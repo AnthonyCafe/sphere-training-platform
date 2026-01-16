@@ -31,7 +31,7 @@ export default function AdminDashboard() {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc')
 
   // Admin emails - add your admin emails here
-  const adminEmails = ['admin@sphere.com', user?.primaryEmailAddress?.emailAddress]
+  const adminEmails = ['anthony@vc.cafe', user?.primaryEmailAddress?.emailAddress]
 
   const isAdmin = adminEmails.includes(user?.primaryEmailAddress?.emailAddress || '')
 
