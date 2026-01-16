@@ -1,5 +1,4 @@
 import { ClerkProvider } from '@clerk/nextjs'
-import { dark } from '@clerk/themes'
 import './globals.css'
 
 export const metadata = {
@@ -15,7 +14,6 @@ export default function RootLayout({
   return (
     <ClerkProvider
       appearance={{
-        baseTheme: dark,
         elements: {
           formButtonPrimary: 'bg-blue-600 hover:bg-blue-700',
           card: 'bg-slate-800',
