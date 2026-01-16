@@ -61,21 +61,38 @@ export default function AdminDashboard() {
         .from('quiz_answers')
         .select('*')
 
-      // Fetch user details from Clerk via API
+      // Collect all unique user IDs
       const userIds = new Set<string>()
       progressData?.forEach(p => userIds.add(p.user_id))
       masteryData?.forEach(m => userIds.add(m.user_id))
       quizData?.forEach(q => userIds.add(q.user_id))
+
+      // Fetch user names from Clerk API
+      let userNames: Record<string, { name: string; email: string }> = {}
+      if (userIds.size > 0) {
+        try {
+          const response = await fetch('/api/users', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userIds: Array.from(userIds) })
+          })
+          const data = await response.json()
+          userNames = data.users || {}
+        } catch (e) {
+          console.error('Error fetching user names:', e)
+        }
+      }
 
       // Group by user
       const userMap = new Map<string, UserStats>()
 
       progressData?.forEach((p: any) => {
         if (!userMap.has(p.user_id)) {
+          const clerkUser = userNames[p.user_id]
           userMap.set(p.user_id, {
             user_id: p.user_id,
-            email: '',
-            name: `User ${p.user_id.slice(0, 8)}...`,
+            email: clerkUser?.email || '',
+            name: clerkUser?.name || `User ${p.user_id.slice(0, 8)}...`,
             totalProgress: 0,
             sectionsCompleted: 0,
             totalSections,
@@ -107,15 +124,14 @@ export default function AdminDashboard() {
         }
       })
 
-      // Calculate quiz averages
+      // Calculate quiz and exercise averages
       const userQuizScores = new Map<string, number[]>()
       const userExerciseScores = new Map<string, number[]>()
 
       progressData?.forEach((p: any) => {
         if (p.quiz_score !== null) {
           if (!userQuizScores.has(p.user_id)) userQuizScores.set(p.user_id, [])
-          // Find the section to get total questions
-          let totalQuestions = 3 // default
+          let totalQuestions = 3
           pillarsData.forEach((pillar: any) => {
             const section = pillar.sections.find((s: any) => s.id === p.section_id)
             if (section?.quiz) totalQuestions = section.quiz.length
@@ -135,8 +151,8 @@ export default function AdminDashboard() {
         }
       })
 
-      userExerciseScores.forEach((scores, userId) => {
-        const userData = userMap.get(userId)
+      userExerciseScores.forEach((scores, oderId) => {
+        const userData = userMap.get(oderId)
         if (userData && scores.length > 0) {
           userData.exerciseAverage = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)
         }
@@ -175,11 +191,13 @@ export default function AdminDashboard() {
   })
 
   const exportCSV = () => {
-    const headers = ['User ID', 'Progress %', 'Quiz Avg', 'Exercise Avg', 'Last Active']
+    const headers = ['Name', 'Email', 'User ID', 'Progress %', 'Quiz Avg', 'Exercise Avg', 'Last Active']
     pillarsData.forEach((p: any) => headers.push(`${p.shortTitle} Mastery`))
 
     const rows = users.map(u => {
       const row = [
+        u.name,
+        u.email,
         u.user_id,
         u.totalProgress,
         u.quizAverage || '-',
@@ -315,7 +333,7 @@ export default function AdminDashboard() {
             <h2 className="font-semibold">Trainee Progress</h2>
             <div className="flex items-center gap-2 text-sm">
               <span className="text-slate-400">Sort by:</span>
-              {(['progress', 'lastActive'] as const).map(key => (
+              {(['name', 'progress', 'lastActive'] as const).map(key => (
                 <button
                   key={key}
                   onClick={() => {
@@ -324,7 +342,7 @@ export default function AdminDashboard() {
                   }}
                   className={`px-3 py-1 rounded ${sortBy === key ? 'bg-blue-600' : 'bg-slate-700 hover:bg-slate-600'}`}
                 >
-                  {key === 'lastActive' ? 'Last Active' : 'Progress'}
+                  {key === 'lastActive' ? 'Last Active' : key.charAt(0).toUpperCase() + key.slice(1)}
                   {sortBy === key && (sortOrder === 'asc' ? ' ↑' : ' ↓')}
                 </button>
               ))}
@@ -347,13 +365,13 @@ export default function AdminDashboard() {
                     className="p-4 hover:bg-slate-700/50 cursor-pointer flex items-center gap-4"
                   >
                     <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center font-bold text-sm">
-                      {u.user_id.slice(0, 2).toUpperCase()}
+                      {u.name.charAt(0).toUpperCase()}
                     </div>
                     
                     <div className="flex-1 min-w-0">
-                      <div className="font-medium truncate">User {u.user_id.slice(0, 12)}...</div>
-                      <div className="text-xs text-slate-400">
-                        Last active: {new Date(u.lastActive).toLocaleDateString()}
+                      <div className="font-medium truncate">{u.name}</div>
+                      <div className="text-xs text-slate-400 truncate">
+                        {u.email || `ID: ${u.user_id.slice(0, 12)}...`}
                       </div>
                     </div>
 
