@@ -10,9 +10,11 @@ export function useProgress() {
   const [progress, setProgress] = useState<Record<string, any>>({})
   const [loading, setLoading] = useState(true)
 
-  // Load progress from database
   useEffect(() => {
-    if (!user) return
+    if (!user) {
+      setLoading(false)
+      return
+    }
 
     const loadProgress = async () => {
       const { data, error } = await supabase
@@ -38,7 +40,6 @@ export function useProgress() {
     loadProgress()
   }, [user])
 
-  // Update progress in database
   const updateProgress = useCallback(async (sectionId: string, updates: any) => {
     if (!user) return
 
@@ -48,7 +49,7 @@ export function useProgress() {
     }
     setProgress(newProgress)
 
-    const { error } = await supabase
+    await supabase
       .from('user_progress')
       .upsert({
         user_id: user.id,
@@ -61,18 +62,17 @@ export function useProgress() {
       }, {
         onConflict: 'user_id,section_id'
       })
-
-    if (error) console.error('Error updating progress:', error)
   }, [user, progress])
 
   return { progress, setProgress: updateProgress, loading }
 }
 
-// Hook for managing exercise answers and AI feedback
+// Hook for managing exercise answers, AI feedback, and scores
 export function useExercises() {
   const { user } = useUser()
   const [exerciseAnswers, setExerciseAnswersState] = useState<Record<string, string>>({})
   const [aiFeedback, setAiFeedbackState] = useState<Record<string, string>>({})
+  const [exerciseScores, setExerciseScoresState] = useState<Record<string, number>>({})
 
   useEffect(() => {
     if (!user) return
@@ -80,18 +80,21 @@ export function useExercises() {
     const loadExercises = async () => {
       const { data } = await supabase
         .from('user_progress')
-        .select('section_id, exercise_answer, ai_feedback')
+        .select('section_id, exercise_answer, ai_feedback, exercise_score')
         .eq('user_id', user.id)
 
       if (data) {
         const answers: Record<string, string> = {}
         const feedback: Record<string, string> = {}
+        const scores: Record<string, number> = {}
         data.forEach((p) => {
           if (p.exercise_answer) answers[p.section_id] = p.exercise_answer
           if (p.ai_feedback) feedback[p.section_id] = p.ai_feedback
+          if (p.exercise_score !== null) scores[p.section_id] = p.exercise_score
         })
         setExerciseAnswersState(answers)
         setAiFeedbackState(feedback)
+        setExerciseScoresState(scores)
       }
     }
 
@@ -132,7 +135,24 @@ export function useExercises() {
       })
   }, [user])
 
-  return { exerciseAnswers, setExerciseAnswer, aiFeedback, setAiFeedback }
+  const setExerciseScore = useCallback(async (sectionId: string, score: number) => {
+    if (!user) return
+
+    setExerciseScoresState(prev => ({ ...prev, [sectionId]: score }))
+
+    await supabase
+      .from('user_progress')
+      .upsert({
+        user_id: user.id,
+        section_id: sectionId,
+        exercise_score: score,
+        updated_at: new Date().toISOString(),
+      }, {
+        onConflict: 'user_id,section_id'
+      })
+  }, [user])
+
+  return { exerciseAnswers, setExerciseAnswer, aiFeedback, setAiFeedback, exerciseScores, setExerciseScore }
 }
 
 // Hook for managing quiz answers
