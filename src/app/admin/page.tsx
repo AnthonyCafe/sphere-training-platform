@@ -6,7 +6,7 @@ import { supabase } from '@/lib/supabase'
 import { pillarsData } from '@/lib/pillars-data'
 import { 
   Users, Trophy, BookOpen, CheckCircle, AlertCircle, 
-  ChevronDown, ChevronUp, Download, RefreshCw, ArrowLeft
+  ChevronDown, ChevronUp, Download, RefreshCw, ArrowLeft, Award
 } from 'lucide-react'
 import Link from 'next/link'
 
@@ -129,7 +129,7 @@ export default function AdminDashboard() {
       })
 
       userQuizScores.forEach((scores, oderId) => {
-        const userData = userMap.get(userId)
+        const userData = userMap.get(oderId)
         if (userData && scores.length > 0) {
           userData.quizAverage = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)
         }
