@@ -10,6 +10,9 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 
+// Admin emails list - keep in sync with page.tsx
+const ADMIN_EMAILS = ['admin@sphere.com', 'anthony@vc.cafe']
+
 interface UserStats {
   user_id: string
   email: string
@@ -18,6 +21,7 @@ interface UserStats {
   sectionsCompleted: number
   totalSections: number
   quizAverage: number
+  exerciseAverage: number
   masteryScores: Record<string, any>
   lastActive: string
 }
@@ -30,10 +34,8 @@ export default function AdminDashboard() {
   const [sortBy, setSortBy] = useState<'name' | 'progress' | 'lastActive'>('progress')
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc')
 
-  // Admin emails - add your admin emails here
-  const adminEmails = ['anthony@vc.cafe', user?.primaryEmailAddress?.emailAddress]
-
-  const isAdmin = adminEmails.includes(user?.primaryEmailAddress?.emailAddress || '')
+  const userEmail = user?.primaryEmailAddress?.emailAddress || ''
+  const isAdmin = ADMIN_EMAILS.includes(userEmail)
 
   const totalSections = pillarsData.reduce((acc: number, p: any) => acc + p.sections.length, 0)
 
@@ -46,7 +48,7 @@ export default function AdminDashboard() {
     setLoading(true)
     
     try {
-      // Get all unique users from progress
+      // Get all progress data
       const { data: progressData } = await supabase
         .from('user_progress')
         .select('*')
@@ -59,6 +61,12 @@ export default function AdminDashboard() {
         .from('quiz_answers')
         .select('*')
 
+      // Fetch user details from Clerk via API
+      const userIds = new Set<string>()
+      progressData?.forEach(p => userIds.add(p.user_id))
+      masteryData?.forEach(m => userIds.add(m.user_id))
+      quizData?.forEach(q => userIds.add(q.user_id))
+
       // Group by user
       const userMap = new Map<string, UserStats>()
 
@@ -67,31 +75,32 @@ export default function AdminDashboard() {
           userMap.set(p.user_id, {
             user_id: p.user_id,
             email: '',
-            name: `User ${p.user_id.slice(0, 8)}`,
+            name: `User ${p.user_id.slice(0, 8)}...`,
             totalProgress: 0,
             sectionsCompleted: 0,
             totalSections,
             quizAverage: 0,
+            exerciseAverage: 0,
             masteryScores: {},
             lastActive: p.updated_at
           })
         }
 
-        const user = userMap.get(p.user_id)!
-        if (p.learn_complete) user.sectionsCompleted += 0.33
-        if (p.exercise_complete) user.sectionsCompleted += 0.33
-        if (p.quiz_complete) user.sectionsCompleted += 0.34
+        const userData = userMap.get(p.user_id)!
+        if (p.learn_complete) userData.sectionsCompleted += 0.33
+        if (p.exercise_complete) userData.sectionsCompleted += 0.33
+        if (p.quiz_complete) userData.sectionsCompleted += 0.34
 
-        if (new Date(p.updated_at) > new Date(user.lastActive)) {
-          user.lastActive = p.updated_at
+        if (new Date(p.updated_at) > new Date(userData.lastActive)) {
+          userData.lastActive = p.updated_at
         }
       })
 
       // Add mastery scores
       masteryData?.forEach((m: any) => {
-        const user = userMap.get(m.user_id)
-        if (user) {
-          user.masteryScores[m.pillar_id] = {
+        const userData = userMap.get(m.user_id)
+        if (userData) {
+          userData.masteryScores[m.pillar_id] = {
             score: m.overall_score,
             passed: m.passed
           }
@@ -100,33 +109,42 @@ export default function AdminDashboard() {
 
       // Calculate quiz averages
       const userQuizScores = new Map<string, number[]>()
-      quizData?.forEach((q: any) => {
-        if (!userQuizScores.has(q.user_id)) {
-          userQuizScores.set(q.user_id, [])
+      const userExerciseScores = new Map<string, number[]>()
+
+      progressData?.forEach((p: any) => {
+        if (p.quiz_score !== null) {
+          if (!userQuizScores.has(p.user_id)) userQuizScores.set(p.user_id, [])
+          // Find the section to get total questions
+          let totalQuestions = 3 // default
+          pillarsData.forEach((pillar: any) => {
+            const section = pillar.sections.find((s: any) => s.id === p.section_id)
+            if (section?.quiz) totalQuestions = section.quiz.length
+          })
+          userQuizScores.get(p.user_id)!.push((p.quiz_score / totalQuestions) * 100)
         }
-        // Calculate score based on answers
-        const pillar = pillarsData.find((p: any) => 
-          p.sections.some((s: any) => s.id === q.section_id)
-        ) as any
-        const section = pillar?.sections.find((s: any) => s.id === q.section_id)
-        if (section?.quiz && q.answers) {
-          const correct = section.quiz.reduce((acc: number, quiz: any, i: number) => 
-            q.answers[i] === quiz.correct ? acc + 1 : acc, 0
-          )
-          userQuizScores.get(q.user_id)!.push((correct / section.quiz.length) * 100)
+        if (p.exercise_score !== null) {
+          if (!userExerciseScores.has(p.user_id)) userExerciseScores.set(p.user_id, [])
+          userExerciseScores.get(p.user_id)!.push(p.exercise_score)
         }
       })
 
-      userQuizScores.forEach((scores, userId) => {
-        const user = userMap.get(userId)
-        if (user && scores.length > 0) {
-          user.quizAverage = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)
+      userQuizScores.forEach((scores, oderId) => {
+        const userData = userMap.get(userId)
+        if (userData && scores.length > 0) {
+          userData.quizAverage = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)
+        }
+      })
+
+      userExerciseScores.forEach((scores, userId) => {
+        const userData = userMap.get(userId)
+        if (userData && scores.length > 0) {
+          userData.exerciseAverage = Math.round(scores.reduce((a, b) => a + b, 0) / scores.length)
         }
       })
 
       // Calculate total progress
-      userMap.forEach(user => {
-        user.totalProgress = Math.round((user.sectionsCompleted / totalSections) * 100)
+      userMap.forEach(userData => {
+        userData.totalProgress = Math.round((userData.sectionsCompleted / totalSections) * 100)
       })
 
       setUsers(Array.from(userMap.values()))
@@ -157,16 +175,15 @@ export default function AdminDashboard() {
   })
 
   const exportCSV = () => {
-    const headers = ['User ID', 'Name', 'Progress %', 'Sections Completed', 'Quiz Average', 'Last Active']
+    const headers = ['User ID', 'Progress %', 'Quiz Avg', 'Exercise Avg', 'Last Active']
     pillarsData.forEach((p: any) => headers.push(`${p.shortTitle} Mastery`))
 
     const rows = users.map(u => {
       const row = [
         u.user_id,
-        u.name,
         u.totalProgress,
-        Math.round(u.sectionsCompleted),
-        u.quizAverage,
+        u.quizAverage || '-',
+        u.exerciseAverage || '-',
         new Date(u.lastActive).toLocaleDateString()
       ]
       pillarsData.forEach((p: any) => {
@@ -184,6 +201,11 @@ export default function AdminDashboard() {
     a.download = `sphere-training-progress-${new Date().toISOString().split('T')[0]}.csv`
     a.click()
   }
+
+  // Calculate team averages
+  const teamAvgProgress = users.length > 0 ? Math.round(users.reduce((a, u) => a + u.totalProgress, 0) / users.length) : 0
+  const teamAvgQuiz = users.length > 0 ? Math.round(users.filter(u => u.quizAverage > 0).reduce((a, u) => a + u.quizAverage, 0) / Math.max(1, users.filter(u => u.quizAverage > 0).length)) : 0
+  const teamAvgExercise = users.length > 0 ? Math.round(users.filter(u => u.exerciseAverage > 0).reduce((a, u) => a + u.exerciseAverage, 0) / Math.max(1, users.filter(u => u.exerciseAverage > 0).length)) : 0
 
   if (!isAdmin) {
     return (
@@ -217,7 +239,7 @@ export default function AdminDashboard() {
               onClick={loadAllUsers}
               className="flex items-center gap-2 px-4 py-2 bg-slate-700 rounded-lg hover:bg-slate-600 transition"
             >
-              <RefreshCw className="w-4 h-4" />
+              <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin' : ''}`} />
               Refresh
             </button>
             <button
@@ -233,7 +255,7 @@ export default function AdminDashboard() {
 
       <main className="p-6">
         {/* Stats Overview */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mb-8">
           <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
             <div className="flex items-center gap-3">
               <Users className="w-8 h-8 text-blue-400" />
@@ -248,9 +270,7 @@ export default function AdminDashboard() {
             <div className="flex items-center gap-3">
               <BookOpen className="w-8 h-8 text-emerald-400" />
               <div>
-                <div className="text-2xl font-bold">
-                  {users.length > 0 ? Math.round(users.reduce((a, u) => a + u.totalProgress, 0) / users.length) : 0}%
-                </div>
+                <div className="text-2xl font-bold">{teamAvgProgress}%</div>
                 <div className="text-sm text-slate-400">Avg Progress</div>
               </div>
             </div>
@@ -260,9 +280,7 @@ export default function AdminDashboard() {
             <div className="flex items-center gap-3">
               <Trophy className="w-8 h-8 text-amber-400" />
               <div>
-                <div className="text-2xl font-bold">
-                  {users.length > 0 ? Math.round(users.reduce((a, u) => a + u.quizAverage, 0) / users.length) : 0}%
-                </div>
+                <div className="text-2xl font-bold">{teamAvgQuiz}%</div>
                 <div className="text-sm text-slate-400">Avg Quiz Score</div>
               </div>
             </div>
@@ -270,7 +288,17 @@ export default function AdminDashboard() {
 
           <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
             <div className="flex items-center gap-3">
-              <CheckCircle className="w-8 h-8 text-purple-400" />
+              <Award className="w-8 h-8 text-purple-400" />
+              <div>
+                <div className="text-2xl font-bold">{teamAvgExercise}%</div>
+                <div className="text-sm text-slate-400">Avg Exercise Score</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+            <div className="flex items-center gap-3">
+              <CheckCircle className="w-8 h-8 text-cyan-400" />
               <div>
                 <div className="text-2xl font-bold">
                   {users.filter(u => u.totalProgress === 100).length}
@@ -287,7 +315,7 @@ export default function AdminDashboard() {
             <h2 className="font-semibold">Trainee Progress</h2>
             <div className="flex items-center gap-2 text-sm">
               <span className="text-slate-400">Sort by:</span>
-              {(['name', 'progress', 'lastActive'] as const).map(key => (
+              {(['progress', 'lastActive'] as const).map(key => (
                 <button
                   key={key}
                   onClick={() => {
@@ -296,7 +324,7 @@ export default function AdminDashboard() {
                   }}
                   className={`px-3 py-1 rounded ${sortBy === key ? 'bg-blue-600' : 'bg-slate-700 hover:bg-slate-600'}`}
                 >
-                  {key === 'lastActive' ? 'Last Active' : key.charAt(0).toUpperCase() + key.slice(1)}
+                  {key === 'lastActive' ? 'Last Active' : 'Progress'}
                   {sortBy === key && (sortOrder === 'asc' ? ' ↑' : ' ↓')}
                 </button>
               ))}
@@ -304,7 +332,10 @@ export default function AdminDashboard() {
           </div>
 
           {loading ? (
-            <div className="p-8 text-center text-slate-400">Loading users...</div>
+            <div className="p-8 text-center text-slate-400">
+              <RefreshCw className="w-6 h-6 animate-spin mx-auto mb-2" />
+              Loading users...
+            </div>
           ) : users.length === 0 ? (
             <div className="p-8 text-center text-slate-400">No users found</div>
           ) : (
@@ -315,35 +346,34 @@ export default function AdminDashboard() {
                     onClick={() => setExpandedUser(expandedUser === u.user_id ? null : u.user_id)}
                     className="p-4 hover:bg-slate-700/50 cursor-pointer flex items-center gap-4"
                   >
-                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center font-bold">
-                      {u.name.charAt(0).toUpperCase()}
+                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center font-bold text-sm">
+                      {u.user_id.slice(0, 2).toUpperCase()}
                     </div>
                     
-                    <div className="flex-1">
-                      <div className="font-medium">{u.name}</div>
-                      <div className="text-sm text-slate-400">ID: {u.user_id.slice(0, 12)}...</div>
-                    </div>
-
-                    <div className="text-right">
-                      <div className="flex items-center gap-2">
-                        <div className="w-32 bg-slate-700 rounded-full h-2">
-                          <div 
-                            className={`h-2 rounded-full ${u.totalProgress === 100 ? 'bg-emerald-500' : 'bg-blue-500'}`}
-                            style={{ width: `${u.totalProgress}%` }}
-                          />
-                        </div>
-                        <span className="text-sm font-medium w-12">{u.totalProgress}%</span>
-                      </div>
-                      <div className="text-xs text-slate-400 mt-1">
+                    <div className="flex-1 min-w-0">
+                      <div className="font-medium truncate">User {u.user_id.slice(0, 12)}...</div>
+                      <div className="text-xs text-slate-400">
                         Last active: {new Date(u.lastActive).toLocaleDateString()}
                       </div>
                     </div>
 
-                    <div className="text-right w-20">
-                      <div className="text-sm">Quiz Avg</div>
-                      <div className={`font-bold ${u.quizAverage >= 70 ? 'text-emerald-400' : 'text-amber-400'}`}>
-                        {u.quizAverage}%
+                    <div className="text-center px-4">
+                      <div className="text-lg font-bold">{u.totalProgress}%</div>
+                      <div className="text-xs text-slate-400">Progress</div>
+                    </div>
+
+                    <div className="text-center px-4">
+                      <div className={`text-lg font-bold ${u.quizAverage >= 70 ? 'text-emerald-400' : u.quizAverage > 0 ? 'text-amber-400' : 'text-slate-500'}`}>
+                        {u.quizAverage > 0 ? `${u.quizAverage}%` : '-'}
                       </div>
+                      <div className="text-xs text-slate-400">Quiz Avg</div>
+                    </div>
+
+                    <div className="text-center px-4">
+                      <div className={`text-lg font-bold ${u.exerciseAverage >= 70 ? 'text-emerald-400' : u.exerciseAverage > 0 ? 'text-amber-400' : 'text-slate-500'}`}>
+                        {u.exerciseAverage > 0 ? `${u.exerciseAverage}%` : '-'}
+                      </div>
+                      <div className="text-xs text-slate-400">Exercise Avg</div>
                     </div>
 
                     {expandedUser === u.user_id ? (
@@ -356,7 +386,8 @@ export default function AdminDashboard() {
                   {/* Expanded Details */}
                   {expandedUser === u.user_id && (
                     <div className="px-4 pb-4 bg-slate-800/50">
-                      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3 mt-2">
+                      <div className="text-sm text-slate-400 mb-3">Mastery Assessment Scores:</div>
+                      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
                         {pillarsData.map((p: any) => {
                           const score = u.masteryScores[p.id]
                           return (
