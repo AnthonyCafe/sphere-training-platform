@@ -488,7 +488,6 @@ export default function TrainingPlatform() {
                 {/* Pillar Overview - Only show on first section */}
                 {currentSection === 0 && pillar.overview && (
                   <div className={`${pillarColors.bg} rounded-xl p-6 border ${pillarColors.border}`}>
-                    <h3 className={`font-semibold ${pillarColors.text} mb-4`}>Why This Pillar Matters</h3>
                     <div 
                       className="text-gray-300 whitespace-pre-wrap leading-relaxed"
                       dangerouslySetInnerHTML={{ 
