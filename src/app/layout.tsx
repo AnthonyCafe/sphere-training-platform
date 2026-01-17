@@ -4,6 +4,9 @@ import './globals.css'
 export const metadata = {
   title: 'Sphere Training Platform',
   description: 'Comprehensive training for UAE counterparty engagement',
+  icons: {
+    icon: '/favicon.svg',
+  },
 }
 
 export default function RootLayout({
