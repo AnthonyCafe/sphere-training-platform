@@ -462,7 +462,7 @@ export default function TrainingPlatform() {
 
           <div className="p-6 max-w-4xl">
             {/* Curriculum Tab */}
-            {currentTab === 'curriculum' && !showMasterQuiz && (
+{currentTab === 'curriculum' && !showMasterQuiz && (
               <div className="space-y-6">
                 <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
                   <h3 className="font-semibold text-white mb-4">Learning Objectives</h3>
@@ -484,6 +484,21 @@ export default function TrainingPlatform() {
                     ))}
                   </ul>
                 </div>
+
+                {/* Pillar Overview - Only show on first section */}
+                {currentSection === 0 && pillar.overview && (
+                  <div className={`${pillarColors.bg} rounded-xl p-6 border ${pillarColors.border}`}>
+                    <h3 className={`font-semibold ${pillarColors.text} mb-4`}>Why This Pillar Matters</h3>
+                    <div 
+                      className="text-gray-300 whitespace-pre-wrap leading-relaxed"
+                      dangerouslySetInnerHTML={{ 
+                        __html: pillar.overview
+                          .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>')
+                          .replace(/^- (.*$)/gim, '<div class="ml-4 mb-2">• $1</div>')
+                      }}
+                    />
+                  </div>
+                )}
               </div>
             )}
 
