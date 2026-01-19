@@ -20,7 +20,7 @@ import {
 import Link from 'next/link'
 
 // Admin emails list
-const ADMIN_EMAILS = ['admin@sphere.com', 'anthony@vc.cafe']
+const ADMIN_EMAILS = ['arnold@sphere.com', 'anthony@vc.cafe']
 
 // Sphere Logo Component
 const SphereLogo = ({ className = "h-8 w-auto" }: { className?: string }) => (
