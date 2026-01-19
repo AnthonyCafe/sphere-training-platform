@@ -2128,6 +2128,239 @@ Arnold identified these 15 questions as the ones Sphere faces repeatedly. Master
         { type: 'roleplay', question: 'Bank: "We don\'t work with crypto." Respond.', rubric: ['Reframes', 'Credentials', 'Opens dialogue'] }
       ]
     }
+  },
+
+  // ============================================================================
+  // FINAL EXAM: COMPREHENSIVE ASSESSMENT
+  // ============================================================================
+  {
+    id: 'final-exam',
+    title: 'Final Exam: Comprehensive Assessment',
+    shortTitle: 'Final Exam',
+    description: 'Demonstrate mastery across all pillars with a comprehensive assessment.',
+    color: 'amber',
+    overview: `**Final Exam Instructions**
+
+This comprehensive assessment tests your knowledge across all six pillars. Complete each section to demonstrate your readiness for UAE counterparty engagement.
+
+**What to expect:**
+- Questions from all pillars
+- Scenario-based assessments
+- Time estimate: 45-60 minutes
+- Passing score: 80%
+
+**Before you begin:**
+- Review any pillars where you scored below 80%
+- Have the 15 Questions reference handy
+- Take your time — quality over speed`,
+    sections: [
+      {
+        id: 'exam-payments',
+        title: 'Section 1: Payments Fundamentals',
+        curriculum: {
+          objectives: [
+            'Demonstrate understanding of payment lifecycle',
+            'Explain settlement finality',
+            'Articulate cross-border complexity'
+          ],
+          keyConcepts: [
+            'Initiation → Clearing → Settlement',
+            'Messages ≠ Money',
+            'Central bank role in settlement'
+          ]
+        },
+        learn: {
+          introduction: 'This section tests your understanding of traditional payments infrastructure — the foundation everything else builds on.',
+          coreQuestion: 'Can you explain why cross-border payments are structurally hard?',
+          sections: [],
+          keyTakeaway: 'Review Pillar 1 if you need to refresh on payment fundamentals.'
+        },
+        exercise: {
+          title: 'Payments Assessment Checklist',
+          prompt: 'Before proceeding, confirm you can:\n\n☐ Explain the three stages of a payment (initiation, clearing, settlement)\n☐ Distinguish between messages and money movement\n☐ Explain what "settlement finality" means legally\n☐ Describe why correspondent banking creates friction\n☐ Articulate where Sphere fits in the payment chain',
+          criteria: ['All items checked']
+        },
+        quiz: [
+          { q: 'At which stage does risk get eliminated?', options: ['Initiation', 'Clearing', 'Settlement', 'All stages'], correct: 2 },
+          { q: 'SWIFT primarily handles:', options: ['Settlement', 'Messaging', 'Compliance', 'FX conversion'], correct: 1 },
+          { q: 'Settlement finality means:', options: ['Payment is fast', 'Payment is irrevocable', 'Payment is international', 'Payment is digital'], correct: 1 }
+        ]
+      },
+      {
+        id: 'exam-stablecoins',
+        title: 'Section 2: Stablecoins',
+        curriculum: {
+          objectives: [
+            'Explain stablecoins as settlement infrastructure',
+            'Articulate stablecoin risks honestly',
+            'Describe regulatory landscape'
+          ],
+          keyConcepts: [
+            'Stablecoin sandwich concept',
+            'Five risk categories',
+            'USDC depeg case study'
+          ]
+        },
+        learn: {
+          introduction: 'This section tests your ability to discuss stablecoins without crypto jargon and with honest risk acknowledgment.',
+          coreQuestion: 'Can you explain stablecoins to a traditional banker?',
+          sections: [],
+          keyTakeaway: 'Review Pillar 2 if you need to refresh on stablecoin fundamentals.'
+        },
+        exercise: {
+          title: 'Stablecoins Assessment Checklist',
+          prompt: 'Before proceeding, confirm you can:\n\n☐ Explain the "stablecoin sandwich" without jargon\n☐ Name and explain five stablecoin risk categories\n☐ Describe the USDC depeg incident accurately\n☐ Explain why "stable" doesn\'t mean "risk-free"\n☐ Articulate Sphere\'s risk mitigation approach',
+          criteria: ['All items checked']
+        },
+        quiz: [
+          { q: 'What backs USDC?', options: ['Bitcoin', 'Algorithms', 'T-bills and cash', 'Gold'], correct: 2 },
+          { q: 'USDC traded at during SVB crisis:', options: ['$1.00', '$0.95', '$0.87', '$0.50'], correct: 2 },
+          { q: 'Sphere holds stablecoins for:', options: ['Days', 'Weeks', 'Minutes', 'Permanently'], correct: 2 }
+        ]
+      },
+      {
+        id: 'exam-compliance',
+        title: 'Section 3: Compliance',
+        curriculum: {
+          objectives: [
+            'Classify Sphere correctly',
+            'Explain AML/KYC program',
+            'Handle compliance questions'
+          ],
+          keyConcepts: [
+            'MSB classification',
+            'Pre-settlement compliance',
+            'Travel Rule requirements'
+          ]
+        },
+        learn: {
+          introduction: 'This section tests your ability to position Sphere correctly and handle compliance questions from sophisticated counterparties.',
+          coreQuestion: 'Can you defend Sphere\'s regulatory classification?',
+          sections: [],
+          keyTakeaway: 'Review Pillar 3 if you need to refresh on compliance fundamentals.'
+        },
+        exercise: {
+          title: 'Compliance Assessment Checklist',
+          prompt: 'Before proceeding, confirm you can:\n\n☐ Explain what Sphere IS and IS NOT\n☐ Articulate "compliance-native" positioning\n☐ Describe the AML/KYC program\n☐ Explain sanctions screening process\n☐ Answer Travel Rule questions',
+          criteria: ['All items checked']
+        },
+        quiz: [
+          { q: 'Sphere is classified as:', options: ['Exchange', 'MSB/Money Transmitter', 'Bank', 'Custodian'], correct: 1 },
+          { q: 'Compliance screening happens:', options: ['After settlement', 'Before settlement', 'Weekly', 'Never'], correct: 1 },
+          { q: 'Travel Rule threshold in US:', options: ['$1,000', '$3,000', '$10,000', 'All amounts'], correct: 1 }
+        ]
+      },
+      {
+        id: 'exam-governance',
+        title: 'Section 4: Governance',
+        curriculum: {
+          objectives: [
+            'Explain operational risk framework',
+            'Articulate business continuity approach',
+            'Handle governance questions'
+          ],
+          keyConcepts: [
+            'SOC 2 and ISO 27001',
+            'RTO and RPO metrics',
+            'Incident management'
+          ]
+        },
+        learn: {
+          introduction: 'This section tests your ability to answer governance and operational risk questions from institutional counterparties.',
+          coreQuestion: 'Can you explain Sphere\'s risk management to a bank risk officer?',
+          sections: [],
+          keyTakeaway: 'Review Pillar 4 if you need to refresh on governance fundamentals.'
+        },
+        exercise: {
+          title: 'Governance Assessment Checklist',
+          prompt: 'Before proceeding, confirm you can:\n\n☐ Explain operational risk categories\n☐ Describe SOC 2 and ISO 27001 certifications\n☐ Define RTO and RPO\n☐ Explain incident severity levels\n☐ Articulate business continuity approach',
+          criteria: ['All items checked']
+        },
+        quiz: [
+          { q: 'SOC 2 Type II certifies:', options: ['Financials', 'Security controls', 'Product quality', 'Market share'], correct: 1 },
+          { q: 'RTO stands for:', options: ['Real-Time Operations', 'Recovery Time Objective', 'Risk Tolerance', 'Test'], correct: 1 },
+          { q: 'P1 incident means:', options: ['Low priority', 'Critical/outage', 'Scheduled', 'Feature request'], correct: 1 }
+        ]
+      },
+      {
+        id: 'exam-sphere',
+        title: 'Section 5: Sphere Product',
+        curriculum: {
+          objectives: [
+            'Articulate Sphere\'s value proposition',
+            'Know key metrics',
+            'Handle competitive positioning'
+          ],
+          keyConcepts: [
+            'Origin story',
+            'Performance metrics',
+            'Competitive advantages'
+          ]
+        },
+        learn: {
+          introduction: 'This section tests your knowledge of Sphere\'s specific products, metrics, and positioning.',
+          coreQuestion: 'Can you pitch Sphere to an enterprise prospect?',
+          sections: [],
+          keyTakeaway: 'Review Pillar 5 if you need to refresh on Sphere product knowledge.'
+        },
+        exercise: {
+          title: 'Sphere Product Assessment Checklist',
+          prompt: 'Before proceeding, confirm you can:\n\n☐ Tell Sphere\'s origin story compellingly\n☐ Explain the product architecture\n☐ Cite key performance metrics accurately\n☐ Position against traditional banks\n☐ Position against crypto-native competitors',
+          criteria: ['All items checked']
+        },
+        quiz: [
+          { q: 'Sphere median settlement time:', options: ['2-5 days', '24 hours', '15-30 minutes', 'Instant'], correct: 2 },
+          { q: 'Sphere was founded during:', options: ['Bull market', 'FTX collapse period', 'Before crypto', '2010'], correct: 1 },
+          { q: 'Sphere annualized volume:', options: ['$25M', '$250M', '$2.5B+', '$25B'], correct: 2 }
+        ]
+      },
+      {
+        id: 'exam-final',
+        title: 'Section 6: Comprehensive Scenario',
+        curriculum: {
+          objectives: [
+            'Handle a complete counterparty conversation',
+            'Apply knowledge from all pillars',
+            'Demonstrate professional readiness'
+          ],
+          keyConcepts: [
+            'All 15 questions',
+            'Objection handling',
+            'Closing with next steps'
+          ]
+        },
+        learn: {
+          introduction: 'This final section presents a comprehensive scenario that tests your ability to apply all your training in a realistic counterparty conversation.',
+          coreQuestion: 'Are you ready for a real UAE bank meeting?',
+          sections: [],
+          keyTakeaway: 'This is where everything comes together. Good luck!'
+        },
+        exercise: {
+          title: 'Final Scenario',
+          prompt: 'SCENARIO: You have 30 minutes with the Chief Risk Officer of a major UAE bank. They are skeptical of "crypto companies" but interested in improving their cross-border payment capabilities.\n\nWrite out your approach:\n\n1. Opening (How do you introduce Sphere?)\n2. Reframe (How do you address "crypto company" concern?)\n3. Value Prop (What specific benefits do you highlight?)\n4. Risk Handling (How do you address stablecoin risk questions?)\n5. Compliance (How do you establish regulatory credibility?)\n6. Metrics (What numbers do you cite?)\n7. Close (How do you propose next steps?)',
+          criteria: ['Professional opening', 'Effective reframe', 'Clear value prop', 'Honest risk handling', 'Compliance credibility', 'Accurate metrics', 'Strong close']
+        },
+        quiz: [
+          { q: 'First thing to establish with a skeptical compliance officer:', options: ['Product features', 'Licensing and classification', 'Pricing', 'Technology'], correct: 1 },
+          { q: 'When asked about stablecoin risk, you should:', options: ['Deny risks exist', 'Acknowledge and explain mitigation', 'Change the subject', 'Say it\'s not your area'], correct: 1 },
+          { q: 'Every counterparty conversation should end with:', options: ['A handshake', 'Clear next steps', 'Pricing discussion', 'Technical demo'], correct: 1 }
+        ]
+      }
+    ],
+    masterQuiz: {
+      title: 'Final Certification Assessment',
+      passingScore: 80,
+      scenario: 'You are meeting with the leadership team of a UAE bank considering Sphere as a payment infrastructure partner. The meeting includes the CRO, Head of Compliance, and Head of Treasury.',
+      questions: [
+        { type: 'multiple_choice', question: 'Settlement finality means:', options: ['Payment is fast', 'Payment is irrevocable', 'Payment is international', 'Payment is compliant'], correct: 1 },
+        { type: 'multiple_choice', question: 'Sphere is classified as:', options: ['Cryptocurrency exchange', 'Licensed MSB', 'Bank', 'Stablecoin issuer'], correct: 1 },
+        { type: 'multiple_choice', question: 'USDC depeg cause:', options: ['Insufficient reserves', 'SVB failure', 'Hack', 'Algorithm failure'], correct: 1 },
+        { type: 'multiple_choice', question: 'Sphere median settlement:', options: ['2-5 days', 'Same day', '15-30 minutes', '5 seconds'], correct: 2 },
+        { type: 'analysis', question: 'The CRO asks: "Why should we work with a company that was founded during the crypto crash?" Write your response.', rubric: ['Acknowledges timing', 'Turns to advantage', 'Differentiates from failed companies', 'Builds confidence'] },
+        { type: 'analysis', question: 'The Head of Compliance asks: "Walk me through your AML program." Write your response.', rubric: ['KYC process', 'Transaction monitoring', 'Sanctions screening', 'Pre-settlement emphasis'] },
+        { type: 'application', question: 'The Head of Treasury asks: "What happens if USDC depegs during one of our transactions?" Write your response.', rubric: ['Acknowledges risk honestly', 'Cites USDC case', 'Explains mitigation', 'Demonstrates sophistication'] }
+      ]
+    }
   }
 ];
 
