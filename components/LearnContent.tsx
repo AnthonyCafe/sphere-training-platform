@@ -164,6 +164,18 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
       );
 
     case 'keyFact':
+      // Handle both simple format (stat/context) and complex format (title/points/conclusion)
+      if (value.points) {
+        return (
+          <div className="bg-blue-500/10 border border-blue-500/50 rounded-xl p-6">
+            <h3 className="font-semibold text-white mb-3">{value.title}</h3>
+            <ul className="text-gray-300 space-y-2 mb-3">
+              {value.points.map((p: string, i: number) => <li key={i}>• {p}</li>)}
+            </ul>
+            {value.conclusion && <p className="text-blue-300 font-medium">{value.conclusion}</p>}
+          </div>
+        );
+      }
       return (
         <div className="bg-blue-500/10 border border-blue-500/50 rounded-xl p-6 text-center">
           <p className="text-2xl font-bold text-white">{value.stat || value}</p>
@@ -1411,14 +1423,18 @@ function SphereRelevanceBlock({ data }: { data: any }) {
 }
 
 function RegulatorQABlock({ data }: { data: any }) {
+  // Handle both array format and object with items format
+  const items = Array.isArray(data) ? data : data.items || [];
+  const title = Array.isArray(data) ? 'Regulator Q&A' : data.title || 'Regulator Q&A';
+  
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      <h3 className="font-semibold text-white mb-4">{title}</h3>
       <div className="space-y-4">
-        {data.items?.map((qa: any, i: number) => (
+        {items.map((qa: any, i: number) => (
           <div key={i} className="bg-slate-700/50 rounded-lg p-4">
-            <p className="text-blue-300 font-medium mb-2">Q: {qa.question}</p>
-            <p className="text-gray-300">A: {qa.answer}</p>
+            <p className="text-blue-300 font-medium mb-2">Q: {qa.q || qa.question}</p>
+            <p className="text-gray-300">A: {qa.a || qa.answer}</p>
           </div>
         ))}
       </div>
