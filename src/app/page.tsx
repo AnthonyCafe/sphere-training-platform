@@ -38,7 +38,8 @@ const FormattedFeedback = ({ text }: { text: string }) => {
         </div>
         <div className="text-gray-200 space-y-2">
           {content.map((line, i) => {
-            const trimmed = line.trim();
+            // Strip ** from the line
+            let trimmed = line.trim().replace(/\*\*/g, '');
             if (!trimmed) return <div key={i} className="h-2" />;
             if (trimmed.startsWith('- ') || trimmed.startsWith('• ') || trimmed.startsWith('* ')) {
               return <div key={i} className="flex items-start gap-2 ml-2"><span className="text-blue-400">•</span><span>{trimmed.slice(2)}</span></div>;
