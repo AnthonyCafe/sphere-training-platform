@@ -25,21 +25,24 @@ export async function POST(request: NextRequest) {
 **Trainee Response**:
 ${body.answer}
 
-Provide feedback in this EXACT format:
+Provide feedback in this EXACT format (use the exact icons shown):
 
 **Score: X/10**
 
 **Strengths:**
-- [Key point done well]
-- [Another strength]
+- ✅ [Specific strength - what they did well]
+- ✅ [Another specific strength]
 
-**Areas for Improvement:**
-- [Specific suggestion]
-- [Another improvement]
+**Needs Improvement:**
+- ⚠️ [Specific area that could be better, with suggestion]
+- ⚠️ [Another improvement area]
+
+**Errors (if any):**
+- ❌ [Factual error or significant mistake - only include if actually wrong]
 
 **Key Tip:** [One actionable suggestion for next time]
 
-Be encouraging but honest. Score fairly based on criteria met.`
+IMPORTANT: Use ✅ for strengths, ⚠️ for areas needing improvement, and ❌ only for factual errors or significant mistakes. Be encouraging but honest. Score fairly based on criteria met.`
   } else if (body.type === 'quiz') {
     prompt = `You are a training instructor. The trainee completed a quiz with these results:
 
@@ -71,17 +74,24 @@ ${body.responses?.map((r: any, i: number) => `
 **Trainee Response**: ${r.answer || '[No response provided]'}
 `).join('\n')}
 
-Provide evaluation in this EXACT format:
+Provide evaluation in this EXACT format (use the exact icons shown):
 
 ${body.responses?.map((_: any, i: number) => `**Question ${i + 1} Score: X/10**
-- Strengths: [Brief strengths]
-- Gaps: [Brief gaps]
+- ✅ Strengths: [What they did well]
+- ⚠️ Needs improvement: [What could be better]
+- ❌ Errors: [Only if factually wrong - omit this line if no errors]
 - Verdict: ✅ Pass / ⚠️ Needs Work / ❌ Insufficient
 `).join('\n')}
 
 **OVERALL WRITTEN SCORE: X/10**
 
-**OVERALL ASSESSMENT:** [2-3 sentence summary of readiness level and key recommendations]`
+**Summary:**
+- ✅ [Key strength across responses]
+- ⚠️ [Key area to focus on]
+
+**OVERALL ASSESSMENT:** [2-3 sentence summary of readiness level and key recommendations]
+
+IMPORTANT: Use ✅ for strengths/pass, ⚠️ for needs improvement, and ❌ only for factual errors or insufficient responses.`
   }
 
   try {
