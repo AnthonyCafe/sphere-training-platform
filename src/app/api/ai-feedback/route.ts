@@ -42,7 +42,14 @@ Provide feedback in this EXACT format (use the exact icons shown):
 
 **Key Tip:** [One actionable suggestion for next time]
 
-IMPORTANT: Use ✅ for strengths, ⚠️ for areas needing improvement, and ❌ only for factual errors or significant mistakes. Be encouraging but honest. Score fairly based on criteria met.`
+**Model Answer:**
+[MANDATORY if score is 8/10 or below - Write a comprehensive, perfect example response that would score 10/10. This should demonstrate exactly what an ideal answer looks like, covering all the criteria. Make it detailed and educational so the trainee can learn from it. If score is 9/10 or 10/10, write "Great job! No model answer needed for scores above 80%."]
+
+CRITICAL INSTRUCTIONS:
+1. Use ✅ for strengths, ⚠️ for areas needing improvement, and ❌ only for factual errors
+2. Be encouraging but honest
+3. Score fairly based on criteria met
+4. YOU MUST ALWAYS INCLUDE THE MODEL ANSWER SECTION - if score is 8/10 or below, provide a full example answer; if 9/10 or above, just note that no model is needed`
   } else if (body.type === 'quiz') {
     prompt = `You are a training instructor. The trainee completed a quiz with these results:
 
@@ -81,6 +88,9 @@ ${body.responses?.map((_: any, i: number) => `**Question ${i + 1} Score: X/10**
 - ⚠️ Needs improvement: [What could be better]
 - ❌ Errors: [Only if factually wrong - omit this line if no errors]
 - Verdict: ✅ Pass / ⚠️ Needs Work / ❌ Insufficient
+
+**Model Answer for Question ${i + 1}:**
+[MANDATORY if score is 8/10 or below - Write a perfect example response. If score is 9/10 or 10/10, write "Score above 80% - no model answer needed."]
 `).join('\n')}
 
 **OVERALL WRITTEN SCORE: X/10**
@@ -91,7 +101,10 @@ ${body.responses?.map((_: any, i: number) => `**Question ${i + 1} Score: X/10**
 
 **OVERALL ASSESSMENT:** [2-3 sentence summary of readiness level and key recommendations]
 
-IMPORTANT: Use ✅ for strengths/pass, ⚠️ for needs improvement, and ❌ only for factual errors or insufficient responses.`
+CRITICAL INSTRUCTIONS:
+1. Use ✅ for strengths/pass, ⚠️ for needs improvement, and ❌ only for factual errors or insufficient responses
+2. YOU MUST ALWAYS INCLUDE A MODEL ANSWER SECTION FOR EACH QUESTION - if score is 8/10 or below, provide a full example; if 9/10 or above, just note that no model is needed
+3. Be thorough in your model answers - they should teach the trainee exactly what a perfect response looks like`
   }
 
   try {
