@@ -1,7 +1,7 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
-import { CheckCircle, Clock, ChevronDown, ChevronUp } from 'lucide-react';
+import React, { useState } from 'react';
+import { CheckCircle, ChevronDown, ChevronUp } from 'lucide-react';
 
 // =============================================================================
 // MAIN COMPONENT - Renders any learn content structure
@@ -11,35 +11,7 @@ interface LearnContentProps {
   learn: any;
 }
 
-function calculateReadTime(learn: any): number {
-  let wordCount = 0;
-  const countWords = (obj: any) => {
-    if (typeof obj === 'string') {
-      wordCount += obj.split(/\s+/).length;
-    } else if (Array.isArray(obj)) {
-      obj.forEach(countWords);
-    } else if (obj && typeof obj === 'object') {
-      Object.values(obj).forEach(countWords);
-    }
-  };
-  countWords(learn);
-  return Math.max(1, Math.ceil(wordCount / 200));
-}
-
 export default function LearnContentRenderer({ learn }: LearnContentProps) {
-  const [scrollProgress, setScrollProgress] = useState(0);
-  
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      setScrollProgress(Math.min(100, Math.max(0, progress)));
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   // Handle string format (old markdown)
   if (typeof learn === 'string') {
     return (
@@ -48,8 +20,6 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
       </div>
     );
   }
-
-  const readTime = calculateReadTime(learn);
 
   // Render order for known properties
   const renderOrder = [
@@ -88,23 +58,6 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
 
   return (
     <div className="space-y-6">
-      {/* Progress Bar */}
-      <div className="bg-slate-800 rounded-xl p-4 border border-slate-700">
-        <div className="flex items-center justify-between mb-2">
-          <div className="flex items-center gap-2 text-gray-400 text-sm">
-            <Clock className="w-4 h-4" />
-            <span>{readTime} min read</span>
-          </div>
-          <span className="text-gray-400 text-sm">{Math.round(scrollProgress)}% complete</span>
-        </div>
-        <div className="w-full bg-slate-700 rounded-full h-2">
-          <div 
-            className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full transition-all duration-150"
-            style={{ width: `${scrollProgress}%` }}
-          />
-        </div>
-      </div>
-
       {/* Render in order */}
       {renderOrder.map(key => {
         if (!learn[key]) return null;
