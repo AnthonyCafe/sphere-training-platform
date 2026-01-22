@@ -2042,24 +2042,3 @@ function IdentifyingCorrespondentsBlock({ data }: { data: any }) {
     </div>
   );
 }
-      {Array.isArray(data) && (
-        <ul className="text-gray-300 space-y-1">
-          {data.map((item, i) => <li key={i}>• {typeof item === 'string' ? item : JSON.stringify(item)}</li>)}
-        </ul>
-      )}
-      {typeof data === 'object' && !Array.isArray(data) && (
-        <div className="text-gray-300 text-sm">
-          {Object.entries(data).map(([k, v]) => {
-            if (k === 'title') return null;
-            return (
-              <div key={k} className="mb-2">
-                <span className="text-gray-400">{k}: </span>
-                <span>{typeof v === 'string' ? v : JSON.stringify(v)}</span>
-              </div>
-            );
-          })}
-        </div>
-      )}
-    </div>
-  );
-}
