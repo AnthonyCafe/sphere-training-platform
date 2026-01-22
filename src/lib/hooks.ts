@@ -235,7 +235,34 @@ export function useQuizzes() {
       })
   }, [user])
 
-  return { quizAnswers, setQuizAnswers, quizSubmitted, submitQuiz }
+  const resetQuiz = useCallback(async (sectionId: string) => {
+    if (!user) return
+
+    setQuizAnswersState(prev => {
+      const newState = { ...prev }
+      delete newState[sectionId]
+      return newState
+    })
+    setQuizSubmittedState(prev => {
+      const newState = { ...prev }
+      delete newState[sectionId]
+      return newState
+    })
+
+    await supabase
+      .from('quiz_answers')
+      .upsert({
+        user_id: user.id,
+        section_id: sectionId,
+        answers: {},
+        submitted: false,
+        updated_at: new Date().toISOString(),
+      }, {
+        onConflict: 'user_id,section_id'
+      })
+  }, [user])
+
+  return { quizAnswers, setQuizAnswers, quizSubmitted, submitQuiz, resetQuiz }
 }
 
 // Hook for managing mastery assessments
