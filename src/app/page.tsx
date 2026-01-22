@@ -148,7 +148,7 @@ export default function TrainingPlatform() {
   // Database hooks
   const { progress, setProgress: updateProgress, loading: progressLoading } = useProgress()
   const { exerciseAnswers, setExerciseAnswer, aiFeedback, setAiFeedback, exerciseScores, setExerciseScore } = useExercises()
-  const { quizAnswers, setQuizAnswers, quizSubmitted, submitQuiz } = useQuizzes()
+  const { quizAnswers, setQuizAnswers, quizSubmitted, submitQuiz, resetQuiz } = useQuizzes()
   const { 
     masterQuizAnswers, 
     setMasterQuizAnswers, 
@@ -747,8 +747,7 @@ export default function TrainingPlatform() {
                 {quizSubmitted[sectionKey] && (
                   <button 
                     onClick={() => {
-                      submitQuiz(sectionKey, false);
-                      setQuizAnswers(sectionKey, {});
+                      resetQuiz(sectionKey);
                       updateProgress(sectionKey, { quiz: false, quizScore: undefined });
                     }}
                     className="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg flex items-center gap-2"
