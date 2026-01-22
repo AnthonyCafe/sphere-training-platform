@@ -67,8 +67,8 @@ const FormattedFeedback = ({ text }: { text: string }) => {
     const line = lines[i];
     const trimmed = line.trim();
     
-    // Check for Model Answer header
-    if (/^\*\*Model Answer.*?\*\*:?$/i.test(trimmed) || /^Model Answer.*?:/i.test(trimmed)) {
+    // Check for Model Answer header (including "Model Answer for Question X:")
+    if (/^\*?\*?Model Answer.*?\*?\*?:?$/i.test(trimmed.replace(/\*/g, '')) || /^Model Answer/i.test(trimmed.replace(/\*\*/g, ''))) {
       inModelAnswer = true;
       modelAnswerLines = [];
       continue;
