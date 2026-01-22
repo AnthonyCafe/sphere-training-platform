@@ -19,6 +19,82 @@ import {
 } from '@/lib/hooks'
 import Link from 'next/link'
 
+// Formatted AI Feedback Component - renders markdown-like text with proper styling
+const FormattedFeedback = ({ text }: { text: string }) => {
+  if (!text) return null;
+  
+  // Split into lines and process
+  const lines = text.split('\n');
+  
+  return (
+    <div className="space-y-3">
+      {lines.map((line, i) => {
+        const trimmed = line.trim();
+        if (!trimmed) return <div key={i} className="h-2" />;
+        
+        // Headers (## or **Header**)
+        if (trimmed.startsWith('## ')) {
+          return <h3 key={i} className="text-lg font-semibold text-white mt-4">{trimmed.slice(3)}</h3>;
+        }
+        if (trimmed.startsWith('### ')) {
+          return <h4 key={i} className="text-md font-semibold text-white mt-3">{trimmed.slice(4)}</h4>;
+        }
+        
+        // Score lines (e.g., "Score: 85%" or "Overall: 90%")
+        if (/^(score|overall|total|grade):/i.test(trimmed)) {
+          const [label, value] = trimmed.split(':');
+          const numMatch = value?.match(/(\d+)/);
+          const score = numMatch ? parseInt(numMatch[1]) : 0;
+          return (
+            <div key={i} className={`inline-flex items-center gap-2 px-3 py-1 rounded-lg ${score >= 70 ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'}`}>
+              <span className="font-medium">{label}:</span>
+              <span className="font-bold">{value}</span>
+            </div>
+          );
+        }
+        
+        // Bullet points
+        if (trimmed.startsWith('- ') || trimmed.startsWith('• ') || trimmed.startsWith('* ')) {
+          const content = trimmed.slice(2);
+          // Check for ✅ or ❌ or ⚠️
+          if (content.startsWith('✅') || content.toLowerCase().includes('strength') || content.toLowerCase().includes('good')) {
+            return <div key={i} className="flex items-start gap-2 text-emerald-300 ml-2"><span>✅</span><span>{content.replace(/^[✅❌⚠️]\s*/, '')}</span></div>;
+          }
+          if (content.startsWith('❌') || content.toLowerCase().includes('missing') || content.toLowerCase().includes('incorrect')) {
+            return <div key={i} className="flex items-start gap-2 text-red-300 ml-2"><span>❌</span><span>{content.replace(/^[✅❌⚠️]\s*/, '')}</span></div>;
+          }
+          if (content.startsWith('⚠️') || content.toLowerCase().includes('improve') || content.toLowerCase().includes('consider')) {
+            return <div key={i} className="flex items-start gap-2 text-amber-300 ml-2"><span>⚠️</span><span>{content.replace(/^[✅❌⚠️]\s*/, '')}</span></div>;
+          }
+          return <div key={i} className="flex items-start gap-2 text-gray-300 ml-2"><span className="text-gray-500">•</span><span>{content}</span></div>;
+        }
+        
+        // Numbered items
+        if (/^\d+[\.\)]\s/.test(trimmed)) {
+          const match = trimmed.match(/^(\d+)[\.\)]\s*(.*)/);
+          if (match) {
+            return (
+              <div key={i} className="flex items-start gap-3 text-gray-300 ml-2">
+                <span className="bg-slate-700 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs flex-shrink-0">{match[1]}</span>
+                <span>{match[2]}</span>
+              </div>
+            );
+          }
+        }
+        
+        // Bold text sections (**text**)
+        const formattedLine = trimmed.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>');
+        if (formattedLine !== trimmed) {
+          return <p key={i} className="text-gray-300" dangerouslySetInnerHTML={{ __html: formattedLine }} />;
+        }
+        
+        // Regular paragraph
+        return <p key={i} className="text-gray-300">{trimmed}</p>;
+      })}
+    </div>
+  );
+};
+
 // Admin emails list
 const ADMIN_EMAILS = ['arnold@sphere.com', 'anthony@vc.cafe']
 
@@ -582,7 +658,7 @@ export default function TrainingPlatform() {
                           <Award className="w-5 h-5 text-amber-400" />
                           AI Feedback
                         </h4>
-                        <p className="text-gray-300 whitespace-pre-wrap">{aiFeedback[sectionKey]}</p>
+                        <FormattedFeedback text={aiFeedback[sectionKey]} />
                         <button onClick={() => setCurrentTab('quiz')} className="mt-4 text-sm text-blue-400 hover:underline">
                           Continue to Quiz →
                         </button>
@@ -772,7 +848,7 @@ export default function TrainingPlatform() {
                       <Award className="w-5 h-5 text-amber-400" />
                       AI Evaluation
                     </h3>
-                    <p className="text-gray-300 whitespace-pre-wrap">{masterQuizFeedback[pillar.id]}</p>
+                    <FormattedFeedback text={masterQuizFeedback[pillar.id]} />
                   </div>
                 )}
               </div>
