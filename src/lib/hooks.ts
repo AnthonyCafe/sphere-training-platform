@@ -118,10 +118,18 @@ export function useExercises() {
       })
   }, [user])
 
-  const setAiFeedback = useCallback(async (sectionId: string, feedback: string) => {
+  const setAiFeedback = useCallback(async (sectionId: string, feedback: string | null) => {
     if (!user) return
 
-    setAiFeedbackState(prev => ({ ...prev, [sectionId]: feedback }))
+    if (feedback === null) {
+      setAiFeedbackState(prev => {
+        const newState = { ...prev }
+        delete newState[sectionId]
+        return newState
+      })
+    } else {
+      setAiFeedbackState(prev => ({ ...prev, [sectionId]: feedback }))
+    }
 
     await supabase
       .from('user_progress')
@@ -135,10 +143,18 @@ export function useExercises() {
       })
   }, [user])
 
-  const setExerciseScore = useCallback(async (sectionId: string, score: number) => {
+  const setExerciseScore = useCallback(async (sectionId: string, score: number | null) => {
     if (!user) return
 
-    setExerciseScoresState(prev => ({ ...prev, [sectionId]: score }))
+    if (score === null) {
+      setExerciseScoresState(prev => {
+        const newState = { ...prev }
+        delete newState[sectionId]
+        return newState
+      })
+    } else {
+      setExerciseScoresState(prev => ({ ...prev, [sectionId]: score }))
+    }
 
     await supabase
       .from('user_progress')
