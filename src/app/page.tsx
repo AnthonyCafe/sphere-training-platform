@@ -665,7 +665,7 @@ export default function TrainingPlatform() {
                           </button>
                           <button 
                             onClick={() => {
-                              setAiFeedback({ ...aiFeedback, [sectionKey]: null });
+                              setAiFeedback(sectionKey, null);
                               setExerciseScore(sectionKey, null);
                               updateProgress(sectionKey, { exercise: false });
                             }} 
