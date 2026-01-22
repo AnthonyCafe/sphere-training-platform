@@ -25,74 +25,183 @@ const FormattedFeedback = ({ text }: { text: string }) => {
   
   // Split into lines and process
   const lines = text.split('\n');
+  let inModelAnswer = false;
+  let modelAnswerLines: string[] = [];
   
-  return (
-    <div className="space-y-3">
-      {lines.map((line, i) => {
-        const trimmed = line.trim();
-        if (!trimmed) return <div key={i} className="h-2" />;
-        
-        // Headers (## or **Header**)
-        if (trimmed.startsWith('## ')) {
-          return <h3 key={i} className="text-lg font-semibold text-white mt-4">{trimmed.slice(3)}</h3>;
-        }
-        if (trimmed.startsWith('### ')) {
-          return <h4 key={i} className="text-md font-semibold text-white mt-3">{trimmed.slice(4)}</h4>;
-        }
-        
-        // Score lines (e.g., "Score: 85%" or "Overall: 90%")
-        if (/^(score|overall|total|grade):/i.test(trimmed)) {
-          const [label, value] = trimmed.split(':');
-          const numMatch = value?.match(/(\d+)/);
-          const score = numMatch ? parseInt(numMatch[1]) : 0;
-          return (
-            <div key={i} className={`inline-flex items-center gap-2 px-3 py-1 rounded-lg ${score >= 70 ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'}`}>
-              <span className="font-medium">{label}:</span>
-              <span className="font-bold">{value}</span>
-            </div>
-          );
-        }
-        
-        // Bullet points
-        if (trimmed.startsWith('- ') || trimmed.startsWith('• ') || trimmed.startsWith('* ')) {
-          const content = trimmed.slice(2);
-          // Check for ✅ or ❌ or ⚠️
-          if (content.startsWith('✅') || content.toLowerCase().includes('strength') || content.toLowerCase().includes('good')) {
-            return <div key={i} className="flex items-start gap-2 text-emerald-300 ml-2"><span>✅</span><span>{content.replace(/^[✅❌⚠️]\s*/, '')}</span></div>;
-          }
-          if (content.startsWith('❌') || content.toLowerCase().includes('missing') || content.toLowerCase().includes('incorrect')) {
-            return <div key={i} className="flex items-start gap-2 text-red-300 ml-2"><span>❌</span><span>{content.replace(/^[✅❌⚠️]\s*/, '')}</span></div>;
-          }
-          if (content.startsWith('⚠️') || content.toLowerCase().includes('improve') || content.toLowerCase().includes('consider')) {
-            return <div key={i} className="flex items-start gap-2 text-amber-300 ml-2"><span>⚠️</span><span>{content.replace(/^[✅❌⚠️]\s*/, '')}</span></div>;
-          }
-          return <div key={i} className="flex items-start gap-2 text-gray-300 ml-2"><span className="text-gray-500">•</span><span>{content}</span></div>;
-        }
-        
-        // Numbered items
-        if (/^\d+[\.\)]\s/.test(trimmed)) {
-          const match = trimmed.match(/^(\d+)[\.\)]\s*(.*)/);
-          if (match) {
-            return (
-              <div key={i} className="flex items-start gap-3 text-gray-300 ml-2">
-                <span className="bg-slate-700 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs flex-shrink-0">{match[1]}</span>
-                <span>{match[2]}</span>
-              </div>
-            );
-          }
-        }
-        
-        // Bold text sections (**text**)
-        const formattedLine = trimmed.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>');
-        if (formattedLine !== trimmed) {
-          return <p key={i} className="text-gray-300" dangerouslySetInnerHTML={{ __html: formattedLine }} />;
-        }
-        
-        // Regular paragraph
-        return <p key={i} className="text-gray-300">{trimmed}</p>;
-      })}
-    </div>
-  );
+  const renderModelAnswerBlock = (content: string[]) => {
+    if (content.length === 0) return null;
+    return (
+      <div className="mt-4 bg-blue-500/10 border border-blue-500/30 rounded-xl p-5">
+        <div className="flex items-center gap-2 mb-3">
+          <span className="text-xl">📝</span>
+          <h4 className="font-semibold text-blue-400">Model Answer</h4>
+        </div>
+        <div className="text-gray-200 space-y-2">
+          {content.map((line, i) => {
+            const trimmed = line.trim();
+            if (!trimmed) return <div key={i} className="h-2" />;
+            if (trimmed.startsWith('- ') || trimmed.startsWith('• ') || trimmed.startsWith('* ')) {
+              return <div key={i} className="flex items-start gap-2 ml-2"><span className="text-blue-400">•</span><span>{trimmed.slice(2)}</span></div>;
+            }
+            if (/^\d+[\.\)]\s/.test(trimmed)) {
+              const match = trimmed.match(/^(\d+)[\.\)]\s*(.*)/);
+              if (match) {
+                return (
+                  <div key={i} className="flex items-start gap-3 ml-2">
+                    <span className="bg-blue-500/30 text-blue-300 w-6 h-6 rounded-full flex items-center justify-center text-xs flex-shrink-0">{match[1]}</span>
+                    <span>{match[2]}</span>
+                  </div>
+                );
+              }
+            }
+            return <p key={i}>{trimmed}</p>;
+          })}
+        </div>
+      </div>
+    );
+  };
+  
+  const elements: JSX.Element[] = [];
+  
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+    const trimmed = line.trim();
+    
+    // Check for Model Answer header
+    if (/^\*\*Model Answer.*?\*\*:?$/i.test(trimmed) || /^Model Answer.*?:/i.test(trimmed)) {
+      inModelAnswer = true;
+      modelAnswerLines = [];
+      continue;
+    }
+    
+    // Check if we've hit another section header while in model answer
+    if (inModelAnswer && /^\*\*[A-Z]/.test(trimmed) && !trimmed.toLowerCase().includes('model answer')) {
+      // Render the collected model answer
+      const rendered = renderModelAnswerBlock(modelAnswerLines);
+      if (rendered) elements.push(<div key={`model-${i}`}>{rendered}</div>);
+      inModelAnswer = false;
+      modelAnswerLines = [];
+    }
+    
+    // Collect model answer lines
+    if (inModelAnswer) {
+      modelAnswerLines.push(line);
+      continue;
+    }
+    
+    // Skip empty lines
+    if (!trimmed) {
+      elements.push(<div key={i} className="h-2" />);
+      continue;
+    }
+    
+    // Headers (## or **Header**)
+    if (trimmed.startsWith('## ')) {
+      elements.push(<h3 key={i} className="text-lg font-semibold text-white mt-4">{trimmed.slice(3)}</h3>);
+      continue;
+    }
+    if (trimmed.startsWith('### ')) {
+      elements.push(<h4 key={i} className="text-md font-semibold text-white mt-3">{trimmed.slice(4)}</h4>);
+      continue;
+    }
+    
+    // Score lines (e.g., "Score: 85%" or "Overall: 90%")
+    if (/^\*?\*?(score|overall|total|grade):/i.test(trimmed)) {
+      const cleanLine = trimmed.replace(/\*\*/g, '');
+      const [label, value] = cleanLine.split(':');
+      const numMatch = value?.match(/(\d+)/);
+      const score = numMatch ? parseInt(numMatch[1]) : 0;
+      elements.push(
+        <div key={i} className={`inline-flex items-center gap-2 px-3 py-1 rounded-lg ${score >= 80 ? 'bg-emerald-500/20 text-emerald-400' : score >= 60 ? 'bg-amber-500/20 text-amber-400' : 'bg-red-500/20 text-red-400'}`}>
+          <span className="font-medium">{label}:</span>
+          <span className="font-bold">{value}</span>
+        </div>
+      );
+      continue;
+    }
+    
+    // Section headers like **Strengths:** or **Key Tip:**
+    if (/^\*\*.*?\*\*:?$/.test(trimmed)) {
+      const headerText = trimmed.replace(/\*\*/g, '').replace(/:$/, '');
+      let icon = '';
+      let colorClass = 'text-white';
+      
+      if (headerText.toLowerCase().includes('strength')) {
+        icon = '✅';
+        colorClass = 'text-emerald-400';
+      } else if (headerText.toLowerCase().includes('improvement') || headerText.toLowerCase().includes('needs')) {
+        icon = '⚠️';
+        colorClass = 'text-amber-400';
+      } else if (headerText.toLowerCase().includes('error')) {
+        icon = '❌';
+        colorClass = 'text-red-400';
+      } else if (headerText.toLowerCase().includes('tip')) {
+        icon = '💡';
+        colorClass = 'text-blue-400';
+      } else if (headerText.toLowerCase().includes('verdict') || headerText.toLowerCase().includes('assessment')) {
+        icon = '📋';
+        colorClass = 'text-purple-400';
+      } else if (headerText.toLowerCase().includes('summary')) {
+        icon = '📊';
+        colorClass = 'text-blue-400';
+      }
+      
+      elements.push(
+        <h4 key={i} className={`font-semibold ${colorClass} mt-4 mb-2 flex items-center gap-2`}>
+          {icon && <span>{icon}</span>}
+          {headerText}
+        </h4>
+      );
+      continue;
+    }
+    
+    // Bullet points
+    if (trimmed.startsWith('- ') || trimmed.startsWith('• ') || trimmed.startsWith('* ')) {
+      const content = trimmed.slice(2);
+      if (content.startsWith('✅')) {
+        elements.push(<div key={i} className="flex items-start gap-2 text-emerald-300 ml-2"><span>✅</span><span>{content.slice(1).trim()}</span></div>);
+      } else if (content.startsWith('❌')) {
+        elements.push(<div key={i} className="flex items-start gap-2 text-red-300 ml-2"><span>❌</span><span>{content.slice(1).trim()}</span></div>);
+      } else if (content.startsWith('⚠️')) {
+        elements.push(<div key={i} className="flex items-start gap-2 text-amber-300 ml-2"><span>⚠️</span><span>{content.slice(1).trim()}</span></div>);
+      } else {
+        elements.push(<div key={i} className="flex items-start gap-2 text-gray-300 ml-2"><span className="text-gray-500">•</span><span>{content}</span></div>);
+      }
+      continue;
+    }
+    
+    // Numbered items
+    if (/^\d+[\.\)]\s/.test(trimmed)) {
+      const match = trimmed.match(/^(\d+)[\.\)]\s*(.*)/);
+      if (match) {
+        elements.push(
+          <div key={i} className="flex items-start gap-3 text-gray-300 ml-2">
+            <span className="bg-slate-700 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs flex-shrink-0">{match[1]}</span>
+            <span>{match[2]}</span>
+          </div>
+        );
+        continue;
+      }
+    }
+    
+    // Bold text sections (**text**)
+    const formattedLine = trimmed.replace(/\*\*(.*?)\*\*/g, '<strong class="text-white font-semibold">$1</strong>');
+    if (formattedLine !== trimmed) {
+      elements.push(<p key={i} className="text-gray-300" dangerouslySetInnerHTML={{ __html: formattedLine }} />);
+      continue;
+    }
+    
+    // Regular paragraph
+    elements.push(<p key={i} className="text-gray-300">{trimmed}</p>);
+  }
+  
+  // Don't forget to render any remaining model answer content
+  if (inModelAnswer && modelAnswerLines.length > 0) {
+    const rendered = renderModelAnswerBlock(modelAnswerLines);
+    if (rendered) elements.push(<div key="model-final">{rendered}</div>);
+  }
+  
+  return <div className="space-y-2">{elements}</div>;
 };
 
 // Admin emails list
