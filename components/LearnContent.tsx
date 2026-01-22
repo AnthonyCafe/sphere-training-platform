@@ -23,11 +23,14 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
 
   // Render order for known properties
   const renderOrder = [
-    'introduction', 'coreQuestion', 'warning',
+    'introduction', 'glossary', 'coreQuestion', 'warning',
     'arnoldQuote', 'parable', 'keyFact', 'keyPhrase',
     'stats', 'coreMetrics', 'sphereMetrics',
     'riskCategories', 'definitions', 'types',
     'sections',
+    'swiftAckExplained', 'dangerZone', 'howToVerifySettlement',
+    'systemDetails', 'bitcoinClarification',
+    'identifyingCorrespondents',
     'speedComparison', 'asymmetryProblem', 'fourLedgers', 'capitalEfficiency',
     'globalFrameworks', 'micaDetails', 'geniusAct', 'uaeFramework', 'convergencePattern',
     'adoptionCurve', 'enterpriseUseCases', 'unbankedOpportunity', 'arnoldOnMarkets',
