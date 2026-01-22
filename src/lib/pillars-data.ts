@@ -53,10 +53,33 @@ This pillar ensures you can explain:
                 { label: 'Risk status', value: 'Customer bears the risk' }
               ],
               example: 'You hit "Send" on a wire transfer. Your bank receives the instruction. At this moment, you\'ve initiated — but no money has moved.',
-              partiesInvolved: 'Two parties are involved: (1) The Customer (Payer) who initiates the payment instruction, provides beneficiary details, authorizes the transaction, and ensures sufficient funds. (2) The Originating Bank who receives and validates the instruction, confirms customer identity, checks account balance, and validates beneficiary information format.',
-              whyCustomerBearsRisk: 'At initiation, the customer has provided an instruction but the bank hasn\'t committed to executing it yet. If the instruction contains errors (wrong account number, invalid beneficiary name, insufficient details), the payment will fail—and the customer bears responsibility for providing correct information. The bank is simply receiving an order; they haven\'t acted on it.',
-              riskScenario: 'You submit a wire with a typo in the beneficiary account number. Your bank hasn\'t sent anything yet—they\'re just processing your request. If they catch the error, they\'ll reject it. If they don\'t, and the payment fails later, you bear the cost of correction and delay.',
-              commonErrors: 'Invalid beneficiary account number • Incorrect SWIFT/BIC code • Missing required reference information • Insufficient funds in account • Payment instruction doesn\'t meet bank\'s formatting requirements'
+              partiesInvolved: {
+                title: 'Who Is Involved at Initiation?',
+                parties: [
+                  {
+                    name: 'The Customer (Payer)',
+                    role: 'Initiates the payment instruction',
+                    responsibilities: ['Provides beneficiary details', 'Authorizes the transaction', 'Ensures sufficient funds']
+                  },
+                  {
+                    name: 'The Originating Bank',
+                    role: 'Receives and validates the instruction',
+                    responsibilities: ['Confirms customer identity', 'Checks account balance', 'Validates beneficiary information format']
+                  }
+                ]
+              },
+              riskExplained: {
+                title: 'Why Does the Customer Bear Risk?',
+                explanation: 'At initiation, the customer has provided an instruction but the bank hasn\'t committed to executing it yet. If the instruction contains errors (wrong account number, invalid beneficiary name, insufficient details), the payment will fail—and the customer bears responsibility for providing correct information.',
+                scenario: 'You submit a wire with a typo in the beneficiary account number. Your bank hasn\'t sent anything yet—they\'re just processing your request. If they catch the error, they\'ll reject it. If they don\'t, and the payment fails later, you bear the cost of correction and delay.',
+                commonErrors: [
+                  'Invalid beneficiary account number',
+                  'Incorrect SWIFT/BIC code',
+                  'Missing required reference information',
+                  'Insufficient funds in account',
+                  'Payment instruction doesn\'t meet bank\'s formatting requirements'
+                ]
+              }
             },
             {
               title: 'Stage 2: Clearing',
@@ -69,11 +92,41 @@ This pillar ensures you can explain:
               ],
               example: 'Your wire goes through SWIFT. SWIFT validates the format, routes to correspondent bank, they confirm the beneficiary.',
               warning: 'A payment can clear successfully and STILL never settle. Clearing is just agreement — not money movement.',
-              partiesInvolved: 'Four types of parties are involved: (1) Messaging Networks (SWIFT, FedACH) that transmit and validate the payment message, ensure format is correct, and confirm delivery. (2) Correspondent Banks that act as intermediaries between originating and beneficiary banks when they don\'t have direct relationships—each correspondent adds time, fees, and another compliance checkpoint. (3) Beneficiary Bank that receives the payment message, confirms account details match, performs compliance screening, and notifies customer of incoming payment. (4) Originating Bank managing the process.',
-              whyCorrespondentsExist: 'Correspondent banks exist because not all banks have direct relationships with each other. If your bank in Texas doesn\'t have a direct relationship with a bank in Lagos, they need a correspondent bank (often in New York or London) that has relationships with both. Each correspondent adds time, fees, and another compliance checkpoint.',
-              whySendingBankBearsRisk: 'Once clearing begins, the originating bank has committed to the payment. They\'ve debited the customer\'s account and sent the instruction into the payment network. At this point, the customer\'s money is "in flight"—gone from their account but not yet received by the beneficiary. If anything goes wrong during clearing (correspondent bank rejects it, compliance hold, beneficiary account closed), the sending bank must unwind the transaction, return funds, and manage the operational mess.',
-              riskScenario: 'Your bank sends a $50,000 wire to Nigeria. The message goes through SWIFT to a correspondent in London, then to a correspondent in Lagos, then to the beneficiary bank. At the Lagos correspondent, the payment gets flagged for enhanced due diligence because the reference field mentions "agricultural equipment" and they want documentation. The payment is in limbo. Your money is gone from your account. The receiver hasn\'t gotten it. Your bank can\'t just "cancel" it—they have to negotiate with the correspondent. This is clearing risk.',
-              whatCanGoWrong: 'Correspondent bank rejects payment due to risk appetite • Beneficiary account frozen or closed • Compliance hold for sanctions or AML review (can take days or weeks) • Beneficiary name doesn\'t match account (requires manual verification) • Cut-off time missed—payment delayed to next business day • FX rate moves against you while payment is clearing • Nostro account (correspondent account) has insufficient balance'
+              partiesInvolved: {
+                title: 'Who Is Involved at Clearing?',
+                parties: [
+                  {
+                    name: 'Messaging Networks (SWIFT, FedACH)',
+                    role: 'Transmits and validates the payment message',
+                    responsibilities: ['Ensures message format is correct', 'Routes to proper destination', 'Confirms delivery']
+                  },
+                  {
+                    name: 'Correspondent Bank(s)',
+                    role: 'Intermediaries between originating and beneficiary banks',
+                    responsibilities: ['Validate compliance (AML/sanctions)', 'Confirm beneficiary account exists', 'Prepare for settlement'],
+                    whyTheyExist: 'If your bank in Texas doesn\'t have a direct relationship with a bank in Lagos, they need a correspondent bank (often in New York or London) that has relationships with both. Each correspondent adds time, fees, and another compliance checkpoint.'
+                  },
+                  {
+                    name: 'Beneficiary Bank',
+                    role: 'Receives the payment message and prepares to credit customer',
+                    responsibilities: ['Confirms account details match', 'Performs own compliance screening', 'Notifies customer of incoming payment']
+                  }
+                ]
+              },
+              riskExplained: {
+                title: 'Why Does the Sending Bank Now Bear Risk?',
+                explanation: 'Once clearing begins, the originating bank has committed to the payment. They\'ve debited the customer\'s account and sent the instruction into the payment network. At this point, the customer\'s money is "in flight"—gone from their account but not yet received by the beneficiary.',
+                scenario: 'Your bank sends a $50,000 wire to Nigeria. The message goes through SWIFT to a correspondent in London, then to a correspondent in Lagos, then to the beneficiary bank. At the Lagos correspondent, the payment gets flagged for enhanced due diligence because the reference field mentions "agricultural equipment" and they want documentation. The payment is in limbo. Your money is gone from your account. The receiver hasn\'t gotten it. Your bank can\'t just "cancel" it—they have to negotiate with the correspondent. This is clearing risk.',
+                whatCanGoWrong: [
+                  'Correspondent bank rejects payment due to risk appetite',
+                  'Beneficiary account frozen or closed',
+                  'Compliance hold for sanctions or AML review (can take days or weeks)',
+                  'Beneficiary name doesn\'t match account (requires manual verification)',
+                  'Cut-off time missed—payment delayed to next business day',
+                  'FX rate moves against you while payment is clearing',
+                  'Nostro account has insufficient balance'
+                ]
+              }
             },
             {
               title: 'Stage 3: Settlement',
@@ -85,10 +138,33 @@ This pillar ensures you can explain:
                 { label: 'Risk status', value: 'Risk is eliminated' }
               ],
               example: 'Fedwire debits Bank A\'s reserve account and credits Bank B\'s. Done. Final. Irrevocable.',
-              partiesInvolved: 'Three parties complete settlement: (1) Central Bank Settlement System (Fedwire, TARGET2, CHAPS) that maintains reserve accounts for commercial banks and executes final settlement by debiting one bank and crediting another on the central bank ledger. (2) Originating Bank that sends final settlement instruction and ensures sufficient reserves at central bank to cover the payment. (3) Beneficiary Bank that receives settled funds and credits customer account once settlement is confirmed.',
-              whyRiskIsEliminated: 'Settlement happens on the central bank ledger—the most trusted ledger in the financial system. When Fedwire debits Bank A and credits Bank B, that transaction is final, irrevocable, and backed by law. There\'s no credit risk (central bank can\'t default), no reversal mechanism, and legal finality. The payment is done.',
-              riskScenario: 'After all the correspondent approvals and compliance checks, the payment reaches the final step. The sending bank\'s Fedwire account is debited $50,000. The receiving bank\'s Fedwire account is credited $50,000. The Federal Reserve has moved money on its books. This is settlement. The beneficiary bank can now safely credit their customer\'s account because they have the money.',
-              whyCentralBanksMatter: 'This is why central banks matter. Only they can provide zero-credit-risk settlement. No private system, no blockchain, and no technology company can replicate this function without sovereign backing.'
+              partiesInvolved: {
+                title: 'Who Is Involved at Settlement?',
+                parties: [
+                  {
+                    name: 'Central Bank Settlement System',
+                    role: 'Moves actual value between banks',
+                    examples: ['Fedwire (US)', 'TARGET2 (EU)', 'CHAPS (UK)'],
+                    responsibilities: ['Maintains reserve accounts for commercial banks', 'Executes final settlement by debiting one bank and crediting another']
+                  },
+                  {
+                    name: 'Originating Bank',
+                    role: 'Sends final settlement instruction',
+                    responsibilities: ['Ensures sufficient reserves at central bank to cover the payment']
+                  },
+                  {
+                    name: 'Beneficiary Bank',
+                    role: 'Receives settled funds',
+                    responsibilities: ['Credits customer account once settlement is confirmed']
+                  }
+                ]
+              },
+              riskExplained: {
+                title: 'Why Is Risk Eliminated at Settlement?',
+                explanation: 'Settlement happens on the central bank ledger—the most trusted ledger in the financial system. When Fedwire debits Bank A and credits Bank B, that transaction is final, irrevocable, and backed by law. There\'s no credit risk (central bank can\'t default), no reversal mechanism, and legal finality.',
+                scenario: 'After all the correspondent approvals and compliance checks, the payment reaches the final step. The sending bank\'s Fedwire account is debited $50,000. The receiving bank\'s Fedwire account is credited $50,000. The Federal Reserve has moved money on its books. This is settlement. The beneficiary bank can now safely credit their customer\'s account because they have the money.',
+                keyPoint: 'This is why central banks matter. Only they can provide zero-credit-risk settlement. No private system, no blockchain, and no technology company can replicate this function without sovereign backing.'
+              }
             }
           ],
           table: {
@@ -102,12 +178,52 @@ This pillar ensures you can explain:
           },
           sphereRelevance: {
             title: 'Why This Matters for Sphere',
-            context: 'Traditional cross-border payments take 2-5 days from initiation to settlement. During that window: sender\'s money is gone, receiver hasn\'t received it, banks carry risk, FX rates can move against you, and compliance holds can freeze everything. SpherePay compresses this from days to MINUTES using stablecoins.',
+            context: 'Traditional cross-border payments take 2-5 days from initiation to settlement. During that window: sender\'s money is gone, receiver hasn\'t received it, banks carry risk, FX rates can move against you, and compliance holds can freeze everything.',
+            sphereValue: 'SpherePay compresses this from days to MINUTES using stablecoins.',
             keyInsight: 'SpherePay\'s value is in the settlement layer — not faster messaging.',
             problemExplained: 'Traditional cross-border payments are slow because settlement requires moving money through correspondent banking chains, across time zones, and through central bank systems that operate on business hours. The MESSAGING is already fast (SWIFT messages arrive in seconds)—the delay is in SETTLEMENT.',
-            howSphereWorks: 'Sphere uses a three-step process: (1) Sender Side - Customer deposits local currency (USD, AED, EUR) with a licensed on-ramp partner who converts fiat to stablecoins and sends them to Sphere\'s system in minutes because stablecoins settle on blockchain rails 24/7. Traditional: Initiate wire → Wait for correspondents → Wait for central bank → 2-5 days. Sphere: Deposit fiat → Convert to stablecoin → Received in minutes. (2) Cross-Border Movement - Sphere moves stablecoins across borders instantly via blockchain with no correspondent banks, no SWIFT messages, no business hours. Traditional: SWIFT → Correspondent A → Correspondent B → Days. Sphere: Blockchain transfer → 15-30 minutes, 24/7. (3) Receiver Side - Licensed off-ramp partner receives stablecoins and converts to local currency for beneficiary who receives local fiat in their bank account, settled and final. Traditional: Wait for settlement → Credit after confirmation → Days. Sphere: Receive stablecoin → Convert to fiat → Credit beneficiary → Minutes.',
-            whyStablecoinsWork: '24/7 Settlement (blockchains don\'t have banking hours, traditional systems only operate during business hours) • Programmable Compliance (smart contracts embed KYC/AML checks directly, traditional systems check manually at each correspondent) • No Correspondent Chain (no need for 4+ intermediaries taking days to process) • Atomic Settlement (when stablecoin confirms on-chain, it\'s settled—no "clearing vs settlement" delay like traditional payments)',
-            criticalClarification: 'Sphere does NOT eliminate fiat settlement—fiat settlement still happens at the endpoints through licensed partners. What Sphere does is compress the CROSS-BORDER leg from days to minutes by using stablecoins as the settlement asset across borders. This is why we say "Sphere\'s value is in the settlement layer"—we\'re not making messages faster, we\'re making settlement faster.'
+            howSphereWorks: {
+              title: 'How Sphere Achieves Settlement Layer Value Using Stablecoins',
+              steps: [
+                {
+                  step: 'Sender Side: Fiat to Stablecoin',
+                  process: 'Customer deposits local currency (USD, AED, EUR) with a licensed on-ramp partner. That partner converts the fiat to stablecoins (USDC, USDT) and sends them to Sphere\'s system. This happens in minutes, not days, because stablecoins settle on blockchain rails 24/7.',
+                  traditional: 'Initiate wire → Wait for correspondent banks → Wait for central bank settlement → 2-5 days',
+                  sphere: 'Deposit fiat → On-ramp converts to stablecoin → Stablecoin received in minutes'
+                },
+                {
+                  step: 'Cross-Border Movement: Stablecoin Transfer',
+                  process: 'Sphere moves stablecoins across borders instantly via blockchain. No correspondent banks. No SWIFT messages. No waiting for business hours. The stablecoin transfer settles in minutes on-chain.',
+                  traditional: 'SWIFT message → Correspondent in Country A → Correspondent in Country B → Beneficiary bank → Days of clearing',
+                  sphere: 'Stablecoin transfer on blockchain → Settlement in 15-30 minutes, 24/7'
+                },
+                {
+                  step: 'Receiver Side: Stablecoin to Fiat',
+                  process: 'Licensed off-ramp partner receives the stablecoins and converts them to local currency for the beneficiary. The beneficiary receives local fiat in their bank account, settled and final.',
+                  traditional: 'Wait for final settlement → Beneficiary bank credits account after settlement confirmation → Days',
+                  sphere: 'Off-ramp receives stablecoin → Converts to local fiat → Credits beneficiary → Minutes to hours'
+                }
+              ],
+              whyStablecoinsWork: [
+                {
+                  reason: '24/7 Settlement',
+                  explanation: 'Blockchains don\'t have banking hours. Traditional settlement systems (Fedwire, TARGET2) only operate during business hours. Stablecoins settle continuously.'
+                },
+                {
+                  reason: 'Programmable Compliance',
+                  explanation: 'Smart contracts can embed KYC/AML checks directly into the transfer. Traditional systems do compliance checks manually at each correspondent bank.'
+                },
+                {
+                  reason: 'No Correspondent Chain',
+                  explanation: 'With stablecoins, there\'s no need for 4+ correspondent banks. You move value peer-to-peer (or through Sphere\'s network) without intermediaries taking days to process.'
+                },
+                {
+                  reason: 'Atomic Settlement',
+                  explanation: 'When a stablecoin transaction confirms on-chain, it\'s settled. There\'s no "clearing vs settlement" delay. Traditional payments can clear (message confirmed) but not settle (money not moved) for days.'
+                }
+              ],
+              criticalClarification: 'Sphere does NOT eliminate fiat settlement—fiat settlement still happens at the endpoints through licensed partners. What Sphere does is compress the CROSS-BORDER leg from days to minutes by using stablecoins as the settlement asset across borders. This is why we say "Sphere\'s value is in the settlement layer"—we\'re not making messages faster, we\'re making settlement faster.'
+            }
           },
           keyTakeaway: 'A payment can be initiated and cleared WITHOUT being settled. Risk accumulates until settlement occurs.'
         },
@@ -167,24 +283,95 @@ This pillar ensures you can explain:
           swiftAckExplained: {
             title: 'What Is a SWIFT ACK?',
             definition: 'ACK stands for "Acknowledgment." A SWIFT ACK (technically called an MT 900 or MT 910 message) is a confirmation message that tells you the receiving bank has received and accepted your payment instruction.',
-            whatItMeans: 'The SWIFT message was delivered successfully • The receiving bank has acknowledged receipt • The message format was valid and accepted',
-            whatItDoesNOTMean: '❌ Money has moved • ❌ Settlement has occurred • ❌ The beneficiary has received funds • ❌ Compliance checks are complete • ❌ The payment cannot be rejected or delayed',
+            whatItMeans: [
+              'The SWIFT message was delivered successfully',
+              'The receiving bank has acknowledged receipt',
+              'The message format was valid and accepted'
+            ],
+            whatItDoesNOTMean: [
+              'Money has moved',
+              'Settlement has occurred',
+              'The beneficiary has received funds',
+              'Compliance checks are complete',
+              'The payment cannot be rejected or delayed'
+            ],
             analogy: 'Think of SWIFT ACK like a "read receipt" on an email. It tells you the recipient opened your email, but it doesn\'t mean they\'ve acted on it, agreed to it, or completed what you asked.'
           },
           dangerZone: {
             title: 'The Dangerous Statement',
             statement: '"I got the SWIFT ACK, so we\'re good."',
             whyDangerous: 'A SWIFT ACK only confirms message delivery—NOT that money has moved. This is one of the most common and costly mistakes in cross-border payments.',
-            mythVsReality: 'Myth: "Payment went through" → Reality: Message was delivered to the next bank in the chain • Myth: "Money has moved" → Reality: An instruction was received and acknowledged • Myth: "We\'re done, release the goods" → Reality: We\'ve barely started—settlement still pending • Myth: "Beneficiary can access the funds" → Reality: Beneficiary won\'t see anything until settlement completes',
-            whatCanStillGoWrong: 'Compliance Hold: AML or sanctions screening flags the transaction and payment freezes for days or weeks while under review. Example: You send $100K for "industrial equipment" to Iran. SWIFT ACK received but correspondent freezes it pending OFAC review. Weeks later, payment rejected. • Beneficiary Mismatch: Account number doesn\'t match beneficiary name, requires manual verification. Example: SWIFT ACK received but account is for "Ahmed Trading LLC" and you wrote "Ahmed Industrial Co." Payment rejected 3 days later. • Insufficient Correspondent Balance: Correspondent\'s nostro account doesn\'t have enough funds. Example: SWIFT ACK received but correspondent\'s nostro is low, they wait to batch your payment, adds 2 days. • Manual Review Required: Payment triggers operations review. Example: $250K with reference "consulting services" to newly opened Lagos account kicks to ops for due diligence, 5-day delay. • Cut-off Time Missed: Payment arrived after cut-off, delayed to next day. Example: Payment at 4:55 PM NY time, SWIFT ACK at 5:01 PM, but London correspondent closed at 5:00 PM, waits until next day. • Correspondent Rejection: Bank decides they don\'t want the business. Example: Payment to Afghanistan for agricultural imports, SWIFT ACK received, 2 days later correspondent says "we no longer service this corridor" and rejects.'
+            mythVsReality: [
+              { myth: 'Payment went through', truth: 'Message was delivered to the next bank in the chain' },
+              { myth: 'Money has moved', truth: 'An instruction was received and acknowledged' },
+              { myth: 'We\'re done, release the goods', truth: 'We\'ve barely started—settlement still pending' },
+              { myth: 'Beneficiary can access the funds', truth: 'Beneficiary won\'t see anything until settlement completes' }
+            ],
+            whatCanStillGoWrong: {
+              title: 'What Can Go Wrong AFTER Getting SWIFT ACK',
+              scenarios: [
+                {
+                  issue: 'Compliance Hold',
+                  explanation: 'AML or sanctions screening flags the transaction. Payment freezes for days or weeks while under review.',
+                  example: 'You send $100K for "industrial equipment" to Iran. SWIFT ACK received. But correspondent freezes it pending OFAC review. Weeks later, payment rejected.'
+                },
+                {
+                  issue: 'Beneficiary Mismatch',
+                  explanation: 'Account number doesn\'t match beneficiary name. Banks require manual verification.',
+                  example: 'SWIFT ACK received. But the account is for "Ahmed Trading LLC" and you wrote "Ahmed Industrial Co." Payment rejected 3 days later.'
+                },
+                {
+                  issue: 'Insufficient Correspondent Balance',
+                  explanation: 'Correspondent\'s nostro account doesn\'t have enough funds to cover your payment.',
+                  example: 'SWIFT ACK received but correspondent\'s nostro is low. They wait to batch your payment with others. Adds 2 days.'
+                },
+                {
+                  issue: 'Manual Review Required',
+                  explanation: 'Payment amount, destination, or reference triggers a manual operations review.',
+                  example: '$250K with reference "consulting services" to newly opened Lagos account. SWIFT ACK received, kicks to ops for enhanced due diligence. 5-day delay.'
+                },
+                {
+                  issue: 'Cut-off Time Missed',
+                  explanation: 'Payment arrived after the correspondent\'s processing cut-off time. Delayed to next business day.',
+                  example: 'Payment at 4:55 PM NY time. SWIFT ACK at 5:01 PM. But London correspondent closed at 5:00 PM. Payment waits until next day.'
+                },
+                {
+                  issue: 'Correspondent Rejection',
+                  explanation: 'Correspondent bank decides they don\'t want the business (too risky, wrong jurisdiction, relationship issue).',
+                  example: 'Payment to Afghanistan for agricultural imports. SWIFT ACK received. 2 days later, correspondent says "we no longer service this corridor" and rejects.'
+                }
+              ]
+            }
           },
           howToVerifySettlement: {
             title: 'How to Verify a Payment Is Actually Settled',
             introduction: 'Don\'t rely on SWIFT ACK. Here\'s what you should verify:',
-            step1: 'Confirm Settlement System Execution - Check that the payment has been processed through the actual settlement system (Fedwire, CHIPS, TARGET2, etc.). Request a settlement confirmation from your bank, not just a SWIFT ACK. Ask: "Has this settled on Fedwire?" or "Do you have TARGET2 confirmation?" Look for MT 950 (Account Statement) showing debit from sending bank\'s nostro or settlement account.',
-            step2: 'Beneficiary Bank Confirmation - Verify the beneficiary\'s bank has received and credited the funds. Ask the beneficiary to check their account statement. Don\'t assume—confirm. Get a screenshot or statement showing the credit.',
-            step3: 'Irrevocability Confirmation - Ensure the payment is final and cannot be reversed. For high-value transactions, ask your bank: "Is this payment final and irrevocable?" Settlements through RTGS systems (Fedwire, CHAPS) are immediate and final. Other systems may have delay. Get written confirmation that settlement is complete and final.',
-            step4: 'Time-Based Reality Check - Understand the realistic timeline for your corridor. If you sent a payment to Nigeria on Monday and got SWIFT ACK on Monday, don\'t expect settlement until Wednesday or Thursday at earliest. Cross-border payments have structural delays. Use historical data on your payment corridor (ask your bank for average settlement times).',
+            steps: [
+              {
+                step: 'Confirm Settlement System Execution',
+                what: 'Check that the payment has been processed through the actual settlement system (Fedwire, CHIPS, TARGET2, etc.)',
+                how: 'Request a settlement confirmation from your bank, not just a SWIFT ACK. Ask: "Has this settled on Fedwire?" or "Do you have TARGET2 confirmation?"',
+                evidence: 'MT 950 (Account Statement) showing debit from sending bank\'s nostro or settlement account'
+              },
+              {
+                step: 'Beneficiary Bank Confirmation',
+                what: 'Verify the beneficiary\'s bank has received and credited the funds',
+                how: 'Ask the beneficiary to check their account statement. Don\'t assume—confirm.',
+                evidence: 'Beneficiary sends you a screenshot or statement showing the credit'
+              },
+              {
+                step: 'Irrevocability Confirmation',
+                what: 'Ensure the payment is final and cannot be reversed',
+                how: 'For high-value transactions, ask your bank: "Is this payment final and irrevocable?" Settlements through RTGS systems (Fedwire, CHAPS) are immediate and final. Other systems may have delay.',
+                evidence: 'Written confirmation from your bank that settlement is complete and final'
+              },
+              {
+                step: 'Time-Based Reality Check',
+                what: 'Understand the realistic timeline for your corridor',
+                how: 'If you sent a payment to Nigeria on Monday and got SWIFT ACK on Monday, don\'t expect settlement until Wednesday or Thursday at earliest. Cross-border payments have structural delays.',
+                evidence: 'Historical data on your payment corridor (ask your bank for average settlement times)'
+              }
+            ],
             bestPractice: 'For large or critical payments, require the beneficiary to confirm receipt in their account before releasing goods, services, or obligations. SWIFT ACK is not proof of payment.',
             sphereAdvantage: 'With Sphere, stablecoin transfers settle on-chain in 15-30 minutes. You can verify settlement by checking the blockchain transaction—it\'s transparent, timestamped, and final. No waiting for correspondent confirmations.'
           },
@@ -265,11 +452,55 @@ This pillar ensures you can explain:
             ]
           },
           systemDetails: {
-            fedwire: 'Fedwire (RTGS) - Strongest finality: Operated by the Federal Reserve. When a Fedwire transaction processes, it is immediate, final, and irrevocable by law (UCC 4A, Regulation J). The Fed debits one bank and credits another on its master ledger. No take-backs, no disputes. Legal backing: Federal Reserve Act, UCC Article 4A, Regulation J. Use cases: Large-value payments, real estate closings, securities settlement, time-sensitive transactions.',
-            chips: 'CHIPS - Very strong finality: Private payment system for large-value USD transactions. Unlike Fedwire (which settles each payment individually), CHIPS nets payments throughout the day and settles net positions via Fedwire at end of day. Once CHIPS releases the payment for settlement, it has finality. Legal backing: CHIPS Rules and Regulations, backed by New York law. Use cases: International USD transfers, correspondent banking, FX settlement. Note: Strong finality once settlement occurs, but there\'s an intraday window where payments are conditional (pending net settlement).',
-            ach: 'ACH - Good finality, but delayed: Batches payments and settles them through the Federal Reserve. Finality occurs when the Fed settles the ACH batch—typically 1-2 days after initiation. However, ACH has return windows (unauthorized debits can be returned for 60 days), so finality is not as absolute as RTGS. Legal backing: NACHA Operating Rules, UCC 4A. Use cases: Payroll, bill payments, consumer transactions. Note: Cheaper and efficient for bulk payments, but don\'t expect same-day finality.',
-            cards: 'Card Networks - Weak finality: Card payments are authorized instantly but don\'t achieve finality for months. Cardholders have the right to dispute transactions (chargebacks) for 60-120 days. Merchants bear this risk. Even after settlement, funds can be clawed back if a chargeback is filed. Legal backing: Card network rules (private contracts), consumer protection laws. Use cases: Consumer purchases, e-commerce, point-of-sale. Note: Convenient but risky for merchants—high chargeback risk for certain industries (travel, digital goods).',
-            crypto: 'Cryptocurrency - No legal finality: Cryptocurrencies use consensus mechanisms (proof of work, proof of stake) to confirm transactions. After N confirmations, a transaction is "computationally impractical to reverse"—but there\'s no legal framework defining finality. A 51% attack could theoretically reverse transactions. More importantly, courts don\'t recognize blockchain finality as legally binding. Legal backing: None. No statute defines finality, no court precedent. Use cases: Crypto trading, speculative transfers, experimental payments. Note: Crypto provides technical security (hard to reverse) but not legal finality (no law protects you if it\'s reversed).'
+            title: 'Understanding Finality by Payment System',
+            systems: [
+              {
+                name: 'Fedwire (RTGS)',
+                when: 'Immediately upon processing',
+                strength: '⭐⭐⭐⭐⭐ Strongest possible finality',
+                explanation: 'Fedwire is operated by the Federal Reserve. When a Fedwire transaction processes, it is immediate, final, and irrevocable by law (UCC 4A, Regulation J). The Fed debits one bank and credits another on its master ledger. Done. No take-backs. No disputes. This is the gold standard of settlement finality.',
+                legalBacking: 'Federal Reserve Act, UCC Article 4A, Regulation J',
+                useCases: ['Large-value payments', 'Real estate closings', 'Securities settlement', 'Time-sensitive transactions'],
+                keyPoint: 'If you need absolute certainty that a payment cannot be reversed, Fedwire is the answer.'
+              },
+              {
+                name: 'CHIPS',
+                when: 'Same-day when net positions are released and settled',
+                strength: '⭐⭐⭐⭐ Very strong finality',
+                explanation: 'CHIPS is a private payment system that processes large-value USD transactions. Unlike Fedwire (which settles each payment individually), CHIPS nets payments throughout the day and settles the net positions via Fedwire at end of day. Once CHIPS releases the payment for settlement, it has finality.',
+                legalBacking: 'CHIPS Rules and Regulations, backed by New York law',
+                useCases: ['International USD transfers', 'Correspondent banking', 'FX settlement'],
+                keyPoint: 'CHIPS provides strong finality once settlement occurs, but there\'s an intraday window where payments are conditional (pending net settlement).'
+              },
+              {
+                name: 'ACH',
+                when: '1-2 business days after initiation (during settlement window)',
+                strength: '⭐⭐⭐ Good finality, but delayed',
+                explanation: 'ACH batches payments and settles them through the Federal Reserve. Finality occurs when the Fed settles the ACH batch—typically 1-2 days after initiation. However, ACH has return windows (unauthorized debits can be returned for 60 days), so finality is not as absolute as RTGS.',
+                legalBacking: 'NACHA Operating Rules, UCC 4A',
+                useCases: ['Payroll', 'Bill payments', 'Consumer transactions'],
+                keyPoint: 'ACH is cheaper and efficient for bulk payments, but don\'t expect same-day finality. Returns are possible for unauthorized transactions.'
+              },
+              {
+                name: 'Card Networks (Visa, Mastercard, Amex)',
+                when: 'Only after chargeback window expires (60-120 days depending on card type)',
+                strength: '⭐⭐ Weak finality',
+                explanation: 'Card payments are authorized instantly but don\'t achieve finality for months. Cardholders have the right to dispute transactions (chargebacks) for 60-120 days. Merchants bear this risk. Even after settlement, funds can be clawed back if a chargeback is filed.',
+                legalBacking: 'Card network rules (private contracts), consumer protection laws',
+                useCases: ['Consumer purchases', 'E-commerce', 'Point-of-sale'],
+                keyPoint: 'Card payments are convenient but risky for merchants. Finality is delayed and conditional. High chargeback risk for certain industries (travel, digital goods).'
+              },
+              {
+                name: 'Cryptocurrency (Bitcoin, Ethereum, etc.)',
+                when: 'Never achieves legal finality—only probabilistic certainty',
+                strength: '⭐ No legal finality',
+                explanation: 'Cryptocurrencies use consensus mechanisms (proof of work, proof of stake) to confirm transactions. After N confirmations, a transaction is "computationally impractical to reverse"—but there\'s no legal framework that defines finality. A 51% attack could theoretically reverse transactions. More importantly, courts don\'t recognize blockchain finality as legally binding.',
+                legalBacking: 'None. No statute defines finality. No court precedent.',
+                useCases: ['Crypto trading', 'Speculative transfers', 'Experimental payments'],
+                keyPoint: 'Crypto provides technical security (hard to reverse) but not legal finality (no law protects you if it\'s reversed). Enterprises and regulators care about legal finality.'
+              }
+            ],
+            summary: 'When someone asks about "finality," they\'re asking: "If this payment is reversed, can I take legal action?" For Fedwire, the answer is yes—the law protects you. For crypto, the answer is unclear—you might have a blockchain record, but no legal recourse.'
           },
           comparison: {
             title: 'Legal Finality vs Technical Finality: Fedwire vs Bitcoin',
@@ -280,13 +511,29 @@ This pillar ensures you can explain:
               ['Reversal mechanism', 'Legally prohibited once processed. Cannot be reversed by Fed or banks.', 'Technically reversible via 51% attack (extremely unlikely but theoretically possible). No legal protection against it.'],
               ['Definition of "final"', 'Precisely defined: moment Fed processes payment on its ledger', 'Probabilistic: "probably won\'t reverse after N confirmations"'],
               ['Enforceability', 'Backed by US government and court system', 'Self-enforcing via cryptography, but no legal backing']
-            ]
+            ],
+            keyPoint: 'Bitcoin\'s finality is PROBABILISTIC and TECHNICAL. Fedwire\'s finality is LEGAL and ABSOLUTE. These are fundamentally different concepts.'
           },
           bitcoinClarification: {
             title: 'Bitcoin Finality: What It Actually Means',
             explanation: 'Bitcoin doesn\'t have "reversible" transactions in the traditional sense (like a chargeback), but it also doesn\'t have legal finality. Here\'s the nuanced truth:',
-            technicalReality: 'After 6 confirmations (~1 hour), a Bitcoin transaction is "computationally impractical to reverse" • The deeper a transaction is buried in the blockchain, the more secure it becomes • A 51% attack could theoretically reverse transactions, but the cost would be astronomical ($billions) for major cryptocurrencies',
-            legalReality: 'No law defines when a Bitcoin transaction is "final" • No court has ruled that Bitcoin transactions have legal finality • If a Bitcoin transaction is reversed (even via 51% attack), there\'s no legal framework to enforce the original transaction • Disputes over Bitcoin transactions have unclear legal status in most jurisdictions',
+            technicalReality: {
+              title: 'Technical Reality',
+              points: [
+                'After 6 confirmations (~1 hour), a Bitcoin transaction is "computationally impractical to reverse"',
+                'The deeper a transaction is buried in the blockchain, the more secure it becomes',
+                'A 51% attack could theoretically reverse transactions, but the cost would be astronomical ($billions) for major cryptocurrencies'
+              ]
+            },
+            legalReality: {
+              title: 'Legal Reality',
+              points: [
+                'No law defines when a Bitcoin transaction is "final"',
+                'No court has ruled that Bitcoin transactions have legal finality',
+                'If a Bitcoin transaction is reversed (even via 51% attack), there\'s no legal framework to enforce the original transaction',
+                'Disputes over Bitcoin transactions have unclear legal status in most jurisdictions'
+              ]
+            },
             contrast: 'When Fedwire settles a payment, the law says it\'s final. When Bitcoin confirms a transaction, cryptography says it\'s extremely unlikely to be reversed—but the law is silent. That\'s the difference.'
           },
           warning: 'When a regulator or bank asks about "finality," they mean LEGAL finality. Saying "it\'s final after 6 blocks" will not satisfy them.',
@@ -383,9 +630,49 @@ This pillar ensures you can explain:
             title: 'Sphere\'s Position',
             summary: 'We are NOT trying to replace central banks • We optimize the path TO settlement (faster, cheaper) • We work WITHIN existing regulatory frameworks • We complement central bank infrastructure',
             keyInsight: 'Using stablecoins as transport, with fiat settlement at endpoints.',
-            howSphereComplements: 'Sphere doesn\'t compete with central banks—we enhance their effectiveness by making cross-border value movement faster while maintaining fiat settlement at endpoints. Here are five ways we complement: (1) Cross-Border Speed Without Replacing Settlement: Central banks provide domestic settlement (Fedwire, TARGET2, UAEFTS) with legal finality. Sphere uses stablecoins to move value BETWEEN jurisdictions rapidly (15-30 min), then settles into local fiat through local central bank systems. Example: UAE→US payment: AED settles through UAE Central Bank → Stablecoin transfer (30 min) → USD settles through Fedwire. Central banks still settle both endpoints—we just made the middle faster. (2) Reducing Pressure on Correspondent Banking: Central banks don\'t directly connect all banks globally—correspondent banking fills the gap but it\'s slow, expensive, and shrinking. Sphere provides alternative pathway without requiring 4+ correspondents. Licensed partners convert fiat→stablecoin (using local central bank settlement), move cross-border, convert back (using destination central bank settlement). This reduces load on correspondent networks while still using central bank infrastructure at endpoints. (3) Supporting Financial Inclusion Without Circumventing Regulation: Central banks want financial inclusion, but cross-border is hard for SMEs (expensive, slow, complex). Sphere makes central bank-settled payments accessible to smaller players while maintaining regulatory compliance. Example: Small UAE importer paying Vietnamese supplier—traditional banks quote $50 fee and 5 days. Sphere: $8 fee, 30 minutes, full compliance. Money still settles through UAE Central Bank and State Bank of Vietnam. (4) Preparing for CBDC Integration: Many central banks are exploring CBDCs. Sphere\'s infrastructure is CBDC-ready. If/when CBDCs launch, we can integrate them as settlement assets alongside or instead of stablecoins. Sphere is building the cross-border payment layer that CBDCs will need. Central banks focus on issuing digital currency; Sphere focuses on moving it across borders compliantly. (5) Providing 24/7 Access Without Competing with RTGS: Central bank RTGS systems operate during business hours (Fedwire 9 PM–7 PM ET, TARGET2 7 AM–6 PM CET). Sphere\'s stablecoin transfers operate 24/7/365. When RTGS systems are closed, Sphere can initiate transactions that settle when RTGS reopens. Example: Friday 7 PM in New York, urgent payment to Dubai. Traditional: wait until Monday. Sphere: initiate immediately, settles through CBUAE Sunday, through Fedwire Monday.',
-            keyMessage: 'Sphere is infrastructure that sits BETWEEN central bank systems, making them more accessible and efficient for cross-border payments. We don\'t replace central banks—we make them work better together.',
-            regulatorFriendlyFraming: 'When talking to regulators: emphasize (1) Fiat settlement at all endpoints, (2) Full regulatory compliance, (3) Licensed partners in each jurisdiction, (4) CBDC-ready infrastructure, (5) Reduced systemic risk by eliminating long correspondent chains.'
+            howSphereComplements: {
+              title: 'How Sphere Complements Central Banks',
+              introduction: 'Sphere doesn\'t compete with central banks—we enhance their effectiveness by making cross-border value movement faster while maintaining fiat settlement at endpoints.',
+              functions: [
+                {
+                  name: 'Cross-Border Speed Without Replacing Settlement Infrastructure',
+                  centralBankRole: 'Central banks provide domestic settlement systems (Fedwire, TARGET2, UAEFTS) that settle in their local currency with legal finality.',
+                  sphereRole: 'Sphere uses stablecoins to move value BETWEEN jurisdictions rapidly (15-30 minutes), then settles into local fiat through the local central bank system at each endpoint.',
+                  complement: 'Central banks remain the final settlement layer for fiat. Sphere simply optimizes the cross-border leg. We\'re like a fast highway between two cities—the cities (central banks) are still the origin and destination.',
+                  example: 'UAE company pays US supplier. Traditional: AED → Central Bank of UAE → Correspondent → Correspondent → Fedwire → USD (2-5 days). Sphere: AED → CBUAE settlement → Stablecoin transfer (30 min) → Fedwire settlement → USD. Central banks still settle both endpoints—we just made the middle faster.'
+                },
+                {
+                  name: 'Reducing Pressure on Correspondent Banking',
+                  centralBankRole: 'Central banks don\'t directly connect all banks globally. Correspondent banking fills the gap, but it\'s slow, expensive, and shrinking (de-risking).',
+                  sphereRole: 'Sphere provides an alternative pathway that doesn\'t require 4+ correspondent banks. Licensed partners convert fiat to stablecoin (using local central bank settlement), move stablecoins cross-border, and convert back to fiat (using destination central bank settlement).',
+                  complement: 'This reduces load on correspondent banking networks while still using central bank infrastructure at endpoints. Central banks benefit because cross-border payments become more efficient without requiring them to build new infrastructure.',
+                  example: 'Nigerian bank wants to send money to Japan. Traditional path requires correspondents in London, New York, Tokyo—each with their own nostro accounts, compliance, and delays. Sphere path: Nigerian naira settles through Central Bank of Nigeria → stablecoin transfer → Japanese yen settles through Bank of Japan. No correspondent chain needed. Central banks still provide final settlement.'
+                },
+                {
+                  name: 'Supporting Financial Inclusion Without Circumventing Regulation',
+                  centralBankRole: 'Central banks regulate financial systems to protect consumers, prevent crime, and maintain stability.',
+                  sphereRole: 'Sphere embeds compliance (KYC/AML) and works with licensed partners in each jurisdiction. We don\'t bypass regulation—we make regulated cross-border payments accessible to more businesses.',
+                  complement: 'Central banks want financial inclusion, but cross-border payments are hard for SMEs (expensive, slow, complex). Sphere makes central bank-settled payments accessible to smaller players while maintaining regulatory compliance.',
+                  example: 'Small UAE importer wants to pay Vietnamese supplier. Traditional banks quote $50 fee and 5-day timeline. Importer can\'t afford it. Sphere: $8 fee, 30 minutes, full compliance. Money still settles through Central Bank of UAE and State Bank of Vietnam—just faster and cheaper.'
+                },
+                {
+                  name: 'Preparing for CBDC Integration',
+                  centralBankRole: 'Many central banks are exploring Central Bank Digital Currencies (CBDCs) for domestic and cross-border use.',
+                  sphereRole: 'Sphere\'s infrastructure is CBDC-ready. If/when CBDCs launch, we can integrate them as settlement assets alongside or instead of stablecoins.',
+                  complement: 'Sphere is building the cross-border payment layer that CBDCs will need. Central banks focus on issuing digital currency; Sphere focuses on moving it across borders compliantly. We\'re complementary infrastructure.',
+                  example: 'UAE launches digital dirham. Sphere integrates it into our network. Now cross-border payments can use digital dirham → stablecoin (or other CBDC) → digital dollar. Central banks issue the currency; Sphere moves it.'
+                },
+                {
+                  name: 'Providing 24/7 Access Without Competing with RTGS',
+                  centralBankRole: 'Central bank RTGS systems operate during business hours (e.g., Fedwire 9 PM – 7 PM ET, TARGET2 7 AM – 6 PM CET).',
+                  sphereRole: 'Sphere\'s stablecoin transfers operate 24/7/365. When RTGS systems are closed, Sphere can initiate transactions that settle when RTGS reopens.',
+                  complement: 'Central banks don\'t need to run 24/7 operations. Sphere provides after-hours initiation with guaranteed settlement when central bank systems reopen. This is complementary, not competitive.',
+                  example: 'Friday 7 PM in New York, urgent payment needed to Dubai (Saturday morning there, banks closed). Traditional: wait until Monday. Sphere: initiate stablecoin transfer immediately, settles through CBUAE when it opens Sunday, through Fedwire when it opens Monday. Central banks still provide final settlement—just with faster initiation.'
+                }
+              ],
+              keyMessage: 'Sphere is infrastructure that sits BETWEEN central bank systems, making them more accessible and efficient for cross-border payments. We don\'t replace central banks—we make them work better together.',
+              regulatorFriendlyFraming: 'When talking to regulators or central banks, emphasize: (1) Fiat settlement at all endpoints, (2) Full regulatory compliance, (3) Licensed partners in each jurisdiction, (4) CBDC-ready infrastructure, (5) Reduced systemic risk by eliminating long correspondent chains.'
+            }
           },
           keyTakeaway: 'Central banks are irreplaceable. Sphere works with them, not against them.'
         },
@@ -419,15 +706,54 @@ This pillar ensures you can explain:
           introduction: 'Cross-border payments are hard because of laws, regulations, and institutions — NOT old technology. The instinct is to think "new technology will fix it." This is wrong.',
           glossary: {
             title: 'Key Terms You Need to Know',
-            correspondentBank: 'Correspondent Bank - A bank that provides services on behalf of another bank, typically in a foreign country. Used when two banks don\'t have a direct relationship. Example: Your bank in Texas doesn\'t have an account at a bank in Lagos. So your bank uses a correspondent bank in London that has relationships with both.',
-            nostro: 'Nostro Account - Latin for "our account with you." A nostro account is an account a bank holds at a foreign bank in foreign currency. Example: Bank of America has a EUR nostro account at Deutsche Bank in Germany. When BoA needs to send EUR to Europe, it debits this nostro account. Why it matters: Nostro accounts tie up capital. Banks must pre-fund them with millions or billions of dollars sitting idle, waiting to be used for payments.',
-            vostro: 'Vostro Account - Latin for "your account with us." The opposite of nostro—it\'s the account a foreign bank holds with you. Example: Deutsche Bank has a USD account at Bank of America. From Deutsche Bank\'s perspective, it\'s a nostro. From BoA\'s perspective, it\'s a vostro.',
-            swiftBic: 'SWIFT BIC/SWIFT Code - Bank Identifier Code—a unique 8 or 11-character code that identifies a specific bank for international wire transfers. Example: CHASUS33 = JPMorgan Chase, New York. The code tells SWIFT where to route payment messages.',
-            correspondentChain: 'Correspondent Banking Chain - The series of banks involved in moving a payment from originating bank to beneficiary bank when they don\'t have a direct relationship. Example: Nigeria → Lagos correspondent → London correspondent → New York correspondent → US bank. Each hop adds time, cost, and risk.',
-            cutoffTime: 'Cut-off Time - The deadline by which a bank must receive a payment to process it same-day. Miss the cut-off, and your payment waits until the next business day. Example: Fedwire cut-off is 6:30 PM ET. If your payment arrives at 6:35 PM, it waits until tomorrow.',
-            tPlusN: 'T+N Settlement - Trade date plus N days. T+2 means settlement occurs 2 business days after the trade/payment is initiated. Example: ACH is typically T+1 or T+2. Cross-border wires can be T+5 or T+10 depending on the corridor.',
-            corridor: 'Payment Corridor - The path between two countries/currencies for payments. Some corridors are fast and cheap (US-UK), others slow and expensive (US-Nigeria). Example: The USD-EUR corridor is highly liquid with many correspondent relationships. The USD-NGN corridor has fewer banks willing to service it (higher risk, lower volume).',
-            derisking: 'De-risking - When banks exit correspondent relationships with certain countries/regions due to compliance risk, even when the business is legitimate. Example: After 2008, many Western banks closed correspondent accounts for banks in Africa, Caribbean, Middle East due to AML/sanctions concerns. Result: fewer payment routes, higher costs.'
+            terms: [
+              {
+                term: 'Correspondent Bank',
+                definition: 'A bank that provides services on behalf of another bank, typically in a foreign country. Used when two banks don\'t have a direct relationship.',
+                example: 'Your bank in Texas doesn\'t have an account at a bank in Lagos. So your bank uses a correspondent bank in London that has relationships with both.'
+              },
+              {
+                term: 'Nostro Account',
+                definition: 'Latin for "our account with you." A nostro account is an account a bank holds at a foreign bank in foreign currency.',
+                example: 'Bank of America has a EUR nostro account at Deutsche Bank in Germany. When BoA needs to send EUR to Europe, it debits this nostro account.',
+                whyItMatters: 'Nostro accounts tie up capital. Banks must pre-fund them with millions or billions of dollars sitting idle, waiting to be used for payments.'
+              },
+              {
+                term: 'Vostro Account',
+                definition: 'Latin for "your account with us." The opposite of nostro—it\'s the account a foreign bank holds with you.',
+                example: 'Deutsche Bank has a USD account at Bank of America. From Deutsche Bank\'s perspective, it\'s a nostro. From BoA\'s perspective, it\'s a vostro.'
+              },
+              {
+                term: 'SWIFT BIC/SWIFT Code',
+                definition: 'Bank Identifier Code—a unique 8 or 11-character code that identifies a specific bank for international wire transfers.',
+                example: 'CHASUS33 = JPMorgan Chase, New York. The code tells SWIFT where to route payment messages.'
+              },
+              {
+                term: 'Correspondent Banking Chain',
+                definition: 'The series of banks involved in moving a payment from originating bank to beneficiary bank when they don\'t have a direct relationship.',
+                example: 'Nigeria → Lagos correspondent → London correspondent → New York correspondent → US bank. Each hop adds time, cost, and risk.'
+              },
+              {
+                term: 'Cut-off Time',
+                definition: 'The deadline by which a bank must receive a payment to process it same-day. Miss the cut-off, and your payment waits until the next business day.',
+                example: 'Fedwire cut-off is 6:30 PM ET. If your payment arrives at 6:35 PM, it waits until tomorrow.'
+              },
+              {
+                term: 'T+N Settlement',
+                definition: 'Trade date plus N days. T+2 means settlement occurs 2 business days after the trade/payment is initiated.',
+                example: 'ACH is typically T+1 or T+2. Cross-border wires can be T+5 or T+10 depending on the corridor.'
+              },
+              {
+                term: 'Payment Corridor',
+                definition: 'The path between two countries/currencies for payments. Some corridors are fast and cheap (US-UK), others slow and expensive (US-Nigeria).',
+                example: 'The USD-EUR corridor is highly liquid with many correspondent relationships. The USD-NGN corridor has fewer banks willing to service it (higher risk, lower volume).'
+              },
+              {
+                term: 'De-risking',
+                definition: 'When banks exit correspondent relationships with certain countries/regions due to compliance risk, even when the business is legitimate.',
+                example: 'After 2008, many Western banks closed correspondent accounts for banks in Africa, Caribbean, Middle East due to AML/sanctions concerns. Result: fewer payment routes, higher costs.'
+              }
+            ]
           },
           coreQuestion: 'Why can\'t we just make cross-border payments instant?',
           arnoldQuote: {
@@ -472,12 +798,82 @@ This pillar ensures you can explain:
           identifyingCorrespondents: {
             title: 'How to Identify Correspondent Banks in Different Corridors',
             introduction: 'The number and identity of correspondent banks depends on the payment corridor, currency pair, and bank relationships.',
-            currencyLiquidity: 'Currency Liquidity - Major currencies (USD, EUR, GBP, JPY) have fewer correspondent hops because more banks hold these currencies and have direct relationships. High liquidity: USD-EUR corridor often just 1-2 correspondents (US bank → London correspondent → EU bank). Low liquidity: USD-NGN corridor often 3-4 correspondents (US bank → NY correspondent → London correspondent → Lagos correspondent → Nigerian bank).',
-            geographicRegion: 'Geographic Region - Payments to frontier markets require more correspondents because fewer banks are willing to maintain relationships there (due to risk, regulation, or low volume). Developed markets: US→UK→Germany: 1-2 hops, well-established relationships. Frontier markets: US→Nigeria/Myanmar/Afghanistan: 3-5 hops, limited correspondent appetite.',
-            regulatoryRisk: 'Regulatory Risk - Countries under sanctions, with weak AML controls, or flagged by FATF have fewer correspondent banking relationships. High risk: Iran, North Korea, Venezuela—very few correspondents willing (if any). Medium risk: Pakistan, Kenya, Philippines—more than high-risk but fewer than developed markets.',
-            bankSize: 'Bank Size and Relationships - Larger banks have more direct correspondent relationships. Smaller banks route through larger banks, adding hops. Large bank: JPMorgan Chase has 50+ correspondent relationships globally, direct paths to most major markets. Small bank: Community bank in Texas has 2-3 correspondent relationships, routes everything through larger US banks first.',
-            typicalCorridors: 'US→UK (USD→GBP): 1-2 hops, same day to T+1, highly liquid corridor • US→Nigeria (USD→NGN): 3-4 hops (US bank→NY correspondent JPM/BoA→London correspondent StanChart/Citi→Lagos correspondent Zenith/GTBank→Nigerian bank), T+3 to T+10, few banks willing to hold NGN • US→Brazil (USD→BRL): 2-3 hops, T+2 to T+5, strict capital controls require local correspondent • UAE→India (AED→INR): 2-3 hops, T+1 to T+3, high volume corridor (remittances) • US→Japan (USD→JPY): 1-2 hops, same day to T+2, major currency pair with strong banking relationships',
-            howToResearch: 'Ask your bank what correspondent banks they use for payments to specific countries (they may or may not disclose) • Check SWIFT directory (swift.com) to identify likely correspondents in destination country • Look for regional hubs—payments often route through London, New York, Singapore, Hong Kong • Industry reports from BIS, World Bank, IMF identify common correspondent relationships • Send small test payment and request detailed routing information from your bank'
+            factors: [
+              {
+                factor: 'Currency Liquidity',
+                explanation: 'Major currencies (USD, EUR, GBP, JPY) have fewer correspondent hops because more banks hold these currencies and have direct relationships.',
+                highLiquidity: 'USD-EUR corridor: Often just 1-2 correspondents. Example: US bank → London correspondent → EU bank.',
+                lowLiquidity: 'USD-NGN (Nigerian Naira) corridor: Often 3-4 correspondents. Example: US bank → NY correspondent → London correspondent → Lagos correspondent → Nigerian bank.'
+              },
+              {
+                factor: 'Geographic Region',
+                explanation: 'Payments to frontier markets require more correspondents because fewer banks are willing to maintain relationships there (due to risk, regulation, or low volume).',
+                developed: 'US → UK → Germany: 1-2 hops, well-established correspondent relationships',
+                frontier: 'US → Nigeria, Myanmar, Afghanistan: 3-5 hops, limited correspondent appetite'
+              },
+              {
+                factor: 'Regulatory Risk',
+                explanation: 'Countries under sanctions, with weak AML controls, or flagged by FATF have fewer correspondent banking relationships.',
+                highRisk: 'Payments to Iran, North Korea, Venezuela: Very few correspondents willing to facilitate (if any)',
+                mediumRisk: 'Payments to Pakistan, Kenya, Philippines: More correspondents than high-risk, but fewer than developed markets'
+              },
+              {
+                factor: 'Bank Size and Relationships',
+                explanation: 'Larger banks have more direct correspondent relationships. Smaller banks route through larger banks, adding hops.',
+                largeBank: 'JPMorgan Chase has 50+ correspondent relationships globally. Direct paths to most major markets.',
+                smallBank: 'Community bank in Texas has 2-3 correspondent relationships. Routes everything through larger US banks first.'
+              }
+            ],
+            typicalCorridors: {
+              title: 'Typical Correspondent Chains by Corridor',
+              examples: [
+                {
+                  corridor: 'US → UK (USD → GBP)',
+                  hops: '1-2',
+                  chain: 'US bank → London correspondent or direct → UK bank',
+                  speed: 'Same day to T+1',
+                  reason: 'Highly liquid corridor, many banks have direct GBP accounts'
+                },
+                {
+                  corridor: 'US → Nigeria (USD → NGN)',
+                  hops: '3-4',
+                  chain: 'US bank → New York correspondent (JPM, BoA) → London correspondent (Standard Chartered, Citi) → Lagos correspondent (Zenith, GTBank) → Nigerian bank',
+                  speed: 'T+3 to T+10',
+                  reason: 'Few banks willing to hold NGN, heavy compliance requirements, low liquidity'
+                },
+                {
+                  corridor: 'US → Brazil (USD → BRL)',
+                  hops: '2-3',
+                  chain: 'US bank → New York correspondent → São Paulo correspondent (Itaú, Bradesco) → Brazilian bank',
+                  speed: 'T+2 to T+5',
+                  reason: 'Brazil has strict capital controls, requires local correspondent'
+                },
+                {
+                  corridor: 'UAE → India (AED → INR)',
+                  hops: '2-3',
+                  chain: 'UAE bank → Dubai correspondent (Emirates NBD, ADCB) → Mumbai correspondent (HDFC, ICICI) → Indian bank',
+                  speed: 'T+1 to T+3',
+                  reason: 'High volume corridor (remittances), but still requires local correspondent in India'
+                },
+                {
+                  corridor: 'US → Japan (USD → JPY)',
+                  hops: '1-2',
+                  chain: 'US bank → Tokyo correspondent (MUFG, Mizuho) or direct → Japanese bank',
+                  speed: 'Same day to T+2',
+                  reason: 'Major currency pair, strong banking relationships'
+                }
+              ]
+            },
+            howToResearch: {
+              title: 'How to Research a Specific Corridor',
+              steps: [
+                'Ask your bank: "What correspondent banks do you use for payments to [country]?" They may or may not disclose the full chain, but it\'s worth asking.',
+                'Check SWIFT directory: Use SWIFT\'s BIC directory (swift.com) to identify likely correspondents in the destination country.',
+                'Look for regional hubs: Payments often route through financial hubs (London, New York, Singapore, Hong Kong) before reaching final destination.',
+                'Industry reports: The BIS, World Bank, and IMF publish reports on payment corridors that identify common correspondent relationships.',
+                'Trial and error: Send a small test payment and request detailed routing information from your bank.'
+              ]
+            }
           },
           table: {
             title: 'BIS/CPMI Identified Frictions',
@@ -496,13 +892,56 @@ This pillar ensures you can explain:
           sphereSolution: {
             title: 'How Sphere Addresses This',
             introduction: 'Sphere doesn\'t eliminate these frictions—we compress and optimize them.',
-            correspondentHops: 'Problem: 4+ correspondent hops. Sphere Solution: Direct stablecoin settlement. How it works: Traditional payment hops through 4 banks, each with own compliance, fees, cut-off times. Sphere converts to stablecoin at origin, transfers peer-to-peer on blockchain, converts to local fiat at destination. No correspondent chain. Licensed partners at each endpoint handle fiat conversion. Result: 4 hops become 2 conversions + 1 transfer.',
-            bankingHours: 'Problem: Banking hours only (cut-off times). Sphere Solution: 24/7 blockchain operations. How it works: Miss 5 PM cut-off in New York? Traditional: Your payment waits until tomorrow. Weekend? Add 2 days. Sphere: Stablecoin transfers operate 24/7/365. Initiate payment Friday 11 PM, settles by Saturday morning. Fiat off-ramp processes when local banking hours resume, but cross-border movement is done. No waiting for Monday.',
-            nostroFunding: 'Problem: Capital trapped in nostros. Sphere Solution: No pre-funding needed. How it works: Traditional banks maintain €500M nostro accounts at foreign banks just to have liquidity for payments. Capital sits idle. Sphere: On-ramps and off-ramps convert fiat to stablecoin on-demand. No need to pre-fund accounts in 50 currencies. Capital deployed only when needed, returned immediately after use. Frees billions in trapped liquidity.',
-            complianceHops: 'Problem: Compliance at each hop (5+ regimes). Sphere Solution: Embedded compliance upfront. How it works: Traditional: Each correspondent bank runs own compliance checks. Payment gets flagged at hop 3, frozen for 5 days pending review. Sphere: KYC/AML/sanctions screening happens upfront at on-ramp before payment initiates. Smart contracts enforce compliance rules. If payment doesn\'t pass compliance, it never enters the network. No mid-flight freezes.',
-            settlementSpeed: 'Problem: 2-5 day settlement (T+2 to T+10). Sphere Solution: 15-30 minute median settlement. How it works: Traditional correspondent chain takes days. Each bank processes during business hours, adds delays. Sphere: Stablecoin transfer confirms on-chain in minutes. Fiat conversion at endpoints adds minimal time (15-30 minutes total from fiat in→fiat out). Median settlement: under 30 minutes vs 2-5 days traditional.',
-            whatSphereDoesNOT: 'Sphere does NOT: ❌ Eliminate regulation—we work with licensed partners in each jurisdiction • ❌ Bypass banks entirely—fiat on/off-ramps are through regulated financial institutions • ❌ Remove compliance—we embed it upfront instead of checking at each hop • ❌ Replace central banks—fiat settlement still happens through traditional systems at endpoints • ✅ Compress the cross-border leg from days to minutes using stablecoins as transport',
-            realExample: 'UAE→Nigeria Payment Comparison. Traditional: Day 0: Initiate payment in Dubai. Day 1: Reaches correspondent in London. Day 2: London correspondent clears compliance, sends to Lagos correspondent. Day 3-5: Lagos correspondent performs enhanced due diligence. Day 5: Approved, settles to Nigerian bank. Day 6: Beneficiary receives funds. Total: 6 days, $75 in fees. Risks: Compliance hold at any hop, FX rate movement, correspondent rejection. Sphere: Minute 0: Initiate payment in Dubai. Minute 5: AED converted to USDC at on-ramp. Minute 10: USDC transfer confirms on-chain. Minute 25: USDC converted to NGN at off-ramp. Minute 30: NGN credited to beneficiary account. Total: 30 minutes, $8 in fees. Risks: Minimal—compliance completed upfront, no correspondent rejections, blockchain confirmation is deterministic.'
+            solutions: [
+              {
+                problem: '4+ correspondent hops',
+                sphereSolution: 'Direct stablecoin settlement',
+                howItWorks: 'Traditional payment hops through 4 banks, each with own compliance, fees, cut-off times. Sphere converts to stablecoin at origin, transfers peer-to-peer on blockchain, converts to local fiat at destination. No correspondent chain. Licensed partners at each endpoint handle fiat conversion. Result: 4 hops become 2 conversions + 1 transfer.'
+              },
+              {
+                problem: 'Banking hours only (cut-off times)',
+                sphereSolution: '24/7 blockchain operations',
+                howItWorks: 'Miss 5 PM cut-off in New York? Traditional: Your payment waits until tomorrow. Weekend? Add 2 days. Sphere: Stablecoin transfers operate 24/7/365. Initiate payment Friday 11 PM, settles by Saturday morning. Fiat off-ramp processes when local banking hours resume, but cross-border movement is done. No waiting for Monday.'
+              },
+              {
+                problem: 'Capital trapped in nostros',
+                sphereSolution: 'No pre-funding needed',
+                howItWorks: 'Traditional banks maintain €500M nostro accounts at foreign banks just to have liquidity for payments. Capital sits idle. Sphere: On-ramps and off-ramps convert fiat to stablecoin on-demand. No need to pre-fund accounts in 50 currencies. Capital deployed only when needed, returned immediately after use. Frees billions in trapped liquidity.'
+              },
+              {
+                problem: 'Compliance at each hop (5+ regimes)',
+                sphereSolution: 'Embedded compliance upfront',
+                howItWorks: 'Traditional: Each correspondent bank runs own compliance checks. Payment gets flagged at hop 3, frozen for 5 days pending review. Sphere: KYC/AML/sanctions screening happens upfront at on-ramp before payment initiates. Smart contracts enforce compliance rules. If payment doesn\'t pass compliance, it never enters the network. No mid-flight freezes.'
+              },
+              {
+                problem: '2-5 day settlement (T+2 to T+10)',
+                sphereSolution: '15-30 minute median settlement',
+                howItWorks: 'Traditional correspondent chain takes days. Each bank processes during business hours, adds delays. Sphere: Stablecoin transfer confirms on-chain in minutes. Fiat conversion at endpoints adds minimal time (15-30 minutes total from fiat in→fiat out). Median settlement: under 30 minutes vs 2-5 days traditional.'
+              }
+            ],
+            clarifications: {
+              title: 'What Sphere Does NOT Do',
+              points: [
+                'Eliminate regulation—we work with licensed partners in each jurisdiction',
+                'Bypass banks entirely—fiat on/off-ramps are through regulated financial institutions',
+                'Remove compliance—we embed it upfront instead of checking at each hop',
+                'Replace central banks—fiat settlement still happens through traditional systems at endpoints',
+                'What we DO: Compress the cross-border leg from days to minutes using stablecoins as transport'
+              ]
+            },
+            realWorldExample: {
+              title: 'UAE→Nigeria Payment Comparison',
+              traditional: {
+                timeline: 'Day 0: Initiate payment in Dubai. Day 1: Reaches correspondent in London. Day 2: London correspondent clears compliance, sends to Lagos correspondent. Day 3-5: Lagos correspondent performs enhanced due diligence. Day 5: Approved, settles to Nigerian bank. Day 6: Beneficiary receives funds. Total: 6 days.',
+                cost: '$75 in correspondent fees',
+                risks: ['Compliance hold at any hop', 'FX rate movement', 'Correspondent rejection']
+              },
+              sphere: {
+                timeline: 'Minute 0: Initiate payment in Dubai. Minute 5: AED converted to USDC at on-ramp. Minute 10: USDC transfer confirms on-chain. Minute 25: USDC converted to NGN at off-ramp. Minute 30: NGN credited to beneficiary account. Total: 30 minutes.',
+                cost: '$8 in network fees',
+                risks: ['Minimal—compliance completed upfront', 'No correspondent rejections', 'Blockchain confirmation is deterministic']
+              }
+            }
           },
           arnoldInsight: {
             quote: 'One-third of all human time is spent waiting for weekends, holidays for things to clear.',
