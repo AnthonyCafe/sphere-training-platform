@@ -659,9 +659,22 @@ export default function TrainingPlatform() {
                           AI Feedback
                         </h4>
                         <FormattedFeedback text={aiFeedback[sectionKey]} />
-                        <button onClick={() => setCurrentTab('quiz')} className="mt-4 text-sm text-blue-400 hover:underline">
-                          Continue to Quiz →
-                        </button>
+                        <div className="flex items-center gap-4 mt-4">
+                          <button onClick={() => setCurrentTab('quiz')} className="text-sm text-blue-400 hover:underline">
+                            Continue to Quiz →
+                          </button>
+                          <button 
+                            onClick={() => {
+                              setAiFeedback({ ...aiFeedback, [sectionKey]: null });
+                              setExerciseScore(sectionKey, null);
+                              updateProgress(sectionKey, { exercise: false });
+                            }} 
+                            className="text-sm text-amber-400 hover:underline flex items-center gap-1"
+                          >
+                            <RefreshCw className="w-3 h-3" />
+                            Redo Exercise
+                          </button>
+                        </div>
                       </div>
                     )}
                   </>
@@ -729,6 +742,19 @@ export default function TrainingPlatform() {
                     className={`px-6 py-3 bg-gradient-to-r ${pillarColors.gradient} text-white rounded-lg disabled:opacity-50`}
                   >
                     Submit Quiz
+                  </button>
+                )}
+                {quizSubmitted[sectionKey] && (
+                  <button 
+                    onClick={() => {
+                      submitQuiz(sectionKey, false);
+                      setQuizAnswers(sectionKey, {});
+                      updateProgress(sectionKey, { quiz: false, quizScore: undefined });
+                    }}
+                    className="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg flex items-center gap-2"
+                  >
+                    <RefreshCw className="w-4 h-4" />
+                    Redo Quiz
                   </button>
                 )}
               </div>
@@ -843,12 +869,24 @@ export default function TrainingPlatform() {
                     )}
                   </button>
                 ) : masterQuizFeedback[pillar.id] && (
-                  <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-                    <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
-                      <Award className="w-5 h-5 text-amber-400" />
-                      AI Evaluation
-                    </h3>
-                    <FormattedFeedback text={masterQuizFeedback[pillar.id]} />
+                  <div className="space-y-4">
+                    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                      <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
+                        <Award className="w-5 h-5 text-amber-400" />
+                        AI Evaluation
+                      </h3>
+                      <FormattedFeedback text={masterQuizFeedback[pillar.id]} />
+                    </div>
+                    <button 
+                      onClick={() => {
+                        resetMasteryScore(pillar.id);
+                        setMasterQuizAnswers({ ...masterQuizAnswers, [pillar.id]: {} });
+                      }}
+                      className="px-6 py-3 bg-slate-700 hover:bg-slate-600 text-white rounded-lg flex items-center gap-2"
+                    >
+                      <RefreshCw className="w-4 h-4" />
+                      Redo Assessment
+                    </button>
                   </div>
                 )}
               </div>
