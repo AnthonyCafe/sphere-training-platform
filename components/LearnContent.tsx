@@ -26,11 +26,18 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
     'introduction', 'glossary', 'coreQuestion', 'warning',
     'arnoldQuote', 'parable', 'keyFact', 'keyPhrase',
     'stats', 'coreMetrics', 'sphereMetrics',
+    'antarcticaStory',
     'riskCategories', 'definitions', 'types',
     'sections',
+    'stablecoinSandwichDeepDive', 'howSphereUtilizesStablecoins',
     'swiftAckExplained', 'dangerZone', 'howToVerifySettlement',
     'systemDetails', 'bitcoinClarification',
     'identifyingCorrespondents',
+    'issuanceVsTransmission', 'globalFrameworks',
+    'uaeDeepDive', 'singaporeDeepDive', 'ukDeepDive', 'brazilDeepDive',
+    'potentialFrictionPoints', 'howSphereAddresses',
+    'adoptionCurve', 'enterpriseUseCases',
+    'realEnterpriseUseCases', 'whySphereIsRightPartner',
     'speedComparison', 'asymmetryProblem', 'fourLedgers', 'capitalEfficiency',
     'globalFrameworks', 'micaDetails', 'geniusAct', 'uaeFramework', 'convergencePattern',
     'adoptionCurve', 'enterpriseUseCases', 'unbankedOpportunity', 'arnoldOnMarkets',
@@ -214,10 +221,25 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
 
     case 'table':
     case 'comparison':
-    case 'speedComparison':
-    case 'convergencePattern':
-    case 'sphereMitigation':
     case 'classificationMatters':
+      return <TableBlock data={value} />;
+
+    case 'speedComparison':
+      // Handle new detailed format with stablecoin/fiat leg breakdowns
+      if (value.stablecoinLegDetail || value.fiatLegDetail) {
+        return <SpeedComparisonDetailedBlock data={value} />;
+      }
+      return <TableBlock data={value} />;
+
+    case 'convergencePattern':
+    case 'classificationMatters':
+      return <TableBlock data={value} />;
+
+    case 'sphereMitigation':
+      // Handle new detailed strategies format or old table format
+      if (value.strategies) {
+        return <SphereMitigationDetailedBlock data={value} />;
+      }
       return <TableBlock data={value} />;
 
     case 'caseStudy':
@@ -386,6 +408,40 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
 
     case 'identifyingCorrespondents':
       return <IdentifyingCorrespondentsBlock data={value} />;
+
+    // NEW PILLAR 2.1 FIELDS
+    case 'stablecoinSandwichDeepDive':
+      return <StablecoinSandwichBlock data={value} />;
+
+    case 'howSphereUtilizesStablecoins':
+      return <HowSphereUtilizesStablecoinsBlock data={value} />;
+
+    // NEW PILLAR 2.2 FIELDS
+    case 'antarcticaStory':
+      return <AntarcticaStoryBlock data={value} />;
+
+    // NEW PILLAR 2.4 FIELDS
+    case 'issuanceVsTransmission':
+      return <IssuanceVsTransmissionBlock data={value} />;
+
+    case 'uaeDeepDive':
+    case 'singaporeDeepDive':
+    case 'ukDeepDive':
+    case 'brazilDeepDive':
+      return <MarketDeepDiveBlock data={value} />;
+
+    case 'potentialFrictionPoints':
+      return <FrictionPointsBlock data={value} />;
+
+    case 'howSphereAddresses':
+      return <SphereAdvantagesBlock data={value} />;
+
+    // NEW PILLAR 2.5 FIELDS
+    case 'realEnterpriseUseCases':
+      return <RealUseCasesBlock data={value} />;
+
+    case 'whySphereIsRightPartner':
+      return <WhySpherePartnerBlock data={value} />;
 
     default:
       // Generic object renderer for any missed properties
@@ -678,11 +734,19 @@ function RiskCategoriesBlock({ data }: { data: any }) {
               {item.icon && <span className="text-2xl">{item.icon}</span>}
               <h4 className="font-semibold text-white">{item.category}</h4>
             </div>
-            <p className="text-gray-300 text-sm">{item.description}</p>
+            <p className="text-gray-300 text-sm mb-2">{item.description}</p>
             {item.examples && (
-              <ul className="text-sm text-gray-400 mt-2 space-y-1">
-                {item.examples.map((ex: string, j: number) => <li key={j}>• {ex}</li>)}
-              </ul>
+              <div className="mb-2">
+                <p className="text-amber-300 text-xs font-semibold mb-1">Examples:</p>
+                <ul className="text-sm text-gray-400 space-y-1">
+                  {item.examples.map((ex: string, j: number) => <li key={j}>• {ex}</li>)}
+                </ul>
+              </div>
+            )}
+            {item.context && (
+              <div className="bg-blue-500/10 border border-blue-500/30 rounded p-2 mt-2">
+                <p className="text-blue-200 text-xs">{item.context}</p>
+              </div>
             )}
           </div>
         ))}
@@ -747,7 +811,24 @@ function TableBlock({ data }: { data: any }) {
 function CaseStudyBlock({ data }: { data: any }) {
   return (
     <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-6 space-y-4">
-      <h3 className="font-semibold text-white">📋 {data.title}</h3>
+      <h3 className="font-semibold text-white text-xl">📋 {data.title}</h3>
+      {data.subtitle && <p className="text-orange-200 text-sm italic">{data.subtitle}</p>}
+      
+      {/* Background section */}
+      {data.background && (
+        <div className="bg-slate-700/50 rounded-lg p-4">
+          <h4 className="font-semibold text-white mb-2">{data.background.title}</h4>
+          <p className="text-emerald-300 text-sm mb-2">{data.background.status}</p>
+          <ul className="text-gray-300 text-sm space-y-1 mb-2">
+            {data.background.characteristics?.map((char: string, i: number) => (
+              <li key={i}>• {char}</li>
+            ))}
+          </ul>
+          {data.background.circlesBanking && (
+            <p className="text-gray-400 text-sm mt-2">{data.background.circlesBanking}</p>
+          )}
+        </div>
+      )}
       
       {data.parties && (
         <div className="grid md:grid-cols-2 gap-4">
@@ -762,13 +843,33 @@ function CaseStudyBlock({ data }: { data: any }) {
       )}
       
       {data.timeline && (
-        <div className="space-y-2">
+        <div className="space-y-3">
+          <h4 className="font-semibold text-white">Timeline</h4>
           {data.timeline.map((t: any, i: number) => (
-            <div key={i} className="flex gap-3 items-start">
-              <span className="font-medium text-orange-300 w-28 flex-shrink-0">{t.time}:</span>
-              <span className="text-gray-300">{t.event}</span>
+            <div key={i} className="bg-slate-700/50 rounded-lg p-3 border-l-4 border-orange-500">
+              <p className="font-semibold text-orange-300 mb-1">{t.time}</p>
+              <p className="text-white text-sm mb-1">{t.event}</p>
+              {t.context && <p className="text-gray-400 text-xs mb-1">{t.context}</p>}
+              {t.impact && (
+                <p className="text-amber-300 text-xs"><span className="font-semibold">Impact:</span> {t.impact}</p>
+              )}
             </div>
           ))}
+        </div>
+      )}
+      
+      {/* Key Insights section */}
+      {data.keyInsights && (
+        <div>
+          <h4 className="font-semibold text-white mb-3">{data.keyInsights.title}</h4>
+          <div className="space-y-3">
+            {data.keyInsights.insights?.map((insight: any, i: number) => (
+              <div key={i} className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
+                <p className="text-blue-300 font-semibold mb-1">{insight.insight}</p>
+                <p className="text-gray-300 text-sm">{insight.explanation}</p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
       
@@ -787,7 +888,12 @@ function CaseStudyBlock({ data }: { data: any }) {
         </div>
       )}
       
-      {data.lesson && <p className="text-gray-300 italic">{data.lesson}</p>}
+      {data.lesson && <p className="text-gray-300 italic font-medium">{data.lesson}</p>}
+      {data.postCrisis && (
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-3">
+          <p className="text-emerald-200 text-sm"><span className="font-semibold">Post-Crisis:</span> {data.postCrisis}</p>
+        </div>
+      )}
     </div>
   );
 }
@@ -811,23 +917,53 @@ function AsymmetryBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      {data.concept && <p className="text-gray-300 mb-4">{data.concept}</p>}
+      
       {data.visualization && (
         <div className="flex justify-center gap-8 mb-4">
           {data.visualization.map((v: any, i: number) => (
-            <div key={i} className="text-center">
-              <p className="text-gray-400 text-sm">{v.leg}</p>
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4 text-center">
+              <p className="text-gray-400 text-sm mb-2">{v.leg}</p>
               <p className="text-2xl font-bold text-white">{v.time}</p>
+              {v.finality && <p className="text-xs text-gray-500 mt-1">{v.finality}</p>}
             </div>
           ))}
         </div>
       )}
-      {data.problem && <p className="text-amber-300 mb-3">{data.problem}</p>}
+      
+      {data.problem && (
+        <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4 mb-4">
+          <p className="text-amber-300 font-medium">{data.problem}</p>
+        </div>
+      )}
+      
+      {data.detailedScenarios && (
+        <div className="space-y-3 mb-4">
+          <h4 className="font-semibold text-white">{data.detailedScenarios.title}</h4>
+          {data.detailedScenarios.scenarios?.map((scenario: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-red-500">
+              <p className="text-red-300 font-semibold mb-2">{scenario.scenario}</p>
+              <p className="text-gray-300 text-sm mb-2">{scenario.setup}</p>
+              <p className="text-amber-300 text-sm mb-2"><span className="font-semibold">Problem:</span> {scenario.problem}</p>
+              <p className="text-gray-400 text-sm mb-2"><span className="font-semibold">Consequence:</span> {scenario.consequence}</p>
+              <p className="text-red-200 text-xs font-medium">⚠️ {scenario.risk}</p>
+            </div>
+          ))}
+        </div>
+      )}
+      
       {data.whatCanGoWrong && (
         <div className="bg-red-500/10 rounded-lg p-4">
           <p className="font-medium text-red-300 mb-2">What can go wrong:</p>
           <ul className="text-gray-300 text-sm space-y-1">
             {data.whatCanGoWrong.map((w: string, i: number) => <li key={i}>• {w}</li>)}
           </ul>
+        </div>
+      )}
+      
+      {data.theProblem && (
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 mt-4">
+          <p className="text-purple-200 font-medium">{data.theProblem}</p>
         </div>
       )}
     </div>
@@ -838,15 +974,49 @@ function FourLedgersBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+      {data.concept && <p className="text-gray-300 mb-4">{data.concept}</p>}
+      
+      <div className="grid md:grid-cols-2 gap-4 mb-6">
         {data.ledgers?.map((l: any, i: number) => (
-          <div key={i} className="bg-slate-700/50 rounded-lg p-4 text-center">
-            <span className="text-2xl">{l.icon}</span>
-            <p className="text-gray-300 text-sm mt-2">{l.name}</p>
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-blue-500">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-2xl">{l.icon}</span>
+              <p className="text-white font-semibold">{l.name}</p>
+            </div>
+            {l.what && <p className="text-gray-300 text-sm mb-2">{l.what}</p>}
+            {l.timing && <p className="text-blue-300 text-xs mb-1"><span className="font-semibold">Timing:</span> {l.timing}</p>}
+            {l.owner && <p className="text-gray-400 text-xs mb-1"><span className="font-semibold">Owner:</span> {l.owner}</p>}
+            {l.finality && <p className="text-amber-300 text-xs"><span className="font-semibold">Finality:</span> {l.finality}</p>}
           </div>
         ))}
       </div>
-      {data.requirement && <p className="text-gray-400 text-sm">{data.requirement}</p>}
+      
+      {data.timingDifferences && (
+        <div className="mb-4">
+          <h4 className="font-semibold text-white mb-3">{data.timingDifferences.title}</h4>
+          <p className="text-gray-300 mb-3">{data.timingDifferences.explanation}</p>
+          <div className="space-y-2">
+            {data.timingDifferences.timeline?.map((event: any, i: number) => (
+              <div key={i} className="flex gap-3 items-start bg-slate-700/30 rounded p-2">
+                <span className="text-blue-300 text-xs font-mono min-w-[120px]">{event.time}</span>
+                <div className="flex-1">
+                  <p className="text-gray-300 text-sm">{event.event}</p>
+                  <p className="text-gray-500 text-xs">{event.ledger} - {event.status}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3 mt-3">
+            <p className="text-red-200 text-sm font-medium">{data.timingDifferences.gap}</p>
+          </div>
+        </div>
+      )}
+      
+      {data.requirement && (
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <p className="text-purple-200">{data.requirement}</p>
+        </div>
+      )}
     </div>
   );
 }
@@ -877,8 +1047,71 @@ function SphereApproachBlock({ data }: { data: any }) {
       {data.introduction && <p className="text-purple-200 mb-4">{data.introduction}</p>}
       
       {data.principle && <p className="text-purple-300 font-medium mb-2">{data.principle}</p>}
+      {data.philosophy && <p className="text-purple-200 italic mb-2">{data.philosophy}</p>}
       {data.statement && <p className="text-purple-300 font-medium mb-2">{data.statement}</p>}
       {data.explanation && <p className="text-gray-300 mb-3">{data.explanation}</p>}
+      
+      {/* Operational Controls */}
+      {data.operationalControls && (
+        <div className="mb-4">
+          <h4 className="font-semibold text-white mb-3">{data.operationalControls.title}</h4>
+          <div className="space-y-3">
+            {data.operationalControls.controls?.map((control: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-blue-500">
+                <p className="text-blue-300 font-semibold mb-2">{control.control}</p>
+                <p className="text-gray-300 text-sm mb-2"><span className="font-semibold">What:</span> {control.what}</p>
+                <p className="text-gray-300 text-sm mb-2"><span className="font-semibold">How:</span> {control.how}</p>
+                <p className="text-emerald-300 text-xs">✅ Prevents: {control.preventedRisk}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {/* Settlement Windows */}
+      {data.settlementsWindows && (
+        <div className="mb-4 bg-slate-700/30 rounded-lg p-4">
+          <h4 className="font-semibold text-white mb-2">{data.settlementsWindows.title}</h4>
+          <p className="text-gray-300 text-sm mb-3">{data.settlementsWindows.explanation}</p>
+          <div className="space-y-2">
+            {data.settlementsWindows.windows?.map((window: any, i: number) => (
+              <div key={i} className="flex justify-between items-start bg-slate-600/50 rounded p-2">
+                <div className="flex-1">
+                  <p className="text-white text-sm font-semibold">{window.system}</p>
+                  <p className="text-gray-400 text-xs">{window.hours}</p>
+                </div>
+                <p className="text-amber-300 text-xs">{window.cutOff}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-blue-200 text-sm mt-3">{data.settlementsWindows.strategy}</p>
+        </div>
+      )}
+      
+      {/* Safety First Examples */}
+      {data.safetyFirstExamples && (
+        <div className="mb-4">
+          <h4 className="font-semibold text-white mb-3">{data.safetyFirstExamples.title}</h4>
+          <div className="space-y-3">
+            {data.safetyFirstExamples.examples?.map((example: any, i: number) => (
+              <div key={i} className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+                <p className="text-emerald-300 font-semibold mb-2">{example.situation}</p>
+                <div className="grid md:grid-cols-2 gap-3">
+                  <div className="bg-red-500/10 rounded p-2">
+                    <p className="text-red-300 text-xs font-semibold mb-1">Naive Approach:</p>
+                    <p className="text-gray-300 text-xs">{example.naiveApproach}</p>
+                  </div>
+                  <div className="bg-emerald-500/10 rounded p-2">
+                    <p className="text-emerald-300 text-xs font-semibold mb-1">Sphere Approach:</p>
+                    <p className="text-gray-300 text-xs">{example.sphereApproach}</p>
+                  </div>
+                </div>
+                <p className="text-blue-200 text-xs mt-2">💡 {example.whyItMatters}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
       
       {/* Handle solutions array (new structure) */}
       {data.solutions && (
@@ -2039,6 +2272,702 @@ function IdentifyingCorrespondentsBlock({ data }: { data: any }) {
           </ul>
         </div>
       )}
+    </div>
+  );
+}
+
+// =============================================================================
+// PILLAR 2.1 COMPONENTS
+// =============================================================================
+
+function StablecoinSandwichBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      <p className="text-gray-300 mb-4">{data.concept}</p>
+      
+      {/* Three Layers */}
+      <h4 className="text-white font-semibold mb-3">{data.threeLayersTitle}</h4>
+      <div className="space-y-4 mb-6">
+        {data.layers?.map((layer: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-5 border-l-4 border-emerald-500">
+            <h5 className="text-emerald-300 font-semibold mb-3">{layer.layer}</h5>
+            
+            <div className="grid md:grid-cols-2 gap-3 mb-3">
+              <div>
+                <p className="text-gray-400 text-sm mb-1"><span className="font-semibold">What:</span> {layer.what}</p>
+                <p className="text-gray-400 text-sm mb-1"><span className="font-semibold">How:</span> {layer.how}</p>
+                <p className="text-gray-400 text-sm"><span className="font-semibold">Time:</span> {layer.time}</p>
+              </div>
+              <div>
+                <p className="text-gray-400 text-sm mb-1"><span className="font-semibold">Who:</span> {layer.who}</p>
+                <p className="text-gray-400 text-sm"><span className="font-semibold">Compliance:</span> {layer.compliance}</p>
+              </div>
+            </div>
+            
+            <div className="bg-blue-500/10 border border-blue-500/30 rounded p-3">
+              <p className="text-blue-200 text-sm"><span className="font-semibold">Example:</span> {layer.example}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      
+      {/* Why It Works */}
+      {data.whyItWorks && (
+        <div className="mb-4">
+          <h4 className="text-white font-semibold mb-3">{data.whyItWorks.title}</h4>
+          <div className="space-y-3">
+            {data.whyItWorks.reasons?.map((item: any, i: number) => (
+              <div key={i} className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+                <p className="text-emerald-300 font-semibold mb-2">{item.reason}</p>
+                <p className="text-gray-300 text-sm">{item.explanation}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {data.criticalClarification && (
+        <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <p className="text-amber-200 font-medium">⚠️ {data.criticalClarification}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function HowSphereUtilizesStablecoinsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      <p className="text-gray-300 mb-4">{data.approach}</p>
+      
+      {/* Multi-Stablecoin Strategy */}
+      {data.multiStablecoinStrategy && (
+        <div className="mb-6">
+          <h4 className="text-white font-semibold mb-3">{data.multiStablecoinStrategy.title}</h4>
+          <p className="text-gray-300 mb-3">{data.multiStablecoinStrategy.why}</p>
+          <div className="space-y-3">
+            {data.multiStablecoinStrategy.examples?.map((ex: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+                <div className="flex items-start justify-between mb-2">
+                  <p className="text-blue-300 font-semibold">{ex.corridor}</p>
+                  <span className="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded">{ex.stablecoinUsed}</span>
+                </div>
+                <p className="text-gray-400 text-sm">{ex.reason}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {/* Liquidity Management */}
+      {data.liquidityManagement && (
+        <div className="mb-6">
+          <h4 className="text-white font-semibold mb-3">{data.liquidityManagement.title}</h4>
+          <p className="text-amber-300 text-sm mb-2"><span className="font-semibold">Challenge:</span> {data.liquidityManagement.challenge}</p>
+          <p className="text-emerald-300 text-sm mb-2"><span className="font-semibold">Solution:</span> {data.liquidityManagement.solution}</p>
+          <div className="bg-blue-500/10 border border-blue-500/30 rounded p-3">
+            <p className="text-blue-200 text-sm">{data.liquidityManagement.example}</p>
+          </div>
+        </div>
+      )}
+      
+      {/* Compliance First */}
+      {data.complianceFirst && (
+        <div className="mb-6">
+          <h4 className="text-white font-semibold mb-3">{data.complianceFirst.title}</h4>
+          <p className="text-purple-200 font-medium mb-2">{data.complianceFirst.principle}</p>
+          <p className="text-gray-300 text-sm mb-3">{data.complianceFirst.why}</p>
+          <ul className="text-gray-300 text-sm space-y-1">
+            {data.complianceFirst.partners?.map((partner: string, i: number) => (
+              <li key={i}>• {partner}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+      
+      {/* Transparency */}
+      {data.transparency && (
+        <div>
+          <h4 className="text-white font-semibold mb-3">{data.transparency.title}</h4>
+          <p className="text-gray-300 text-sm mb-2">{data.transparency.benefit}</p>
+          <ul className="text-emerald-300 text-sm space-y-1 mb-3">
+            {data.transparency.capabilities?.map((cap: string, i: number) => (
+              <li key={i}>• {cap}</li>
+            ))}
+          </ul>
+          <p className="text-blue-300 text-sm mb-2"><span className="font-semibold">Regulator Value:</span> {data.transparency.regulatorValue}</p>
+          <p className="text-gray-400 text-sm">{data.transparency.auditTrail}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// =============================================================================
+// PILLAR 2.2 COMPONENTS
+// =============================================================================
+
+function AntarcticaStoryBlock({ data }: { data: any }) {
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
+  
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">🏔️ {data.title}</h3>
+      <p className="text-gray-300 mb-4">{data.setup}</p>
+      
+      {/* The Scenario */}
+      {data.theScenario && (
+        <div className="mb-4">
+          <button 
+            onClick={() => setExpandedSection(expandedSection === 'scenario' ? null : 'scenario')}
+            className="w-full bg-slate-700/50 rounded-lg p-4 text-left hover:bg-slate-700 transition"
+          >
+            <h4 className="font-semibold text-blue-300">{data.theScenario.title}</h4>
+          </button>
+          {expandedSection === 'scenario' && (
+            <div className="bg-slate-700/30 rounded-b-lg p-4 space-y-3">
+              <p className="text-gray-300 text-sm">{data.theScenario.situation}</p>
+              <div>
+                <p className="text-amber-300 text-sm font-semibold mb-2">Capital Controls:</p>
+                <ul className="text-gray-400 text-sm space-y-1">
+                  {data.theScenario.capitalControls?.map((control: string, i: number) => (
+                    <li key={i}>• {control}</li>
+                  ))}
+                </ul>
+              </div>
+              <p className="text-gray-300 text-sm italic">{data.theScenario.whatThisMeans}</p>
+            </div>
+          )}
+        </div>
+      )}
+      
+      {/* Stablecoins Arrive */}
+      {data.stablecoinsArrive && (
+        <div className="mb-4">
+          <button 
+            onClick={() => setExpandedSection(expandedSection === 'arrive' ? null : 'arrive')}
+            className="w-full bg-slate-700/50 rounded-lg p-4 text-left hover:bg-slate-700 transition"
+          >
+            <h4 className="font-semibold text-emerald-300">{data.stablecoinsArrive.title}</h4>
+          </button>
+          {expandedSection === 'arrive' && (
+            <div className="bg-slate-700/30 rounded-b-lg p-4 space-y-3">
+              <p className="text-gray-300 text-sm">{data.stablecoinsArrive.howTheyArrive}</p>
+              <ul className="text-gray-400 text-sm space-y-1">
+                {data.stablecoinsArrive.steps?.map((step: string, i: number) => (
+                  <li key={i}>{i + 1}. {step}</li>
+                ))}
+              </ul>
+              <p className="text-gray-300 text-sm">{data.stablecoinsArrive.adoption}</p>
+              <div className="bg-purple-500/10 border border-purple-500/30 rounded p-3">
+                <p className="text-purple-200 italic">"{data.stablecoinsArrive.quote}"</p>
+                <p className="text-gray-400 text-xs mt-2">{data.stablecoinsArrive.fishbonesExplained}</p>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+      
+      {/* The Collapse */}
+      {data.theCollapse && (
+        <div className="mb-4">
+          <button 
+            onClick={() => setExpandedSection(expandedSection === 'collapse' ? null : 'collapse')}
+            className="w-full bg-slate-700/50 rounded-lg p-4 text-left hover:bg-slate-700 transition"
+          >
+            <h4 className="font-semibold text-red-300">{data.theCollapse.title}</h4>
+          </button>
+          {expandedSection === 'collapse' && (
+            <div className="bg-slate-700/30 rounded-b-lg p-4 space-y-3">
+              <p className="text-gray-300 text-sm mb-3">{data.theCollapse.whatHappens}</p>
+              <div className="space-y-2">
+                {data.theCollapse.consequences?.map((consequence: any, i: number) => (
+                  <div key={i} className="bg-red-500/10 border border-red-500/30 rounded p-3">
+                    <p className="text-red-300 font-semibold text-sm mb-1">{consequence.problem}</p>
+                    <p className="text-gray-300 text-xs">{consequence.explanation}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="text-red-200 text-sm font-medium mt-3">{data.theCollapse.theCrisis}</p>
+            </div>
+          )}
+        </div>
+      )}
+      
+      {/* Lessons */}
+      <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 space-y-3">
+        <h4 className="font-semibold text-blue-300">{data.theLessonTitle}</h4>
+        {data.lessons?.map((item: any, i: number) => (
+          <div key={i}>
+            <p className="text-blue-200 font-semibold text-sm">{item.lesson}</p>
+            <p className="text-gray-300 text-xs">{item.explanation}</p>
+          </div>
+        ))}
+      </div>
+      
+      {data.arnoldInsight && (
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 mt-4">
+          <p className="text-purple-200 italic">💡 {data.arnoldInsight}</p>
+        </div>
+      )}
+      
+      {data.spherePosition && (
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 mt-4">
+          <p className="text-emerald-200 text-sm">{data.spherePosition}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SphereMitigationDetailedBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-purple-500/10 border border-purple-500/50 rounded-xl p-6">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      <p className="text-purple-200 mb-4">{data.principle}</p>
+      
+      <div className="space-y-4">
+        {data.strategies?.map((strategy: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-purple-500">
+            <h4 className="text-purple-300 font-semibold mb-2">{strategy.risk}</h4>
+            <p className="text-emerald-300 text-sm mb-2">✅ {strategy.sphereMitigation}</p>
+            <p className="text-gray-300 text-sm mb-3">{strategy.howItWorks}</p>
+            
+            {strategy.specificActions && (
+              <div className="bg-slate-600/50 rounded p-3 mb-2">
+                <p className="text-blue-300 text-xs font-semibold mb-1">Specific Actions:</p>
+                <ul className="text-gray-400 text-xs space-y-1">
+                  {strategy.specificActions.map((action: string, j: number) => (
+                    <li key={j}>• {action}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            
+            {strategy.whichRisksAddressed && (
+              <p className="text-gray-400 text-xs italic">{strategy.whichRisksAddressed}</p>
+            )}
+          </div>
+        ))}
+      </div>
+      
+      {data.keyPoint && (
+        <div className="bg-purple-500/20 rounded-lg p-4 mt-4">
+          <p className="text-purple-200 font-medium">💡 {data.keyPoint}</p>
+        </div>
+      )}
+      
+      {data.honestAssessment && (
+        <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-3 mt-4">
+          <p className="text-amber-200 text-sm">{data.honestAssessment}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// =============================================================================
+// PILLAR 2.3 COMPONENTS
+// =============================================================================
+
+function SpeedComparisonDetailedBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+      
+      {/* Main comparison table */}
+      <div className="overflow-x-auto mb-6">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-slate-600">
+              {data.headers?.map((h: string, i: number) => (
+                <th key={i} className="text-left text-gray-400 p-2">{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {data.rows?.map((row: string[], i: number) => (
+              <tr key={i} className="border-b border-slate-700">
+                {row.map((cell, j) => (
+                  <td key={j} className="text-gray-300 p-2">{cell}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      
+      {/* Stablecoin Leg Detail */}
+      {data.stablecoinLegDetail && (
+        <div className="mb-6 bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 className="font-semibold text-emerald-300 mb-3">{data.stablecoinLegDetail.title}</h4>
+          <div className="space-y-3">
+            {data.stablecoinLegDetail.steps?.map((step: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded p-3">
+                <div className="flex justify-between items-start mb-1">
+                  <p className="text-white text-sm font-semibold">{step.step}</p>
+                  <span className="text-emerald-300 text-xs font-mono">{step.time}</span>
+                </div>
+                <p className="text-gray-300 text-xs mb-1">{step.what}</p>
+                <p className="text-gray-500 text-xs">Dependency: {step.dependency}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-emerald-200 text-sm mt-3"><span className="font-semibold">Total:</span> {data.stablecoinLegDetail.totalTime}</p>
+          <p className="text-amber-300 text-xs mt-1">⚠️ {data.stablecoinLegDetail.bottleneck}</p>
+        </div>
+      )}
+      
+      {/* Fiat Leg Detail */}
+      {data.fiatLegDetail && (
+        <div className="mb-4 bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+          <h4 className="font-semibold text-red-300 mb-3">{data.fiatLegDetail.title}</h4>
+          <div className="space-y-3">
+            {data.fiatLegDetail.steps?.map((step: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded p-3">
+                <div className="flex justify-between items-start mb-1">
+                  <p className="text-white text-sm font-semibold">{step.step}</p>
+                  <span className="text-red-300 text-xs font-mono">{step.time}</span>
+                </div>
+                <p className="text-gray-300 text-xs mb-1">{step.what}</p>
+                <p className="text-gray-500 text-xs">Dependency: {step.dependency}</p>
+              </div>
+            ))}
+          </div>
+          <p className="text-red-200 text-sm mt-3"><span className="font-semibold">Total:</span> {data.fiatLegDetail.totalTime}</p>
+          <p className="text-amber-300 text-xs mt-1">⚠️ {data.fiatLegDetail.bottleneck}</p>
+        </div>
+      )}
+      
+      {data.conclusion && (
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <p className="text-purple-200 font-medium">{data.conclusion}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// =============================================================================
+// PILLAR 2.4 COMPONENTS
+// =============================================================================
+
+function IssuanceVsTransmissionBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      <p className="text-gray-300 mb-4">{data.concept}</p>
+      
+      <div className="grid md:grid-cols-2 gap-4 mb-4">
+        {/* Issuance */}
+        <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+          <h4 className="text-red-300 font-semibold mb-3">{data.issuance.title}</h4>
+          <p className="text-gray-300 text-sm mb-2">{data.issuance.what}</p>
+          <p className="text-amber-300 text-sm mb-3"><span className="font-semibold">Regulatory:</span> {data.issuance.regulatoryFramework}</p>
+          
+          <div className="mb-3">
+            <p className="text-gray-400 text-xs font-semibold mb-2">Requirements:</p>
+            <ul className="text-gray-400 text-xs space-y-1">
+              {data.issuance.requirements?.map((req: string, i: number) => (
+                <li key={i}>• {req}</li>
+              ))}
+            </ul>
+          </div>
+          
+          <p className="text-gray-400 text-xs mb-2"><span className="font-semibold">Who:</span> {data.issuance.whoDoesThis}</p>
+          <div className="bg-red-500/20 rounded p-2 mt-2">
+            <p className="text-red-200 text-xs font-semibold">{data.issuance.spherePosition}</p>
+          </div>
+        </div>
+        
+        {/* Transmission */}
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 className="text-emerald-300 font-semibold mb-3">{data.transmission.title}</h4>
+          <p className="text-gray-300 text-sm mb-2">{data.transmission.what}</p>
+          <p className="text-blue-300 text-sm mb-3"><span className="font-semibold">Regulatory:</span> {data.transmission.regulatoryFramework}</p>
+          
+          <div className="mb-3">
+            <p className="text-gray-400 text-xs font-semibold mb-2">Requirements:</p>
+            <ul className="text-gray-400 text-xs space-y-1">
+              {data.transmission.requirements?.map((req: string, i: number) => (
+                <li key={i}>• {req}</li>
+              ))}
+            </ul>
+          </div>
+          
+          <p className="text-gray-400 text-xs mb-2"><span className="font-semibold">Who:</span> {data.transmission.whoDoesThis}</p>
+          <div className="bg-emerald-500/20 rounded p-2 mt-2">
+            <p className="text-emerald-200 text-xs font-semibold">{data.transmission.spherePosition}</p>
+          </div>
+        </div>
+      </div>
+      
+      {/* Why It Matters */}
+      {data.whyItMatters && (
+        <div className="mb-4">
+          <h4 className="text-white font-semibold mb-3">{data.whyItMatters.title}</h4>
+          <ul className="text-gray-300 text-sm space-y-2">
+            {data.whyItMatters.points?.map((point: string, i: number) => (
+              <li key={i}>• {point}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+      
+      {data.analogy && (
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <p className="text-purple-200 italic">💡 {data.analogy}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function MarketDeepDiveBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.whyUAE && <p className="text-blue-300 mb-4">{data.whyUAE}</p>}
+      {data.whySingapore && <p className="text-blue-300 mb-4">{data.whySingapore}</p>}
+      {data.whyUK && <p className="text-blue-300 mb-4">{data.whyUK}</p>}
+      {data.whyBrazil && <p className="text-blue-300 mb-4">{data.whyBrazil}</p>}
+      
+      {/* Regulators */}
+      {data.regulators && (
+        <div className="mb-4">
+          <h4 className="text-white font-semibold mb-3">Regulators</h4>
+          <div className="space-y-2">
+            {data.regulators.map((reg: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded p-3">
+                <p className="text-blue-300 font-semibold text-sm">{reg.name}</p>
+                <p className="text-gray-400 text-xs">{reg.jurisdiction}</p>
+                {reg.relevance && <p className="text-gray-300 text-xs mt-1">{reg.relevance}</p>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {/* Framework */}
+      {data.framework && (
+        <div className="bg-blue-500/10 border border-blue-500/30 rounded p-3 mb-4">
+          <p className="text-blue-200 text-sm"><span className="font-semibold">Framework:</span> {data.framework}</p>
+        </div>
+      )}
+      
+      {/* Key Developments */}
+      {data.keyDevelopments && (
+        <div className="mb-4">
+          <h4 className="text-white font-semibold mb-2 text-sm">Key Developments</h4>
+          <ul className="text-gray-300 text-sm space-y-1">
+            {data.keyDevelopments.map((dev: string, i: number) => (
+              <li key={i}>• {dev}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+      
+      {/* Compliance Requirements */}
+      {data.complianceRequirements && (
+        <div className="mb-4">
+          <h4 className="text-white font-semibold mb-2">{data.complianceRequirements.title}</h4>
+          <ul className="text-gray-300 text-sm space-y-1">
+            {data.complianceRequirements.requirements?.map((req: string, i: number) => (
+              <li key={i}>• {req}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+      
+      {/* Friction Points */}
+      {data.frictionPoints && (
+        <div className="mb-4 bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 className="text-amber-300 font-semibold mb-2">Friction Points</h4>
+          <ul className="text-gray-300 text-sm space-y-1">
+            {data.frictionPoints.map((friction: string, i: number) => (
+              <li key={i}>• {friction}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+      
+      {/* Sphere Advantage */}
+      {data.sphereAdvantage && (
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 mb-4">
+          <p className="text-emerald-200 text-sm">{data.sphereAdvantage}</p>
+        </div>
+      )}
+      
+      {/* Corridors */}
+      {data.corridors && (
+        <div className="bg-purple-500/10 rounded p-3">
+          <p className="text-purple-200 text-sm"><span className="font-semibold">Key Corridors:</span> {data.corridors}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function FrictionPointsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      
+      <div className="space-y-4">
+        {data.frictions?.map((friction: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-amber-500">
+            <h4 className="text-amber-300 font-semibold mb-2">{friction.friction}</h4>
+            
+            <div className="space-y-3">
+              <div className="bg-red-500/10 rounded p-3">
+                <p className="text-red-300 text-sm font-semibold mb-1">Challenge:</p>
+                <p className="text-gray-300 text-sm">{friction.challenge}</p>
+              </div>
+              
+              <div className="bg-emerald-500/10 rounded p-3">
+                <p className="text-emerald-300 text-sm font-semibold mb-1">Sphere Approach:</p>
+                <p className="text-gray-300 text-sm">{friction.sphereApproach}</p>
+              </div>
+              
+              {friction.example && (
+                <div className="bg-blue-500/10 border border-blue-500/30 rounded p-3">
+                  <p className="text-blue-200 text-xs"><span className="font-semibold">Example:</span> {friction.example}</p>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SphereAdvantagesBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-purple-500/10 border border-purple-500/50 rounded-xl p-6">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      
+      <div className="space-y-4">
+        {data.advantages?.map((adv: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-emerald-500">
+            <h4 className="text-emerald-300 font-semibold mb-2">{adv.advantage}</h4>
+            <p className="text-gray-300 text-sm mb-3">{adv.explanation}</p>
+            
+            {adv.example && (
+              <div className="bg-blue-500/10 border border-blue-500/30 rounded p-3">
+                <p className="text-blue-200 text-xs">{adv.example}</p>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// =============================================================================
+// PILLAR 2.5 COMPONENTS
+// =============================================================================
+
+function RealUseCasesBlock({ data }: { data: any }) {
+  const [expandedCase, setExpandedCase] = useState<number | null>(null);
+  
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4 text-sm">{data.subtitle}</p>}
+      
+      <div className="space-y-3">
+        {data.cases?.map((useCase: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg border border-slate-600 overflow-hidden">
+            <button
+              onClick={() => setExpandedCase(expandedCase === i ? null : i)}
+              className="w-full p-4 text-left hover:bg-slate-700 transition flex items-start justify-between"
+            >
+              <div className="flex-1">
+                <h4 className="text-emerald-300 font-semibold mb-1">{useCase.useCase}</h4>
+                <p className="text-gray-400 text-sm">{useCase.customer}</p>
+              </div>
+              <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${expandedCase === i ? 'rotate-180' : ''}`} />
+            </button>
+            
+            {expandedCase === i && (
+              <div className="px-4 pb-4 space-y-3">
+                {/* Problem */}
+                <div className="bg-red-500/10 border border-red-500/30 rounded p-3">
+                  <p className="text-red-300 text-xs font-semibold mb-1">Problem</p>
+                  <p className="text-gray-300 text-sm">{useCase.problem}</p>
+                </div>
+                
+                {/* Sphere Solution */}
+                <div className="bg-blue-500/10 border border-blue-500/30 rounded p-3">
+                  <p className="text-blue-300 text-xs font-semibold mb-1">Sphere Solution</p>
+                  <p className="text-gray-300 text-sm">{useCase.sphereSolution}</p>
+                </div>
+                
+                {/* Results */}
+                {useCase.results && (
+                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded p-3">
+                    <p className="text-emerald-300 text-xs font-semibold mb-2">Results</p>
+                    <div className="space-y-1">
+                      {Object.entries(useCase.results).map(([key, value], j) => (
+                        <p key={j} className="text-gray-300 text-xs">
+                          <span className="font-semibold capitalize">{key.replace(/([A-Z])/g, ' $1')}:</span> {value as string}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
+                {/* Why Sphere */}
+                {useCase.whySphere && (
+                  <div className="bg-purple-500/10 border border-purple-500/30 rounded p-3">
+                    <p className="text-purple-300 text-xs font-semibold mb-2">Why Sphere</p>
+                    <ul className="text-gray-300 text-xs space-y-1">
+                      {useCase.whySphere.map((reason: string, j: number) => (
+                        <li key={j}>• {reason}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function WhySpherePartnerBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-purple-500/10 border border-purple-500/50 rounded-xl p-6">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      <p className="text-purple-200 mb-4">{data.overarching}</p>
+      
+      <div className="space-y-4">
+        {data.reasons?.map((item: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-emerald-500">
+            <h4 className="text-emerald-300 font-semibold mb-2">{item.reason}</h4>
+            <p className="text-gray-300 text-sm mb-2">{item.why}</p>
+            
+            {item.example && (
+              <div className="bg-blue-500/10 border border-blue-500/30 rounded p-3 mb-2">
+                <p className="text-blue-200 text-xs"><span className="font-semibold">Example:</span> {item.example}</p>
+              </div>
+            )}
+            
+            {item.competitive && (
+              <div className="bg-purple-500/20 rounded p-2">
+                <p className="text-purple-200 text-xs"><span className="font-semibold">Competitive Edge:</span> {item.competitive}</p>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
