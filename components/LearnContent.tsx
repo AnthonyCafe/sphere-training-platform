@@ -1897,16 +1897,6 @@ function PaymentFlowBlock({ data }: { data: any }) {
   );
 }
 
-function VsComparisonBlock({ data }: { data: any }) {
-  return (
-    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
-      {data.headers && data.rows && <TableBlock data={data} />}
-      {data.comparison && <TableBlock data={data.comparison} />}
-    </div>
-  );
-}
-
 function BobAhmedBlock({ data }: { data: any }) {
   return (
     <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-6">
