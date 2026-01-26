@@ -3963,9 +3963,6 @@ function EntityStructureBlock({ data }: { data: any }) {
     </div>
   );
 }
-    </div>
-  );
-}
 
 function ActivityLicenseMappingBlock({ data }: { data: any }) {
   return (
