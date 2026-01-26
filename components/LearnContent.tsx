@@ -3473,6 +3473,18 @@ function WhyUAEMattersBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4 text-xl">🇦🇪 {data.title}</h3>
+      {data.points && (
+        <div className="space-y-2 mb-4">
+          <ul className="text-gray-300 space-y-2">
+            {data.points.map((p: string, i: number) => (
+              <li key={i} className="flex items-start gap-2">
+                <span className="text-emerald-400">•</span>
+                <span>{p}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
       {data.strategicReasons && (
         <div className="space-y-3 mb-4">
           {data.strategicReasons.map((r: any, i: number) => (
@@ -3485,7 +3497,16 @@ function WhyUAEMattersBlock({ data }: { data: any }) {
       )}
       {data.arnoldQuote && (
         <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
-          <p className="text-purple-200 italic">"{data.arnoldQuote}"</p>
+          {typeof data.arnoldQuote === 'string' ? (
+            <p className="text-purple-200 italic">"{data.arnoldQuote}"</p>
+          ) : (
+            <>
+              <p className="text-purple-200 italic">"{data.arnoldQuote.quote}"</p>
+              {data.arnoldQuote.context && (
+                <p className="text-gray-400 text-sm mt-2">{data.arnoldQuote.context}</p>
+              )}
+            </>
+          )}
         </div>
       )}
     </div>
@@ -3496,26 +3517,29 @@ function RegulatoryLandscapeBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+      
       {data.territories && (
-        <div className="overflow-x-auto">
-          <table className="w-full text-sm">
-            <thead><tr className="bg-slate-700">
-              <th className="text-left p-3 text-gray-300">Territory</th>
-              <th className="text-left p-3 text-gray-300">Legal System</th>
-              <th className="text-left p-3 text-gray-300">Crypto Scope</th>
-              <th className="text-left p-3 text-gray-300">Sphere Relevance</th>
-            </tr></thead>
-            <tbody>
-              {data.territories.map((t: any, i: number) => (
-                <tr key={i} className="border-t border-slate-700">
-                  <td className="p-3 text-white font-medium">{t.territory}</td>
-                  <td className="p-3 text-gray-300">{t.legalSystem}</td>
-                  <td className="p-3 text-gray-300">{t.cryptoScope}</td>
-                  <td className="p-3 text-emerald-300">{t.sphereRelevance}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="space-y-3 mb-4">
+          {data.territories.map((t: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-blue-500">
+              <div className="flex items-center gap-2 mb-2">
+                {t.icon && <span className="text-xl">{t.icon}</span>}
+                <h4 className="text-blue-300 font-semibold">{t.name || t.territory}</h4>
+              </div>
+              {t.regulator && <p className="text-gray-400 text-sm">Regulator: {t.regulator}</p>}
+              {t.legalSystem && <p className="text-gray-400 text-sm">Legal System: {t.legalSystem}</p>}
+              {t.bestFor && <p className="text-gray-300 text-sm">Best For: {t.bestFor}</p>}
+              {t.cryptoScope && <p className="text-gray-300 text-sm">Crypto Scope: {t.cryptoScope}</p>}
+              {t.sphereRelevance && <p className="text-emerald-300 text-sm font-semibold mt-2">Sphere: {t.sphereRelevance}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+      
+      {data.keyInsight && (
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <p className="text-purple-200 text-sm">💡 {data.keyInsight}</p>
         </div>
       )}
     </div>
@@ -3523,29 +3547,111 @@ function RegulatoryLandscapeBlock({ data }: { data: any }) {
 }
 
 function VARADeepDiveBlock({ data }: { data: any }) {
+  const [expanded, setExpanded] = React.useState(true);
+  
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      <button onClick={() => setExpanded(!expanded)} className="w-full flex items-center justify-between mb-4">
+        <h3 className="font-semibold text-white text-xl">{data.title}</h3>
+        <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${expanded ? 'rotate-180' : ''}`} />
+      </button>
+      
+      {data.whyVARA && <p className="text-gray-300 mb-4">{data.whyVARA}</p>}
       {data.overview && <p className="text-gray-300 mb-4">{data.overview}</p>}
-      {data.requirements && (
-        <div className="grid md:grid-cols-2 gap-4">
-          {data.requirements.map((req: any, i: number) => (
-            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
-              <p className="text-gray-400 text-sm">{req.requirement}</p>
-              <p className="text-white font-semibold">{req.detail}</p>
+      
+      {expanded && (
+        <>
+          {data.requirements?.items && (
+            <div className="mb-4">
+              <h4 className="text-white font-semibold mb-3">{data.requirements.title}</h4>
+              <div className="space-y-3">
+                {data.requirements.items.map((req: any, i: number) => (
+                  <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+                    <p className="text-blue-300 font-semibold">{req.requirement}</p>
+                    <p className="text-white text-sm mt-1">{req.detail}</p>
+                    {req.cost && <p className="text-amber-300 text-xs mt-1">Cost: {req.cost}</p>}
+                    {req.note && <p className="text-gray-400 text-xs mt-1">{req.note}</p>}
+                    {req.roles && <p className="text-gray-400 text-xs mt-1">Roles: {req.roles.join(', ')}</p>}
+                  </div>
+                ))}
+              </div>
             </div>
-          ))}
-        </div>
-      )}
-      {data.licenseTypes && (
-        <div className="mt-4 space-y-2">
-          {data.licenseTypes.map((lt: any, i: number) => (
-            <div key={i} className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
-              <p className="text-blue-300 font-semibold">{lt.type}</p>
-              <p className="text-gray-300 text-sm">{lt.description}</p>
+          )}
+          
+          {data.requirements && Array.isArray(data.requirements) && (
+            <div className="grid md:grid-cols-2 gap-4 mb-4">
+              {data.requirements.map((req: any, i: number) => (
+                <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+                  <p className="text-gray-400 text-sm">{req.requirement}</p>
+                  <p className="text-white font-semibold">{req.detail}</p>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
+          )}
+          
+          {data.timeline && (
+            <div className="mb-4">
+              <h4 className="text-white font-semibold mb-3">{data.timeline.title}</h4>
+              <p className="text-emerald-300 mb-2">Duration: {data.timeline.duration}</p>
+              <div className="space-y-2">
+                {data.timeline.phases?.map((p: any, i: number) => (
+                  <div key={i} className="bg-slate-700/50 rounded-lg p-3 flex items-start gap-3">
+                    <span className="bg-blue-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0">{i+1}</span>
+                    <div>
+                      <p className="text-white font-medium">{p.phase} <span className="text-gray-400 text-sm">({p.duration})</span></p>
+                      <p className="text-gray-400 text-sm">{p.activities}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          {data.licenseTypes?.types && (
+            <div className="mb-4">
+              <h4 className="text-white font-semibold mb-3">{data.licenseTypes.title}</h4>
+              <div className="space-y-2">
+                {data.licenseTypes.types.map((lt: any, i: number) => (
+                  <div key={i} className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
+                    <p className="text-blue-300 font-semibold">{lt.license}</p>
+                    <p className="text-gray-300 text-sm">{lt.description}</p>
+                    <p className="text-emerald-300 text-xs mt-1">Sphere Use: {lt.sphereUse}</p>
+                    <p className="text-amber-300 text-xs">Capital: {lt.capital}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+          
+          {data.licenseTypes && Array.isArray(data.licenseTypes) && (
+            <div className="mt-4 space-y-2">
+              {data.licenseTypes.map((lt: any, i: number) => (
+                <div key={i} className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
+                  <p className="text-blue-300 font-semibold">{lt.type || lt.license}</p>
+                  <p className="text-gray-300 text-sm">{lt.description}</p>
+                </div>
+              ))}
+            </div>
+          )}
+          
+          {data.advantages && (
+            <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 mb-4">
+              <h4 className="text-emerald-300 font-semibold mb-2">Advantages</h4>
+              <ul className="text-gray-300 text-sm space-y-1">
+                {data.advantages.map((a: string, i: number) => (<li key={i}>✅ {a}</li>))}
+              </ul>
+            </div>
+          )}
+          
+          {data.limitations && (
+            <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+              <h4 className="text-amber-300 font-semibold mb-2">Limitations</h4>
+              <ul className="text-gray-300 text-sm space-y-1">
+                {data.limitations.map((l: string, i: number) => (<li key={i}>⚠️ {l}</li>))}
+              </ul>
+            </div>
+          )}
+        </>
       )}
     </div>
   );
@@ -3555,6 +3661,8 @@ function DIFCComparisonBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+      
       {data.comparisonTable && (
         <div className="overflow-x-auto mb-4">
           <table className="w-full text-sm">
@@ -3566,17 +3674,47 @@ function DIFCComparisonBlock({ data }: { data: any }) {
             <tbody>
               {data.comparisonTable.rows?.map((row: any, i: number) => (
                 <tr key={i} className="border-t border-slate-700">
-                  <td className="p-3 text-gray-400">{row.attribute}</td>
-                  <td className="p-3 text-blue-300">{row.vara}</td>
-                  <td className="p-3 text-purple-300">{row.difc}</td>
+                  {Array.isArray(row) ? (
+                    row.map((cell: string, j: number) => (
+                      <td key={j} className={`p-3 ${j === 0 ? 'text-gray-400' : j === 1 ? 'text-blue-300' : 'text-purple-300'}`}>{cell}</td>
+                    ))
+                  ) : (
+                    <>
+                      <td className="p-3 text-gray-400">{row.attribute}</td>
+                      <td className="p-3 text-blue-300">{row.vara}</td>
+                      <td className="p-3 text-purple-300">{row.difc}</td>
+                    </>
+                  )}
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
       )}
+      
+      {(data.whenToChooseVARA || data.whenToChooseDIFC) && (
+        <div className="grid md:grid-cols-2 gap-4 mb-4">
+          {data.whenToChooseVARA && (
+            <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+              <h4 className="text-blue-300 font-semibold mb-2">Choose VARA When:</h4>
+              <ul className="text-gray-300 text-sm space-y-1">
+                {data.whenToChooseVARA.map((r: string, i: number) => (<li key={i}>• {r}</li>))}
+              </ul>
+            </div>
+          )}
+          {data.whenToChooseDIFC && (
+            <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+              <h4 className="text-purple-300 font-semibold mb-2">Choose DIFC When:</h4>
+              <ul className="text-gray-300 text-sm space-y-1">
+                {data.whenToChooseDIFC.map((r: string, i: number) => (<li key={i}>• {r}</li>))}
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
+      
       {data.whenToChoose && (
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 gap-4 mb-4">
           <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
             <h4 className="text-blue-300 font-semibold mb-2">Choose VARA When:</h4>
             <ul className="text-gray-300 text-sm space-y-1">
@@ -3591,6 +3729,44 @@ function DIFCComparisonBlock({ data }: { data: any }) {
           </div>
         </div>
       )}
+      
+      {data.practicalDifference && (
+        <div className="bg-slate-700/50 rounded-lg p-4 mb-4">
+          <h4 className="text-white font-semibold mb-3">{data.practicalDifference.title}</h4>
+          <div className="grid md:grid-cols-2 gap-3">
+            <div className="bg-blue-500/10 rounded p-3">
+              <p className="text-blue-300 text-sm italic">"{data.practicalDifference.vara}"</p>
+            </div>
+            <div className="bg-purple-500/10 rounded p-3">
+              <p className="text-purple-300 text-sm italic">"{data.practicalDifference.difc}"</p>
+            </div>
+          </div>
+        </div>
+      )}
+      
+      {data.sphereExample && (
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 className="text-emerald-300 font-semibold mb-3">{data.sphereExample.title}</h4>
+          <div className="grid md:grid-cols-2 gap-4">
+            {data.sphereExample.varaScenario && (
+              <div className="bg-slate-700/50 rounded p-3">
+                <p className="text-blue-300 font-semibold mb-2">{data.sphereExample.varaScenario.description}</p>
+                <ul className="text-gray-300 text-xs space-y-1">
+                  {data.sphereExample.varaScenario.capabilities?.map((c: string, i: number) => (<li key={i}>• {c}</li>))}
+                </ul>
+              </div>
+            )}
+            {data.sphereExample.difcScenario && (
+              <div className="bg-slate-700/50 rounded p-3">
+                <p className="text-purple-300 font-semibold mb-2">{data.sphereExample.difcScenario.description}</p>
+                <ul className="text-gray-300 text-xs space-y-1">
+                  {data.sphereExample.difcScenario.capabilities?.map((c: string, i: number) => (<li key={i}>• {c}</li>))}
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -3599,15 +3775,37 @@ function ADGMOverviewBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      {data.description && <p className="text-gray-300 mb-4">{data.description}</p>}
       {data.overview && <p className="text-gray-300 mb-4">{data.overview}</p>}
-      {data.requirements && (
-        <div className="space-y-2">
+      
+      {data.requirements?.items && (
+        <div className="mb-4">
+          <h4 className="text-white font-semibold mb-3">{data.requirements.title}</h4>
+          <div className="space-y-2">
+            {data.requirements.items.map((req: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded-lg p-3 flex justify-between items-center">
+                <span className="text-gray-300">{req.item || req.requirement}</span>
+                <span className="text-white font-semibold">{req.detail}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {data.requirements && Array.isArray(data.requirements) && (
+        <div className="space-y-2 mb-4">
           {data.requirements.map((req: any, i: number) => (
             <div key={i} className="bg-slate-700/50 rounded-lg p-3 flex justify-between items-center">
-              <span className="text-gray-300">{req.requirement}</span>
+              <span className="text-gray-300">{req.requirement || req.item}</span>
               <span className="text-white font-semibold">{req.detail}</span>
             </div>
           ))}
+        </div>
+      )}
+      
+      {data.sphereRelevance && (
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <p className="text-emerald-300 text-sm"><span className="font-semibold">Sphere Relevance:</span> {data.sphereRelevance}</p>
         </div>
       )}
     </div>
@@ -3618,6 +3816,32 @@ function CBUAERegulationsBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+      
+      {data.circular2024 && (
+        <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 mb-4">
+          <h4 className="text-blue-300 font-semibold mb-2">{data.circular2024.title}</h4>
+          {data.circular2024.description && <p className="text-gray-300 text-sm mb-3">{data.circular2024.description}</p>}
+          {data.circular2024.keyProvisions && (
+            <div className="space-y-2 mb-3">
+              {data.circular2024.keyProvisions.map((p: any, i: number) => (
+                <div key={i} className="bg-slate-700/50 rounded p-2">
+                  <p className="text-white font-medium text-sm">{p.provision}</p>
+                  <p className="text-gray-400 text-xs">{p.detail}</p>
+                  {p.sphereImplication && <p className="text-emerald-300 text-xs mt-1">Sphere: {p.sphereImplication}</p>}
+                </div>
+              ))}
+            </div>
+          )}
+          {data.circular2024.effectiveDate && <p className="text-amber-300 text-sm">Effective: {data.circular2024.effectiveDate}</p>}
+          {data.circular2024.spherePosition && (
+            <div className="bg-emerald-500/10 border border-emerald-500/30 rounded p-3 mt-3">
+              <p className="text-emerald-300 text-sm"><span className="font-semibold">Sphere Position:</span> {data.circular2024.spherePosition}</p>
+            </div>
+          )}
+        </div>
+      )}
+      
       {data.circular && (
         <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 mb-4">
           <h4 className="text-blue-300 font-semibold mb-2">{data.circular.title}</h4>
@@ -3628,10 +3852,22 @@ function CBUAERegulationsBlock({ data }: { data: any }) {
           )}
         </div>
       )}
+      
       {data.digitalDirham && (
         <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
           <h4 className="text-purple-300 font-semibold mb-2">{data.digitalDirham.title}</h4>
-          <p className="text-gray-300 text-sm">{data.digitalDirham.status}</p>
+          {data.digitalDirham.description && <p className="text-gray-300 text-sm mb-3">{data.digitalDirham.description}</p>}
+          {data.digitalDirham.status && <p className="text-gray-300 text-sm mb-3">{data.digitalDirham.status}</p>}
+          {data.digitalDirham.implications && (
+            <ul className="text-gray-300 text-sm space-y-1 mb-3">
+              {data.digitalDirham.implications.map((imp: string, i: number) => (<li key={i}>• {imp}</li>))}
+            </ul>
+          )}
+          {data.digitalDirham.sphereStrategy && (
+            <div className="bg-emerald-500/10 rounded p-3">
+              <p className="text-emerald-300 text-sm"><span className="font-semibold">Sphere Strategy:</span> {data.digitalDirham.sphereStrategy}</p>
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -3642,13 +3878,48 @@ function EntityStructureBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4 text-xl">🏢 {data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-2">{data.subtitle}</p>}
+      {data.rationale && <p className="text-gray-300 mb-4">{data.rationale}</p>}
       {data.recommendation && <p className="text-gray-300 mb-4">{data.recommendation}</p>}
+      
       {data.entities && (
-        <div className="space-y-4">
+        <div className="space-y-4 mb-4">
           {data.entities.map((entity: any, i: number) => (
             <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-blue-500">
-              <h4 className="text-blue-300 font-semibold mb-2">{entity.name}</h4>
-              <p className="text-gray-300 text-sm">{entity.purpose}</p>
+              <div className="flex items-center justify-between mb-2">
+                <h4 className="text-blue-300 font-semibold">{entity.entity || entity.name}</h4>
+                {entity.priority && <span className="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded">{entity.priority}</span>}
+              </div>
+              {entity.territory && <p className="text-gray-400 text-sm">Territory: {entity.territory}</p>}
+              {entity.licenses && <p className="text-gray-400 text-sm">Licenses: {entity.licenses.join(', ')}</p>}
+              <p className="text-gray-300 text-sm mt-2">{entity.purpose}</p>
+              
+              {entity.yearOneCost && (
+                <div className="bg-slate-600/50 rounded p-3 mt-3">
+                  <p className="text-amber-300 text-sm font-semibold mb-2">{entity.yearOneCost.title}</p>
+                  <div className="space-y-1 text-xs">
+                    {entity.yearOneCost.items?.map((item: any, j: number) => (
+                      <div key={j} className="flex justify-between">
+                        <span className="text-gray-400">{item.category}</span>
+                        <span className="text-white">
+                          {item.aed ? `AED ${item.aed.toLocaleString()} (~$${item.usd.toLocaleString()})` : `$${item.usd}`}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                  {entity.yearOneCost.total && (
+                    <div className="border-t border-slate-500 mt-2 pt-2 flex justify-between font-semibold">
+                      <span className="text-gray-300">Total</span>
+                      <span className="text-emerald-300">
+                        {entity.yearOneCost.total.aed ? 
+                          `AED ${entity.yearOneCost.total.aed.toLocaleString()} (~$${entity.yearOneCost.total.usd.toLocaleString()})` : 
+                          `$${entity.yearOneCost.total.usd}`}
+                      </span>
+                    </div>
+                  )}
+                </div>
+              )}
+              
               {entity.costs && (
                 <div className="bg-slate-600/50 rounded p-3 mt-3">
                   <p className="text-gray-400 text-sm font-semibold mb-2">Estimated Costs:</p>
@@ -3663,6 +3934,35 @@ function EntityStructureBlock({ data }: { data: any }) {
           ))}
         </div>
       )}
+      
+      {data.timeline && (
+        <div className="mb-4">
+          <h4 className="text-white font-semibold mb-3">{data.timeline.title}</h4>
+          <div className="space-y-2">
+            {data.timeline.phases?.map((p: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded-lg p-3 flex items-start gap-3">
+                <span className="bg-blue-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0">{i+1}</span>
+                <div>
+                  <p className="text-white font-medium">{p.phase} <span className="text-gray-400 text-sm">({p.months})</span></p>
+                  <p className="text-gray-400 text-sm">{p.actions}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {data.totalInvestment && (
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 className="text-emerald-300 font-semibold mb-2">Total Investment</h4>
+          <p className="text-white">2-Year: {data.totalInvestment.twoYear}</p>
+          <p className="text-gray-400 text-sm">Locked Capital: {data.totalInvestment.lockedCapital}</p>
+          {data.totalInvestment.note && <p className="text-gray-500 text-xs mt-2">{data.totalInvestment.note}</p>}
+        </div>
+      )}
+    </div>
+  );
+}
     </div>
   );
 }
@@ -3671,20 +3971,24 @@ function ActivityLicenseMappingBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      {data.activities && (
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+      
+      {(data.mappings || data.activities) && (
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead><tr className="bg-slate-700">
               <th className="text-left p-3 text-gray-300">Activity</th>
               <th className="text-left p-3 text-gray-300">Required License</th>
+              <th className="text-left p-3 text-gray-300">Territory</th>
               <th className="text-left p-3 text-gray-300">Notes</th>
             </tr></thead>
             <tbody>
-              {data.activities.map((a: any, i: number) => (
+              {(data.mappings || data.activities)?.map((a: any, i: number) => (
                 <tr key={i} className="border-t border-slate-700">
                   <td className="p-3 text-white">{a.activity}</td>
                   <td className="p-3 text-blue-300">{a.license}</td>
-                  <td className="p-3 text-gray-400">{a.notes}</td>
+                  <td className="p-3 text-purple-300">{a.territory}</td>
+                  <td className="p-3 text-gray-400">{a.note || a.notes}</td>
                 </tr>
               ))}
             </tbody>
