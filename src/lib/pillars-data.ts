@@ -3830,420 +3830,127 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
         title: '3.5 UAE Regulatory Framework',
         curriculum: {
           objectives: [
-            'Navigate UAE\'s multi-regulator landscape (CBUAE, VARA, DFSA, FSRA)',
-            'Understand VARA vs DIFC licensing requirements and tradeoffs',
-            'Explain the Payment Token Services Regulation and Digital Dirham',
-            'Articulate Sphere\'s recommended UAE entity structure'
+            'Understand UAE\'s multi-regulator landscape (CBUAE, VARA, DFSA, FSRA)',
+            'Explain why UAE is a strategic market for cross-border payments',
+            'Describe VARA vs DIFC vs ADGM at a high level',
+            'Answer basic questions about UAE crypto regulation'
           ],
           keyConcepts: [
-            'Six regulatory territories with distinct requirements',
-            'VARA for retail + B2B crypto, DIFC for institutional',
-            'CBUAE Circular 2/2024: Payment Token Services Regulation',
-            'Two-entity structure: SpherePay (VARA) + SphereNet (ADGM/DIFC)'
+            'UAE has multiple regulatory territories with different rules',
+            'VARA is Dubai\'s crypto-specific regulator',
+            'CBUAE oversees federal payment token rules',
+            'Sphere is exploring UAE market entry (not yet licensed there)'
           ]
         },
         learn: {
-          introduction: 'UAE is Sphere\'s primary market for the Middle East and a critical hub for Asia-Africa trade. Understanding the regulatory landscape is essential — UAE has SIX distinct regulatory territories, each with different rules, costs, and strategic value.',
-          coreQuestion: 'How does UAE regulate stablecoins and payments, and where should Sphere operate?',
+          introduction: 'UAE is a strategic market for cross-border payments, connecting MENA, South Asia, and Africa. Understanding the basics of UAE\'s regulatory landscape helps you answer questions from prospects and partners interested in the region.',
+          coreQuestion: 'What do trainees need to know about UAE crypto/payments regulation?',
           whyUAEMatters: {
-            title: 'Why UAE Is Strategic for Sphere',
+            title: 'Why UAE Is a Strategic Market',
             points: [
-              'Dubai is the financial hub for MENA, connecting $1.5T+ in annual trade flows',
-              'Progressive regulatory environment — UAE actively wants to be a global crypto/fintech hub',
-              'High volume of cross-border payments: UAE-India corridor alone is $50B+ annually',
-              'Gateway to emerging markets: Africa, South Asia, Central Asia all route through UAE',
+              'Dubai is a major financial hub connecting $1.5T+ in annual trade flows',
+              'UAE-India corridor alone handles $50B+ annually in remittances and trade',
+              'Gateway to emerging markets: Africa, South Asia, Central Asia route through UAE',
+              'Progressive regulatory environment that actively wants crypto/fintech innovation',
               'English-speaking business environment with strong rule of law'
             ],
-            arnoldQuote: {
-              quote: 'Being small is the advantage. These operators don\'t want to go live in Libya. We will.',
-              context: 'UAE gives Sphere a compliant base to serve hard-to-reach markets across MENA and beyond.'
+            sphereStatus: {
+              title: 'Sphere\'s UAE Status',
+              status: 'Sphere is actively exploring UAE market entry. We are NOT yet licensed in UAE.',
+              whatThisMeans: [
+                'We cannot currently serve UAE-based customers directly',
+                'We are evaluating licensing options and regulatory pathways',
+                'UAE customers interested in Sphere should be informed of our expansion plans',
+                'Do NOT promise UAE services or timelines to prospects'
+              ]
             }
           },
           regulatoryLandscape: {
-            title: 'UAE Regulatory Landscape: Six Territories',
-            subtitle: 'UAE is NOT one regulatory jurisdiction — it\'s six distinct territories with different regulators, legal systems, and crypto scopes.',
+            title: 'UAE Regulatory Landscape Overview',
+            subtitle: 'UAE has multiple regulatory territories — this is a simplified overview for trainees.',
             territories: [
               {
-                name: 'VARA (Dubai Mainland)',
-                regulator: 'Virtual Assets Regulatory Authority',
-                legalSystem: 'UAE Civil Law',
-                bestFor: 'Retail + B2B crypto, AED on/off-ramp',
-                cryptoScope: 'Broadest — built specifically for crypto',
-                sphereRelevance: 'PRIMARY — SpherePay UAE entity',
-                icon: '🏙️'
+                name: 'VARA (Dubai)',
+                fullName: 'Virtual Assets Regulatory Authority',
+                icon: '🏙️',
+                whatItIs: 'Dubai\'s dedicated crypto regulator, created specifically for virtual assets',
+                bestFor: 'Crypto businesses serving retail and B2B customers',
+                keyFact: 'Most crypto-native regulator in UAE — built for digital assets from scratch'
               },
               {
-                name: 'DIFC (Dubai Free Zone)',
-                regulator: 'Dubai Financial Services Authority (DFSA)',
-                legalSystem: 'English Common Law',
-                bestFor: 'Institutional clients, tokenized securities',
-                cryptoScope: 'Narrow — traditional finance + limited crypto',
-                sphereRelevance: 'SECONDARY — potential SphereNet tokenization',
-                icon: '🏛️'
+                name: 'DIFC',
+                fullName: 'Dubai International Financial Centre',
+                icon: '🏛️',
+                whatItIs: 'Dubai\'s financial free zone with English Common Law',
+                bestFor: 'Traditional finance and institutional clients',
+                keyFact: 'More conservative on crypto — better for traditional finance firms touching some tokens'
               },
               {
-                name: 'ADGM (Abu Dhabi Free Zone)',
-                regulator: 'Financial Services Regulatory Authority (FSRA)',
-                legalSystem: 'English Common Law',
-                bestFor: 'Institutional, exchanges, custody',
-                cryptoScope: 'Comprehensive since 2018 — first mover',
-                sphereRelevance: 'SECONDARY — SphereNet institutional infrastructure',
-                icon: '🏗️'
+                name: 'ADGM',
+                fullName: 'Abu Dhabi Global Market',
+                icon: '🏗️',
+                whatItIs: 'Abu Dhabi\'s financial free zone, first UAE jurisdiction to regulate crypto (2018)',
+                bestFor: 'Institutional crypto infrastructure, custody, exchanges',
+                keyFact: 'Most mature crypto framework in UAE, but Abu Dhabi-based'
               },
               {
-                name: 'UAE Mainland (Federal)',
-                regulator: 'SCA + CBUAE',
-                legalSystem: 'UAE Civil Law',
-                bestFor: 'Payment services, AED stablecoins',
-                cryptoScope: 'Payment tokens, AED-backed stablecoins only',
-                sphereRelevance: 'COMPLIANCE — CBUAE Payment Token rules apply',
-                icon: '🇦🇪'
-              },
-              {
-                name: 'DMCC (Dubai Free Zone)',
-                regulator: 'DMCC Authority + VARA overlay',
-                legalSystem: 'UAE Civil Law',
-                bestFor: 'Quick setup, trading companies',
-                cryptoScope: 'Limited — needs VARA add-on for crypto',
-                sphereRelevance: 'OPERATIONAL — base entity for VARA application',
-                icon: '💎'
-              },
-              {
-                name: 'RAK DAO (Ras Al Khaimah)',
-                regulator: 'RAKEZ',
-                legalSystem: 'UAE Civil Law',
-                bestFor: 'Web3, DAOs, unregulated activities',
-                cryptoScope: 'Unregulated activities only',
-                sphereRelevance: 'NOT SUITABLE — no regulatory framework',
-                icon: '🌴'
+                name: 'CBUAE',
+                fullName: 'Central Bank of UAE',
+                icon: '🇦🇪',
+                whatItIs: 'Federal regulator overseeing payment services and stablecoins',
+                bestFor: 'Applies to ALL UAE operations regardless of free zone',
+                keyFact: 'Sets rules for stablecoin issuance and payment tokens — key for any payment business'
               }
             ],
-            keyInsight: 'For Sphere\'s B2B payment focus, VARA is the primary choice. For institutional tokenization (SphereNet), ADGM or DIFC are better suited.'
+            simpleRule: 'VARA = crypto-native Dubai. DIFC/ADGM = institutional/traditional finance. CBUAE = federal rules that apply everywhere.'
           },
-          varaDeepDive: {
-            title: 'VARA Deep Dive: Primary Recommendation for SpherePay',
-            whyVARA: 'VARA (Virtual Assets Regulatory Authority) is purpose-built for crypto businesses. Unlike DIFC/ADGM which adapted traditional finance frameworks, VARA was created from scratch to regulate virtual assets. This makes licensing faster and more predictable.',
-            requirements: {
-              title: 'VARA Licensing Requirements',
-              items: [
-                {
-                  requirement: 'Physical Office',
-                  detail: 'YES — Physical office in Dubai required. Virtual office NOT acceptable.',
-                  cost: 'AED 150,000/year (~$41,000) for appropriate office space',
-                  note: 'Flexi-desk arrangements not permitted. Need real office with meeting rooms.'
-                },
-                {
-                  requirement: 'Local Staff',
-                  detail: '2 UAE-resident "Responsible Individuals" required',
-                  roles: ['Money Laundering Reporting Officer (MLRO)', 'Compliance Officer (CO)'],
-                  note: 'These individuals must be UAE residents with appropriate experience. Cannot be outsourced.'
-                },
-                {
-                  requirement: 'Minimum Capital — Transfer Services',
-                  detail: 'AED 600,000 - 800,000 (~$163,000 - $218,000)',
-                  note: 'This capital is locked/restricted — cannot be used for operations.'
-                },
-                {
-                  requirement: 'Minimum Capital — Exchange Services',
-                  detail: 'AED 800,000 - 1,500,000 (~$218,000 - $408,000)',
-                  note: 'Higher capital for exchange activities due to greater risk.'
-                },
-                {
-                  requirement: 'Minimum Capital — Custody Services',
-                  detail: 'AED 750,000 (~$204,000)',
-                  note: 'Required if holding customer assets.'
-                },
-                {
-                  requirement: 'Application Fees',
-                  detail: 'AED 40,000 - 100,000 per activity (~$11,000 - $27,000)',
-                  note: 'Fees vary by license type. Multiple activities = multiple fees.'
-                },
-                {
-                  requirement: 'Annual Supervision Fees',
-                  detail: 'AED 80,000 - 200,000 per activity (~$22,000 - $55,000)',
-                  note: 'Ongoing annual cost. Budget for multi-year commitment.'
-                }
-              ]
-            },
-            timeline: {
-              title: 'VARA Licensing Timeline',
-              duration: '6-12 months (typically 9 months)',
-              phases: [
-                { phase: 'Pre-Application', duration: '1-2 months', activities: 'Select legal counsel, draft business plan, identify local staff' },
-                { phase: 'Application Submission', duration: '1 month', activities: 'Submit application, pay fees, begin VARA review' },
-                { phase: 'VARA Review', duration: '3-6 months', activities: 'Q&A with VARA, document requests, compliance review' },
-                { phase: 'Conditional Approval', duration: '1-2 months', activities: 'Address conditions, finalize office/staff, deposit capital' },
-                { phase: 'Final License', duration: '1 month', activities: 'License issued, commence operations' }
-              ]
-            },
-            licenseTypes: {
-              title: 'VARA License Types Relevant to Sphere',
-              types: [
-                {
-                  license: 'Transfer and Settlement Services',
-                  description: 'Moving virtual assets between parties',
-                  sphereUse: 'Core SpherePay activity — stablecoin transfers',
-                  capital: 'AED 600,000-800,000'
-                },
-                {
-                  license: 'Broker-Dealer Services',
-                  description: 'Facilitating VA transactions for clients',
-                  sphereUse: 'Needed for fiat-to-stablecoin conversion services',
-                  capital: 'AED 800,000-1,500,000'
-                },
-                {
-                  license: 'Custody Services',
-                  description: 'Holding VAs on behalf of clients',
-                  sphereUse: 'Only if holding client funds (FBO model)',
-                  capital: 'AED 750,000'
-                }
-              ]
-            },
-            advantages: [
-              'AED on/off-ramp: Full support for AED banking relationships',
-              'Retail allowed: Can serve SMBs and eventually retail customers',
-              'Crypto-native regulator: VARA understands crypto business models',
-              'Faster licensing: Purpose-built framework vs adapted traditional finance rules',
-              'Broader token support: More stablecoins approved than DIFC'
-            ],
-            limitations: [
-              'UAE Civil Law: Less familiar to international investors than English Common Law',
-              'Capital locked: Minimum capital earns ~0% — opportunity cost',
-              'Marketing restrictions: All marketing must be pre-approved by VARA (fines up to AED 10M)',
-              'Intensive supervision: Regular audits, reporting requirements'
-            ]
-          },
-          difcComparison: {
-            title: 'VARA vs DIFC: Head-to-Head Comparison',
-            subtitle: 'Understanding when to choose each territory',
-            comparisonTable: {
-              headers: ['Attribute', 'VARA', 'DIFC (DFSA)'],
-              rows: [
-                ['Location', 'Mainland Dubai', 'Financial free zone (separate jurisdiction)'],
-                ['Legal System', 'UAE Civil Law', 'English Common Law'],
-                ['Target Customers', 'Retail + Institutional', 'Institutional / Professional only'],
-                ['Crypto Scope', 'Broad (built for crypto)', 'Narrow (crypto bolted onto traditional finance)'],
-                ['Token Restrictions', 'Approved list, no privacy coins', 'Very limited approved tokens'],
-                ['Capital Requirements', '~AED 600K for Transfer Services', 'Higher, varies by activity (USD 500K-2M+)'],
-                ['Banking Access', 'Easier (more UAE banks onboarded)', 'Harder (DIFC banks more conservative)'],
-                ['Fiat On/Off-Ramp', 'Yes, AED supported', 'Limited, more USD/EUR focused'],
-                ['Licensing Timeline', '6-12 months', '6-12 months (more rigorous)'],
-                ['Vibe', '"Crypto-native regulator"', '"Traditional finance tolerating crypto"']
-              ]
-            },
-            whenToChooseVARA: [
-              'Serve retail customers in UAE',
-              'Offer AED on/off-ramps',
-              'Operate broad stablecoin payment rail',
-              'Move fast (VARA more familiar with crypto business models)',
-              'Access local UAE banking relationships'
-            ],
-            whenToChooseDIFC: [
-              'Only serve institutional / professional clients',
-              'Operate more like traditional financial infrastructure',
-              'Want English Common Law protections (better for disputes, investor comfort)',
-              'Eventually get acquired by or partner with traditional finance',
-              'Avoid "crypto company" stigma with certain counterparties'
-            ],
-            practicalDifference: {
-              title: 'The Real Difference',
-              vara: 'VARA says: "You\'re a crypto company, here are crypto rules"',
-              difc: 'DIFC says: "You\'re a financial services company that happens to touch some approved tokens"'
-            },
-            sphereExample: {
-              title: 'Practical Example: SpherePay Use Case',
-              varaScenario: {
-                description: 'SpherePay under VARA',
-                capabilities: [
-                  'Let Ahmad\'s SMB client convert AED → USDC',
-                  'Send USDC to supplier anywhere globally',
-                  'Supplier converts USDC → their local currency',
-                  'Full retail access, AED banking works',
-                  'Regulated as VASP (Virtual Asset Service Provider)'
-                ]
-              },
-              difcScenario: {
-                description: 'SpherePay under DIFC',
-                capabilities: [
-                  'Offer USDC settlement for institutional clients',
-                  'Probably can\'t serve retail SMBs directly',
-                  'More hoops for fiat conversion',
-                  'Regulated more like payment processor or MTL'
-                ]
-              }
-            }
-          },
-          adgmOverview: {
-            title: 'ADGM: Institutional Alternative',
-            description: 'Abu Dhabi Global Market (ADGM) was the UAE\'s first comprehensive crypto framework (2018). It\'s mature, institutional-focused, and ideal for custody/exchange infrastructure.',
-            requirements: {
-              title: 'ADGM Key Requirements',
-              items: [
-                { item: 'Physical Office', detail: 'Required on Al Maryah Island, Abu Dhabi' },
-                { item: 'Local Staff', detail: 'SEO, CO, MLRO must be UAE residents. Minimum 2-4 directors.' },
-                { item: 'Capital (Advisory)', detail: 'USD 10,000-50,000' },
-                { item: 'Capital (Broker)', detail: 'USD 250,000-500,000' },
-                { item: 'Capital (Exchange/MTF)', detail: 'USD 2,000,000+ (varies by volume)' },
-                { item: 'Registration Fee', detail: '~USD 15,000' },
-                { item: 'Annual Fees', detail: 'USD 20,000-60,000 + volume-based levies' },
-                { item: 'Timeline', detail: '6-9 months' }
-              ]
-            },
-            sphereRelevance: 'ADGM is better suited for SphereNet\'s institutional infrastructure — custody, exchange, tokenization. Not ideal for SpherePay\'s retail/SMB focus.'
-          },
-          cbuaeRegulations: {
-            title: 'CBUAE: Payment Token Services Regulation',
-            subtitle: 'Critical federal-level regulation that applies regardless of free zone status',
-            circular2024: {
-              title: 'CBUAE Circular No. 2/2024',
-              description: 'Central Bank framework establishing licensing and supervision for stablecoin issuance, custody, transfer, and conversion.',
-              keyProvisions: [
-                {
-                  provision: 'Payment Token Definition',
-                  detail: 'Stablecoins pegged to fiat currencies (AED, USD, etc.) are classified as "Payment Tokens"'
-                },
-                {
-                  provision: 'AED-Backed Requirement',
-                  detail: 'For retail payment services in UAE, ONLY AED-backed stablecoins are permitted. Foreign stablecoins (USDC, USDT) restricted for retail payments.',
-                  sphereImplication: 'B2B cross-border payments using USDC/USDT remain permitted. Restriction primarily affects retail point-of-sale.'
-                },
-                {
-                  provision: 'Licensing Categories',
-                  detail: 'Separate licenses for: (1) Issuance, (2) Custody, (3) Transfer, (4) Conversion'
-                },
-                {
-                  provision: 'Reserve Requirements',
-                  detail: 'Issuers must maintain 1:1 reserves in high-quality liquid assets, held at UAE-licensed banks'
-                },
-                {
-                  provision: 'Consumer Protection',
-                  detail: 'Mandatory redemption rights, clear fee disclosure, dispute resolution'
-                }
-              ],
-              effectiveDate: 'August 2025',
-              spherePosition: 'Sphere is NOT an issuer — we use third-party stablecoins (USDC, USDT). CBUAE regulations for issuers don\'t apply to us. Transfer/conversion regulations do apply.'
-            },
-            digitalDirham: {
-              title: 'Digital Dirham: UAE\'s CBDC',
-              description: 'Federal Decree-Law No. 6 of 2025 amended UAE monetary law to recognize the Digital Dirham as central bank money and legal tender.',
-              implications: [
-                'Digital Dirham will be issued by CBUAE — government-backed digital currency',
-                'Will compete with/complement private stablecoins',
-                'Sphere positioned to integrate Digital Dirham alongside USDC/USDT',
-                'Timeline: Pilot underway, full launch expected 2026-2027'
-              ],
-              sphereStrategy: 'Sphere will support Digital Dirham when available — gives UAE customers government-backed alternative to private stablecoins. Regulatory tailwind for compliant providers.'
-            }
-          },
-          recommendedEntityStructure: {
-            title: 'Recommended Entity Structure for Sphere',
-            subtitle: 'Two-entity approach optimized for SpherePay + SphereNet',
-            rationale: 'Based on Sphere\'s priorities: (1) B2B money transmission, (2) Tokenization infrastructure, (3) Future retail/SMB expansion',
-            entities: [
+          cbuaeBasics: {
+            title: 'CBUAE Stablecoin Rules — What Trainees Should Know',
+            subtitle: 'Central Bank Circular 2/2024 affects stablecoin use in UAE',
+            keyPoints: [
               {
-                entity: 'SpherePay UAE FZE',
-                territory: 'VARA (Dubai)',
-                licenses: ['Transfer & Settlement Services', 'Broker-Dealer'],
-                purpose: 'B2B payments, AED on/off-ramp, stablecoin transfers, SWIFT alternative',
-                priority: 'PRIMARY — Start here',
-                yearOneCost: {
-                  title: 'Year 1 Budget Estimate',
-                  items: [
-                    { category: 'VARA Application Fees', aed: 150000, usd: 41000 },
-                    { category: 'VARA Annual Supervision', aed: 280000, usd: 76000 },
-                    { category: 'Minimum Capital (locked)', aed: 800000, usd: 218000 },
-                    { category: 'Entity Setup (DMCC base)', aed: 35000, usd: 9500 },
-                    { category: 'Office Space (annual)', aed: 150000, usd: 41000 },
-                    { category: 'Staff (Year 1)', aed: 600000, usd: 163000 },
-                    { category: 'Legal & Advisory', aed: 200000, usd: 54000 },
-                    { category: 'Tech/Compliance Infrastructure', aed: 150000, usd: 41000 },
-                    { category: 'Banking Setup/Guarantees', aed: 50000, usd: 14000 }
-                  ],
-                  total: { aed: 2415000, usd: 658000 }
-                }
+                point: 'Foreign Stablecoins (USDC, USDT)',
+                rule: 'Restricted for retail payments within UAE',
+                butNote: 'B2B cross-border payments still permitted',
+                sphereRelevance: 'Sphere\'s B2B focus aligns with permitted use cases'
               },
               {
-                entity: 'SphereNet ADGM Ltd',
-                territory: 'ADGM (Abu Dhabi) or DIFC',
-                licenses: ['MTF', 'Custody'],
-                purpose: 'Tokenization, institutional custody, RWA infrastructure',
-                priority: 'SECONDARY — Phase 2 (18-30 months)',
-                yearOneCost: {
-                  title: 'Year 1 Budget Estimate',
-                  items: [
-                    { category: 'FSRA Application Fee', usd: '15,000-30,000' },
-                    { category: 'Annual Fees', usd: '30,000-60,000' },
-                    { category: 'Minimum Capital', usd: '500,000-2,000,000' },
-                    { category: 'Entity Setup', usd: '15,000-25,000' },
-                    { category: 'Office Space (annual)', usd: '25,000-50,000' },
-                    { category: 'Staff', usd: '150,000-300,000' },
-                    { category: 'Legal & Advisory', usd: '50,000-100,000' }
-                  ],
-                  total: { usd: '785,000-2,565,000', note: 'Wide range based on scope' }
-                }
+                point: 'AED-Backed Stablecoins',
+                rule: 'Only CBUAE-licensed issuers can offer AED stablecoins',
+                butNote: 'Currently limited options available',
+                sphereRelevance: 'Sphere is NOT a stablecoin issuer — we use third-party stablecoins'
+              },
+              {
+                point: 'Digital Dirham',
+                rule: 'CBUAE is developing a central bank digital currency',
+                butNote: 'Timeline unclear, but Sphere would integrate when available',
+                sphereRelevance: 'Future opportunity for AED settlement'
               }
             ],
-            timeline: {
-              title: 'Recommended Phased Timeline',
-              phases: [
-                { phase: 'Phase 0: Prep', months: '1-2', actions: 'Select legal counsel, draft business plan, identify local staff (MLRO, CO)' },
-                { phase: 'Phase 1: VARA Setup', months: '3-12', actions: 'Incorporate DMCC entity, submit VARA application, set up office, hire staff, open bank account, obtain VARA license' },
-                { phase: 'Phase 2: Operational', months: '12-18', actions: 'Go live with B2B transfers, AED on/off-ramp integration, build banking relationships, scale operations' },
-                { phase: 'Phase 3: Tokenization', months: '18-30', actions: 'Apply for ADGM or DIFC license, set up second entity, launch tokenization services' },
-                { phase: 'Phase 4: Retail (Future)', months: '36+', actions: 'Apply for VARA Exchange license, build retail product, marketing approvals' }
-              ]
-            },
-            totalInvestment: {
-              twoYear: '$1.5M - $3M+',
-              lockedCapital: '$1M+',
-              note: 'Significant investment required. Plan for multi-year commitment.'
-            }
+            keyMessage: 'CBUAE rules primarily affect stablecoin ISSUERS and retail payments. Sphere is not an issuer, and our B2B cross-border focus remains viable.'
           },
-          activityLicenseMapping: {
-            title: 'Activity → License Mapping',
-            subtitle: 'Which license do you need for each activity?',
-            mappings: [
-              { activity: 'B2B Stablecoin Transfers (USDC/USDT)', license: 'Transfer & Settlement Services', territory: 'VARA', note: 'Core SpherePay use case' },
-              { activity: 'FBO / 3rd Party Money Holding', license: 'Custody + Transfer Services', territory: 'VARA or ADGM', note: 'Custody license if holding client funds' },
-              { activity: 'SWIFT Alternative (Fiat rails)', license: 'Broker-Dealer + Transfer', territory: 'VARA', note: 'Need banking partner for fiat leg' },
-              { activity: 'AED On/Off-Ramp', license: 'Transfer Services + CBUAE alignment', territory: 'VARA', note: 'Must comply with CBUAE stablecoin rules' },
-              { activity: 'Tokenization (RWA, securities)', license: 'VA Issuance or DFSA Crypto Token', territory: 'DIFC or ADGM', note: 'DIFC has Tokenisation Sandbox' },
-              { activity: 'Institutional Custody', license: 'Custody Services', territory: 'ADGM', note: 'FSRA framework is most mature' },
-              { activity: 'Retail Exchange (future)', license: 'Exchange Services', territory: 'VARA', note: 'Only VARA allows retail easily' }
-            ]
-          },
-          keyRisksAndConsiderations: {
-            title: 'Key Risks & Considerations',
-            risks: [
+          commonQuestions: {
+            title: 'Common Questions Trainees Should Be Ready For',
+            questions: [
               {
-                risk: 'Banking Access',
-                detail: 'UAE banks still cautious with crypto companies. Plan 3-6 months for bank account opening.',
-                mitigation: 'Apply to multiple banks in parallel. Consider Emirates NBD, Mashreq, RAK Bank which have crypto-friendly units.'
+                question: 'Can Sphere serve UAE customers?',
+                answer: 'Sphere is actively exploring UAE market entry but is not yet licensed there. We cannot currently serve UAE-based customers directly. We\'re happy to discuss our expansion plans and timeline.',
+                doNotSay: ['Yes, we\'re fully operational in UAE', 'We don\'t need UAE licenses', 'We can serve you through our offshore entity']
               },
               {
-                risk: 'Capital Lock-up',
-                detail: 'Minimum capital is dead money earning ~0%. Factor opportunity cost into planning.',
-                mitigation: 'Budget for this as cost of doing business. Capital requirements unlikely to decrease.'
+                question: 'Which UAE regulator would oversee Sphere?',
+                answer: 'For B2B payment services in Dubai, VARA (Virtual Assets Regulatory Authority) would be the primary regulator. CBUAE rules on payment tokens would also apply. We\'re evaluating the best licensing pathway.',
+                doNotSay: ['We don\'t need regulation', 'No one regulates crypto in UAE', 'We operate offshore so it doesn\'t matter']
               },
               {
-                risk: 'Stablecoin Restrictions',
-                detail: 'CBUAE Payment Token Services Regulation restricts foreign stablecoins for retail payments. AED-backed tokens only for retail.',
-                mitigation: 'B2B cross-border remains permitted with USDC/USDT. Focus on B2B initially, monitor retail rules.'
+                question: 'When will Sphere be available in UAE?',
+                answer: 'We\'re actively working on UAE market entry but cannot commit to specific timelines. Licensing typically takes 6-12 months once initiated. I can keep you updated on our progress.',
+                doNotSay: ['Next month', 'We\'re already licensed', 'Any specific date without confirmation']
               },
               {
-                risk: 'Staff Residency',
-                detail: 'Key personnel (MLRO, CO, SEO) must be UAE residents. Factor visa/relocation costs.',
-                mitigation: 'Budget AED 50-100K per relocated employee. Consider hiring locally experienced staff.'
-              },
-              {
-                risk: 'Ongoing Compliance',
-                detail: 'VARA audits, reporting, supervision are intensive. Budget for ongoing compliance costs.',
-                mitigation: 'Build compliance team. Budget AED 500K+/year for ongoing compliance operations.'
-              },
-              {
-                risk: 'Marketing Restrictions',
-                detail: 'All marketing must be pre-approved by VARA. Fines up to AED 10M for violations.',
-                mitigation: 'Build VARA approval into marketing workflow. 2-4 week lead time for approvals.'
+                question: 'What about CBUAE stablecoin restrictions?',
+                answer: 'CBUAE Circular 2/2024 primarily restricts foreign stablecoins for retail domestic payments. B2B cross-border payments using USDC/USDT remain permitted, which aligns with Sphere\'s focus.',
+                doNotSay: ['Those rules don\'t apply', 'We\'ll ignore CBUAE', 'Regulations don\'t matter for crypto']
               }
             ]
           },
@@ -4251,35 +3958,35 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
             title: 'Sample Responses for UAE Regulatory Questions',
             scenarios: [
               {
-                question: 'Which UAE regulator oversees Sphere?',
-                answer: 'For our B2B payment services in Dubai, we operate under VARA (Virtual Assets Regulatory Authority) with Transfer & Settlement and Broker-Dealer licenses. For federal payment token compliance, we align with CBUAE Circular 2/2024. We\'re also evaluating ADGM for our SphereNet institutional infrastructure.',
-                doNotSay: ['We don\'t need regulation', 'We operate offshore', 'VARA is optional']
+                question: 'We\'re a UAE company interested in Sphere. Can we use your services?',
+                answer: 'Thank you for your interest! Sphere is actively exploring UAE market entry, but we\'re not yet licensed there. I\'d love to understand your use case better so we can keep you updated as we progress. In the meantime, if you have entities in jurisdictions where we currently operate, we may be able to help.',
+                doNotSay: ['Yes, sign up now', 'We don\'t need UAE licenses', 'Our offshore structure covers UAE']
               },
               {
-                question: 'Why VARA instead of DIFC?',
-                answer: 'VARA is purpose-built for crypto businesses and allows us to serve both retail and institutional clients with AED on/off-ramps. DIFC is better suited for traditional finance institutions that want limited crypto exposure. For SpherePay\'s B2B payment focus, VARA gives us broader capability and faster licensing.',
-                doNotSay: ['DIFC is too strict', 'We\'re avoiding traditional finance', 'Regulation doesn\'t matter']
+                question: 'Why doesn\'t Sphere have UAE licenses yet?',
+                answer: 'UAE licensing requires significant local presence, capital commitment, and regulatory engagement. We\'re doing this properly — evaluating the right structure and building relationships with regulators. We\'d rather take time to do it right than rush and create compliance issues.',
+                doNotSay: ['We\'re avoiding regulation', 'It\'s too expensive', 'UAE is too strict']
               },
               {
-                question: 'How do you comply with CBUAE stablecoin rules?',
-                answer: 'CBUAE Circular 2/2024 primarily affects stablecoin issuers and retail payment services. Sphere is NOT an issuer — we use licensed third-party stablecoins. For B2B cross-border payments, USDC and USDT remain permitted. We\'re also positioned to integrate Digital Dirham when it launches.',
-                doNotSay: ['Those rules don\'t apply to us', 'We ignore CBUAE', 'CBUAE can\'t regulate crypto']
+                question: 'I heard UAE restricted stablecoins. Does that affect Sphere?',
+                answer: 'CBUAE Circular 2/2024 restricts foreign stablecoins for retail domestic payments in UAE. However, B2B cross-border payments — which is Sphere\'s core use case — remain permitted with USDC and USDT. The regulations actually validate the B2B payment infrastructure approach.',
+                doNotSay: ['Regulations don\'t apply to us', 'We\'ll work around the rules', 'CBUAE can\'t regulate crypto']
               }
             ]
           },
-          keyTakeaway: 'UAE has six distinct regulatory territories. For SpherePay, VARA is the primary choice (retail + B2B, AED access). For SphereNet, ADGM or DIFC for institutional infrastructure. Budget ~$650K Year 1 for VARA entity, plan 9-12 months for licensing.'
+          keyTakeaway: 'UAE is a strategic market with multiple regulators. Sphere is exploring market entry but is NOT yet licensed in UAE. Trainees should understand the landscape, be honest about our status, and not promise UAE services or timelines.'
         },
         exercise: {
-          title: 'Exercise 3.5 — UAE Regulatory Navigation',
-          prompt: 'A UAE-based trading company asks: "We want to use Sphere for paying our suppliers in China and India. What licenses do you need and how long will it take?"\n\nWrite your response:\n1) Which territory/regulator applies\n2) What licenses Sphere holds or is obtaining\n3) Timeline expectations\n4) How their use case fits within the regulatory framework',
-          criteria: ['Correct territory identification', 'Accurate license requirements', 'Realistic timeline', 'Business-appropriate framing']
+          title: 'Exercise 3.5 — UAE Inquiry Response',
+          prompt: 'A Dubai-based trading company emails: "We heard about Sphere and want to use your platform for paying suppliers in India and China. How do we get started?"\n\nWrite your response:\n1) Acknowledge their interest\n2) Be honest about Sphere\'s UAE status\n3) Understand their use case\n4) Offer next steps',
+          criteria: ['Honest about licensing status', 'Professional and helpful tone', 'Gathers information about their needs', 'Provides appropriate next steps']
         },
         quiz: [
-          { q: 'Which UAE territory is best for SpherePay\'s B2B payment services?', options: ['DIFC', 'VARA', 'RAK DAO', 'DMCC'], correct: 1 },
-          { q: 'VARA minimum capital for Transfer Services?', options: ['AED 100,000', 'AED 600,000-800,000', 'AED 5,000,000', 'No minimum'], correct: 1 },
-          { q: 'CBUAE Circular 2/2024 restricts foreign stablecoins for:', options: ['All transactions', 'Retail payments only', 'B2B cross-border', 'Nothing'], correct: 1 },
-          { q: 'Typical VARA licensing timeline?', options: ['2 weeks', '2 months', '6-12 months', '3 years'], correct: 2 },
-          { q: 'Why might Sphere choose ADGM over VARA for SphereNet?', options: ['Lower costs', 'Institutional focus, English Common Law', 'No regulation needed', 'Faster licensing'], correct: 1 }
+          { q: 'What is Sphere\'s current licensing status in UAE?', options: ['Fully licensed', 'License pending', 'Exploring market entry, not yet licensed', 'No plans for UAE'], correct: 2 },
+          { q: 'Which UAE regulator is specifically built for crypto businesses?', options: ['CBUAE', 'VARA', 'DIFC', 'ADGM'], correct: 1 },
+          { q: 'CBUAE Circular 2/2024 restricts foreign stablecoins for:', options: ['All transactions', 'Retail domestic payments', 'B2B cross-border', 'Nothing'], correct: 1 },
+          { q: 'If a UAE prospect asks when Sphere will be available there, you should:', options: ['Promise next month', 'Say we\'re already licensed', 'Be honest about exploring entry without committing to dates', 'Tell them to use an offshore workaround'], correct: 2 },
+          { q: 'CBUAE applies to:', options: ['Only DIFC', 'Only ADGM', 'Only VARA', 'All UAE operations regardless of free zone'], correct: 3 }
         ]
       }
     ],
