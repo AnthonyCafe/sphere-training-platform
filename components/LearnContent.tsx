@@ -232,7 +232,6 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
       return <TableBlock data={value} />;
 
     case 'convergencePattern':
-    case 'classificationMatters':
       return <TableBlock data={value} />;
 
     case 'sphereMitigation':
@@ -265,8 +264,6 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
     case 'globalFrameworks':
       return <GlobalFrameworksBlock data={value} />;
 
-    case 'micaDetails':
-    case 'geniusAct':
     case 'uaeFramework':
       return <RegulationBlock data={value} />;
 
@@ -293,18 +290,8 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
     case 'complianceFlow':
       return <FlowBlock data={value} />;
 
-    case 'complianceEnablesGrowth':
-      return <ComparisonBlock data={value} />;
-
-    case 'sanctionsRegimes':
-    case 'whatGetsScreened':
-      return <ListBlock data={value} />;
-
     case 'screeningProcess':
       return <ProcessBlock data={value} />;
-
-    case 'highRiskJurisdictions':
-      return <HighRiskBlock data={value} />;
 
     case 'whatIsIt':
       return <WhatIsItBlock data={value} />;
@@ -515,7 +502,7 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
       return <KeyRisksBlock data={value} />;
     
     case 'sampleResponses':
-      return <SampleResponsesBlock data={value} />;
+      return <SampleResponsesBlockNew data={value} />;
 
     // ===========================================
     // NEW SECTION 5.4 - COMPETITIVE POSITIONING
@@ -528,7 +515,6 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
       return <CompetitorLandscapeBlock data={value} />;
     
     case 'vsTraditionalBanks':
-    case 'vsCryptoNative':
       return <VsComparisonBlock data={value} />;
     
     case 'positioningFramework':
@@ -540,9 +526,6 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
     // ===========================================
     // NEW SECTION 5.5 - BOB AND AHMED EXPANDED
     // ===========================================
-    case 'bobAndAhmed':
-      return <BobAndAhmedBlock data={value} />;
-    
     case 'sphereCustomerProfiles':
       return <CustomerProfilesBlock data={value} />;
     
@@ -598,9 +581,6 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
     // Section 3.1 - What Sphere Is expanded
     case 'classificationMattersLegally':
       return <ClassificationMattersBlock data={value} />;
-    
-    case 'sampleResponses':
-      return <SampleResponsesBlock data={value} />;
 
     // Section 3.2 - AML/KYC expanded
     case 'coreDefinitions':
@@ -2265,8 +2245,8 @@ function ClassificationMattersBlock({ data }: { data: any }) {
   );
 }
 
-// Sample Responses Block (Section 3.1)
-function SampleResponsesBlock({ data }: { data: any }) {
+// Sample Responses Block (Section 3.1) - handles both scenarios and responses formats
+function SampleResponsesBlockNew({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
@@ -2284,6 +2264,12 @@ function SampleResponsesBlock({ data }: { data: any }) {
                 ))}
               </div>
             )}
+          </div>
+        ))}
+        {data.responses?.map((r: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+            <p className="text-blue-300 font-semibold mb-2">Q: {r.question}</p>
+            <p className="text-gray-300 text-sm">{r.answer}</p>
           </div>
         ))}
       </div>
