@@ -41,9 +41,15 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
     'speedComparison', 'asymmetryProblem', 'fourLedgers', 'capitalEfficiency',
     'globalFrameworks', 'micaDetails', 'geniusAct', 'uaeFramework', 'convergencePattern',
     'adoptionCurve', 'enterpriseUseCases', 'unbankedOpportunity', 'arnoldOnMarkets',
-    'whatSphereIs', 'whatSphereIsNot', 'classificationMatters', 'complianceNative', 'sampleResponse',
+    'whatSphereIs', 'whatSphereIsNot', 'classificationMatters', 'classificationMattersLegally', 'complianceNative', 'sampleResponse', 'sampleResponses',
     'complianceFlow', 'complianceEnablesGrowth',
-    'sanctionsRegimes', 'whatGetsScreened', 'screeningProcess', 'highRiskJurisdictions',
+    'coreDefinitions', 'kycRequirements', 'amlProgram', 'cddRequirements', 'eddRequirements', 'sarRequirements',
+    'riskAssessmentFramework', 'sphereComplianceApproach', 'redFlagsToWatch',
+    'majorSanctionsRegimes', 'whatGetsScreened', 'highRiskJurisdictions', 'screeningProcessFlow',
+    'documentationRequirements', 'flaggedPaymentProcess',
+    'travelRuleSummary', 'fatfDefinition', 'requiredDataElements', 'thresholdsByJurisdiction',
+    'whyTravelRuleMatters', 'travelRuleProtocols', 'transmissionMethods', 'transactionsApplied', 'edgeCases',
+    'sanctionsRegimes', 'screeningProcess',
     'whatIsIt', 'thresholds', 'travelRuleFlow', 'whyItMatters',
     'mitigationFramework', 'sphereCertifications',
     'counterpartyTypes', 'dueDiligenceFramework',
@@ -1665,10 +1671,28 @@ function ComplianceNativeBlock({ data }: { data: any }) {
           ))}
         </div>
       )}
-      {data.whatItMeans && (
-        <ul className="text-gray-300 space-y-1">
-          {data.whatItMeans.map((w: string, i: number) => <li key={i}>• {w}</li>)}
-        </ul>
+      {data.whatItMeans && Array.isArray(data.whatItMeans) && (
+        <div className="space-y-3">
+          {data.whatItMeans.map((w: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded p-3">
+              {typeof w === 'string' ? (
+                <p className="text-gray-300">• {w}</p>
+              ) : (
+                <>
+                  <p className="text-white font-medium">{w.principle}</p>
+                  <p className="text-gray-400 text-sm">{w.explanation}</p>
+                  {w.implementation && <p className="text-emerald-300 text-xs mt-1">→ {w.implementation}</p>}
+                </>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+      {data.arnoldQuote && (
+        <div className="mt-4 bg-slate-700/50 border-l-4 border-blue-500 rounded-r p-4">
+          <p className="text-gray-300 italic">"{data.arnoldQuote.quote}"</p>
+          {data.arnoldQuote.context && <p className="text-gray-500 text-xs mt-1">— {data.arnoldQuote.context}</p>}
+        </div>
       )}
     </div>
   );
