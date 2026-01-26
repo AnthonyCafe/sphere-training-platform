@@ -590,6 +590,96 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
     case 'qualificationFramework':
       return <QualificationFrameworkBlock data={value} />;
 
+
+    // =========================================================================
+    // PILLAR 3 EXPANDED COMPONENTS - Section 3.1-3.4
+    // =========================================================================
+    
+    // Section 3.1 - What Sphere Is expanded
+    case 'classificationMattersLegally':
+      return <ClassificationMattersBlock data={value} />;
+    
+    case 'sampleResponses':
+      return <SampleResponsesBlock data={value} />;
+
+    // Section 3.2 - AML/KYC expanded
+    case 'coreDefinitions':
+      return <CoreDefinitionsBlock data={value} />;
+    
+    case 'complianceEnablesGrowth':
+      return <ComplianceEnablesGrowthBlock data={value} />;
+    
+    case 'kycRequirements':
+      return <KYCRequirementsBlock data={value} />;
+    
+    case 'amlProgram':
+      return <AMLProgramBlock data={value} />;
+    
+    case 'cddRequirements':
+      return <CDDRequirementsBlock data={value} />;
+    
+    case 'eddRequirements':
+      return <EDDRequirementsBlock data={value} />;
+    
+    case 'sarRequirements':
+      return <SARRequirementsBlock data={value} />;
+    
+    case 'riskAssessmentFramework':
+      return <RiskAssessmentFrameworkBlock data={value} />;
+    
+    case 'sphereComplianceApproach':
+      return <SphereComplianceApproachBlock data={value} />;
+    
+    case 'redFlagsToWatch':
+      return <RedFlagsBlock data={value} />;
+
+    // Section 3.3 - Sanctions expanded
+    case 'majorSanctionsRegimes':
+      return <SanctionsRegimesBlock data={value} />;
+    
+    case 'whatGetsScreened':
+      return <WhatGetsScreenedBlock data={value} />;
+    
+    case 'highRiskJurisdictions':
+      return <HighRiskJurisdictionsBlock data={value} />;
+    
+    case 'screeningProcessFlow':
+      return <ScreeningFlowDiagramBlock data={value} />;
+    
+    case 'documentationRequirements':
+      return <DocumentationRequirementsBlock data={value} />;
+    
+    case 'flaggedPaymentProcess':
+      return <FlaggedPaymentProcessBlock data={value} />;
+
+    // Section 3.4 - Travel Rule expanded
+    case 'travelRuleSummary':
+      return <TravelRuleSummaryBlock data={value} />;
+    
+    case 'fatfDefinition':
+      return <FATFDefinitionBlock data={value} />;
+    
+    case 'requiredDataElements':
+      return <RequiredDataElementsBlock data={value} />;
+    
+    case 'thresholdsByJurisdiction':
+      return <ThresholdsByJurisdictionBlock data={value} />;
+    
+    case 'whyTravelRuleMatters':
+      return <WhyTravelRuleMattersBlock data={value} />;
+    
+    case 'travelRuleProtocols':
+      return <TravelRuleProtocolsBlock data={value} />;
+    
+    case 'transmissionMethods':
+      return <TransmissionMethodsBlock data={value} />;
+    
+    case 'transactionsApplied':
+      return <TransactionsAppliedBlock data={value} />;
+    
+    case 'edgeCases':
+      return <EdgeCasesBlock data={value} />;
+
     default:
       // Generic object renderer for any missed properties
       if (typeof value === 'object' && value !== null) {
@@ -2114,6 +2204,1387 @@ function ReserveBlock({ data }: { data: any }) {
         ))}
       </div>
       {data.keyPoint && <p className="text-emerald-300 mt-4 font-medium">💡 {data.keyPoint}</p>}
+    </div>
+  );
+}
+
+
+// =============================================================================
+// PILLAR 3 EXPANDED - NEW COMPONENTS
+// =============================================================================
+
+// Classification Matters Block (Section 3.1)
+function ClassificationMattersBlock({ data }: { data: any }) {
+  const [expandedCase, setExpandedCase] = useState<string | null>(null);
+  
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+      
+      {data.consequences && (
+        <div className="space-y-3 mb-4">
+          {data.consequences.map((c: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-white font-medium mb-2">{c.determination}</h4>
+              <p className="text-gray-400 text-sm mb-2">{c.detail}</p>
+              {c.sphereImplication && (
+                <p className="text-emerald-300 text-sm"><span className="font-semibold">Sphere:</span> {c.sphereImplication}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+      
+      {data.caseStudies && (
+        <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+          <h4 className="text-red-300 font-semibold mb-3">{data.caseStudies.title}</h4>
+          <div className="space-y-3">
+            {data.caseStudies.cases?.map((cs: any, i: number) => (
+              <div key={i} className="bg-slate-800/50 rounded p-3">
+                <button
+                  onClick={() => setExpandedCase(expandedCase === cs.company ? null : cs.company)}
+                  className="w-full text-left"
+                >
+                  <h5 className="text-white font-medium">{cs.company}</h5>
+                </button>
+                {expandedCase === cs.company && (
+                  <div className="mt-2 text-sm">
+                    <p className="text-gray-400"><span className="text-gray-500">Issue:</span> {cs.issue}</p>
+                    <p className="text-red-300"><span className="text-gray-500">Consequence:</span> {cs.consequence}</p>
+                    <p className="text-amber-300"><span className="text-gray-500">Lesson:</span> {cs.lesson}</p>
+                    {cs.sphereRelevance && <p className="text-emerald-300"><span className="text-gray-500">Sphere:</span> {cs.sphereRelevance}</p>}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Sample Responses Block (Section 3.1)
+function SampleResponsesBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      <div className="space-y-4">
+        {data.scenarios?.map((s: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+            <h4 className="text-blue-300 font-medium mb-2">{s.scenario}</h4>
+            <div className="bg-slate-800/50 rounded p-3 mb-3">
+              <p className="text-gray-300 text-sm italic">"{s.response}"</p>
+            </div>
+            {s.keyPoints && (
+              <div className="flex flex-wrap gap-2">
+                {s.keyPoints.map((p: string, j: number) => (
+                  <span key={j} className="text-xs bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded">{p}</span>
+                ))}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Core Definitions Block (Section 3.2)
+function CoreDefinitionsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      <div className="grid md:grid-cols-2 gap-3">
+        {data.definitions?.map((d: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-blue-400 font-bold">{d.term}</span>
+              {d.fullName && <span className="text-gray-500 text-sm">({d.fullName})</span>}
+            </div>
+            <p className="text-gray-300 text-sm mb-2">{d.definition}</p>
+            {d.sphereContext && (
+              <p className="text-emerald-300 text-xs"><span className="font-semibold">Sphere:</span> {d.sphereContext}</p>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Compliance Enables Growth Block (Section 3.2)
+function ComplianceEnablesGrowthBlock({ data }: { data: any }) {
+  const [expandedExample, setExpandedExample] = useState<number | null>(null);
+  
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.overview && <p className="text-gray-400 mb-4">{data.overview}</p>}
+      
+      {data.comparisonTable && (
+        <div className="overflow-x-auto mb-4">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-slate-700">
+                {data.comparisonTable.headers?.map((h: string, i: number) => (
+                  <th key={i} className={`p-3 text-left ${i === 0 ? 'text-red-300' : 'text-emerald-300'}`}>{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {data.comparisonTable.rows?.map((row: string[], i: number) => (
+                <tr key={i} className="border-t border-slate-700">
+                  <td className="p-3 text-red-200">{row[0]}</td>
+                  <td className="p-3 text-emerald-200">{row[1]}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+      
+      {data.specificExamples && (
+        <div className="space-y-2">
+          <h4 className="text-white font-medium">Real Examples:</h4>
+          {data.specificExamples.map((ex: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+              <button
+                onClick={() => setExpandedExample(expandedExample === i ? null : i)}
+                className="w-full p-3 text-left flex justify-between items-center hover:bg-slate-700/70"
+              >
+                <span className="text-white font-medium">{ex.example}</span>
+                <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${expandedExample === i ? 'rotate-180' : ''}`} />
+              </button>
+              {expandedExample === i && (
+                <div className="px-3 pb-3 text-sm">
+                  <p className="text-gray-300 mb-2">{ex.story}</p>
+                  <p className="text-emerald-300"><span className="text-gray-500">Outcome:</span> {ex.outcome}</p>
+                  <p className="text-amber-300"><span className="text-gray-500">Lesson:</span> {ex.lesson}</p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+      
+      {data.bankingPartnerRequirements && (
+        <div className="mt-4 bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 className="text-blue-300 font-medium mb-2">Banking Partner Requirements:</h4>
+          <div className="grid md:grid-cols-2 gap-2">
+            {data.bankingPartnerRequirements.map((r: any, i: number) => (
+              <div key={i} className="text-sm">
+                <span className="text-white font-medium">{r.requirement}:</span>{' '}
+                <span className="text-gray-400">{r.detail}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// KYC Requirements Block (Section 3.2)
+function KYCRequirementsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      
+      {data.individualVerification && (
+        <div className="mb-4">
+          <h4 className="text-blue-300 font-medium mb-2">{data.individualVerification.title}</h4>
+          <div className="space-y-2">
+            {data.individualVerification.requirements?.map((r: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded p-3">
+                <div className="flex justify-between items-start">
+                  <span className="text-white font-medium">{r.category}</span>
+                  <span className="text-emerald-300 text-xs">{r.required}</span>
+                </div>
+                {r.acceptable && (
+                  <div className="mt-1 flex flex-wrap gap-1">
+                    {r.acceptable.map((a: string, j: number) => (
+                      <span key={j} className="text-xs bg-slate-600 text-gray-300 px-2 py-0.5 rounded">{a}</span>
+                    ))}
+                  </div>
+                )}
+                {r.notes && <p className="text-gray-500 text-xs mt-1">{r.notes}</p>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {data.businessVerification && (
+        <div>
+          <h4 className="text-purple-300 font-medium mb-2">{data.businessVerification.title}</h4>
+          <div className="space-y-2">
+            {data.businessVerification.requirements?.map((r: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded p-3">
+                <div className="flex justify-between items-start">
+                  <span className="text-white font-medium">{r.category}</span>
+                  <span className="text-emerald-300 text-xs">{r.required}</span>
+                </div>
+                {r.acceptable && (
+                  <div className="mt-1 flex flex-wrap gap-1">
+                    {r.acceptable.map((a: string, j: number) => (
+                      <span key={j} className="text-xs bg-slate-600 text-gray-300 px-2 py-0.5 rounded">{a}</span>
+                    ))}
+                  </div>
+                )}
+                {r.detail && <p className="text-gray-400 text-xs mt-1">{r.detail}</p>}
+                {r.notes && <p className="text-gray-500 text-xs mt-1">{r.notes}</p>}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// AML Program Block (Section 3.2)
+function AMLProgramBlock({ data }: { data: any }) {
+  const [expandedPillar, setExpandedPillar] = useState<number | null>(null);
+  
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+      
+      <div className="space-y-2">
+        {data.pillars?.map((p: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+            <button
+              onClick={() => setExpandedPillar(expandedPillar === i ? null : i)}
+              className="w-full p-4 text-left flex justify-between items-center hover:bg-slate-700/70"
+            >
+              <span className="text-white font-medium">{p.pillar}</span>
+              <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${expandedPillar === i ? 'rotate-180' : ''}`} />
+            </button>
+            {expandedPillar === i && (
+              <div className="px-4 pb-4 space-y-2">
+                <p className="text-gray-300 text-sm">{p.requirement}</p>
+                {p.includes && (
+                  <div>
+                    <p className="text-gray-500 text-xs mb-1">Includes:</p>
+                    <ul className="text-gray-400 text-xs space-y-0.5">
+                      {p.includes.map((item: string, j: number) => (
+                        <li key={j}>• {item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {p.responsibilities && (
+                  <div>
+                    <p className="text-gray-500 text-xs mb-1">Responsibilities:</p>
+                    <ul className="text-gray-400 text-xs space-y-0.5">
+                      {p.responsibilities.map((r: string, j: number) => (
+                        <li key={j}>• {r}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {p.elements && (
+                  <div>
+                    <p className="text-gray-500 text-xs mb-1">Elements:</p>
+                    <ul className="text-gray-400 text-xs space-y-0.5">
+                      {p.elements.map((e: string, j: number) => (
+                        <li key={j}>• {e}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {p.scope && (
+                  <div>
+                    <p className="text-gray-500 text-xs mb-1">Scope:</p>
+                    <ul className="text-gray-400 text-xs space-y-0.5">
+                      {p.scope.map((s: string, j: number) => (
+                        <li key={j}>• {s}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {p.sphereImplementation && (
+                  <p className="text-emerald-300 text-xs mt-2"><span className="font-semibold">Sphere:</span> {p.sphereImplementation}</p>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// CDD Requirements Block (Section 3.2)
+function CDDRequirementsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      <div className="space-y-3">
+        {data.requirements?.map((r: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+            <h4 className="text-blue-300 font-medium mb-2">{r.requirement}</h4>
+            <p className="text-gray-300 text-sm mb-2">{r.detail}</p>
+            {r.forIndividuals && (
+              <div className="mb-2">
+                <span className="text-gray-500 text-xs">Individuals:</span>
+                <div className="flex flex-wrap gap-1 mt-1">
+                  {r.forIndividuals.map((item: string, j: number) => (
+                    <span key={j} className="text-xs bg-slate-600 text-gray-300 px-2 py-0.5 rounded">{item}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+            {r.forEntities && (
+              <div className="mb-2">
+                <span className="text-gray-500 text-xs">Entities:</span>
+                <div className="flex flex-wrap gap-1 mt-1">
+                  {r.forEntities.map((item: string, j: number) => (
+                    <span key={j} className="text-xs bg-slate-600 text-gray-300 px-2 py-0.5 rounded">{item}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+            {r.toCollect && (
+              <div className="mb-2">
+                <span className="text-gray-500 text-xs">To Collect:</span>
+                <div className="flex flex-wrap gap-1 mt-1">
+                  {r.toCollect.map((item: string, j: number) => (
+                    <span key={j} className="text-xs bg-slate-600 text-gray-300 px-2 py-0.5 rounded">{item}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+            {r.timing && <p className="text-amber-300 text-xs">Timing: {r.timing}</p>}
+            {r.purpose && <p className="text-gray-400 text-xs">Purpose: {r.purpose}</p>}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// EDD Requirements Block (Section 3.2)
+function EDDRequirementsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      
+      {data.triggers && (
+        <div className="mb-4">
+          <h4 className="text-red-300 font-medium mb-2">EDD Triggers:</h4>
+          <div className="space-y-2">
+            {data.triggers.map((t: any, i: number) => (
+              <div key={i} className="bg-red-500/10 border border-red-500/30 rounded p-3">
+                <h5 className="text-white font-medium">{t.trigger}</h5>
+                <p className="text-gray-400 text-xs mb-1">Why: {t.why}</p>
+                {t.eddRequired && (
+                  <div className="flex flex-wrap gap-1 mt-1">
+                    {t.eddRequired.map((item: string, j: number) => (
+                      <span key={j} className="text-xs bg-red-500/20 text-red-300 px-2 py-0.5 rounded">{item}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {data.components && (
+        <div>
+          <h4 className="text-blue-300 font-medium mb-2">EDD Components:</h4>
+          <div className="grid md:grid-cols-2 gap-2">
+            {data.components.map((c: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded p-3">
+                <span className="text-white font-medium text-sm">{c.component}:</span>
+                <span className="text-gray-400 text-xs ml-1">{c.detail}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// SAR Requirements Block (Section 3.2)
+function SARRequirementsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      
+      {data.thresholds && (
+        <div className="mb-4">
+          <h4 className="text-amber-300 font-medium mb-2">Filing Thresholds:</h4>
+          <div className="space-y-2">
+            {data.thresholds.map((t: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded p-3 flex justify-between items-center">
+                <div>
+                  <span className="text-white font-medium">{t.category}</span>
+                  <p className="text-gray-400 text-xs">{t.detail}</p>
+                </div>
+                <span className="text-amber-300 font-bold">{t.threshold}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {data.process && (
+        <div className="mb-4">
+          <h4 className="text-blue-300 font-medium mb-2">SAR Process:</h4>
+          <div className="flex flex-wrap gap-2">
+            {data.process.map((p: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded px-3 py-2">
+                <span className="text-blue-400 font-bold">{p.step}.</span>
+                <span className="text-white ml-1">{p.action}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {data.timeline && (
+        <p className="text-amber-300 text-sm mb-4">⏱️ {data.timeline}</p>
+      )}
+      
+      {data.confidentiality && (
+        <div className="bg-red-500/10 border border-red-500/30 rounded p-4">
+          <h4 className="text-red-300 font-medium mb-2">Confidentiality Rules:</h4>
+          <ul className="text-gray-300 text-sm space-y-1">
+            {data.confidentiality.rules?.map((r: any, i: number) => (
+              <li key={i}>• <span className="text-white">{r.rule}:</span> {r.detail}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Risk Assessment Framework Block (Section 3.2)
+function RiskAssessmentFrameworkBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      
+      {data.categories && (
+        <div className="space-y-4 mb-4">
+          {data.categories.map((cat: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-white font-medium mb-2 flex items-center gap-2">
+                <span>{cat.icon}</span> {cat.category}
+              </h4>
+              <div className="space-y-2">
+                {cat.factors?.map((f: any, j: number) => (
+                  <div key={j} className="grid grid-cols-4 gap-2 text-xs">
+                    <span className="text-gray-400">{f.factor}</span>
+                    <span className="text-red-300 bg-red-500/10 px-2 py-1 rounded">{f.high}</span>
+                    <span className="text-amber-300 bg-amber-500/10 px-2 py-1 rounded">{f.medium}</span>
+                    <span className="text-emerald-300 bg-emerald-500/10 px-2 py-1 rounded">{f.low}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      
+      {data.riskRatings && (
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-slate-700">
+                <th className="p-2 text-left text-white">Rating</th>
+                <th className="p-2 text-left text-gray-400">Criteria</th>
+                <th className="p-2 text-left text-gray-400">Monitoring</th>
+                <th className="p-2 text-left text-gray-400">Refresh</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.riskRatings.map((r: any, i: number) => (
+                <tr key={i} className="border-t border-slate-700">
+                  <td className={`p-2 font-medium ${r.rating === 'Prohibited' ? 'text-red-400' : r.rating === 'High' ? 'text-amber-400' : r.rating === 'Medium' ? 'text-yellow-400' : 'text-emerald-400'}`}>{r.rating}</td>
+                  <td className="p-2 text-gray-300">{r.criteria}</td>
+                  <td className="p-2 text-gray-400">{r.monitoring}</td>
+                  <td className="p-2 text-gray-400">{r.refresh}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Sphere Compliance Approach Block (Section 3.2)
+function SphereComplianceApproachBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      
+      {data.philosophy && (
+        <div className="mb-4">
+          <h4 className="text-emerald-300 font-medium mb-2">Philosophy:</h4>
+          <div className="space-y-2">
+            {data.philosophy.map((p: any, i: number) => (
+              <div key={i} className="bg-emerald-500/10 border border-emerald-500/30 rounded p-3">
+                <h5 className="text-white font-medium">{p.principle}</h5>
+                <p className="text-gray-400 text-xs">{p.explanation}</p>
+                <p className="text-emerald-300 text-xs mt-1">→ {p.implementation}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {data.technologyStack && (
+        <div className="mb-4">
+          <h4 className="text-blue-300 font-medium mb-2">Technology Stack:</h4>
+          <div className="grid md:grid-cols-2 gap-2">
+            {data.technologyStack.map((t: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded p-3">
+                <span className="text-white font-medium text-sm">{t.component}</span>
+                <p className="text-gray-400 text-xs">{t.function}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {data.teamStructure && (
+        <div>
+          <h4 className="text-purple-300 font-medium mb-2">Team Structure:</h4>
+          <div className="space-y-2">
+            {data.teamStructure.map((t: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded p-2 flex justify-between">
+                <span className="text-white text-sm">{t.role}</span>
+                <span className="text-gray-400 text-xs">{t.responsibility}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Red Flags Block (Section 3.2)
+function RedFlagsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      
+      {data.categories && (
+        <div className="space-y-4 mb-4">
+          {data.categories.map((cat: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-white font-medium mb-2 flex items-center gap-2">
+                <span>{cat.icon}</span> {cat.category}
+              </h4>
+              <div className="space-y-1">
+                {cat.flags?.map((f: any, j: number) => (
+                  <div key={j} className="flex justify-between items-center text-sm">
+                    <div>
+                      <span className="text-white">{f.flag}:</span>
+                      <span className="text-gray-400 ml-1">{f.detail}</span>
+                    </div>
+                    <span className={`text-xs px-2 py-0.5 rounded ${f.severity === 'High' ? 'bg-red-500/20 text-red-300' : 'bg-amber-500/20 text-amber-300'}`}>{f.severity}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+      
+      {data.responseToRedFlags && (
+        <div className="bg-blue-500/10 border border-blue-500/30 rounded p-4">
+          <h4 className="text-blue-300 font-medium mb-2">Response Process:</h4>
+          <div className="flex flex-wrap gap-2">
+            {data.responseToRedFlags.map((r: any, i: number) => (
+              <div key={i} className="bg-slate-800/50 rounded px-3 py-2">
+                <span className="text-blue-400 font-bold">{r.step}.</span>
+                <span className="text-white ml-1">{r.detail}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Sanctions Regimes Block (Section 3.3)
+function SanctionsRegimesBlock({ data }: { data: any }) {
+  const [expandedRegime, setExpandedRegime] = useState<string | null>(null);
+  
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      
+      <div className="space-y-2">
+        {data.regimes?.map((r: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+            <button
+              onClick={() => setExpandedRegime(expandedRegime === r.regime ? null : r.regime)}
+              className="w-full p-4 text-left flex items-center justify-between hover:bg-slate-700/70"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">{r.icon}</span>
+                <div>
+                  <span className="text-white font-medium">{r.regime}</span>
+                  {r.fullName && <p className="text-gray-400 text-xs">{r.fullName}</p>}
+                </div>
+              </div>
+              <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${expandedRegime === r.regime ? 'rotate-180' : ''}`} />
+            </button>
+            {expandedRegime === r.regime && (
+              <div className="px-4 pb-4 space-y-3">
+                <p className="text-gray-300 text-sm"><span className="text-gray-500">Agency:</span> {r.agency}</p>
+                <p className="text-gray-300 text-sm"><span className="text-gray-500">Scope:</span> {r.scope}</p>
+                
+                {r.lists && (
+                  <div>
+                    <p className="text-gray-500 text-xs mb-1">Lists:</p>
+                    {r.lists.map((l: any, j: number) => (
+                      <div key={j} className="bg-slate-800/50 rounded p-2 mb-1">
+                        <span className="text-blue-300 text-sm">{l.list}</span>
+                        <p className="text-gray-400 text-xs">{l.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                
+                {r.keyPrinciples && (
+                  <div>
+                    <p className="text-gray-500 text-xs mb-1">Key Principles:</p>
+                    <ul className="text-gray-300 text-xs space-y-0.5">
+                      {r.keyPrinciples.map((p: string, j: number) => (
+                        <li key={j}>• {p}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                
+                {r.realWorldExamples && (
+                  <div className="bg-red-500/10 rounded p-2">
+                    {r.realWorldExamples.map((ex: any, j: number) => (
+                      <div key={j} className="mb-2">
+                        <span className="text-red-300 font-medium text-sm">{ex.example}</span>
+                        <p className="text-gray-400 text-xs">{ex.violation}</p>
+                        <p className="text-red-300 text-xs">{ex.consequence}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                
+                {r.sphereImplication && (
+                  <p className="text-emerald-300 text-sm"><span className="font-semibold">Sphere:</span> {r.sphereImplication}</p>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// What Gets Screened Block (Section 3.3)
+function WhatGetsScreenedBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      
+      <div className="space-y-4">
+        {data.categories?.map((cat: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+            <h4 className="text-white font-medium mb-2 flex items-center gap-2">
+              <span>{cat.icon}</span> {cat.category}
+            </h4>
+            <div className="space-y-2 mb-3">
+              {cat.items?.map((item: any, j: number) => (
+                <div key={j} className="text-sm">
+                  <span className="text-blue-300">{item.item}:</span>
+                  <span className="text-gray-400 ml-1">{item.detail}</span>
+                  {item.challenge && <span className="text-amber-300 text-xs ml-2">(Challenge: {item.challenge})</span>}
+                </div>
+              ))}
+            </div>
+            {cat.howItWorks && <p className="text-gray-300 text-xs mb-2"><span className="text-gray-500">How:</span> {cat.howItWorks}</p>}
+            {cat.example && <p className="text-emerald-300 text-xs"><span className="text-gray-500">Example:</span> {cat.example}</p>}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// High Risk Jurisdictions Block (Section 3.3)
+function HighRiskJurisdictionsBlock({ data }: { data: any }) {
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+  
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      
+      <div className="space-y-2 mb-4">
+        {data.jurisdictionCategories?.map((cat: any, i: number) => (
+          <div key={i} className={`rounded-lg border ${cat.riskLevel.includes('PROHIBITED') ? 'border-red-500 bg-red-500/10' : cat.riskLevel.includes('HIGH') ? 'border-amber-500 bg-amber-500/10' : 'border-yellow-500 bg-yellow-500/10'}`}>
+            <button
+              onClick={() => setExpandedCategory(expandedCategory === cat.category ? null : cat.category)}
+              className="w-full p-4 text-left flex justify-between items-center"
+            >
+              <div>
+                <span className="text-white font-medium">{cat.category}</span>
+                <span className={`ml-2 text-xs px-2 py-0.5 rounded ${cat.riskLevel.includes('PROHIBITED') ? 'bg-red-500 text-white' : cat.riskLevel.includes('HIGH') ? 'bg-amber-500 text-black' : 'bg-yellow-500 text-black'}`}>{cat.riskLevel}</span>
+              </div>
+              <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${expandedCategory === cat.category ? 'rotate-180' : ''}`} />
+            </button>
+            {expandedCategory === cat.category && (
+              <div className="px-4 pb-4 space-y-2">
+                {cat.jurisdictions && (
+                  <div className="grid md:grid-cols-2 gap-2">
+                    {cat.jurisdictions.map((j: any, k: number) => (
+                      <div key={k} className="bg-slate-800/50 rounded p-2">
+                        <span>{j.icon} {j.country}</span>
+                        <p className="text-gray-400 text-xs">{j.detail}</p>
+                        {j.exception && <p className="text-emerald-300 text-xs">Exception: {j.exception}</p>}
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {cat.spherePolicy && <p className="text-blue-300 text-sm mt-2"><span className="font-semibold">Sphere Policy:</span> {cat.spherePolicy}</p>}
+                {cat.eddRequirements && (
+                  <div className="flex flex-wrap gap-1">
+                    {cat.eddRequirements.map((req: string, k: number) => (
+                      <span key={k} className="text-xs bg-slate-700 text-gray-300 px-2 py-1 rounded">{req}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+      
+      {data.nuancedApproach && (
+        <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+          <h4 className="text-blue-300 font-medium mb-2">{data.nuancedApproach.title}</h4>
+          <p className="text-gray-300 text-sm mb-2">{data.nuancedApproach.explanation}</p>
+          <div className="space-y-1">
+            {data.nuancedApproach.tiers?.map((t: any, i: number) => (
+              <div key={i} className="flex items-center gap-2 text-sm">
+                <span className={`px-2 py-0.5 rounded text-xs ${t.tier === 'Prohibited' ? 'bg-red-500 text-white' : t.tier === 'Highly Restricted' ? 'bg-amber-500 text-black' : t.tier === 'Enhanced Scrutiny' ? 'bg-yellow-500 text-black' : 'bg-emerald-500 text-white'}`}>{t.tier}</span>
+                <span className="text-gray-400">{t.treatment}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Screening Flow Diagram Block (Section 3.3)
+function ScreeningFlowDiagramBlock({ data }: { data: any }) {
+  const [activeNode, setActiveNode] = useState<string>('initiation');
+  
+  const getNodeColor = (node: any) => {
+    if (node.color === 'green') return 'bg-emerald-500/20 border-emerald-500';
+    if (node.color === 'yellow') return 'bg-amber-500/20 border-amber-500';
+    if (node.color === 'red') return 'bg-red-500/20 border-red-500';
+    if (node.type === 'start') return 'bg-blue-500/20 border-blue-500';
+    if (node.type === 'decision') return 'bg-purple-500/20 border-purple-500';
+    return 'bg-slate-700/50 border-slate-500';
+  };
+  
+  const activeNodeData = data.nodes?.find((n: any) => n.id === activeNode);
+  
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      
+      {/* Flow visualization */}
+      <div className="bg-slate-900 rounded-lg p-4 mb-4">
+        <div className="flex flex-wrap justify-center gap-2">
+          {data.nodes?.map((node: any) => (
+            <button
+              key={node.id}
+              onClick={() => setActiveNode(node.id)}
+              className={`px-3 py-2 rounded-lg border-2 transition-all ${getNodeColor(node)} ${activeNode === node.id ? 'ring-2 ring-white' : ''}`}
+            >
+              <span className="text-white text-xs">{node.label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+      
+      {/* Active node details */}
+      {activeNodeData && (
+        <div className={`rounded-lg p-4 border-2 mb-4 ${getNodeColor(activeNodeData)}`}>
+          <h4 className="text-white font-semibold mb-2">{activeNodeData.label}</h4>
+          <p className="text-gray-300 text-sm mb-2">{activeNodeData.description}</p>
+          {activeNodeData.details && (
+            <ul className="text-gray-400 text-xs space-y-0.5">
+              {activeNodeData.details.map((d: string, i: number) => (
+                <li key={i}>• {d}</li>
+              ))}
+            </ul>
+          )}
+          {activeNodeData.outcome && <p className="text-emerald-300 text-sm mt-2">Outcome: {activeNodeData.outcome}</p>}
+        </div>
+      )}
+      
+      {/* Key principles */}
+      {data.keyPrinciples && (
+        <div className="bg-blue-500/10 border border-blue-500/30 rounded p-4">
+          <h4 className="text-blue-300 font-medium mb-2">Key Principles:</h4>
+          <ul className="text-gray-300 text-sm space-y-1">
+            {data.keyPrinciples.map((p: string, i: number) => (
+              <li key={i}>✓ {p}</li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Documentation Requirements Block (Section 3.3)
+function DocumentationRequirementsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      
+      <div className="space-y-3">
+        {data.byFlagType?.map((f: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+            <h4 className="text-amber-300 font-medium mb-2">{f.flagType}</h4>
+            <p className="text-gray-400 text-xs mb-2">Scenario: {f.scenario}</p>
+            <div className="mb-2">
+              <span className="text-gray-500 text-xs">Required:</span>
+              <div className="flex flex-wrap gap-1 mt-1">
+                {f.requiredDocumentation?.map((d: string, j: number) => (
+                  <span key={j} className="text-xs bg-slate-600 text-gray-300 px-2 py-0.5 rounded">{d}</span>
+                ))}
+              </div>
+            </div>
+            <p className="text-gray-300 text-xs"><span className="text-gray-500">Purpose:</span> {f.purpose}</p>
+            <p className="text-blue-300 text-xs">⏱️ {f.timeline}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Flagged Payment Process Block (Section 3.3)
+function FlaggedPaymentProcessBlock({ data }: { data: any }) {
+  const [activeStep, setActiveStep] = useState(1);
+  const steps = data.process?.steps || [];
+  const activeStepData = steps.find((s: any) => s.step === activeStep);
+  
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      
+      {/* Step navigation */}
+      <div className="flex overflow-x-auto gap-2 mb-4">
+        {steps.map((s: any) => (
+          <button
+            key={s.step}
+            onClick={() => setActiveStep(s.step)}
+            className={`flex-shrink-0 px-4 py-2 rounded-lg ${activeStep === s.step ? 'bg-blue-500 text-white' : 'bg-slate-700 text-gray-300'}`}
+          >
+            {s.step}. {s.title}
+          </button>
+        ))}
+      </div>
+      
+      {/* Active step content */}
+      {activeStepData && (
+        <div className="bg-slate-700/50 rounded-lg p-4 mb-4">
+          <div className="flex items-center gap-2 mb-3">
+            <span className="bg-blue-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">{activeStepData.step}</span>
+            <div>
+              <h4 className="text-white font-semibold">{activeStepData.title}</h4>
+              <p className="text-gray-400 text-sm">{activeStepData.timing}</p>
+            </div>
+          </div>
+          <p className="text-gray-300 mb-3">{activeStepData.whatHappens}</p>
+          
+          {activeStepData.outcomes && (
+            <div className="flex flex-wrap gap-2 mb-3">
+              {activeStepData.outcomes.map((o: string, i: number) => (
+                <span key={i} className="text-xs bg-slate-600 text-gray-200 px-2 py-1 rounded">{o}</span>
+              ))}
+            </div>
+          )}
+          
+          {activeStepData.customerCommunication && (
+            <div className="bg-slate-800 rounded p-3">
+              <p className="text-blue-300 text-sm font-medium mb-1">📧 {activeStepData.customerCommunication.subject}</p>
+              <pre className="text-gray-300 text-xs whitespace-pre-wrap font-sans">{activeStepData.customerCommunication.template}</pre>
+            </div>
+          )}
+        </div>
+      )}
+      
+      {/* Timeline expectations */}
+      {data.timelineExpectations && (
+        <div className="bg-slate-700/50 rounded-lg p-4 mb-4">
+          <h4 className="text-white font-medium mb-2">{data.timelineExpectations.title}</h4>
+          <div className="space-y-2">
+            {data.timelineExpectations.scenarios?.map((s: any, i: number) => (
+              <div key={i} className="flex justify-between text-sm">
+                <span className="text-gray-300">{s.scenario}</span>
+                <span className="text-blue-300">{s.typical}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {/* Escalation path */}
+      {data.escalationPath && (
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+          <h4 className="text-purple-300 font-medium mb-2">{data.escalationPath.title}</h4>
+          <div className="space-y-2">
+            {data.escalationPath.levels?.map((l: any, i: number) => (
+              <div key={i} className="flex items-start gap-2">
+                <span className="bg-purple-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs">{i + 1}</span>
+                <div>
+                  <span className="text-white text-sm">{l.level}:</span>
+                  <span className="text-gray-400 text-xs ml-1">{l.handles}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Travel Rule Summary Block (Section 3.4)
+function TravelRuleSummaryBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      <p className="text-gray-300 mb-4">{data.definition}</p>
+      
+      {data.keyTakeaways && (
+        <div className="space-y-2 mb-4">
+          {data.keyTakeaways.map((t: string, i: number) => (
+            <div key={i} className="bg-slate-800/50 rounded px-3 py-2 text-sm text-gray-300">{t}</div>
+          ))}
+        </div>
+      )}
+      
+      {data.spherePosition && (
+        <p className="text-emerald-300"><span className="font-semibold">Sphere:</span> {data.spherePosition}</p>
+      )}
+      {data.whyItMatters && (
+        <p className="text-amber-300 text-sm mt-2">{data.whyItMatters}</p>
+      )}
+    </div>
+  );
+}
+
+// FATF Definition Block (Section 3.4)
+function FATFDefinitionBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      
+      {data.whatIsFATF && (
+        <div className="bg-slate-700/50 rounded p-4 mb-4">
+          <h4 className="text-blue-300 font-medium">{data.whatIsFATF.fullName}</h4>
+          <p className="text-gray-300 text-sm">{data.whatIsFATF.description}</p>
+          <p className="text-amber-300 text-xs mt-2">Relevant: {data.whatIsFATF.relevantRecommendation}</p>
+        </div>
+      )}
+      
+      {data.recommendation16 && (
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded p-4 mb-4">
+          <h4 className="text-purple-300 font-medium mb-2">{data.recommendation16.title}</h4>
+          <p className="text-gray-400 text-sm"><span className="text-gray-500">Original:</span> {data.recommendation16.originalScope}</p>
+          <p className="text-gray-400 text-sm"><span className="text-gray-500">Extended:</span> {data.recommendation16.extension}</p>
+          {data.recommendation16.keyLanguage && (
+            <p className="text-gray-300 text-sm italic mt-2 bg-slate-800/50 p-2 rounded">"{data.recommendation16.keyLanguage}"</p>
+          )}
+        </div>
+      )}
+      
+      {data.sunriseIssue && (
+        <div className="bg-amber-500/10 border border-amber-500/30 rounded p-4">
+          <h4 className="text-amber-300 font-medium mb-2">{data.sunriseIssue.title}</h4>
+          <p className="text-gray-300 text-sm"><span className="text-gray-500">Problem:</span> {data.sunriseIssue.problem}</p>
+          <p className="text-emerald-300 text-sm mt-1"><span className="font-semibold">Sphere:</span> {data.sunriseIssue.sphereApproach}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Required Data Elements Block (Section 3.4)
+function RequiredDataElementsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      
+      {data.originatorRequirements && (
+        <div className="mb-4">
+          <h4 className="text-blue-300 font-medium mb-2">{data.originatorRequirements.title}</h4>
+          <div className="space-y-2">
+            {data.originatorRequirements.required?.map((r: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded p-3">
+                <div className="flex justify-between">
+                  <span className="text-white font-medium">{r.element}</span>
+                  <span className="text-emerald-300 text-xs">{r.required}</span>
+                </div>
+                {r.description && <p className="text-gray-400 text-xs">{r.description}</p>}
+                {r.options && (
+                  <div className="flex flex-wrap gap-1 mt-1">
+                    {r.options.map((o: string, j: number) => (
+                      <span key={j} className="text-xs bg-slate-600 text-gray-300 px-2 py-0.5 rounded">{o}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {data.beneficiaryRequirements && (
+        <div className="mb-4">
+          <h4 className="text-purple-300 font-medium mb-2">{data.beneficiaryRequirements.title}</h4>
+          <div className="space-y-2">
+            {data.beneficiaryRequirements.required?.map((r: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded p-3">
+                <span className="text-white font-medium">{r.element}</span>
+                <span className="text-emerald-300 text-xs ml-2">{r.required}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {data.whyEachMatters && (
+        <div className="bg-blue-500/10 rounded p-4">
+          <h4 className="text-blue-300 font-medium mb-2">Why Each Matters:</h4>
+          <div className="space-y-1">
+            {data.whyEachMatters.map((w: any, i: number) => (
+              <p key={i} className="text-sm"><span className="text-white">{w.element}:</span> <span className="text-gray-400">{w.purpose}</span></p>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Thresholds by Jurisdiction Block (Section 3.4)
+function ThresholdsByJurisdictionBlock({ data }: { data: any }) {
+  const [expandedJurisdiction, setExpandedJurisdiction] = useState<string | null>(null);
+  
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      
+      {data.majorJurisdictions && (
+        <div className="space-y-2 mb-4">
+          {data.majorJurisdictions.map((j: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+              <button
+                onClick={() => setExpandedJurisdiction(expandedJurisdiction === j.jurisdiction ? null : j.jurisdiction)}
+                className="w-full p-3 text-left flex items-center justify-between hover:bg-slate-700/70"
+              >
+                <div className="flex items-center gap-2">
+                  <span className="text-xl">{j.flag}</span>
+                  <span className="text-white">{j.jurisdiction}</span>
+                  <span className={`text-sm ${j.threshold.includes('0') && !j.threshold.includes('$3') ? 'text-red-300' : 'text-emerald-300'}`}>{j.threshold}</span>
+                </div>
+                <span className={`text-xs px-2 py-0.5 rounded ${j.status === 'Enforced' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}`}>{j.status}</span>
+              </button>
+              {expandedJurisdiction === j.jurisdiction && (
+                <div className="px-3 pb-3 text-sm">
+                  <p className="text-gray-400"><span className="text-gray-500">Regulator:</span> {j.regulator}</p>
+                  {j.notes && <p className="text-gray-400"><span className="text-gray-500">Notes:</span> {j.notes}</p>}
+                  {j.sphereImplication && <p className="text-emerald-300 mt-1"><span className="font-semibold">Sphere:</span> {j.sphereImplication}</p>}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+      
+      {data.latinAmerica && (
+        <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4 mb-4">
+          <h4 className="text-amber-300 font-medium mb-2">{data.latinAmerica.title}</h4>
+          {data.latinAmerica.jurisdictions?.map((j: any, i: number) => (
+            <div key={i} className="bg-slate-800/50 rounded p-3 mb-2">
+              <div className="flex items-center gap-2 mb-1">
+                <span>{j.flag}</span>
+                <span className="text-white">{j.jurisdiction}</span>
+                <span className="text-emerald-300 text-sm">{j.threshold}</span>
+              </div>
+              <p className="text-gray-400 text-xs">Regulator: {j.regulator}</p>
+              {j.sphereImplication && <p className="text-blue-300 text-xs mt-1">{j.sphereImplication}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+      
+      {data.thresholdComparisonTable && (
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="bg-slate-700">
+                {data.thresholdComparisonTable.headers?.map((h: string, i: number) => (
+                  <th key={i} className="p-2 text-left text-gray-300">{h}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {data.thresholdComparisonTable.rows?.map((row: string[], i: number) => (
+                <tr key={i} className="border-t border-slate-700">
+                  {row.map((cell: string, j: number) => (
+                    <td key={j} className={`p-2 ${j === 0 ? 'text-white' : j === 1 ? 'text-emerald-300' : 'text-gray-400'}`}>{cell}</td>
+                  ))}
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Why Travel Rule Matters Block (Section 3.4)
+function WhyTravelRuleMattersBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      
+      <div className="space-y-3">
+        {data.businessImplications?.map((b: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+            <h4 className="text-blue-300 font-medium mb-1">{b.implication}</h4>
+            <p className="text-gray-300 text-sm mb-2">{b.detail}</p>
+            <p className="text-red-300 text-sm"><span className="text-gray-500">Impact:</span> {b.impact}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// Travel Rule Protocols Block (Section 3.4)
+function TravelRuleProtocolsBlock({ data }: { data: any }) {
+  const [expandedProtocol, setExpandedProtocol] = useState<string | null>(null);
+  
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.overview && <p className="text-gray-400 mb-4">{data.overview}</p>}
+      
+      <div className="space-y-2 mb-4">
+        {data.protocols?.map((p: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+            <button
+              onClick={() => setExpandedProtocol(expandedProtocol === p.protocol ? null : p.protocol)}
+              className="w-full p-3 text-left flex justify-between items-center hover:bg-slate-700/70"
+            >
+              <div>
+                <span className="text-white font-medium">{p.protocol}</span>
+                <span className="text-gray-400 text-sm ml-2">({p.type})</span>
+              </div>
+              <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${expandedProtocol === p.protocol ? 'rotate-180' : ''}`} />
+            </button>
+            {expandedProtocol === p.protocol && (
+              <div className="px-3 pb-3 space-y-2">
+                <p className="text-gray-300 text-sm">{p.description}</p>
+                <p className="text-gray-400 text-xs"><span className="text-gray-500">Governance:</span> {p.governance}</p>
+                <p className="text-gray-400 text-xs"><span className="text-gray-500">Coverage:</span> {p.coverage}</p>
+                <div className="grid grid-cols-2 gap-2">
+                  {p.pros && (
+                    <div className="bg-emerald-500/10 rounded p-2">
+                      <p className="text-emerald-300 text-xs font-medium">Pros:</p>
+                      {p.pros.map((pro: string, j: number) => (
+                        <p key={j} className="text-gray-300 text-xs">✓ {pro}</p>
+                      ))}
+                    </div>
+                  )}
+                  {p.cons && (
+                    <div className="bg-red-500/10 rounded p-2">
+                      <p className="text-red-300 text-xs font-medium">Cons:</p>
+                      {p.cons.map((con: string, j: number) => (
+                        <p key={j} className="text-gray-300 text-xs">✗ {con}</p>
+                      ))}
+                    </div>
+                  )}
+                </div>
+                {p.sphereSupport && <p className="text-emerald-300 text-xs"><span className="font-semibold">Sphere:</span> {p.sphereSupport}</p>}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+      
+      {data.sphereApproach && (
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded p-4">
+          <h4 className="text-emerald-300 font-medium mb-2">{data.sphereApproach.title}</h4>
+          <p className="text-gray-300 text-sm mb-2">{data.sphereApproach.strategy}</p>
+          {data.sphereApproach.workflow && (
+            <div className="flex flex-wrap gap-2">
+              {data.sphereApproach.workflow.map((w: any, i: number) => (
+                <div key={i} className="bg-slate-800/50 rounded px-2 py-1 text-xs">
+                  <span className="text-emerald-400">{w.step}.</span> <span className="text-gray-300">{w.action}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Transmission Methods Block (Section 3.4)
+function TransmissionMethodsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      
+      <div className="space-y-3 mb-4">
+        {data.methods?.map((m: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+            <h4 className="text-blue-300 font-medium mb-1">{m.method}</h4>
+            <p className="text-gray-300 text-sm mb-2">{m.description}</p>
+            <p className="text-gray-400 text-xs mb-2"><span className="text-gray-500">How:</span> {m.howItWorks}</p>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div>
+                <span className="text-emerald-300">Advantages:</span>
+                {m.advantages?.map((a: string, j: number) => (
+                  <p key={j} className="text-gray-400">✓ {a}</p>
+                ))}
+              </div>
+              <div>
+                <span className="text-red-300">Disadvantages:</span>
+                {m.disadvantages?.map((d: string, j: number) => (
+                  <p key={j} className="text-gray-400">✗ {d}</p>
+                ))}
+              </div>
+            </div>
+            <p className="text-amber-300 text-xs mt-2">When: {m.whenToUse}</p>
+          </div>
+        ))}
+      </div>
+      
+      {data.timingRequirements && (
+        <div className="bg-blue-500/10 border border-blue-500/30 rounded p-4">
+          <h4 className="text-blue-300 font-medium mb-1">{data.timingRequirements.title}</h4>
+          <p className="text-gray-300 text-sm">{data.timingRequirements.guidance}</p>
+          <p className="text-emerald-300 text-sm mt-1"><span className="font-semibold">Sphere:</span> {data.timingRequirements.sphereApproach}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Transactions Applied Block (Section 3.4)
+function TransactionsAppliedBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      
+      {data.appliesTo && (
+        <div className="mb-4">
+          <h4 className="text-emerald-300 font-medium mb-2">Travel Rule APPLIES To:</h4>
+          <div className="space-y-2">
+            {data.appliesTo.map((t: any, i: number) => (
+              <div key={i} className="bg-emerald-500/10 border border-emerald-500/30 rounded p-3">
+                <h5 className="text-white font-medium">{t.type}</h5>
+                <p className="text-gray-400 text-xs">{t.description}</p>
+                <p className="text-gray-300 text-xs">Example: {t.example}</p>
+                <p className="text-emerald-300 text-xs mt-1">{t.travelRule}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {data.doesNotApply && (
+        <div>
+          <h4 className="text-gray-400 font-medium mb-2">Travel Rule Does NOT Apply To:</h4>
+          <div className="space-y-2">
+            {data.doesNotApply.map((t: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded p-3">
+                <h5 className="text-white font-medium">{t.type}</h5>
+                <p className="text-gray-400 text-xs">{t.description}</p>
+                <p className="text-gray-500 text-xs mt-1">{t.travelRule}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Edge Cases Block (Section 3.4)
+function EdgeCasesBlock({ data }: { data: any }) {
+  const [expandedScenario, setExpandedScenario] = useState<string | null>(null);
+  
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      
+      <div className="space-y-2">
+        {data.scenarios?.map((s: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+            <button
+              onClick={() => setExpandedScenario(expandedScenario === s.scenario ? null : s.scenario)}
+              className="w-full p-4 text-left hover:bg-slate-700/70"
+            >
+              <h4 className="text-white font-medium">{s.scenario}</h4>
+              <p className="text-gray-400 text-sm">{s.problem}</p>
+            </button>
+            {expandedScenario === s.scenario && (
+              <div className="px-4 pb-4 space-y-3">
+                <div className="space-y-2">
+                  {s.solutions?.map((sol: any, j: number) => (
+                    <div key={j} className="bg-slate-800/50 rounded p-3 border-l-4 border-blue-500">
+                      <h5 className="text-blue-300 font-medium text-sm">{sol.solution}</h5>
+                      <p className="text-gray-300 text-xs">{sol.implementation}</p>
+                      <div className="flex gap-4 text-xs mt-1">
+                        <span className="text-emerald-300">✓ {sol.pros}</span>
+                        <span className="text-red-300">✗ {sol.cons}</span>
+                      </div>
+                      <p className="text-amber-300 text-xs">When: {sol.when}</p>
+                    </div>
+                  ))}
+                </div>
+                {s.sphereApproach && (
+                  <div className="bg-emerald-500/10 rounded p-3">
+                    <p className="text-emerald-300 text-sm"><span className="font-semibold">Sphere:</span> {s.sphereApproach}</p>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
