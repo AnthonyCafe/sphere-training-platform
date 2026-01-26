@@ -1524,6 +1524,105 @@ function UnbankedBlock({ data }: { data: any }) {
 }
 
 function WhatSphereBlock({ data, isNot }: { data: any; isNot: boolean }) {
+  const [expandedItem, setExpandedItem] = useState<number | null>(null);
+  
+  // Handle new expanded format with categories array
+  if (data.categories) {
+    return (
+      <div className={`rounded-xl p-6 ${isNot ? 'bg-red-500/10 border border-red-500/30' : 'bg-emerald-500/10 border border-emerald-500/30'}`}>
+        <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+        {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+        
+        <div className="space-y-2">
+          {data.categories.map((cat: any, i: number) => (
+            <div key={i} className="bg-slate-800/50 rounded-lg overflow-hidden">
+              <button
+                onClick={() => setExpandedItem(expandedItem === i ? null : i)}
+                className="w-full p-4 text-left flex items-center justify-between hover:bg-slate-700/50"
+              >
+                <div className="flex items-center gap-3">
+                  {cat.icon && <span className="text-2xl">{cat.icon}</span>}
+                  <div>
+                    <span className={`font-medium ${isNot ? 'text-red-300' : 'text-white'}`}>
+                      {cat.classification || cat.notThis}
+                    </span>
+                    {cat.jurisdiction && <p className="text-gray-500 text-xs">{cat.jurisdiction}</p>}
+                  </div>
+                </div>
+                <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${expandedItem === i ? 'rotate-180' : ''}`} />
+              </button>
+              {expandedItem === i && (
+                <div className="px-4 pb-4 space-y-2">
+                  {cat.whatItMeans && <p className="text-gray-300 text-sm">{cat.whatItMeans}</p>}
+                  {cat.whatThatIs && <p className="text-gray-300 text-sm">{cat.whatThatIs}</p>}
+                  {cat.howSphereDiffers && (
+                    <div>
+                      <p className="text-gray-500 text-xs mb-1">How Sphere Differs:</p>
+                      <ul className="text-emerald-300 text-xs space-y-0.5">
+                        {cat.howSphereDiffers.map((d: string, j: number) => <li key={j}>✓ {d}</li>)}
+                      </ul>
+                    </div>
+                  )}
+                  {cat.sphereStatus && <p className="text-emerald-300 text-sm"><span className="text-gray-500">Status:</span> {cat.sphereStatus}</p>}
+                  {cat.keyObligations && (
+                    <div className="flex flex-wrap gap-1">
+                      {cat.keyObligations.map((o: string, j: number) => (
+                        <span key={j} className="text-xs bg-slate-700 text-gray-300 px-2 py-0.5 rounded">{o}</span>
+                      ))}
+                    </div>
+                  )}
+                  {cat.whyItMatters && <p className="text-blue-300 text-xs"><span className="text-gray-500">Why it matters:</span> {cat.whyItMatters}</p>}
+                  {cat.whyDistinctionMatters && <p className="text-amber-300 text-xs"><span className="text-gray-500">Why distinction matters:</span> {cat.whyDistinctionMatters}</p>}
+                  {cat.wrongFraming && <p className="text-red-300 text-xs">❌ Wrong: "{cat.wrongFraming}"</p>}
+                  {cat.rightFraming && <p className="text-emerald-300 text-xs">✓ Right: "{cat.rightFraming}"</p>}
+                  {cat.penalties && <p className="text-red-300 text-xs"><span className="text-gray-500">Penalties:</span> {cat.penalties}</p>}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+        
+        {data.currentStats && (
+          <div className="mt-4 pt-4 border-t border-slate-700">
+            <h4 className="text-white font-medium mb-2">{data.currentStats.title}</h4>
+            <div className="grid grid-cols-3 gap-3">
+              {data.currentStats.stats?.map((s: any, i: number) => (
+                <div key={i} className="bg-slate-800 rounded p-3 text-center">
+                  <p className="text-emerald-400 font-bold text-lg">{s.value}</p>
+                  <p className="text-gray-400 text-xs">{s.metric}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+        
+        {data.summaryTable && (
+          <div className="mt-4 overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-slate-700">
+                  {data.summaryTable.headers?.map((h: string, i: number) => (
+                    <th key={i} className="p-2 text-left text-gray-300">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {data.summaryTable.rows?.map((row: string[], i: number) => (
+                  <tr key={i} className="border-t border-slate-700">
+                    {row.map((cell: string, j: number) => (
+                      <td key={j} className={`p-2 ${j === 0 ? 'text-white' : 'text-gray-400'}`}>{cell}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    );
+  }
+  
+  // Original simple format with items array
   return (
     <div className={`rounded-xl p-6 ${isNot ? 'bg-red-500/10 border border-red-500/30' : 'bg-emerald-500/10 border border-emerald-500/30'}`}>
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
@@ -2245,17 +2344,19 @@ function ClassificationMattersBlock({ data }: { data: any }) {
   );
 }
 
-// Sample Responses Block (Section 3.1) - handles both scenarios and responses formats
+// Sample Responses Block - handles scenarios (3.1 style), responses, and UAE Q&A style
 function SampleResponsesBlockNew({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
       <div className="space-y-4">
+        {/* Section 3.1 style - scenarios with scenario/response/keyPoints */}
         {data.scenarios?.map((s: any, i: number) => (
           <div key={i} className="bg-slate-700/50 rounded-lg p-4">
-            <h4 className="text-blue-300 font-medium mb-2">{s.scenario}</h4>
+            {/* Handle both 'scenario' and 'question' field names */}
+            <h4 className="text-blue-300 font-medium mb-2">{s.scenario || `Q: ${s.question}`}</h4>
             <div className="bg-slate-800/50 rounded p-3 mb-3">
-              <p className="text-gray-300 text-sm italic">"{s.response}"</p>
+              <p className="text-gray-300 text-sm italic">{s.response ? `"${s.response}"` : s.answer}</p>
             </div>
             {s.keyPoints && (
               <div className="flex flex-wrap gap-2">
@@ -2264,8 +2365,18 @@ function SampleResponsesBlockNew({ data }: { data: any }) {
                 ))}
               </div>
             )}
+            {/* UAE style doNotSay/doSay */}
+            {s.doNotSay && (
+              <div className="bg-red-500/10 rounded p-2 mt-2">
+                <p className="text-red-400 text-xs font-medium mb-1">❌ Don't say:</p>
+                <ul className="text-red-300 text-xs space-y-0.5">
+                  {s.doNotSay.map((d: string, j: number) => <li key={j}>• {d}</li>)}
+                </ul>
+              </div>
+            )}
           </div>
         ))}
+        {/* Old responses format */}
         {data.responses?.map((r: any, i: number) => (
           <div key={i} className="bg-slate-700/50 rounded-lg p-4">
             <p className="text-blue-300 font-semibold mb-2">Q: {r.question}</p>
