@@ -2972,7 +2972,6 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
 **Key Principle:** Regulatory classification matters more than technology. A sophisticated counterparty asks about licensing and classification BEFORE features.`,
     sections: [
       {
-      {
         id: 'what-sphere-is',
         title: '3.1 What Sphere Is (And Isn\'t)',
         curriculum: {
