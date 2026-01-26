@@ -3825,6 +3825,7 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
           { q: 'When transmit Travel Rule data:', options: ['Within 30 days', 'Immediately', 'Only if requested', 'End of month'], correct: 1 }
         ]
       },
+      {
         id: 'uae-regulatory-framework',
         title: '3.5 UAE Regulatory Framework',
         curriculum: {
