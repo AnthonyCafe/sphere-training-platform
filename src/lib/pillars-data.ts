@@ -2972,90 +2972,235 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
 **Key Principle:** Regulatory classification matters more than technology. A sophisticated counterparty asks about licensing and classification BEFORE features.`,
     sections: [
       {
+      {
         id: 'what-sphere-is',
         title: '3.1 What Sphere Is (And Isn\'t)',
         curriculum: {
           objectives: [
-            'Classify Sphere correctly under multiple frameworks',
-            'Explain what Sphere is NOT',
-            'Articulate "compliance-native" positioning'
+            'Classify Sphere correctly under US, international, and industry frameworks',
+            'Explain in depth what Sphere is NOT and why each distinction matters',
+            'Articulate the "compliance-native" positioning with concrete examples',
+            'Understand the legal and business implications of misclassification'
           ],
           keyConcepts: [
-            'Sphere IS: Payment infrastructure, licensed MSB, B2B settlement',
-            'Sphere is NOT: Exchange, custodian, issuer, bank, wallet',
-            'Compliance-native = built for regulation, not retrofitted'
+            'Sphere IS: MSB, Money Transmitter, VASP, PSP, B2B settlement infrastructure',
+            'Sphere is NOT: Exchange, custodian, issuer, bank, wallet, broker-dealer, DeFi',
+            'Compliance-native = designed for regulation from architecture level',
+            'Classification determines: regulators, capital requirements, permitted activities'
           ]
         },
         learn: {
-          introduction: 'Regulatory classification determines which laws apply and how regulators view you. Getting this right is essential.',
-          coreQuestion: 'How should Sphere be classified?',
+          introduction: 'Regulatory classification determines which laws apply, which regulators supervise you, what activities you can perform, and ultimately whether your business can operate. Getting classification right is existential.',
+          coreQuestion: 'How should Sphere be classified, and why does classification matter?',
           whatSphereIs: {
-            title: 'What Sphere IS',
-            items: [
-              { classification: 'Money Services Business', detail: 'Registered with FinCEN' },
-              { classification: 'Licensed Money Transmitter', detail: 'State-level licenses' },
-              { classification: 'B2B Payment Infrastructure', detail: 'APIs for businesses' },
-              { classification: 'Payment Processor', detail: 'Stablecoin + bank rails' },
-              { classification: 'SOC 2 Type II Certified', detail: 'Security audit verified' },
-              { classification: 'ISO 27001 Certified', detail: 'InfoSec standard' }
+            title: 'What Sphere IS — Detailed Classifications',
+            subtitle: 'Understanding each classification and its regulatory implications',
+            categories: [
+              {
+                classification: 'Money Services Business (MSB)',
+                jurisdiction: 'United States (Federal)',
+                regulator: 'FinCEN',
+                icon: '🇺🇸',
+                whatItMeans: 'Federal classification under BSA for money transmission, currency exchange, check cashing.',
+                sphereStatus: 'Registered with FinCEN as MSB',
+                keyObligations: ['BSA/AML compliance program', 'Designated Compliance Officer', 'Independent testing', 'SAR/CTR filing', '5-year recordkeeping', 'Registration renewal every 2 years'],
+                whyItMatters: 'MSB registration is federal baseline for operating as money transmitter in US.',
+                penalties: 'Unregistered MSB: Up to 5 years imprisonment, $250,000 fine per violation'
+              },
+              {
+                classification: 'Money Transmitter',
+                jurisdiction: 'United States (State-level)',
+                regulator: 'State banking regulators (NYDFS, CA DFPI, etc.)',
+                icon: '🏛️',
+                whatItMeans: 'State-level license for money transmission within/from that state.',
+                sphereStatus: 'Licensed in multiple states',
+                keyObligations: ['Surety bonds ($25K-$2M+)', 'Net worth requirements', 'Annual audited financials', 'State examinations'],
+                stateVariations: [
+                  { state: 'New York', requirement: 'BitLicense OR MTL', note: 'Most stringent' },
+                  { state: 'California', requirement: 'MTL', note: 'Crypto-specific provisions' },
+                  { state: 'Montana', requirement: 'None required', note: 'One of few without MTL' }
+                ],
+                whyItMatters: 'State MTLs required to legally serve customers in each state.',
+                penalties: 'Unlicensed transmission: Fines up to $10,000/day, criminal charges possible'
+              },
+              {
+                classification: 'Virtual Asset Service Provider (VASP)',
+                jurisdiction: 'International (FATF)',
+                regulator: 'Varies by country',
+                icon: '🌐',
+                whatItMeans: 'FATF classification for virtual asset services: exchange, transfer, safekeeping.',
+                sphereStatus: 'VASP in jurisdictions adopting FATF guidance',
+                keyObligations: ['Travel Rule compliance', 'CDD requirements', 'Suspicious transaction reporting', '5-year recordkeeping'],
+                whyItMatters: 'VASP classification determines international regulatory treatment.',
+                penalties: 'Varies by jurisdiction — EU MiCA violations up to €5M or 3% of turnover'
+              },
+              {
+                classification: 'B2B Payment Infrastructure',
+                jurisdiction: 'Industry Classification',
+                regulator: 'N/A — business model',
+                icon: '🏗️',
+                whatItMeans: 'APIs and infrastructure for businesses — not consumer-facing.',
+                sphereStatus: 'Core business model',
+                keyObligations: ['Enterprise security (SOC 2)', 'API reliability', 'Business KYC/KYB'],
+                whyItMatters: 'B2B focus affects risk profile, sales cycles, regulatory treatment.',
+                businessImplications: ['Higher transaction values, lower volume', 'Longer onboarding', 'Enterprise sales motion']
+              },
+              {
+                classification: 'SOC 2 Type II Certified',
+                jurisdiction: 'Industry Standard',
+                regulator: 'AICPA / Independent CPAs',
+                icon: '🔒',
+                whatItMeans: 'Third-party audit of security controls over extended period.',
+                sphereStatus: 'SOC 2 Type II certified',
+                keyAreas: ['Security', 'Availability', 'Processing Integrity', 'Confidentiality'],
+                whyItMatters: 'Gold standard for enterprise security. Often prerequisite for enterprise customers and banks.',
+                competitiveAdvantage: 'Many crypto/fintech lack SOC 2. Sphere\'s certification removes security concerns.'
+              }
             ],
-            stats: [
-              '27 regulated entities across 18 jurisdictions',
-              '$2.5B+ annualized volume',
-              '150+ B2B customers'
-            ]
+            currentStats: {
+              title: 'Sphere by the Numbers',
+              stats: [
+                { metric: 'Regulatory Entities', value: '27+', context: 'Licensed entities across jurisdictions' },
+                { metric: 'Annualized Volume', value: '$2.5B+', context: 'Transaction volume processed' },
+                { metric: 'B2B Customers', value: '150+', context: 'Business customers onboarded' }
+              ]
+            }
           },
           whatSphereIsNot: {
-            title: 'What Sphere is NOT',
-            items: [
-              { notThis: 'Cryptocurrency exchange', why: 'No trading/speculation' },
-              { notThis: 'Stablecoin issuer', why: 'We use third-party coins' },
-              { notThis: 'Custodian', why: 'No long-term asset holding' },
-              { notThis: 'Bank', why: 'No deposits or loans' },
-              { notThis: 'Wallet provider', why: 'Infrastructure, not app' },
-              { notThis: 'DeFi protocol', why: 'Regulated company' }
-            ]
+            title: 'What Sphere is NOT — Critical Distinctions',
+            subtitle: 'Understanding what Sphere is NOT is as important as what it IS.',
+            categories: [
+              {
+                notThis: 'Cryptocurrency Exchange',
+                icon: '❌',
+                whatThatIs: 'Platforms for buying, selling, trading crypto. Examples: Coinbase, Binance.',
+                howSphereDiffers: ['No order book', 'No speculative trading', 'No token listings', 'Stablecoins as RAILS, not tradeable assets'],
+                whyDistinctionMatters: 'Exchanges face securities scrutiny (SEC), market manipulation rules.',
+                wrongFraming: '"Sphere is like Coinbase for businesses"',
+                rightFraming: '"Sphere is payment infrastructure using stablecoins as settlement rails"'
+              },
+              {
+                notThis: 'Stablecoin Issuer',
+                icon: '❌',
+                whatThatIs: 'Companies that create/redeem stablecoins with reserves. Examples: Circle (USDC), Tether.',
+                howSphereDiffers: ['Does NOT issue/mint stablecoins', 'Does NOT maintain reserves', 'USES third-party stablecoins', 'CONSUMER of stablecoin infrastructure'],
+                whyDistinctionMatters: 'Issuers face reserve requirements, redemption obligations.',
+                wrongFraming: '"Sphere has its own stablecoin"',
+                rightFraming: '"Sphere uses USDC and other regulated stablecoins from Circle"'
+              },
+              {
+                notThis: 'Custodian',
+                icon: '❌',
+                whatThatIs: 'Entities holding assets long-term for customers. Examples: Anchorage, BitGo.',
+                howSphereDiffers: ['Does NOT hold long-term', 'PASS-THROUGH model', 'Same-day/next-day settlement', 'No custody fees'],
+                whyDistinctionMatters: 'Custodians face fiduciary duties, trust charter requirements.',
+                wrongFraming: '"Sphere holds your crypto"',
+                rightFraming: '"Sphere facilitates payments. Funds flow through for settlement within hours."'
+              },
+              {
+                notThis: 'Bank',
+                icon: '❌',
+                whatThatIs: 'Depository institutions with deposits, loans, central bank access. Examples: JPMorgan.',
+                howSphereDiffers: ['Does NOT accept deposits', 'Does NOT make loans', 'No bank charter', 'No Fed access', 'PARTNERS with banks'],
+                whyDistinctionMatters: 'Banks are most heavily regulated with massive capital requirements.',
+                wrongFraming: '"Sphere is a crypto bank"',
+                rightFraming: '"Sphere is licensed payment infrastructure that partners with regulated banks."'
+              },
+              {
+                notThis: 'Wallet Provider',
+                icon: '❌',
+                whatThatIs: 'Software/hardware for storing, sending crypto. Examples: MetaMask, Ledger.',
+                howSphereDiffers: ['No consumer wallet apps', 'Not retail/individual users', 'INFRASTRUCTURE and APIs for businesses'],
+                whyDistinctionMatters: 'Consumer wallets face consumer protection regulations.',
+                wrongFraming: '"Sphere is a wallet for businesses"',
+                rightFraming: '"Sphere provides payment APIs that businesses integrate."'
+              },
+              {
+                notThis: 'Broker-Dealer',
+                icon: '❌',
+                whatThatIs: 'Firms buying/selling securities. SEC/FINRA regulated. Examples: Robinhood.',
+                howSphereDiffers: ['Does NOT deal in securities', 'No investment advice', 'Not SEC/FINRA registered', 'Stablecoins generally NOT securities'],
+                whyDistinctionMatters: 'Broker-dealers face SEC regulation, suitability duties.',
+                wrongFraming: '"Sphere helps you invest in crypto"',
+                rightFraming: '"Sphere facilitates B2B payments using stablecoins."'
+              },
+              {
+                notThis: 'DeFi Protocol',
+                icon: '❌',
+                whatThatIs: 'Decentralized applications without centralized control. Examples: Uniswap, Aave.',
+                howSphereDiffers: ['IS centralized, regulated company', 'Has identified management', 'Can be regulated, examined', 'Policies, procedures, human oversight'],
+                whyDistinctionMatters: 'DeFi faces existential regulatory uncertainty.',
+                wrongFraming: '"Sphere is decentralized"',
+                rightFraming: '"Sphere is regulated, centralized payment infrastructure with full accountability."'
+              }
+            ],
+            summaryTable: {
+              title: 'Classification Comparison',
+              headers: ['Entity Type', 'Primary Regulator', 'Burden Sphere Avoids', 'Sphere Status'],
+              rows: [
+                ['Exchange', 'SEC/CFTC/State', 'Securities laws', 'NOT an exchange'],
+                ['Issuer', 'State/OCC', 'Reserve requirements', 'NOT an issuer'],
+                ['Custodian', 'State trust', 'Fiduciary duty', 'NOT a custodian'],
+                ['Bank', 'OCC/Fed/FDIC', 'Charter, deposits', 'NOT a bank'],
+                ['Wallet', 'State MTL', 'Consumer apps', 'NOT a wallet'],
+                ['Broker-Dealer', 'SEC/FINRA', 'Securities registration', 'NOT a BD'],
+                ['DeFi', 'Uncertain', 'Regulatory uncertainty', 'NOT DeFi']
+              ]
+            }
           },
-          classificationMatters: {
+          classificationMattersLegally: {
             title: 'Why Classification Matters Legally',
-            headers: ['If You\'re A...', 'Regulatory Focus'],
-            rows: [
-              ['Money Transmitter (SPHERE)', 'AML/BSA, state licenses'],
-              ['Exchange', 'Securities laws, BitLicense'],
-              ['Custodian', 'Fiduciary duty, trust charter'],
-              ['Bank', 'Bank charter, FDIC, capital requirements']
-            ]
+            consequences: [
+              { determination: 'Which Regulators Supervise You', detail: 'MSB = FinCEN + state. Exchange = SEC/CFTC. Bank = OCC/Fed/FDIC.', sphereImplication: 'Sphere supervised by FinCEN and state regulators — focused on AML/BSA.' },
+              { determination: 'Capital Requirements', detail: 'Banks need billions. Money transmitters need bonds.', sphereImplication: 'Money transmitter requirements significant but manageable.' },
+              { determination: 'Permitted Activities', detail: 'Classification defines what you can do.', sphereImplication: 'Licensed for transmission. Cannot take deposits or sell securities.' },
+              { determination: 'Examination Frequency', detail: 'Banks: annual+. Money transmitters: 1-3 years.', sphereImplication: 'Periodic state exams focused on AML, customer funds, compliance.' }
+            ],
+            caseStudies: {
+              title: 'Companies That Got Classification Wrong',
+              cases: [
+                { company: 'Ripple Labs', issue: 'SEC alleges XRP is unregistered security', consequence: '$125M+ settlement, multi-year litigation', lesson: 'Token classification has massive implications.', sphereRelevance: 'Sphere uses established payment stablecoins with clearer status.' },
+                { company: 'BitMEX', issue: 'Unregistered futures exchange, inadequate AML', consequence: '$100M penalty, criminal charges for founders', lesson: 'Operating without registration has severe consequences.', sphereRelevance: 'Sphere is registered, licensed, maintains robust AML.' },
+                { company: 'Celsius', issue: 'Took deposits, operated like bank without charter', consequence: 'Bankruptcy, frozen funds, executive charges', lesson: 'If you take deposits and lend, you\'re acting like a bank.', sphereRelevance: 'Sphere does NOT take deposits or lend. Pass-through model.' }
+              ]
+            }
           },
           complianceNative: {
             title: '"Compliance-Native" Explained',
             approaches: [
-              { approach: 'Compliance as afterthought', result: 'Build product → try to make compliant → fails', icon: '❌' },
-              { approach: 'Compliance as bolt-on', result: 'Build product → add compliance layer → gaps', icon: '⚠️' },
-              { approach: 'Compliance-native (Sphere)', result: 'Design for compliance from day one → embedded', icon: '✅' }
+              { approach: 'Compliance as Afterthought', icon: '❌', description: 'Build product first, worry later', result: 'Enforcement, shutdowns, loss of banking', problems: ['Technical debt', 'Wrong expectations', 'Bad actor view'] },
+              { approach: 'Compliance as Bolt-On', icon: '⚠️', description: 'Build product, add compliance layer', result: 'Gaps, workarounds, tension', problems: ['Can be bypassed', 'Conflicts', 'Exam findings'] },
+              { approach: 'Compliance-Native (Sphere)', icon: '✅', description: 'Design for compliance from architecture', result: 'Embedded, no gaps, clean audits', advantages: ['Cannot bypass', 'Aligned', 'Bank confidence'] }
             ],
             whatItMeans: [
-              'Policy enforcement BEFORE settlement, not after',
-              'Compliance embedded in protocol, not separate system',
-              'Work WITH regulators, not around them'
+              { principle: 'Policy Enforcement BEFORE Settlement', explanation: 'Every transaction screened before settlement.', implementation: 'Real-time screening, jurisdiction checks — before funds move.' },
+              { principle: 'Compliance Embedded in Protocol', explanation: 'In core flow, not separate system.', implementation: 'Can\'t process without compliance passing. No override.' },
+              { principle: 'Immutable Audit Trail', explanation: 'Every decision logged, cannot be altered.', implementation: 'Blockchain-based logs, tamper-evident, exam-ready.' },
+              { principle: 'Work WITH Regulators', explanation: 'Proactive engagement, not adversarial.', implementation: 'Regular communication, SAR filing when appropriate.' }
+            ],
+            arnoldQuote: { quote: 'Compliance isn\'t a cost center — it\'s our moat. Anyone can build rails. Building rails banks trust requires compliance baked in from day one.', context: 'Compliance-native is competitive advantage.' }
+          },
+          sampleResponses: {
+            title: 'How to Explain Classification',
+            scenarios: [
+              { scenario: 'Regulator asks: "What kind of company?"', response: 'Sphere is a licensed MSB and Money Transmitter. FinCEN registered, state MTLs. B2B payment infrastructure using stablecoin settlement. NOT exchange, NOT custodian, NOT issuer, NOT bank.', keyPoints: ['Lead with licenses', 'State what you ARE', 'State what you\'re NOT'] },
+              { scenario: 'Bank asks: "Are you a crypto company?"', response: 'We\'re licensed payment infrastructure using stablecoins as settlement technology. Like asking if a bank using fiber optic is a telecom company. SOC 2 certified, licensed in multiple states.', keyPoints: ['Reframe', 'Emphasize regulation', 'Certifications'] },
+              { scenario: 'Customer asks: "Can you hold funds long-term?"', response: 'Sphere is payment infrastructure, not custodian. Same-day/next-day settlement. For long-term, you\'d want a licensed custodian. Pass-through model keeps funds moving.', keyPoints: ['Decline inappropriate', 'Explain why', 'Redirect'] }
             ]
           },
-          sampleResponse: {
-            question: 'What kind of company is Sphere?',
-            answer: 'Sphere is a licensed Money Services Business — specifically, a B2B payments infrastructure company. We\'re registered with FinCEN and hold Money Transmitter licenses. We\'re NOT an exchange, NOT a custodian, NOT a stablecoin issuer.',
-            doNotSay: ['We\'re a crypto company', 'We\'re like Coinbase but for businesses', 'We\'re decentralized'],
-            doSay: ['We\'re a licensed payment infrastructure provider', 'We use stablecoins as settlement rails, like banks use SWIFT', 'We\'re compliance-native — built for regulation from day one']
-          },
-          keyTakeaway: 'Sphere is a licensed MSB, not a crypto exchange. Classification determines everything.'
+          keyTakeaway: 'Sphere is licensed MSB and Money Transmitter — not exchange, custodian, issuer, or bank. Classification is intentional and enables B2B payments focus with appropriate regulatory relationships.'
         },
         exercise: {
           title: 'Exercise 3.1 — Classification Defense',
-          prompt: 'A regulator asks: "Isn\'t Sphere just another crypto company?"\n\nWrite your response:\n1) What Sphere actually does (be specific)\n2) How it differs from crypto exchanges\n3) Why classification matters\n4) What licenses Sphere holds',
-          criteria: ['Clear classification', 'Specific differentiators', 'Licenses mentioned', 'Professional tone']
+          prompt: 'A state banking regulator asks: "Help me understand what Sphere does and how it should be classified. What makes you different from other crypto companies?"\n\nWrite response covering:\n1) What Sphere IS (specific classifications)\n2) What Sphere is NOT and why each matters\n3) Licenses held and significance\n4) Why classification is appropriate for business model',
+          criteria: ['Accurate classification', 'Clear NOT distinctions', 'Licenses with context', 'Business model explained', 'Professional tone']
         },
         quiz: [
-          { q: 'Sphere\'s primary US classification?', options: ['Crypto exchange', 'MSB/Money Transmitter', 'Bank', 'Broker-dealer'], correct: 1 },
-          { q: 'What does "compliance-native" mean?', options: ['Compliance added after', 'Designed for compliance from day one', 'No compliance needed', 'Third-party handles it'], correct: 1 },
-          { q: 'Which is Sphere NOT?', options: ['Licensed MSB', 'B2B infrastructure', 'Stablecoin issuer', 'FinCEN registered'], correct: 2 }
+          { q: 'Sphere\'s primary US federal classification:', options: ['Bank', 'Broker-Dealer', 'Money Services Business (MSB)', 'Investment Adviser'], correct: 2 },
+          { q: 'Which is Sphere NOT?', options: ['Licensed Money Transmitter', 'B2B Infrastructure', 'Stablecoin Issuer', 'FinCEN Registered MSB'], correct: 2 },
+          { q: '"Compliance-native" means:', options: ['Added after', 'Third party handles', 'Designed into architecture from day one', 'Only when required'], correct: 2 },
+          { q: 'Why is Sphere NOT a custodian?', options: ['Not enough capital', 'Pass-through model with same-day settlement', 'Too expensive', 'Only businesses'], correct: 1 },
+          { q: 'State MTLs enable Sphere to:', options: ['Take deposits', 'Legally transmit money in those states', 'Issue stablecoins', 'Operate as bank'], correct: 1 }
         ]
       },
       {
@@ -3063,74 +3208,209 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
         title: '3.2 AML/KYC Fundamentals',
         curriculum: {
           objectives: [
-            'Understand AML/KYC core concepts',
-            'Explain why compliance enables, not restricts',
-            'Articulate Sphere\'s compliance approach'
+            'Understand complete AML/KYC regulatory framework',
+            'Master requirements for KYC, AML, CDD, EDD, SAR',
+            'Apply comprehensive risk assessment frameworks',
+            'Explain why compliance enables growth',
+            'Articulate Sphere\'s compliance approach',
+            'Identify red flags across categories'
           ],
           keyConcepts: [
-            'KYC = Know Your Customer (identity verification)',
-            'AML = Anti-Money Laundering (transaction monitoring)',
-            'Compliance enables institutional adoption'
+            'KYC = Know Your Customer — identity verification',
+            'AML = Anti-Money Laundering — detection and prevention',
+            'CDD = Customer Due Diligence — risk-based assessment',
+            'EDD = Enhanced Due Diligence — deeper review for high-risk',
+            'SAR = Suspicious Activity Report — regulatory reporting',
+            'Risk-Based Approach = intensity matches risk level'
           ]
         },
         learn: {
-          introduction: 'Compliance is not a burden — it\'s what enables institutional adoption. Without it, banks won\'t work with you.',
-          coreQuestion: 'Why is compliance an enabler, not a barrier?',
-          definitions: {
-            title: 'Core Definitions',
-            items: [
-              { term: 'KYC', meaning: 'Know Your Customer — verify who you\'re doing business with' },
-              { term: 'AML', meaning: 'Anti-Money Laundering — detect and prevent illicit flows' },
-              { term: 'CDD', meaning: 'Customer Due Diligence — assess risk level of customers' },
-              { term: 'EDD', meaning: 'Enhanced Due Diligence — deeper review for high-risk customers' },
-              { term: 'SAR', meaning: 'Suspicious Activity Report — file with authorities when needed' }
-            ]
-          },
-          complianceFlow: {
-            title: 'The Compliance Flow',
-            steps: [
-              { step: 'Customer Applies', icon: '📝' },
-              { step: 'KYC/CDD Review', icon: '🔍' },
-              { step: 'Onboarded (or rejected)', icon: '✅' },
-              { step: 'Ongoing Monitoring (AML/TM)', icon: '👁️' },
-              { step: 'SAR Filing (if needed)', icon: '📋' }
+          introduction: 'Compliance is not a burden — it\'s the foundation enabling institutional adoption, banking partnerships, and sustainable growth. Without robust KYC/AML programs, banks won\'t work with you, enterprises won\'t trust you, regulators will shut you down.',
+          coreQuestion: 'Why is compliance an enabler rather than a barrier?',
+          coreDefinitions: {
+            title: 'Core Compliance Definitions',
+            definitions: [
+              { term: 'KYC', fullName: 'Know Your Customer', definition: 'Process of identifying and verifying customer identity.', sphereContext: 'Every Sphere customer goes through KYC before onboarding.' },
+              { term: 'AML', fullName: 'Anti-Money Laundering', definition: 'Laws, regulations, procedures to prevent disguising illegal funds.', sphereContext: 'Sphere maintains comprehensive AML program.' },
+              { term: 'CDD', fullName: 'Customer Due Diligence', definition: 'Evaluating customer information to assess risk.', sphereContext: 'Risk level determines monitoring intensity.' },
+              { term: 'EDD', fullName: 'Enhanced Due Diligence', definition: 'Additional rigorous diligence for high-risk customers.', sphereContext: 'High-risk customers undergo EDD with senior approval.' },
+              { term: 'SAR', fullName: 'Suspicious Activity Report', definition: 'Report filed with FinCEN when suspicious activity detected.', sphereContext: 'Sphere files SARs when required. Filing is confidential.' },
+              { term: 'BSA', fullName: 'Bank Secrecy Act', definition: 'Primary US AML law requiring programs and reports.', sphereContext: 'Sphere is subject to BSA as registered MSB.' },
+              { term: 'PEP', fullName: 'Politically Exposed Person', definition: 'Senior government officials, family, close associates.', sphereContext: 'PEP status triggers EDD.' }
             ]
           },
           complianceEnablesGrowth: {
             title: 'Why Compliance Enables Growth',
-            comparison: {
-              headers: ['Without Compliance', 'With Compliance'],
+            overview: 'Compliance enables business with partners, customers, and institutions that matter.',
+            comparisonTable: {
+              headers: ['Without Robust Compliance', 'With Robust Compliance'],
               rows: [
-                ['Banks won\'t work with you', 'Bank partnerships'],
-                ['Limited to retail', 'Institutional access'],
-                ['Regulatory risk', 'Regulatory clarity'],
-                ['Reputation risk', 'Trust and credibility']
+                ['Banks refuse partnership', 'Banking relationships possible'],
+                ['Limited to retail/unbanked', 'Enterprise and institutional access'],
+                ['Constant regulatory uncertainty', 'Clear regulatory standing'],
+                ['Reputational risk', 'Trust and credibility signal'],
+                ['Can\'t serve regulated customers', 'Regulated customers welcome you']
+              ]
+            },
+            specificExamples: [
+              { example: 'Banking Partner Onboarding', story: 'Banks conduct extensive due diligence. Sphere\'s SOC 2, AML program, licensing enabled relationships impossible without them.', outcome: 'Multiple banking relationships', lesson: 'Banks want compliance matching their standards.' },
+              { example: 'Enterprise Customer Win', story: 'Fortune 500 required SOC 2, compliance docs, licensing. Companies without were eliminated.', outcome: 'Enterprise onboarded', lesson: 'Compliance docs are table stakes.' },
+              { example: 'Regulatory Examination', story: 'State examiners conducted exam. Sphere\'s compliance-native approach meant all docs ready.', outcome: 'Clean exam, no material findings', lesson: 'Readiness is ongoing, not a scramble.' }
+            ],
+            bankingPartnerRequirements: [
+              { requirement: 'BSA/AML Program', detail: 'Written policies, BSA officer, testing, training' },
+              { requirement: 'SOC 2 Type II', detail: 'Security controls audit' },
+              { requirement: 'Licensing', detail: 'State MTLs, FinCEN registration' },
+              { requirement: 'Financial Statements', detail: 'Audited financials' },
+              { requirement: 'Insurance', detail: 'Cyber, E&O, crime insurance' }
+            ]
+          },
+          kycRequirements: {
+            title: 'KYC Requirements',
+            individualVerification: {
+              title: 'Individual Verification (Beneficial Owners)',
+              requirements: [
+                { category: 'Government ID', required: 'Yes — all 25%+ owners', acceptable: ['Passport', 'Driver\'s License', 'National ID'], notes: 'Current, legible' },
+                { category: 'Proof of Address', required: 'Yes — all 25%+ owners', acceptable: ['Utility bill (90 days)', 'Bank statement', 'Government letter'], notes: 'PO Boxes need extra verification' },
+                { category: 'Tax ID', required: 'Yes — SSN for US, Foreign TIN for non-US', notes: 'Tax reporting and verification' },
+                { category: 'Date of Birth', required: 'Yes — all owners', notes: 'Match ID, age 18+' }
+              ]
+            },
+            businessVerification: {
+              title: 'Business Verification (KYB)',
+              requirements: [
+                { category: 'Business Registration', required: 'Yes', acceptable: ['Articles of Incorporation', 'Certificate of Formation'], notes: 'Current, good standing' },
+                { category: 'EIN', required: 'Yes — US entities', acceptable: ['IRS confirmation', 'Form SS-4'], notes: 'Non-US provide equivalent' },
+                { category: 'Beneficial Ownership', required: 'Yes', detail: 'All 25%+ owners and control persons', notes: 'FinCEN CDD Rule' },
+                { category: 'Good Standing', required: 'Yes', notes: 'From state of incorporation' }
               ]
             }
           },
-          sphereApproach: {
-            title: 'Sphere\'s Compliance Approach',
-            items: [
-              'Pre-transaction screening',
-              'Real-time sanctions checks',
-              'Ongoing transaction monitoring',
-              'Risk-based customer tiering',
-              'Automated SAR workflows',
-              'Regular compliance audits'
-            ],
-            keyDifferentiator: 'Compliance happens BEFORE settlement, not after.'
+          amlProgram: {
+            title: 'AML Program — Five Pillars',
+            pillars: [
+              { pillar: '1. Written Policies', requirement: 'Documented BSA/AML policies', includes: ['Customer ID procedures', 'Monitoring policies', 'SAR procedures', 'Sanctions screening', 'Recordkeeping'], sphereImplementation: 'Comprehensive policies reviewed annually.' },
+              { pillar: '2. BSA Officer', requirement: 'Qualified compliance officer', responsibilities: ['Oversee program', 'SAR process', 'Regulator coordination', 'Board reporting'], sphereImplementation: 'Designated officer with board reporting.' },
+              { pillar: '3. Training', requirement: 'Training for all personnel', elements: ['BSA/AML overview', 'Company policies', 'Red flags', 'SAR confidentiality'], sphereImplementation: 'Annual training, tracked.' },
+              { pillar: '4. Independent Testing', requirement: 'Periodic independent review', scope: ['Policy adequacy', 'Compliance', 'Monitoring effectiveness', 'SAR appropriateness'], sphereImplementation: 'External audit annually.' },
+              { pillar: '5. Risk-Based CDD', requirement: 'Identify customers, understand business, assess risk', elements: ['CIP', 'Beneficial ownership', 'Understand relationship', 'Ongoing monitoring'], sphereImplementation: 'Risk ratings, monitoring matched to risk.' }
+            ]
           },
-          keyTakeaway: 'Compliance enables institutional adoption. Sphere\'s pre-settlement compliance is a competitive advantage.'
+          cddRequirements: {
+            title: 'CDD — Four Core Requirements',
+            requirements: [
+              { requirement: '1. Customer Identification (CIP)', detail: 'Collect identifying info, verify identity', forIndividuals: ['Name', 'DOB', 'Address', 'ID number'], forEntities: ['Legal name', 'Address', 'EIN'], timing: 'Before establishing relationship' },
+              { requirement: '2. Beneficial Ownership', detail: 'Identify 25%+ owners AND control persons', ownershipProng: '25%+ equity', controlProng: 'Management responsibility', timing: 'At opening, update when changes' },
+              { requirement: '3. Nature and Purpose', detail: 'Understand what customer does and why they need services', toCollect: ['Business description', 'Expected transactions', 'Counterparties', 'Source of funds'], purpose: 'Baseline for monitoring' },
+              { requirement: '4. Ongoing Monitoring', detail: 'Monitor for suspicious activity, keep info current', transactionMonitoring: 'Review against expected, flag anomalies', informationUpdates: 'Update when triggered' }
+            ]
+          },
+          eddRequirements: {
+            title: 'Enhanced Due Diligence (EDD)',
+            triggers: [
+              { trigger: 'PEPs', why: 'Corruption opportunity', eddRequired: ['Source of wealth', 'Source of funds', 'Senior approval', 'Enhanced monitoring'] },
+              { trigger: 'High-Risk Jurisdictions', why: 'Elevated ML/TF risk', eddRequired: ['Purpose info', 'Source of funds', 'Senior approval', 'Enhanced monitoring'] },
+              { trigger: 'Complex Ownership', why: 'Can hide true owners', eddRequired: ['Full chain documentation', 'Reason for structure', 'Verification at each layer'] },
+              { trigger: 'High-Risk Business', why: 'Higher ML risk', eddRequired: ['Industry docs', 'Licensing verification', 'Enhanced monitoring'] }
+            ],
+            components: [
+              { component: 'Enhanced ID', detail: 'Multiple sources' },
+              { component: 'Source of Wealth', detail: 'How accumulated' },
+              { component: 'Source of Funds', detail: 'Where funds originate' },
+              { component: 'Purpose', detail: 'Why transactions' },
+              { component: 'Senior Approval', detail: 'Documented approval' },
+              { component: 'Enhanced Monitoring', detail: 'Lower thresholds' }
+            ]
+          },
+          sarRequirements: {
+            title: 'Suspicious Activity Reporting',
+            thresholds: [
+              { category: 'Known Criminal Violation', threshold: '$2,000+', detail: 'Illegal funds or evading reporting' },
+              { category: 'Suspicious — Suspect Identified', threshold: '$5,000+', detail: 'Suspicious with identified subject' },
+              { category: 'Suspicious — No Suspect', threshold: '$25,000+', detail: 'Suspicious, no subject identified' }
+            ],
+            process: [
+              { step: 1, action: 'Detection', detail: 'Activity flagged' },
+              { step: 2, action: 'Alert Review', detail: 'Determine if investigation warranted' },
+              { step: 3, action: 'Investigation', detail: 'Gather information' },
+              { step: 4, action: 'SAR Decision', detail: 'Filing threshold met?' },
+              { step: 5, action: 'SAR Preparation', detail: 'Who, what, when, where, why, how' },
+              { step: 6, action: 'Quality Review', detail: 'Senior review' },
+              { step: 7, action: 'Filing', detail: 'FinCEN BSA E-Filing' },
+              { step: 8, action: 'Recordkeeping', detail: '5 years' }
+            ],
+            timeline: 'File within 30 days of detection',
+            confidentiality: { rules: ['No Tipping Off — federal crime', 'Limited Disclosure — FinCEN, law enforcement, regulators only', 'Safe Harbor — protection for good faith filing'] }
+          },
+          riskAssessmentFramework: {
+            title: 'Risk Assessment Framework',
+            categories: [
+              { category: 'Geographic Risk', icon: '🌍', factors: [{ factor: 'Customer Location', high: 'FATF grey/black, high-corruption', medium: 'Developing', low: 'Established jurisdictions' }, { factor: 'Transaction Destinations', high: 'Sanctioned, offshore', medium: 'Emerging', low: 'Low-risk' }, { factor: 'Beneficial Owner Location', high: 'High-risk jurisdictions', medium: 'Moderate', low: 'Low-risk with verification' }] },
+              { category: 'Business Risk', icon: '🏭', factors: [{ factor: 'Industry', high: 'Gambling, cannabis, crypto exchanges', medium: 'Real estate, import/export', low: 'Regulated financial services' }, { factor: 'Cash Intensity', high: 'Significant cash', medium: 'Some cash', low: 'Entirely electronic' }] },
+              { category: 'Transaction Risk', icon: '💹', factors: [{ factor: 'Volume', high: 'High without justification', medium: 'Moderate consistent', low: 'Matches business' }, { factor: 'Patterns', high: 'Structuring, layering', medium: 'Some irregular with explanation', low: 'Consistent' }] },
+              { category: 'Customer Profile Risk', icon: '👤', factors: [{ factor: 'PEP Status', high: 'Current senior PEP', medium: 'Former, lower-level', low: 'No connection' }, { factor: 'Ownership', high: 'Opaque, nominees', medium: 'Some complexity', low: 'Clear, simple' }] }
+            ],
+            riskRatings: [
+              { rating: 'Low', criteria: 'No significant factors', monitoring: 'Standard', refresh: '3 years' },
+              { rating: 'Medium', criteria: 'Some elevated, mitigated', monitoring: 'Lowered thresholds', refresh: '2 years' },
+              { rating: 'High', criteria: 'Significant factors', monitoring: 'Intensive', refresh: 'Annually', approval: 'Senior required' },
+              { rating: 'Prohibited', criteria: 'Exceeds appetite', monitoring: 'N/A', approval: 'Declined' }
+            ]
+          },
+          sphereComplianceApproach: {
+            title: 'Sphere\'s Compliance Approach',
+            philosophy: [
+              { principle: 'Compliance is a Feature', explanation: 'Enables enterprise adoption.', implementation: 'Highlighted in sales, docs ready.' },
+              { principle: 'Pre-Transaction', explanation: 'Before settlement.', implementation: 'Real-time screening.' },
+              { principle: 'Embedded', explanation: 'In architecture.', implementation: 'No override buttons.' },
+              { principle: 'Risk-Based', explanation: 'Intensity matches risk.', implementation: 'Automated scoring, tiered monitoring.' }
+            ],
+            technologyStack: [
+              { component: 'Sanctions Screening', function: 'Real-time against OFAC, UN, EU, UK' },
+              { component: 'Transaction Monitoring', function: 'Automated pattern detection' },
+              { component: 'Case Management', function: 'Alert investigation workflow' },
+              { component: 'Risk Rating', function: 'Multi-factor scoring' },
+              { component: 'Identity Verification', function: 'Document verification' },
+              { component: 'Blockchain Analytics', function: 'Wallet risk scoring' }
+            ],
+            teamStructure: [
+              { role: 'CCO', responsibility: 'Overall program, board' },
+              { role: 'BSA Officer', responsibility: 'BSA, SAR, exams' },
+              { role: 'Analysts', responsibility: 'Alerts, KYC/EDD, investigations' },
+              { role: 'Operations', responsibility: 'Onboarding, documentation' }
+            ]
+          },
+          redFlagsToWatch: {
+            title: 'Red Flags to Watch',
+            categories: [
+              { category: 'Transaction Red Flags', icon: '💸', flags: [{ flag: 'Structuring', detail: 'Below thresholds', severity: 'High' }, { flag: 'Rapid Movement', detail: 'Quick with no purpose', severity: 'High' }, { flag: 'Round-Trip', detail: 'Sent and returned', severity: 'High' }, { flag: 'Layering', detail: 'Complex to obscure', severity: 'High' }] },
+              { category: 'Behavior Red Flags', icon: '🚩', flags: [{ flag: 'Reluctant to Provide Info', detail: 'Refuses KYC', severity: 'High' }, { flag: 'Inconsistent Info', detail: 'Contradicts docs', severity: 'High' }, { flag: 'Unusual Questions', detail: 'About thresholds, detection', severity: 'High' }] },
+              { category: 'Documentation Red Flags', icon: '📄', flags: [{ flag: 'Forged Docs', detail: 'Tampering', severity: 'High' }, { flag: 'Nominees', detail: 'Without purpose', severity: 'High' }, { flag: 'Shell Company', detail: 'No presence', severity: 'High' }] },
+              { category: 'Geographic Red Flags', icon: '🌍', flags: [{ flag: 'Sanctioned Jurisdiction', detail: 'Comprehensively sanctioned', severity: 'High' }, { flag: 'FATF Grey/Black', detail: 'High-risk jurisdiction', severity: 'High' }] },
+              { category: 'Crypto Red Flags', icon: '🔗', flags: [{ flag: 'Mixer Usage', detail: 'Through mixing', severity: 'High' }, { flag: 'Sanctioned Wallet', detail: 'OFAC address', severity: 'High' }, { flag: 'Darknet Exposure', detail: 'Darknet markets', severity: 'High' }] }
+            ],
+            responseToRedFlags: [
+              { step: 'Document', detail: 'Record flag and circumstances' },
+              { step: 'Investigate', detail: 'Gather information' },
+              { step: 'Escalate', detail: 'To compliance team' },
+              { step: 'Decide', detail: 'SAR? Continue relationship?' },
+              { step: 'Act', detail: 'File SAR, enhance monitoring, or exit' }
+            ]
+          },
+          keyTakeaway: 'Compliance enables institutional adoption, banking, and growth. Sphere\'s compliance-native approach embeds compliance as competitive advantage.'
         },
         exercise: {
           title: 'Exercise 3.2 — Compliance Scenario',
-          prompt: 'A new B2B customer wants to onboard for high-value cross-border payments.\n\nDescribe:\n1) KYC requirements you\'d need\n2) Risk assessment factors\n3) Ongoing monitoring approach\n4) Red flags to watch for',
-          criteria: ['KYC elements', 'Risk factors identified', 'Monitoring approach', 'Red flags listed']
+          prompt: 'New B2B customer wants to onboard:\n- Dubai trading company (DMCC)\n- Beneficial owner: UAE national (60%) + Iranian national with UAE residency (40%)\n- Expected: $2M/month to India, Pakistan, Nigeria\n- Industry: Textiles and commodities\n\nProvide:\n1) KYC documents required\n2) Risk factors\n3) Risk rating recommendation\n4) EDD elements\n5) Monitoring approach\n6) Red flags to watch\n7) Onboard decision and rationale',
+          criteria: ['Complete KYC list', 'All risk factors', 'Appropriate rating', 'EDD for Iranian BO', 'Monitoring matched to risk', 'Red flags identified']
         },
         quiz: [
-          { q: 'What does KYC stand for?', options: ['Keep Your Cash', 'Know Your Customer', 'Key Yield Calculation', 'Know Your Compliance'], correct: 1 },
-          { q: 'When does Sphere perform compliance checks?', options: ['After settlement', 'Before settlement', 'Never', 'Only for large amounts'], correct: 1 },
-          { q: 'EDD is required for:', options: ['All customers', 'High-risk customers', 'Low-risk only', 'No customers'], correct: 1 }
+          { q: 'KYC stands for:', options: ['Keep Your Cash', 'Know Your Customer', 'Key Yield Calculation', 'Know Your Compliance'], correct: 1 },
+          { q: 'Sphere performs compliance checks:', options: ['After settlement', 'Before settlement', 'Weekly batch', 'Only large amounts'], correct: 1 },
+          { q: 'EDD is required for:', options: ['All customers', 'High-risk only', 'Low-risk only', 'None'], correct: 1 },
+          { q: 'BSA/AML program has how many pillars?', options: ['3', '4', '5', '6'], correct: 2 },
+          { q: 'SAR filing deadline:', options: ['7 days', '30 days', '60 days', '90 days'], correct: 1 },
+          { q: 'Can you tell customer SAR was filed?', options: ['Yes', 'Only if asked', 'Never — illegal', 'After 90 days'], correct: 2 }
         ]
       },
       {
@@ -3138,66 +3418,183 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
         title: '3.3 Sanctions & Screening',
         curriculum: {
           objectives: [
-            'Understand sanctions regimes (OFAC, UN, EU)',
-            'Explain screening processes',
-            'Handle sanctions-related questions'
+            'Understand major sanctions regimes (OFAC, UN, EU, UK)',
+            'Master what gets screened and how',
+            'Navigate high-risk jurisdictions',
+            'Apply Sphere\'s screening process',
+            'Know documentation requirements',
+            'Handle flagged payments professionally'
           ],
           keyConcepts: [
-            'OFAC (US), UN, EU maintain sanctions lists',
+            'OFAC (US), UN, EU, UK maintain sanctions lists',
+            'Screening: names, addresses, wallets, jurisdictions',
             'Real-time screening before every transaction',
-            'Both parties AND jurisdictions must be screened'
+            'High-risk requires enhanced scrutiny, not automatic rejection',
+            'Flagged payments follow structured process'
           ]
         },
         learn: {
-          introduction: 'Sanctions compliance is non-negotiable. One violation can end a business.',
-          coreQuestion: 'How does sanctions screening work?',
-          sanctionsRegimes: {
+          introduction: 'Sanctions compliance is existential — a single violation can mean millions in fines, loss of banking, criminal prosecution. Unlike other compliance, sanctions is binary: comply or face severe consequences.',
+          coreQuestion: 'How does sanctions screening work, and what happens when flagged?',
+          majorSanctionsRegimes: {
             title: 'Major Sanctions Regimes',
-            items: [
-              { regime: 'OFAC (US)', scope: 'SDN list, country programs (Iran, NK, Russia, etc.)' },
-              { regime: 'UN', scope: 'Security Council sanctions' },
-              { regime: 'EU', scope: 'Consolidated sanctions list' },
-              { regime: 'UK', scope: 'OFSI financial sanctions' },
-              { regime: 'UAE', scope: 'Local lists + international' }
+            regimes: [
+              {
+                regime: 'OFAC (US)',
+                fullName: 'Office of Foreign Assets Control',
+                agency: 'US Treasury',
+                icon: '🇺🇸',
+                scope: 'US persons, US-origin goods, USD transactions',
+                lists: [{ list: 'SDN List', description: 'Blocked persons', count: '~12,000' }, { list: 'Sectoral Sanctions', description: 'Russian energy, financial' }, { list: 'Country Programs', description: 'Iran, NK, Syria, Cuba, Russia' }],
+                keyPrinciples: ['Strict liability — no intent required', 'Secondary sanctions — affects non-US persons', 'Dollar clearing creates US nexus', '50% rule — 50%+ owned = sanctioned'],
+                realWorldExamples: [{ example: 'BNP Paribas (2014)', violation: 'Sudan, Cuba, Iran through US', consequence: '$8.9 billion fine', lesson: 'Even non-US banks face massive penalties' }, { example: 'BitGo (2020)', violation: 'Sanctioned jurisdictions used services', consequence: '$98,830 settlement', lesson: 'OFAC applies to crypto' }],
+                sphereImplication: 'Full OFAC exposure. Every transaction screened.'
+              },
+              {
+                regime: 'UN Sanctions',
+                fullName: 'UN Security Council Sanctions',
+                agency: 'UN Security Council',
+                icon: '🇺🇳',
+                scope: 'All 193 member states',
+                lists: [{ list: 'Consolidated List', description: 'UN sanctioned individuals/entities' }],
+                keyPrinciples: ['Binding on all members', 'Focus: terrorism, WMD, human rights', 'Adopted by OFAC, EU, UK'],
+                sphereImplication: 'UN sanctions incorporated into lists Sphere screens.'
+              },
+              {
+                regime: 'EU Sanctions',
+                fullName: 'EU Restrictive Measures',
+                agency: 'European External Action Service',
+                icon: '🇪🇺',
+                scope: 'EU persons, territory, entities',
+                lists: [{ list: 'EU Consolidated List', description: 'Asset freeze targets' }],
+                keyPrinciples: ['Applies to EU citizens worldwide', 'Member states enforce', 'UK now separate'],
+                realWorldExamples: [{ example: 'Russia Sanctions (2022+)', context: 'Most comprehensive ever', measures: 'Freezes, SWIFT disconnection' }],
+                sphereImplication: 'EU sanctions apply for EU customers, EUR transactions.'
+              },
+              {
+                regime: 'UK Sanctions',
+                fullName: 'UK Financial Sanctions (OFSI)',
+                agency: 'OFSI (HM Treasury)',
+                icon: '🇬🇧',
+                scope: 'UK persons, territory, GBP',
+                lists: [{ list: 'UK Sanctions List', description: 'Asset freeze targets' }],
+                keyPrinciples: ['Post-Brexit independent', 'Strict liability', 'Criminal penalties possible'],
+                sphereImplication: 'UK OFSI applies for UK customers, GBP.'
+              }
             ]
           },
           whatGetsScreened: {
             title: 'What Gets Screened',
-            items: [
-              { item: 'Individuals', details: 'Names, aliases, DOB' },
-              { item: 'Entities', details: 'Company names, ownership' },
-              { item: 'Jurisdictions', details: 'Country of origin/destination' },
-              { item: 'Vessels/Aircraft', details: 'If applicable' },
-              { item: 'Wallet Addresses', details: 'Blockchain analytics' }
-            ]
-          },
-          screeningProcess: {
-            title: 'Sphere\'s Screening Process',
-            steps: [
-              { step: 'Transaction Initiated', action: 'Request received' },
-              { step: 'Real-Time Screen', action: 'Check sender, recipient, jurisdiction, wallet' },
-              { step: 'Clear', action: 'Proceed with transaction' },
-              { step: 'Hit', action: 'Escalate to compliance team' }
+            categories: [
+              { category: 'Name Screening', icon: '👤', items: [{ item: 'Individual Names', detail: 'Legal name, aliases, transliterations', challenge: 'Variations, common names' }, { item: 'Entity Names', detail: 'Legal, trading, former names', challenge: 'Changes, translations' }, { item: 'Beneficial Owners', detail: 'All 25%+ owners', challenge: 'Complex ownership' }], howItWorks: 'Fuzzy matching against sanctions lists.', example: '"Mohammad Al-Rahman" checked against variations.' },
+              { category: 'Address Screening', icon: '📍', items: [{ item: 'Country', detail: 'Customer, counterparty, BO country', challenge: 'Comprehensive sanctions' }, { item: 'Region', detail: 'Crimea, Donetsk', challenge: 'Region-specific' }], howItWorks: 'Parsed to identify country/region, checked.', example: 'Sevastopol, Crimea — blocked.' },
+              { category: 'Wallet Screening', icon: '🔗', items: [{ item: 'Direct Sanctions', detail: 'OFAC SDN wallet addresses', challenge: 'Growing but not comprehensive' }, { item: 'Exposure Analysis', detail: 'History — sanctioned, mixers, darknet', challenge: 'Indirect exposure' }, { item: 'Risk Scoring', detail: 'Overall based on history', challenge: 'Interpretation' }], howItWorks: 'Blockchain analytics trace history, assign score.', example: '5% Tornado Cash exposure triggers review.' },
+              { category: 'Transaction Purpose', icon: '📋', items: [{ item: 'Purpose Codes', detail: 'Description fields', challenge: 'Prohibited purposes' }, { item: 'Trade Descriptions', detail: 'Goods/services', challenge: 'Dual-use' }], howItWorks: 'Text analysis for prohibited items.', example: '"Oil drilling equipment" flagged for Russia sectors.' }
             ]
           },
           highRiskJurisdictions: {
             title: 'High-Risk Jurisdictions',
-            comprehensive: ['Russia', 'Belarus', 'Iran', 'North Korea'],
-            targeted: ['Venezuela', 'Cuba'],
-            situational: 'Various African/Asian countries',
-            keyPrinciple: 'Jurisdiction alone can block a transaction.'
+            jurisdictionCategories: [
+              {
+                category: 'Comprehensively Sanctioned (OFAC)',
+                riskLevel: 'PROHIBITED',
+                jurisdictions: [{ country: 'North Korea', icon: '🇰🇵', detail: 'Near-total embargo', exception: 'Humanitarian with license' }, { country: 'Iran', icon: '🇮🇷', detail: 'Comprehensive', exception: 'Very limited' }, { country: 'Syria', icon: '🇸🇾', detail: 'Comprehensive', exception: 'Humanitarian with license' }, { country: 'Cuba', icon: '🇨🇺', detail: 'Comprehensive', exception: 'Licensed travel, limited remittances' }, { country: 'Russia', icon: '🇷🇺', detail: 'Increasingly comprehensive', exception: 'Rapidly changing' }],
+                spherePolicy: 'Sphere does NOT process comprehensively sanctioned countries. No exceptions without legal review.',
+                customerCommunication: 'Unable to process due to US sanctions regulations.'
+              },
+              {
+                category: 'FATF Grey List',
+                riskLevel: 'HIGH RISK — EDD REQUIRED',
+                jurisdictions: [{ country: 'South Africa', icon: '🇿🇦', detail: 'Grey listed 2023', status: 'Action plan' }, { country: 'Nigeria', icon: '🇳🇬', detail: 'Grey listed', status: 'Action plan' }, { country: 'Turkey', icon: '🇹🇷', detail: 'Grey listed', status: 'Action plan' }],
+                spherePolicy: 'EDD required. Not automatically prohibited.',
+                eddRequirements: ['Source of funds', 'Purpose', 'Senior review', 'Enhanced monitoring']
+              },
+              {
+                category: 'High Corruption',
+                riskLevel: 'ELEVATED — ENHANCED SCRUTINY',
+                assessment: 'Transparency International CPI',
+                spherePolicy: 'Enhanced scrutiny even if not on FATF lists.',
+                eddRequirements: ['Source of wealth', 'PEP emphasis', 'Enhanced monitoring']
+              }
+            ],
+            nuancedApproach: {
+              title: 'Not All High-Risk = Prohibited',
+              explanation: 'High-risk means more scrutiny, not automatic rejection.',
+              tiers: [
+                { tier: 'Prohibited', treatment: 'No transactions', examples: 'North Korea, Iran' },
+                { tier: 'Highly Restricted', treatment: 'Only with licenses', examples: 'Cuba (licensed)' },
+                { tier: 'Enhanced Scrutiny', treatment: 'Permitted with EDD', examples: 'FATF grey list' },
+                { tier: 'Standard', treatment: 'Normal CDD', examples: 'Low-risk developed markets' }
+              ]
+            }
           },
-          keyTakeaway: 'Sanctions screening is real-time and non-negotiable. Jurisdiction alone can block a transaction.'
+          screeningProcessFlow: {
+            title: 'Sphere\'s Screening Process',
+            displayType: 'flow-diagram',
+            nodes: [
+              { id: 'initiation', type: 'start', label: 'Transaction Initiated', description: 'Customer initiates payment' },
+              { id: 'pre-screen', type: 'process', label: 'Pre-Transaction Screening', description: 'Automated screening of all parties, jurisdictions, wallets', details: ['Sender screening', 'Recipient screening', 'BO screening', 'Jurisdiction check', 'Wallet screening', 'Purpose screening'] },
+              { id: 'decision', type: 'decision', label: 'Screening Result', branches: [{ condition: 'Clear', target: 'clear-process' }, { condition: 'Potential Match', target: 'potential-match' }, { condition: 'Confirmed Hit', target: 'confirmed-hit' }] },
+              { id: 'clear-process', type: 'process', label: 'Clear — Proceed', description: 'No matches. Proceed to settlement.', outcome: 'Processed normally', color: 'green' },
+              { id: 'potential-match', type: 'process', label: 'Potential Match — Review', description: 'Fuzzy match requires analyst review', details: ['Transaction held', 'Analyst reviews', 'Compares info', 'True match or false positive'], color: 'yellow' },
+              { id: 'analyst-decision', type: 'decision', label: 'Analyst Determination', branches: [{ condition: 'False Positive', target: 'false-positive' }, { condition: 'True Match', target: 'confirmed-hit' }, { condition: 'Need Info', target: 'request-info' }] },
+              { id: 'false-positive', type: 'process', label: 'False Positive — Clear', description: 'Not a true match. Document.', outcome: 'Released', color: 'green' },
+              { id: 'request-info', type: 'process', label: 'Request Information', description: 'Need additional docs', details: ['Contact customer', 'Set timeline', 'Hold pending'], color: 'yellow' },
+              { id: 'confirmed-hit', type: 'process', label: 'Confirmed Hit — Block', description: 'True match to sanctioned party', details: ['Blocked', 'Escalate', 'Document', 'Consider SAR'], outcome: 'Rejected', color: 'red' }
+            ],
+            keyPrinciples: ['Screening BEFORE funds move', 'Potential matches = human review', 'Confirmed hits blocked, no exceptions', 'All decisions documented']
+          },
+          documentationRequirements: {
+            title: 'Documentation for Compliance',
+            byFlagType: [
+              { flagType: 'Name Match (Individual)', scenario: 'Customer matches sanctioned individual', requiredDocumentation: ['Government photo ID', 'DOB proof', 'Citizenship proof'], purpose: 'Confirm NOT the sanctioned individual', timeline: '24-48 hours' },
+              { flagType: 'Name Match (Entity)', scenario: 'Business matches sanctioned entity', requiredDocumentation: ['Certificate of Incorporation', 'Registration', 'Ownership docs'], purpose: 'Confirm NOT the sanctioned entity', timeline: '48-72 hours' },
+              { flagType: 'Jurisdiction Flag', scenario: 'High-risk jurisdiction involved', requiredDocumentation: ['Purpose explanation', 'Evidence not benefiting sanctioned', 'Source of funds'], purpose: 'Confirm transaction permitted', timeline: '48-72 hours' },
+              { flagType: 'Wallet Risk', scenario: 'High-risk wallet exposure', requiredDocumentation: ['Ownership explanation', 'Source of flagged funds', 'Business justification'], purpose: 'Understand and mitigate risks', timeline: '24-72 hours' }
+            ]
+          },
+          flaggedPaymentProcess: {
+            title: 'Flagged Payment — Customer Journey',
+            process: {
+              steps: [
+                { step: 1, title: 'Hold Notification', timing: 'Immediate', whatHappens: 'Transaction held, customer notified.', customerCommunication: { subject: 'Payment Under Review', template: 'Your payment of [AMOUNT] to [RECIPIENT] is under compliance review.\n\nNext: Our team will review, may contact you.\nTimeline: [TIMEFRAME]\nStatus: Under Review\nRef: [REF]' } },
+                { step: 2, title: 'Initial Review', timing: '24-48 hours', whatHappens: 'Analyst reviews, determines if info needed.', outcomes: ['Cleared — proceed', 'Info needed — request docs', 'Blocked — reject'] },
+                { step: 3, title: 'Documentation Request', timing: 'Within 48 hours', whatHappens: 'Customer receives specific request.', customerCommunication: { subject: 'Documentation Required: [REF]', template: 'To complete review, we need:\n\n[DOCS LIST]\n\nWhy: [EXPLANATION]\nDeadline: [X] business days\nSubmit: Reply or upload via dashboard' }, documentationTimeline: { standard: '5 business days', extension: 'One 5-day extension', expired: 'Cancelled, funds returned' } },
+                { step: 4, title: 'Doc Review', timing: '24-48 hours after receipt', whatHappens: 'Compliance reviews documentation.', outcomes: ['Resolved — approved', 'Insufficient — more docs', 'Unresolved — rejected'] },
+                { step: 5, title: 'Resolution', timing: 'Immediately', approvedCommunication: { subject: 'Payment Approved: [REF]', template: 'Your payment of [AMOUNT] to [RECIPIENT] is approved.\n\nExpected: [DATE]\n\nThank you.' }, rejectedCommunication: { subject: 'Payment Cannot Be Completed: [REF]', template: 'We cannot complete payment of [AMOUNT] to [RECIPIENT].\n\nReason: [GENERAL REASON]\nFunds: [RETURNED]\n\nTo request review: compliance@sphere.com with ref.' } }
+              ]
+            },
+            timelineExpectations: {
+              title: 'Timeline by Scenario',
+              scenarios: [
+                { scenario: 'Simple name match (false positive)', typical: '24-48 hours', withDocs: '24 hours after receipt' },
+                { scenario: 'Jurisdiction review', typical: '48-72 hours', withDocs: '48 hours after receipt' },
+                { scenario: 'Complex ownership', typical: '3-5 business days', withDocs: '2-3 days after receipt' }
+              ]
+            },
+            escalationPath: {
+              title: 'Escalation Path',
+              levels: [
+                { level: 'Level 1: Analyst', handles: 'Standard reviews, false positives, docs' },
+                { level: 'Level 2: Senior Compliance', handles: 'Complex, jurisdiction, EDD' },
+                { level: 'Level 3: Compliance Officer', handles: 'SAR, termination, regulatory' },
+                { level: 'Level 4: Legal/Executive', handles: 'Novel situations, regulator inquiries' }
+              ]
+            }
+          },
+          keyTakeaway: 'Sanctions compliance is non-negotiable. Real-time screening against multiple regimes before processing. Clear process for flagged payments with customer communication.'
         },
         exercise: {
           title: 'Exercise 3.3 — Sanctions Scenario',
-          prompt: 'A customer wants to send payment to a company in Dubai, but one of the beneficial owners has a Russian passport.\n\nAnalyze:\n1) What screening is required?\n2) What factors determine if allowed?\n3) What documentation would you need?\n4) How would you explain the process?',
-          criteria: ['Screening requirements', 'Risk factors', 'Documentation needs', 'Clear communication']
+          prompt: 'UAE customer wants to send $150,000 to Istanbul. During screening:\n1) "Yilmaz Trading Ltd" partially matches SDN "Yilmaz International Trading"\n2) One BO has common Turkish name matching SDN\n3) Turkey is FATF grey list\n\nAs analyst:\n1) Initial assessment?\n2) Documentation to request?\n3) Customer communication?\n4) Criteria to clear?\n5) Criteria to reject?\n6) Draft documentation request email.',
+          criteria: ['Correct risk assessment', 'Appropriate documentation', 'Professional communication', 'Clear criteria']
         },
         quiz: [
-          { q: 'OFAC is administered by which country?', options: ['UAE', 'UK', 'US', 'UN'], correct: 2 },
-          { q: 'When does Sphere screen transactions?', options: ['After settlement', 'Real-time before processing', 'Weekly batch', 'Never'], correct: 1 },
-          { q: 'What can block a transaction besides people?', options: ['Nothing else', 'Jurisdiction alone', 'Only large amounts', 'Time of day'], correct: 1 }
+          { q: 'OFAC is administered by:', options: ['UN', 'EU', 'US', 'UK'], correct: 2 },
+          { q: 'FATF grey list means:', options: ['Prohibited', 'EDD required', 'No requirements', 'Auto approval'], correct: 1 },
+          { q: 'Sphere screens transactions:', options: ['After settlement', 'Real-time before', 'Daily batch', 'Only large'], correct: 1 },
+          { q: 'Potential match requires:', options: ['Auto rejection', 'Auto approval', 'Human review', 'Customer notification only'], correct: 2 },
+          { q: 'Customer documentation timeline:', options: ['24 hours', '5 business days', '30 days', 'No deadline'], correct: 1 }
         ]
       },
       {
@@ -3205,71 +3602,230 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
         title: '3.4 Travel Rule & Data Requirements',
         curriculum: {
           objectives: [
-            'Understand FATF Travel Rule',
-            'Explain originator/beneficiary data requirements',
-            'Handle Travel Rule questions from counterparties'
+            'Understand FATF Travel Rule origin and purpose',
+            'Master required data elements',
+            'Navigate threshold variations including Brazil/LatAm',
+            'Articulate why Travel Rule matters for Sphere',
+            'Understand protocols and transmission methods',
+            'Handle edge cases practically'
           ],
           keyConcepts: [
-            'Travel Rule: Share originator/beneficiary info',
-            'Threshold varies by jurisdiction ($3K US, €1K EU)',
-            'Critical for institutional adoption'
+            'FATF Recommendation 16: Share originator/beneficiary info',
+            'Thresholds vary: $3K (US), €0 (EU crypto), BRL 10,000 (Brazil)',
+            'Required: Name, account/wallet, address OR ID, institution',
+            'Protocols: TRISA, Notabene, TRUST, OpenVASP, Sygna',
+            'Edge cases need practical solutions'
           ]
         },
         learn: {
-          introduction: 'The Travel Rule is becoming mandatory globally. Understanding it is essential for institutional conversations.',
-          coreQuestion: 'What is the Travel Rule and why does it matter?',
-          whatIsIt: {
-            title: 'What is the Travel Rule?',
-            description: 'FATF Recommendation 16 requires VASPs (Virtual Asset Service Providers) to share originator and beneficiary information for transfers.',
-            dataRequired: {
-              originator: ['Full name', 'Account number', 'Address or ID', 'Institution name'],
-              beneficiary: ['Full name', 'Account number', 'Institution name (if applicable)']
+          introduction: 'The Travel Rule is becoming global standard for virtual asset transfers. Understanding and implementing compliance is essential for institutional customers, banking, and cross-border operations.',
+          coreQuestion: 'What is Travel Rule, what data must be shared, and how does Sphere comply?',
+          travelRuleSummary: {
+            title: 'Travel Rule — Executive Summary',
+            definition: 'VASPs must obtain, hold, and transmit originator and beneficiary information for virtual asset transfers above thresholds.',
+            keyTakeaways: ['WHO: VASPs conducting transfers', 'WHAT: Originator/beneficiary identifying info', 'WHEN: Above jurisdiction thresholds', 'WHY: Enable law enforcement tracing', 'HOW: Via protocols or secure communication'],
+            spherePosition: 'Sphere is fully Travel Rule compliant. We collect, transmit, and maintain records.',
+            whyItMatters: 'Banks, institutions, regulators view Travel Rule as table stakes. Non-compliant VASPs excluded.'
+          },
+          fatfDefinition: {
+            title: 'FATF Definition',
+            whatIsFATF: { fullName: 'Financial Action Task Force', description: '39 member jurisdictions setting global AML/CFT standards.', relevantRecommendation: 'Recommendation 16 (Wire Transfers) — extended to crypto 2019' },
+            recommendation16: { title: 'Recommendation 16', originalScope: 'Wire transfers since 1996', extension: 'June 2019: Extended to virtual assets', keyLanguage: '"Countries should ensure originating VASPs obtain originator and beneficiary info, submit to beneficiary VASP immediately and securely."' },
+            sunriseIssue: { title: 'Sunrise Issue', problem: 'Not all jurisdictions implemented same time/thresholds.', sphereApproach: 'Apply MORE stringent jurisdiction. When in doubt, collect full info.' }
+          },
+          requiredDataElements: {
+            title: 'Required Data Elements',
+            originatorRequirements: {
+              title: 'Originator (Sender)',
+              required: [
+                { element: 'Full Legal Name', description: 'As on official ID', required: 'Always above threshold' },
+                { element: 'Account/Wallet Address', description: 'Unique identifier', required: 'Always' },
+                { element: 'Address OR ID OR Customer ID OR DOB/POB', description: 'At least ONE additional', options: ['Physical address', 'Government ID number', 'Customer ID', 'Date and place of birth'], required: 'At least ONE above threshold' }
+              ],
+              institutionRequirements: [{ element: 'Originating Institution Name', required: 'Required' }, { element: 'Institution Address or LEI', required: 'Recommended' }]
+            },
+            beneficiaryRequirements: {
+              title: 'Beneficiary (Receiver)',
+              required: [
+                { element: 'Full Legal Name', required: 'Always above threshold' },
+                { element: 'Account/Wallet Address', required: 'Always' }
+              ],
+              institutionRequirements: [{ element: 'Beneficiary Institution Name', required: 'When at another VASP' }]
+            },
+            whyEachMatters: [
+              { element: 'Name', purpose: 'Sanctions screening, investigation' },
+              { element: 'Account/Wallet', purpose: 'Tracing funds' },
+              { element: 'Address/ID', purpose: 'Verification, disambiguation' },
+              { element: 'Institution', purpose: 'Regulatory targeting' }
+            ]
+          },
+          thresholdsByJurisdiction: {
+            title: 'Thresholds by Jurisdiction',
+            majorJurisdictions: [
+              { jurisdiction: 'United States', flag: '🇺🇸', threshold: '$3,000', regulator: 'FinCEN', status: 'Enforced', notes: 'Traditional wire rule', sphereImplication: 'US transfers ≥$3,000 require compliance' },
+              { jurisdiction: 'European Union', flag: '🇪🇺', threshold: '€0 (no threshold crypto)', regulator: 'NCAs', regulation: 'TFR', status: 'Enforced Dec 2024', notes: 'ALL crypto transfers require info', sphereImplication: 'ALL EU transfers require compliance' },
+              { jurisdiction: 'United Kingdom', flag: '🇬🇧', threshold: '£0', regulator: 'FCA', status: 'Enforced', notes: 'Aligned with EU', sphereImplication: 'ALL UK transfers require compliance' },
+              { jurisdiction: 'Singapore', flag: '🇸🇬', threshold: 'SGD 1,500 (~$1,100)', regulator: 'MAS', status: 'Enforced', notes: 'First for crypto', sphereImplication: 'Singapore ≥SGD 1,500 require compliance' },
+              { jurisdiction: 'UAE', flag: '🇦🇪', threshold: 'AED 3,500 (~$950)', regulator: 'CBUAE, VARA', status: 'Enforced', notes: 'Part of FATF exit', sphereImplication: 'UAE ≥AED 3,500 require compliance' },
+              { jurisdiction: 'Japan', flag: '🇯🇵', threshold: '¥0', regulator: 'FSA', status: 'Enforced', notes: 'First for crypto (2020)', sphereImplication: 'ALL Japan transfers require compliance' },
+              { jurisdiction: 'Switzerland', flag: '🇨🇭', threshold: 'CHF 1,000 (~$1,100)', regulator: 'FINMA', status: 'Enforced', notes: 'Wallet ownership proof for self-hosted', sphereImplication: 'Switzerland ≥CHF 1,000 plus wallet verification' }
+            ],
+            latinAmerica: {
+              title: 'Latin America — Key Markets',
+              subtitle: 'Brazil and LatAm jurisdictions Sphere is pursuing',
+              jurisdictions: [
+                { jurisdiction: 'Brazil', flag: '🇧🇷', threshold: 'BRL 10,000 (~$2,000)', regulator: 'COAF, BCB', status: 'Enforced', details: { keyRequirements: ['≥BRL 10,000 full info', 'BCB registration', 'STRs to COAF', 'Cross-border extra docs'], pixIntegration: 'PIX creates stablecoin opportunities', sphereOpportunity: 'Brazil-US corridor is high volume' }, sphereImplication: 'Brazil ≥BRL 10,000 require compliance; BCB registration needed' },
+                { jurisdiction: 'Mexico', flag: '🇲🇽', threshold: 'No threshold (all)', regulator: 'CNBV', status: 'Enforced', details: { keyRequirements: ['CNBV registration', 'All transfers require info', 'Strict beneficial ownership'] }, sphereImplication: 'ALL Mexico require compliance; CNBV registration' },
+                { jurisdiction: 'Argentina', flag: '🇦🇷', threshold: 'USD 1,000', regulator: 'CNV, UIF', status: 'Evolving', details: { keyRequirements: ['CNV registration', '≥$1,000 require compliance', 'FX controls add complexity'] }, sphereImplication: 'Argentina ≥$1,000 require compliance; FX complexity' }
+              ],
+              regionalTrends: ['GAFILAT pushing harmonization', 'High crypto adoption (currency instability)', 'Remittance corridors significant', 'Frameworks rapidly evolving']
+            },
+            thresholdComparisonTable: {
+              title: 'Quick Reference',
+              headers: ['Jurisdiction', 'Threshold', 'USD Equivalent', 'Notes'],
+              rows: [
+                ['🇺🇸 US', '$3,000', '$3,000', 'FinCEN BSA'],
+                ['🇪🇺 EU', '€0', '$0', 'No threshold crypto'],
+                ['🇬🇧 UK', '£0', '$0', 'No threshold'],
+                ['🇯🇵 Japan', '¥0', '$0', 'No threshold'],
+                ['🇸🇬 Singapore', 'SGD 1,500', '~$1,100', 'MAS'],
+                ['🇨🇭 Switzerland', 'CHF 1,000', '~$1,100', 'Plus wallet ownership'],
+                ['🇦🇪 UAE', 'AED 3,500', '~$950', 'VARA/CBUAE'],
+                ['🇧🇷 Brazil', 'BRL 10,000', '~$2,000', 'COAF/BCB'],
+                ['🇲🇽 Mexico', 'No threshold', '$0', 'CNBV'],
+                ['🇦🇷 Argentina', 'USD 1,000', '$1,000', 'CNV/UIF']
+              ]
             }
           },
-          thresholds: {
-            title: 'Thresholds by Jurisdiction',
-            items: [
-              { jurisdiction: '🇺🇸 United States', threshold: '$3,000', status: 'Enforced' },
-              { jurisdiction: '🇪🇺 European Union', threshold: '€1,000', status: 'MiCA enforced' },
-              { jurisdiction: '🇦🇪 UAE', threshold: 'AED 3,500', status: 'Implemented' },
-              { jurisdiction: '🇸🇬 Singapore', threshold: 'SGD 1,500', status: 'Enforced' },
-              { jurisdiction: '🇯🇵 Japan', threshold: '¥0 (all)', status: 'All transactions' }
-            ]
-          },
-          travelRuleFlow: {
-            title: 'Travel Rule Flow',
-            steps: [
-              'Originator VASP collects data',
-              'Data transmitted with/before transaction',
-              'Via Travel Rule protocols (TRISA, Notabene, etc.)',
-              'Beneficiary VASP receives and stores',
-              'Data available for regulatory access'
-            ]
-          },
-          whyItMatters: {
+          whyTravelRuleMatters: {
             title: 'Why Travel Rule Matters for Sphere',
-            statement: 'Travel Rule compliance is a PREREQUISITE for institutional adoption.',
-            explanation: 'Banks and large enterprises will NOT work with providers who can\'t demonstrate Travel Rule compliance.',
-            sphereApproach: [
-              'Integrated Travel Rule compliance',
-              'Support for major protocols',
-              'Automated data collection and transmission'
+            businessImplications: [
+              { implication: 'Banking Partners', detail: 'Banks ask about Travel Rule. Without it, relationships at risk.', impact: 'No Travel Rule = no banking' },
+              { implication: 'Institutional Customers', detail: 'Enterprise verifies compliance before onboarding.', impact: 'No compliance = excluded from enterprise' },
+              { implication: 'Regulatory Exams', detail: 'Examiners focus on Travel Rule.', impact: 'Non-compliance = findings, enforcement' },
+              { implication: 'Counterparty VASPs', detail: 'Others may refuse without exchange.', impact: 'Non-compliance = reduced connectivity' },
+              { implication: 'Competitive Advantage', detail: 'Differentiates from less compliant competitors.', impact: 'Compliance = differentiation' }
             ]
           },
-          keyTakeaway: 'Travel Rule compliance is mandatory for institutional adoption. Sphere has it built in.'
+          travelRuleProtocols: {
+            title: 'Travel Rule Protocols',
+            overview: 'No single standard. Multiple protocols exist.',
+            protocols: [
+              { protocol: 'TRISA', fullName: 'Travel Rule Information Sharing Alliance', type: 'Decentralized, open-source', description: 'Peer-to-peer with mTLS certificates.', governance: 'TRISA Working Group', coverage: 'Growing global', pros: ['Open source', 'No central failure', 'Industry-governed'], cons: ['Certificate management', 'Network effects'], sphereSupport: 'Supported' },
+              { protocol: 'Notabene', fullName: 'Notabene Network', type: 'Commercial SaaS', description: 'Hosted network via API.', governance: 'Notabene (private)', coverage: '200+ VASPs', pros: ['Easy integration', 'Large network', 'Extra features'], cons: ['Fees', 'Vendor dependency'], sphereSupport: 'Integrated' },
+              { protocol: 'TRUST', fullName: 'Travel Rule Universal Solution Technology', type: 'US consortium', description: 'Major US VASPs consortium.', governance: 'Coinbase, Kraken, Gemini', coverage: 'US-focused', pros: ['Major US exchanges', 'US regulatory alignment'], cons: ['US-centric', 'Membership'], sphereSupport: 'Monitoring' },
+              { protocol: 'OpenVASP', fullName: 'OpenVASP Protocol', type: 'Open protocol', description: 'Decentralized, open-source.', governance: 'OpenVASP Association (Switzerland)', coverage: 'Europe focus', pros: ['Open source', 'Privacy-preserving'], cons: ['Smaller network'], sphereSupport: 'Available' },
+              { protocol: 'Sygna Bridge', fullName: 'Sygna Bridge', type: 'Commercial (APAC)', description: 'Strong APAC coverage.', governance: 'CoolBitX', coverage: 'APAC, expanding', pros: ['APAC coverage', 'Regulatory relationships'], cons: ['Regional'], sphereSupport: 'Integrated' }
+            ],
+            protocolComparison: {
+              headers: ['Protocol', 'Type', 'Coverage', 'Integration', 'Cost', 'Sphere'],
+              rows: [
+                ['TRISA', 'Open source', 'Global', 'Medium', 'Free', 'Supported'],
+                ['Notabene', 'Commercial', '200+ VASPs', 'Low (API)', 'Per-transaction', 'Integrated'],
+                ['TRUST', 'Consortium', 'US majors', 'Medium', 'Membership', 'Monitoring'],
+                ['OpenVASP', 'Open source', 'Europe', 'Medium', 'Free', 'Available'],
+                ['Sygna', 'Commercial', 'APAC', 'Low (API)', 'Per-transaction', 'Integrated']
+              ]
+            },
+            sphereApproach: {
+              title: 'Sphere Multi-Protocol Strategy',
+              strategy: 'Support multiple protocols for maximum connectivity.',
+              workflow: [{ step: 1, action: 'Identify counterparty VASP' }, { step: 2, action: 'Check protocols supported' }, { step: 3, action: 'Transmit via supported protocol' }, { step: 4, action: 'If no shared protocol, secure email or reject' }]
+            }
+          },
+          transmissionMethods: {
+            title: 'Transmission Methods',
+            methods: [
+              { method: 'Protocol-Based', description: 'Automated via TRISA, Notabene, etc.', howItWorks: 'API call → receive → acknowledge', advantages: ['Automated', 'Secure', 'Auditable', 'Fast'], disadvantages: ['Both parties on protocol'], whenToUse: 'Default when supported' },
+              { method: 'Direct API', description: 'Bilateral custom integration.', howItWorks: 'Custom for high-volume', advantages: ['Customizable', 'No third-party'], disadvantages: ['Dev per counterparty'], whenToUse: 'High-volume relationships' },
+              { method: 'Secure Email', description: 'Fallback encrypted email.', howItWorks: 'Encrypted with Travel Rule data', advantages: ['Works with any'], disadvantages: ['Manual', 'Slower'], whenToUse: 'One-off, non-integrated' }
+            ],
+            timingRequirements: { title: 'Timing', guidance: 'FATF says "immediately." Most allow before, during, or after.', sphereApproach: 'Sphere transmits immediately upon initiation, before settlement.' }
+          },
+          transactionsApplied: {
+            title: 'What Transactions Apply',
+            appliesTo: [
+              { type: 'VASP-to-VASP', description: 'Transfers between VASPs', example: 'Sphere customer → Coinbase customer', travelRule: 'YES — full compliance above threshold' },
+              { type: 'VASP-to-Unhosted', description: 'To self-hosted wallet', example: 'Sphere → MetaMask', travelRule: 'VARIES — some jurisdictions require, EDD often needed' },
+              { type: 'Unhosted-to-VASP', description: 'From self-hosted', example: 'Personal wallet → Sphere', travelRule: 'VASP collects originator info, EDD' }
+            ],
+            doesNotApply: [
+              { type: 'Internal Transfers', description: 'Between accounts at same VASP', travelRule: 'Generally exempt, recordkeeping required' },
+              { type: 'Unhosted-to-Unhosted', description: 'Between self-hosted wallets', travelRule: 'Not subject (no regulated entity)' }
+            ]
+          },
+          edgeCases: {
+            title: 'Edge Cases & Solutions',
+            scenarios: [
+              {
+                scenario: 'Counterparty Not on Protocol',
+                problem: 'VASP without TRISA, Notabene, etc.',
+                solutions: [
+                  { solution: 'Secure Email', implementation: 'Contact compliance, establish channel, encrypted email', pros: 'Works with any', cons: 'Manual, slow', when: 'One-off' },
+                  { solution: 'Correspondent VASP', implementation: 'Route through intermediate with both relationships', pros: 'Maintains compliance', cons: 'Cost, complexity', when: 'Regular with non-integrated' },
+                  { solution: 'Rejection', implementation: 'Decline, explain requirements, suggest compliant alternative', pros: 'Maintains standards', cons: 'Customer friction', when: 'Risk exceeds benefit' }
+                ],
+                sphereApproach: 'Try email first, then correspondent. Rejection is last resort.'
+              },
+              {
+                scenario: 'Unhosted Wallet',
+                problem: 'Send to self-hosted (no beneficiary institution)',
+                solutions: [
+                  { solution: 'Enhanced DD', implementation: 'Verify customer controls destination, document purpose, enhanced monitoring', pros: 'Enables legitimate self-custody', cons: 'Friction, risk', when: 'Legitimate need' },
+                  { solution: 'Wallet Ownership Verification', implementation: 'Proof of ownership (sign message, test transaction)', pros: 'Reduces risk', cons: 'Technical friction', when: 'Required by jurisdiction or risk' },
+                  { solution: 'Transaction Limits', implementation: 'Lower limits for unhosted', pros: 'Manages risk', cons: 'May not meet needs', when: 'Risk appetite limited' }
+                ],
+                sphereApproach: 'Allow with EDD, ownership verification for larger amounts, enhanced monitoring.'
+              },
+              {
+                scenario: 'Incomplete Beneficiary Info',
+                problem: 'Receiving VASP provides incomplete data',
+                solutions: [
+                  { solution: 'Request Clarification', implementation: 'Follow up for complete info', pros: 'May resolve', cons: 'Delays', when: 'Time permits' },
+                  { solution: 'Document Gap and Proceed', implementation: 'Document incomplete, note attempts, proceed', pros: 'Doesn\'t block legitimate', cons: 'Gap in record', when: 'Reputable counterparty, acceptable risk' },
+                  { solution: 'Reject', implementation: 'Decline until complete', pros: 'Standards', cons: 'Friction', when: 'High-risk, questionable counterparty' }
+                ],
+                sphereApproach: 'Request clarification, document gaps, risk-based decision.'
+              },
+              {
+                scenario: 'Name Matching',
+                problem: 'Beneficiary name doesn\'t match (transliteration, legal vs trading)',
+                solutions: [
+                  { solution: 'Fuzzy with Documentation', implementation: 'Accept reasonable variations if documented', pros: 'Accommodates real-world', cons: 'Judgment required', when: 'Explainable (Mohammed vs Muhammad)' },
+                  { solution: 'Exact Match', implementation: 'Insist on exact', pros: 'Clear standard', cons: 'May block legitimate', when: 'High-risk, unexplained' }
+                ],
+                sphereApproach: 'Accept reasonable variations with documentation, reject significant unexplained.'
+              },
+              {
+                scenario: 'Structuring Concern',
+                problem: 'Multiple transactions just below threshold',
+                solutions: [
+                  { solution: 'Aggregate Monitoring', implementation: 'Monitor cumulative, trigger if aggregate exceeds', pros: 'Catches structuring', cons: 'Complexity', when: 'Pattern suggests avoidance' },
+                  { solution: 'Apply Proactively', implementation: 'Collect Travel Rule data even below threshold', pros: 'Proactive', cons: 'Friction', when: 'Structuring indicators' },
+                  { solution: 'SAR Consideration', implementation: 'If structuring evident, consider SAR', pros: 'Addresses underlying', cons: 'Significant step', when: 'Clear intent' }
+                ],
+                sphereApproach: 'Monitor aggregates, may apply proactively or escalate to SAR.'
+              }
+            ]
+          },
+          keyTakeaway: 'Travel Rule is global standard for institutional customers, banking, and legal cross-border ops. Collect originator/beneficiary info, transmit via protocols, handle edge cases practically, apply MORE stringent jurisdiction\'s requirements.'
         },
         exercise: {
           title: 'Exercise 3.4 — Travel Rule Scenario',
-          prompt: 'A UAE company wants to send $50,000 to a US supplier.\n\nExplain:\n1) Does Travel Rule apply?\n2) What data must be collected?\n3) How is the data transmitted?\n4) What if beneficiary VASP doesn\'t support Travel Rule?',
-          criteria: ['Threshold understanding', 'Data requirements', 'Transmission method', 'Edge case handling']
+          prompt: 'Brazilian company (São Paulo) wants to send $75,000 USDC to UK supplier (UK VASP account).\n\nAnalyze:\n1) Does Travel Rule apply? Which threshold?\n2) Originator info to collect?\n3) Beneficiary info required?\n4) How to transmit?\n5) What if UK VASP not on any protocol?\n6) What documentation to maintain?',
+          criteria: ['Correct threshold', 'Complete originator data', 'Complete beneficiary data', 'Protocol identified', 'Non-integrated solution', 'Recordkeeping requirements']
         },
         quiz: [
-          { q: 'US Travel Rule threshold?', options: ['$1,000', '$3,000', '$10,000', 'All transactions'], correct: 1 },
-          { q: 'Travel Rule requires sharing:', options: ['Only amounts', 'Originator and beneficiary info', 'Only sender info', 'Nothing'], correct: 1 },
-          { q: 'Why is Travel Rule critical for Sphere?', options: ['Reduces costs', 'Prerequisite for institutional adoption', 'Optional', 'Only for retail'], correct: 1 }
+          { q: 'US Travel Rule threshold:', options: ['$1,000', '$3,000', '$10,000', 'No threshold'], correct: 1 },
+          { q: 'EU crypto threshold under TFR:', options: ['€1,000', '€3,000', '€0 (no threshold)', '€10,000'], correct: 2 },
+          { q: 'NOT required originator info:', options: ['Full name', 'Account number', 'Social media handle', 'Address or ID'], correct: 2 },
+          { q: 'TRISA is:', options: ['A stablecoin', 'A sanctions list', 'A Travel Rule protocol', 'A regulator'], correct: 2 },
+          { q: 'Brazil threshold approximately:', options: ['$500', '$1,000', '$2,000', '$5,000'], correct: 2 },
+          { q: 'If counterparty not on protocol:', options: ['Reject all', 'Ignore Travel Rule', 'Try email, then correspondent', 'Wait for them'], correct: 2 },
+          { q: 'Unhosted wallet transfers:', options: ['Always reject', 'Apply enhanced DD', 'Ignore Travel Rule', 'Double threshold'], correct: 1 },
+          { q: 'When transmit Travel Rule data:', options: ['Within 30 days', 'Immediately', 'Only if requested', 'End of month'], correct: 1 }
         ]
       },
-      {
         id: 'uae-regulatory-framework',
         title: '3.5 UAE Regulatory Framework',
         curriculum: {
