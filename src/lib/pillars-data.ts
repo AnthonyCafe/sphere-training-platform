@@ -92,6 +92,16 @@ This pillar ensures you can explain:
               ],
               example: 'Your wire goes through SWIFT. SWIFT validates the format, routes to correspondent bank, they confirm the beneficiary.',
               warning: 'A payment can clear successfully and STILL never settle. Clearing is just agreement — not money movement.',
+              systemsPreview: {
+                title: 'Different Systems, Different Rules',
+                explanation: 'The system a payment clears through determines its speed, cost, and finality. A $5,000 payroll deposit clears differently than a $5 million trade settlement.',
+                systems: [
+                  { name: 'ACH', role: 'Batches millions of small payments (payroll, bills) — clears in batches, settles next-day or same-day' },
+                  { name: 'CHIPS', role: 'Clears large international USD payments — nets positions throughout the day, settles via Fedwire' },
+                  { name: 'SWIFT', role: 'Carries the message, but doesn\'t clear or settle — it\'s just the postal service' }
+                ],
+                lookAhead: 'Section 1.3 covers each system in depth. For now, understand: the system determines the rules.'
+              },
               partiesInvolved: {
                 title: 'Who Is Involved at Clearing?',
                 parties: [
@@ -280,6 +290,36 @@ This pillar ensures you can explain:
               ]
             }
           ],
+          beyondSwiftAndFedwire: {
+            title: 'Beyond SWIFT and Fedwire: The Broader Landscape',
+            introduction: 'SWIFT and Fedwire are the most commonly discussed, but they\'re just two pieces of a larger ecosystem. Understanding how other systems fit helps you grasp why different payments behave differently.',
+            keyDistinction: 'Some systems only carry messages (like SWIFT). Some only settle (like Fedwire). Some do both clearing AND settlement (like ACH and CHIPS). The behavior of your payment depends entirely on which system it flows through.',
+            otherSystems: [
+              {
+                name: 'CHIPS',
+                type: 'Clearing + Settlement',
+                oneLiner: 'The workhorse for large international USD payments',
+                keyFact: 'Handles ~$1.8 trillion daily. Privately operated, but settles through Fedwire at end of day.',
+                whyItMatters: 'When your UAE client sends USD to a US supplier via traditional wire, it likely clears through CHIPS before final settlement on Fedwire.'
+              },
+              {
+                name: 'ACH',
+                type: 'Clearing + Settlement',
+                oneLiner: 'The high-volume system for everyday payments',
+                keyFact: 'Processes 80+ million transactions daily — payroll, bills, B2B payments. Batch-based, not real-time.',
+                whyItMatters: 'ACH is domestic US only. Its batch processing and return windows (payments can bounce back days later) make it unsuitable for time-sensitive international payments.'
+              },
+              {
+                name: 'FedNow',
+                type: 'Instant Settlement',
+                oneLiner: 'The Fed\'s new instant payment rail',
+                keyFact: 'Launched 2023. Real-time, 24/7/365, final settlement in seconds. Currently domestic US only.',
+                whyItMatters: 'FedNow raises customer expectations — if domestic is instant, why does international take days? This is the gap Sphere fills.'
+              }
+            ],
+            sphereContext: 'Sphere doesn\'t replace these systems — we complement them. At the US endpoint, our banking partners use Fedwire, CHIPS, or ACH to move USD. Sphere compresses the cross-border leg that traditionally requires multiple correspondent banks and days of delay.',
+            deeperDive: 'Section 1.3 covers each system in detail — how they work, when they\'re used, and their finality characteristics.'
+          },
           swiftAckExplained: {
             title: 'What Is a SWIFT ACK?',
             definition: 'ACK stands for "Acknowledgment." A SWIFT ACK (technically called an MT 900 or MT 910 message) is a confirmation message that tells you the receiving bank has received and accepted your payment instruction.',
@@ -501,6 +541,332 @@ This pillar ensures you can explain:
               }
             ],
             summary: 'When someone asks about "finality," they\'re asking: "If this payment is reversed, can I take legal action?" For Fedwire, the answer is yes—the law protects you. For crypto, the answer is unclear—you might have a blockchain record, but no legal recourse.'
+          },
+          paymentSystemsDeepDive: {
+            title: 'Payment Systems Deep Dive: How Money Actually Moves',
+            introduction: 'Understanding payment systems isn\'t academic — it\'s essential for explaining why traditional cross-border payments take so long and why Sphere\'s approach works. Each system has different rules, speeds, and finality characteristics.',
+            usPaymentSystems: {
+              title: 'US Payment Systems: The Four Pillars',
+              subtitle: 'The US has multiple payment systems because different payments have different needs. A $10 Netflix subscription doesn\'t need the same infrastructure as a $10 million trade settlement.',
+              systems: [
+                {
+                  name: 'Fedwire Funds Service',
+                  icon: '🏛️',
+                  tagline: 'The gold standard of settlement',
+                  operator: 'Federal Reserve Banks',
+                  type: 'Real-Time Gross Settlement (RTGS)',
+                  description: 'Fedwire is the backbone of US high-value payments. Each payment settles individually and immediately on the Federal Reserve\'s master ledger. When Fedwire processes a payment, it\'s final — backed by the full faith and credit of the US government.',
+                  keyStats: [
+                    { stat: '~$4 trillion', label: 'daily volume' },
+                    { stat: '~800,000', label: 'transactions/day' },
+                    { stat: '$4.5 million', label: 'average transaction' },
+                    { stat: '22 hours', label: 'operating window (business days)' }
+                  ],
+                  howItWorks: {
+                    title: 'How Fedwire Actually Works',
+                    steps: [
+                      { step: 'Bank A initiates payment to Bank B', detail: 'Bank A must have a Federal Reserve account with sufficient balance' },
+                      { step: 'Fed validates and processes', detail: 'Federal Reserve checks Bank A\'s balance, debits Bank A\'s reserve account' },
+                      { step: 'Immediate credit to Bank B', detail: 'Federal Reserve credits Bank B\'s reserve account in the same instant' },
+                      { step: 'Finality achieved', detail: 'Transaction is complete, irrevocable, and legally final under Regulation J' }
+                    ],
+                    keyPoint: 'There\'s no netting, no batching, no delay. Each payment settles individually and immediately. This is "gross settlement."'
+                  },
+                  operatingHours: {
+                    title: 'Operating Hours Matter',
+                    hours: '9:00 PM ET (prior day) to 7:00 PM ET',
+                    closed: 'Weekends and Federal holidays',
+                    implication: 'If you need to settle a payment at 8 PM ET on Friday, you\'re waiting until Monday. This is why "24/7 settlement" is valuable — and why stablecoins can help bridge these gaps.'
+                  },
+                  cost: {
+                    title: 'Cost Structure',
+                    fedFee: '$0.50 - $1.00 per transaction (what banks pay the Fed)',
+                    bankFee: '$15 - $45 typical (what banks charge customers)',
+                    insight: 'The Fed\'s cost is cheap. Banks mark it up significantly. This is margin — and why alternatives are attractive for high-volume senders.'
+                  },
+                  whenUsed: ['Large-value payments ($1M+)', 'Time-critical settlements', 'Real estate closings', 'Securities transactions', 'Final leg of international wires'],
+                  sphereRelevance: 'When Sphere\'s US banking partners deliver USD to a beneficiary, that final USD movement often settles through Fedwire. We don\'t touch Fedwire directly — our licensed partners do — but their Fedwire settlement is what gives the USD leg legal finality.'
+                },
+                {
+                  name: 'CHIPS',
+                  fullName: 'Clearing House Interbank Payments System',
+                  icon: '🌐',
+                  tagline: 'The international USD workhorse',
+                  operator: 'The Clearing House (private consortium of large banks)',
+                  type: 'Real-Time Gross Settlement with Continuous Netting',
+                  description: 'CHIPS handles approximately 95% of international USD payments. It\'s privately operated but settles through Fedwire. CHIPS uses sophisticated netting algorithms to reduce the amount of liquidity banks need to process massive payment volumes.',
+                  keyStats: [
+                    { stat: '~$1.8 trillion', label: 'daily volume' },
+                    { stat: '~400,000', label: 'transactions/day' },
+                    { stat: '$4.5 million', label: 'average transaction' },
+                    { stat: '45', label: 'participant banks' }
+                  ],
+                  howNettingWorks: {
+                    title: 'Why Netting Matters',
+                    explanation: 'Instead of settling each payment individually (requiring massive liquidity), CHIPS continuously calculates net positions between banks.',
+                    example: {
+                      scenario: 'Morning transactions between Bank A and Bank B:',
+                      transactions: [
+                        'Bank A → Bank B: $50 million',
+                        'Bank B → Bank A: $45 million',
+                        'Bank A → Bank B: $30 million'
+                      ],
+                      withoutNetting: 'Three separate settlements totaling $125 million in gross value',
+                      withNetting: 'One net settlement: Bank A owes Bank B $35 million',
+                      benefit: 'Banks need 70% less liquidity to process the same volume. This is how CHIPS handles $1.8 trillion daily with only ~$3 billion in liquidity.'
+                    }
+                  },
+                  settlementProcess: {
+                    title: 'CHIPS Settlement Process',
+                    steps: [
+                      { step: 'Payment enters queue', detail: 'Bank submits payment instruction to CHIPS' },
+                      { step: 'Continuous matching', detail: 'CHIPS algorithm matches payments that offset each other throughout the day' },
+                      { step: 'Real-time release', detail: 'When payments can be funded from netting, they\'re released immediately' },
+                      { step: 'End-of-day settlement', detail: 'Remaining net positions settle through Fedwire by 5:30 PM ET' }
+                    ],
+                    keyPoint: 'CHIPS payments become final when "released" — but the system depends on Fedwire for ultimate settlement. CHIPS is a layer on top of the Fed infrastructure.'
+                  },
+                  participants: {
+                    title: 'Who Uses CHIPS',
+                    description: 'Only ~45 of the largest banks are direct CHIPS participants. Other banks access CHIPS through these participants as correspondents.',
+                    majorParticipants: ['JPMorgan Chase', 'Bank of America', 'Citibank', 'Wells Fargo', 'HSBC', 'Deutsche Bank', 'Standard Chartered'],
+                    implication: 'If your bank isn\'t a CHIPS participant, your international USD wire goes through a correspondent who is. That\'s another hop, another fee, another delay.'
+                  },
+                  whenUsed: ['International USD wire transfers', 'Correspondent banking settlements', 'Foreign exchange settlements', 'Large commercial trade payments'],
+                  sphereRelevance: 'Traditional cross-border payments that Sphere competes with typically clear through CHIPS. When a UAE company wires USD to the US, it likely goes: UAE bank → correspondent (London or NY) → CHIPS → Fedwire → US beneficiary bank. This multi-hop journey is what takes 2-5 days and costs $25-50. Sphere compresses this to minutes.'
+                },
+                {
+                  name: 'ACH',
+                  fullName: 'Automated Clearing House',
+                  icon: '🔄',
+                  tagline: 'The everyday workhorse',
+                  operator: 'Federal Reserve (FedACH) and The Clearing House (EPN)',
+                  type: 'Batch Processing with Deferred Net Settlement',
+                  description: 'ACH is the high-volume, lower-value network that moves everyday money — payroll, bill payments, subscriptions, and increasingly B2B payments. It processes in batches, not real-time, which makes it efficient but slower.',
+                  keyStats: [
+                    { stat: '~80 million', label: 'transactions/day' },
+                    { stat: '~$280 billion', label: 'daily volume' },
+                    { stat: '~$3,500', label: 'average transaction' },
+                    { stat: '10,000+', label: 'participating banks' }
+                  ],
+                  howItWorks: {
+                    title: 'ACH Batch Processing',
+                    explanation: 'Unlike Fedwire (individual, real-time), ACH collects payments into batches and processes them at specific windows throughout the day.',
+                    batches: [
+                      { window: 'Morning batch', deadline: '10:30 AM ET', settles: 'Same business day (if Same-Day ACH)' },
+                      { window: 'Afternoon batch', deadline: '2:45 PM ET', settles: 'Same business day (if Same-Day ACH)' },
+                      { window: 'Standard batch', deadline: 'Various', settles: 'Next business day' }
+                    ],
+                    keyPoint: 'Batching is why ACH is cheap — processing millions of payments together is efficient. But it means your payment waits for the next batch window.'
+                  },
+                  achTypes: {
+                    title: 'ACH Credits vs ACH Debits',
+                    types: [
+                      { type: 'ACH Credit (Push)', description: 'Sender pushes money to receiver', examples: ['Payroll direct deposit', 'Vendor payments', 'Tax refunds'], riskProfile: 'Lower risk — sender initiates and authorizes' },
+                      { type: 'ACH Debit (Pull)', description: 'Receiver pulls money from sender', examples: ['Bill payments', 'Subscription charges', 'Gym memberships'], riskProfile: 'Higher risk — receiver initiates, sender must have authorized' }
+                    ],
+                    returnRisk: 'ACH debits can be returned for up to 60 days if unauthorized. This is fundamentally different from Fedwire finality. Businesses accepting ACH payments bear this return risk.'
+                  },
+                  sameDayACH: {
+                    title: 'Same-Day ACH',
+                    launched: '2016, expanded since',
+                    description: 'Same-Day ACH allows payments to settle same business day instead of next day — for an additional fee.',
+                    limits: [
+                      { limit: '$1 million', description: 'per-transaction maximum' },
+                      { limit: '~$0.50 - $1.50', description: 'additional fee per transaction' },
+                      { limit: '2:45 PM ET', description: 'latest submission deadline' }
+                    ],
+                    limitation: 'Same-Day ACH improved domestic speed but doesn\'t help cross-border. It\'s still US-only, still has return windows, still batch-based.'
+                  },
+                  whenUsed: ['Payroll and direct deposit', 'Bill payments', 'Subscription charges', 'B2B vendor payments (growing)', 'Government benefits'],
+                  notUsedFor: ['Time-critical payments', 'High-value transactions', 'International payments', 'Situations requiring immediate finality'],
+                  sphereRelevance: 'ACH is domestic US only — it doesn\'t help with cross-border. However, Sphere\'s US on-ramp partners might use ACH for lower-value USD collections from customers. The key insight: ACH\'s batch processing and return windows are why businesses needing speed and certainty look for alternatives.'
+                },
+                {
+                  name: 'FedNow',
+                  icon: '⚡',
+                  tagline: 'The new instant payment rail',
+                  operator: 'Federal Reserve',
+                  type: 'Real-Time Gross Settlement (Instant)',
+                  launched: 'July 2023',
+                  description: 'FedNow is the Federal Reserve\'s instant payment service — real-time, 24/7/365 settlement with immediate finality. It\'s the Fed\'s answer to private instant payment networks and modernizes US payment expectations.',
+                  keyStats: [
+                    { stat: '24/7/365', label: 'availability' },
+                    { stat: 'Seconds', label: 'settlement time' },
+                    { stat: '$500,000', label: 'transaction limit (initial)' },
+                    { stat: '1,000+', label: 'participating institutions (growing)' }
+                  ],
+                  whyItMatters: {
+                    title: 'Why FedNow Changes Expectations',
+                    points: [
+                      { point: 'Always on', detail: 'Unlike Fedwire (business hours) or ACH (batches), FedNow operates continuously. Payments at 2 AM on Sunday settle instantly.' },
+                      { point: 'Instant finality', detail: 'Like Fedwire, FedNow provides immediate, irrevocable settlement. But faster and cheaper.' },
+                      { point: 'Lower threshold', detail: 'Designed for smaller payments that don\'t justify Fedwire costs but need speed ACH can\'t provide.' }
+                    ],
+                    customerExpectation: 'Once customers experience instant domestic payments, they\'ll ask: "Why does international still take days?" This is the expectation gap Sphere addresses.'
+                  },
+                  currentStatus: {
+                    title: 'Current Status (2024-2025)',
+                    points: [
+                      'Over 1,000 financial institutions participating',
+                      'Still ramping adoption — not all banks support it yet',
+                      'Transaction limits may increase as system matures',
+                      'Primarily consumer and small business use cases currently'
+                    ]
+                  },
+                  limitations: {
+                    title: 'What FedNow Doesn\'t Solve',
+                    points: [
+                      'Domestic US only — no cross-border capability',
+                      'Requires both banks to be FedNow participants',
+                      '$500K limit excludes large commercial payments',
+                      'Doesn\'t address correspondent banking complexity'
+                    ]
+                  },
+                  whenUsed: ['Urgent P2P payments', 'Emergency bill payments', 'Gig economy payouts', 'Small business urgent needs'],
+                  sphereRelevance: 'FedNow validates the demand for instant settlement — customers want speed. But FedNow is domestic only. The cross-border gap remains. Sphere fills that gap: instant cross-border movement via stablecoins, with fiat settlement (potentially via FedNow) at endpoints.'
+                }
+              ],
+              comparisonTable: {
+                title: 'US Payment Systems at a Glance',
+                headers: ['System', 'Speed', 'Finality', 'Cost (to bank)', 'Best For', 'Limitation'],
+                rows: [
+                  ['Fedwire', 'Real-time', 'Immediate, irrevocable', '$0.50-1.00', 'High-value, time-critical', 'Business hours only'],
+                  ['CHIPS', 'Same-day', 'When released', 'Lower (netting)', 'International USD', 'Only 45 participants'],
+                  ['ACH', 'Next-day or same-day', '1-2 days (returns possible)', 'Pennies', 'High-volume, lower-value', 'Batch delays, return risk'],
+                  ['FedNow', 'Instant', 'Immediate, irrevocable', '$0.045', 'Urgent smaller payments', 'Domestic only, $500K limit']
+                ]
+              },
+              keyInsight: 'No single system does everything. Fedwire is fast but expensive and limited hours. CHIPS handles international but requires correspondent relationships. ACH is cheap but slow with return risk. FedNow is instant but domestic only. Understanding these tradeoffs helps you explain why cross-border payments are complex — and why Sphere\'s approach works.'
+            },
+            internationalSystems: {
+              title: 'International Payment Systems',
+              subtitle: 'Each major economy has its own settlement infrastructure. Cross-border payments must bridge between these systems.',
+              systems: [
+                {
+                  name: 'TARGET2',
+                  region: '🇪🇺 Eurozone',
+                  type: 'RTGS',
+                  operator: 'European Central Bank',
+                  description: 'TARGET2 is the Eurozone\'s equivalent of Fedwire — real-time gross settlement for EUR. All Eurozone banks settle EUR through TARGET2.',
+                  keyFacts: [
+                    '~€2 trillion daily volume',
+                    'Processes all large-value EUR payments',
+                    'Operating hours: 7:00 AM - 6:00 PM CET',
+                    'Being upgraded to T2 (new consolidated platform)'
+                  ],
+                  sphereRelevance: 'EUR payments at Sphere\'s European endpoints ultimately settle through TARGET2 (via our banking partners). Understanding TARGET2 hours helps explain EUR settlement timing.'
+                },
+                {
+                  name: 'CHAPS',
+                  region: '🇬🇧 United Kingdom',
+                  type: 'RTGS',
+                  operator: 'Bank of England',
+                  description: 'CHAPS is the UK\'s RTGS system for GBP. Same-day, final, irrevocable settlement for sterling payments.',
+                  keyFacts: [
+                    '~£400 billion daily volume',
+                    'Used for high-value GBP (property, securities)',
+                    'Operating hours: 6:00 AM - 6:00 PM UK time',
+                    'Extended hours pilot underway'
+                  ],
+                  sphereRelevance: 'GBP payments settle through CHAPS. The UK\'s post-Brexit separation from EU systems means GBP and EUR payments route differently.'
+                },
+                {
+                  name: 'SEPA',
+                  fullName: 'Single Euro Payments Area',
+                  region: '🇪🇺 Europe (36 countries)',
+                  type: 'Mass payment scheme',
+                  operator: 'European Payments Council',
+                  description: 'SEPA isn\'t a settlement system — it\'s a payment scheme that standardizes EUR transfers across 36 European countries. SEPA Credit Transfers (SCT) and SEPA Instant (SCT Inst) enable EUR payments across borders within Europe.',
+                  keyFacts: [
+                    'Covers 36 countries (EU + EEA + others)',
+                    'Standard EUR transfer: T+1 (next business day)',
+                    'SEPA Instant: 10 seconds, 24/7',
+                    'Max €100,000 for SEPA Instant (increasing)'
+                  ],
+                  sphereRelevance: 'SEPA makes intra-European EUR payments easy, but it doesn\'t help with payments outside Europe. A EUR payment from UAE to Germany still needs correspondent banking — SEPA only kicks in for the European leg.'
+                },
+                {
+                  name: 'UAEFTS',
+                  region: '🇦🇪 UAE',
+                  type: 'RTGS',
+                  operator: 'Central Bank of UAE',
+                  description: 'UAE Funds Transfer System is the UAE\'s RTGS for AED. High-value AED payments settle through UAEFTS.',
+                  keyFacts: [
+                    'Real-time gross settlement for AED',
+                    'Processes all large-value AED domestically',
+                    'Operating hours: 8:00 AM - 5:30 PM UAE time',
+                    'Being modernized as part of UAE financial infrastructure upgrades'
+                  ],
+                  sphereRelevance: 'When Sphere eventually operates in UAE, AED payments at our UAE endpoint would settle through UAEFTS (via our banking partners). Understanding UAEFTS hours and capabilities is essential for UAE market entry.'
+                }
+              ],
+              crossBorderChallenge: {
+                title: 'The Cross-Border Challenge',
+                explanation: 'Each country has its own settlement system. There\'s no "global Fedwire." Cross-border payments must somehow bridge between these disconnected systems.',
+                traditionalSolution: {
+                  title: 'Traditional Solution: Correspondent Banking',
+                  description: 'Banks establish relationships (nostro/vostro accounts) with banks in other countries. Payments hop between correspondents until they reach a bank connected to the destination\'s settlement system.',
+                  example: 'UAE company pays US supplier: AED → UAEFTS (UAE) → Correspondent in London → CHIPS (US) → Fedwire (US) → USD. Each hop adds time, cost, and compliance checks.',
+                  problems: ['Multiple intermediaries = multiple delays', 'Each correspondent takes a fee', 'Operating hours across time zones create gaps', 'De-risking has reduced correspondent relationships in many corridors']
+                },
+                sphereSolution: {
+                  title: 'Sphere\'s Approach',
+                  description: 'Sphere compresses the correspondent chain by using stablecoins for the cross-border leg. Fiat settles through local systems at each endpoint.',
+                  example: 'UAE company pays US supplier: AED → UAEFTS (UAE banking partner) → Stablecoin transfer (minutes, 24/7) → Fedwire (US banking partner) → USD. One cross-border hop instead of multiple correspondents.',
+                  benefits: ['Hours instead of days', 'Transparent, single fee', '24/7 movement (even when RTGS systems are closed)', 'Works even where correspondent relationships are weak']
+                }
+              }
+            },
+            swiftMessageTypes: {
+              title: 'SWIFT Message Types: What You\'ll See',
+              introduction: 'SWIFT messages are identified by "MT" codes. Recognizing common message types helps you understand payment status and troubleshoot issues.',
+              commonTypes: [
+                {
+                  code: 'MT103',
+                  name: 'Single Customer Credit Transfer',
+                  purpose: 'The standard wire transfer message. When you send a wire, this is the message that carries the payment instruction.',
+                  contains: ['Sender and receiver details', 'Amount and currency', 'Beneficiary information', 'Payment reference'],
+                  youllSee: 'Customers reference MT103 when tracking their wire. "Can you give me the MT103?" means they want the payment details.'
+                },
+                {
+                  code: 'MT202',
+                  name: 'Bank-to-Bank Transfer',
+                  purpose: 'Covers the movement of funds between banks (not customers). Used for correspondent banking settlements and cover payments.',
+                  contains: ['Bank-to-bank payment details', 'Related MT103 reference (if cover payment)'],
+                  youllSee: 'MT202 often accompanies MT103 in correspondent banking. The MT103 tells the story; the MT202 moves the money between banks.'
+                },
+                {
+                  code: 'MT900',
+                  name: 'Confirmation of Debit',
+                  purpose: 'Confirms that an account has been debited. Sent by a bank to confirm funds left an account.',
+                  contains: ['Account debited', 'Amount', 'Reference to original payment'],
+                  youllSee: 'When someone says they got a "debit confirmation," they likely mean MT900.'
+                },
+                {
+                  code: 'MT910',
+                  name: 'Confirmation of Credit',
+                  purpose: 'Confirms that an account has been credited. Sent by a bank to confirm funds arrived.',
+                  contains: ['Account credited', 'Amount', 'Reference to original payment'],
+                  youllSee: 'MT910 is what the beneficiary\'s bank sends to confirm receipt. But remember — MT910 confirms the message arrived, not necessarily that funds are available.'
+                },
+                {
+                  code: 'MT950',
+                  name: 'Statement Message',
+                  purpose: 'Account statement showing transactions over a period. Used for reconciliation.',
+                  contains: ['Opening/closing balances', 'Transaction details', 'Date range'],
+                  youllSee: 'MT950 is how banks report nostro account activity. Useful for verifying that settlement actually occurred.'
+                },
+                {
+                  code: 'MT199/MT299',
+                  name: 'Free Format Messages',
+                  purpose: 'General-purpose messages for inquiries, responses, and payment investigations.',
+                  contains: ['Free-form text', 'References to other messages'],
+                  youllSee: 'When there\'s a problem with a payment, MT199/MT299 messages fly back and forth between banks trying to resolve it.'
+                }
+              ],
+              keyPoint: 'You don\'t need to memorize every MT code, but recognizing MT103 (the wire instruction), MT202 (bank transfer), and MT910 (credit confirmation) helps you speak the language when troubleshooting payment issues.'
+            }
           },
           comparison: {
             title: 'Legal Finality vs Technical Finality: Fedwire vs Bitcoin',
@@ -3339,21 +3705,77 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
               { step: 8, action: 'Recordkeeping', detail: '5 years' }
             ],
             timeline: 'File within 30 days of detection',
-            confidentiality: { rules: ['No Tipping Off — federal crime', 'Limited Disclosure — FinCEN, law enforcement, regulators only', 'Safe Harbor — protection for good faith filing'] }
+            confidentiality: {
+              title: 'SAR Confidentiality Rules',
+              rules: [
+                { rule: 'No Tipping Off', detail: 'It is a FEDERAL CRIME to inform anyone that a SAR has been or will be filed. This includes the subject of the SAR, their attorneys, or any other party. Violation can result in criminal prosecution.' },
+                { rule: 'Limited Disclosure', detail: 'SARs can only be disclosed to: FinCEN, federal law enforcement, bank regulators, and certain self-regulatory organizations. Never to customers, counterparties, or external parties.' },
+                { rule: 'Safe Harbor Protection', detail: 'Financial institutions and their employees are protected from liability for good-faith SAR filings. You cannot be sued for filing a SAR, even if the suspicion turns out to be unfounded.' },
+                { rule: 'Internal Information Barriers', detail: 'SAR information should be shared internally only on a need-to-know basis. Customer-facing staff should never know if a SAR has been filed on a customer.' }
+              ],
+              warning: 'SAR confidentiality is taken extremely seriously by regulators. Violations can result in criminal charges, substantial fines, and regulatory action against the institution.'
+            }
           },
           riskAssessmentFramework: {
             title: 'Risk Assessment Framework',
             categories: [
-              { category: 'Geographic Risk', icon: '🌍', factors: [{ factor: 'Customer Location', high: 'FATF grey/black, high-corruption', medium: 'Developing', low: 'Established jurisdictions' }, { factor: 'Transaction Destinations', high: 'Sanctioned, offshore', medium: 'Emerging', low: 'Low-risk' }, { factor: 'Beneficial Owner Location', high: 'High-risk jurisdictions', medium: 'Moderate', low: 'Low-risk with verification' }] },
-              { category: 'Business Risk', icon: '🏭', factors: [{ factor: 'Industry', high: 'Gambling, cannabis, crypto exchanges', medium: 'Real estate, import/export', low: 'Regulated financial services' }, { factor: 'Cash Intensity', high: 'Significant cash', medium: 'Some cash', low: 'Entirely electronic' }] },
-              { category: 'Transaction Risk', icon: '💹', factors: [{ factor: 'Volume', high: 'High without justification', medium: 'Moderate consistent', low: 'Matches business' }, { factor: 'Patterns', high: 'Structuring, layering', medium: 'Some irregular with explanation', low: 'Consistent' }] },
-              { category: 'Customer Profile Risk', icon: '👤', factors: [{ factor: 'PEP Status', high: 'Current senior PEP', medium: 'Former, lower-level', low: 'No connection' }, { factor: 'Ownership', high: 'Opaque, nominees', medium: 'Some complexity', low: 'Clear, simple' }] }
+              { category: 'Geographic Risk', icon: '🌍', factors: [{ factor: 'Customer Location', high: 'FATF grey/black, high-corruption', medium: 'Developing markets with some concerns', low: 'Established jurisdictions' }, { factor: 'Transaction Destinations', high: 'Sanctioned, offshore havens', medium: 'Emerging markets, some opacity', low: 'Low-risk developed markets' }, { factor: 'Beneficial Owner Location', high: 'High-risk or opaque jurisdictions', medium: 'Moderate-risk with verification', low: 'Low-risk with clear verification' }] },
+              { category: 'Business Risk', icon: '🏭', factors: [{ factor: 'Industry', high: 'Gambling, cannabis, unregulated crypto', medium: 'Real estate, import/export, jewelry', low: 'Regulated financial services, tech' }, { factor: 'Cash Intensity', high: 'Significant cash component', medium: 'Some cash transactions', low: 'Entirely electronic/traceable' }] },
+              { category: 'Transaction Risk', icon: '💹', factors: [{ factor: 'Volume', high: 'High volume without business justification', medium: 'Moderate, generally consistent', low: 'Matches stated business profile' }, { factor: 'Patterns', high: 'Structuring, rapid layering, round amounts', medium: 'Some irregular with reasonable explanation', low: 'Consistent, predictable patterns' }] },
+              { category: 'Customer Profile Risk', icon: '👤', factors: [{ factor: 'PEP Status', high: 'Current senior PEP or close associate', medium: 'Former PEP, lower-level official, distant family', low: 'No PEP connection' }, { factor: 'Ownership Structure', high: 'Opaque, nominee shareholders, shell layers', medium: 'Some complexity but documented', low: 'Clear, simple, fully verified' }] }
             ],
             riskRatings: [
-              { rating: 'Low', criteria: 'No significant factors', monitoring: 'Standard', refresh: '3 years' },
-              { rating: 'Medium', criteria: 'Some elevated, mitigated', monitoring: 'Lowered thresholds', refresh: '2 years' },
-              { rating: 'High', criteria: 'Significant factors', monitoring: 'Intensive', refresh: 'Annually', approval: 'Senior required' },
-              { rating: 'Prohibited', criteria: 'Exceeds appetite', monitoring: 'N/A', approval: 'Declined' }
+              { 
+                rating: 'Low', 
+                criteria: 'No significant risk factors present', 
+                monitoring: 'Standard transaction monitoring', 
+                refresh: 'Every 3 years',
+                examples: [
+                  'US-based software company paying EU suppliers',
+                  'Established manufacturer with 10+ year operating history',
+                  'Simple ownership structure, all principals verified'
+                ]
+              },
+              { 
+                rating: 'Medium', 
+                criteria: 'Some elevated factors present but mitigated', 
+                monitoring: 'Lowered alert thresholds, periodic review', 
+                refresh: 'Every 2 years',
+                examples: [
+                  'Import/export company in jewelry trade with verified supply chain',
+                  'Customer in emerging market (e.g., Vietnam, Colombia) with strong documentation',
+                  'Business with some cash component but clear records and audit trail',
+                  'Former low-level government official with 5+ years since leaving office',
+                  'Company with moderately complex structure but all beneficial owners identified'
+                ]
+              },
+              { 
+                rating: 'High', 
+                criteria: 'Significant risk factors requiring enhanced controls', 
+                monitoring: 'Intensive monitoring, manual review of transactions', 
+                refresh: 'Annually', 
+                approval: 'Senior management approval required',
+                examples: [
+                  'Customer in FATF grey-list country with legitimate business need',
+                  'PEP or close family member with clear source of wealth documentation',
+                  'High-volume transactions to emerging markets with full documentation',
+                  'Industry with elevated ML/TF risk but strong compliance controls'
+                ]
+              },
+              { 
+                rating: 'Prohibited', 
+                criteria: 'Exceeds risk appetite — relationship declined or exited', 
+                monitoring: 'N/A', 
+                refresh: 'N/A',
+                approval: 'Automatically declined',
+                examples: [
+                  'Any sanctioned entity, individual, or country',
+                  'Shell companies with no identifiable beneficial owner',
+                  'Customers refusing to provide required documentation',
+                  'Unlicensed money services businesses',
+                  'Businesses primarily dealing in anonymity-enhanced cryptocurrencies'
+                ]
+              }
             ]
           },
           sphereComplianceApproach: {
@@ -3830,163 +4252,313 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
         title: '3.5 UAE Regulatory Framework',
         curriculum: {
           objectives: [
-            'Understand UAE\'s multi-regulator landscape (CBUAE, VARA, DFSA, FSRA)',
-            'Explain why UAE is a strategic market for cross-border payments',
-            'Describe VARA vs DIFC vs ADGM at a high level',
-            'Answer basic questions about UAE crypto regulation'
+            'Understand UAE\'s multi-regulator landscape and why it exists',
+            'Explain why UAE is strategically important for cross-border payments',
+            'Navigate VARA vs DIFC vs ADGM differences with confidence',
+            'Articulate CBUAE stablecoin rules and their implications',
+            'Answer UAE regulatory questions accurately and professionally'
           ],
           keyConcepts: [
-            'UAE has multiple regulatory territories with different rules',
-            'VARA is Dubai\'s crypto-specific regulator',
-            'CBUAE oversees federal payment token rules',
-            'Sphere is exploring UAE market entry (not yet licensed there)'
+            'UAE has multiple regulatory territories — each with distinct legal systems',
+            'VARA = crypto-native, DIFC/ADGM = institutional, CBUAE = federal overlay',
+            'CBUAE Circular 2/2024 restricts foreign stablecoins for retail, not B2B cross-border',
+            'Sphere is exploring UAE market entry — not yet licensed there'
           ]
         },
         learn: {
-          introduction: 'UAE is a strategic market for cross-border payments, connecting MENA, South Asia, and Africa. Understanding the basics of UAE\'s regulatory landscape helps you answer questions from prospects and partners interested in the region.',
-          coreQuestion: 'What do trainees need to know about UAE crypto/payments regulation?',
+          introduction: 'UAE is one of the most important markets for cross-border payments globally. It sits at the intersection of MENA, South Asia, and Africa — three regions with massive remittance flows and underserved payment infrastructure. Understanding UAE\'s regulatory landscape is essential for any conversation involving Middle East expansion.',
+          coreQuestion: 'How does UAE regulate crypto and payments, and what should trainees understand about this market?',
+          
           whyUAEMatters: {
             title: 'Why UAE Is a Strategic Market',
-            points: [
-              'Dubai is a major financial hub connecting $1.5T+ in annual trade flows',
-              'UAE-India corridor alone handles $50B+ annually in remittances and trade',
-              'Gateway to emerging markets: Africa, South Asia, Central Asia route through UAE',
-              'Progressive regulatory environment that actively wants crypto/fintech innovation',
-              'English-speaking business environment with strong rule of law'
-            ],
+            subtitle: 'Understanding the market opportunity helps you explain why UAE matters to Sphere\'s growth story.',
+            marketContext: {
+              title: 'The Numbers That Matter',
+              stats: [
+                { metric: '$1.5 Trillion+', description: 'Annual trade flows through UAE', context: 'Dubai is the re-export hub for the region — goods flow through UAE to reach Africa, South Asia, and Central Asia' },
+                { metric: '$50 Billion+', description: 'UAE-India corridor annually', context: 'One of the world\'s largest remittance corridors. 3.5M+ Indian expats in UAE send money home regularly' },
+                { metric: '$20 Billion+', description: 'UAE-Pakistan corridor annually', context: 'Another massive corridor with significant friction in traditional banking' },
+                { metric: '200+', description: 'Nationalities in UAE', context: 'Expatriates make up 88% of UAE population — nearly everyone needs cross-border payments' }
+              ]
+            },
+            tradeCorridors: {
+              title: 'Key Trade Corridors Through UAE',
+              corridors: [
+                { route: 'China → UAE → Africa', description: 'Chinese goods re-exported through Dubai to African markets', volume: 'Billions annually', painPoint: 'African banking relationships are difficult; UAE acts as trusted intermediary' },
+                { route: 'India ↔ UAE', description: 'Remittances, trade finance, SMB payments', volume: '$50B+ annually', painPoint: 'High fees on traditional remittance, slow settlement' },
+                { route: 'UAE → Southeast Asia', description: 'Trade payments for electronics, manufacturing', volume: 'Growing rapidly', painPoint: 'Multiple currencies, correspondent banking delays' },
+                { route: 'Europe → UAE → MENA', description: 'European companies using UAE as regional HQ', volume: 'Significant B2B flows', painPoint: 'Compliance complexity across jurisdictions' }
+              ]
+            },
+            whyUAEWantsCrypto: {
+              title: 'Why UAE Actively Welcomes Crypto/Fintech',
+              points: [
+                { point: 'Economic Diversification', explanation: 'UAE Vision 2030 aims to reduce oil dependence. Financial services and tech are key growth sectors.' },
+                { point: 'Regional Competition', explanation: 'UAE competes with Singapore, Hong Kong, and Bahrain for financial hub status. Crypto-friendly regulations attract talent and capital.' },
+                { point: 'Innovation Narrative', explanation: 'Dubai brands itself as "City of the Future." Being crypto-friendly supports that positioning.' },
+                { point: 'Practical Utility', explanation: 'UAE\'s expat-heavy population actually needs better cross-border payment solutions. Regulators see the utility.' }
+              ]
+            },
+            sphereOpportunity: {
+              title: 'What This Means for Sphere',
+              points: [
+                'Massive underserved market for B2B cross-border payments',
+                'Regulatory environment that understands and welcomes crypto infrastructure',
+                'Gateway to harder-to-reach markets (Africa, Central Asia, Pakistan)',
+                'English-speaking business environment reduces friction',
+                'Strong rule of law compared to other regional options'
+              ]
+            },
             sphereStatus: {
-              title: 'Sphere\'s UAE Status',
+              title: '⚠️ Current Sphere Status in UAE',
               status: 'Sphere is actively exploring UAE market entry. We are NOT yet licensed in UAE.',
               whatThisMeans: [
                 'We cannot currently serve UAE-based customers directly',
                 'We are evaluating licensing options and regulatory pathways',
-                'UAE customers interested in Sphere should be informed of our expansion plans',
-                'Do NOT promise UAE services or timelines to prospects'
+                'Do NOT promise UAE services or specific timelines to prospects',
+                'If asked, be transparent: "We\'re working on UAE expansion but not yet licensed there"'
               ]
             }
           },
+          
           regulatoryLandscape: {
-            title: 'UAE Regulatory Landscape Overview',
-            subtitle: 'UAE has multiple regulatory territories — this is a simplified overview for trainees.',
+            title: 'UAE Regulatory Landscape: Understanding the Territories',
+            subtitle: 'UAE is NOT one jurisdiction — it\'s multiple territories with different regulators, legal systems, and rules. This is unusual and important to understand.',
+            whyMultipleTerritories: {
+              title: 'Why Does UAE Have Multiple Regulators?',
+              explanation: 'UAE is a federation of seven emirates. Each emirate has autonomy, and some have created "free zones" with their own legal systems to attract international business. This creates a patchwork of regulatory territories — confusing at first, but each serves a purpose.',
+              keyInsight: 'Think of it like this: VARA regulates crypto in Dubai mainland. DIFC is a separate jurisdiction within Dubai with its own regulator (DFSA). ADGM is Abu Dhabi\'s equivalent. And CBUAE sets federal rules that apply everywhere.'
+            },
             territories: [
               {
-                name: 'VARA (Dubai)',
+                name: 'VARA',
                 fullName: 'Virtual Assets Regulatory Authority',
+                location: 'Dubai Mainland',
                 icon: '🏙️',
-                whatItIs: 'Dubai\'s dedicated crypto regulator, created specifically for virtual assets',
-                bestFor: 'Crypto businesses serving retail and B2B customers',
-                keyFact: 'Most crypto-native regulator in UAE — built for digital assets from scratch'
+                legalSystem: 'UAE Civil Law',
+                established: '2022',
+                whatItIs: 'Dubai\'s dedicated crypto regulator — the world\'s first purpose-built virtual asset authority. Created from scratch to regulate crypto, not adapted from traditional finance.',
+                targetClients: 'Retail and B2B crypto businesses',
+                cryptoScope: 'Broadest in UAE — designed specifically for virtual assets',
+                licenseTypes: ['Exchange Services', 'Broker-Dealer', 'Transfer & Settlement', 'Custody', 'Lending', 'VA Management'],
+                strengths: ['Crypto-native regulator that understands the business', 'AED banking relationships possible', 'Can serve retail customers', 'Faster licensing (6-12 months)', 'Clear framework for stablecoins'],
+                limitations: ['UAE Civil Law (less familiar to Western investors)', 'Marketing requires pre-approval', 'Capital requirements locked'],
+                sphereRelevance: 'PRIMARY option for SpherePay — allows B2B payments with AED on/off-ramps',
+                vibeCheck: '"We\'re a crypto regulator — here are crypto rules"'
               },
               {
                 name: 'DIFC',
                 fullName: 'Dubai International Financial Centre',
+                location: 'Dubai Free Zone (separate jurisdiction)',
                 icon: '🏛️',
-                whatItIs: 'Dubai\'s financial free zone with English Common Law',
-                bestFor: 'Traditional finance and institutional clients',
-                keyFact: 'More conservative on crypto — better for traditional finance firms touching some tokens'
+                legalSystem: 'English Common Law',
+                established: '2004 (crypto framework added later)',
+                whatItIs: 'Dubai\'s premier financial free zone, modeled on London/Singapore. Has its own courts, its own regulator (DFSA), and operates under English Common Law.',
+                targetClients: 'Institutional clients, professional investors, traditional finance',
+                cryptoScope: 'Narrow — traditional finance with limited crypto overlay',
+                licenseTypes: ['Investment Tokens', 'Crypto Tokens (limited)', 'Custody'],
+                strengths: ['English Common Law (familiar to Western investors)', 'Prestigious address', 'Strong traditional finance connections', 'Easier for firms already in TradFi'],
+                limitations: ['Conservative on crypto', 'Harder to get AED banking', 'Cannot easily serve retail', 'Crypto feels "bolted on" not native'],
+                sphereRelevance: 'SECONDARY — potentially for SphereNet institutional infrastructure',
+                vibeCheck: '"We\'re a financial regulator that tolerates some approved tokens"'
               },
               {
                 name: 'ADGM',
                 fullName: 'Abu Dhabi Global Market',
+                location: 'Abu Dhabi Free Zone (Al Maryah Island)',
                 icon: '🏗️',
-                whatItIs: 'Abu Dhabi\'s financial free zone, first UAE jurisdiction to regulate crypto (2018)',
-                bestFor: 'Institutional crypto infrastructure, custody, exchanges',
-                keyFact: 'Most mature crypto framework in UAE, but Abu Dhabi-based'
+                legalSystem: 'English Common Law',
+                established: '2015 (crypto framework 2018 — first in UAE)',
+                whatItIs: 'Abu Dhabi\'s international financial centre. Was actually FIRST in UAE to create comprehensive crypto regulations (2018), before Dubai/VARA.',
+                targetClients: 'Institutional clients, exchanges, custody providers',
+                cryptoScope: 'Comprehensive — mature framework for institutional crypto',
+                licenseTypes: ['Multilateral Trading Facility (MTF)', 'Custody', 'Broker-Dealer', 'Advisory'],
+                strengths: ['Most mature crypto framework in UAE (since 2018)', 'English Common Law', 'Strong institutional credibility', 'Good for exchanges/custody'],
+                limitations: ['Based in Abu Dhabi (not Dubai)', 'Higher capital requirements', 'More institutional focus', 'Less retail flexibility'],
+                sphereRelevance: 'SECONDARY — potentially for SphereNet custody/infrastructure',
+                vibeCheck: '"We\'ve been doing crypto regulation since 2018 — institutional grade"'
               },
               {
                 name: 'CBUAE',
                 fullName: 'Central Bank of UAE',
+                location: 'Federal (applies everywhere)',
                 icon: '🇦🇪',
-                whatItIs: 'Federal regulator overseeing payment services and stablecoins',
-                bestFor: 'Applies to ALL UAE operations regardless of free zone',
-                keyFact: 'Sets rules for stablecoin issuance and payment tokens — key for any payment business'
+                legalSystem: 'UAE Federal Law',
+                established: '1980 (stablecoin rules 2024)',
+                whatItIs: 'The federal central bank. Unlike VARA/DIFC/ADGM which are territory-specific, CBUAE rules apply across ALL of UAE regardless of which free zone you\'re in.',
+                targetClients: 'Everyone operating in UAE',
+                cryptoScope: 'Payment tokens and stablecoins specifically',
+                licenseTypes: ['Payment Token Issuance', 'Payment Token Custody', 'Payment Token Transfer', 'Payment Token Conversion'],
+                strengths: ['Federal authority — rules apply everywhere', 'Clear stablecoin framework', 'Digital Dirham (CBDC) coming'],
+                limitations: ['Restricts foreign stablecoins for retail', 'Additional layer of compliance'],
+                sphereRelevance: 'COMPLIANCE OVERLAY — must comply regardless of which territory',
+                vibeCheck: '"We\'re the central bank — our rules apply to everyone"'
               }
             ],
-            simpleRule: 'VARA = crypto-native Dubai. DIFC/ADGM = institutional/traditional finance. CBUAE = federal rules that apply everywhere.'
+            comparisonTable: {
+              title: 'Quick Comparison: VARA vs DIFC vs ADGM',
+              headers: ['Attribute', 'VARA', 'DIFC', 'ADGM'],
+              rows: [
+                ['Location', 'Dubai Mainland', 'Dubai Free Zone', 'Abu Dhabi Free Zone'],
+                ['Legal System', 'UAE Civil Law', 'English Common Law', 'English Common Law'],
+                ['Crypto Approach', 'Built for crypto', 'Crypto added to TradFi', 'Early crypto adopter'],
+                ['Target Clients', 'Retail + B2B', 'Institutional only', 'Institutional focus'],
+                ['AED Banking', 'Easier', 'Harder', 'Moderate'],
+                ['Timeline', '6-12 months', '6-12 months', '6-9 months'],
+                ['Best For', 'B2B payments, retail', 'TradFi + some crypto', 'Exchanges, custody']
+              ]
+            },
+            decisionFramework: {
+              title: 'How to Think About Territory Selection',
+              scenarios: [
+                { scenario: 'B2B stablecoin payments with AED access', recommendation: 'VARA', reason: 'Crypto-native, supports retail/B2B, AED banking easier' },
+                { scenario: 'Institutional tokenization platform', recommendation: 'DIFC or ADGM', reason: 'English Common Law, institutional credibility' },
+                { scenario: 'Crypto exchange for professional traders', recommendation: 'ADGM', reason: 'Mature MTF framework, institutional focus' },
+                { scenario: 'Traditional finance firm adding crypto', recommendation: 'DIFC', reason: 'Already familiar regulatory approach, TradFi connections' }
+              ]
+            }
           },
-          cbuaeBasics: {
-            title: 'CBUAE Stablecoin Rules — What Trainees Should Know',
-            subtitle: 'Central Bank Circular 2/2024 affects stablecoin use in UAE',
-            keyPoints: [
-              {
-                point: 'Foreign Stablecoins (USDC, USDT)',
-                rule: 'Restricted for retail payments within UAE',
-                butNote: 'B2B cross-border payments still permitted',
-                sphereRelevance: 'Sphere\'s B2B focus aligns with permitted use cases'
+          
+          cbuaeRegulations: {
+            title: 'CBUAE Stablecoin Rules: What You Need to Know',
+            subtitle: 'Central Bank Circular No. 2/2024 is critical to understand — it affects ALL stablecoin activity in UAE.',
+            overview: {
+              title: 'What Is Circular 2/2024?',
+              description: 'In January 2024, CBUAE issued comprehensive regulations for "Payment Token Services" — essentially a framework for stablecoins. This is FEDERAL law, meaning it applies regardless of whether you\'re in VARA, DIFC, ADGM, or anywhere else in UAE.',
+              whyItMatters: 'Before this circular, stablecoin regulation in UAE was fragmented. Now there\'s a clear federal framework that everyone must follow.'
+            },
+            keyProvisions: {
+              title: 'Key Provisions Explained',
+              provisions: [
+                {
+                  provision: 'Licensing Categories',
+                  icon: '📋',
+                  whatItSays: 'Four distinct license types: Payment Token Issuance, Custody, Transfer, and Conversion',
+                  whatItMeans: 'Each activity requires specific licensing. You can\'t just do everything with one license.',
+                  sphereImplication: 'Sphere would need Transfer and potentially Conversion licenses. We do NOT need Issuance (we don\'t mint stablecoins).'
+                },
+                {
+                  provision: 'Foreign Stablecoin Restrictions',
+                  icon: '🚫',
+                  whatItSays: 'Foreign currency-denominated stablecoins (USDC, USDT) are PROHIBITED for retail payments within UAE',
+                  whatItMeans: 'UAE residents cannot use USDC to buy coffee. But B2B cross-border payments are still permitted.',
+                  sphereImplication: 'Sphere\'s B2B cross-border focus remains viable. This rule targets retail domestic use, not our core use case.',
+                  criticalDistinction: 'RETAIL payments = restricted. B2B CROSS-BORDER = permitted. This distinction is crucial.'
+                },
+                {
+                  provision: 'AED-Backed Stablecoins',
+                  icon: '💰',
+                  whatItSays: 'Only CBUAE-licensed entities can issue AED-pegged stablecoins. Must maintain 100% reserves in approved assets.',
+                  whatItMeans: 'CBUAE wants control over AED-denominated digital currency. Only licensed issuers allowed.',
+                  sphereImplication: 'Sphere is NOT a stablecoin issuer. We would use third-party AED stablecoins when available from licensed issuers.',
+                  currentState: 'As of now, AED stablecoin options are limited. This may change as issuers get licensed.'
+                },
+                {
+                  provision: 'Digital Dirham (CBDC)',
+                  icon: '🏦',
+                  whatItSays: 'CBUAE is developing a central bank digital currency. May eventually require mandatory acceptance.',
+                  whatItMeans: 'UAE will have its own CBDC for domestic payments. Could be required for certain use cases.',
+                  sphereImplication: 'Sphere should be positioned to integrate Digital Dirham when it launches. Timing unclear but likely within 2-3 years.'
+                },
+                {
+                  provision: 'Reserve Requirements',
+                  icon: '🏛️',
+                  whatItSays: 'Payment token issuers must maintain reserves in approved assets (UAE government securities, CBUAE deposits, etc.)',
+                  whatItMeans: 'CBUAE wants stablecoins backed by safe, auditable assets — not risky investments.',
+                  sphereImplication: 'As a user of stablecoins (not issuer), this gives us confidence in AED stablecoins that do get licensed.'
+                }
+              ]
+            },
+            practicalImplications: {
+              title: 'Practical Implications for Sphere',
+              permitted: {
+                title: '✅ What\'s Permitted',
+                items: [
+                  'B2B cross-border payments using USDC/USDT',
+                  'Stablecoin transfers between businesses',
+                  'Using licensed third-party stablecoins',
+                  'Settlement infrastructure for international trade'
+                ]
               },
-              {
-                point: 'AED-Backed Stablecoins',
-                rule: 'Only CBUAE-licensed issuers can offer AED stablecoins',
-                butNote: 'Currently limited options available',
-                sphereRelevance: 'Sphere is NOT a stablecoin issuer — we use third-party stablecoins'
+              restricted: {
+                title: '🚫 What\'s Restricted',
+                items: [
+                  'Retail payments within UAE using foreign stablecoins',
+                  'Issuing our own stablecoin (we don\'t do this anyway)',
+                  'Domestic consumer payments in USDC/USDT'
+                ]
               },
-              {
-                point: 'Digital Dirham',
-                rule: 'CBUAE is developing a central bank digital currency',
-                butNote: 'Timeline unclear, but Sphere would integrate when available',
-                sphereRelevance: 'Future opportunity for AED settlement'
-              }
-            ],
-            keyMessage: 'CBUAE rules primarily affect stablecoin ISSUERS and retail payments. Sphere is not an issuer, and our B2B cross-border focus remains viable.'
+              keyMessage: 'CBUAE rules validate Sphere\'s B2B cross-border focus. The restrictions target retail domestic use — not our core use case.'
+            },
+            commonMisconceptions: {
+              title: 'Common Misconceptions to Correct',
+              misconceptions: [
+                { wrong: '"UAE banned stablecoins"', right: 'UAE restricted foreign stablecoins for RETAIL payments. B2B cross-border is still permitted.' },
+                { wrong: '"You can\'t use USDC in UAE"', right: 'You can use USDC for B2B cross-border payments. Retail domestic use is restricted.' },
+                { wrong: '"CBUAE rules don\'t apply in DIFC/VARA"', right: 'CBUAE is federal — rules apply everywhere in UAE regardless of free zone.' },
+                { wrong: '"Sphere needs to issue its own AED stablecoin"', right: 'Sphere is NOT an issuer. We use third-party licensed stablecoins.' }
+              ]
+            }
           },
-          commonQuestions: {
-            title: 'Common Questions Trainees Should Be Ready For',
-            questions: [
-              {
-                question: 'Can Sphere serve UAE customers?',
-                answer: 'Sphere is actively exploring UAE market entry but is not yet licensed there. We cannot currently serve UAE-based customers directly. We\'re happy to discuss our expansion plans and timeline.',
-                doNotSay: ['Yes, we\'re fully operational in UAE', 'We don\'t need UAE licenses', 'We can serve you through our offshore entity']
-              },
-              {
-                question: 'Which UAE regulator would oversee Sphere?',
-                answer: 'For B2B payment services in Dubai, VARA (Virtual Assets Regulatory Authority) would be the primary regulator. CBUAE rules on payment tokens would also apply. We\'re evaluating the best licensing pathway.',
-                doNotSay: ['We don\'t need regulation', 'No one regulates crypto in UAE', 'We operate offshore so it doesn\'t matter']
-              },
-              {
-                question: 'When will Sphere be available in UAE?',
-                answer: 'We\'re actively working on UAE market entry but cannot commit to specific timelines. Licensing typically takes 6-12 months once initiated. I can keep you updated on our progress.',
-                doNotSay: ['Next month', 'We\'re already licensed', 'Any specific date without confirmation']
-              },
-              {
-                question: 'What about CBUAE stablecoin restrictions?',
-                answer: 'CBUAE Circular 2/2024 primarily restricts foreign stablecoins for retail domestic payments. B2B cross-border payments using USDC/USDT remain permitted, which aligns with Sphere\'s focus.',
-                doNotSay: ['Those rules don\'t apply', 'We\'ll ignore CBUAE', 'Regulations don\'t matter for crypto']
-              }
-            ]
-          },
+          
           sampleResponses: {
-            title: 'Sample Responses for UAE Regulatory Questions',
+            title: 'How to Answer UAE Questions',
+            subtitle: 'Common questions and how to respond professionally and accurately.',
             scenarios: [
               {
-                question: 'We\'re a UAE company interested in Sphere. Can we use your services?',
-                answer: 'Thank you for your interest! Sphere is actively exploring UAE market entry, but we\'re not yet licensed there. I\'d love to understand your use case better so we can keep you updated as we progress. In the meantime, if you have entities in jurisdictions where we currently operate, we may be able to help.',
-                doNotSay: ['Yes, sign up now', 'We don\'t need UAE licenses', 'Our offshore structure covers UAE']
+                category: 'Sphere\'s UAE Status',
+                question: 'Can Sphere serve UAE customers?',
+                goodResponse: 'Sphere is actively exploring UAE market entry, but we\'re not yet licensed there. We cannot currently serve UAE-based customers directly. I\'d be happy to understand your use case better — if you have entities in jurisdictions where we currently operate, we may be able to help. And I can keep you updated on our UAE progress.',
+                keyPoints: ['Be honest about status', 'Don\'t promise timelines', 'Offer alternatives if possible', 'Keep them engaged'],
+                doNotSay: ['Yes, we\'re fully operational in UAE', 'We don\'t need UAE licenses', 'We can serve you through an offshore entity', 'We\'ll be licensed next month']
               },
               {
-                question: 'Why doesn\'t Sphere have UAE licenses yet?',
-                answer: 'UAE licensing requires significant local presence, capital commitment, and regulatory engagement. We\'re doing this properly — evaluating the right structure and building relationships with regulators. We\'d rather take time to do it right than rush and create compliance issues.',
-                doNotSay: ['We\'re avoiding regulation', 'It\'s too expensive', 'UAE is too strict']
+                category: 'Regulatory Questions',
+                question: 'Which UAE regulator would oversee Sphere?',
+                goodResponse: 'For B2B payment services in Dubai, VARA would likely be our primary regulator — they\'re the crypto-native authority with specific licenses for transfer and settlement services. CBUAE rules on payment tokens would also apply as a federal overlay. We\'re evaluating the optimal licensing pathway.',
+                keyPoints: ['Show regulatory knowledge', 'Mention both VARA and CBUAE', 'Demonstrate we\'re thinking about this seriously'],
+                doNotSay: ['We don\'t need regulation', 'No one regulates crypto in UAE', 'We\'ll just operate offshore']
               },
               {
-                question: 'I heard UAE restricted stablecoins. Does that affect Sphere?',
-                answer: 'CBUAE Circular 2/2024 restricts foreign stablecoins for retail domestic payments in UAE. However, B2B cross-border payments — which is Sphere\'s core use case — remain permitted with USDC and USDT. The regulations actually validate the B2B payment infrastructure approach.',
-                doNotSay: ['Regulations don\'t apply to us', 'We\'ll work around the rules', 'CBUAE can\'t regulate crypto']
+                category: 'Stablecoin Rules',
+                question: 'I heard UAE banned stablecoins. Can you still operate there?',
+                goodResponse: 'UAE didn\'t ban stablecoins — CBUAE Circular 2/2024 restricts foreign stablecoins like USDC for retail domestic payments. B2B cross-border payments, which is Sphere\'s focus, remain permitted. The regulations actually validate the B2B payment infrastructure approach and show UAE is creating clear frameworks rather than blanket bans.',
+                keyPoints: ['Correct the misconception', 'Explain the nuance', 'Show how it supports our model'],
+                doNotSay: ['Those rules don\'t apply to us', 'We\'ll work around the restrictions', 'Regulations don\'t matter']
+              },
+              {
+                category: 'Licensing Timeline',
+                question: 'When will Sphere be available in UAE?',
+                goodResponse: 'We\'re actively evaluating UAE market entry but can\'t commit to specific timelines. UAE licensing typically takes 6-12 months once initiated, and we want to do it properly. I\'d be happy to keep you updated on our progress — can I get your contact details?',
+                keyPoints: ['Don\'t promise dates', 'Show we\'re serious', 'Turn it into lead capture'],
+                doNotSay: ['Next month', 'We\'re already licensed', 'Any specific date']
+              },
+              {
+                category: 'VARA vs DIFC',
+                question: 'Why would Sphere choose VARA over DIFC?',
+                goodResponse: 'VARA is purpose-built for crypto businesses and allows both retail and B2B services with AED on/off-ramps. DIFC is more suited to traditional finance firms that want limited crypto exposure — they operate under English Common Law but have a narrower crypto scope. For a B2B payment platform like Sphere, VARA\'s crypto-native framework is likely more aligned with our model.',
+                keyPoints: ['Show you understand the difference', 'Explain the rationale', 'Connect to Sphere\'s business model'],
+                doNotSay: ['DIFC is too strict', 'We\'re avoiding traditional finance', 'It doesn\'t matter which one']
               }
             ]
           },
-          keyTakeaway: 'UAE is a strategic market with multiple regulators. Sphere is exploring market entry but is NOT yet licensed in UAE. Trainees should understand the landscape, be honest about our status, and not promise UAE services or timelines.'
+          
+          keyTakeaway: 'UAE is a strategic market with multiple regulators serving different purposes. VARA is crypto-native (Dubai), DIFC/ADGM are institutional (English Common Law), and CBUAE rules apply federally. Sphere is exploring UAE market entry but is NOT yet licensed — be honest about status and don\'t promise timelines. CBUAE stablecoin rules restrict retail use of foreign stablecoins but permit B2B cross-border, which aligns with Sphere\'s focus.'
         },
         exercise: {
           title: 'Exercise 3.5 — UAE Inquiry Response',
-          prompt: 'A Dubai-based trading company emails: "We heard about Sphere and want to use your platform for paying suppliers in India and China. How do we get started?"\n\nWrite your response:\n1) Acknowledge their interest\n2) Be honest about Sphere\'s UAE status\n3) Understand their use case\n4) Offer next steps',
-          criteria: ['Honest about licensing status', 'Professional and helpful tone', 'Gathers information about their needs', 'Provides appropriate next steps']
+          prompt: 'A Dubai-based import/export company emails:\n\n"We currently use SWIFT for paying suppliers in India, Pakistan, and Bangladesh. Fees are killing us and settlement takes 3-5 days. We heard Sphere uses stablecoins for faster, cheaper payments. Can you help us? Also, we\'re confused about the new CBUAE stablecoin rules — are we even allowed to use this?"\n\nWrite your response addressing:\n1) Sphere\'s current UAE status (be honest)\n2) How their use case fits (or doesn\'t) with regulations\n3) What you can offer them now\n4) Next steps',
+          criteria: ['Honest about UAE licensing status', 'Correctly explains B2B cross-border is permitted', 'Offers alternatives or keeps them engaged', 'Professional tone', 'Demonstrates regulatory understanding']
         },
         quiz: [
-          { q: 'What is Sphere\'s current licensing status in UAE?', options: ['Fully licensed', 'License pending', 'Exploring market entry, not yet licensed', 'No plans for UAE'], correct: 2 },
-          { q: 'Which UAE regulator is specifically built for crypto businesses?', options: ['CBUAE', 'VARA', 'DIFC', 'ADGM'], correct: 1 },
-          { q: 'CBUAE Circular 2/2024 restricts foreign stablecoins for:', options: ['All transactions', 'Retail domestic payments', 'B2B cross-border', 'Nothing'], correct: 1 },
-          { q: 'If a UAE prospect asks when Sphere will be available there, you should:', options: ['Promise next month', 'Say we\'re already licensed', 'Be honest about exploring entry without committing to dates', 'Tell them to use an offshore workaround'], correct: 2 },
-          { q: 'CBUAE applies to:', options: ['Only DIFC', 'Only ADGM', 'Only VARA', 'All UAE operations regardless of free zone'], correct: 3 }
+          { q: 'What is Sphere\'s current licensing status in UAE?', options: ['Fully licensed under VARA', 'License application pending', 'Exploring market entry, not yet licensed', 'Operating via offshore structure'], correct: 2 },
+          { q: 'Which UAE regulator is purpose-built for crypto businesses?', options: ['CBUAE', 'VARA', 'DIFC', 'ADGM'], correct: 1 },
+          { q: 'CBUAE Circular 2/2024 restricts foreign stablecoins (USDC/USDT) for:', options: ['All transactions in UAE', 'Retail domestic payments only', 'B2B cross-border payments', 'Nothing — no restrictions'], correct: 1 },
+          { q: 'CBUAE rules apply to:', options: ['Only VARA-licensed companies', 'Only DIFC-licensed companies', 'Only ADGM-licensed companies', 'All UAE operations regardless of territory'], correct: 3 },
+          { q: 'What legal system does DIFC operate under?', options: ['UAE Civil Law', 'Sharia Law', 'English Common Law', 'US Federal Law'], correct: 2 },
+          { q: 'If a prospect asks when Sphere will be licensed in UAE, you should:', options: ['Promise a specific date to close the deal', 'Say we\'re already licensed', 'Be honest that we\'re exploring entry without committing to dates', 'Tell them to use our offshore entity'], correct: 2 },
+          { q: 'Why is UAE strategically important for cross-border payments?', options: ['Low tax rates only', 'Gateway to MENA, South Asia, Africa trade corridors', 'Only English-speaking country in region', 'No regulations at all'], correct: 1 },
+          { q: 'Which statement about Sphere and stablecoin issuance is correct?', options: ['Sphere issues its own USDC', 'Sphere is seeking an issuance license', 'Sphere is NOT an issuer — we use third-party stablecoins', 'Sphere will issue an AED stablecoin'], correct: 2 }
         ]
       }
     ],
