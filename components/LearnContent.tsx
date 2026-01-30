@@ -27,7 +27,7 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
     // Section difficulty/prerequisites (for advanced sections)
     'difficultyNote', 'summaryFramework',
     'arnoldQuote', 'parable', 'keyFact', 'keyPhrase',
-    'stats', 'coreMetrics', 'sphereMetrics',
+    'stats', 'coreMetrics',
     'riskCategories', 'definitions', 'types',
     'sections',
     // Payment systems content (Pillar 1)
@@ -39,12 +39,15 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
     'issuanceVsTransmission', 'globalFrameworks',
     'uaeDeepDive', 'sphereStatus', 'singaporeDeepDive', 'ukDeepDive', 'brazilDeepDive',
     'potentialFrictionPoints', 'howSphereAddresses',
-    'realEnterpriseUseCases', 'whySphereIsRightPartner',
     'speedComparison', 'asymmetryProblem', 'fourLedgers', 'capitalEfficiency',
     'globalFrameworks', 'micaDetails', 'geniusAct', 'uaeFramework', 'convergencePattern',
-    'adoptionCurve', 'enterpriseUseCases', 'unbankedOpportunity', 'arnoldOnMarkets',
+    // Section 2.5 flow: adoption curve → categories → detailed examples → why Sphere → metrics (proof) → market opportunity
+    'adoptionCurve', 'enterpriseUseCases', 'realEnterpriseUseCases', 'whySphereIsRightPartner', 'sphereMetrics', 'unbankedOpportunity', 'arnoldOnMarkets',
     // Pillar 2 story content (Antarctica moved after risk categories)
     'antarcticaStory',
+    // Section 2.6 flow: scale context → three risk categories → case studies → contagion → why blockchains fail → SphereNet solution → regulator perspective
+    'systemicScaleContext', 'threeRiskCategories', 'caseStudyMakerDAO', 'caseStudyUSDCDepeg', 'caseStudyChainalysis', 
+    'contagionRiskToTraditionalFinance', 'whyExistingBlockchainsFail', 'sphereNetSolution', 'regulatorPerspective',
     'whatSphereIs', 'whatSphereIsNot', 'classificationMatters', 'classificationMattersLegally', 'complianceNative', 'sampleResponse', 'sampleResponses',
     'complianceFlow', 'complianceEnablesGrowth',
     'coreDefinitions', 'kycRequirements', 'amlProgram', 'cddRequirements', 'eddRequirements', 'sarRequirements',
@@ -66,7 +69,7 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
     'primaryUseCases', 'bobAndAhmed',
     'questions', 'tips', 'closingExample',
     'caseStudy', 'systemicRisk', 'sphereMitigation', 'sphereApproach', 'spherePosition',
-    'regulatorQA', 'reserveComposition',
+    'regulatorQA', 'reserveComposition', 'marketGrowth',
     'table', 'comparison', 'languageGuide',
     'sphereRelevance', 'sphereSolution',
     'arnoldInsight',
