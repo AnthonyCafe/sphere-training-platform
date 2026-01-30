@@ -68,7 +68,7 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
     'vsTraditional', 'vsCryptoNative',
     'primaryUseCases', 'bobAndAhmed',
     'questions', 'tips', 'closingExample',
-    'caseStudy', 'systemicRisk', 'sphereMitigation', 'sphereApproach', 'spherePosition',
+    'caseStudy', 'systemicRisk', 'sphereMitigation', 'sphereApproach', 'sphereRegulatoryApproach', 'sphereEnterpriseApproach', 'spherePosition',
     'regulatorQA', 'reserveComposition', 'marketGrowth',
     'table', 'comparison', 'languageGuide',
     'sphereRelevance', 'sphereSolution',
@@ -297,6 +297,8 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
     case 'sphereApproach':
     case 'spherePosition':
     case 'sphereSolution':
+    case 'sphereRegulatoryApproach':
+    case 'sphereEnterpriseApproach':
       return <SphereApproachBlock data={value} />;
 
     case 'globalFrameworks':
@@ -1806,6 +1808,86 @@ function SphereApproachBlock({ data }: { data: any }) {
               <li key={i}>• {point}</li>
             ))}
           </ul>
+        </div>
+      )}
+      
+      {/* NEW: Handle strategies array (for detailed Sphere approach sections) */}
+      {data.strategies && (
+        <div className="space-y-4 mb-4">
+          {data.strategies.map((strategy: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-purple-500">
+              <h4 className="text-purple-300 font-semibold mb-2">{strategy.strategy || strategy.what}</h4>
+              {strategy.what && <p className="text-gray-300 text-sm mb-3">{strategy.what}</p>}
+              
+              {strategy.howItWorks && Array.isArray(strategy.howItWorks) && (
+                <div className="bg-slate-600/50 rounded p-3 mb-3">
+                  <p className="text-blue-300 font-semibold text-sm mb-2">How It Works:</p>
+                  <ul className="text-gray-300 text-sm space-y-1">
+                    {strategy.howItWorks.map((item: string, j: number) => (
+                      <li key={j}>• {item}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              
+              {strategy.whyItMatters && (
+                <p className="text-emerald-300 text-sm mb-2">💡 <span className="font-semibold">Why it matters:</span> {strategy.whyItMatters}</p>
+              )}
+              
+              {strategy.example && (
+                <p className="text-blue-200 text-xs bg-blue-500/10 rounded p-2">📋 Example: {strategy.example}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+      
+      {/* Handle keyPoint */}
+      {data.keyPoint && (
+        <div className="bg-purple-500/20 border border-purple-500/40 rounded-lg p-3 mb-4">
+          <p className="text-purple-200 font-medium">{data.keyPoint}</p>
+        </div>
+      )}
+      
+      {/* Handle competitiveAdvantage */}
+      {data.competitiveAdvantage && (
+        <p className="text-emerald-300 text-sm mb-3">🏆 {data.competitiveAdvantage}</p>
+      )}
+      
+      {/* Handle languageGuide within sphereApproach */}
+      {data.languageGuide && (
+        <div className="grid md:grid-cols-2 gap-3 mb-4">
+          <div className="bg-red-500/10 border border-red-500/30 rounded p-3">
+            <p className="text-red-300 text-sm font-semibold mb-2">❌ Don't Say:</p>
+            <ul className="text-gray-300 text-xs space-y-1">
+              {data.languageGuide.wrong?.map((item: string, i: number) => (
+                <li key={i}>• {item}</li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-emerald-500/10 border border-emerald-500/30 rounded p-3">
+            <p className="text-emerald-300 text-sm font-semibold mb-2">✅ Do Say:</p>
+            <ul className="text-gray-300 text-xs space-y-1">
+              {data.languageGuide.correct?.map((item: string, i: number) => (
+                <li key={i}>• {item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
+      
+      {/* Handle targetCustomers */}
+      {data.targetCustomers && (
+        <div className="mb-4">
+          <h4 className="text-white font-semibold mb-2">Target Customers</h4>
+          <div className="grid md:grid-cols-2 gap-2">
+            {data.targetCustomers.map((customer: any, i: number) => (
+              <div key={i} className="bg-slate-600/50 rounded p-2">
+                <p className="text-purple-300 text-sm font-semibold">{customer.segment}</p>
+                <p className="text-gray-400 text-xs">{customer.need}</p>
+              </div>
+            ))}
+          </div>
         </div>
       )}
       
@@ -5489,16 +5571,453 @@ function BlockchainFailBlock({ data }: { data: any }) {
 }
 
 function SphereNetSolutionBlock({ data }: { data: any }) {
+  const [expandedSection, setExpandedSection] = useState<string | null>(null);
+  
+  const toggleSection = (section: string) => {
+    setExpandedSection(expandedSection === section ? null : section);
+  };
+  
   return (
     <div className="bg-emerald-500/10 border border-emerald-500/50 rounded-xl p-6">
       <h3 className="font-semibold text-white mb-2 text-xl">✅ {data.title}</h3>
+      {data.subtitle && <p className="text-emerald-300 text-sm mb-2">{data.subtitle}</p>}
       {data.introduction && <p className="text-gray-300 mb-4">{data.introduction}</p>}
-      {data.threeCorePrinciples?.principles?.map((p: any, i: number) => (
-        <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-emerald-500 mb-3">
-          <h5 className="text-emerald-300 font-semibold">{p.icon} {p.principle}</h5>
-          <p className="text-gray-300 text-sm mt-2">{p.description}</p>
+      
+      {/* Why SphereNet Exists */}
+      {data.whySphereNetExists && (
+        <div className="mb-6">
+          <button onClick={() => toggleSection('why')} className="w-full text-left">
+            <h4 className="text-white font-semibold mb-2 flex items-center justify-between">
+              {data.whySphereNetExists.title}
+              <ChevronDown className={`w-5 h-5 transition-transform ${expandedSection === 'why' ? 'rotate-180' : ''}`} />
+            </h4>
+          </button>
+          {data.whySphereNetExists.context && <p className="text-gray-400 text-sm mb-3">{data.whySphereNetExists.context}</p>}
+          {expandedSection === 'why' && (
+            <div className="space-y-3 mt-3">
+              {data.whySphereNetExists.limitations?.map((l: any, i: number) => (
+                <div key={i} className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+                  <p className="text-red-300 font-semibold mb-2">❌ {l.limitation}</p>
+                  <p className="text-gray-300 text-sm mb-2"><span className="text-gray-500">Problem:</span> {l.problem}</p>
+                  <p className="text-amber-300 text-sm mb-2"><span className="text-gray-500">Consequence:</span> {l.consequence}</p>
+                  {l.example && <p className="text-gray-400 text-xs bg-slate-700/50 rounded p-2">📋 {l.example}</p>}
+                </div>
+              ))}
+              {data.whySphereNetExists.conclusion && (
+                <div className="bg-emerald-500/20 border border-emerald-500/40 rounded p-3">
+                  <p className="text-emerald-200">{data.whySphereNetExists.conclusion}</p>
+                </div>
+              )}
+            </div>
+          )}
         </div>
-      ))}
+      )}
+      
+      {/* Architecture Shift */}
+      {data.architectureShift && (
+        <div className="mb-6">
+          <button onClick={() => toggleSection('arch')} className="w-full text-left">
+            <h4 className="text-white font-semibold mb-2 flex items-center justify-between">
+              {data.architectureShift.title}
+              <ChevronDown className={`w-5 h-5 transition-transform ${expandedSection === 'arch' ? 'rotate-180' : ''}`} />
+            </h4>
+          </button>
+          {expandedSection === 'arch' && (
+            <div className="grid md:grid-cols-2 gap-4 mt-3">
+              <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+                <p className="text-red-300 font-semibold mb-2">{data.architectureShift.traditional?.label}</p>
+                <div className="flex flex-wrap gap-1 mb-2">
+                  {data.architectureShift.traditional?.flow?.map((step: string, i: number) => (
+                    <span key={i} className="bg-slate-700 text-gray-300 text-xs px-2 py-1 rounded">
+                      {step} {i < data.architectureShift.traditional.flow.length - 1 ? '→' : ''}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-red-400 text-sm">⚠️ {data.architectureShift.traditional?.riskPoint}</p>
+                {data.architectureShift.traditional?.problem && (
+                  <p className="text-gray-400 text-xs mt-2">{data.architectureShift.traditional.problem}</p>
+                )}
+              </div>
+              <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+                <p className="text-emerald-300 font-semibold mb-2">{data.architectureShift.sphereNet?.label}</p>
+                <div className="flex flex-wrap gap-1 mb-2">
+                  {data.architectureShift.sphereNet?.flow?.map((step: string, i: number) => (
+                    <span key={i} className="bg-slate-700 text-gray-300 text-xs px-2 py-1 rounded">
+                      {step} {i < data.architectureShift.sphereNet.flow.length - 1 ? '→' : ''}
+                    </span>
+                  ))}
+                </div>
+                <p className="text-emerald-400 text-sm">✅ {data.architectureShift.sphereNet?.riskPoint}</p>
+                {data.architectureShift.sphereNet?.advantage && (
+                  <p className="text-gray-400 text-xs mt-2">{data.architectureShift.sphereNet.advantage}</p>
+                )}
+              </div>
+            </div>
+          )}
+          {data.architectureShift.keyDifference && (
+            <p className="text-blue-200 text-sm mt-3 bg-blue-500/10 rounded p-2">{data.architectureShift.keyDifference}</p>
+          )}
+        </div>
+      )}
+      
+      {/* Three Core Principles */}
+      {data.threeCorePrinciples && (
+        <div className="mb-6">
+          <h4 className="text-white font-semibold mb-3">{data.threeCorePrinciples.title}</h4>
+          <div className="space-y-4">
+            {data.threeCorePrinciples.principles?.map((p: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-emerald-500">
+                <button onClick={() => toggleSection(`principle-${i}`)} className="w-full text-left">
+                  <h5 className="text-emerald-300 font-semibold flex items-center justify-between">
+                    <span>{p.icon} {p.principle}</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${expandedSection === `principle-${i}` ? 'rotate-180' : ''}`} />
+                  </h5>
+                </button>
+                {p.tagline && <p className="text-gray-400 text-sm italic mt-1">{p.tagline}</p>}
+                <p className="text-gray-300 text-sm mt-2">{p.description}</p>
+                
+                {expandedSection === `principle-${i}` && (
+                  <div className="mt-3 space-y-3">
+                    {p.howItWorks && (
+                      <div className="bg-slate-600/50 rounded p-3">
+                        <p className="text-blue-300 font-semibold text-sm mb-2">How It Works:</p>
+                        <ul className="text-gray-300 text-sm space-y-1">
+                          {p.howItWorks.map((item: string, j: number) => (
+                            <li key={j}>• {item}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    
+                    {p.withoutThis && (
+                      <div className="bg-red-500/10 border border-red-500/30 rounded p-3">
+                        <p className="text-red-300 font-semibold text-sm mb-2">❌ {p.withoutThis.scenario}:</p>
+                        <ul className="text-gray-400 text-xs space-y-1">
+                          {p.withoutThis.consequences?.map((c: string, j: number) => (
+                            <li key={j}>• {c}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    
+                    {p.concreteExample && (
+                      <div className="bg-blue-500/10 border border-blue-500/30 rounded p-3">
+                        <p className="text-blue-300 font-semibold text-sm mb-2">📋 Example: {p.concreteExample.title}</p>
+                        {p.concreteExample.traditional && (
+                          <p className="text-gray-400 text-xs mb-1"><span className="text-red-300">Traditional:</span> {p.concreteExample.traditional}</p>
+                        )}
+                        {p.concreteExample.sphereNet && (
+                          <p className="text-gray-400 text-xs mb-1"><span className="text-emerald-300">SphereNet:</span> {p.concreteExample.sphereNet}</p>
+                        )}
+                        {p.concreteExample.result && (
+                          <p className="text-emerald-200 text-xs mt-2">✅ {p.concreteExample.result}</p>
+                        )}
+                      </div>
+                    )}
+                    
+                    {p.regulatoryAlignment && (
+                      <div className="bg-slate-600/50 rounded p-3">
+                        <p className="text-purple-300 font-semibold text-sm mb-2">{p.regulatoryAlignment.title}</p>
+                        <div className="space-y-1">
+                          {p.regulatoryAlignment.frameworks?.map((f: any, j: number) => (
+                            <div key={j} className="flex items-start gap-2 text-xs">
+                              <span className="text-purple-400 font-mono">{f.framework}:</span>
+                              <span className="text-gray-400">{f.alignment}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    
+                    {p.privacyLevels && (
+                      <div className="bg-slate-600/50 rounded p-3">
+                        <p className="text-purple-300 font-semibold text-sm mb-2">{p.privacyLevels.title}</p>
+                        <div className="space-y-2">
+                          {p.privacyLevels.levels?.map((level: any, j: number) => (
+                            <div key={j} className="bg-slate-700/50 rounded p-2">
+                              <p className="text-white text-sm font-medium">{level.level}</p>
+                              <p className="text-gray-400 text-xs">Visibility: {level.visibility}</p>
+                              <p className="text-gray-500 text-xs">Who sees: {level.whoSees}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                    
+                    {p.participantTiers && (
+                      <div className="bg-slate-600/50 rounded p-3">
+                        <p className="text-purple-300 font-semibold text-sm mb-2">{p.participantTiers.title}</p>
+                        <div className="space-y-2">
+                          {p.participantTiers.tiers?.map((tier: any, j: number) => (
+                            <div key={j} className="bg-slate-700/50 rounded p-2">
+                              <p className="text-white text-sm font-medium">{tier.tier}</p>
+                              <p className="text-gray-400 text-xs">Examples: {tier.examples}</p>
+                              <p className="text-emerald-400 text-xs">Permissions: {tier.permissions}</p>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+      
+      {/* VS Analytics Approach */}
+      {data.vsAnalyticsApproach && (
+        <div className="mb-6">
+          <button onClick={() => toggleSection('vsAnalytics')} className="w-full text-left">
+            <h4 className="text-white font-semibold mb-2 flex items-center justify-between">
+              {data.vsAnalyticsApproach.title}
+              <ChevronDown className={`w-5 h-5 transition-transform ${expandedSection === 'vsAnalytics' ? 'rotate-180' : ''}`} />
+            </h4>
+          </button>
+          {data.vsAnalyticsApproach.subtitle && <p className="text-gray-400 text-sm">{data.vsAnalyticsApproach.subtitle}</p>}
+          {expandedSection === 'vsAnalytics' && (
+            <div className="mt-3">
+              {data.vsAnalyticsApproach.comparison && (
+                <div className="overflow-x-auto mb-4">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="bg-slate-700">
+                        {data.vsAnalyticsApproach.comparison.headers?.map((h: string, i: number) => (
+                          <th key={i} className="p-2 text-left text-gray-300">{h}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {data.vsAnalyticsApproach.comparison.rows?.map((row: string[], i: number) => (
+                        <tr key={i} className="border-t border-slate-600">
+                          {row.map((cell: string, j: number) => (
+                            <td key={j} className={`p-2 ${j === 0 ? 'text-gray-300 font-medium' : j === 1 ? 'text-red-300' : 'text-emerald-300'}`}>
+                              {cell}
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+              {data.vsAnalyticsApproach.notReplacement && (
+                <div className="bg-blue-500/10 border border-blue-500/30 rounded p-3">
+                  <p className="text-blue-300 font-semibold text-sm mb-1">{data.vsAnalyticsApproach.notReplacement.title}</p>
+                  <p className="text-gray-300 text-sm">{data.vsAnalyticsApproach.notReplacement.explanation}</p>
+                  {data.vsAnalyticsApproach.notReplacement.analogy && (
+                    <p className="text-gray-400 text-xs mt-2 italic">💡 {data.vsAnalyticsApproach.notReplacement.analogy}</p>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+      
+      {/* Real World Scenarios */}
+      {data.realWorldScenarios && (
+        <div className="mb-6">
+          <button onClick={() => toggleSection('scenarios')} className="w-full text-left">
+            <h4 className="text-white font-semibold mb-2 flex items-center justify-between">
+              {data.realWorldScenarios.title}
+              <ChevronDown className={`w-5 h-5 transition-transform ${expandedSection === 'scenarios' ? 'rotate-180' : ''}`} />
+            </h4>
+          </button>
+          {expandedSection === 'scenarios' && (
+            <div className="space-y-4 mt-3">
+              {data.realWorldScenarios.scenarios?.map((s: any, i: number) => (
+                <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+                  <p className="text-white font-semibold mb-2">🎯 {s.scenario}</p>
+                  <p className="text-gray-400 text-sm mb-3">{s.setup}</p>
+                  <div className="grid md:grid-cols-2 gap-3">
+                    <div className="bg-red-500/10 border border-red-500/30 rounded p-3">
+                      <p className="text-red-300 font-semibold text-sm mb-2">On Traditional Blockchain:</p>
+                      <ul className="text-gray-400 text-xs space-y-1">
+                        {s.onTraditionalBlockchain?.map((step: string, j: number) => (
+                          <li key={j}>{j + 1}. {step}</li>
+                        ))}
+                      </ul>
+                    </div>
+                    <div className="bg-emerald-500/10 border border-emerald-500/30 rounded p-3">
+                      <p className="text-emerald-300 font-semibold text-sm mb-2">On SphereNet:</p>
+                      <ul className="text-gray-400 text-xs space-y-1">
+                        {s.onSphereNet?.map((step: string, j: number) => (
+                          <li key={j}>{j + 1}. {step}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                  {s.keyDifference && (
+                    <p className="text-blue-200 text-sm mt-3 bg-blue-500/10 rounded p-2">💡 {s.keyDifference}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+      
+      {/* Addressing Systemic Risks */}
+      {data.addressingSystemicRisks && (
+        <div className="mb-6">
+          <button onClick={() => toggleSection('systemic')} className="w-full text-left">
+            <h4 className="text-white font-semibold mb-2 flex items-center justify-between">
+              {data.addressingSystemicRisks.title}
+              <ChevronDown className={`w-5 h-5 transition-transform ${expandedSection === 'systemic' ? 'rotate-180' : ''}`} />
+            </h4>
+          </button>
+          {data.addressingSystemicRisks.subtitle && <p className="text-gray-400 text-sm">{data.addressingSystemicRisks.subtitle}</p>}
+          {expandedSection === 'systemic' && (
+            <div className="space-y-4 mt-3">
+              {data.addressingSystemicRisks.risks?.map((r: any, i: number) => (
+                <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-purple-500">
+                  <p className="text-purple-300 font-semibold mb-2">📊 {r.riskCategory}</p>
+                  <p className="text-gray-400 text-sm mb-3">{r.problemRecap}</p>
+                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded p-3">
+                    <p className="text-emerald-300 font-semibold text-sm mb-2">SphereNet: {r.sphereNetResponse?.approach}</p>
+                    <ul className="text-gray-300 text-xs space-y-1">
+                      {r.sphereNetResponse?.mechanisms?.map((m: string, j: number) => (
+                        <li key={j}>• {m}</li>
+                      ))}
+                    </ul>
+                    {r.sphereNetResponse?.result && (
+                      <p className="text-emerald-200 text-xs mt-2">✅ {r.sphereNetResponse.result}</p>
+                    )}
+                  </div>
+                  {r.limitation && (
+                    <p className="text-amber-300 text-xs mt-2">⚠️ Limitation: {r.limitation}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+      
+      {/* Protocol Level Enforcement */}
+      {data.protocolLevelEnforcement && (
+        <div className="mb-6">
+          <button onClick={() => toggleSection('protocol')} className="w-full text-left">
+            <h4 className="text-white font-semibold mb-2 flex items-center justify-between">
+              {data.protocolLevelEnforcement.title}
+              <ChevronDown className={`w-5 h-5 transition-transform ${expandedSection === 'protocol' ? 'rotate-180' : ''}`} />
+            </h4>
+          </button>
+          {expandedSection === 'protocol' && (
+            <div className="mt-3 space-y-4">
+              {data.protocolLevelEnforcement.transactionLifecycle && (
+                <div className="bg-slate-700/50 rounded p-3">
+                  <p className="text-blue-300 font-semibold text-sm mb-2">{data.protocolLevelEnforcement.transactionLifecycle.title}</p>
+                  <div className="space-y-2">
+                    {data.protocolLevelEnforcement.transactionLifecycle.steps?.map((step: any, i: number) => (
+                      <div key={i} className="flex items-start gap-2 bg-slate-600/50 rounded p-2">
+                        <span className="bg-emerald-500 text-white text-xs font-bold px-2 py-0.5 rounded">{step.step}</span>
+                        <div>
+                          <p className="text-white text-sm font-medium">{step.name}</p>
+                          <p className="text-gray-400 text-xs">{step.description}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              {data.protocolLevelEnforcement.preExecutionChecks && (
+                <div className="bg-slate-700/50 rounded p-3">
+                  <p className="text-blue-300 font-semibold text-sm mb-2">Pre-Execution Checks</p>
+                  <div className="space-y-2">
+                    {data.protocolLevelEnforcement.preExecutionChecks.map((check: any, i: number) => (
+                      <div key={i} className="bg-slate-600/50 rounded p-2">
+                        <p className="text-white text-sm font-medium">{check.check}</p>
+                        <p className="text-gray-400 text-xs">{check.description}</p>
+                        {check.failureResult && <p className="text-red-300 text-xs">If fails: {check.failureResult}</p>}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              {data.protocolLevelEnforcement.outcomes && (
+                <div className="grid md:grid-cols-4 gap-2">
+                  {data.protocolLevelEnforcement.outcomes.map((o: any, i: number) => (
+                    <div key={i} className={`rounded p-2 text-center ${
+                      o.status === 'APPROVED' || o.status === 'OK' ? 'bg-emerald-500/20 border border-emerald-500/40' :
+                      o.status === 'FLAGGED' || o.status === 'Warning' ? 'bg-amber-500/20 border border-amber-500/40' :
+                      o.status === 'QUEUED' ? 'bg-blue-500/20 border border-blue-500/40' :
+                      'bg-red-500/20 border border-red-500/40'
+                    }`}>
+                      <p className="font-bold text-sm">{o.status}</p>
+                      <p className="text-gray-400 text-xs">{o.result}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+              
+              {data.protocolLevelEnforcement.keyPoint && (
+                <p className="text-emerald-200 text-sm bg-emerald-500/10 rounded p-2">{data.protocolLevelEnforcement.keyPoint}</p>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+      
+      {/* Roadmap and Migration */}
+      {data.roadmapAndMigration && (
+        <div className="mb-4">
+          <button onClick={() => toggleSection('roadmap')} className="w-full text-left">
+            <h4 className="text-white font-semibold mb-2 flex items-center justify-between">
+              {data.roadmapAndMigration.title}
+              <ChevronDown className={`w-5 h-5 transition-transform ${expandedSection === 'roadmap' ? 'rotate-180' : ''}`} />
+            </h4>
+          </button>
+          {expandedSection === 'roadmap' && (
+            <div className="mt-3 space-y-4">
+              {data.roadmapAndMigration.currentState && (
+                <div className="bg-blue-500/10 border border-blue-500/30 rounded p-3">
+                  <p className="text-blue-300 font-semibold text-sm mb-2">{data.roadmapAndMigration.currentState.title}</p>
+                  <p className="text-white text-sm">{data.roadmapAndMigration.currentState.status}</p>
+                  <p className="text-gray-400 text-xs mt-1">{data.roadmapAndMigration.currentState.infrastructure}</p>
+                </div>
+              )}
+              
+              {data.roadmapAndMigration.roadmap && (
+                <div className="space-y-2">
+                  {data.roadmapAndMigration.roadmap.map((phase: any, i: number) => (
+                    <div key={i} className={`rounded p-3 ${
+                      phase.status === 'In Progress' ? 'bg-emerald-500/10 border border-emerald-500/30' :
+                      phase.status === 'Planned' ? 'bg-blue-500/10 border border-blue-500/30' :
+                      'bg-slate-700/50 border border-slate-600'
+                    }`}>
+                      <div className="flex items-center justify-between mb-2">
+                        <p className="text-white font-semibold text-sm">{phase.phase}</p>
+                        <span className={`text-xs px-2 py-0.5 rounded ${
+                          phase.status === 'In Progress' ? 'bg-emerald-500 text-white' :
+                          phase.status === 'Planned' ? 'bg-blue-500 text-white' :
+                          'bg-slate-600 text-gray-300'
+                        }`}>{phase.status}</span>
+                      </div>
+                      <ul className="text-gray-400 text-xs space-y-1">
+                        {phase.milestones?.map((m: string, j: number) => (
+                          <li key={j}>• {m}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              )}
+              
+              {data.roadmapAndMigration.strategicRationale?.arnoldQuote && (
+                <div className="bg-purple-500/10 border border-purple-500/30 rounded p-3">
+                  <p className="text-purple-200 italic">"{data.roadmapAndMigration.strategicRationale.arnoldQuote.quote}"</p>
+                  <p className="text-purple-400 text-sm mt-1">— {data.roadmapAndMigration.strategicRationale.arnoldQuote.speaker}</p>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
