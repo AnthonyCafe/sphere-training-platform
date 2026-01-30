@@ -40,7 +40,7 @@ This pillar ensures you can explain:
           ]
         },
         learn: {
-          introduction: 'Every payment — whether it\'s $50 on Venmo or $500M between banks — moves through the same three stages. Understanding this lifecycle is non-negotiable for Sphere conversations because we restructure where and how settlement happens.',
+          introduction: 'Every payment - whether it\'s $50 on Venmo or $500M between banks - moves through the same three stages. Understanding this lifecycle is non-negotiable for Sphere conversations because we restructure where and how settlement happens.',
           coreQuestion: 'Has money actually moved?',
           sections: [
             {
@@ -49,10 +49,10 @@ This pillar ensures you can explain:
               content: 'A payment instruction is created and sent. Someone says "move money from A to B."',
               details: [
                 { label: 'Who controls it', value: 'The sender (payer) and their bank' },
-                { label: 'Reversible?', value: 'Yes — easily. Nothing has moved yet.' },
+                { label: 'Reversible?', value: 'Yes - easily. Nothing has moved yet.' },
                 { label: 'Risk status', value: 'Customer bears the risk' }
               ],
-              example: 'You hit "Send" on a wire transfer. Your bank receives the instruction. At this moment, you\'ve initiated — but no money has moved.',
+              example: 'You hit "Send" on a wire transfer. Your bank receives the instruction. At this moment, you\'ve initiated - but no money has moved.',
               partiesInvolved: {
                 title: 'Who Is Involved at Initiation?',
                 parties: [
@@ -70,8 +70,8 @@ This pillar ensures you can explain:
               },
               riskExplained: {
                 title: 'Why Does the Customer Bear Risk?',
-                explanation: 'At initiation, the customer has provided an instruction but the bank hasn\'t committed to executing it yet. If the instruction contains errors (wrong account number, invalid beneficiary name, insufficient details), the payment will fail—and the customer bears responsibility for providing correct information.',
-                scenario: 'You submit a wire with a typo in the beneficiary account number. Your bank hasn\'t sent anything yet—they\'re just processing your request. If they catch the error, they\'ll reject it. If they don\'t, and the payment fails later, you bear the cost of correction and delay.',
+                explanation: 'At initiation, the customer has provided an instruction but the bank hasn\'t committed to executing it yet. If the instruction contains errors (wrong account number, invalid beneficiary name, insufficient details), the payment will fail-and the customer bears responsibility for providing correct information.',
+                scenario: 'You submit a wire with a typo in the beneficiary account number. Your bank hasn\'t sent anything yet-they\'re just processing your request. If they catch the error, they\'ll reject it. If they don\'t, and the payment fails later, you bear the cost of correction and delay.',
                 commonErrors: [
                   'Invalid beneficiary account number',
                   'Incorrect SWIFT/BIC code',
@@ -87,18 +87,18 @@ This pillar ensures you can explain:
               content: 'The payment instruction is validated, matched, and prepared for settlement. Banks confirm details.',
               details: [
                 { label: 'Who controls it', value: 'Payment network (SWIFT, ACH, CHIPS)' },
-                { label: 'Reversible?', value: 'Possibly — depends on the system' },
+                { label: 'Reversible?', value: 'Possibly - depends on the system' },
                 { label: 'Risk status', value: 'Sending bank now bears risk' }
               ],
               example: 'Your wire goes through SWIFT. SWIFT validates the format, routes to correspondent bank, they confirm the beneficiary.',
-              warning: 'A payment can clear successfully and STILL never settle. Clearing is just agreement — not money movement.',
+              warning: 'A payment can clear successfully and STILL never settle. Clearing is just agreement - not money movement.',
               systemsPreview: {
                 title: 'Different Systems, Different Rules',
                 explanation: 'The system a payment clears through determines its speed, cost, and finality. A $5,000 payroll deposit clears differently than a $5 million trade settlement.',
                 systems: [
-                  { name: 'ACH', role: 'Batches millions of small payments (payroll, bills) — clears in batches, settles next-day or same-day' },
-                  { name: 'CHIPS', role: 'Clears large international USD payments — nets positions throughout the day, settles via Fedwire' },
-                  { name: 'SWIFT', role: 'Carries the message, but doesn\'t clear or settle — it\'s just the postal service' }
+                  { name: 'ACH', role: 'Batches millions of small payments (payroll, bills) - clears in batches, settles next-day or same-day' },
+                  { name: 'CHIPS', role: 'Clears large international USD payments - nets positions throughout the day, settles via Fedwire' },
+                  { name: 'SWIFT', role: 'Carries the message, but doesn\'t clear or settle - it\'s just the postal service' }
                 ],
                 lookAhead: 'Section 1.3 covers each system in depth. For now, understand: the system determines the rules.'
               },
@@ -125,14 +125,14 @@ This pillar ensures you can explain:
               },
               riskExplained: {
                 title: 'Why Does the Sending Bank Now Bear Risk?',
-                explanation: 'Once clearing begins, the originating bank has committed to the payment. They\'ve debited the customer\'s account and sent the instruction into the payment network. At this point, the customer\'s money is "in flight"—gone from their account but not yet received by the beneficiary.',
-                scenario: 'Your bank sends a $50,000 wire to Nigeria. The message goes through SWIFT to a correspondent in London, then to a correspondent in Lagos, then to the beneficiary bank. At the Lagos correspondent, the payment gets flagged for enhanced due diligence because the reference field mentions "agricultural equipment" and they want documentation. The payment is in limbo. Your money is gone from your account. The receiver hasn\'t gotten it. Your bank can\'t just "cancel" it—they have to negotiate with the correspondent. This is clearing risk.',
+                explanation: 'Once clearing begins, the originating bank has committed to the payment. They\'ve debited the customer\'s account and sent the instruction into the payment network. At this point, the customer\'s money is "in flight"-gone from their account but not yet received by the beneficiary.',
+                scenario: 'Your bank sends a $50,000 wire to Nigeria. The message goes through SWIFT to a correspondent in London, then to a correspondent in Lagos, then to the beneficiary bank. At the Lagos correspondent, the payment gets flagged for enhanced due diligence because the reference field mentions "agricultural equipment" and they want documentation. The payment is in limbo. Your money is gone from your account. The receiver hasn\'t gotten it. Your bank can\'t just "cancel" it-they have to negotiate with the correspondent. This is clearing risk.',
                 whatCanGoWrong: [
                   'Correspondent bank rejects payment due to risk appetite',
                   'Beneficiary account frozen or closed',
                   'Compliance hold for sanctions or AML review (can take days or weeks)',
                   'Beneficiary name doesn\'t match account (requires manual verification)',
-                  'Cut-off time missed—payment delayed to next business day',
+                  'Cut-off time missed-payment delayed to next business day',
                   'FX rate moves against you while payment is clearing',
                   'Nostro account has insufficient balance'
                 ]
@@ -141,7 +141,7 @@ This pillar ensures you can explain:
             {
               title: 'Stage 3: Settlement',
               icon: '✅',
-              content: 'Actual value moves. Balances change on the ledger that matters — usually the central bank ledger.',
+              content: 'Actual value moves. Balances change on the ledger that matters - usually the central bank ledger.',
               details: [
                 { label: 'Who controls it', value: 'Settlement system (Fedwire, TARGET2)' },
                 { label: 'Reversible?', value: 'No. This is finality.' },
@@ -171,7 +171,7 @@ This pillar ensures you can explain:
               },
               riskExplained: {
                 title: 'Why Is Risk Eliminated at Settlement?',
-                explanation: 'Settlement happens on the central bank ledger—the most trusted ledger in the financial system. When Fedwire debits Bank A and credits Bank B, that transaction is final, irrevocable, and backed by law. There\'s no credit risk (central bank can\'t default), no reversal mechanism, and legal finality.',
+                explanation: 'Settlement happens on the central bank ledger-the most trusted ledger in the financial system. When Fedwire debits Bank A and credits Bank B, that transaction is final, irrevocable, and backed by law. There\'s no credit risk (central bank can\'t default), no reversal mechanism, and legal finality.',
                 scenario: 'After all the correspondent approvals and compliance checks, the payment reaches the final step. The sending bank\'s Fedwire account is debited $50,000. The receiving bank\'s Fedwire account is credited $50,000. The Federal Reserve has moved money on its books. This is settlement. The beneficiary bank can now safely credit their customer\'s account because they have the money.',
                 keyPoint: 'This is why central banks matter. Only they can provide zero-credit-risk settlement. No private system, no blockchain, and no technology company can replicate this function without sovereign backing.'
               }
@@ -190,8 +190,8 @@ This pillar ensures you can explain:
             title: 'Why This Matters for Sphere',
             context: 'Traditional cross-border payments take 2-5 days from initiation to settlement. During that window: sender\'s money is gone, receiver hasn\'t received it, banks carry risk, FX rates can move against you, and compliance holds can freeze everything.',
             sphereValue: 'SpherePay compresses this from days to MINUTES using stablecoins.',
-            keyInsight: 'SpherePay\'s value is in the settlement layer — not faster messaging.',
-            problemExplained: 'Traditional cross-border payments are slow because settlement requires moving money through correspondent banking chains, across time zones, and through central bank systems that operate on business hours. The MESSAGING is already fast (SWIFT messages arrive in seconds)—the delay is in SETTLEMENT.',
+            keyInsight: 'SpherePay\'s value is in the settlement layer - not faster messaging.',
+            problemExplained: 'Traditional cross-border payments are slow because settlement requires moving money through correspondent banking chains, across time zones, and through central bank systems that operate on business hours. The MESSAGING is already fast (SWIFT messages arrive in seconds)-the delay is in SETTLEMENT.',
             howSphereWorks: {
               title: 'How Sphere Achieves Settlement Layer Value Using Stablecoins',
               steps: [
@@ -232,20 +232,22 @@ This pillar ensures you can explain:
                   explanation: 'When a stablecoin transaction confirms on-chain, it\'s settled. There\'s no "clearing vs settlement" delay. Traditional payments can clear (message confirmed) but not settle (money not moved) for days.'
                 }
               ],
-              criticalClarification: 'Sphere does NOT eliminate fiat settlement—fiat settlement still happens at the endpoints through licensed partners. What Sphere does is compress the CROSS-BORDER leg from days to minutes by using stablecoins as the settlement asset across borders. This is why we say "Sphere\'s value is in the settlement layer"—we\'re not making messages faster, we\'re making settlement faster.'
+              criticalClarification: 'Sphere does NOT eliminate fiat settlement-fiat settlement still happens at the endpoints through licensed partners. What Sphere does is compress the CROSS-BORDER leg from days to minutes by using stablecoins as the settlement asset across borders. This is why we say "Sphere\'s value is in the settlement layer"-we\'re not making messages faster, we\'re making settlement faster.'
             }
           },
           keyTakeaway: 'A payment can be initiated and cleared WITHOUT being settled. Risk accumulates until settlement occurs.'
         },
         exercise: {
-          title: 'Exercise 1.1 — Timeline Mapping',
+          title: 'Exercise 1.1 - Timeline Mapping',
           prompt: 'Draw a payment timeline with three sections (Initiation → Clearing → Settlement). For each section, answer:\n\n1) Who controls the process?\n2) Is the payment reversible?\n3) Who bears risk?\n4) What systems are involved?\n\nThen explain: Why does understanding this matter for how you position Sphere?',
           criteria: ['Accurate stage descriptions', 'Clear risk attribution', 'Sphere connection']
         },
         quiz: [
           { q: 'At which stage does risk get eliminated in a payment?', options: ['Initiation', 'Clearing', 'Settlement', 'All stages carry equal risk'], correct: 2 },
           { q: 'A payment has cleared but not settled. What is true?', options: ['Money has moved', 'Banks agreed but value hasn\'t transferred', 'Cannot be reversed', 'Customer no longer bears risk'], correct: 1 },
-          { q: 'Why is SpherePay\'s value "in the settlement layer"?', options: ['Faster messages than SWIFT', 'Stablecoins compress settlement to minutes', 'Eliminates clearing', 'Bypasses all banks'], correct: 1 }
+          { q: 'Why is SpherePay\'s value "in the settlement layer"?', options: ['Faster messages than SWIFT', 'Stablecoins compress settlement to minutes', 'Eliminates clearing', 'Bypasses all banks'], correct: 1 },
+          { q: 'What is the correct order of the payment lifecycle?', options: ['Settlement → Clearing → Initiation', 'Clearing → Initiation → Settlement', 'Initiation → Clearing → Settlement', 'Initiation → Settlement → Clearing'], correct: 2 },
+          { q: 'Settlement finality means:', options: ['Payment message was sent', 'Banks have agreed to transfer', 'Value transfer is complete and irrevocable', 'Customer received confirmation'], correct: 2 }
         ]
       },
       {
@@ -264,13 +266,13 @@ This pillar ensures you can explain:
           ]
         },
         learn: {
-          introduction: 'This is where most people — even experienced finance professionals — get it wrong. They confuse the message about a payment with the movement of money. These are completely different things.',
+          introduction: 'This is where most people - even experienced finance professionals - get it wrong. They confuse the message about a payment with the movement of money. These are completely different things.',
           coreQuestion: 'What actually moves when you send a payment?',
           sections: [
             {
-              title: 'SWIFT — The Messaging Network',
+              title: 'SWIFT - The Messaging Network',
               icon: '📨',
-              content: 'SWIFT is like a very secure email system for banks. When you send a wire transfer, SWIFT carries the instruction — but doesn\'t move a single dollar.',
+              content: 'SWIFT is like a very secure email system for banks. When you send a wire transfer, SWIFT carries the instruction - but doesn\'t move a single dollar.',
               details: [
                 { label: 'What it does', value: 'Sends messages' },
                 { label: 'What moves', value: 'Information only' },
@@ -279,7 +281,7 @@ This pillar ensures you can explain:
               ]
             },
             {
-              title: 'Fedwire — The Settlement System',
+              title: 'Fedwire - The Settlement System',
               icon: '🏛️',
               content: 'Fedwire is operated by the Federal Reserve. When Fedwire processes a payment, actual money moves on the Fed\'s master ledger.',
               details: [
@@ -306,7 +308,7 @@ This pillar ensures you can explain:
                 name: 'ACH',
                 type: 'Clearing + Settlement',
                 oneLiner: 'The high-volume system for everyday payments',
-                keyFact: 'Processes 80+ million transactions daily — payroll, bills, B2B payments. Batch-based, not real-time.',
+                keyFact: 'Processes 80+ million transactions daily - payroll, bills, B2B payments. Batch-based, not real-time.',
                 whyItMatters: 'ACH is domestic US only. Its batch processing and return windows (payments can bounce back days later) make it unsuitable for time-sensitive international payments.'
               },
               {
@@ -314,11 +316,11 @@ This pillar ensures you can explain:
                 type: 'Instant Settlement',
                 oneLiner: 'The Fed\'s new instant payment rail',
                 keyFact: 'Launched 2023. Real-time, 24/7/365, final settlement in seconds. Currently domestic US only.',
-                whyItMatters: 'FedNow raises customer expectations — if domestic is instant, why does international take days? This is the gap Sphere fills.'
+                whyItMatters: 'FedNow raises customer expectations - if domestic is instant, why does international take days? This is the gap Sphere fills.'
               }
             ],
-            sphereContext: 'Sphere doesn\'t replace these systems — we complement them. At the US endpoint, our banking partners use Fedwire, CHIPS, or ACH to move USD. Sphere compresses the cross-border leg that traditionally requires multiple correspondent banks and days of delay.',
-            deeperDive: 'Section 1.3 covers each system in detail — how they work, when they\'re used, and their finality characteristics.'
+            sphereContext: 'Sphere doesn\'t replace these systems - we complement them. At the US endpoint, our banking partners use Fedwire, CHIPS, or ACH to move USD. Sphere compresses the cross-border leg that traditionally requires multiple correspondent banks and days of delay.',
+            deeperDive: 'Section 1.3 covers each system in detail - how they work, when they\'re used, and their finality characteristics.'
           },
           swiftAckExplained: {
             title: 'What Is a SWIFT ACK?',
@@ -340,11 +342,11 @@ This pillar ensures you can explain:
           dangerZone: {
             title: 'The Dangerous Statement',
             statement: '"I got the SWIFT ACK, so we\'re good."',
-            whyDangerous: 'A SWIFT ACK only confirms message delivery—NOT that money has moved. This is one of the most common and costly mistakes in cross-border payments.',
+            whyDangerous: 'A SWIFT ACK only confirms message delivery-NOT that money has moved. This is one of the most common and costly mistakes in cross-border payments.',
             mythVsReality: [
               { myth: 'Payment went through', truth: 'Message was delivered to the next bank in the chain' },
               { myth: 'Money has moved', truth: 'An instruction was received and acknowledged' },
-              { myth: 'We\'re done, release the goods', truth: 'We\'ve barely started—settlement still pending' },
+              { myth: 'We\'re done, release the goods', truth: 'We\'ve barely started-settlement still pending' },
               { myth: 'Beneficiary can access the funds', truth: 'Beneficiary won\'t see anything until settlement completes' }
             ],
             whatCanStillGoWrong: {
@@ -396,7 +398,7 @@ This pillar ensures you can explain:
               {
                 step: 'Beneficiary Bank Confirmation',
                 what: 'Verify the beneficiary\'s bank has received and credited the funds',
-                how: 'Ask the beneficiary to check their account statement. Don\'t assume—confirm.',
+                how: 'Ask the beneficiary to check their account statement. Don\'t assume-confirm.',
                 evidence: 'Beneficiary sends you a screenshot or statement showing the credit'
               },
               {
@@ -413,7 +415,7 @@ This pillar ensures you can explain:
               }
             ],
             bestPractice: 'For large or critical payments, require the beneficiary to confirm receipt in their account before releasing goods, services, or obligations. SWIFT ACK is not proof of payment.',
-            sphereAdvantage: 'With Sphere, stablecoin transfers settle on-chain in 15-30 minutes. You can verify settlement by checking the blockchain transaction—it\'s transparent, timestamped, and final. No waiting for correspondent confirmations.'
+            sphereAdvantage: 'With Sphere, stablecoin transfers settle on-chain in 15-30 minutes. You can verify settlement by checking the blockchain transaction-it\'s transparent, timestamped, and final. No waiting for correspondent confirmations.'
           },
           keyPhrase: {
             phrase: 'Messages create obligations; settlement discharges them.',
@@ -434,20 +436,22 @@ This pillar ensures you can explain:
             points: [
               'Traditional: SWIFT message → Days of uncertainty → Eventually Fedwire settles',
               'Sphere: Stablecoin transfer → Minutes → Settlement complete',
-              'We\'re not making SWIFT faster — we\'re using a different settlement layer entirely'
+              'We\'re not making SWIFT faster - we\'re using a different settlement layer entirely'
             ]
           },
           keyTakeaway: 'SWIFT sends messages. Fedwire moves money. Never confuse the two.'
         },
         exercise: {
-          title: 'Exercise 1.2 — Message vs Money',
+          title: 'Exercise 1.2 - Message vs Money',
           prompt: 'A colleague says: "The SWIFT payment went through, so we can release the goods."\n\nWrite a response that:\n1) Explains why this assumption is dangerous\n2) Clarifies what SWIFT ACK actually means\n3) Describes what needs to happen for settlement\n4) Recommends what they should verify instead',
           criteria: ['Correct SWIFT understanding', 'Clear settlement explanation', 'Practical recommendation']
         },
         quiz: [
           { q: 'What does SWIFT primarily provide?', options: ['Settlement services', 'Messaging services', 'Currency exchange', 'Liquidity provision'], correct: 1 },
           { q: 'A SWIFT ACK confirms:', options: ['Money has moved', 'Message delivered to next bank', 'Settlement complete', 'Beneficiary received funds'], correct: 1 },
-          { q: 'Complete: "Messages create obligations..."', options: ['...messaging confirms them', '...settlement discharges them', '...banks process them', '...compliance approves them'], correct: 1 }
+          { q: 'Complete: "Messages create obligations..."', options: ['...messaging confirms them', '...settlement discharges them', '...banks process them', '...compliance approves them'], correct: 1 },
+          { q: 'How many financial institutions are connected to SWIFT?', options: ['1,100+', '5,500+', '11,000+', '50,000+'], correct: 2 },
+          { q: 'Which system actually MOVES money in the US?', options: ['SWIFT', 'Fedwire', 'CHIPS', 'Both Fedwire and CHIPS'], correct: 3 }
         ]
       },
       {
@@ -516,7 +520,7 @@ This pillar ensures you can explain:
                 name: 'ACH',
                 when: '1-2 business days after initiation (during settlement window)',
                 strength: '⭐⭐⭐ Good finality, but delayed',
-                explanation: 'ACH batches payments and settles them through the Federal Reserve. Finality occurs when the Fed settles the ACH batch—typically 1-2 days after initiation. However, ACH has return windows (unauthorized debits can be returned for 60 days), so finality is not as absolute as RTGS.',
+                explanation: 'ACH batches payments and settles them through the Federal Reserve. Finality occurs when the Fed settles the ACH batch-typically 1-2 days after initiation. However, ACH has return windows (unauthorized debits can be returned for 60 days), so finality is not as absolute as RTGS.',
                 legalBacking: 'NACHA Operating Rules, UCC 4A',
                 useCases: ['Payroll', 'Bill payments', 'Consumer transactions'],
                 keyPoint: 'ACH is cheaper and efficient for bulk payments, but don\'t expect same-day finality. Returns are possible for unauthorized transactions.'
@@ -532,19 +536,19 @@ This pillar ensures you can explain:
               },
               {
                 name: 'Cryptocurrency (Bitcoin, Ethereum, etc.)',
-                when: 'Never achieves legal finality—only probabilistic certainty',
+                when: 'Never achieves legal finality-only probabilistic certainty',
                 strength: '⭐ No legal finality',
-                explanation: 'Cryptocurrencies use consensus mechanisms (proof of work, proof of stake) to confirm transactions. After N confirmations, a transaction is "computationally impractical to reverse"—but there\'s no legal framework that defines finality. A 51% attack could theoretically reverse transactions. More importantly, courts don\'t recognize blockchain finality as legally binding.',
+                explanation: 'Cryptocurrencies use consensus mechanisms (proof of work, proof of stake) to confirm transactions. After N confirmations, a transaction is "computationally impractical to reverse"-but there\'s no legal framework that defines finality. A 51% attack could theoretically reverse transactions. More importantly, courts don\'t recognize blockchain finality as legally binding.',
                 legalBacking: 'None. No statute defines finality. No court precedent.',
                 useCases: ['Crypto trading', 'Speculative transfers', 'Experimental payments'],
                 keyPoint: 'Crypto provides technical security (hard to reverse) but not legal finality (no law protects you if it\'s reversed). Enterprises and regulators care about legal finality.'
               }
             ],
-            summary: 'When someone asks about "finality," they\'re asking: "If this payment is reversed, can I take legal action?" For Fedwire, the answer is yes—the law protects you. For crypto, the answer is unclear—you might have a blockchain record, but no legal recourse.'
+            summary: 'When someone asks about "finality," they\'re asking: "If this payment is reversed, can I take legal action?" For Fedwire, the answer is yes-the law protects you. For crypto, the answer is unclear-you might have a blockchain record, but no legal recourse.'
           },
           paymentSystemsDeepDive: {
             title: 'Payment Systems Deep Dive: How Money Actually Moves',
-            introduction: 'Understanding payment systems isn\'t academic — it\'s essential for explaining why traditional cross-border payments take so long and why Sphere\'s approach works. Each system has different rules, speeds, and finality characteristics.',
+            introduction: 'Understanding payment systems isn\'t academic - it\'s essential for explaining why traditional cross-border payments take so long and why Sphere\'s approach works. Each system has different rules, speeds, and finality characteristics.',
             usPaymentSystems: {
               title: 'US Payment Systems: The Four Pillars',
               subtitle: 'The US has multiple payment systems because different payments have different needs. A $10 Netflix subscription doesn\'t need the same infrastructure as a $10 million trade settlement.',
@@ -555,7 +559,7 @@ This pillar ensures you can explain:
                   tagline: 'The gold standard of settlement',
                   operator: 'Federal Reserve Banks',
                   type: 'Real-Time Gross Settlement (RTGS)',
-                  description: 'Fedwire is the backbone of US high-value payments. Each payment settles individually and immediately on the Federal Reserve\'s master ledger. When Fedwire processes a payment, it\'s final — backed by the full faith and credit of the US government.',
+                  description: 'Fedwire is the backbone of US high-value payments. Each payment settles individually and immediately on the Federal Reserve\'s master ledger. When Fedwire processes a payment, it\'s final - backed by the full faith and credit of the US government.',
                   keyStats: [
                     { stat: '~$4 trillion', label: 'daily volume' },
                     { stat: '~800,000', label: 'transactions/day' },
@@ -576,16 +580,16 @@ This pillar ensures you can explain:
                     title: 'Operating Hours Matter',
                     hours: '9:00 PM ET (prior day) to 7:00 PM ET',
                     closed: 'Weekends and Federal holidays',
-                    implication: 'If you need to settle a payment at 8 PM ET on Friday, you\'re waiting until Monday. This is why "24/7 settlement" is valuable — and why stablecoins can help bridge these gaps.'
+                    implication: 'If you need to settle a payment at 8 PM ET on Friday, you\'re waiting until Monday. This is why "24/7 settlement" is valuable - and why stablecoins can help bridge these gaps.'
                   },
                   cost: {
                     title: 'Cost Structure',
                     fedFee: '$0.50 - $1.00 per transaction (what banks pay the Fed)',
                     bankFee: '$15 - $45 typical (what banks charge customers)',
-                    insight: 'The Fed\'s cost is cheap. Banks mark it up significantly. This is margin — and why alternatives are attractive for high-volume senders.'
+                    insight: 'The Fed\'s cost is cheap. Banks mark it up significantly. This is margin - and why alternatives are attractive for high-volume senders.'
                   },
                   whenUsed: ['Large-value payments ($1M+)', 'Time-critical settlements', 'Real estate closings', 'Securities transactions', 'Final leg of international wires'],
-                  sphereRelevance: 'When Sphere\'s US banking partners deliver USD to a beneficiary, that final USD movement often settles through Fedwire. We don\'t touch Fedwire directly — our licensed partners do — but their Fedwire settlement is what gives the USD leg legal finality.'
+                  sphereRelevance: 'When Sphere\'s US banking partners deliver USD to a beneficiary, that final USD movement often settles through Fedwire. We don\'t touch Fedwire directly - our licensed partners do - but their Fedwire settlement is what gives the USD leg legal finality.'
                 },
                 {
                   name: 'CHIPS',
@@ -624,7 +628,7 @@ This pillar ensures you can explain:
                       { step: 'Real-time release', detail: 'When payments can be funded from netting, they\'re released immediately' },
                       { step: 'End-of-day settlement', detail: 'Remaining net positions settle through Fedwire by 5:30 PM ET' }
                     ],
-                    keyPoint: 'CHIPS payments become final when "released" — but the system depends on Fedwire for ultimate settlement. CHIPS is a layer on top of the Fed infrastructure.'
+                    keyPoint: 'CHIPS payments become final when "released" - but the system depends on Fedwire for ultimate settlement. CHIPS is a layer on top of the Fed infrastructure.'
                   },
                   participants: {
                     title: 'Who Uses CHIPS',
@@ -642,7 +646,7 @@ This pillar ensures you can explain:
                   tagline: 'The everyday workhorse',
                   operator: 'Federal Reserve (FedACH) and The Clearing House (EPN)',
                   type: 'Batch Processing with Deferred Net Settlement',
-                  description: 'ACH is the high-volume, lower-value network that moves everyday money — payroll, bill payments, subscriptions, and increasingly B2B payments. It processes in batches, not real-time, which makes it efficient but slower.',
+                  description: 'ACH is the high-volume, lower-value network that moves everyday money - payroll, bill payments, subscriptions, and increasingly B2B payments. It processes in batches, not real-time, which makes it efficient but slower.',
                   keyStats: [
                     { stat: '~80 million', label: 'transactions/day' },
                     { stat: '~$280 billion', label: 'daily volume' },
@@ -657,20 +661,20 @@ This pillar ensures you can explain:
                       { window: 'Afternoon batch', deadline: '2:45 PM ET', settles: 'Same business day (if Same-Day ACH)' },
                       { window: 'Standard batch', deadline: 'Various', settles: 'Next business day' }
                     ],
-                    keyPoint: 'Batching is why ACH is cheap — processing millions of payments together is efficient. But it means your payment waits for the next batch window.'
+                    keyPoint: 'Batching is why ACH is cheap - processing millions of payments together is efficient. But it means your payment waits for the next batch window.'
                   },
                   achTypes: {
                     title: 'ACH Credits vs ACH Debits',
                     types: [
-                      { type: 'ACH Credit (Push)', description: 'Sender pushes money to receiver', examples: ['Payroll direct deposit', 'Vendor payments', 'Tax refunds'], riskProfile: 'Lower risk — sender initiates and authorizes' },
-                      { type: 'ACH Debit (Pull)', description: 'Receiver pulls money from sender', examples: ['Bill payments', 'Subscription charges', 'Gym memberships'], riskProfile: 'Higher risk — receiver initiates, sender must have authorized' }
+                      { type: 'ACH Credit (Push)', description: 'Sender pushes money to receiver', examples: ['Payroll direct deposit', 'Vendor payments', 'Tax refunds'], riskProfile: 'Lower risk - sender initiates and authorizes' },
+                      { type: 'ACH Debit (Pull)', description: 'Receiver pulls money from sender', examples: ['Bill payments', 'Subscription charges', 'Gym memberships'], riskProfile: 'Higher risk - receiver initiates, sender must have authorized' }
                     ],
                     returnRisk: 'ACH debits can be returned for up to 60 days if unauthorized. This is fundamentally different from Fedwire finality. Businesses accepting ACH payments bear this return risk.'
                   },
                   sameDayACH: {
                     title: 'Same-Day ACH',
                     launched: '2016, expanded since',
-                    description: 'Same-Day ACH allows payments to settle same business day instead of next day — for an additional fee.',
+                    description: 'Same-Day ACH allows payments to settle same business day instead of next day - for an additional fee.',
                     limits: [
                       { limit: '$1 million', description: 'per-transaction maximum' },
                       { limit: '~$0.50 - $1.50', description: 'additional fee per transaction' },
@@ -680,7 +684,7 @@ This pillar ensures you can explain:
                   },
                   whenUsed: ['Payroll and direct deposit', 'Bill payments', 'Subscription charges', 'B2B vendor payments (growing)', 'Government benefits'],
                   notUsedFor: ['Time-critical payments', 'High-value transactions', 'International payments', 'Situations requiring immediate finality'],
-                  sphereRelevance: 'ACH is domestic US only — it doesn\'t help with cross-border. However, Sphere\'s US on-ramp partners might use ACH for lower-value USD collections from customers. The key insight: ACH\'s batch processing and return windows are why businesses needing speed and certainty look for alternatives.'
+                  sphereRelevance: 'ACH is domestic US only - it doesn\'t help with cross-border. However, Sphere\'s US on-ramp partners might use ACH for lower-value USD collections from customers. The key insight: ACH\'s batch processing and return windows are why businesses needing speed and certainty look for alternatives.'
                 },
                 {
                   name: 'FedNow',
@@ -689,7 +693,7 @@ This pillar ensures you can explain:
                   operator: 'Federal Reserve',
                   type: 'Real-Time Gross Settlement (Instant)',
                   launched: 'July 2023',
-                  description: 'FedNow is the Federal Reserve\'s instant payment service — real-time, 24/7/365 settlement with immediate finality. It\'s the Fed\'s answer to private instant payment networks and modernizes US payment expectations.',
+                  description: 'FedNow is the Federal Reserve\'s instant payment service - real-time, 24/7/365 settlement with immediate finality. It\'s the Fed\'s answer to private instant payment networks and modernizes US payment expectations.',
                   keyStats: [
                     { stat: '24/7/365', label: 'availability' },
                     { stat: 'Seconds', label: 'settlement time' },
@@ -709,7 +713,7 @@ This pillar ensures you can explain:
                     title: 'Current Status (2024-2025)',
                     points: [
                       'Over 1,000 financial institutions participating',
-                      'Still ramping adoption — not all banks support it yet',
+                      'Still ramping adoption - not all banks support it yet',
                       'Transaction limits may increase as system matures',
                       'Primarily consumer and small business use cases currently'
                     ]
@@ -717,14 +721,14 @@ This pillar ensures you can explain:
                   limitations: {
                     title: 'What FedNow Doesn\'t Solve',
                     points: [
-                      'Domestic US only — no cross-border capability',
+                      'Domestic US only - no cross-border capability',
                       'Requires both banks to be FedNow participants',
                       '$500K limit excludes large commercial payments',
                       'Doesn\'t address correspondent banking complexity'
                     ]
                   },
                   whenUsed: ['Urgent P2P payments', 'Emergency bill payments', 'Gig economy payouts', 'Small business urgent needs'],
-                  sphereRelevance: 'FedNow validates the demand for instant settlement — customers want speed. But FedNow is domestic only. The cross-border gap remains. Sphere fills that gap: instant cross-border movement via stablecoins, with fiat settlement (potentially via FedNow) at endpoints.'
+                  sphereRelevance: 'FedNow validates the demand for instant settlement - customers want speed. But FedNow is domestic only. The cross-border gap remains. Sphere fills that gap: instant cross-border movement via stablecoins, with fiat settlement (potentially via FedNow) at endpoints.'
                 }
               ],
               comparisonTable: {
@@ -737,7 +741,7 @@ This pillar ensures you can explain:
                   ['FedNow', 'Instant', 'Immediate, irrevocable', '$0.045', 'Urgent smaller payments', 'Domestic only, $500K limit']
                 ]
               },
-              keyInsight: 'No single system does everything. Fedwire is fast but expensive and limited hours. CHIPS handles international but requires correspondent relationships. ACH is cheap but slow with return risk. FedNow is instant but domestic only. Understanding these tradeoffs helps you explain why cross-border payments are complex — and why Sphere\'s approach works.'
+              keyInsight: 'No single system does everything. Fedwire is fast but expensive and limited hours. CHIPS handles international but requires correspondent relationships. ACH is cheap but slow with return risk. FedNow is instant but domestic only. Understanding these tradeoffs helps you explain why cross-border payments are complex - and why Sphere\'s approach works.'
             },
             internationalSystems: {
               title: 'International Payment Systems',
@@ -748,7 +752,7 @@ This pillar ensures you can explain:
                   region: '🇪🇺 Eurozone',
                   type: 'RTGS',
                   operator: 'European Central Bank',
-                  description: 'TARGET2 is the Eurozone\'s equivalent of Fedwire — real-time gross settlement for EUR. All Eurozone banks settle EUR through TARGET2.',
+                  description: 'TARGET2 is the Eurozone\'s equivalent of Fedwire - real-time gross settlement for EUR. All Eurozone banks settle EUR through TARGET2.',
                   keyFacts: [
                     '~€2 trillion daily volume',
                     'Processes all large-value EUR payments',
@@ -777,14 +781,14 @@ This pillar ensures you can explain:
                   region: '🇪🇺 Europe (36 countries)',
                   type: 'Mass payment scheme',
                   operator: 'European Payments Council',
-                  description: 'SEPA isn\'t a settlement system — it\'s a payment scheme that standardizes EUR transfers across 36 European countries. SEPA Credit Transfers (SCT) and SEPA Instant (SCT Inst) enable EUR payments across borders within Europe.',
+                  description: 'SEPA isn\'t a settlement system - it\'s a payment scheme that standardizes EUR transfers across 36 European countries. SEPA Credit Transfers (SCT) and SEPA Instant (SCT Inst) enable EUR payments across borders within Europe.',
                   keyFacts: [
                     'Covers 36 countries (EU + EEA + others)',
                     'Standard EUR transfer: T+1 (next business day)',
                     'SEPA Instant: 10 seconds, 24/7',
                     'Max €100,000 for SEPA Instant (increasing)'
                   ],
-                  sphereRelevance: 'SEPA makes intra-European EUR payments easy, but it doesn\'t help with payments outside Europe. A EUR payment from UAE to Germany still needs correspondent banking — SEPA only kicks in for the European leg.'
+                  sphereRelevance: 'SEPA makes intra-European EUR payments easy, but it doesn\'t help with payments outside Europe. A EUR payment from UAE to Germany still needs correspondent banking - SEPA only kicks in for the European leg.'
                 },
                 {
                   name: 'UAEFTS',
@@ -848,7 +852,7 @@ This pillar ensures you can explain:
                   name: 'Confirmation of Credit',
                   purpose: 'Confirms that an account has been credited. Sent by a bank to confirm funds arrived.',
                   contains: ['Account credited', 'Amount', 'Reference to original payment'],
-                  youllSee: 'MT910 is what the beneficiary\'s bank sends to confirm receipt. But remember — MT910 confirms the message arrived, not necessarily that funds are available.'
+                  youllSee: 'MT910 is what the beneficiary\'s bank sends to confirm receipt. But remember - MT910 confirms the message arrived, not necessarily that funds are available.'
                 },
                 {
                   code: 'MT950',
@@ -900,7 +904,7 @@ This pillar ensures you can explain:
                 'Disputes over Bitcoin transactions have unclear legal status in most jurisdictions'
               ]
             },
-            contrast: 'When Fedwire settles a payment, the law says it\'s final. When Bitcoin confirms a transaction, cryptography says it\'s extremely unlikely to be reversed—but the law is silent. That\'s the difference.'
+            contrast: 'When Fedwire settles a payment, the law says it\'s final. When Bitcoin confirms a transaction, cryptography says it\'s extremely unlikely to be reversed-but the law is silent. That\'s the difference.'
           },
           warning: 'When a regulator or bank asks about "finality," they mean LEGAL finality. Saying "it\'s final after 6 blocks" will not satisfy them.',
           sphereRelevance: {
@@ -916,14 +920,16 @@ This pillar ensures you can explain:
           keyTakeaway: 'Finality is defined by law, not technology. Blockchain provides probabilistic confirmation, not legal finality.'
         },
         exercise: {
-          title: 'Exercise 1.3 — Finality Explanation',
+          title: 'Exercise 1.3 - Finality Explanation',
           prompt: 'A crypto-native counterparty says: "Bitcoin has finality after 6 confirmations, just like Fedwire."\n\nWrite a response that:\n1) Explains why this comparison is flawed\n2) Defines legal finality properly\n3) Acknowledges what crypto DOES provide\n4) Positions Sphere\'s approach accurately',
           criteria: ['Legal vs technical distinction', 'Accurate crypto understanding', 'Sphere positioning']
         },
         quiz: [
           { q: 'What defines settlement finality?', options: ['Network confirmations', 'Transaction speed', 'Legal framework making transfer irrevocable', 'Consensus algorithm'], correct: 2 },
           { q: 'Why doesn\'t Bitcoin have legal finality?', options: ['Too slow', 'No legal framework defining when final', 'Always reversible', 'Government banned it'], correct: 1 },
-          { q: 'Strongest finality?', options: ['ACH', 'CHIPS', 'Fedwire (RTGS)', 'Card networks'], correct: 2 }
+          { q: 'Strongest finality?', options: ['ACH', 'CHIPS', 'Fedwire (RTGS)', 'Card networks'], correct: 2 },
+          { q: 'Technical finality on blockchain means:', options: ['Legally irrevocable', 'Computationally impractical to reverse', 'Government approved', 'Bank confirmed'], correct: 1 },
+          { q: 'Why does Sphere use regulated stablecoins?', options: ['Faster than Bitcoin', 'Issuer provides legal framework for finality', 'No fees', 'Decentralized'], correct: 1 }
         ]
       },
       {
@@ -990,7 +996,7 @@ This pillar ensures you can explain:
           regulatorQA: [
             { q: 'Are you trying to replace banks?', a: 'No. We make it easier for money to reach the banking system faster.' },
             { q: 'What about CBDCs?', a: 'We welcome them. They\'d strengthen our model as another compliant rail.' },
-            { q: 'How do you affect monetary policy?', a: 'We don\'t. We move existing money faster — we don\'t create new money.' }
+            { q: 'How do you affect monetary policy?', a: 'We don\'t. We move existing money faster - we don\'t create new money.' }
           ],
           sphereRelevance: {
             title: 'Sphere\'s Position',
@@ -998,28 +1004,28 @@ This pillar ensures you can explain:
             keyInsight: 'Using stablecoins as transport, with fiat settlement at endpoints.',
             howSphereComplements: {
               title: 'How Sphere Complements Central Banks',
-              introduction: 'Sphere doesn\'t compete with central banks—we enhance their effectiveness by making cross-border value movement faster while maintaining fiat settlement at endpoints.',
+              introduction: 'Sphere doesn\'t compete with central banks-we enhance their effectiveness by making cross-border value movement faster while maintaining fiat settlement at endpoints.',
               functions: [
                 {
                   name: 'Cross-Border Speed Without Replacing Settlement Infrastructure',
                   centralBankRole: 'Central banks provide domestic settlement systems (Fedwire, TARGET2, UAEFTS) that settle in their local currency with legal finality.',
                   sphereRole: 'Sphere uses stablecoins to move value BETWEEN jurisdictions rapidly (15-30 minutes), then settles into local fiat through the local central bank system at each endpoint.',
-                  complement: 'Central banks remain the final settlement layer for fiat. Sphere simply optimizes the cross-border leg. We\'re like a fast highway between two cities—the cities (central banks) are still the origin and destination.',
-                  example: 'UAE company pays US supplier. Traditional: AED → Central Bank of UAE → Correspondent → Correspondent → Fedwire → USD (2-5 days). Sphere: AED → CBUAE settlement → Stablecoin transfer (30 min) → Fedwire settlement → USD. Central banks still settle both endpoints—we just made the middle faster.'
+                  complement: 'Central banks remain the final settlement layer for fiat. Sphere simply optimizes the cross-border leg. We\'re like a fast highway between two cities-the cities (central banks) are still the origin and destination.',
+                  example: 'UAE company pays US supplier. Traditional: AED → Central Bank of UAE → Correspondent → Correspondent → Fedwire → USD (2-5 days). Sphere: AED → CBUAE settlement → Stablecoin transfer (30 min) → Fedwire settlement → USD. Central banks still settle both endpoints-we just made the middle faster.'
                 },
                 {
                   name: 'Reducing Pressure on Correspondent Banking',
                   centralBankRole: 'Central banks don\'t directly connect all banks globally. Correspondent banking fills the gap, but it\'s slow, expensive, and shrinking (de-risking).',
                   sphereRole: 'Sphere provides an alternative pathway that doesn\'t require 4+ correspondent banks. Licensed partners convert fiat to stablecoin (using local central bank settlement), move stablecoins cross-border, and convert back to fiat (using destination central bank settlement).',
                   complement: 'This reduces load on correspondent banking networks while still using central bank infrastructure at endpoints. Central banks benefit because cross-border payments become more efficient without requiring them to build new infrastructure.',
-                  example: 'Nigerian bank wants to send money to Japan. Traditional path requires correspondents in London, New York, Tokyo—each with their own nostro accounts, compliance, and delays. Sphere path: Nigerian naira settles through Central Bank of Nigeria → stablecoin transfer → Japanese yen settles through Bank of Japan. No correspondent chain needed. Central banks still provide final settlement.'
+                  example: 'Nigerian bank wants to send money to Japan. Traditional path requires correspondents in London, New York, Tokyo-each with their own nostro accounts, compliance, and delays. Sphere path: Nigerian naira settles through Central Bank of Nigeria → stablecoin transfer → Japanese yen settles through Bank of Japan. No correspondent chain needed. Central banks still provide final settlement.'
                 },
                 {
                   name: 'Supporting Financial Inclusion Without Circumventing Regulation',
                   centralBankRole: 'Central banks regulate financial systems to protect consumers, prevent crime, and maintain stability.',
-                  sphereRole: 'Sphere embeds compliance (KYC/AML) and works with licensed partners in each jurisdiction. We don\'t bypass regulation—we make regulated cross-border payments accessible to more businesses.',
+                  sphereRole: 'Sphere embeds compliance (KYC/AML) and works with licensed partners in each jurisdiction. We don\'t bypass regulation-we make regulated cross-border payments accessible to more businesses.',
                   complement: 'Central banks want financial inclusion, but cross-border payments are hard for SMEs (expensive, slow, complex). Sphere makes central bank-settled payments accessible to smaller players while maintaining regulatory compliance.',
-                  example: 'Small UAE importer wants to pay Vietnamese supplier. Traditional banks quote $50 fee and 5-day timeline. Importer can\'t afford it. Sphere: $8 fee, 30 minutes, full compliance. Money still settles through Central Bank of UAE and State Bank of Vietnam—just faster and cheaper.'
+                  example: 'Small UAE importer wants to pay Vietnamese supplier. Traditional banks quote $50 fee and 5-day timeline. Importer can\'t afford it. Sphere: $8 fee, 30 minutes, full compliance. Money still settles through Central Bank of UAE and State Bank of Vietnam-just faster and cheaper.'
                 },
                 {
                   name: 'Preparing for CBDC Integration',
@@ -1033,17 +1039,17 @@ This pillar ensures you can explain:
                   centralBankRole: 'Central bank RTGS systems operate during business hours (e.g., Fedwire 9 PM – 7 PM ET, TARGET2 7 AM – 6 PM CET).',
                   sphereRole: 'Sphere\'s stablecoin transfers operate 24/7/365. When RTGS systems are closed, Sphere can initiate transactions that settle when RTGS reopens.',
                   complement: 'Central banks don\'t need to run 24/7 operations. Sphere provides after-hours initiation with guaranteed settlement when central bank systems reopen. This is complementary, not competitive.',
-                  example: 'Friday 7 PM in New York, urgent payment needed to Dubai (Saturday morning there, banks closed). Traditional: wait until Monday. Sphere: initiate stablecoin transfer immediately, settles through CBUAE when it opens Sunday, through Fedwire when it opens Monday. Central banks still provide final settlement—just with faster initiation.'
+                  example: 'Friday 7 PM in New York, urgent payment needed to Dubai (Saturday morning there, banks closed). Traditional: wait until Monday. Sphere: initiate stablecoin transfer immediately, settles through CBUAE when it opens Sunday, through Fedwire when it opens Monday. Central banks still provide final settlement-just with faster initiation.'
                 }
               ],
-              keyMessage: 'Sphere is infrastructure that sits BETWEEN central bank systems, making them more accessible and efficient for cross-border payments. We don\'t replace central banks—we make them work better together.',
+              keyMessage: 'Sphere is infrastructure that sits BETWEEN central bank systems, making them more accessible and efficient for cross-border payments. We don\'t replace central banks-we make them work better together.',
               regulatorFriendlyFraming: 'When talking to regulators or central banks, emphasize: (1) Fiat settlement at all endpoints, (2) Full regulatory compliance, (3) Licensed partners in each jurisdiction, (4) CBDC-ready infrastructure, (5) Reduced systemic risk by eliminating long correspondent chains.'
             }
           },
           keyTakeaway: 'Central banks are irreplaceable. Sphere works with them, not against them.'
         },
         exercise: {
-          title: 'Exercise 1.4 — Central Bank Defense',
+          title: 'Exercise 1.4 - Central Bank Defense',
           prompt: 'A potential partner says: "I thought the whole point of crypto was to eliminate central banks. Why are you working with them?"\n\nWrite a response that:\n1) Acknowledges the crypto narrative\n2) Explains what central banks actually provide\n3) Clarifies why Sphere works WITH the system\n4) Positions this as a strategic advantage',
           criteria: ['Central bank understanding', 'Sphere positioning', 'Strategic framing']
         },
@@ -1069,7 +1075,7 @@ This pillar ensures you can explain:
           ]
         },
         learn: {
-          introduction: 'Cross-border payments are hard because of laws, regulations, and institutions — NOT old technology. The instinct is to think "new technology will fix it." This is wrong.',
+          introduction: 'Cross-border payments are hard because of laws, regulations, and institutions - NOT old technology. The instinct is to think "new technology will fix it." This is wrong.',
           glossary: {
             title: 'Key Terms You Need to Know',
             terms: [
@@ -1086,12 +1092,12 @@ This pillar ensures you can explain:
               },
               {
                 term: 'Vostro Account',
-                definition: 'Latin for "your account with us." The opposite of nostro—it\'s the account a foreign bank holds with you.',
+                definition: 'Latin for "your account with us." The opposite of nostro-it\'s the account a foreign bank holds with you.',
                 example: 'Deutsche Bank has a USD account at Bank of America. From Deutsche Bank\'s perspective, it\'s a nostro. From BoA\'s perspective, it\'s a vostro.'
               },
               {
                 term: 'SWIFT BIC/SWIFT Code',
-                definition: 'Bank Identifier Code—a unique 8 or 11-character code that identifies a specific bank for international wire transfers.',
+                definition: 'Bank Identifier Code-a unique 8 or 11-character code that identifies a specific bank for international wire transfers.',
                 example: 'CHASUS33 = JPMorgan Chase, New York. The code tells SWIFT where to route payment messages.'
               },
               {
@@ -1134,7 +1140,7 @@ This pillar ensures you can explain:
               { name: 'Ahmed', location: 'Lagos, Nigeria', role: 'Agricultural business', needs: 'Bob\'s machinery' }
             ],
             problem: [
-              'Swift wire takes T+2, T+3, T+5, T+10 days — unpredictable',
+              'Swift wire takes T+2, T+3, T+5, T+10 days - unpredictable',
               'Shipping takes 25-45 days',
               'Every day waiting = port fees, personnel, storage costs',
               'If order is wrong → restart entire process'
@@ -1248,8 +1254,8 @@ This pillar ensures you can explain:
             rows: [
               ['Fragmented data standards', 'Manual reconciliation, errors, delays', 'US banks use different payment message formats than EU banks. When a payment moves from US→EU, data fields don\'t match perfectly. Correspondent banks must manually reconcile, fix errors, or reject the payment. A single typo in the beneficiary name can cause a 3-day delay while banks exchange messages to clarify.'],
               ['Complex compliance', '5+ regulatory regimes may apply', 'Payment from UAE to Brazil touches: UAE Central Bank regulations, FATF standards, US sanctions (if routed through USD correspondent), Brazilian Central Bank rules, and potentially EU regulations if a European correspondent is involved. Each regulator has different KYC requirements, reporting standards, and sanctions lists. One mismatch = payment frozen.'],
-              ['Limited operating hours', '5pm New York = Frankfurt closed', 'You send a payment from New York at 4:00 PM Friday to Germany. By the time it reaches the German correspondent, it\'s 10:00 PM Frankfurt time—bank is closed. Payment waits until Monday morning. Then Monday is a German holiday. Now it\'s Tuesday. 4 days lost to operating hours.'],
-              ['Funding requirements (Nostro accounts)', '$100M+ trapped in nostro accounts', 'Bank of America needs to send EUR payments to Europe regularly. They maintain a €500M nostro account at Deutsche Bank—that\'s $500M+ sitting idle, earning minimal interest, just to have liquidity for EUR payments. Multiply this across 50+ currency pairs and hundreds of correspondent relationships = billions in trapped capital.'],
+              ['Limited operating hours', '5pm New York = Frankfurt closed', 'You send a payment from New York at 4:00 PM Friday to Germany. By the time it reaches the German correspondent, it\'s 10:00 PM Frankfurt time-bank is closed. Payment waits until Monday morning. Then Monday is a German holiday. Now it\'s Tuesday. 4 days lost to operating hours.'],
+              ['Funding requirements (Nostro accounts)', '$100M+ trapped in nostro accounts', 'Bank of America needs to send EUR payments to Europe regularly. They maintain a €500M nostro account at Deutsche Bank-that\'s $500M+ sitting idle, earning minimal interest, just to have liquidity for EUR payments. Multiply this across 50+ currency pairs and hundreds of correspondent relationships = billions in trapped capital.'],
               ['Long transaction chains', '4+ hops = 4+ failure points', 'Payment from Philippines to Peru: Philippine bank→Singapore correspondent (hop 1)→New York correspondent (hop 2)→Panamanian correspondent (hop 3)→Peruvian bank (hop 4). Each hop can: reject the payment, hold it for compliance review, miss their cut-off time, have insufficient nostro balance, or charge fees. If hop 3 rejects, the payment bounces back through hop 2 and hop 1 before returning to sender. Timeline: 7-10 days, $80 in fees.']
             ],
             source: 'Based on BIS/CPMI reports: "Enhancing Cross-border Payments" (2020) and "Targets for Addressing the Four Challenges of Cross-border Payments" (2021)'
@@ -1257,7 +1263,7 @@ This pillar ensures you can explain:
           warning: 'Technology does NOT remove jurisdiction. Even instant blockchain transfer still requires AML/KYC, capital controls, licensing, tax reporting, and sanctions screening.',
           sphereSolution: {
             title: 'How Sphere Addresses This',
-            introduction: 'Sphere doesn\'t eliminate these frictions—we compress and optimize them.',
+            introduction: 'Sphere doesn\'t eliminate these frictions-we compress and optimize them.',
             solutions: [
               {
                 problem: '4+ correspondent hops',
@@ -1288,10 +1294,10 @@ This pillar ensures you can explain:
             clarifications: {
               title: 'What Sphere Does NOT Do',
               points: [
-                'Eliminate regulation—we work with licensed partners in each jurisdiction',
-                'Bypass banks entirely—fiat on/off-ramps are through regulated financial institutions',
-                'Remove compliance—we embed it upfront instead of checking at each hop',
-                'Replace central banks—fiat settlement still happens through traditional systems at endpoints',
+                'Eliminate regulation-we work with licensed partners in each jurisdiction',
+                'Bypass banks entirely-fiat on/off-ramps are through regulated financial institutions',
+                'Remove compliance-we embed it upfront instead of checking at each hop',
+                'Replace central banks-fiat settlement still happens through traditional systems at endpoints',
                 'What we DO: Compress the cross-border leg from days to minutes using stablecoins as transport'
               ]
             },
@@ -1305,7 +1311,7 @@ This pillar ensures you can explain:
               sphere: {
                 timeline: 'Minute 0: Initiate payment in Dubai. Minute 5: AED converted to USDC at on-ramp. Minute 10: USDC transfer confirms on-chain. Minute 25: USDC converted to NGN at off-ramp. Minute 30: NGN credited to beneficiary account. Total: 30 minutes.',
                 cost: '$8 in network fees',
-                risks: ['Minimal—compliance completed upfront', 'No correspondent rejections', 'Blockchain confirmation is deterministic']
+                risks: ['Minimal-compliance completed upfront', 'No correspondent rejections', 'Blockchain confirmation is deterministic']
               }
             }
           },
@@ -1316,14 +1322,16 @@ This pillar ensures you can explain:
           keyTakeaway: 'Cross-border is hard because of laws and institutions, not technology. Sphere compresses the chain and embeds compliance.'
         },
         exercise: {
-          title: 'Exercise 1.5 — Cross-Border Analysis',
+          title: 'Exercise 1.5 - Cross-Border Analysis',
           prompt: 'Map a payment from Brazil to Japan through correspondent banking:\n\n1) Identify likely correspondent banks involved\n2) List compliance checks at each step\n3) Estimate realistic timeline and failure points\n4) Explain how Sphere would handle this differently',
           criteria: ['Correspondent chain understood', 'Compliance points identified', 'Sphere solution clear']
         },
         quiz: [
           { q: 'Why is cross-border slow?', options: ['Old computers', 'Laws & compliance across jurisdictions', 'Banks are lazy', 'Internet is slow'], correct: 1 },
           { q: 'What is a nostro account?', options: ['Crypto wallet', 'Bank\'s account at another bank in foreign currency', 'Central bank reserve', 'Savings account'], correct: 1 },
-          { q: 'Sphere\'s approach:', options: ['Eliminate compliance', 'Replace all banks', 'Compress chain, embed compliance', 'One country only'], correct: 2 }
+          { q: 'Sphere\'s approach:', options: ['Eliminate compliance', 'Replace all banks', 'Compress chain, embed compliance', 'One country only'], correct: 2 },
+          { q: 'A vostro account is:', options: ['Same as nostro from the other bank\'s perspective', 'A type of savings account', 'Central bank reserve', 'Crypto wallet'], correct: 0 },
+          { q: 'How many correspondent banks might a complex cross-border payment involve?', options: ['Always 1', '2-4', 'Always 10+', 'None'], correct: 1 }
         ]
       }
     ],
@@ -1335,8 +1343,14 @@ This pillar ensures you can explain:
         { type: 'multiple_choice', question: 'Three stages of payment lifecycle?', options: ['Send/Receive/Confirm', 'Initiation/Clearing/Settlement', 'Request/Process/Complete', 'Debit/Transfer/Credit'], correct: 1 },
         { type: 'multiple_choice', question: 'SWIFT provides:', options: ['Settlement', 'Messaging', 'Currency exchange', 'Liquidity'], correct: 1 },
         { type: 'multiple_choice', question: 'Why no legal finality for blockchain?', options: ['Too slow', 'No legal framework', 'Always reversible', 'Banned'], correct: 1 },
-        { type: 'analysis', question: 'Counterparty says: "SWIFT is already instant. What does Sphere solve?"', rubric: ['Distinguishes messaging from settlement', 'Explains delay', 'Articulates Sphere value'] },
-        { type: 'application', question: 'Explain to a regulator why Sphere is NOT replacing central banks.', rubric: ['Central bank functions', 'Sphere positioning', 'Compliance-native framing'] }
+        { type: 'multiple_choice', question: 'Fedwire is operated by:', options: ['SWIFT', 'Private banks consortium', 'Federal Reserve', 'US Treasury'], correct: 2 },
+        { type: 'multiple_choice', question: 'What does RTGS stand for?', options: ['Real-Time Gross Settlement', 'Rapid Transfer Gateway System', 'Regional Transaction Guarantee Service', 'Real-Time Global SWIFT'], correct: 0 },
+        { type: 'multiple_choice', question: 'A nostro account is:', options: ['Your account at another bank', 'Another bank\'s account at your bank', 'Central bank reserve', 'Customer savings account'], correct: 0 },
+        { type: 'multiple_choice', question: 'Which provides strongest settlement finality?', options: ['ACH batch processing', 'Card network settlement', 'Central bank RTGS (Fedwire)', 'SWIFT messaging'], correct: 2 },
+        { type: 'analysis', question: 'Counterparty says: "SWIFT is already instant. What does Sphere solve?"', rubric: ['Distinguishes messaging from settlement', 'Explains 2-5 day delay reality', 'Articulates Sphere value proposition', 'Uses concrete examples'] },
+        { type: 'analysis', question: 'Explain the difference between technical finality and legal finality. Why does this matter for enterprise payments?', rubric: ['Technical = computationally irreversible', 'Legal = legally irrevocable', 'Why enterprises need legal finality', 'How regulated stablecoins bridge the gap'] },
+        { type: 'application', question: 'Explain to a regulator why Sphere is NOT replacing central banks.', rubric: ['Central bank functions (RTGS, lender of last resort, monetary policy)', 'Sphere works WITH infrastructure', 'Compliance-native framing', 'Stablecoins still rely on fiat'] },
+        { type: 'application', question: 'A client asks why their $500K wire to Singapore took 4 days. Walk them through what actually happened.', rubric: ['Correspondent banking chain', 'Compliance checks at each hop', 'Cut-off times and time zones', 'How Sphere compresses this'] }
       ]
     }
   },
@@ -1352,7 +1366,7 @@ This pillar ensures you can explain:
     color: 'emerald',
     overview: `**Why This Pillar Matters**
 
-Sphere uses stablecoins as plumbing, not ideology — and regulators judge it accordingly.
+Sphere uses stablecoins as plumbing, not ideology - and regulators judge it accordingly.
 
 You must be able to discuss stablecoins without crypto language, understand their systemic implications, and explain why Sphere's approach differs from typical crypto projects.
 
@@ -1407,17 +1421,17 @@ You must be able to discuss stablecoins without crypto language, understand thei
               icon: '🥪',
               content: 'For someone who doesn\'t know crypto, doesn\'t have a wallet, they still get the benefits.',
               flow: ['FIAT IN (USD/LCY)', 'STABLECOIN TRANSFER (minutes)', 'FIAT OUT (USD/LCY)'],
-              keyPoint: 'The end user never needs to understand crypto. They send money, recipient gets money — faster and cheaper.'
+              keyPoint: 'The end user never needs to understand crypto. They send money, recipient gets money - faster and cheaper.'
             }
           ],
           arnoldQuote: {
             quote: 'By 2030, stablecoins are estimated to be the world\'s default way of moving money.',
             speaker: 'Arnold Lee',
-            context: 'This isn\'t crypto hype — it\'s infrastructure evolution.'
+            context: 'This isn\'t crypto hype - it\'s infrastructure evolution.'
           },
           stablecoinSandwichDeepDive: {
             title: 'The Stablecoin Sandwich Explained in Depth',
-            concept: 'The "stablecoin sandwich" is the core innovation that makes Sphere work. It\'s called a sandwich because stable coin sits in the middle—wrapped by fiat on both sides. The end user only ever touches fiat currency.',
+            concept: 'The "stablecoin sandwich" is the core innovation that makes Sphere work. It\'s called a sandwich because stable coin sits in the middle-wrapped by fiat on both sides. The end user only ever touches fiat currency.',
             threeLayersTitle: 'The Three Layers of the Sandwich',
             layers: [
               {
@@ -1434,7 +1448,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 what: 'Stablecoins move cross-border on blockchain rails.',
                 how: 'Once converted to stablecoins, the value moves peer-to-peer on blockchain (Ethereum, Solana, etc.) without intermediaries. No correspondent banks. No SWIFT. No business hours. Transaction confirms in minutes.',
                 time: '10-30 minutes (depending on blockchain congestion)',
-                who: 'Blockchain network (public, permissionless). Sphere doesn\'t control it—we just use it.',
+                who: 'Blockchain network (public, permissionless). Sphere doesn\'t control it-we just use it.',
                 compliance: 'None required at this layer. Compliance already done at on-ramp. Blockchain is just transport.',
                 example: '50,000 USDC moves from UAE wallet to US wallet on Ethereum blockchain. Transaction fee: ~$2. Confirms in 15 minutes. Transparent, traceable on blockchain explorer.'
               },
@@ -1445,7 +1459,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 time: '15-60 minutes (depending on local banking)',
                 who: 'Licensed off-ramp partner (regulated financial institution in destination country)',
                 compliance: 'Beneficiary identity verified. Transaction recorded for regulatory reporting.',
-                example: 'US off-ramp partner receives 50,000 USDC, converts to $50,000 USD, and deposits into supplier\'s US bank account via ACH or wire. Supplier sees USD—never touched crypto.'
+                example: 'US off-ramp partner receives 50,000 USDC, converts to $50,000 USD, and deposits into supplier\'s US bank account via ACH or wire. Supplier sees USD-never touched crypto.'
               }
             ],
             whyItWorks: {
@@ -1503,7 +1517,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
               title: 'Liquidity Management',
               challenge: 'Stablecoins need to be liquid at both endpoints. If Sphere can\'t convert AED→USDC in UAE, or can\'t convert USDC→USD in US, the payment fails.',
               solution: 'Sphere maintains relationships with multiple licensed on-ramp and off-ramp partners in each geography. If Partner A has low liquidity, we route through Partner B. Redundancy is critical.',
-              example: 'Sphere has 3 licensed partners in UAE, 5 in US, 2 in UK. If one is experiencing high demand (low liquidity), we route through another. Customer never knows—payment just works.'
+              example: 'Sphere has 3 licensed partners in UAE, 5 in US, 2 in UK. If one is experiencing high demand (low liquidity), we route through another. Customer never knows-payment just works.'
             },
             complianceFirst: {
               title: 'Compliance-First Approach',
@@ -1526,7 +1540,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 'Amount transferred',
                 'Blockchain confirmation (proof of finality)'
               ],
-              regulatorValue: 'Regulators LOVE this. Traditional correspondent banking is opaque—you don\'t know which correspondent banks were involved, what fees they charged, when payment was actually processed. Blockchain is transparent. Sphere can show regulators the exact path money took.',
+              regulatorValue: 'Regulators LOVE this. Traditional correspondent banking is opaque-you don\'t know which correspondent banks were involved, what fees they charged, when payment was actually processed. Blockchain is transparent. Sphere can show regulators the exact path money took.',
               auditTrail: 'Every Sphere payment has a complete audit trail: (1) Fiat deposited at on-ramp (timestamped, KYC\'d), (2) Stablecoin minted/transferred (blockchain record), (3) Fiat withdrawn at off-ramp (timestamped, KYC\'d). Perfect for compliance audits.'
             }
           },
@@ -1581,7 +1595,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 { system: 'SWIFT', annualVolume: '~$150T', note: 'Interbank messaging (not settlement)' },
                 { system: 'Stablecoins', annualVolume: '~$27.6T (2024)', note: 'Growing rapidly, mostly B2B/DeFi' }
               ],
-              insight: 'Stablecoin volume already exceeds Visa. While not directly comparable (different use cases), this demonstrates stablecoins are not niche — they\'re systemically significant.'
+              insight: 'Stablecoin volume already exceeds Visa. While not directly comparable (different use cases), this demonstrates stablecoins are not niche - they\'re systemically significant.'
             }
           },
           reserveComposition: {
@@ -1591,7 +1605,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
               { issuer: 'Circle (USDC)', composition: '~80% short-dated T-bills (BlackRock managed), ~20% cash at regulated banks', updated: 'Monthly attestations' },
               { issuer: 'PayPal (PYUSD)', composition: '100% cash, T-bills, and money market funds (Paxos managed)', updated: 'Monthly attestations' }
             ],
-            keyPoint: 'Major stablecoins are backed by real, short-dated, liquid assets — primarily US Treasury bills. This is why the "stablecoins link to Treasury markets" narrative in the systemic risk section matters.',
+            keyPoint: 'Major stablecoins are backed by real, short-dated, liquid assets - primarily US Treasury bills. This is why the "stablecoins link to Treasury markets" narrative in the systemic risk section matters.',
             treasuryHoldings: {
               title: 'Stablecoin Issuers as Treasury Holders',
               context: 'Stablecoin issuers have become major holders of US Treasury bills:',
@@ -1599,38 +1613,82 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 { issuer: 'Tether', amount: '~$100B+', ranking: 'Would rank among top 20 sovereign holders' },
                 { issuer: 'Circle', amount: '~$40B+', ranking: 'Significant institutional holder' }
               ],
-              implication: 'This is the connection to systemic risk — stablecoin redemptions could force Treasury sales, affecting yields and liquidity.'
+              implication: 'This is the connection to systemic risk - stablecoin redemptions could force Treasury sales, affecting yields and liquidity.'
             }
           },
-          sphereRelevance: {
-            title: 'Sphere\'s Position',
-            points: [
-              'We use stablecoins as plumbing, not product',
-              'We\'re not a stablecoin issuer',
-              'We don\'t promote any single stablecoin',
-              'We\'re infrastructure that works with multiple issuers',
-              'The stablecoin is invisible to end users'
-            ]
-          },
-          languageGuide: {
-            wrong: ['Sphere is a crypto company'],
-            correct: ['Sphere uses stablecoin rails for faster B2B settlement']
+          sphereApproach: {
+            title: 'How Sphere Uses Stablecoins Operationally',
+            principle: 'Stablecoins are plumbing, not product. The customer never touches crypto - they experience faster, cheaper payments.',
+            strategies: [
+              {
+                strategy: 'Infrastructure-Agnostic Design',
+                what: 'Sphere doesn\'t promote any single stablecoin. We use whichever stablecoin is optimal for each corridor.',
+                howItWorks: [
+                  'UAE→US corridor: USDC (US-regulated, high liquidity, trusted by US banks)',
+                  'Asia corridors: USDT (deepest liquidity in Asian markets)',
+                  'EU corridors: EURC (MiCA-compliant, EUR-denominated)',
+                  'Automatic routing: System selects optimal stablecoin based on corridor, liquidity, and cost'
+                ],
+                whyItMatters: 'No single stablecoin dependency. If USDC has issues, we route through USDT. If regulatory environment changes, we adapt.'
+              },
+              {
+                strategy: 'Invisible Crypto Layer',
+                what: 'End users never see, touch, or understand the stablecoin. They send fiat, recipient gets fiat.',
+                howItWorks: [
+                  'Customer initiates payment in their local currency (AED, USD, EUR)',
+                  'Sphere\'s licensed partner converts to stablecoin (invisible to customer)',
+                  'Stablecoin moves cross-border in minutes (invisible to customer)',
+                  'Destination partner converts to recipient\'s local currency',
+                  'Recipient receives fiat in their bank account'
+                ],
+                whyItMatters: 'No crypto education required. No wallet setup. No key management. Just faster payments.'
+              },
+              {
+                strategy: 'Transitory Holdings Only',
+                what: 'Sphere holds stablecoins for MINUTES, not hours or days.',
+                howItWorks: [
+                  'Average stablecoin hold time: 15-45 minutes',
+                  'Maximum hold time: 2 hours per transaction',
+                  'No overnight stablecoin positions - everything converted to fiat by end of day',
+                  'Real-time monitoring of all stablecoin balances'
+                ],
+                whyItMatters: 'Minimizes exposure to depeg risk, hack risk, or regulatory risk. Even if USDC depegs 10%, our max exposure is minutes of transaction volume.'
+              },
+              {
+                strategy: 'Licensed Partner Network',
+                what: 'All fiat on-ramps and off-ramps are licensed, regulated financial institutions.',
+                howItWorks: [
+                  'UAE: Licensed payment service providers under CBUAE',
+                  'US: Licensed money transmitters (state MTLs)',
+                  'Singapore: MAS-licensed payment institutions',
+                  'All partners: Full KYC/AML programs, sanctions screening, regulatory reporting'
+                ],
+                whyItMatters: 'Regulators can trace every dollar. Compliance is embedded, not bolted on. No anonymous flows.'
+              }
+            ],
+            keyPoint: 'Sphere is a PAYMENT company that uses stablecoin RAILS. We\'re not a crypto company. The distinction matters for regulatory conversations.',
+            languageGuide: {
+              wrong: ['Sphere is a crypto company', 'We sell stablecoins', 'Customers buy USDC from us'],
+              correct: ['Sphere uses stablecoin rails for faster B2B settlement', 'Stablecoins are our transport layer', 'Customers send and receive fiat - stablecoins are invisible']
+            }
           },
           keyTakeaway: 'Stablecoins are settlement infrastructure, not speculation. Sphere uses them as invisible plumbing.',
           nextSection: {
             title: 'What\'s Next',
-            preview: 'Now that you understand what stablecoins are and how Sphere uses them, Section 2.2 covers the risks. Stablecoins are NOT risk-free — and sophisticated counterparties will test your knowledge of what can go wrong.'
+            preview: 'Now that you understand what stablecoins are and how Sphere uses them, Section 2.2 covers the risks. Stablecoins are NOT risk-free - and sophisticated counterparties will test your knowledge of what can go wrong.'
           }
         },
         exercise: {
-          title: 'Exercise 2.1 — Stablecoin Explanation',
+          title: 'Exercise 2.1 - Stablecoin Explanation',
           prompt: 'A traditional banker asks: "What exactly is a stablecoin and why should I care?"\n\nExplain without using crypto jargon:\n1) What a stablecoin is\n2) What backs it\n3) Why it matters for payments\n4) How Sphere uses them',
           criteria: ['No jargon', 'Clear backing explanation', 'Business relevance', 'Sphere positioning']
         },
         quiz: [
           { q: 'What backs USDT and USDC?', options: ['Bitcoin', 'Algorithms', 'T-bills, cash, bank deposits', 'Gold'], correct: 2 },
           { q: 'Stablecoin transfer volume in 2024?', options: ['$2.7B', '$27.6B', '$276B', '$27.6T'], correct: 3 },
-          { q: 'What is the "stablecoin sandwich"?', options: ['A trading strategy', 'Fiat→Stablecoin→Fiat transfer flow', 'A type of stablecoin', 'DeFi protocol'], correct: 1 }
+          { q: 'What is the "stablecoin sandwich"?', options: ['A trading strategy', 'Fiat→Stablecoin→Fiat transfer flow', 'A type of stablecoin', 'DeFi protocol'], correct: 1 },
+          { q: 'Sphere uses stablecoins as:', options: ['Investment product', 'Speculative asset', 'Settlement infrastructure/plumbing', 'Customer-facing product'], correct: 2 },
+          { q: 'Average stablecoin hold time at Sphere:', options: ['Days', 'Hours', 'Minutes (15-45)', 'Weeks'], correct: 2 }
         ]
       },
       {
@@ -1714,7 +1772,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
           },
           caseStudy: {
             title: 'USDC Depeg (March 2023): The Full Story',
-            subtitle: 'How a well-regulated, fully-backed stablecoin lost its peg in 48 hours — demonstrating counterparty risk in action',
+            subtitle: 'How a well-regulated, fully-backed stablecoin lost its peg in 48 hours - demonstrating counterparty risk in action',
             background: {
               title: 'Background: USDC Pre-Crisis',
               status: 'USDC was the gold standard of stablecoins',
@@ -1724,7 +1782,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 'Monthly attestations from Grant Thornton (Big 4 accounting)',
                 'Market cap: $43 billion',
                 'Used by institutions, exchanges, and enterprises globally',
-                'Never depegged significantly—always traded $0.9999-$1.0001'
+                'Never depegged significantly-always traded $0.9999-$1.0001'
               ],
               circlesBanking: 'Circle held USDC reserves across multiple US banks, including: Silicon Valley Bank ($3.3B), Signature Bank (undisclosed amount), BNY Mellon, Citizens Bank, and others. This diversification was considered conservative.'
             },
@@ -1756,7 +1814,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
               {
                 time: 'Friday, March 10, 2023 (Markets Open)',
                 event: 'USDC redemptions surge',
-                context: 'Circle continues honoring redemptions—but only for deposits received BEFORE the SVB failure. New redemption requests delayed. Users panic, sell USDC on secondary markets.',
+                context: 'Circle continues honoring redemptions-but only for deposits received BEFORE the SVB failure. New redemption requests delayed. Users panic, sell USDC on secondary markets.',
                 impact: 'USDC drops to $0.90, then $0.88. Trading volume explodes to $20B/day (10x normal). Arbitrage bots buy USDC at $0.88, hoping to redeem at $1.00 later.'
               },
               {
@@ -1768,7 +1826,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
               {
                 time: 'Sunday, March 12, 2023 (4:00 PM)',
                 event: 'Federal Reserve announces full depositor protection',
-                context: 'US Treasury, Fed, and FDIC jointly announce ALL depositors at SVB and Signature Bank will be made whole—no $250K limit. Circle will recover 100% of $3.3B.',
+                context: 'US Treasury, Fed, and FDIC jointly announce ALL depositors at SVB and Signature Bank will be made whole-no $250K limit. Circle will recover 100% of $3.3B.',
                 impact: 'USDC immediately jumps to $0.97 on announcement. Confidence restored.'
               },
               {
@@ -1787,7 +1845,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 },
                 {
                   insight: 'COUNTERPARTY RISK IS UNAVOIDABLE',
-                  explanation: 'Circle did "everything right"—diversified across banks, held high-quality reserves, monthly attestations. But they STILL had $3.3B at a failed bank. No amount of diversification eliminates counterparty risk entirely.'
+                  explanation: 'Circle did "everything right"-diversified across banks, held high-quality reserves, monthly attestations. But they STILL had $3.3B at a failed bank. No amount of diversification eliminates counterparty risk entirely.'
                 },
                 {
                   insight: 'WEEKEND LIQUIDITY GAPS ARE DANGEROUS',
@@ -1795,16 +1853,16 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 },
                 {
                   insight: 'GOVERNMENT BACKSTOP SAVED USDC',
-                  explanation: 'If the Fed hadn\'t guaranteed depositors, Circle would have lost $3.3B (8% of reserves). USDC might have permanently traded at $0.92. The government saved USDC—not Circle\'s risk management.'
+                  explanation: 'If the Fed hadn\'t guaranteed depositors, Circle would have lost $3.3B (8% of reserves). USDC might have permanently traded at $0.92. The government saved USDC-not Circle\'s risk management.'
                 },
                 {
                   insight: 'STABLECOINS ARE ONLY AS STABLE AS THEIR WEAKEST LINK',
-                  explanation: 'USDC\'s reserves were 92% safe. But the 8% at SVB caused a 13% depeg. The market doesn\'t average risk—it panics at the worst exposure.'
+                  explanation: 'USDC\'s reserves were 92% safe. But the 8% at SVB caused a 13% depeg. The market doesn\'t average risk-it panics at the worst exposure.'
                 }
               ]
             },
             lesson: 'Well-regulated, fully-backed stablecoins CAN STILL DEPEG due to confidence shocks. The lesson: Acknowledge risk. Don\'t promise perfection. Explain mitigation.',
-            postCrisis: 'After the crisis, Circle: (1) Diversified further—now holds reserves at 6+ banks, (2) Increased cash holdings vs T-bills for faster liquidity, (3) Publishes daily reserve reports instead of monthly. But the risk remains: any bank holding reserves can fail.'
+            postCrisis: 'After the crisis, Circle: (1) Diversified further-now holds reserves at 6+ banks, (2) Increased cash holdings vs T-bills for faster liquidity, (3) Publishes daily reserve reports instead of monthly. But the risk remains: any bank holding reserves can fail.'
           },
           systemicRisk: {
             title: 'Mass Redemption Risk (BIS Data)',
@@ -1818,7 +1876,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
           },
           sphereMitigation: {
             title: 'How Sphere Mitigates Stablecoin Risk',
-            principle: 'We can\'t eliminate stablecoin risk—but we can minimize exposure through operational design and partner selection.',
+            principle: 'We can\'t eliminate stablecoin risk-but we can minimize exposure through operational design and partner selection.',
             strategies: [
               {
                 risk: 'Reserve Risk',
@@ -1826,17 +1884,17 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 howItWorks: 'Sphere only uses stablecoins from issuers with: (1) Monthly attestations from reputable auditors, (2) Public reserve disclosures, (3) Regulatory licenses (money transmitter, EMI, MAS license). We exclude: algorithmic stablecoins, unaudited issuers, or anything without transparent reserves.',
                 specificActions: [
                   'Approved list: USDC, USDT (select corridors only), EURC',
-                  'Review reserve reports monthly—if composition changes (e.g., shift to illiquid assets), flag for review',
+                  'Review reserve reports monthly-if composition changes (e.g., shift to illiquid assets), flag for review',
                   'Diversify across issuers when possible (e.g., USDC for US, USDT for Asia)'
                 ],
-                whichRisksAddressed: 'Eliminates algorithmic collapse risk. Reduces reserve quality risk. Doesn\'t eliminate risk entirely—audited issuers can still have problems (see USDC).'
+                whichRisksAddressed: 'Eliminates algorithmic collapse risk. Reduces reserve quality risk. Doesn\'t eliminate risk entirely-audited issuers can still have problems (see USDC).'
               },
               {
                 risk: 'Redemption Risk',
-                sphereMitigation: 'Transitory holdings—stablecoins held for MINUTES, not days',
+                sphereMitigation: 'Transitory holdings-stablecoins held for MINUTES, not days',
                 howItWorks: 'Sphere doesn\'t accumulate stablecoin balances. Every payment is: (1) Fiat received → convert to stablecoin, (2) Transfer stablecoin cross-border, (3) Convert stablecoin → fiat delivered. Total hold time: 15-45 minutes average.',
                 specificActions: [
-                  'No overnight stablecoin positions—everything converted to fiat by end of day',
+                  'No overnight stablecoin positions-everything converted to fiat by end of day',
                   'Maximum hold time: 2 hours for any single transaction',
                   'If redemption delayed (liquidity issue), we absorb cost and complete payment using backup liquidity'
                 ],
@@ -1845,25 +1903,25 @@ You must be able to discuss stablecoins without crypto language, understand thei
               {
                 risk: 'Operational Risk',
                 sphereMitigation: 'Multi-issuer support + redundant infrastructure',
-                howItWorks: 'Sphere integrates with multiple stablecoin issuers. If one experiences operational issues (smart contract bug, bridge hack, freeze), we route through another. We also maintain hot wallet limits—never hold more than $2M in any single wallet.',
+                howItWorks: 'Sphere integrates with multiple stablecoin issuers. If one experiences operational issues (smart contract bug, bridge hack, freeze), we route through another. We also maintain hot wallet limits-never hold more than $2M in any single wallet.',
                 specificActions: [
                   'Primary: USDC. Secondary: USDT. Tertiary: EURC or alternative',
                   'Hot wallet max: $2M. Cold storage for larger reserves.',
-                  'Multi-sig wallets (3-of-5) for critical operations—no single point of failure',
+                  'Multi-sig wallets (3-of-5) for critical operations-no single point of failure',
                   'If smart contract vulnerability detected, immediately pause affected routes and switch to backup issuer'
                 ],
-                whichRisksAddressed: 'Reduces single-issuer operational risk. If USDC bridge hacked, switch to USDT. If USDT has smart contract issue, switch to USDC. Doesn\'t eliminate risk—if BOTH fail simultaneously, we have exposure.'
+                whichRisksAddressed: 'Reduces single-issuer operational risk. If USDC bridge hacked, switch to USDT. If USDT has smart contract issue, switch to USDC. Doesn\'t eliminate risk-if BOTH fail simultaneously, we have exposure.'
               },
               {
                 risk: 'Regulatory Risk',
-                sphereMitigation: 'Compliance-native design—only licensed partners, full KYC/AML',
+                sphereMitigation: 'Compliance-native design-only licensed partners, full KYC/AML',
                 howItWorks: 'Sphere operates in compliance with local regulations FIRST. We don\'t use stablecoins in jurisdictions where they\'re banned or restricted. We work with licensed on-ramps and off-ramps who handle all regulatory reporting.',
                 specificActions: [
                   'Jurisdiction screening: Before offering a corridor, legal team confirms stablecoin usage is permitted',
                   'Partner vetting: All on/off-ramp partners must have: MSB license (US), FCA authorization (UK), MAS license (Singapore), etc.',
                   'If regulatory environment changes (e.g., new stablecoin ban), we have 30-day wind-down plan to migrate customers'
                 ],
-                whichRisksAddressed: 'Reduces risk of sudden regulatory shutdown. We\'re operating WITH regulators, not around them. If stablecoin regulation tightens, we\'re positioned to comply quickly. Doesn\'t eliminate risk—governments can still ban stablecoins overnight (see China).'
+                whichRisksAddressed: 'Reduces risk of sudden regulatory shutdown. We\'re operating WITH regulators, not around them. If stablecoin regulation tightens, we\'re positioned to comply quickly. Doesn\'t eliminate risk-governments can still ban stablecoins overnight (see China).'
               },
               {
                 risk: 'Counterparty Risk',
@@ -1875,7 +1933,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                   'If bank shows distress (rating downgrade, deposit flight), reduce exposure within 48 hours',
                   'FDIC/deposit insurance where available, but don\'t rely on it (only covers $250K)'
                 ],
-                whichRisksAddressed: 'Reduces concentrated bank failure risk. SVB-style failure wouldn\'t affect Sphere severely because we\'d have <10% exposure to any single bank. Doesn\'t eliminate counterparty risk entirely—multiple banks can fail (see 2008).'
+                whichRisksAddressed: 'Reduces concentrated bank failure risk. SVB-style failure wouldn\'t affect Sphere severely because we\'d have <10% exposure to any single bank. Doesn\'t eliminate counterparty risk entirely-multiple banks can fail (see 2008).'
               }
             ],
             keyPoint: 'We hold stablecoins for MINUTES, not days. This dramatically reduces exposure to ALL five risk categories. Even in worst-case scenarios (depeg, hack, bank failure), our exposure is limited to minutes of transaction flow.',
@@ -1884,7 +1942,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
           antarcticaStory: {
             title: 'The Antarctica Story: A Macro Risk Perspective',
             speaker: 'Arnold Lee',
-            setup: 'Beyond the five categories of technical risk above, there\'s a broader SYSTEMIC risk that sophisticated counterparties — especially central bankers — will probe. Arnold tells a parable about "Antarctica" to illustrate.',
+            setup: 'Beyond the five categories of technical risk above, there\'s a broader SYSTEMIC risk that sophisticated counterparties - especially central bankers - will probe. Arnold tells a parable about "Antarctica" to illustrate.',
             theScenario: {
               title: 'The Setup: Pre-Stablecoin Antarctica',
               situation: 'Antarctica is an emerging market country with chronic inflation and currency instability. The local currency, the "Antarctic Peso," has been depreciating 20-30% annually for years. The government institutes strict capital controls.',
@@ -1907,7 +1965,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
               ],
               adoption: 'Within 18 months, no one trusts the Antarctic Peso anymore.',
               quote: 'If you have easy access to dollars through stablecoins, why do you need the old fishbones at all?',
-              fishbonesExplained: 'The "old fishbones" are the Antarctic Peso—the local currency that citizens used because they had no alternative.'
+              fishbonesExplained: 'The "old fishbones" are the Antarctic Peso-the local currency that citizens used because they had no alternative.'
             },
             theCollapse: {
               title: 'Act III: The System Collapses',
@@ -1923,25 +1981,27 @@ You must be able to discuss stablecoins without crypto language, understand thei
             lessons: [
               { lesson: 'Don\'t Present Stablecoins as Harmless', explanation: 'Central bankers understand the systemic implications. Acknowledge the disruption.' },
               { lesson: 'Violent Transitions Are the Real Risk', explanation: 'The problem is SPEED of transition. Gradual dollarization can be managed. Rapid, uncontrolled dollarization creates chaos.' },
-              { lesson: 'Sphere\'s Position', explanation: 'We\'re providing cross-border payment infrastructure for BUSINESSES—not facilitating mass dollarization. Our customers are enterprises paying suppliers, not citizens evading capital controls.' }
+              { lesson: 'Sphere\'s Position', explanation: 'We\'re providing cross-border payment infrastructure for BUSINESSES-not facilitating mass dollarization. Our customers are enterprises paying suppliers, not citizens evading capital controls.' }
             ],
-            arnoldInsight: 'Stablecoins themselves are not the problem, but VIOLENT TRANSITIONS are. Countries need time to adapt. Sphere works with regulators to enable gradual, controlled adoption—not chaotic displacement.'
+            arnoldInsight: 'Stablecoins themselves are not the problem, but VIOLENT TRANSITIONS are. Countries need time to adapt. Sphere works with regulators to enable gradual, controlled adoption-not chaotic displacement.'
           },
           keyTakeaway: '"Stable" doesn\'t mean "risk-free." Understand the five risk categories, be honest about them, and explain how Sphere mitigates each one.',
           nextSection: {
             title: 'What\'s Next',
-            preview: 'Section 2.3 covers the speed vs safety tradeoffs — the operational challenges that arise when stablecoins settle in minutes but fiat takes days.'
+            preview: 'Section 2.3 covers the speed vs safety tradeoffs - the operational challenges that arise when stablecoins settle in minutes but fiat takes days.'
           }
         },
         exercise: {
-          title: 'Exercise 2.2 — Risk Explanation',
+          title: 'Exercise 2.2 - Risk Explanation',
           prompt: 'A risk officer asks: "What are the risks of using stablecoins for settlement?"\n\nExplain:\n1) The five risk categories\n2) The USDC depeg case study\n3) Why "stable" doesn\'t mean "risk-free"\n4) How Sphere mitigates these risks',
           criteria: ['All risk categories', 'USDC case accurate', 'Honest about risks', 'Mitigation clear']
         },
         quiz: [
           { q: 'During the USDC depeg, it traded at:', options: ['$0.97', '$0.87', '$0.77', '$0.50'], correct: 1 },
           { q: 'What caused the USDC depeg?', options: ['Insufficient reserves', 'SVB failure ($3.3B exposure)', 'Smart contract hack', 'Regulatory action'], correct: 1 },
-          { q: 'How does Sphere mitigate stablecoin risk?', options: ['Avoid stablecoins', 'Hold for minutes not days', 'Use only one issuer', 'Guarantee the peg'], correct: 1 }
+          { q: 'How does Sphere mitigate stablecoin risk?', options: ['Avoid stablecoins', 'Hold for minutes not days', 'Use only one issuer', 'Guarantee the peg'], correct: 1 },
+          { q: 'Which is NOT one of the five stablecoin risk categories?', options: ['Reserve risk', 'Redemption risk', 'Interest rate risk', 'Counterparty risk'], correct: 2 },
+          { q: 'Sphere\'s maximum stablecoin hold time per transaction:', options: ['24 hours', '2 hours', '1 week', 'No limit'], correct: 1 }
         ]
       },
       {
@@ -1981,7 +2041,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 { step: 'Stablecoin to Fiat (Off-Ramp)', time: '15-45 minutes', what: 'Stablecoin converted → Fiat delivered to beneficiary', dependency: 'Local banking hours, KYC verification' }
               ],
               totalTime: '30 minutes to 1 hour (median)',
-              bottleneck: 'NOT the blockchain—the bottleneck is the fiat on/off-ramps, which depend on traditional banking systems.'
+              bottleneck: 'NOT the blockchain-the bottleneck is the fiat on/off-ramps, which depend on traditional banking systems.'
             },
             fiatLegDetail: {
               title: 'Fiat Leg Breakdown (Traditional Wire)',
@@ -1993,9 +2053,9 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 { step: 'Beneficiary Bank', time: 'Day 3-5', what: 'Final bank receives, runs compliance, credits beneficiary account', dependency: 'Final compliance review, account verification' }
               ],
               totalTime: '2-5 business days (median)',
-              bottleneck: 'Correspondent banking chain—each hop adds 1-2 days due to compliance, cut-off times, and manual processing.'
+              bottleneck: 'Correspondent banking chain-each hop adds 1-2 days due to compliance, cut-off times, and manual processing.'
             },
-            conclusion: 'Stablecoins are 1000x faster and 99% cheaper. But that creates new problems—the speed asymmetry.'
+            conclusion: 'Stablecoins are 1000x faster and 99% cheaper. But that creates new problems-the speed asymmetry.'
           },
           asymmetryProblem: {
             title: 'The Speed Asymmetry Problem',
@@ -2018,7 +2078,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 {
                   scenario: 'Scenario 2: Wait for Fiat Before Releasing Stablecoin',
                   setup: 'Sphere receives AED from customer, waits 2-5 days for fiat to fully settle through correspondent chain before releasing USDC to supplier.',
-                  problem: 'This eliminates Sphere\'s risk—but now the payment takes 2-5 days. We\'ve lost the speed advantage of stablecoins.',
+                  problem: 'This eliminates Sphere\'s risk-but now the payment takes 2-5 days. We\'ve lost the speed advantage of stablecoins.',
                   consequence: 'Customer asks: "Why am I using Sphere if it takes the same time as a wire?"',
                   risk: 'No risk to Sphere, but value proposition disappears'
                 },
@@ -2027,14 +2087,14 @@ You must be able to discuss stablecoins without crypto language, understand thei
                   setup: 'Customer sends AED 367,300 (= $100K at 3.673 rate). Sphere converts to USDC immediately. But the fiat settlement takes 3 days.',
                   problem: 'Over those 3 days, AED depreciates to 3.80. When fiat settles, Sphere receives AED 367,300, but it\'s now only worth $96,658.',
                   consequence: 'Sphere promised supplier $100K USDC. Sphere received equivalent of $96,658. Sphere is $3,342 short.',
-                  risk: 'FX exposure during the timing gap—someone has to absorb FX movement'
+                  risk: 'FX exposure during the timing gap-someone has to absorb FX movement'
                 },
                 {
                   scenario: 'Scenario 4: Compliance Flag After Stablecoin Released',
                   setup: 'Sphere releases $100K USDC to supplier after receiving customer\'s fiat. Two days later, customer\'s bank flags the transaction for AML review and freezes the payment.',
                   problem: 'Supplier has $100K USDC. Customer\'s bank has frozen their $100K. Sphere is stuck in the middle.',
                   consequence: 'Sphere either: (1) Claws back USDC from supplier (relationship damage), or (2) Absorbs $100K loss.',
-                  risk: 'Compliance timing mismatches—one leg clears compliance, other doesn\'t'
+                  risk: 'Compliance timing mismatches-one leg clears compliance, other doesn\'t'
                 },
                 {
                   scenario: 'Scenario 5: Amount Mismatch Due to Fees',
@@ -2049,7 +2109,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
           },
           fourLedgers: {
             title: 'Four Ledgers Must Reconcile',
-            concept: 'Every Sphere payment touches FOUR separate ledgers. They all must agree—but they operate on different timelines.',
+            concept: 'Every Sphere payment touches FOUR separate ledgers. They all must agree-but they operate on different timelines.',
             ledgers: [
               {
                 name: 'Client\'s Bank Ledger',
@@ -2065,7 +2125,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 what: 'Sphere\'s bank account where fiat is received',
                 timing: 'Receives fiat after correspondent settlement (Day 2-5)',
                 owner: 'Sphere\'s partner bank',
-                finality: 'Final once correspondent chain settles—but timing is unpredictable'
+                finality: 'Final once correspondent chain settles-but timing is unpredictable'
               },
               {
                 name: 'Blockchain Ledger',
@@ -2073,7 +2133,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 what: 'Public blockchain where stablecoin transfer occurs',
                 timing: 'Confirms in 15 seconds to 5 minutes',
                 owner: 'Decentralized network (Ethereum, Solana, etc.)',
-                finality: 'Probabilistic—final after N confirmations (minutes), but no legal backing'
+                finality: 'Probabilistic-final after N confirmations (minutes), but no legal backing'
               },
               {
                 name: 'Destination Bank Ledger',
@@ -2186,7 +2246,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                   whyItMatters: 'Prevents Sphere from absorbing hidden fees. Keeps reconciliation tight.'
                 },
                 {
-                  situation: 'Blockchain congestion—gas fees spike from $5 to $200',
+                  situation: 'Blockchain congestion-gas fees spike from $5 to $200',
                   naiveApproach: 'Pay $200 gas fee to meet speed SLA. Absorb the cost.',
                   sphereApproach: 'System detects gas spike. Offers customer choice: (1) Pay $200 for immediate transfer, or (2) Wait 2 hours for gas to normalize. Most choose to wait. Saves Sphere from bleeding on gas fees.',
                   whyItMatters: 'Flexibility beats rigid speed targets. Customers care about COST too.'
@@ -2197,21 +2257,23 @@ You must be able to discuss stablecoins without crypto language, understand thei
               'Step 1: Fiat received and confirmed → THEN convert to stablecoin',
               'Step 2: Stablecoin transferred on-chain → confirm N-block finality',
               'Step 3: Beneficiary confirmed fiat receipt → THEN mark payment complete',
-              'Step 4: Never expose Sphere to both legs simultaneously—one must settle before the other initiates'
+              'Step 4: Never expose Sphere to both legs simultaneously-one must settle before the other initiates'
             ],
             conclusion: 'This is slower than raw blockchain speed (60 seconds) but ELIMINATES settlement risk. 15-30 minutes is fast enough for enterprise use cases.'
           },
-          keyTakeaway: 'Speed creates risk. Sphere prioritizes safety with 15-30 minute settlement — fast enough to transform payments, safe enough for institutions.'
+          keyTakeaway: 'Speed creates risk. Sphere prioritizes safety with 15-30 minute settlement - fast enough to transform payments, safe enough for institutions.'
         },
         exercise: {
-          title: 'Exercise 2.3 — Reconciliation Design',
+          title: 'Exercise 2.3 - Reconciliation Design',
           prompt: 'Design a reconciliation process for:\n$1M transfer, US company → Brazilian supplier\n\n1) Identify the four ledgers involved\n2) Map timing differences\n3) Identify risk points\n4) Propose controls for each risk',
           criteria: ['Four ledgers identified', 'Timing understood', 'Risks mapped', 'Controls practical']
         },
         quiz: [
           { q: 'How many ledgers must reconcile for a Sphere transaction?', options: ['Two', 'Three', 'Four', 'Five'], correct: 2 },
           { q: 'What is the "speed asymmetry problem"?', options: ['Blockchain is slow', 'Stablecoins settle fast, fiat takes days', 'Banks faster than blockchain', 'All equal speed'], correct: 1 },
-          { q: 'Sphere\'s approach to speed vs safety:', options: ['Maximum speed always', 'Safety first — confirm fiat before releasing', 'Ignore reconciliation', 'Only use one ledger'], correct: 1 }
+          { q: 'Sphere\'s approach to speed vs safety:', options: ['Maximum speed always', 'Safety first - confirm fiat before releasing', 'Ignore reconciliation', 'Only use one ledger'], correct: 1 },
+          { q: 'Sphere\'s median settlement time:', options: ['60 seconds', '15-30 minutes', '2-5 days', '24 hours'], correct: 1 },
+          { q: 'What does Sphere do if fiat confirmation exceeds 2 hours?', options: ['Auto-complete anyway', 'Cancel transaction', 'Escalate to manual review', 'Ignore'], correct: 2 }
         ]
       },
       {
@@ -2247,7 +2309,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 'Consumer protection obligations',
                 'Redemption guarantees'
               ],
-              whoDoesThis: 'Circle (USDC), Tether (USDT), Paxos (PYUSD). Very few entities globally—maybe 10-20.',
+              whoDoesThis: 'Circle (USDC), Tether (USDT), Paxos (PYUSD). Very few entities globally-maybe 10-20.',
               spherePosition: 'Sphere does NOT issue stablecoins. We are not a stablecoin issuer. We don\'t want to be. Issuing is heavily regulated, capital-intensive, and not our business model.'
             },
             transmission: {
@@ -2260,7 +2322,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 'Transaction monitoring and reporting',
                 'Consumer protection disclosures',
                 'Operational resilience standards',
-                'Capital requirements (lower than issuers—typically $100K-500K)'
+                'Capital requirements (lower than issuers-typically $100K-500K)'
               ],
               whoDoesThis: 'Coinbase, Kraken, Binance (exchanges), Sphere, Ripple, Wise. Hundreds of entities globally.',
               spherePosition: 'Sphere is a TRANSMITTER. We move stablecoins on behalf of customers. We partner with licensed issuers (Circle, Tether) but don\'t compete with them.'
@@ -2294,25 +2356,25 @@ You must be able to discuss stablecoins without crypto language, understand thei
             regulators: [
               { name: 'CBUAE (Central Bank of UAE)', jurisdiction: 'Onshore payment services', relevance: 'Federal regulator for fiat payment services and stablecoin rules' },
               { name: 'VARA (Virtual Assets Regulatory Authority)', jurisdiction: 'Dubai virtual assets', relevance: 'Governs crypto custody, exchange services in Dubai' },
-              { name: 'DFSA (Dubai Financial Services Authority)', jurisdiction: 'DIFC (Dubai International Financial Centre)', relevance: 'Free zone regulator—English Common Law jurisdiction' },
-              { name: 'FSRA (Financial Services Regulatory Authority)', jurisdiction: 'ADGM (Abu Dhabi Global Market)', relevance: 'Abu Dhabi free zone—separate from Dubai' }
+              { name: 'DFSA (Dubai Financial Services Authority)', jurisdiction: 'DIFC (Dubai International Financial Centre)', relevance: 'Free zone regulator-English Common Law jurisdiction' },
+              { name: 'FSRA (Financial Services Regulatory Authority)', jurisdiction: 'ADGM (Abu Dhabi Global Market)', relevance: 'Abu Dhabi free zone-separate from Dubai' }
             ],
             keyDevelopments: [
-              'CBUAE Circular 2/2024 — licensing framework for stablecoin payment services',
-              'Digital Dirham (CBDC) pilot underway—Sphere positioned to integrate',
+              'CBUAE Circular 2/2024 - licensing framework for stablecoin payment services',
+              'Digital Dirham (CBDC) pilot underway-Sphere positioned to integrate',
               'UAE-India payment corridor focus (massive remittance volume)',
               'Dubai Multi Commodities Centre (DMCC) crypto hub'
             ],
             sphereStatus: {
               title: '⚠️ Sphere\'s Current UAE Status',
-              status: 'EXPLORING — NOT YET LICENSED',
+              status: 'EXPLORING - NOT YET LICENSED',
               explanation: 'Sphere is actively exploring UAE market entry but has NOT yet obtained UAE licenses. Be honest about this status with counterparties.',
               crossReference: 'For detailed UAE regulatory framework (VARA vs DIFC vs ADGM, CBUAE stablecoin rules, decision frameworks), see Section 3.5 in Pillar 3.'
             }
           },
           singaporeDeepDive: {
             title: 'Singapore: Asia-Pacific Hub',
-            whySingapore: 'Singapore is Asia\'s financial center. Gateway to Southeast Asia, India, China corridors. MAS (Monetary Authority of Singapore) is progressive but strict—high compliance bar.',
+            whySingapore: 'Singapore is Asia\'s financial center. Gateway to Southeast Asia, India, China corridors. MAS (Monetary Authority of Singapore) is progressive but strict-high compliance bar.',
             framework: 'Payment Services Act (PSA) 2019',
             complianceRequirements: {
               title: 'MAS Payment Services License',
@@ -2357,12 +2419,12 @@ You must be able to discuss stablecoins without crypto language, understand thei
               ]
             },
             frictionPoints: [
-              'Capital controls: Brazil has FX restrictions—need BCB approval for large transfers',
+              'Capital controls: Brazil has FX restrictions-need BCB approval for large transfers',
               'Tax documentation: IOF tax (financial transactions tax) applies to FX',
               'Local banking: Need Brazilian bank relationships for BRL on/off-ramping',
               'Political risk: Regulation can change quickly with new administrations'
             ],
-            sphereAdvantage: 'Sphere partners with licensed Brazilian payment institutions (IPs) who already have BCB approval. We don\'t need to get our own Brazilian license—we leverage partners. This is FASTER and LOWER RISK than direct licensing.',
+            sphereAdvantage: 'Sphere partners with licensed Brazilian payment institutions (IPs) who already have BCB approval. We don\'t need to get our own Brazilian license-we leverage partners. This is FASTER and LOWER RISK than direct licensing.',
             corridors: 'Brazil → US (imports), Brazil → China (trade), Brazil → Europe (finance), US → Brazil (remittances)'
           },
           potentialFrictionPoints: {
@@ -2372,25 +2434,25 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 friction: 'Multi-Jurisdiction Licensing',
                 challenge: 'Each country requires separate license. UAE license doesn\'t work in Singapore. Singapore license doesn\'t work in Brazil.',
                 sphereApproach: 'Sphere obtains licenses in key hubs (UAE, Singapore, UK) and partners with licensed entities in other markets (Brazil, Mexico, Philippines). Hybrid approach: own licenses where strategic, partnerships elsewhere.',
-                example: 'Brazil: Partner with licensed IP. Philippines: Partner with licensed remittance provider. Don\'t try to license everywhere—too slow, too expensive.'
+                example: 'Brazil: Partner with licensed IP. Philippines: Partner with licensed remittance provider. Don\'t try to license everywhere-too slow, too expensive.'
               },
               {
                 friction: 'Conflicting AML/KYC Standards',
                 challenge: 'US requires OFAC screening. EU requires FATF compliance. UAE requires FIU reporting. All slightly different formats, timelines, lists.',
                 sphereApproach: 'Sphere builds ONE global AML/KYC system that meets the HIGHEST standard (typically US/EU). Then customize reporting for each jurisdiction. Easier to be overcompliant than undercompliant.',
-                example: 'Screen ALL transactions against OFAC, EU sanctions, UN sanctions—even if jurisdiction only requires one. This eliminates risk of missing sanctions hits.'
+                example: 'Screen ALL transactions against OFAC, EU sanctions, UN sanctions-even if jurisdiction only requires one. This eliminates risk of missing sanctions hits.'
               },
               {
                 friction: 'Capital Controls and FX Restrictions',
                 challenge: 'Some countries (Brazil, India, China) restrict currency outflows. You need documentation, limits apply, government approval required for large amounts.',
-                sphereApproach: 'Sphere works WITH central banks, not around them. File proper documentation. Use stablecoins for the speed benefit, but still comply with capital controls. Don\'t try to circumvent—that gets you banned.',
+                sphereApproach: 'Sphere works WITH central banks, not around them. File proper documentation. Use stablecoins for the speed benefit, but still comply with capital controls. Don\'t try to circumvent-that gets you banned.',
                 example: 'Brazil: Customer wants to send $500K to US supplier. Sphere files FX documentation with BCB showing commercial purpose (import payment). BCB approves. Payment moves via stablecoins but with full regulatory approval.'
               },
               {
                 friction: 'Consumer Protection Requirements',
                 challenge: 'EU MiCA requires redemption guarantees. US requires clear fee disclosures. Singapore requires dispute resolution. All add operational complexity.',
                 sphereApproach: 'Sphere builds robust consumer protection into product design: (1) Clear fees upfront, (2) Transaction confirmations, (3) Customer support, (4) Dispute resolution process. This is table stakes for institutional customers anyway.',
-                example: 'Customer disputes a $10K payment—claims they never received it. Sphere provides blockchain proof + beneficiary confirmation. Case closed in 24 hours.'
+                example: 'Customer disputes a $10K payment-claims they never received it. Sphere provides blockchain proof + beneficiary confirmation. Case closed in 24 hours.'
               },
               {
                 friction: 'Banking Partner Derisking',
@@ -2405,7 +2467,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
             advantages: [
               {
                 advantage: 'Compliance Moat',
-                explanation: 'Getting licenses takes 12-18 months and costs $500K-1M per jurisdiction. Most crypto startups can\'t afford it. Sphere can. This creates a moat—competitors are locked out.',
+                explanation: 'Getting licenses takes 12-18 months and costs $500K-1M per jurisdiction. Most crypto startups can\'t afford it. Sphere can. This creates a moat-competitors are locked out.',
                 example: 'Competitor wants to enter UAE market. They need CBUAE license. 12-month process. Sphere is already licensed. 12-month head start.'
               },
               {
@@ -2426,7 +2488,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
             ]
           },
           micaDetails: {
-            title: 'MiCA (EU) — Comprehensive Overview',
+            title: 'MiCA (EU) - Comprehensive Overview',
             fullName: 'Markets in Crypto-Assets Regulation',
             effectiveDate: 'June 2024 (stablecoin provisions), December 2024 (full enforcement)',
             scope: 'All 27 EU member states plus EEA (Norway, Iceland, Liechtenstein)',
@@ -2434,7 +2496,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
               title: 'Why MiCA Matters',
               points: [
                 'First comprehensive crypto regulatory framework for a major economic bloc',
-                'Creates single market for crypto-assets across EU — one license works everywhere',
+                'Creates single market for crypto-assets across EU - one license works everywhere',
                 'Establishes clear rules that other jurisdictions are using as template',
                 'Directly impacts any company serving EU customers or using EUR stablecoins'
               ]
@@ -2451,7 +2513,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 {
                   type: 'Asset-Referenced Tokens (ARTs)',
                   definition: 'Stablecoins pegged to multiple currencies, commodities, or basket of assets',
-                  requirements: 'Stricter requirements due to complexity — whitepaper, governance, reserve management',
+                  requirements: 'Stricter requirements due to complexity - whitepaper, governance, reserve management',
                   example: 'Hypothetical token pegged to USD + EUR + gold'
                 }
               ]
@@ -2462,7 +2524,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 {
                   requirement: 'Authorization',
                   detail: 'Must be authorized as credit institution or e-money institution in an EU member state',
-                  implication: 'High barrier to entry — banking-level licensing required'
+                  implication: 'High barrier to entry - banking-level licensing required'
                 },
                 {
                   requirement: '1:1 Reserve Backing',
@@ -2492,7 +2554,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 {
                   requirement: 'Audit Requirements',
                   detail: 'Regular independent audits of reserves, published publicly',
-                  implication: 'Transparency requirement — no more trust-me attestations'
+                  implication: 'Transparency requirement - no more trust-me attestations'
                 },
                 {
                   requirement: 'Volume Caps for Significant EMTs',
@@ -2515,13 +2577,13 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 'Tether loses significant EU market share',
                 'Creates opportunity for compliant stablecoin issuers (Circle, etc.)'
               ],
-              sphereImplication: 'For EU corridors, Sphere routes through USDC or EURC (MiCA-compliant) rather than USDT. This is a competitive advantage — we can serve EU customers that USDT-only providers cannot.'
+              sphereImplication: 'For EU corridors, Sphere routes through USDC or EURC (MiCA-compliant) rather than USDT. This is a competitive advantage - we can serve EU customers that USDT-only providers cannot.'
             },
             circleApproval: {
               title: 'Circle\'s MiCA Compliance',
               status: 'Circle obtained e-money institution authorization in France (July 2024)',
               products: ['USDC (USD-pegged)', 'EURC (EUR-pegged)'],
-              implication: 'Circle is the largest MiCA-compliant stablecoin issuer — Sphere\'s primary stablecoin partner for EU corridors'
+              implication: 'Circle is the largest MiCA-compliant stablecoin issuer - Sphere\'s primary stablecoin partner for EU corridors'
             },
             sphereStrategy: {
               title: 'Sphere\'s MiCA Strategy',
@@ -2529,19 +2591,19 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 'Use MiCA-compliant stablecoins (USDC, EURC) for all EU-touching transactions',
                 'Maintain flexibility to add other MiCA-compliant issuers as they emerge',
                 'Position MiCA compliance as competitive advantage vs providers using only USDT',
-                'Monitor MiCA evolution — additional provisions may require adjustment'
+                'Monitor MiCA evolution - additional provisions may require adjustment'
               ]
             }
           },
           geniusAct: {
-            title: 'GENIUS Act (US) — Comprehensive Overview',
+            title: 'GENIUS Act (US) - Comprehensive Overview',
             fullName: 'Guiding and Establishing National Innovation for U.S. Stablecoins Act',
-            status: 'Enacted 2025 — First comprehensive federal stablecoin legislation in US history',
+            status: 'Enacted 2025 - First comprehensive federal stablecoin legislation in US history',
             significance: {
               title: 'Why GENIUS Act Matters',
               points: [
                 'Ends years of regulatory uncertainty for stablecoins in the US',
-                'Creates clear federal framework — no more state-by-state patchwork alone',
+                'Creates clear federal framework - no more state-by-state patchwork alone',
                 'Defines "payment stablecoin" as distinct regulatory category',
                 'Establishes US as having clear stablecoin rules (competitive with EU MiCA)'
               ]
@@ -2600,7 +2662,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
               title: 'What GENIUS Act Does NOT Cover',
               items: [
                 'Stablecoin TRANSMISSION (that remains under state MTL and FinCEN MSB framework)',
-                'Other cryptocurrencies (Bitcoin, Ethereum, etc. — separate legislation pending)',
+                'Other cryptocurrencies (Bitcoin, Ethereum, etc. - separate legislation pending)',
                 'DeFi protocols (focus is on centralized issuers)',
                 'Securities classification (SEC jurisdiction questions remain open)'
               ]
@@ -2608,12 +2670,12 @@ You must be able to discuss stablecoins without crypto language, understand thei
             sphereImplication: {
               title: 'GENIUS Act Impact on Sphere',
               points: [
-                'Sphere is NOT an issuer — we\'re a transmitter. GENIUS Act primarily affects issuers (Circle, Tether, etc.)',
-                'Sphere benefits from clearer rules for issuers — more stable, compliant stablecoins to use',
+                'Sphere is NOT an issuer - we\'re a transmitter. GENIUS Act primarily affects issuers (Circle, Tether, etc.)',
+                'Sphere benefits from clearer rules for issuers - more stable, compliant stablecoins to use',
                 'Transmission licensing remains state MTL + FinCEN MSB (our current framework)',
-                'Regulatory clarity attracts institutional adoption — good for Sphere\'s enterprise customers'
+                'Regulatory clarity attracts institutional adoption - good for Sphere\'s enterprise customers'
               ],
-              positioning: 'When asked about GENIUS Act, clarify that Sphere is a TRANSMITTER (licensed MSB), not an ISSUER. GENIUS Act affects our stablecoin partners, not us directly — but clearer rules benefit the entire ecosystem.'
+              positioning: 'When asked about GENIUS Act, clarify that Sphere is a TRANSMITTER (licensed MSB), not an ISSUER. GENIUS Act affects our stablecoin partners, not us directly - but clearer rules benefit the entire ecosystem.'
             },
             comparisonToMiCA: {
               title: 'GENIUS Act vs MiCA Comparison',
@@ -2638,7 +2700,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
               { name: 'FSRA', jurisdiction: 'ADGM (Abu Dhabi free zone)' }
             ],
             keyDevelopments: [
-              'CBUAE Circular 2/2024 — licensing for stablecoin services',
+              'CBUAE Circular 2/2024 - licensing for stablecoin services',
               'Digital Dirham (CBDC) framework coming'
             ]
           },
@@ -2654,19 +2716,66 @@ You must be able to discuss stablecoins without crypto language, understand thei
             ],
             direction: 'Bank-like oversight for stablecoin companies.'
           },
-          spherePosition: {
-            title: 'Sphere\'s Regulatory Position',
-            statement: 'We\'re built FOR the regulated world, not trying to avoid it.',
-            points: [
-              'Regulatory clarity is GOOD for Sphere',
-              'It eliminates cowboys and validates our model',
-              'We welcome clear frameworks'
-            ]
+          sphereRegulatoryApproach: {
+            title: 'How Sphere Navigates Multi-Jurisdiction Complexity',
+            principle: 'We\'re built FOR the regulated world, not trying to avoid it. Regulatory clarity is a competitive advantage.',
+            strategies: [
+              {
+                strategy: 'Highest-Common-Denominator Compliance',
+                what: 'Build ONE compliance system that meets the strictest requirements, then adapt for each jurisdiction.',
+                howItWorks: [
+                  'Core AML/KYC system designed to meet US + EU + FATF standards simultaneously',
+                  'Screen ALL transactions against OFAC, EU sanctions, UN sanctions - even if jurisdiction only requires one',
+                  'Maintain records that satisfy both US 5-year and EU 10-year retention requirements',
+                  'Apply strictest beneficial ownership threshold (10% rather than 25%)'
+                ],
+                whyItMatters: 'Easier to be overcompliant than undercompliant. When we enter new markets, we\'re already meeting or exceeding their requirements.',
+                example: 'New Singapore customer? Our system already exceeds MAS requirements because we built for US + EU first.'
+              },
+              {
+                strategy: 'Hub + Partner Model',
+                what: 'Own licenses in strategic hubs, partner with licensed entities elsewhere.',
+                howItWorks: [
+                  'Own licenses: US (MSB), UK (exploring), Singapore (exploring), UAE (exploring)',
+                  'Partner licenses: Brazil (licensed IP partners), Mexico (licensed partners), Philippines (remittance partners)',
+                  'Partners handle local compliance, Sphere provides technology and liquidity',
+                  'Vetting process: All partners must have valid licenses, clean regulatory history, adequate AML programs'
+                ],
+                whyItMatters: 'Faster market entry. Licensing takes 12-24 months. Partnering takes 2-3 months. We can serve customers while building our own license base.',
+                example: 'Brazil: BCB licensing takes 18+ months. We partnered with 3 licensed IPs and were live in 8 weeks.'
+              },
+              {
+                strategy: 'Regulatory Engagement First',
+                what: 'Meet with regulators BEFORE launching, not after problems arise.',
+                howItWorks: [
+                  'Pre-launch briefings: Explain our model to regulators before going live in their jurisdiction',
+                  'Proactive reporting: Share transaction data, suspicious activity trends, compliance metrics voluntarily',
+                  'Industry participation: Join regulatory consultations, provide feedback on proposed rules',
+                  'No surprises: If we discover an issue, we report it before regulators find it'
+                ],
+                whyItMatters: 'Regulators are more supportive when you engage proactively. They become allies, not adversaries.',
+                example: 'UAE: We briefed CBUAE on stablecoin payment flows before requesting license. They understood our model from day one.'
+              },
+              {
+                strategy: 'Jurisdiction-Specific Adaptation',
+                what: 'Core system is global, but reporting and procedures adapt to local requirements.',
+                howItWorks: [
+                  'UAE: FIU reporting in Arabic, aligned with UAE goAML system',
+                  'US: FinCEN SAR filing, state-specific reporting where required',
+                  'EU: AMLD6 compliance, national FIU reporting formats',
+                  'Singapore: STRO reporting, MAS notification requirements'
+                ],
+                whyItMatters: 'One-size-fits-all doesn\'t work for compliance. Local regulators expect local formats.',
+                example: 'Same suspicious transaction: Filed to UAE FIU in Arabic via goAML, to FinCEN in English via BSA E-Filing.'
+              }
+            ],
+            keyPoint: 'Regulatory convergence is GOOD for Sphere. It eliminates cowboys who can\'t meet compliance standards and validates our compliance-native model.',
+            competitiveAdvantage: 'When MiCA delisted USDT from EU exchanges, Sphere was already using USDC for EU corridors. When GENIUS Act passed, we were already meeting its requirements. Compliance isn\'t a cost - it\'s a moat.'
           },
           keyTakeaway: 'Regulation is converging globally. Sphere is built for compliance, making regulation a competitive advantage.'
         },
         exercise: {
-          title: 'Exercise 2.4 — Regulatory Mapping',
+          title: 'Exercise 2.4 - Regulatory Mapping',
           prompt: 'A client wants to use Sphere for payments between UAE, EU, and US.\n\nFor each jurisdiction:\n1) Which regulators apply?\n2) What compliance requirements exist?\n3) Potential friction points?\n4) How does Sphere address each?',
           criteria: ['Jurisdictions correct', 'Requirements accurate', 'Friction identified', 'Sphere positioning clear']
         },
@@ -2723,13 +2832,13 @@ You must be able to discuss stablecoins without crypto language, understand thei
             title: 'SpherePay Metrics',
             subtitle: 'Real production numbers from live enterprise customers',
             items: [
-              { metric: 'Annualized Volume', value: '$2.5B+', context: 'B2B payments only—not consumer speculation' },
+              { metric: 'Annualized Volume', value: '$2.5B+', context: 'B2B payments only-not consumer speculation' },
               { metric: 'B2B Customers', value: '150+', context: 'SMEs to large enterprises across UAE, Singapore, UK' },
               { metric: 'Active Accounts', value: '1,847', context: 'Businesses actively using Sphere for vendor/supplier payments' },
               { metric: 'Median Settlement', value: '15-30 minutes', context: 'End-to-end: fiat received → beneficiary fiat delivered' },
               { metric: '99th percentile (before 3pm GST)', value: 'Same day', context: 'GST = Gulf Standard Time (UTC+4). Dubai/Abu Dhabi timezone. Payments initiated before 3pm GST complete same business day.' }
             ],
-            clarification: 'The "before 3pm" metric is GST (Gulf Standard Time, UTC+4) because Sphere is UAE-based. If payment initiated after 3pm GST or on weekends, beneficiary banking hours may delay final fiat delivery to next business day—but stablecoin leg still completes in minutes.'
+            clarification: 'The "before 3pm" metric is GST (Gulf Standard Time, UTC+4) because Sphere is UAE-based. If payment initiated after 3pm GST or on weekends, beneficiary banking hours may delay final fiat delivery to next business day-but stablecoin leg still completes in minutes.'
           },
           realEnterpriseUseCases: {
             title: 'Real Enterprise Use Cases: Detailed Examples',
@@ -2743,7 +2852,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 results: {
                   speed: '5-7 days → 2-4 hours',
                   cost: '$50/transfer → $8/transfer (84% savings)',
-                  sellerSatisfaction: 'Churn reduced 40%—sellers happier with faster payments',
+                  sellerSatisfaction: 'Churn reduced 40%-sellers happier with faster payments',
                   platformAdvantage: 'Can offer "instant seller payouts" as competitive differentiator'
                 },
                 whySphere: [
@@ -2778,7 +2887,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 results: {
                   cost: '$12K/month in fees → $2K/month (83% savings)',
                   speed: '2-3 days → 24 hours',
-                  contractorRetention: 'Contractors happier—no more payment delays',
+                  contractorRetention: 'Contractors happier-no more payment delays',
                   globalHiring: 'Can now hire in any country without worrying about payment infrastructure'
                 },
                 whySphere: [
@@ -2794,7 +2903,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 problem: 'Buys from Brazil/India, sells to Europe/US. Traditional letters of credit take 7-14 days to settle. Ties up working capital. Misses market opportunities due to slow settlement.',
                 sphereSolution: 'Sphere enables instant settlement once goods inspected. Buyer deposits USDC to escrow. Seller ships. Inspector confirms quality. Sphere releases USDC to seller. Converted to BRL/INR same day.',
                 results: {
-                  workingCapital: '10x capital efficiency—money not stuck in transit',
+                  workingCapital: '10x capital efficiency-money not stuck in transit',
                   deals: 'Can execute 3x more deals/month due to fast settlement',
                   margins: 'Better pricing because suppliers offer discounts for fast payment'
                 },
@@ -2811,7 +2920,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 problem: 'Customers send money UK→India/Pakistan/Bangladesh. Traditional correspondent banking: 3-5 days, 5-7% fees. Losing market share to crypto solutions.',
                 sphereSolution: 'Remittance company white-labels Sphere API. Customers send GBP, recipient gets INR/PKR/BDT in 1-2 hours. Remittance company takes 2% margin, Sphere handles rails.',
                 results: {
-                  customerRetention: 'Churn down 60%—customers love speed',
+                  customerRetention: 'Churn down 60%-customers love speed',
                   margin: '5% traditional → 2% Sphere = still profitable, just lower margin',
                   volume: '3x volume growth because faster/cheaper service attracts customers'
                 },
@@ -2870,7 +2979,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
             title: 'The Unbanked Opportunity',
             stat: '1.4 BILLION PEOPLE remain unbanked globally',
             explanation: 'Many have smartphones but no bank accounts. Stablecoins provide dollar access without banks.',
-            conclusion: 'This is the market. Not crypto traders — people who need dollar access.'
+            conclusion: 'This is the market. Not crypto traders - people who need dollar access.'
           },
           arnoldOnMarkets: {
             title: 'Why Emerging Markets?',
@@ -2882,30 +2991,97 @@ You must be able to discuss stablecoins without crypto language, understand thei
             speaker: 'Arnold Lee',
             insight: 'Sphere\'s edge: Willing to go where others won\'t.'
           },
-          spherePosition: {
-            title: 'Sphere\'s Position',
-            points: [
-              'Consumer apps use our APIs',
-              'B2B payments flow through our rails',
-              'Enterprise treasury connects to our platform',
-              'We\'re invisible to end users — that\'s the point'
+          sphereEnterpriseApproach: {
+            title: 'How Sphere Serves Enterprise Customers',
+            principle: 'We\'re invisible infrastructure. Enterprise customers get faster, cheaper payments without managing crypto complexity.',
+            strategies: [
+              {
+                strategy: 'API-First Integration',
+                what: 'Enterprises integrate Sphere via API - no manual processes, no portal logins for each payment.',
+                howItWorks: [
+                  'REST API: Standard endpoints for payment initiation, status tracking, reconciliation',
+                  'Webhook notifications: Real-time updates on payment status changes',
+                  'Batch processing: Submit hundreds of payments in single API call (payroll, vendor payments)',
+                  'Sandbox environment: Full testing capability before going live'
+                ],
+                whyItMatters: 'Enterprise finance teams don\'t want to learn new software. They want payments to flow through their existing ERP/accounting systems.',
+                example: 'E-commerce platform: 2,000 seller payouts/week. One API call submits all 2,000. Sphere handles the rest.'
+              },
+              {
+                strategy: 'White-Label Capability',
+                what: 'Enterprises can use Sphere infrastructure under their own brand. End users never see "Sphere".',
+                howItWorks: [
+                  'API returns generic payment confirmations (enterprise adds their branding)',
+                  'No Sphere branding in customer-facing communications',
+                  'Enterprise controls the customer relationship',
+                  'Sphere provides the rails invisibly'
+                ],
+                whyItMatters: 'Some enterprises don\'t want customers knowing they use stablecoin infrastructure. Brand control matters.',
+                example: 'Remittance company: Customers see "FastRemit" branding. They don\'t know Sphere exists. FastRemit gets the credit for fast, cheap transfers.'
+              },
+              {
+                strategy: 'Enterprise-Grade SLAs',
+                what: 'Contractual guarantees on uptime, settlement times, and support response.',
+                howItWorks: [
+                  'Uptime SLA: 99.95% availability guarantee',
+                  'Settlement SLA: 95% of payments complete within 30 minutes (before banking cut-offs)',
+                  'Support SLA: Dedicated account manager, 4-hour response for critical issues',
+                  'Compensation: Service credits if SLAs missed'
+                ],
+                whyItMatters: 'Enterprises need predictability. Consumer crypto products have downtime during volatility. Sphere is enterprise infrastructure.',
+                example: 'Construction company has $5M payment deadline Friday 3pm. Sphere SLA guarantees it completes. Penalty clause if we miss.'
+              },
+              {
+                strategy: 'Compliance as a Service',
+                what: 'Sphere handles all AML/KYC/sanctions compliance. Enterprises don\'t need their own compliance team for cross-border payments.',
+                howItWorks: [
+                  'KYC: Sphere verifies all beneficiaries (enterprise provides basic info, we do the verification)',
+                  'Sanctions screening: Every payment screened against OFAC, EU, UN lists in real-time',
+                  'Transaction monitoring: Automated flagging of suspicious patterns',
+                  'Audit trail: Complete documentation for enterprise\'s own audits and regulatory inquiries'
+                ],
+                whyItMatters: 'Building a cross-border compliance program costs $500K+/year. Sphere externalizes that cost.',
+                example: 'Startup with 30 international contractors: Sphere handles KYC for all 30, screens every payment, provides audit logs. Startup\'s compliance burden: zero.'
+              },
+              {
+                strategy: 'Multi-Currency Treasury',
+                what: 'Enterprises can hold balances in multiple currencies, convert on-demand, and optimize FX.',
+                howItWorks: [
+                  'Virtual accounts in USD, AED, EUR, GBP, SGD (more coming)',
+                  'Real-time FX conversion at competitive rates',
+                  'Pre-funding: Load balance once, pay out multiple currencies',
+                  'Yield on idle balances (where regulations permit)'
+                ],
+                whyItMatters: 'Enterprise treasury wants to optimize working capital, not manage multiple bank accounts in each country.',
+                example: 'UAE trading company: Holds USD and AED balances with Sphere. Pays Chinese suppliers in USD, Indian suppliers in USD, local suppliers in AED. One treasury view.'
+              }
+            ],
+            keyPoint: 'Sphere is B2B infrastructure. Consumer apps use our APIs. Enterprise treasury connects to our platform. We\'re invisible to end users - that\'s the point.',
+            targetCustomers: [
+              { segment: 'E-commerce platforms', need: 'Pay international sellers/vendors quickly and cheaply' },
+              { segment: 'Construction/trading companies', need: 'Pay international suppliers with proof of payment' },
+              { segment: 'Tech companies', need: 'Pay international contractors/remote workers' },
+              { segment: 'Remittance companies', need: 'White-label infrastructure for their own customers' },
+              { segment: 'Banks/FIs', need: 'Correspondent banking alternative for specific corridors' }
             ]
           },
-          keyTakeaway: 'Stablecoins have moved from speculation to production. 1.4B unbanked people need dollar access — that\'s Sphere\'s market.',
+          keyTakeaway: 'Stablecoins have moved from speculation to production. 1.4B unbanked people need dollar access - that\'s Sphere\'s market.',
           nextSection: {
             title: 'What\'s Next: Systemic Risk at Scale',
-            preview: 'With adoption comes scale, and with scale comes systemic implications. Section 2.6 covers the macro-level risks that central bankers and sophisticated institutional counterparties will probe — leverage formation, liquidity runs, and enforcement gaps. This is advanced material, but essential for regulatory conversations.'
+            preview: 'With adoption comes scale, and with scale comes systemic implications. Section 2.6 covers the macro-level risks that central bankers and sophisticated institutional counterparties will probe - leverage formation, liquidity runs, and enforcement gaps. This is advanced material, but essential for regulatory conversations.'
           }
         },
         exercise: {
-          title: 'Exercise 2.5 — Use Case Development',
+          title: 'Exercise 2.5 - Use Case Development',
           prompt: 'Identify three enterprise use cases for stablecoins in the UAE market.\n\nFor each:\n1) The specific use case\n2) Current pain point\n3) How stablecoins solve it\n4) Why Sphere is the right partner',
           criteria: ['UAE-relevant', 'Pain points clear', 'Solution specific', 'Sphere differentiation']
         },
         quiz: [
           { q: 'How many people are unbanked globally?', options: ['140 million', '1.4 billion', '14 billion', '14 million'], correct: 1 },
           { q: 'SpherePay median settlement time?', options: ['2-5 days', '24 hours', '15-30 minutes', 'Instant'], correct: 2 },
-          { q: 'Current stage of institutional adoption?', options: ['Speculation', 'Pilots', 'Production', 'Not started'], correct: 2 }
+          { q: 'Current stage of institutional adoption?', options: ['Speculation', 'Pilots', 'Production', 'Not started'], correct: 2 },
+          { q: 'Sphere serves enterprise customers via:', options: ['Retail app', 'API-first integration', 'Bank branches', 'ATMs'], correct: 1 },
+          { q: 'Which is NOT a Sphere enterprise service?', options: ['White-label capability', 'Compliance as a Service', 'Retail trading', 'Enterprise SLAs'], correct: 2 }
         ]
       },
       {
@@ -2938,28 +3114,28 @@ You must be able to discuss stablecoins without crypto language, understand thei
             recommendation: 'Review this section thoroughly before regulatory meetings. The three-risk-category framework is essential for demonstrating Sphere\'s sophistication.'
           },
           summaryFramework: {
-            title: 'The Three Systemic Risk Categories — At a Glance',
+            title: 'The Three Systemic Risk Categories - At a Glance',
             subtitle: 'Before diving deep, here\'s the framework you\'ll learn:',
             categories: [
               { 
                 name: 'Leverage Formation', 
                 icon: '📈', 
                 oneLiner: 'Hidden leverage builds outside regulatory view through rehypothecation', 
-                caseStudy: 'MakerDAO — how 50% of "decentralized" DAI was backed by USDC',
+                caseStudy: 'MakerDAO - how 50% of "decentralized" DAI was backed by USDC',
                 sphereResponse: 'SphereNet enforces collateral transparency at protocol level'
               },
               { 
                 name: 'Liquidity Runs', 
                 icon: '🏃', 
                 oneLiner: 'Synchronized exits without circuit breakers create contagion', 
-                caseStudy: 'USDC depeg — $10B+ moved in 48 hours with no pause mechanism',
+                caseStudy: 'USDC depeg - $10B+ moved in 48 hours with no pause mechanism',
                 sphereResponse: 'SphereNet supports programmable circuit breakers'
               },
               { 
                 name: 'Enforcement Gaps', 
                 icon: '⚖️', 
                 oneLiner: 'On-chain settlement outpaces regulatory response capability', 
-                caseStudy: 'Chainalysis limitations — analytics see history, not prevent violations',
+                caseStudy: 'Chainalysis limitations - analytics see history, not prevent violations',
                 sphereResponse: 'SphereNet enforces compliance BEFORE settlement'
               }
             ],
@@ -2975,11 +3151,11 @@ You must be able to discuss stablecoins without crypto language, understand thei
             treasuryMarketImpact: {
               title: 'Direct Link to U.S. Treasury Markets',
               points: [
-                'Tether holds ~$127 billion in U.S. Treasuries — one of the largest non-government holders of short-term U.S. debt',
+                'Tether holds ~$127 billion in U.S. Treasuries - one of the largest non-government holders of short-term U.S. debt',
                 'Circle (USDC) holds 44% of reserves in T-bills',
                 'According to BIS, two largest stablecoins hold 65% and 44% of total reserves respectively in T-bills',
                 'A 2-standard-deviation stablecoin inflow lowers T-bill yields by 2-2.5 bps',
-                'Outflows raise yields by 6-7.5 bps — asymmetric impact'
+                'Outflows raise yields by 6-7.5 bps - asymmetric impact'
               ],
               stressScenario: 'A 10% stablecoin redemption (~$20B) could force ~$10-12B of T-bill sales, implying +20-40 bps yield shock if flows hit thin liquidity.'
             },
@@ -3006,7 +3182,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                   'This allows indirect access to stablecoin while bypassing controls applied at issuance',
                   'Credit and risk decisions occur in protocols outside issuer\'s direct control and oversight'
                 ],
-                keyTakeaway: 'Even within regulated systems, multiple forms of leverage can accumulate simultaneously across balance sheets, collateral reuse, and regulatory perimeters — allowing systemic risk to build beyond clear limits or visibility.'
+                keyTakeaway: 'Even within regulated systems, multiple forms of leverage can accumulate simultaneously across balance sheets, collateral reuse, and regulatory perimeters - allowing systemic risk to build beyond clear limits or visibility.'
               },
               {
                 category: 'Liquidity Runs',
@@ -3047,7 +3223,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
             ]
           },
           caseStudyMakerDAO: {
-            title: 'Case Study: MakerDAO — Hidden Leverage Through Rehypothecation',
+            title: 'Case Study: MakerDAO - Hidden Leverage Through Rehypothecation',
             icon: '🏦',
             background: {
               what: 'MakerDAO issues the $DAI stablecoin through on-chain smart contracts that accept various forms of collateral, including regulated stablecoins like USDC.',
@@ -3060,26 +3236,26 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 { step: 2, action: 'MakerDAO mints DAI against the USDC collateral' },
                 { step: 3, action: 'User takes DAI and deposits it into another DeFi protocol' },
                 { step: 4, action: 'That protocol issues its own token against the DAI' },
-                { step: 5, action: 'Process can repeat indefinitely — no hard limits' }
+                { step: 5, action: 'Process can repeat indefinitely - no hard limits' }
               ]
             },
             whyThisMatters: {
               title: 'Why This Matters for Systemic Risk',
               points: [
-                'Creates new monetary layer on top of USDC where credit creation, leverage, and risk management are determined by decentralized protocol rules — not the original issuer\'s regulatory framework',
+                'Creates new monetary layer on top of USDC where credit creation, leverage, and risk management are determined by decentralized protocol rules - not the original issuer\'s regulatory framework',
                 'USDC can be reused to generate additional money-like claims without equivalent regulatory oversight',
                 'Even well-regulated underlying assets (USDC) can become foundation for unregulated leverage',
                 'Total system exposure can expand well beyond original issuance without regulator visibility'
               ]
             },
-            regulatoryImplication: 'This illustrates how "infinite rehypothecation" and hidden leverage can emerge even when the underlying asset is well-regulated. The problem isn\'t USDC — it\'s what happens AFTER USDC enters the on-chain ecosystem.'
+            regulatoryImplication: 'This illustrates how "infinite rehypothecation" and hidden leverage can emerge even when the underlying asset is well-regulated. The problem isn\'t USDC - it\'s what happens AFTER USDC enters the on-chain ecosystem.'
           },
           caseStudyUSDCDepeg: {
-            title: 'Case Study: USDC Depeg (March 2023) — Synchronized Exits',
+            title: 'Case Study: USDC Depeg (March 2023) - Synchronized Exits',
             icon: '📉',
             background: {
               event: 'USDC temporarily traded below $1 peg (to ~$0.87) following uncertainty around access to reserves held at Silicon Valley Bank after it entered receivership.',
-              exposure: 'Circle held $3.3 billion at SVB — approximately 8% of USDC reserves at the time.',
+              exposure: 'Circle held $3.3 billion at SVB - approximately 8% of USDC reserves at the time.',
               timeline: 'Depeg occurred within HOURS of SVB news breaking.'
             },
             whatHappened: {
@@ -3095,17 +3271,17 @@ You must be able to discuss stablecoins without crypto language, understand thei
             criticalInsight: {
               title: 'Critical Insight: The Depeg Was NOT Due to Insolvency',
               points: [
-                'USDC was NOT undercollateralized in aggregate — Circle had sufficient reserves',
+                'USDC was NOT undercollateralized in aggregate - Circle had sufficient reserves',
                 'The depeg occurred due to UNCERTAINTY about accessibility of reserves',
                 'Synchronized behavior and liquidity stress caused the depeg, not actual loss',
                 'Total value gap estimated at $4.5 billion (Investopedia)',
                 'Absence of circuit breakers allowed the run to accelerate unchecked'
               ]
             },
-            lessonForSphere: 'This case demonstrates that even fully-backed, regulated stablecoins can experience violent price dislocations when confidence shocks trigger synchronized exits. The solution isn\'t just better reserves — it\'s better system design with appropriate controls.'
+            lessonForSphere: 'This case demonstrates that even fully-backed, regulated stablecoins can experience violent price dislocations when confidence shocks trigger synchronized exits. The solution isn\'t just better reserves - it\'s better system design with appropriate controls.'
           },
           caseStudyChainalysis: {
-            title: 'Case Study: Chainalysis — The Limits of Analytics-Based Enforcement',
+            title: 'Case Study: Chainalysis - The Limits of Analytics-Based Enforcement',
             icon: '🔍',
             background: {
               what: 'Chainalysis is the leading blockchain analytics firm, providing transaction tracing and risk identification to law enforcement, regulators, and financial institutions.',
@@ -3128,7 +3304,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
             theRevision: {
               title: 'The $22 Billion Revision',
               original: '2023 Chainalysis report claimed $24.2 billion in illicit cryptocurrency volume transacted that year',
-              revised: 'Only 12 months later, figure was updated to $46.1 billion — nearly DOUBLE',
+              revised: 'Only 12 months later, figure was updated to $46.1 billion - nearly DOUBLE',
               implication: 'This reflects the magnitude of delayed attribution. Analytics can identify activity eventually, but not in real-time.'
             },
             keyTakeaway: 'Analytics-based enforcement improves post-event visibility but does NOT provide real-time control over on-chain activity as it occurs. Enforcement becomes predominantly REACTIVE; regulatory responses lag evolving on-chain activity.'
@@ -3186,19 +3362,19 @@ You must be able to discuss stablecoins without crypto language, understand thei
             traditionalBlockchains: {
               title: 'Traditional Blockchain Architecture',
               characteristics: [
-                { attribute: 'Controls', value: 'Reactive — compliance applied retroactively at application layer, after settlement' },
-                { attribute: 'Jurisdiction Awareness', value: 'None — validators cannot natively enforce jurisdictional rules' },
-                { attribute: 'Privacy vs Auditability', value: 'Tradeoff — full transparency required for validation clashes with institutional privacy' },
-                { attribute: 'Compliance Systems', value: 'External — separate from transaction ordering and settlement' }
+                { attribute: 'Controls', value: 'Reactive - compliance applied retroactively at application layer, after settlement' },
+                { attribute: 'Jurisdiction Awareness', value: 'None - validators cannot natively enforce jurisdictional rules' },
+                { attribute: 'Privacy vs Auditability', value: 'Tradeoff - full transparency required for validation clashes with institutional privacy' },
+                { attribute: 'Compliance Systems', value: 'External - separate from transaction ordering and settlement' }
               ]
             },
             regulatedFinanceRequirements: {
               title: 'What Regulated Finance Actually Requires',
               characteristics: [
-                { attribute: 'Controls', value: 'Preventative — policy rules enforced BEFORE settlement, at protocol level' },
-                { attribute: 'Jurisdiction Awareness', value: 'Native — compliance tailored to specific regulatory regimes and participant types' },
-                { attribute: 'Privacy vs Auditability', value: 'Both — compliance and auditability WITHOUT exposing sensitive transaction data' },
-                { attribute: 'Compliance Systems', value: 'Embedded — protocol-level enforcement prior to transaction execution' }
+                { attribute: 'Controls', value: 'Preventative - policy rules enforced BEFORE settlement, at protocol level' },
+                { attribute: 'Jurisdiction Awareness', value: 'Native - compliance tailored to specific regulatory regimes and participant types' },
+                { attribute: 'Privacy vs Auditability', value: 'Both - compliance and auditability WITHOUT exposing sensitive transaction data' },
+                { attribute: 'Compliance Systems', value: 'Embedded - protocol-level enforcement prior to transaction execution' }
               ]
             },
             fundamentalGap: 'Today\'s blockchain architectures optimize for openness and composability rather than regulatory enforceability. This is why regulators remain skeptical of public blockchain infrastructure for institutional finance.'
@@ -3207,78 +3383,439 @@ You must be able to discuss stablecoins without crypto language, understand thei
             title: 'SphereNet: Compliance-Native Infrastructure',
             subtitle: 'How Sphere addresses systemic risk at the protocol level',
             introduction: 'SphereNet is Sphere\'s purpose-built blockchain for regulated finance. Unlike traditional blockchains that bolt compliance on after the fact, SphereNet embeds compliance directly into the transaction lifecycle.',
+            
+            whySphereNetExists: {
+              title: 'Why SphereNet Exists: The Gap SpherePay Exposes',
+              context: 'SpherePay processes $3B+ annually using existing blockchains (Solana, Ethereum). This works - but it exposes fundamental limitations.',
+              limitations: [
+                {
+                  limitation: 'Compliance is Bolted On, Not Built In',
+                  problem: 'SpherePay must run its own compliance checks BEFORE sending transactions to Solana. The blockchain itself has no concept of sanctions, jurisdiction, or counterparty verification.',
+                  consequence: 'If SpherePay misses something, the transaction still settles. The blockchain doesn\'t care.',
+                  example: 'A sanctioned entity creates a new wallet. SpherePay\'s screening catches it - but if they used a different provider on the same blockchain, the transaction would settle.'
+                },
+                {
+                  limitation: 'No Cross-Provider Coordination',
+                  problem: 'Each payment provider on Solana runs their own compliance. There\'s no network-level coordination or shared intelligence.',
+                  consequence: 'A bad actor rejected by SpherePay can simply use a competitor on the same blockchain.',
+                  example: 'SpherePay rejects a suspicious transaction. The sender walks across the street to a less rigorous provider. Same blockchain, same settlement, different compliance standards.'
+                },
+                {
+                  limitation: 'Privacy vs Transparency Tradeoff',
+                  problem: 'On public blockchains, transactions are either fully visible (privacy problem) or fully private (compliance problem). No middle ground.',
+                  consequence: 'Institutional customers are uncomfortable with full transaction visibility. But regulators can\'t accept zero visibility.',
+                  example: 'A bank wants to use stablecoin rails but won\'t expose their client transaction patterns to competitors who can see the blockchain.'
+                },
+                {
+                  limitation: 'Jurisdiction-Blind Settlement',
+                  problem: 'Solana doesn\'t know or care that UAE rules differ from US rules differ from EU rules. A transaction is just a transaction.',
+                  consequence: 'SpherePay must enforce jurisdictional rules at the application layer. The infrastructure provides no support.',
+                  example: 'UAE requires specific Travel Rule data. US requires different data. The blockchain transmits neither - SpherePay must handle both separately.'
+                }
+              ],
+              conclusion: 'SpherePay works despite the blockchain, not because of it. SphereNet inverts this - compliance becomes a PROPERTY of the network, not a responsibility of each application.'
+            },
+            
             architectureShift: {
-              title: 'The Architecture Shift: Reactive → Preventative',
+              title: 'The Architecture Shift: Reactive to Preventative',
               traditional: {
-                label: 'Traditional Blockchains (After-the-Fact)',
+                label: 'Traditional Blockchains (After-the-Fact Compliance)',
                 flow: ['Initiation', 'Execution', 'Settlement', 'Reporting', 'Review/Enforcement'],
-                riskPoint: 'Risk discovered AFTER settlement'
+                riskPoint: 'Risk discovered AFTER settlement',
+                problem: 'By the time you identify a problem, the transaction has already settled. Enforcement becomes recovery, not prevention.',
+                realWorld: 'This is why Chainalysis revised their 2023 illicit volume estimate from $24B to $46B within 12 months. They eventually found it - but the money had already moved.'
               },
               sphereNet: {
-                label: 'SphereNet (Preventative, Embedded)',
+                label: 'SphereNet (Preventative, Embedded Compliance)',
                 flow: ['Initiation', 'Policy Check', 'Privacy Proof', 'Jurisdiction Gate', 'Execution', 'Settlement'],
-                riskPoint: 'Controls applied BEFORE execution'
+                riskPoint: 'Controls applied BEFORE execution',
+                advantage: 'Non-compliant transactions never settle. They don\'t appear on-chain. They don\'t propagate. The network itself rejects them.',
+                realWorld: 'A sanctioned entity attempts a transfer. On Solana, it settles instantly. On SphereNet, it\'s rejected at the policy check stage - no settlement, no on-chain record, no enforcement needed.'
               },
-              keyDifference: 'By embedding compliance checks directly into transaction lifecycle, risk is prevented before settlement rather than addressed after it materializes.'
+              keyDifference: 'Traditional blockchains require you to FIND bad transactions after they happen. SphereNet PREVENTS bad transactions from happening.',
+              regulatorImplication: 'This is the difference between "we\'ll catch them eventually" and "they can\'t do it in the first place." Regulators strongly prefer prevention over enforcement.'
             },
+            
             threeCorePrinciples: {
               title: 'Three Core Principles of SphereNet',
               principles: [
                 {
                   principle: 'Compliance-Native',
                   icon: '✅',
+                  tagline: 'Compliance is a property of the network, not a responsibility of each application',
                   description: 'Compliance controls enforced directly at network level. Shifts oversight from reactive review to real-time preventative enforcement.',
                   howItWorks: [
-                    'Policy engine integrated into network runtime',
+                    'Policy engine integrated into network runtime - not a separate service',
                     'Rules-based enforcement across issuance, transfer, settlement, custody, redemption',
                     'Regulatory constraints encoded as deterministic execution rules',
                     'Transaction validity depends on satisfying policies at execution time',
-                    'Non-compliant flows prevented BEFORE settlement'
+                    'Non-compliant flows prevented BEFORE settlement - they never hit the chain'
                   ],
-                  alignment: 'Maintains alignment with FATF, UN Security Council sanctions, OFAC, European CIS frameworks, and jurisdiction-specific requirements.'
+                  withoutThis: {
+                    scenario: 'Without compliance-native architecture',
+                    consequences: [
+                      'Each application must build and maintain its own compliance system',
+                      'Compliance quality varies wildly across providers',
+                      'Bad actors shop for the weakest link',
+                      'Regulators must audit each application separately',
+                      'Network-wide compliance is impossible to verify'
+                    ]
+                  },
+                  concreteExample: {
+                    title: 'OFAC Sanctions Enforcement',
+                    traditional: 'SpherePay screens against OFAC list. Transaction to sanctioned entity rejected by SpherePay. But sanctioned entity uses different provider - transaction settles on Solana. SpherePay\'s compliance doesn\'t protect the network.',
+                    sphereNet: 'OFAC list embedded in network policy engine. ANY transaction involving sanctioned entity rejected by the NETWORK - regardless of which application initiated it. No provider can bypass network-level sanctions.',
+                    result: 'Compliance becomes a network guarantee, not an application-level best effort.'
+                  },
+                  regulatoryAlignment: {
+                    title: 'Regulatory Framework Alignment',
+                    frameworks: [
+                      { framework: 'FATF Recommendations', alignment: 'Travel Rule data requirements enforced at protocol level' },
+                      { framework: 'OFAC/EU/UN Sanctions', alignment: 'Sanctions screening is a network function, not application function' },
+                      { framework: 'MiCA (EU)', alignment: 'Reserve and redemption requirements verifiable on-chain' },
+                      { framework: 'GENIUS Act (US)', alignment: 'Issuer licensing status encoded in asset metadata' },
+                      { framework: 'CBUAE Stablecoin Framework', alignment: 'UAE-specific rules enforced for UAE-originating transactions' }
+                    ]
+                  }
                 },
                 {
                   principle: 'Privacy-Preserving',
                   icon: '🔒',
+                  tagline: 'Prove compliance without revealing underlying data',
                   description: 'Regulators gain verifiable assurance while institutions retain control over sensitive information.',
                   howItWorks: [
-                    'Zero-knowledge proofs for compliance verification',
-                    'Full and partial homomorphic encryption',
-                    'Secure multi-party computation',
+                    'Zero-knowledge proofs for compliance verification - prove you\'re compliant without showing your data',
+                    'Full and partial homomorphic encryption - compute on encrypted data without decrypting',
+                    'Secure multi-party computation - multiple parties jointly verify without revealing inputs',
                     'Extractable proofs allow regulators to verify specific attributes on demand',
                     'Data remains encrypted during processing and validation'
                   ],
-                  keyBenefit: 'Separates auditability from data exposure — enabling compliance without compromising privacy or commercial confidentiality.'
+                  withoutThis: {
+                    scenario: 'Without privacy-preserving architecture',
+                    consequences: [
+                      'All transactions fully visible to everyone (like Bitcoin/Ethereum)',
+                      'Competitors can see your transaction patterns and volumes',
+                      'Institutional customers refuse to participate',
+                      'Or: fully private chains that regulators can\'t audit at all',
+                      'No middle ground between surveillance and opacity'
+                    ]
+                  },
+                  concreteExample: {
+                    title: 'Bank Treasury Operations',
+                    problem: 'A major bank wants to use stablecoin rails for treasury operations but refuses to expose transaction patterns on a public blockchain. Competitors could infer their trading strategies.',
+                    traditional: 'On Solana/Ethereum: Bank either accepts full transparency (unacceptable) or uses a private chain (regulators can\'t audit). No good option.',
+                    sphereNet: 'Bank\'s transactions are encrypted. Network verifies compliance via zero-knowledge proofs. Regulators can request specific audits through legal process. Competitors see nothing.',
+                    result: 'Bank gets the efficiency of stablecoin rails without the transparency cost. Regulators get better audit capability than with traditional banking.'
+                  },
+                  privacyLevels: {
+                    title: 'Graduated Privacy Architecture',
+                    levels: [
+                      { level: 'Default', visibility: 'Transaction exists, aggregate statistics', whoSees: 'Public', useCase: 'Network health monitoring' },
+                      { level: 'Participant', visibility: 'Own transactions, counterparty identities', whoSees: 'Transaction parties only', useCase: 'Normal business operations' },
+                      { level: 'Supervisory', visibility: 'Jurisdiction-specific aggregates, entity-type breakdowns', whoSees: 'Authorized regulators', useCase: 'Systemic risk monitoring' },
+                      { level: 'Investigation', visibility: 'Full transaction details, complete audit trail', whoSees: 'Legal process (subpoena, court order)', useCase: 'Enforcement actions' }
+                    ],
+                    keyPoint: 'Privacy is not binary. SphereNet provides APPROPRIATE visibility to APPROPRIATE parties through APPROPRIATE processes.'
+                  }
                 },
                 {
                   principle: 'Verified Ecosystem',
                   icon: '🛡️',
+                  tagline: 'Every participant verified, every transaction between known entities',
                   description: 'Risk is contained within verified network perimeter, limiting exposure to unknown or unregulated actors.',
                   howItWorks: [
-                    'Permissioned environment with all participants verified against jurisdictional, regulatory, and risk criteria',
-                    'Classification and segmentation framework assigns participants to regulatory domains, risk tiers, permissible activity sets',
-                    'Identity, licensing status, and regulatory standing validated at onboarding and continuously attested',
-                    'Transactions only permitted between counterparties with compatible regulatory profiles',
-                    'Network-level enforcement prevents unauthorized exposure by design'
+                    'Permissioned environment - all participants verified against jurisdictional, regulatory, and risk criteria',
+                    'Classification framework assigns participants to regulatory domains, risk tiers, permissible activity sets',
+                    'Identity, licensing status, and regulatory standing validated at onboarding',
+                    'Continuous attestation - verification isn\'t one-time, it\'s ongoing',
+                    'Transactions only permitted between counterparties with compatible regulatory profiles'
                   ],
-                  keyBenefit: 'Reduces need for repeated bilateral due diligence and constrains risk propagation within controlled ecosystem.'
+                  withoutThis: {
+                    scenario: 'Without verified ecosystem',
+                    consequences: [
+                      'Anyone can create a wallet and transact (like public blockchains)',
+                      'No way to know if counterparty is licensed, sanctioned, or legitimate',
+                      'Each transaction requires bilateral due diligence',
+                      'Bad actors hide among legitimate participants',
+                      'Regulators can\'t distinguish compliant from non-compliant activity'
+                    ]
+                  },
+                  concreteExample: {
+                    title: 'Cross-Border Payment Between Licensed Entities',
+                    traditional: 'UAE payment provider wants to transact with Singapore payment provider. Each must do full due diligence on the other. Repeated for every new counterparty. Months of legal work.',
+                    sphereNet: 'Both providers already verified by SphereNet - licenses confirmed, regulatory standing attested, risk tier assigned. Network already knows they\'re compatible counterparties. Transaction proceeds immediately.',
+                    result: 'Due diligence happens once at network onboarding, not repeatedly for each counterparty relationship.'
+                  },
+                  participantTiers: {
+                    title: 'Participant Classification Framework',
+                    tiers: [
+                      { tier: 'Tier 1 - Licensed Financial Institutions', examples: 'Banks, licensed payment providers, regulated exchanges', permissions: 'Full network access, all asset types, all corridors', requirements: 'Banking/payments license, full AML program, regulatory supervision' },
+                      { tier: 'Tier 2 - Licensed Non-Bank Entities', examples: 'Money service businesses, remittance providers, fintechs', permissions: 'Standard network access, approved asset types, licensed corridors', requirements: 'MSB/payments license, AML program, jurisdiction-specific compliance' },
+                      { tier: 'Tier 3 - Verified Corporates', examples: 'Enterprise customers, treasury operations, B2B payments', permissions: 'Limited access, approved counterparties only, volume limits', requirements: 'Corporate KYC, beneficial ownership verified, ongoing monitoring' },
+                      { tier: 'Tier 4 - Retail (via Licensed Providers)', examples: 'Individual users accessing through Tier 1/2 providers', permissions: 'Indirect access only, provider-mediated transactions', requirements: 'KYC performed by licensed provider' }
+                    ],
+                    enforcement: 'Network enforces tier-appropriate permissions. A Tier 3 corporate cannot transact with an unverified entity. A Tier 2 provider cannot offer services in jurisdictions where they\'re not licensed.'
+                  }
                 }
               ]
             },
+            
+            vsAnalyticsApproach: {
+              title: 'SphereNet vs Analytics-Based Compliance (Chainalysis Model)',
+              subtitle: 'Why monitoring after the fact isn\'t enough',
+              comparison: {
+                headers: ['Dimension', 'Analytics Approach (Chainalysis)', 'SphereNet Approach'],
+                rows: [
+                  ['When compliance checked', 'AFTER settlement', 'BEFORE settlement'],
+                  ['Can prevent bad transactions', 'No - can only identify them', 'Yes - rejected transactions never settle'],
+                  ['Enforcement model', 'Investigate → Identify → Pursue', 'Prevent → No enforcement needed'],
+                  ['Coverage', 'Analyzes public blockchain data', 'Controls all network transactions'],
+                  ['Sanctioned entity attempt', 'Transaction settles, flagged later', 'Transaction rejected, never settles'],
+                  ['Data quality', 'Probabilistic attribution', 'Verified identity at source'],
+                  ['Revision risk', '$24B → $46B (Chainalysis 2023 revision)', 'No revision needed - prevention, not detection'],
+                  ['Regulator value', 'Forensic investigation support', 'Systemic risk prevention'],
+                  ['Cost model', 'Per-query or subscription', 'Built into network fees']
+                ]
+              },
+              notReplacement: {
+                title: 'SphereNet Doesn\'t Replace Analytics - It Makes Them Less Necessary',
+                explanation: 'Chainalysis and similar tools are valuable for investigating activity on PUBLIC blockchains. SphereNet reduces the need for investigation by preventing problematic activity in the first place.',
+                analogy: 'Analytics is like security cameras that record crimes. SphereNet is like locked doors that prevent entry. Both have value, but prevention is better than investigation.',
+                coexistence: 'For activity that spans SphereNet and public blockchains, analytics tools remain valuable. SphereNet doesn\'t claim to solve the entire crypto ecosystem - just the regulated finance portion.'
+              }
+            },
+            
+            realWorldScenarios: {
+              title: 'Real-World Scenarios: SphereNet in Action',
+              scenarios: [
+                {
+                  scenario: 'Sanctioned Entity Attempts Transfer',
+                  setup: 'An OFAC-sanctioned entity (e.g., Russian oligarch\'s company) creates a fresh wallet and attempts to transfer $5M USDC.',
+                  onTraditionalBlockchain: [
+                    'Entity creates new Solana wallet (no verification required)',
+                    'Entity receives USDC from a less-rigorous exchange',
+                    'Entity initiates transfer to recipient wallet',
+                    'Transaction settles in ~400ms',
+                    'Chainalysis eventually identifies the pattern (days to months later)',
+                    'Enforcement action requires cooperation from downstream parties',
+                    'Money has already moved multiple times'
+                  ],
+                  onSphereNet: [
+                    'Entity attempts to create SphereNet wallet',
+                    'Onboarding requires identity verification against network\'s verified ecosystem',
+                    'Entity fails verification (sanctioned status identified)',
+                    'Wallet creation rejected - entity never enters the network',
+                    'Even if entity somehow obtained credentials, transaction would fail policy check',
+                    'No settlement, no on-chain record, no enforcement needed',
+                    'Attempt logged for regulatory reporting'
+                  ],
+                  keyDifference: 'On public blockchains, the transaction HAPPENED and enforcement is REACTIVE. On SphereNet, the transaction NEVER HAPPENS and prevention is AUTOMATIC.'
+                },
+                {
+                  scenario: 'Cross-Jurisdiction Regulatory Conflict',
+                  setup: 'A UAE-licensed payment provider wants to serve US customers, but UAE and US have different Travel Rule requirements.',
+                  onTraditionalBlockchain: [
+                    'Provider must manually determine which rules apply to each transaction',
+                    'UAE requires certain data fields, US requires different fields',
+                    'Provider builds custom logic to handle jurisdiction detection',
+                    'Edge cases create compliance gaps (VPNs, travel, multi-jurisdiction entities)',
+                    'Each provider solves this differently - no standardization',
+                    'Regulators can\'t verify cross-border compliance systematically'
+                  ],
+                  onSphereNet: [
+                    'Transaction initiated UAE → US',
+                    'Network\'s jurisdiction gate identifies both jurisdictions automatically',
+                    'Policy engine applies UNION of UAE + US requirements',
+                    'Transaction must satisfy BOTH jurisdictions\' Travel Rule requirements',
+                    'Missing data fields → transaction rejected with specific error',
+                    'Provider knows exactly what\'s needed to complete the transaction',
+                    'Both regulators can verify their rules were enforced'
+                  ],
+                  keyDifference: 'SphereNet handles jurisdictional complexity at the NETWORK level. Providers don\'t need to build jurisdiction-specific logic - the network enforces it.'
+                },
+                {
+                  scenario: 'Regulator Audit Request',
+                  setup: 'UAE Central Bank (CBUAE) requests an audit of stablecoin flows through UAE-licensed entities for the past quarter.',
+                  onTraditionalBlockchain: [
+                    'CBUAE must request data from each licensed entity separately',
+                    'Each entity provides data in different formats',
+                    'No way to verify completeness - entities could omit transactions',
+                    'Public blockchain data is pseudonymous - can\'t identify UAE entities reliably',
+                    'Analytics providers offer probabilistic attribution',
+                    'Audit takes months, results have uncertainty ranges'
+                  ],
+                  onSphereNet: [
+                    'CBUAE submits supervisory access request to network',
+                    'Network generates UAE-jurisdiction aggregate report automatically',
+                    'Report includes all UAE-licensed entities, all transaction types',
+                    'Zero-knowledge proofs verify completeness without revealing individual transactions',
+                    'CBUAE can drill down to specific entities or time periods as needed',
+                    'Audit completes in days with cryptographic certainty'
+                  ],
+                  keyDifference: 'SphereNet provides BETTER regulatory visibility than traditional blockchains - but through proper supervisory channels, not bulk surveillance.'
+                },
+                {
+                  scenario: 'Systemic Stress Event (Depeg Scenario)',
+                  setup: 'A major stablecoin begins depegging (similar to USDC March 2023). Synchronized redemptions threaten to cascade.',
+                  onTraditionalBlockchain: [
+                    'No circuit breakers - transactions continue at full speed',
+                    'Panic selling accelerates depeg',
+                    'No way to pause specific asset class or corridor',
+                    'Contagion spreads to other stablecoins through arbitrage',
+                    'Regulators watch helplessly - blockchain doesn\'t have pause function',
+                    'Recovery depends on issuer action (Circle\'s reserve confirmation)'
+                  ],
+                  onSphereNet: [
+                    'Network\'s monitoring detects abnormal redemption volume',
+                    'Policy engine can implement temporary transfer limits for affected asset',
+                    'Jurisdiction-specific circuit breakers can pause specific corridors',
+                    'Affected transactions queue rather than fail - resumable when stress passes',
+                    'Regulators can request emergency policy adjustments through defined process',
+                    'Contagion containable through network-level controls'
+                  ],
+                  keyDifference: 'SphereNet has CONTROL LEVERS that traditional blockchains lack. Not to censor, but to manage systemic stress - like circuit breakers in traditional markets.'
+                }
+              ]
+            },
+            
+            addressingSystemicRisks: {
+              title: 'How SphereNet Addresses the Three Systemic Risk Categories',
+              subtitle: 'Connecting back to Section 2.6\'s risk framework',
+              risks: [
+                {
+                  riskCategory: 'Leverage Formation (Rehypothecation)',
+                  problemRecap: 'Traditional blockchains allow infinite rehypothecation - the same collateral reused across multiple protocols, creating hidden leverage.',
+                  sphereNetResponse: {
+                    approach: 'Collateral Tracking at Protocol Level',
+                    mechanisms: [
+                      'Assets carry metadata indicating encumbrance status',
+                      'Protocol prevents double-use of collateral across verified applications',
+                      'Leverage ratios visible to supervisory entities',
+                      'Network-level limits on total leverage for specific asset classes'
+                    ],
+                    result: 'Leverage becomes VISIBLE and LIMITABLE, not hidden and unlimited.'
+                  },
+                  limitation: 'Only applies to activity within SphereNet. Off-network DeFi leverage still possible but won\'t contaminate SphereNet ecosystem.'
+                },
+                {
+                  riskCategory: 'Liquidity Runs (Synchronized Exits)',
+                  problemRecap: 'Traditional blockchains have no circuit breakers. When panic hits, everyone exits simultaneously, amplifying stress.',
+                  sphereNetResponse: {
+                    approach: 'Programmable Circuit Breakers',
+                    mechanisms: [
+                      'Configurable rate limits for redemptions and large transfers',
+                      'Automatic slowdown triggers based on volume anomalies',
+                      'Queuing rather than rejection - transactions wait rather than fail',
+                      'Jurisdiction-specific controls allow targeted intervention'
+                    ],
+                    result: 'Stress events become MANAGEABLE rather than catastrophic. Time for orderly resolution.'
+                  },
+                  limitation: 'Circuit breakers are controversial. SphereNet implements them as OPTIONAL policy configurations, not mandatory network features. Regulators can request activation during emergencies.'
+                },
+                {
+                  riskCategory: 'Enforcement Gaps (Reactive Analytics)',
+                  problemRecap: 'Analytics-based enforcement discovers problems after settlement. By then, assets have moved and enforcement requires cross-border cooperation.',
+                  sphereNetResponse: {
+                    approach: 'Preventative Enforcement at Settlement Layer',
+                    mechanisms: [
+                      'Compliance checked BEFORE settlement, not after',
+                      'Non-compliant transactions never settle - no enforcement needed',
+                      'Verified ecosystem means all participants known',
+                      'Real-time policy updates propagate network-wide instantly'
+                    ],
+                    result: 'Enforcement shifts from INVESTIGATION to PREVENTION. Bad actors can\'t use the network in the first place.'
+                  },
+                  limitation: 'Only applies to SphereNet transactions. Activity on public blockchains still requires analytics-based approaches.'
+                }
+              ],
+              summaryTable: {
+                headers: ['Systemic Risk', 'Traditional Blockchain', 'SphereNet'],
+                rows: [
+                  ['Leverage Formation', 'Invisible, unlimited', 'Tracked, limitable'],
+                  ['Liquidity Runs', 'No circuit breakers', 'Programmable controls'],
+                  ['Enforcement Gaps', 'Reactive investigation', 'Preventative rejection']
+                ]
+              }
+            },
+            
             protocolLevelEnforcement: {
               title: 'Protocol-Level Policy Enforcement',
+              subtitle: 'The technical mechanics of pre-settlement compliance',
+              transactionLifecycle: {
+                title: 'Transaction Lifecycle on SphereNet',
+                steps: [
+                  { step: 1, name: 'Initiation', description: 'Application submits transaction to network', checks: 'Basic format validation, signature verification' },
+                  { step: 2, name: 'Identity Resolution', description: 'Network resolves sender and receiver identities', checks: 'Both parties verified in ecosystem registry, current attestation valid' },
+                  { step: 3, name: 'Policy Check', description: 'Transaction evaluated against all applicable policies', checks: 'Sanctions screening, jurisdiction rules, asset eligibility, exposure limits' },
+                  { step: 4, name: 'Privacy Proof Generation', description: 'Required compliance proofs generated without revealing data', checks: 'Zero-knowledge proofs for Travel Rule, AML thresholds, jurisdiction verification' },
+                  { step: 5, name: 'Jurisdiction Gate', description: 'Final check that all jurisdictional requirements satisfied', checks: 'Both origin and destination jurisdiction rules applied' },
+                  { step: 6, name: 'Execution', description: 'Transaction executed if all checks pass', checks: 'Atomic execution - all or nothing' },
+                  { step: 7, name: 'Settlement', description: 'State change committed to ledger', checks: 'Finality achieved, audit trail recorded' }
+                ],
+                failureHandling: 'If ANY step fails, transaction is rejected with specific error code. No partial execution. No settlement of non-compliant transactions.'
+              },
               preExecutionChecks: [
-                { check: 'Jurisdiction', description: 'Is this transaction permitted in both originating and destination jurisdictions?' },
-                { check: 'Asset Eligibility', description: 'Is this stablecoin/token approved for this corridor and use case?' },
-                { check: 'Counterparty Permissions', description: 'Are both parties verified and authorized to transact?' },
-                { check: 'Exposure Limits', description: 'Does this transaction exceed any concentration or volume limits?' }
+                { check: 'Sanctions Screening', description: 'Are either party or any beneficial owner on any sanctions list?', failureResult: 'REJECT - sanctions violation', dataSource: 'OFAC SDN, EU Consolidated, UN Security Council, jurisdiction-specific lists' },
+                { check: 'Jurisdiction Eligibility', description: 'Is this transaction type permitted in both jurisdictions?', failureResult: 'REJECT - jurisdiction restriction', dataSource: 'Network jurisdiction policy registry' },
+                { check: 'Asset Eligibility', description: 'Is this stablecoin/token approved for this corridor?', failureResult: 'REJECT - asset not approved', dataSource: 'Network asset registry with regulatory status' },
+                { check: 'Counterparty Verification', description: 'Are both parties verified and in good standing?', failureResult: 'REJECT - counterparty not verified', dataSource: 'Network identity registry with attestation status' },
+                { check: 'Exposure Limits', description: 'Does this exceed concentration or volume limits?', failureResult: 'REJECT or QUEUE - limit exceeded', dataSource: 'Real-time exposure monitoring' },
+                { check: 'Travel Rule Data', description: 'Is required originator/beneficiary data present?', failureResult: 'REJECT - incomplete Travel Rule data', dataSource: 'Transaction metadata validation' }
               ],
               outcomes: [
-                { status: 'OK', result: 'Transaction proceeds to execution' },
-                { status: 'Warning', result: 'Transaction flagged for enhanced review' },
-                { status: 'Rejected', result: 'Transaction does not propagate, settle, or appear on-chain' }
+                { status: 'APPROVED', result: 'Transaction proceeds to execution and settlement', nextSteps: 'Normal completion' },
+                { status: 'FLAGGED', result: 'Transaction proceeds but marked for enhanced monitoring', nextSteps: 'Post-settlement review, possible SAR filing' },
+                { status: 'QUEUED', result: 'Transaction held pending manual review or limit reset', nextSteps: 'Compliance team review, automatic retry after limit reset' },
+                { status: 'REJECTED', result: 'Transaction does not execute, does not settle, does not appear on-chain', nextSteps: 'Error returned to initiator, attempt logged for audit' }
               ],
-              keyPoint: 'Rejected transactions never settle. Compliance is enforced as a CONDITION of execution, not a RESPONSE to settlement.'
+              keyPoint: 'Rejected transactions NEVER SETTLE. This is the fundamental difference from traditional blockchains where settlement happens first and compliance checks happen later.'
+            },
+            
+            roadmapAndMigration: {
+              title: 'SphereNet Roadmap and Migration Path',
+              subtitle: 'From SpherePay on Solana to SpherePay on SphereNet',
+              currentState: {
+                title: 'Today: SpherePay on Existing Blockchains',
+                status: 'SpherePay is LIVE, processing $3B+ annually',
+                infrastructure: 'Uses Solana for stablecoin settlement (USDC, USDT)',
+                compliance: 'Application-level compliance - Sphere runs its own screening, Travel Rule handling, etc.',
+                limitations: 'Compliance is Sphere-specific, not network-wide. Other providers on same blockchain may have different standards.'
+              },
+              roadmap: [
+                { phase: 'Phase 1: Foundation (2024-2025)', milestones: ['SphereNet testnet launch', 'Core protocol development', 'Policy engine implementation', 'Initial partner onboarding (sandbox)'], status: 'In Progress' },
+                { phase: 'Phase 2: Pilot (2025)', milestones: ['Mainnet launch with limited corridors', 'First licensed partners go live', 'Regulatory sandbox participation (UAE, Singapore)', 'SpherePay begins dual-settlement (Solana + SphereNet)'], status: 'Planned' },
+                { phase: 'Phase 3: Migration (2025-2026)', milestones: ['SpherePay migrates primary settlement to SphereNet', 'Additional partners onboard', 'More corridors activated', 'Full Travel Rule and sanctions integration'], status: 'Planned' },
+                { phase: 'Phase 4: Ecosystem (2026+)', milestones: ['Third-party applications build on SphereNet', 'CBDC integration (Digital Dirham)', 'Cross-chain bridges to other compliant networks', 'SpherePay becomes one of many SphereNet applications'], status: 'Vision' }
+              ],
+              migrationPath: {
+                title: 'SpherePay Customer Migration',
+                forCustomers: [
+                  'Seamless migration - API compatibility maintained',
+                  'No action required from most customers',
+                  'Improved settlement finality and compliance guarantees',
+                  'Same or better pricing (network efficiencies passed through)'
+                ],
+                forPartners: [
+                  'Early access to SphereNet sandbox',
+                  'Migration support and documentation',
+                  'Opportunity to become SphereNet validators/participants',
+                  'Revenue share on network fees'
+                ],
+                timeline: 'SpherePay customers will be notified 6+ months before any migration. Dual-settlement period ensures zero disruption.'
+              },
+              strategicRationale: {
+                title: 'Why Build a Blockchain?',
+                reasons: [
+                  { reason: 'Capture Infrastructure Value', explanation: 'SpherePay captures transaction fees. SphereNet captures the entire settlement layer - network fees, validator economics, ecosystem value.' },
+                  { reason: 'Compliance Moat', explanation: 'Application-level compliance can be copied. Protocol-level compliance is a fundamental architectural advantage.' },
+                  { reason: 'Regulatory Positioning', explanation: 'Building infrastructure FOR regulators positions Sphere as a partner, not a threat. Central banks want to work with compliant infrastructure.' },
+                  { reason: 'Network Effects', explanation: 'Once other fintechs build on SphereNet, Sphere benefits from ecosystem growth even if SpherePay faces competition.' }
+                ],
+                arnoldQuote: {
+                  quote: 'We\'re not building a blockchain because it\'s cool. We\'re building it because regulated finance NEEDS infrastructure that traditional blockchains can\'t provide.',
+                  speaker: 'Arnold Lee'
+                }
+              }
             }
           },
           regulatorPerspective: {
@@ -3286,26 +3823,26 @@ You must be able to discuss stablecoins without crypto language, understand thei
             subtitle: 'Framing systemic risk for central bank and regulator conversations',
             doSay: [
               '"We understand stablecoins have reached systemic scale and present novel risks to financial stability."',
-              '"Traditional blockchains cannot support preventative compliance — that\'s why we built SphereNet."',
+              '"Traditional blockchains cannot support preventative compliance - that\'s why we built SphereNet."',
               '"Our architecture enforces policy BEFORE settlement, not after."',
               '"We work WITH regulators to provide real-time visibility without compromising institutional privacy."',
               '"We\'re positioned to support Digital Dirham and other CBDCs alongside private stablecoins."'
             ],
             doNotSay: [
-              '"Stablecoins are just like digital dollars — no additional risk."',
+              '"Stablecoins are just like digital dollars - no additional risk."',
               '"Regulators don\'t understand crypto."',
               '"Decentralization means no one is responsible."',
               '"On-chain is inherently more transparent so there\'s no enforcement problem."'
             ],
             sampleResponse: {
               question: 'A central banker asks: "How do stablecoins affect financial stability?"',
-              answer: 'Stablecoins have reached systemic scale — over $300 billion globally, projected to reach $2-4 trillion by 2030. At this scale, they directly affect Treasury markets, dollar liquidity, and monetary policy transmission. We see three main risk categories: leverage formation through rehypothecation, liquidity runs without circuit breakers, and enforcement gaps due to settlement speed. Traditional blockchains can\'t address these — they\'re designed for openness, not regulatory enforceability. That\'s why we built SphereNet with compliance embedded at the protocol level. We enforce policy BEFORE settlement, not after. We\'re also positioned to integrate Digital Dirham when it launches, giving UAE a compliant bridge between private stablecoins and sovereign digital currency.'
+              answer: 'Stablecoins have reached systemic scale - over $300 billion globally, projected to reach $2-4 trillion by 2030. At this scale, they directly affect Treasury markets, dollar liquidity, and monetary policy transmission. We see three main risk categories: leverage formation through rehypothecation, liquidity runs without circuit breakers, and enforcement gaps due to settlement speed. Traditional blockchains can\'t address these - they\'re designed for openness, not regulatory enforceability. That\'s why we built SphereNet with compliance embedded at the protocol level. We enforce policy BEFORE settlement, not after. We\'re also positioned to integrate Digital Dirham when it launches, giving UAE a compliant bridge between private stablecoins and sovereign digital currency.'
             }
           },
-          keyTakeaway: 'Stablecoins have reached systemic scale with direct links to Treasury markets and global dollar liquidity. Three risk categories — leverage formation, liquidity runs, and enforcement gaps — require protocol-level solutions, not just better analytics. SphereNet addresses this with compliance-native, privacy-preserving, verified ecosystem architecture.'
+          keyTakeaway: 'Stablecoins have reached systemic scale with direct links to Treasury markets and global dollar liquidity. Three risk categories - leverage formation, liquidity runs, and enforcement gaps - require protocol-level solutions, not just better analytics. SphereNet addresses this with compliance-native, privacy-preserving, verified ecosystem architecture.'
         },
         exercise: {
-          title: 'Exercise 2.6 — Systemic Risk Briefing',
+          title: 'Exercise 2.6 - Systemic Risk Briefing',
           prompt: 'You are briefing a UAE Central Bank official on stablecoin systemic risks. Prepare a 5-minute explanation covering:\n\n1) Why stablecoins are now systemically important (scale, Treasury market links)\n2) The three risk categories (leverage formation, liquidity runs, enforcement gaps)\n3) One case study illustrating each risk\n4) Why traditional blockchains can\'t solve this\n5) How SphereNet\'s architecture addresses these risks\n\nWrite your briefing notes.',
           criteria: ['Systemic scale context', 'All three risk categories', 'Relevant case studies', 'Traditional blockchain limitations', 'SphereNet solution', 'Appropriate for central bank audience']
         },
@@ -3329,9 +3866,16 @@ You must be able to discuss stablecoins without crypto language, understand thei
         { type: 'multiple_choice', question: 'MiCA impact on Tether?', options: ['Approval', 'Delisting from some exchanges', 'No impact', 'Increased usage'], correct: 1 },
         { type: 'multiple_choice', question: 'Which is NOT a systemic risk category?', options: ['Leverage formation', 'Liquidity runs', 'Smart contract bugs', 'Enforcement gaps'], correct: 2 },
         { type: 'multiple_choice', question: 'SphereNet enforces compliance:', options: ['After settlement', 'Before settlement', 'Weekly batch', 'Not at all'], correct: 1 },
-        { type: 'analysis', question: 'Explain "stablecoin sandwich" to a traditional banker with no crypto knowledge.', rubric: ['No jargon', 'Clear flow', 'Business benefit', 'Risk acknowledgment'] },
-        { type: 'analysis', question: 'A central banker asks about stablecoin systemic risks. Explain the three risk categories with one case study each.', rubric: ['Leverage formation + MakerDAO', 'Liquidity runs + USDC depeg', 'Enforcement gaps + Chainalysis', 'Protocol-level solution'] },
-        { type: 'application', question: 'Risk officer asks: "What if the stablecoin depegs during a transaction?" How do you respond?', rubric: ['Acknowledge risk', 'USDC case', 'Mitigation strategies', 'Sphere approach'] }
+        { type: 'multiple_choice', question: 'Sphere is classified as:', options: ['Stablecoin issuer', 'Stablecoin transmitter', 'Crypto exchange', 'Bank'], correct: 1 },
+        { type: 'multiple_choice', question: 'What is the "stablecoin sandwich"?', options: ['Trading strategy', 'Fiat→Stablecoin→Fiat flow', 'DeFi protocol', 'Regulatory framework'], correct: 1 },
+        { type: 'multiple_choice', question: 'Chainalysis 2023 illicit volume was revised from $24.2B to:', options: ['$26.1B', '$36.1B', '$46.1B', '$56.1B'], correct: 2 },
+        { type: 'multiple_choice', question: 'Why does SphereNet exist (vs SpherePay on Solana)?', options: ['Solana is too slow', 'Protocol-level compliance needed', 'Lower fees', 'Marketing reasons'], correct: 1 },
+        { type: 'multiple_choice', question: 'SphereNet\'s privacy-preserving approach uses:', options: ['Full transparency', 'Zero-knowledge proofs', 'Complete opacity', 'No privacy controls'], correct: 1 },
+        { type: 'analysis', question: 'Explain "stablecoin sandwich" to a traditional banker with no crypto knowledge.', rubric: ['No jargon', 'Clear fiat→stablecoin→fiat flow', 'Business benefit (speed, cost)', 'Risk acknowledgment (depeg, compliance)'] },
+        { type: 'analysis', question: 'A central banker asks about stablecoin systemic risks. Explain the three risk categories with one case study each.', rubric: ['Leverage formation + MakerDAO rehypothecation', 'Liquidity runs + USDC depeg (no circuit breakers)', 'Enforcement gaps + Chainalysis revision', 'SphereNet as protocol-level solution'] },
+        { type: 'analysis', question: 'Compare analytics-based compliance (Chainalysis model) vs SphereNet\'s approach. When would you use each?', rubric: ['Analytics = after settlement, probabilistic', 'SphereNet = before settlement, preventative', 'Analytics for public blockchains', 'SphereNet for regulated finance'] },
+        { type: 'application', question: 'Risk officer asks: "What if the stablecoin depegs during a transaction?" How do you respond?', rubric: ['Acknowledge risk honestly', 'USDC March 2023 case ($0.87)', 'Sphere mitigation (minutes not days)', 'Multi-issuer support'] },
+        { type: 'application', question: 'A compliance officer asks why Sphere is building SphereNet instead of just using existing blockchains. Explain.', rubric: ['SpherePay limitations on Solana', 'Compliance bolted-on vs built-in', 'Cross-provider coordination', 'Protocol-level policy enforcement'] }
       ]
     }
   },
@@ -3349,7 +3893,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
 
 Sphere's classification determines everything. Get this wrong and nothing else matters.
 
-Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company. Knowing how to classify it correctly — and defend that classification — is essential for every counterparty conversation.
+Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company. Knowing how to classify it correctly - and defend that classification - is essential for every counterparty conversation.
 
 **Key Principle:** Regulatory classification matters more than technology. A sophisticated counterparty asks about licensing and classification BEFORE features.`,
     sections: [
@@ -3374,7 +3918,7 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
           introduction: 'Regulatory classification determines which laws apply, which regulators supervise you, what activities you can perform, and ultimately whether your business can operate. Getting classification right is existential.',
           coreQuestion: 'How should Sphere be classified, and why does classification matter?',
           whatSphereIs: {
-            title: 'What Sphere IS — Detailed Classifications',
+            title: 'What Sphere IS - Detailed Classifications',
             subtitle: 'Understanding each classification and its regulatory implications',
             categories: [
               {
@@ -3413,14 +3957,14 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
                 sphereStatus: 'VASP in jurisdictions adopting FATF guidance',
                 keyObligations: ['Travel Rule compliance', 'CDD requirements', 'Suspicious transaction reporting', '5-year recordkeeping'],
                 whyItMatters: 'VASP classification determines international regulatory treatment.',
-                penalties: 'Varies by jurisdiction — EU MiCA violations up to €5M or 3% of turnover'
+                penalties: 'Varies by jurisdiction - EU MiCA violations up to €5M or 3% of turnover'
               },
               {
                 classification: 'B2B Payment Infrastructure',
                 jurisdiction: 'Industry Classification',
-                regulator: 'N/A — business model',
+                regulator: 'N/A - business model',
                 icon: '🏗️',
-                whatItMeans: 'APIs and infrastructure for businesses — not consumer-facing.',
+                whatItMeans: 'APIs and infrastructure for businesses - not consumer-facing.',
                 sphereStatus: 'Core business model',
                 keyObligations: ['Enterprise security (SOC 2)', 'API reliability', 'Business KYC/KYB'],
                 whyItMatters: 'B2B focus affects risk profile, sales cycles, regulatory treatment.',
@@ -3448,7 +3992,7 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
             }
           },
           whatSphereIsNot: {
-            title: 'What Sphere is NOT — Critical Distinctions',
+            title: 'What Sphere is NOT - Critical Distinctions',
             subtitle: 'Understanding what Sphere is NOT is as important as what it IS.',
             categories: [
               {
@@ -3532,7 +4076,7 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
           classificationMattersLegally: {
             title: 'Why Classification Matters Legally',
             consequences: [
-              { determination: 'Which Regulators Supervise You', detail: 'MSB = FinCEN + state. Exchange = SEC/CFTC. Bank = OCC/Fed/FDIC.', sphereImplication: 'Sphere supervised by FinCEN and state regulators — focused on AML/BSA.' },
+              { determination: 'Which Regulators Supervise You', detail: 'MSB = FinCEN + state. Exchange = SEC/CFTC. Bank = OCC/Fed/FDIC.', sphereImplication: 'Sphere supervised by FinCEN and state regulators - focused on AML/BSA.' },
               { determination: 'Capital Requirements', detail: 'Banks need billions. Money transmitters need bonds.', sphereImplication: 'Money transmitter requirements significant but manageable.' },
               { determination: 'Permitted Activities', detail: 'Classification defines what you can do.', sphereImplication: 'Licensed for transmission. Cannot take deposits or sell securities.' },
               { determination: 'Examination Frequency', detail: 'Banks: annual+. Money transmitters: 1-3 years.', sphereImplication: 'Periodic state exams focused on AML, customer funds, compliance.' }
@@ -3554,12 +4098,12 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
               { approach: 'Compliance-Native (Sphere)', icon: '✅', description: 'Design for compliance from architecture', result: 'Embedded, no gaps, clean audits', advantages: ['Cannot bypass', 'Aligned', 'Bank confidence'] }
             ],
             whatItMeans: [
-              { principle: 'Policy Enforcement BEFORE Settlement', explanation: 'Every transaction screened before settlement.', implementation: 'Real-time screening, jurisdiction checks — before funds move.' },
+              { principle: 'Policy Enforcement BEFORE Settlement', explanation: 'Every transaction screened before settlement.', implementation: 'Real-time screening, jurisdiction checks - before funds move.' },
               { principle: 'Compliance Embedded in Protocol', explanation: 'In core flow, not separate system.', implementation: 'Can\'t process without compliance passing. No override.' },
               { principle: 'Immutable Audit Trail', explanation: 'Every decision logged, cannot be altered.', implementation: 'Blockchain-based logs, tamper-evident, exam-ready.' },
               { principle: 'Work WITH Regulators', explanation: 'Proactive engagement, not adversarial.', implementation: 'Regular communication, SAR filing when appropriate.' }
             ],
-            arnoldQuote: { quote: 'Compliance isn\'t a cost center — it\'s our moat. Anyone can build rails. Building rails banks trust requires compliance baked in from day one.', context: 'Compliance-native is competitive advantage.' }
+            arnoldQuote: { quote: 'Compliance isn\'t a cost center - it\'s our moat. Anyone can build rails. Building rails banks trust requires compliance baked in from day one.', context: 'Compliance-native is competitive advantage.' }
           },
           sampleResponses: {
             title: 'How to Explain Classification',
@@ -3569,10 +4113,10 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
               { scenario: 'Customer asks: "Can you hold funds long-term?"', response: 'Sphere is payment infrastructure, not custodian. Same-day/next-day settlement. For long-term, you\'d want a licensed custodian. Pass-through model keeps funds moving.', keyPoints: ['Decline inappropriate', 'Explain why', 'Redirect'] }
             ]
           },
-          keyTakeaway: 'Sphere is licensed MSB and Money Transmitter — not exchange, custodian, issuer, or bank. Classification is intentional and enables B2B payments focus with appropriate regulatory relationships.'
+          keyTakeaway: 'Sphere is licensed MSB and Money Transmitter - not exchange, custodian, issuer, or bank. Classification is intentional and enables B2B payments focus with appropriate regulatory relationships.'
         },
         exercise: {
-          title: 'Exercise 3.1 — Classification Defense',
+          title: 'Exercise 3.1 - Classification Defense',
           prompt: 'A state banking regulator asks: "Help me understand what Sphere does and how it should be classified. What makes you different from other crypto companies?"\n\nWrite response covering:\n1) What Sphere IS (specific classifications)\n2) What Sphere is NOT and why each matters\n3) Licenses held and significance\n4) Why classification is appropriate for business model',
           criteria: ['Accurate classification', 'Clear NOT distinctions', 'Licenses with context', 'Business model explained', 'Professional tone']
         },
@@ -3597,16 +4141,16 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
             'Identify red flags across categories'
           ],
           keyConcepts: [
-            'KYC = Know Your Customer — identity verification',
-            'AML = Anti-Money Laundering — detection and prevention',
-            'CDD = Customer Due Diligence — risk-based assessment',
-            'EDD = Enhanced Due Diligence — deeper review for high-risk',
-            'SAR = Suspicious Activity Report — regulatory reporting',
+            'KYC = Know Your Customer - identity verification',
+            'AML = Anti-Money Laundering - detection and prevention',
+            'CDD = Customer Due Diligence - risk-based assessment',
+            'EDD = Enhanced Due Diligence - deeper review for high-risk',
+            'SAR = Suspicious Activity Report - regulatory reporting',
             'Risk-Based Approach = intensity matches risk level'
           ]
         },
         learn: {
-          introduction: 'Compliance is not a burden — it\'s the foundation enabling institutional adoption, banking partnerships, and sustainable growth. Without robust KYC/AML programs, banks won\'t work with you, enterprises won\'t trust you, regulators will shut you down.',
+          introduction: 'Compliance is not a burden - it\'s the foundation enabling institutional adoption, banking partnerships, and sustainable growth. Without robust KYC/AML programs, banks won\'t work with you, enterprises won\'t trust you, regulators will shut you down.',
           coreQuestion: 'Why is compliance an enabler rather than a barrier?',
           coreDefinitions: {
             title: 'Core Compliance Definitions',
@@ -3651,24 +4195,24 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
             individualVerification: {
               title: 'Individual Verification (Beneficial Owners)',
               requirements: [
-                { category: 'Government ID', required: 'Yes — all 25%+ owners', acceptable: ['Passport', 'Driver\'s License', 'National ID'], notes: 'Current, legible' },
-                { category: 'Proof of Address', required: 'Yes — all 25%+ owners', acceptable: ['Utility bill (90 days)', 'Bank statement', 'Government letter'], notes: 'PO Boxes need extra verification' },
-                { category: 'Tax ID', required: 'Yes — SSN for US, Foreign TIN for non-US', notes: 'Tax reporting and verification' },
-                { category: 'Date of Birth', required: 'Yes — all owners', notes: 'Match ID, age 18+' }
+                { category: 'Government ID', required: 'Yes - all 25%+ owners', acceptable: ['Passport', 'Driver\'s License', 'National ID'], notes: 'Current, legible' },
+                { category: 'Proof of Address', required: 'Yes - all 25%+ owners', acceptable: ['Utility bill (90 days)', 'Bank statement', 'Government letter'], notes: 'PO Boxes need extra verification' },
+                { category: 'Tax ID', required: 'Yes - SSN for US, Foreign TIN for non-US', notes: 'Tax reporting and verification' },
+                { category: 'Date of Birth', required: 'Yes - all owners', notes: 'Match ID, age 18+' }
               ]
             },
             businessVerification: {
               title: 'Business Verification (KYB)',
               requirements: [
                 { category: 'Business Registration', required: 'Yes', acceptable: ['Articles of Incorporation', 'Certificate of Formation'], notes: 'Current, good standing' },
-                { category: 'EIN', required: 'Yes — US entities', acceptable: ['IRS confirmation', 'Form SS-4'], notes: 'Non-US provide equivalent' },
+                { category: 'EIN', required: 'Yes - US entities', acceptable: ['IRS confirmation', 'Form SS-4'], notes: 'Non-US provide equivalent' },
                 { category: 'Beneficial Ownership', required: 'Yes', detail: 'All 25%+ owners and control persons', notes: 'FinCEN CDD Rule' },
                 { category: 'Good Standing', required: 'Yes', notes: 'From state of incorporation' }
               ]
             }
           },
           amlProgram: {
-            title: 'AML Program — Five Pillars',
+            title: 'AML Program - Five Pillars',
             pillars: [
               { pillar: '1. Written Policies', requirement: 'Documented BSA/AML policies', includes: ['Customer ID procedures', 'Monitoring policies', 'SAR procedures', 'Sanctions screening', 'Recordkeeping'], sphereImplementation: 'Comprehensive policies reviewed annually.' },
               { pillar: '2. BSA Officer', requirement: 'Qualified compliance officer', responsibilities: ['Oversee program', 'SAR process', 'Regulator coordination', 'Board reporting'], sphereImplementation: 'Designated officer with board reporting.' },
@@ -3678,7 +4222,7 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
             ]
           },
           cddRequirements: {
-            title: 'CDD — Four Core Requirements',
+            title: 'CDD - Four Core Requirements',
             requirements: [
               { requirement: '1. Customer Identification (CIP)', detail: 'Collect identifying info, verify identity', forIndividuals: ['Name', 'DOB', 'Address', 'ID number'], forEntities: ['Legal name', 'Address', 'EIN'], timing: 'Before establishing relationship' },
               { requirement: '2. Beneficial Ownership', detail: 'Identify 25%+ owners AND control persons', ownershipProng: '25%+ equity', controlProng: 'Management responsibility', timing: 'At opening, update when changes' },
@@ -3707,8 +4251,8 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
             title: 'Suspicious Activity Reporting',
             thresholds: [
               { category: 'Known Criminal Violation', threshold: '$2,000+', detail: 'Illegal funds or evading reporting' },
-              { category: 'Suspicious — Suspect Identified', threshold: '$5,000+', detail: 'Suspicious with identified subject' },
-              { category: 'Suspicious — No Suspect', threshold: '$25,000+', detail: 'Suspicious, no subject identified' }
+              { category: 'Suspicious - Suspect Identified', threshold: '$5,000+', detail: 'Suspicious with identified subject' },
+              { category: 'Suspicious - No Suspect', threshold: '$25,000+', detail: 'Suspicious, no subject identified' }
             ],
             process: [
               { step: 1, action: 'Detection', detail: 'Activity flagged' },
@@ -3780,7 +4324,7 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
               },
               { 
                 rating: 'Prohibited', 
-                criteria: 'Exceeds risk appetite — relationship declined or exited', 
+                criteria: 'Exceeds risk appetite - relationship declined or exited', 
                 monitoring: 'N/A', 
                 refresh: 'N/A',
                 approval: 'Automatically declined',
@@ -3837,7 +4381,7 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
           keyTakeaway: 'Compliance enables institutional adoption, banking, and growth. Sphere\'s compliance-native approach embeds compliance as competitive advantage.'
         },
         exercise: {
-          title: 'Exercise 3.2 — Compliance Scenario',
+          title: 'Exercise 3.2 - Compliance Scenario',
           prompt: 'New B2B customer wants to onboard:\n- Dubai trading company (DMCC)\n- Beneficial owner: UAE national (60%) + Iranian national with UAE residency (40%)\n- Expected: $2M/month to India, Pakistan, Nigeria\n- Industry: Textiles and commodities\n\nProvide:\n1) KYC documents required\n2) Risk factors\n3) Risk rating recommendation\n4) EDD elements\n5) Monitoring approach\n6) Red flags to watch\n7) Onboard decision and rationale',
           criteria: ['Complete KYC list', 'All risk factors', 'Appropriate rating', 'EDD for Iranian BO', 'Monitoring matched to risk', 'Red flags identified']
         },
@@ -3847,7 +4391,7 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
           { q: 'EDD is required for:', options: ['All customers', 'High-risk only', 'Low-risk only', 'None'], correct: 1 },
           { q: 'BSA/AML program has how many pillars?', options: ['3', '4', '5', '6'], correct: 2 },
           { q: 'SAR filing deadline:', options: ['7 days', '30 days', '60 days', '90 days'], correct: 1 },
-          { q: 'Can you tell customer SAR was filed?', options: ['Yes', 'Only if asked', 'Never — illegal', 'After 90 days'], correct: 2 }
+          { q: 'Can you tell customer SAR was filed?', options: ['Yes', 'Only if asked', 'Never - illegal', 'After 90 days'], correct: 2 }
         ]
       },
       {
@@ -3871,7 +4415,7 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
           ]
         },
         learn: {
-          introduction: 'Sanctions compliance is existential — a single violation can mean millions in fines, loss of banking, criminal prosecution. Unlike other compliance, sanctions is binary: comply or face severe consequences.',
+          introduction: 'Sanctions compliance is existential - a single violation can mean millions in fines, loss of banking, criminal prosecution. Unlike other compliance, sanctions is binary: comply or face severe consequences.',
           coreQuestion: 'How does sanctions screening work, and what happens when flagged?',
           majorSanctionsRegimes: {
             title: 'Major Sanctions Regimes',
@@ -3883,7 +4427,7 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
                 icon: '🇺🇸',
                 scope: 'US persons, US-origin goods, USD transactions',
                 lists: [{ list: 'SDN List', description: 'Blocked persons', count: '~12,000' }, { list: 'Sectoral Sanctions', description: 'Russian energy, financial' }, { list: 'Country Programs', description: 'Iran, NK, Syria, Cuba, Russia' }],
-                keyPrinciples: ['Strict liability — no intent required', 'Secondary sanctions — affects non-US persons', 'Dollar clearing creates US nexus', '50% rule — 50%+ owned = sanctioned'],
+                keyPrinciples: ['Strict liability - no intent required', 'Secondary sanctions - affects non-US persons', 'Dollar clearing creates US nexus', '50% rule - 50%+ owned = sanctioned'],
                 realWorldExamples: [{ example: 'BNP Paribas (2014)', violation: 'Sudan, Cuba, Iran through US', consequence: '$8.9 billion fine', lesson: 'Even non-US banks face massive penalties' }, { example: 'BitGo (2020)', violation: 'Sanctioned jurisdictions used services', consequence: '$98,830 settlement', lesson: 'OFAC applies to crypto' }],
                 sphereImplication: 'Full OFAC exposure. Every transaction screened.'
               },
@@ -3924,8 +4468,8 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
             title: 'What Gets Screened',
             categories: [
               { category: 'Name Screening', icon: '👤', items: [{ item: 'Individual Names', detail: 'Legal name, aliases, transliterations', challenge: 'Variations, common names' }, { item: 'Entity Names', detail: 'Legal, trading, former names', challenge: 'Changes, translations' }, { item: 'Beneficial Owners', detail: 'All 25%+ owners', challenge: 'Complex ownership' }], howItWorks: 'Fuzzy matching against sanctions lists.', example: '"Mohammad Al-Rahman" checked against variations.' },
-              { category: 'Address Screening', icon: '📍', items: [{ item: 'Country', detail: 'Customer, counterparty, BO country', challenge: 'Comprehensive sanctions' }, { item: 'Region', detail: 'Crimea, Donetsk', challenge: 'Region-specific' }], howItWorks: 'Parsed to identify country/region, checked.', example: 'Sevastopol, Crimea — blocked.' },
-              { category: 'Wallet Screening', icon: '🔗', items: [{ item: 'Direct Sanctions', detail: 'OFAC SDN wallet addresses', challenge: 'Growing but not comprehensive' }, { item: 'Exposure Analysis', detail: 'History — sanctioned, mixers, darknet', challenge: 'Indirect exposure' }, { item: 'Risk Scoring', detail: 'Overall based on history', challenge: 'Interpretation' }], howItWorks: 'Blockchain analytics trace history, assign score.', example: '5% Tornado Cash exposure triggers review.' },
+              { category: 'Address Screening', icon: '📍', items: [{ item: 'Country', detail: 'Customer, counterparty, BO country', challenge: 'Comprehensive sanctions' }, { item: 'Region', detail: 'Crimea, Donetsk', challenge: 'Region-specific' }], howItWorks: 'Parsed to identify country/region, checked.', example: 'Sevastopol, Crimea - blocked.' },
+              { category: 'Wallet Screening', icon: '🔗', items: [{ item: 'Direct Sanctions', detail: 'OFAC SDN wallet addresses', challenge: 'Growing but not comprehensive' }, { item: 'Exposure Analysis', detail: 'History - sanctioned, mixers, darknet', challenge: 'Indirect exposure' }, { item: 'Risk Scoring', detail: 'Overall based on history', challenge: 'Interpretation' }], howItWorks: 'Blockchain analytics trace history, assign score.', example: '5% Tornado Cash exposure triggers review.' },
               { category: 'Transaction Purpose', icon: '📋', items: [{ item: 'Purpose Codes', detail: 'Description fields', challenge: 'Prohibited purposes' }, { item: 'Trade Descriptions', detail: 'Goods/services', challenge: 'Dual-use' }], howItWorks: 'Text analysis for prohibited items.', example: '"Oil drilling equipment" flagged for Russia sectors.' }
             ]
           },
@@ -3941,14 +4485,14 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
               },
               {
                 category: 'FATF Grey List',
-                riskLevel: 'HIGH RISK — EDD REQUIRED',
+                riskLevel: 'HIGH RISK - EDD REQUIRED',
                 jurisdictions: [{ country: 'South Africa', icon: '🇿🇦', detail: 'Grey listed 2023', status: 'Action plan' }, { country: 'Nigeria', icon: '🇳🇬', detail: 'Grey listed', status: 'Action plan' }, { country: 'Turkey', icon: '🇹🇷', detail: 'Grey listed', status: 'Action plan' }],
                 spherePolicy: 'EDD required. Not automatically prohibited.',
                 eddRequirements: ['Source of funds', 'Purpose', 'Senior review', 'Enhanced monitoring']
               },
               {
                 category: 'High Corruption',
-                riskLevel: 'ELEVATED — ENHANCED SCRUTINY',
+                riskLevel: 'ELEVATED - ENHANCED SCRUTINY',
                 assessment: 'Transparency International CPI',
                 spherePolicy: 'Enhanced scrutiny even if not on FATF lists.',
                 eddRequirements: ['Source of wealth', 'PEP emphasis', 'Enhanced monitoring']
@@ -3972,12 +4516,12 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
               { id: 'initiation', type: 'start', label: 'Transaction Initiated', description: 'Customer initiates payment' },
               { id: 'pre-screen', type: 'process', label: 'Pre-Transaction Screening', description: 'Automated screening of all parties, jurisdictions, wallets', details: ['Sender screening', 'Recipient screening', 'BO screening', 'Jurisdiction check', 'Wallet screening', 'Purpose screening'] },
               { id: 'decision', type: 'decision', label: 'Screening Result', branches: [{ condition: 'Clear', target: 'clear-process' }, { condition: 'Potential Match', target: 'potential-match' }, { condition: 'Confirmed Hit', target: 'confirmed-hit' }] },
-              { id: 'clear-process', type: 'process', label: 'Clear — Proceed', description: 'No matches. Proceed to settlement.', outcome: 'Processed normally', color: 'green' },
-              { id: 'potential-match', type: 'process', label: 'Potential Match — Review', description: 'Fuzzy match requires analyst review', details: ['Transaction held', 'Analyst reviews', 'Compares info', 'True match or false positive'], color: 'yellow' },
+              { id: 'clear-process', type: 'process', label: 'Clear - Proceed', description: 'No matches. Proceed to settlement.', outcome: 'Processed normally', color: 'green' },
+              { id: 'potential-match', type: 'process', label: 'Potential Match - Review', description: 'Fuzzy match requires analyst review', details: ['Transaction held', 'Analyst reviews', 'Compares info', 'True match or false positive'], color: 'yellow' },
               { id: 'analyst-decision', type: 'decision', label: 'Analyst Determination', branches: [{ condition: 'False Positive', target: 'false-positive' }, { condition: 'True Match', target: 'confirmed-hit' }, { condition: 'Need Info', target: 'request-info' }] },
-              { id: 'false-positive', type: 'process', label: 'False Positive — Clear', description: 'Not a true match. Document.', outcome: 'Released', color: 'green' },
+              { id: 'false-positive', type: 'process', label: 'False Positive - Clear', description: 'Not a true match. Document.', outcome: 'Released', color: 'green' },
               { id: 'request-info', type: 'process', label: 'Request Information', description: 'Need additional docs', details: ['Contact customer', 'Set timeline', 'Hold pending'], color: 'yellow' },
-              { id: 'confirmed-hit', type: 'process', label: 'Confirmed Hit — Block', description: 'True match to sanctioned party', details: ['Blocked', 'Escalate', 'Document', 'Consider SAR'], outcome: 'Rejected', color: 'red' }
+              { id: 'confirmed-hit', type: 'process', label: 'Confirmed Hit - Block', description: 'True match to sanctioned party', details: ['Blocked', 'Escalate', 'Document', 'Consider SAR'], outcome: 'Rejected', color: 'red' }
             ],
             keyPrinciples: ['Screening BEFORE funds move', 'Potential matches = human review', 'Confirmed hits blocked, no exceptions', 'All decisions documented']
           },
@@ -3991,13 +4535,13 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
             ]
           },
           flaggedPaymentProcess: {
-            title: 'Flagged Payment — Customer Journey',
+            title: 'Flagged Payment - Customer Journey',
             process: {
               steps: [
                 { step: 1, title: 'Hold Notification', timing: 'Immediate', whatHappens: 'Transaction held, customer notified.', customerCommunication: { subject: 'Payment Under Review', template: 'Your payment of [AMOUNT] to [RECIPIENT] is under compliance review.\n\nNext: Our team will review, may contact you.\nTimeline: [TIMEFRAME]\nStatus: Under Review\nRef: [REF]' } },
-                { step: 2, title: 'Initial Review', timing: '24-48 hours', whatHappens: 'Analyst reviews, determines if info needed.', outcomes: ['Cleared — proceed', 'Info needed — request docs', 'Blocked — reject'] },
+                { step: 2, title: 'Initial Review', timing: '24-48 hours', whatHappens: 'Analyst reviews, determines if info needed.', outcomes: ['Cleared - proceed', 'Info needed - request docs', 'Blocked - reject'] },
                 { step: 3, title: 'Documentation Request', timing: 'Within 48 hours', whatHappens: 'Customer receives specific request.', customerCommunication: { subject: 'Documentation Required: [REF]', template: 'To complete review, we need:\n\n[DOCS LIST]\n\nWhy: [EXPLANATION]\nDeadline: [X] business days\nSubmit: Reply or upload via dashboard' }, documentationTimeline: { standard: '5 business days', extension: 'One 5-day extension', expired: 'Cancelled, funds returned' } },
-                { step: 4, title: 'Doc Review', timing: '24-48 hours after receipt', whatHappens: 'Compliance reviews documentation.', outcomes: ['Resolved — approved', 'Insufficient — more docs', 'Unresolved — rejected'] },
+                { step: 4, title: 'Doc Review', timing: '24-48 hours after receipt', whatHappens: 'Compliance reviews documentation.', outcomes: ['Resolved - approved', 'Insufficient - more docs', 'Unresolved - rejected'] },
                 { step: 5, title: 'Resolution', timing: 'Immediately', approvedCommunication: { subject: 'Payment Approved: [REF]', template: 'Your payment of [AMOUNT] to [RECIPIENT] is approved.\n\nExpected: [DATE]\n\nThank you.' }, rejectedCommunication: { subject: 'Payment Cannot Be Completed: [REF]', template: 'We cannot complete payment of [AMOUNT] to [RECIPIENT].\n\nReason: [GENERAL REASON]\nFunds: [RETURNED]\n\nTo request review: compliance@sphere.com with ref.' } }
               ]
             },
@@ -4022,7 +4566,7 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
           keyTakeaway: 'Sanctions compliance is non-negotiable. Real-time screening against multiple regimes before processing. Clear process for flagged payments with customer communication.'
         },
         exercise: {
-          title: 'Exercise 3.3 — Sanctions Scenario',
+          title: 'Exercise 3.3 - Sanctions Scenario',
           prompt: 'UAE customer wants to send $150,000 to Istanbul. During screening:\n1) "Yilmaz Trading Ltd" partially matches SDN "Yilmaz International Trading"\n2) One BO has common Turkish name matching SDN\n3) Turkey is FATF grey list\n\nAs analyst:\n1) Initial assessment?\n2) Documentation to request?\n3) Customer communication?\n4) Criteria to clear?\n5) Criteria to reject?\n6) Draft documentation request email.',
           criteria: ['Correct risk assessment', 'Appropriate documentation', 'Professional communication', 'Clear criteria']
         },
@@ -4058,7 +4602,7 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
           introduction: 'The Travel Rule is becoming global standard for virtual asset transfers. Understanding and implementing compliance is essential for institutional customers, banking, and cross-border operations.',
           coreQuestion: 'What is Travel Rule, what data must be shared, and how does Sphere comply?',
           travelRuleSummary: {
-            title: 'Travel Rule — Executive Summary',
+            title: 'Travel Rule - Executive Summary',
             definition: 'VASPs must obtain, hold, and transmit originator and beneficiary information for virtual asset transfers above thresholds.',
             keyTakeaways: ['WHO: VASPs conducting transfers', 'WHAT: Originator/beneficiary identifying info', 'WHEN: Above jurisdiction thresholds', 'WHY: Enable law enforcement tracing', 'HOW: Via protocols or secure communication'],
             spherePosition: 'Sphere is fully Travel Rule compliant. We collect, transmit, and maintain records.',
@@ -4066,7 +4610,7 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
           },
           fatfDefinition: {
             title: 'FATF Definition',
-            whatIsFATF: { fullName: 'Financial Action Task Force', description: '39 member jurisdictions setting global AML/CFT standards.', relevantRecommendation: 'Recommendation 16 (Wire Transfers) — extended to crypto 2019' },
+            whatIsFATF: { fullName: 'Financial Action Task Force', description: '39 member jurisdictions setting global AML/CFT standards.', relevantRecommendation: 'Recommendation 16 (Wire Transfers) - extended to crypto 2019' },
             recommendation16: { title: 'Recommendation 16', originalScope: 'Wire transfers since 1996', extension: 'June 2019: Extended to virtual assets', keyLanguage: '"Countries should ensure originating VASPs obtain originator and beneficiary info, submit to beneficiary VASP immediately and securely."' },
             sunriseIssue: { title: 'Sunrise Issue', problem: 'Not all jurisdictions implemented same time/thresholds.', sphereApproach: 'Apply MORE stringent jurisdiction. When in doubt, collect full info.' }
           },
@@ -4108,7 +4652,7 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
               { jurisdiction: 'Switzerland', flag: '🇨🇭', threshold: 'CHF 1,000 (~$1,100)', regulator: 'FINMA', status: 'Enforced', notes: 'Wallet ownership proof for self-hosted', sphereImplication: 'Switzerland ≥CHF 1,000 plus wallet verification' }
             ],
             latinAmerica: {
-              title: 'Latin America — Key Markets',
+              title: 'Latin America - Key Markets',
               subtitle: 'Brazil and LatAm jurisdictions Sphere is pursuing',
               jurisdictions: [
                 { jurisdiction: 'Brazil', flag: '🇧🇷', threshold: 'BRL 10,000 (~$2,000)', regulator: 'COAF, BCB', status: 'Enforced', details: { keyRequirements: ['≥BRL 10,000 full info', 'BCB registration', 'STRs to COAF', 'Cross-border extra docs'], pixIntegration: 'PIX creates stablecoin opportunities', sphereOpportunity: 'Brazil-US corridor is high volume' }, sphereImplication: 'Brazil ≥BRL 10,000 require compliance; BCB registration needed' },
@@ -4182,8 +4726,8 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
           transactionsApplied: {
             title: 'What Transactions Apply',
             appliesTo: [
-              { type: 'VASP-to-VASP', description: 'Transfers between VASPs', example: 'Sphere customer → Coinbase customer', travelRule: 'YES — full compliance above threshold' },
-              { type: 'VASP-to-Unhosted', description: 'To self-hosted wallet', example: 'Sphere → MetaMask', travelRule: 'VARIES — some jurisdictions require, EDD often needed' },
+              { type: 'VASP-to-VASP', description: 'Transfers between VASPs', example: 'Sphere customer → Coinbase customer', travelRule: 'YES - full compliance above threshold' },
+              { type: 'VASP-to-Unhosted', description: 'To self-hosted wallet', example: 'Sphere → MetaMask', travelRule: 'VARIES - some jurisdictions require, EDD often needed' },
               { type: 'Unhosted-to-VASP', description: 'From self-hosted', example: 'Personal wallet → Sphere', travelRule: 'VASP collects originator info, EDD' }
             ],
             doesNotApply: [
@@ -4248,7 +4792,7 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
           keyTakeaway: 'Travel Rule is global standard for institutional customers, banking, and legal cross-border ops. Collect originator/beneficiary info, transmit via protocols, handle edge cases practically, apply MORE stringent jurisdiction\'s requirements.'
         },
         exercise: {
-          title: 'Exercise 3.4 — Travel Rule Scenario',
+          title: 'Exercise 3.4 - Travel Rule Scenario',
           prompt: 'Brazilian company (São Paulo) wants to send $75,000 USDC to UK supplier (UK VASP account).\n\nAnalyze:\n1) Does Travel Rule apply? Which threshold?\n2) Originator info to collect?\n3) Beneficiary info required?\n4) How to transmit?\n5) What if UK VASP not on any protocol?\n6) What documentation to maintain?',
           criteria: ['Correct threshold', 'Complete originator data', 'Complete beneficiary data', 'Protocol identified', 'Non-integrated solution', 'Recordkeeping requirements']
         },
@@ -4275,14 +4819,14 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
             'Answer UAE regulatory questions accurately and professionally'
           ],
           keyConcepts: [
-            'UAE has multiple regulatory territories — each with distinct legal systems',
+            'UAE has multiple regulatory territories - each with distinct legal systems',
             'VARA = crypto-native, DIFC/ADGM = institutional, CBUAE = federal overlay',
             'CBUAE Circular 2/2024 restricts foreign stablecoins for retail, not B2B cross-border',
-            'Sphere is exploring UAE market entry — not yet licensed there'
+            'Sphere is exploring UAE market entry - not yet licensed there'
           ]
         },
         learn: {
-          introduction: 'UAE is one of the most important markets for cross-border payments globally. It sits at the intersection of MENA, South Asia, and Africa — three regions with massive remittance flows and underserved payment infrastructure. Understanding UAE\'s regulatory landscape is essential for any conversation involving Middle East expansion.',
+          introduction: 'UAE is one of the most important markets for cross-border payments globally. It sits at the intersection of MENA, South Asia, and Africa - three regions with massive remittance flows and underserved payment infrastructure. Understanding UAE\'s regulatory landscape is essential for any conversation involving Middle East expansion.',
           coreQuestion: 'How does UAE regulate crypto and payments, and what should trainees understand about this market?',
           
           whyUAEMatters: {
@@ -4291,10 +4835,10 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
             marketContext: {
               title: 'The Numbers That Matter',
               stats: [
-                { metric: '$1.5 Trillion+', description: 'Annual trade flows through UAE', context: 'Dubai is the re-export hub for the region — goods flow through UAE to reach Africa, South Asia, and Central Asia' },
+                { metric: '$1.5 Trillion+', description: 'Annual trade flows through UAE', context: 'Dubai is the re-export hub for the region - goods flow through UAE to reach Africa, South Asia, and Central Asia' },
                 { metric: '$50 Billion+', description: 'UAE-India corridor annually', context: 'One of the world\'s largest remittance corridors. 3.5M+ Indian expats in UAE send money home regularly' },
                 { metric: '$20 Billion+', description: 'UAE-Pakistan corridor annually', context: 'Another massive corridor with significant friction in traditional banking' },
-                { metric: '200+', description: 'Nationalities in UAE', context: 'Expatriates make up 88% of UAE population — nearly everyone needs cross-border payments' }
+                { metric: '200+', description: 'Nationalities in UAE', context: 'Expatriates make up 88% of UAE population - nearly everyone needs cross-border payments' }
               ]
             },
             tradeCorridors: {
@@ -4339,10 +4883,10 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
           
           regulatoryLandscape: {
             title: 'UAE Regulatory Landscape: Understanding the Territories',
-            subtitle: 'UAE is NOT one jurisdiction — it\'s multiple territories with different regulators, legal systems, and rules. This is unusual and important to understand.',
+            subtitle: 'UAE is NOT one jurisdiction - it\'s multiple territories with different regulators, legal systems, and rules. This is unusual and important to understand.',
             whyMultipleTerritories: {
               title: 'Why Does UAE Have Multiple Regulators?',
-              explanation: 'UAE is a federation of seven emirates. Each emirate has autonomy, and some have created "free zones" with their own legal systems to attract international business. This creates a patchwork of regulatory territories — confusing at first, but each serves a purpose.',
+              explanation: 'UAE is a federation of seven emirates. Each emirate has autonomy, and some have created "free zones" with their own legal systems to attract international business. This creates a patchwork of regulatory territories - confusing at first, but each serves a purpose.',
               keyInsight: 'Think of it like this: VARA regulates crypto in Dubai mainland. DIFC is a separate jurisdiction within Dubai with its own regulator (DFSA). ADGM is Abu Dhabi\'s equivalent. And CBUAE sets federal rules that apply everywhere.'
             },
             territories: [
@@ -4353,14 +4897,14 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
                 icon: '🏙️',
                 legalSystem: 'UAE Civil Law',
                 established: '2022',
-                whatItIs: 'Dubai\'s dedicated crypto regulator — the world\'s first purpose-built virtual asset authority. Created from scratch to regulate crypto, not adapted from traditional finance.',
+                whatItIs: 'Dubai\'s dedicated crypto regulator - the world\'s first purpose-built virtual asset authority. Created from scratch to regulate crypto, not adapted from traditional finance.',
                 targetClients: 'Retail and B2B crypto businesses',
-                cryptoScope: 'Broadest in UAE — designed specifically for virtual assets',
+                cryptoScope: 'Broadest in UAE - designed specifically for virtual assets',
                 licenseTypes: ['Exchange Services', 'Broker-Dealer', 'Transfer & Settlement', 'Custody', 'Lending', 'VA Management'],
                 strengths: ['Crypto-native regulator that understands the business', 'AED banking relationships possible', 'Can serve retail customers', 'Faster licensing (6-12 months)', 'Clear framework for stablecoins'],
                 limitations: ['UAE Civil Law (less familiar to Western investors)', 'Marketing requires pre-approval', 'Capital requirements locked'],
-                sphereRelevance: 'PRIMARY option for SpherePay — allows B2B payments with AED on/off-ramps',
-                vibeCheck: '"We\'re a crypto regulator — here are crypto rules"'
+                sphereRelevance: 'PRIMARY option for SpherePay - allows B2B payments with AED on/off-ramps',
+                vibeCheck: '"We\'re a crypto regulator - here are crypto rules"'
               },
               {
                 name: 'DIFC',
@@ -4371,11 +4915,11 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
                 established: '2004 (crypto framework added later)',
                 whatItIs: 'Dubai\'s premier financial free zone, modeled on London/Singapore. Has its own courts, its own regulator (DFSA), and operates under English Common Law.',
                 targetClients: 'Institutional clients, professional investors, traditional finance',
-                cryptoScope: 'Narrow — traditional finance with limited crypto overlay',
+                cryptoScope: 'Narrow - traditional finance with limited crypto overlay',
                 licenseTypes: ['Investment Tokens', 'Crypto Tokens (limited)', 'Custody'],
                 strengths: ['English Common Law (familiar to Western investors)', 'Prestigious address', 'Strong traditional finance connections', 'Easier for firms already in TradFi'],
                 limitations: ['Conservative on crypto', 'Harder to get AED banking', 'Cannot easily serve retail', 'Crypto feels "bolted on" not native'],
-                sphereRelevance: 'SECONDARY — potentially for SphereNet institutional infrastructure',
+                sphereRelevance: 'SECONDARY - potentially for SphereNet institutional infrastructure',
                 vibeCheck: '"We\'re a financial regulator that tolerates some approved tokens"'
               },
               {
@@ -4384,15 +4928,15 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
                 location: 'Abu Dhabi Free Zone (Al Maryah Island)',
                 icon: '🏗️',
                 legalSystem: 'English Common Law',
-                established: '2015 (crypto framework 2018 — first in UAE)',
+                established: '2015 (crypto framework 2018 - first in UAE)',
                 whatItIs: 'Abu Dhabi\'s international financial centre. Was actually FIRST in UAE to create comprehensive crypto regulations (2018), before Dubai/VARA.',
                 targetClients: 'Institutional clients, exchanges, custody providers',
-                cryptoScope: 'Comprehensive — mature framework for institutional crypto',
+                cryptoScope: 'Comprehensive - mature framework for institutional crypto',
                 licenseTypes: ['Multilateral Trading Facility (MTF)', 'Custody', 'Broker-Dealer', 'Advisory'],
                 strengths: ['Most mature crypto framework in UAE (since 2018)', 'English Common Law', 'Strong institutional credibility', 'Good for exchanges/custody'],
                 limitations: ['Based in Abu Dhabi (not Dubai)', 'Higher capital requirements', 'More institutional focus', 'Less retail flexibility'],
-                sphereRelevance: 'SECONDARY — potentially for SphereNet custody/infrastructure',
-                vibeCheck: '"We\'ve been doing crypto regulation since 2018 — institutional grade"'
+                sphereRelevance: 'SECONDARY - potentially for SphereNet custody/infrastructure',
+                vibeCheck: '"We\'ve been doing crypto regulation since 2018 - institutional grade"'
               },
               {
                 name: 'CBUAE',
@@ -4405,10 +4949,10 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
                 targetClients: 'Everyone operating in UAE',
                 cryptoScope: 'Payment tokens and stablecoins specifically',
                 licenseTypes: ['Payment Token Issuance', 'Payment Token Custody', 'Payment Token Transfer', 'Payment Token Conversion'],
-                strengths: ['Federal authority — rules apply everywhere', 'Clear stablecoin framework', 'Digital Dirham (CBDC) coming'],
+                strengths: ['Federal authority - rules apply everywhere', 'Clear stablecoin framework', 'Digital Dirham (CBDC) coming'],
                 limitations: ['Restricts foreign stablecoins for retail', 'Additional layer of compliance'],
-                sphereRelevance: 'COMPLIANCE OVERLAY — must comply regardless of which territory',
-                vibeCheck: '"We\'re the central bank — our rules apply to everyone"'
+                sphereRelevance: 'COMPLIANCE OVERLAY - must comply regardless of which territory',
+                vibeCheck: '"We\'re the central bank - our rules apply to everyone"'
               }
             ],
             comparisonTable: {
@@ -4437,10 +4981,10 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
           
           cbuaeRegulations: {
             title: 'CBUAE Stablecoin Rules: What You Need to Know',
-            subtitle: 'Central Bank Circular No. 2/2024 is critical to understand — it affects ALL stablecoin activity in UAE.',
+            subtitle: 'Central Bank Circular No. 2/2024 is critical to understand - it affects ALL stablecoin activity in UAE.',
             overview: {
               title: 'What Is Circular 2/2024?',
-              description: 'In January 2024, CBUAE issued comprehensive regulations for "Payment Token Services" — essentially a framework for stablecoins. This is FEDERAL law, meaning it applies regardless of whether you\'re in VARA, DIFC, ADGM, or anywhere else in UAE.',
+              description: 'In January 2024, CBUAE issued comprehensive regulations for "Payment Token Services" - essentially a framework for stablecoins. This is FEDERAL law, meaning it applies regardless of whether you\'re in VARA, DIFC, ADGM, or anywhere else in UAE.',
               whyItMatters: 'Before this circular, stablecoin regulation in UAE was fragmented. Now there\'s a clear federal framework that everyone must follow.'
             },
             keyProvisions: {
@@ -4480,7 +5024,7 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
                   provision: 'Reserve Requirements',
                   icon: '🏛️',
                   whatItSays: 'Payment token issuers must maintain reserves in approved assets (UAE government securities, CBUAE deposits, etc.)',
-                  whatItMeans: 'CBUAE wants stablecoins backed by safe, auditable assets — not risky investments.',
+                  whatItMeans: 'CBUAE wants stablecoins backed by safe, auditable assets - not risky investments.',
                   sphereImplication: 'As a user of stablecoins (not issuer), this gives us confidence in AED stablecoins that do get licensed.'
                 }
               ]
@@ -4504,14 +5048,14 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
                   'Domestic consumer payments in USDC/USDT'
                 ]
               },
-              keyMessage: 'CBUAE rules validate Sphere\'s B2B cross-border focus. The restrictions target retail domestic use — not our core use case.'
+              keyMessage: 'CBUAE rules validate Sphere\'s B2B cross-border focus. The restrictions target retail domestic use - not our core use case.'
             },
             commonMisconceptions: {
               title: 'Common Misconceptions to Correct',
               misconceptions: [
                 { wrong: '"UAE banned stablecoins"', right: 'UAE restricted foreign stablecoins for RETAIL payments. B2B cross-border is still permitted.' },
                 { wrong: '"You can\'t use USDC in UAE"', right: 'You can use USDC for B2B cross-border payments. Retail domestic use is restricted.' },
-                { wrong: '"CBUAE rules don\'t apply in DIFC/VARA"', right: 'CBUAE is federal — rules apply everywhere in UAE regardless of free zone.' },
+                { wrong: '"CBUAE rules don\'t apply in DIFC/VARA"', right: 'CBUAE is federal - rules apply everywhere in UAE regardless of free zone.' },
                 { wrong: '"Sphere needs to issue its own AED stablecoin"', right: 'Sphere is NOT an issuer. We use third-party licensed stablecoins.' }
               ]
             }
@@ -4524,57 +5068,57 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
               {
                 category: 'Sphere\'s UAE Status',
                 question: 'Can Sphere serve UAE customers?',
-                goodResponse: 'Sphere is actively exploring UAE market entry, but we\'re not yet licensed there. We cannot currently serve UAE-based customers directly. I\'d be happy to understand your use case better — if you have entities in jurisdictions where we currently operate, we may be able to help. And I can keep you updated on our UAE progress.',
+                goodResponse: 'Sphere is actively exploring UAE market entry, but we\'re not yet licensed there. We cannot currently serve UAE-based customers directly. I\'d be happy to understand your use case better - if you have entities in jurisdictions where we currently operate, we may be able to help. And I can keep you updated on our UAE progress.',
                 keyPoints: ['Be honest about status', 'Don\'t promise timelines', 'Offer alternatives if possible', 'Keep them engaged'],
                 doNotSay: ['Yes, we\'re fully operational in UAE', 'We don\'t need UAE licenses', 'We can serve you through an offshore entity', 'We\'ll be licensed next month']
               },
               {
                 category: 'Regulatory Questions',
                 question: 'Which UAE regulator would oversee Sphere?',
-                goodResponse: 'For B2B payment services in Dubai, VARA would likely be our primary regulator — they\'re the crypto-native authority with specific licenses for transfer and settlement services. CBUAE rules on payment tokens would also apply as a federal overlay. We\'re evaluating the optimal licensing pathway.',
+                goodResponse: 'For B2B payment services in Dubai, VARA would likely be our primary regulator - they\'re the crypto-native authority with specific licenses for transfer and settlement services. CBUAE rules on payment tokens would also apply as a federal overlay. We\'re evaluating the optimal licensing pathway.',
                 keyPoints: ['Show regulatory knowledge', 'Mention both VARA and CBUAE', 'Demonstrate we\'re thinking about this seriously'],
                 doNotSay: ['We don\'t need regulation', 'No one regulates crypto in UAE', 'We\'ll just operate offshore']
               },
               {
                 category: 'Stablecoin Rules',
                 question: 'I heard UAE banned stablecoins. Can you still operate there?',
-                goodResponse: 'UAE didn\'t ban stablecoins — CBUAE Circular 2/2024 restricts foreign stablecoins like USDC for retail domestic payments. B2B cross-border payments, which is Sphere\'s focus, remain permitted. The regulations actually validate the B2B payment infrastructure approach and show UAE is creating clear frameworks rather than blanket bans.',
+                goodResponse: 'UAE didn\'t ban stablecoins - CBUAE Circular 2/2024 restricts foreign stablecoins like USDC for retail domestic payments. B2B cross-border payments, which is Sphere\'s focus, remain permitted. The regulations actually validate the B2B payment infrastructure approach and show UAE is creating clear frameworks rather than blanket bans.',
                 keyPoints: ['Correct the misconception', 'Explain the nuance', 'Show how it supports our model'],
                 doNotSay: ['Those rules don\'t apply to us', 'We\'ll work around the restrictions', 'Regulations don\'t matter']
               },
               {
                 category: 'Licensing Timeline',
                 question: 'When will Sphere be available in UAE?',
-                goodResponse: 'We\'re actively evaluating UAE market entry but can\'t commit to specific timelines. UAE licensing typically takes 6-12 months once initiated, and we want to do it properly. I\'d be happy to keep you updated on our progress — can I get your contact details?',
+                goodResponse: 'We\'re actively evaluating UAE market entry but can\'t commit to specific timelines. UAE licensing typically takes 6-12 months once initiated, and we want to do it properly. I\'d be happy to keep you updated on our progress - can I get your contact details?',
                 keyPoints: ['Don\'t promise dates', 'Show we\'re serious', 'Turn it into lead capture'],
                 doNotSay: ['Next month', 'We\'re already licensed', 'Any specific date']
               },
               {
                 category: 'VARA vs DIFC',
                 question: 'Why would Sphere choose VARA over DIFC?',
-                goodResponse: 'VARA is purpose-built for crypto businesses and allows both retail and B2B services with AED on/off-ramps. DIFC is more suited to traditional finance firms that want limited crypto exposure — they operate under English Common Law but have a narrower crypto scope. For a B2B payment platform like Sphere, VARA\'s crypto-native framework is likely more aligned with our model.',
+                goodResponse: 'VARA is purpose-built for crypto businesses and allows both retail and B2B services with AED on/off-ramps. DIFC is more suited to traditional finance firms that want limited crypto exposure - they operate under English Common Law but have a narrower crypto scope. For a B2B payment platform like Sphere, VARA\'s crypto-native framework is likely more aligned with our model.',
                 keyPoints: ['Show you understand the difference', 'Explain the rationale', 'Connect to Sphere\'s business model'],
                 doNotSay: ['DIFC is too strict', 'We\'re avoiding traditional finance', 'It doesn\'t matter which one']
               }
             ]
           },
           
-          keyTakeaway: 'UAE is a strategic market with multiple regulators serving different purposes. VARA is crypto-native (Dubai), DIFC/ADGM are institutional (English Common Law), and CBUAE rules apply federally. Sphere is exploring UAE market entry but is NOT yet licensed — be honest about status and don\'t promise timelines. CBUAE stablecoin rules restrict retail use of foreign stablecoins but permit B2B cross-border, which aligns with Sphere\'s focus.'
+          keyTakeaway: 'UAE is a strategic market with multiple regulators serving different purposes. VARA is crypto-native (Dubai), DIFC/ADGM are institutional (English Common Law), and CBUAE rules apply federally. Sphere is exploring UAE market entry but is NOT yet licensed - be honest about status and don\'t promise timelines. CBUAE stablecoin rules restrict retail use of foreign stablecoins but permit B2B cross-border, which aligns with Sphere\'s focus.'
         },
         exercise: {
-          title: 'Exercise 3.5 — UAE Inquiry Response',
-          prompt: 'A Dubai-based import/export company emails:\n\n"We currently use SWIFT for paying suppliers in India, Pakistan, and Bangladesh. Fees are killing us and settlement takes 3-5 days. We heard Sphere uses stablecoins for faster, cheaper payments. Can you help us? Also, we\'re confused about the new CBUAE stablecoin rules — are we even allowed to use this?"\n\nWrite your response addressing:\n1) Sphere\'s current UAE status (be honest)\n2) How their use case fits (or doesn\'t) with regulations\n3) What you can offer them now\n4) Next steps',
+          title: 'Exercise 3.5 - UAE Inquiry Response',
+          prompt: 'A Dubai-based import/export company emails:\n\n"We currently use SWIFT for paying suppliers in India, Pakistan, and Bangladesh. Fees are killing us and settlement takes 3-5 days. We heard Sphere uses stablecoins for faster, cheaper payments. Can you help us? Also, we\'re confused about the new CBUAE stablecoin rules - are we even allowed to use this?"\n\nWrite your response addressing:\n1) Sphere\'s current UAE status (be honest)\n2) How their use case fits (or doesn\'t) with regulations\n3) What you can offer them now\n4) Next steps',
           criteria: ['Honest about UAE licensing status', 'Correctly explains B2B cross-border is permitted', 'Offers alternatives or keeps them engaged', 'Professional tone', 'Demonstrates regulatory understanding']
         },
         quiz: [
           { q: 'What is Sphere\'s current licensing status in UAE?', options: ['Fully licensed under VARA', 'License application pending', 'Exploring market entry, not yet licensed', 'Operating via offshore structure'], correct: 2 },
           { q: 'Which UAE regulator is purpose-built for crypto businesses?', options: ['CBUAE', 'VARA', 'DIFC', 'ADGM'], correct: 1 },
-          { q: 'CBUAE Circular 2/2024 restricts foreign stablecoins (USDC/USDT) for:', options: ['All transactions in UAE', 'Retail domestic payments only', 'B2B cross-border payments', 'Nothing — no restrictions'], correct: 1 },
+          { q: 'CBUAE Circular 2/2024 restricts foreign stablecoins (USDC/USDT) for:', options: ['All transactions in UAE', 'Retail domestic payments only', 'B2B cross-border payments', 'Nothing - no restrictions'], correct: 1 },
           { q: 'CBUAE rules apply to:', options: ['Only VARA-licensed companies', 'Only DIFC-licensed companies', 'Only ADGM-licensed companies', 'All UAE operations regardless of territory'], correct: 3 },
           { q: 'What legal system does DIFC operate under?', options: ['UAE Civil Law', 'Sharia Law', 'English Common Law', 'US Federal Law'], correct: 2 },
           { q: 'If a prospect asks when Sphere will be licensed in UAE, you should:', options: ['Promise a specific date to close the deal', 'Say we\'re already licensed', 'Be honest that we\'re exploring entry without committing to dates', 'Tell them to use our offshore entity'], correct: 2 },
           { q: 'Why is UAE strategically important for cross-border payments?', options: ['Low tax rates only', 'Gateway to MENA, South Asia, Africa trade corridors', 'Only English-speaking country in region', 'No regulations at all'], correct: 1 },
-          { q: 'Which statement about Sphere and stablecoin issuance is correct?', options: ['Sphere issues its own USDC', 'Sphere is seeking an issuance license', 'Sphere is NOT an issuer — we use third-party stablecoins', 'Sphere will issue an AED stablecoin'], correct: 2 }
+          { q: 'Which statement about Sphere and stablecoin issuance is correct?', options: ['Sphere issues its own USDC', 'Sphere is seeking an issuance license', 'Sphere is NOT an issuer - we use third-party stablecoins', 'Sphere will issue an AED stablecoin'], correct: 2 }
         ]
       }
     ],
@@ -4656,7 +5200,7 @@ Banks and large enterprises won't partner with companies that can't articulate t
           keyTakeaway: 'Operational risk management is a competitive advantage. SOC 2 and ISO 27001 prove we take it seriously.'
         },
         exercise: {
-          title: 'Exercise 4.1 — Risk Assessment',
+          title: 'Exercise 4.1 - Risk Assessment',
           prompt: 'Identify the top 5 operational risks for a stablecoin payment processor.\n\nFor each: describe risk, impact, likelihood, mitigation.',
           criteria: ['Risks identified', 'Impact assessed', 'Mitigations practical']
         },
@@ -4705,7 +5249,7 @@ Banks and large enterprises won't partner with companies that can't articulate t
           keyTakeaway: 'Counterparty risk requires continuous monitoring, not just initial due diligence.'
         },
         exercise: {
-          title: 'Exercise 4.2 — Counterparty Assessment',
+          title: 'Exercise 4.2 - Counterparty Assessment',
           prompt: 'Create a due diligence checklist for a new UAE banking partner.',
           criteria: ['Comprehensive', 'UAE-specific', 'Ongoing monitoring']
         },
@@ -4752,7 +5296,7 @@ Banks and large enterprises won't partner with companies that can't articulate t
           keyTakeaway: 'Liquidity risk management ensures we can always meet obligations.'
         },
         exercise: {
-          title: 'Exercise 4.3 — Liquidity Scenario',
+          title: 'Exercise 4.3 - Liquidity Scenario',
           prompt: 'Friday 5pm NYC. Customer needs $5M to Brazil by Monday. Analyze challenges and solutions.',
           criteria: ['Challenges identified', 'Sources mapped', 'Contingency clear']
         },
@@ -4798,7 +5342,7 @@ Banks and large enterprises won't partner with companies that can't articulate t
           keyTakeaway: 'Business continuity is about preparation. Regular testing validates readiness.'
         },
         exercise: {
-          title: 'Exercise 4.4 — BCP Scenario',
+          title: 'Exercise 4.4 - BCP Scenario',
           prompt: 'Primary cloud region goes down during peak hours. Describe response.',
           criteria: ['Response clear', 'Communication professional', 'Failover understood']
         },
@@ -4837,12 +5381,12 @@ Banks and large enterprises won't partner with companies that can't articulate t
           postIncidentReview: {
             title: 'Post-Incident Review',
             elements: ['Timeline', 'Root cause', 'What went well', 'Improvements', 'Action items'],
-            culture: 'Blameless — focus on systems, not individuals.'
+            culture: 'Blameless - focus on systems, not individuals.'
           },
           keyTakeaway: 'Good incident management = fast response + clear communication + continuous learning.'
         },
         exercise: {
-          title: 'Exercise 4.5 — Incident Response',
+          title: 'Exercise 4.5 - Incident Response',
           prompt: 'Customer\'s $500K payment stuck for 4 hours. Classify and respond.',
           criteria: ['Classification correct', 'Investigation thorough', 'Communication professional']
         },
@@ -4893,13 +5437,13 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           ]
         },
         learn: {
-          introduction: 'Sphere was founded at a unique moment — when trust in crypto was at its lowest and traditional banking was also failing.',
+          introduction: 'Sphere was founded at a unique moment - when trust in crypto was at its lowest and traditional banking was also failing.',
           coreQuestion: 'Why does Sphere exist?',
           foundingContext: {
             title: 'Founding Context',
             events: [
               { event: 'FTX Collapse (Nov 2022)', impact: 'Crypto trust destroyed, need for regulated infrastructure' },
-              { event: 'Regional Banking Crisis (Mar 2023)', impact: 'SVB, Signature — traditional banking also fragile' },
+              { event: 'Regional Banking Crisis (Mar 2023)', impact: 'SVB, Signature - traditional banking also fragile' },
               { event: 'USDC Depeg', impact: 'Even "safe" stablecoins need risk management' }
             ]
           },
@@ -4913,7 +5457,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           keyTakeaway: 'Sphere was born in crisis, built for resilience, focused on hard markets.'
         },
         exercise: {
-          title: 'Exercise 5.1 — Origin Story',
+          title: 'Exercise 5.1 - Origin Story',
           prompt: 'Customer asks: "Why trust a company founded during the crypto crash?" Respond.',
           criteria: ['Acknowledge concern', 'Turn to advantage', 'Differentiation']
         },
@@ -4964,7 +5508,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           keyTakeaway: 'Sphere is API-first. Stablecoins are invisible plumbing. Compliance is embedded.'
         },
         exercise: {
-          title: 'Exercise 5.2 — Product Explanation',
+          title: 'Exercise 5.2 - Product Explanation',
           prompt: 'Fintech founder asks how to integrate Sphere. Explain.',
           criteria: ['Integration clear', 'Flow explained', 'Compliance addressed']
         },
@@ -5009,7 +5553,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           keyTakeaway: '15-30 minute median, same-day 99th percentile.'
         },
         exercise: {
-          title: 'Exercise 5.3 — Metrics Presentation',
+          title: 'Exercise 5.3 - Metrics Presentation',
           prompt: 'Create one-page metrics summary for enterprise prospect.',
           criteria: ['Metrics accurate', 'Comparison clear', 'Professional']
         },
@@ -5034,7 +5578,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
             'SpherePay competes on: speed, cost, compliance, emerging market access',
             'SphereNet competes on: native compliance, credible neutrality, regulatory alignment',
             'Unique positioning: "Hard markets + compliance + stablecoin rails"',
-            'Never trash competitors — acknowledge strengths, differentiate on fit'
+            'Never trash competitors - acknowledge strengths, differentiate on fit'
           ]
         },
         learn: {
@@ -5045,7 +5589,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
             categories: [
               {
                 category: 'Traditional Rails',
-                description: 'Legacy payment infrastructure — banks, SWIFT, correspondent networks',
+                description: 'Legacy payment infrastructure - banks, SWIFT, correspondent networks',
                 examples: ['SWIFT', 'Major banks (JPM, Citi, HSBC)', 'Moneygram', 'Western Union'],
                 whenYouFaceThem: 'Enterprise deals, bank partnerships, conservative finance teams',
                 theirStrength: 'Trust, regulatory relationships, existing integration',
@@ -5053,7 +5597,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               },
               {
                 category: 'Crypto-Native',
-                description: 'Blockchain-first companies — exchanges, DeFi, crypto payment rails',
+                description: 'Blockchain-first companies - exchanges, DeFi, crypto payment rails',
                 examples: ['Ripple', 'Stellar', 'Circle', 'Coinbase Commerce'],
                 whenYouFaceThem: 'Tech-forward companies, crypto-curious treasury teams',
                 theirStrength: 'Crypto expertise, developer mindshare, token ecosystems',
@@ -5061,7 +5605,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               },
               {
                 category: 'Fintech Challengers',
-                description: 'Modern payment companies — stablecoin API providers, B2B payment platforms',
+                description: 'Modern payment companies - stablecoin API providers, B2B payment platforms',
                 examples: ['Bridge', 'Conduit', 'BVNK', 'Airwallex', 'Wise'],
                 whenYouFaceThem: 'SMB deals, fintech partnerships, developer-focused sales',
                 theirStrength: 'Product polish, developer experience, specific corridor strength',
@@ -5089,7 +5633,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               differentiators: [
                 {
                   differentiator: 'Hard Market Access',
-                  explanation: 'Sphere operates in corridors others won\'t touch — Nigeria, Pakistan, frontier LATAM. "Being small is the advantage — these operators don\'t want to go live in Libya. We will."',
+                  explanation: 'Sphere operates in corridors others won\'t touch - Nigeria, Pakistan, frontier LATAM. "Being small is the advantage - these operators don\'t want to go live in Libya. We will."',
                   proof: '18 jurisdictions including challenging emerging markets',
                   vsCompetitors: 'Bridge and Conduit focus on US/EU. BVNK is EU-centric. Airwallex is APAC but not frontier.'
                 },
@@ -5107,7 +5651,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 },
                 {
                   differentiator: 'SphereNet Future',
-                  explanation: 'SpherePay customers get access to SphereNet infrastructure — a path to even lower costs and native compliance.',
+                  explanation: 'SpherePay customers get access to SphereNet infrastructure - a path to even lower costs and native compliance.',
                   proof: 'SphereNet mainnet planned 2025',
                   vsCompetitors: 'No other stablecoin API provider is building their own settlement infrastructure.'
                 }
@@ -5180,7 +5724,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               differentiators: [
                 {
                   differentiator: 'Native Compliance',
-                  explanation: 'Compliance embedded at protocol level — not application layer. Policy enforcement BEFORE settlement.',
+                  explanation: 'Compliance embedded at protocol level - not application layer. Policy enforcement BEFORE settlement.',
                   vsCompetitors: 'Ripple and Stellar rely on application-level compliance. SWIFT has no on-chain compliance. SphereNet is the only blockchain built FOR regulators.'
                 },
                 {
@@ -5239,7 +5783,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               rows: [
                 ['Settlement Time', '2-5 business days', '15-30 minutes (median)'],
                 ['Cost', '~6% all-in (fees + FX spread)', '<1% typical'],
-                ['Transparency', 'Black box — can\'t see correspondent chain', 'Real-time tracking, blockchain proof'],
+                ['Transparency', 'Black box - can\'t see correspondent chain', 'Real-time tracking, blockchain proof'],
                 ['Operating Hours', 'Banking hours only (cut-off times)', '24/7/365'],
                 ['Weekend/Holiday', 'No processing', 'Full operation'],
                 ['Correspondent Chain', '3-5 hops typical', 'Direct stablecoin transfer'],
@@ -5253,7 +5797,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               objections: [
                 {
                   objection: '"We already have international wire capability."',
-                  response: 'Absolutely — and for many transactions, bank wires work fine. Sphere is for the transactions where 2-5 days isn\'t acceptable, where 6% cost matters, or where you need payment confirmation before the weekend. We complement your existing banking relationships.',
+                  response: 'Absolutely - and for many transactions, bank wires work fine. Sphere is for the transactions where 2-5 days isn\'t acceptable, where 6% cost matters, or where you need payment confirmation before the weekend. We complement your existing banking relationships.',
                   keyPoint: 'Position as complement, not replacement'
                 },
                 {
@@ -5262,8 +5806,8 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                   keyPoint: 'Show how banking relationships are preserved'
                 },
                 {
-                  objection: '"We can\'t use crypto — our CFO won\'t approve it."',
-                  response: 'I understand. Let me clarify what we actually do: your team sends USD, your supplier receives pesos. The stablecoin is invisible infrastructure — like how you don\'t think about SWIFT message formats. Your finance team sees USD out, pesos in, faster and cheaper than wire.',
+                  objection: '"We can\'t use crypto - our CFO won\'t approve it."',
+                  response: 'I understand. Let me clarify what we actually do: your team sends USD, your supplier receives pesos. The stablecoin is invisible infrastructure - like how you don\'t think about SWIFT message formats. Your finance team sees USD out, pesos in, faster and cheaper than wire.',
                   keyPoint: 'Reframe: stablecoin is plumbing, not product'
                 }
               ]
@@ -5289,7 +5833,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               objections: [
                 {
                   objection: '"We can just use Coinbase/Kraken for this."',
-                  response: 'Exchanges are great for trading and on-ramping. Sphere is built for B2B payment operations — API integration with your ERP, reconciliation support, dedicated compliance, same-day settlement to fiat. Different use case.',
+                  response: 'Exchanges are great for trading and on-ramping. Sphere is built for B2B payment operations - API integration with your ERP, reconciliation support, dedicated compliance, same-day settlement to fiat. Different use case.',
                   keyPoint: 'Differentiate trading infrastructure from payment infrastructure'
                 },
                 {
@@ -5299,7 +5843,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 },
                 {
                   objection: '"Why not just hold stablecoins ourselves?"',
-                  response: 'You can — and some of our customers do. Sphere adds value when you need licensed fiat on/off-ramps, compliance infrastructure, multi-currency support, and operational tooling. We\'re infrastructure, not a requirement to hold stablecoins.',
+                  response: 'You can - and some of our customers do. Sphere adds value when you need licensed fiat on/off-ramps, compliance infrastructure, multi-currency support, and operational tooling. We\'re infrastructure, not a requirement to hold stablecoins.',
                   keyPoint: 'Position as infrastructure provider, not gatekeeper'
                 }
               ]
@@ -5327,14 +5871,14 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 audience: 'Crypto-Native Companies',
                 leadWith: 'Multi-stablecoin support, fiat rails, compliance-as-a-feature',
                 avoid: 'Anti-crypto framing, over-emphasizing "we\'re not crypto"',
-                keyMessage: '"We bridge stablecoins to fiat rails with proper licensing. Use whatever stablecoin you want — we handle the last mile."',
+                keyMessage: '"We bridge stablecoins to fiat rails with proper licensing. Use whatever stablecoin you want - we handle the last mile."',
                 proof: 'Stablecoin partnerships, fiat corridor coverage'
               },
               {
                 audience: 'Regulators / Central Banks',
                 leadWith: 'Compliance-native architecture, transparency, regulatory alignment',
                 avoid: 'Speed and cost focus (they don\'t care), dismissing regulatory concerns',
-                keyMessage: '"We\'re building payment infrastructure that gives regulators BETTER visibility than traditional systems — through proper channels."',
+                keyMessage: '"We\'re building payment infrastructure that gives regulators BETTER visibility than traditional systems - through proper channels."',
                 proof: 'SphereNet architecture, multi-jurisdictional licensing'
               }
             ]
@@ -5351,24 +5895,24 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               {
                 scenario: 'Customer wants full-stack treasury (cards, accounts, FX)',
                 whyNot: 'Sphere is focused on cross-border payments, not full treasury management.',
-                whatToSay: '"If you need cards, multi-currency accounts, and full treasury — Airwallex or Mercury might be better. We can complement them for your cross-border payment needs."'
+                whatToSay: '"If you need cards, multi-currency accounts, and full treasury - Airwallex or Mercury might be better. We can complement them for your cross-border payment needs."'
               },
               {
                 scenario: 'Customer has <$100K monthly cross-border volume',
                 whyNot: 'Sphere\'s value proposition scales with volume. Low volume = Wise might be simpler.',
-                whatToSay: '"At your current volume, Wise or your bank might be simpler. When you scale up and need API integration, same-day settlement, or emerging market access — come back to us."'
+                whatToSay: '"At your current volume, Wise or your bank might be simpler. When you scale up and need API integration, same-day settlement, or emerging market access - come back to us."'
               },
               {
                 scenario: 'Customer wants to hold crypto as investment',
                 whyNot: 'Sphere is payment infrastructure, not an exchange or custody solution.',
-                whatToSay: '"We\'re payment infrastructure, not an exchange. For holding crypto, Coinbase or Anchorage is better suited. If you need to USE stablecoins for payments — that\'s us."'
+                whatToSay: '"We\'re payment infrastructure, not an exchange. For holding crypto, Coinbase or Anchorage is better suited. If you need to USE stablecoins for payments - that\'s us."'
               }
             ]
           },
-          keyTakeaway: 'Position Sphere based on audience: compliance-first for traditional finance, speed-first for fintechs, fiat-rails for crypto-native. Know when competitors win and when to walk away — credibility comes from honesty.'
+          keyTakeaway: 'Position Sphere based on audience: compliance-first for traditional finance, speed-first for fintechs, fiat-rails for crypto-native. Know when competitors win and when to walk away - credibility comes from honesty.'
         },
         exercise: {
-          title: 'Exercise 5.4 — Competitive Positioning',
+          title: 'Exercise 5.4 - Competitive Positioning',
           prompt: 'You\'re in a deal and the prospect says: "We\'re also talking to Bridge and Wise. Why should we choose Sphere?"\n\nWrite your response:\n1) Acknowledge competitor strengths (don\'t trash them)\n2) Differentiate on specific dimensions\n3) Identify what would make Sphere the right vs wrong choice\n4) Ask a qualifying question to understand their needs',
           criteria: ['Acknowledges competitor strengths', 'Clear differentiation', 'Honest about fit', 'Qualifying question included']
         },
@@ -5398,7 +5942,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           ]
         },
         learn: {
-          introduction: 'Concrete use cases make Sphere real for prospects. But more importantly, STORIES make Sphere memorable. The Bob and Ahmed story is Sphere\'s signature narrative — learn to tell it well.',
+          introduction: 'Concrete use cases make Sphere real for prospects. But more importantly, STORIES make Sphere memorable. The Bob and Ahmed story is Sphere\'s signature narrative - learn to tell it well.',
           coreQuestion: 'What do customers use Sphere for, and why does it matter?',
           primaryUseCases: {
             title: 'Primary Use Cases',
@@ -5411,23 +5955,23 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           },
           bobAndAhmed: {
             title: 'The Bob and Ahmed Story',
-            subtitle: 'Arnold\'s signature narrative — learn to tell it well',
+            subtitle: 'Arnold\'s signature narrative - learn to tell it well',
             speaker: 'Arnold Lee, CEO',
-            context: 'This story comes from Arnold\'s conference presentations and captures why Sphere exists. It\'s not just a use case — it\'s the human reality behind cross-border payments.',
+            context: 'This story comes from Arnold\'s conference presentations and captures why Sphere exists. It\'s not just a use case - it\'s the human reality behind cross-border payments.',
             setup: {
               title: 'The Setup: Two People, One Problem',
               bob: {
                 name: 'Bob',
                 age: 35,
                 location: 'Texas, USA',
-                business: 'Ships machinery — tractors, harvesters, agricultural equipment',
-                situation: 'Bob is US-based. He\'s used to taking payments in USD. He has a credit score, a verifiable employment history, and critically — if things go horribly wrong, Bob can use the court system.'
+                business: 'Ships machinery - tractors, harvesters, agricultural equipment',
+                situation: 'Bob is US-based. He\'s used to taking payments in USD. He has a credit score, a verifiable employment history, and critically - if things go horribly wrong, Bob can use the court system.'
               },
               ahmed: {
                 name: 'Ahmed',
                 age: 'Mid-40s',
                 location: 'A town a couple hours north of Lagos, Nigeria',
-                business: 'Agricultural production — employs thousands of people locally to farm wheat and other crops',
+                business: 'Agricultural production - employs thousands of people locally to farm wheat and other crops',
                 situation: 'Ahmed doesn\'t have machinery natively available in his region. He needs to import tractors and harvesters from the US to support his operations and the thousands of people who depend on him for employment.'
               }
             },
@@ -5437,7 +5981,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               timeline: {
                 stated: 'T+2 to T+5 (what banks tell you)',
                 reality: 'T+3 to T+10 (what actually happens)',
-                arnoldQuote: '"The beautiful — or terrifying — part depending on your perspective is that no one actually knows how long it will actually take."'
+                arnoldQuote: '"The beautiful - or terrifying - part depending on your perspective is that no one actually knows how long it will actually take."'
               },
               whyItTakesLong: [
                 'Local government needs to consider capital controls',
@@ -5452,11 +5996,11 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               costs: [
                 {
                   cost: 'Port Fees',
-                  explanation: 'Every single day that Ahmed waits for the ship to clear at the port, clear customs, and unload the machinery — he has to pay additional fees. Port storage fees. Demurrage charges. These add up fast.'
+                  explanation: 'Every single day that Ahmed waits for the ship to clear at the port, clear customs, and unload the machinery - he has to pay additional fees. Port storage fees. Demurrage charges. These add up fast.'
                 },
                 {
                   cost: 'Personnel Costs',
-                  explanation: 'Ahmed has people waiting — workers ready to operate the machinery, logistics staff coordinating delivery. They\'re on the clock while the payment clears.'
+                  explanation: 'Ahmed has people waiting - workers ready to operate the machinery, logistics staff coordinating delivery. They\'re on the clock while the payment clears.'
                 },
                 {
                   cost: 'Opportunity Cost',
@@ -5464,13 +6008,13 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 },
                 {
                   cost: 'Error Recovery',
-                  explanation: 'If the order was wrong — wrong number of units, missing components, damaged equipment — they have to restart the ENTIRE payment process. That\'s another T+3 to T+10.'
+                  explanation: 'If the order was wrong - wrong number of units, missing components, damaged equipment - they have to restart the ENTIRE payment process. That\'s another T+3 to T+10.'
                 }
               ]
             },
             theKicker: {
               title: 'The Kicker: Technology Alone Doesn\'t Solve This',
-              arnoldQuote: '"You\'re probably thinking — oh, stablecoins and blockchain solve this. I regret to inform you that they do not entirely."',
+              arnoldQuote: '"You\'re probably thinking - oh, stablecoins and blockchain solve this. I regret to inform you that they do not entirely."',
               explanation: 'The hard part isn\'t the technology. The hard part is:',
               realObstacles: [
                 {
@@ -5494,7 +6038,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 name: 'Bottom-Up Approach',
                 description: 'Go to people like Ahmed. Walk them through how the technology works. Help them understand the benefits.',
                 challenge: 'This is really hard to scale. One customer at a time.',
-                sphereExperience: 'This is what we\'ve spent the last several years doing — living in emerging markets, having conversation after conversation, understanding the mechanics of why stablecoins are useful to someone shipping things overseas.'
+                sphereExperience: 'This is what we\'ve spent the last several years doing - living in emerging markets, having conversation after conversation, understanding the mechanics of why stablecoins are useful to someone shipping things overseas.'
               },
               topDown: {
                 name: 'Top-Down Approach',
@@ -5504,23 +6048,23 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               },
               truth: {
                 title: 'The Truth',
-                arnoldQuote: '"The beautiful — or terrifying — truth is you kind of have to do both. You kind of have to both go to the local importers of goods in Nigeria as well as go to the local government to make sure everything goes through properly."'
+                arnoldQuote: '"The beautiful - or terrifying - truth is you kind of have to do both. You kind of have to both go to the local importers of goods in Nigeria as well as go to the local government to make sure everything goes through properly."'
               }
             },
             oneThirdStatistic: {
               title: 'The One-Third Statistic',
               stat: 'One-third of all human time is spent waiting.',
               context: 'Waiting for weekends. Waiting for holidays. Waiting for banking hours. Waiting for cut-off times. Waiting for correspondent banks to process.',
-              implication: 'The benefits that could accrue to people like Ahmed are exponential, not linear. Faster payments don\'t just save time — they unlock economic activity that was previously impossible.',
+              implication: 'The benefits that could accrue to people like Ahmed are exponential, not linear. Faster payments don\'t just save time - they unlock economic activity that was previously impossible.',
               arnoldQuote: '"One-third of all human time is spent waiting for a weekend, for things to clear, for holidays. And the truth is that these benefits that could accrue to people like Ahmed are exponential and not linear."'
             },
             howToTellThisStory: {
               title: 'How to Tell This Story',
               tips: [
                 'Start with the people, not the technology. Bob and Ahmed are real archetypes.',
-                'Make the pain tangible — port fees, personnel costs, harvest windows.',
+                'Make the pain tangible - port fees, personnel costs, harvest windows.',
                 'Acknowledge that technology alone doesn\'t solve it. This builds credibility.',
-                'Explain the dual approach — bottom-up AND top-down.',
+                'Explain the dual approach - bottom-up AND top-down.',
                 'End with the "one-third" statistic. It\'s memorable and quantifies the opportunity.',
                 'Don\'t oversell. "Stablecoins don\'t entirely solve this" is more credible than "blockchain fixes everything."'
               ],
@@ -5586,10 +6130,10 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
             },
             insight: 'Heavy LATAM concentration reflects Sphere\'s early market focus. UAE engagement expands reach into MENA, Africa, and South Asia corridors.'
           },
-          keyTakeaway: 'Stories beat features. Bob and Ahmed illustrates the human reality behind cross-border payments. One-third of human time is spent waiting — that\'s the opportunity Sphere addresses.'
+          keyTakeaway: 'Stories beat features. Bob and Ahmed illustrates the human reality behind cross-border payments. One-third of human time is spent waiting - that\'s the opportunity Sphere addresses.'
         },
         exercise: {
-          title: 'Exercise 5.5 — Tell the Bob and Ahmed Story',
+          title: 'Exercise 5.5 - Tell the Bob and Ahmed Story',
           prompt: 'You have 3 minutes to tell the Bob and Ahmed story to a UAE bank executive. Write out your narrative:\n\n1) Introduce Bob and Ahmed (make them real)\n2) Explain the SWIFT wire problem (be specific about costs)\n3) Acknowledge that technology alone doesn\'t solve it\n4) Explain the top-down AND bottom-up approach\n5) End with the "one-third" statistic\n\nMake it compelling. Make it human. Make it memorable.',
           criteria: ['Characters feel real', 'Pain is tangible', 'Technology humility', 'Dual approach explained', 'One-third statistic included', 'Memorable delivery']
         },
@@ -5623,25 +6167,25 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           ]
         },
         learn: {
-          introduction: 'SpherePay is Sphere\'s live product — processing $3B+ annually. SphereNet is Sphere\'s future operating system for regulated finance. Understanding both is essential because they work together: SpherePay builds distribution, SphereNet provides the infrastructure layer.',
+          introduction: 'SpherePay is Sphere\'s live product - processing $3B+ annually. SphereNet is Sphere\'s future operating system for regulated finance. Understanding both is essential because they work together: SpherePay builds distribution, SphereNet provides the infrastructure layer.',
           coreQuestion: 'What is SphereNet and why does regulated finance need a purpose-built blockchain?',
           whatIsSphereNet: {
             title: 'What Is SphereNet?',
             definition: 'SphereNet is a purpose-built Layer 1 blockchain designed specifically for regulated cross-border payments and financial infrastructure.',
             notJustAnotherBlockchain: {
               title: 'Why Not Just Use Solana/Ethereum?',
-              problem: 'Traditional blockchains are designed for openness and composability — not regulatory enforceability. They optimize for permissionless access, which is fundamentally at odds with what regulated finance requires.',
+              problem: 'Traditional blockchains are designed for openness and composability - not regulatory enforceability. They optimize for permissionless access, which is fundamentally at odds with what regulated finance requires.',
               gap: [
-                'No native jurisdiction awareness — validators can\'t enforce local rules',
-                'Privacy vs. auditability tradeoff — full transparency OR privacy, not both',
-                'Reactive compliance — screening happens AFTER settlement, not before',
-                'External controls — compliance systems are separate from transaction processing'
+                'No native jurisdiction awareness - validators can\'t enforce local rules',
+                'Privacy vs. auditability tradeoff - full transparency OR privacy, not both',
+                'Reactive compliance - screening happens AFTER settlement, not before',
+                'External controls - compliance systems are separate from transaction processing'
               ],
-              solution: 'SphereNet is built from the ground up with compliance embedded at the protocol level. It\'s not a compliance layer on top of a blockchain — it\'s a blockchain where compliance IS the architecture.'
+              solution: 'SphereNet is built from the ground up with compliance embedded at the protocol level. It\'s not a compliance layer on top of a blockchain - it\'s a blockchain where compliance IS the architecture.'
             },
             positioning: {
               tagline: '"Modern-day SWIFT"',
-              explanation: 'SWIFT is a messaging network that coordinates correspondent banking. SphereNet is a settlement network that unifies liquidity across blockchains, banks, wallets, and markets — with compliance built in.',
+              explanation: 'SWIFT is a messaging network that coordinates correspondent banking. SphereNet is a settlement network that unifies liquidity across blockchains, banks, wallets, and markets - with compliance built in.',
               comparison: {
                 headers: ['Attribute', 'SWIFT', 'SphereNet'],
                 rows: [
@@ -5687,7 +6231,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 number: 1,
                 name: 'Multi-Dimensional Transaction Coloring',
                 icon: '🎨',
-                concept: 'Every account and transaction is annotated across multiple dimensions, producing a multi-dimensional labeled graph — not a single risk score.',
+                concept: 'Every account and transaction is annotated across multiple dimensions, producing a multi-dimensional labeled graph - not a single risk score.',
                 dimensions: [
                   { dimension: 'Jurisdiction', examples: 'UAE, US, EU, Singapore, etc.' },
                   { dimension: 'Entity Type', examples: 'Individual, Corporation, MSB, Bank, Government' },
@@ -5701,40 +6245,40 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                     'Regulators can observe subnetwork views, projections, and heatmaps along the dimensions THEY care about',
                     'Enables policy-relevant visibility WITHOUT requiring data extraction',
                     'In escalated cases, selective extraction occurs only via valid legal process (subpoena, FIU signing, jurisdiction-specific authority)',
-                    'Strictly more expressive — and safer — than post-hoc analytics or monolithic risk scoring'
+                    'Strictly more expressive - and safer - than post-hoc analytics or monolithic risk scoring'
                   ]
                 },
-                example: 'A UAE regulator can see all UAE-jurisdictional transactions involving high-risk entity types — without seeing transaction amounts, counterparty identities, or details of transactions in other jurisdictions. They see what they NEED to see, nothing more.'
+                example: 'A UAE regulator can see all UAE-jurisdictional transactions involving high-risk entity types - without seeing transaction amounts, counterparty identities, or details of transactions in other jurisdictions. They see what they NEED to see, nothing more.'
               },
               {
                 number: 2,
                 name: 'Control Levers Across Transaction Lifecycle',
                 icon: '🎛️',
-                concept: 'Explicit control and observation points at every stage of a transaction — not just at settlement.',
+                concept: 'Explicit control and observation points at every stage of a transaction - not just at settlement.',
                 levers: [
                   {
                     lever: 'Transaction Ingress',
                     stage: 'Before processing',
                     controls: 'Client-side construction, preflight checks, signature validity, initial metadata/attestation attachment',
-                    example: 'Transaction rejected at ingress if sender wallet is on sanctions list — never even enters the system'
+                    example: 'Transaction rejected at ingress if sender wallet is on sanctions list - never even enters the system'
                   },
                   {
                     lever: 'Policy Evaluation',
                     stage: 'Pre-execution',
-                    controls: 'Deterministic checks over transaction context, accounts, and attestations — enforced at RPC, validator ingress, or pre-execution runtime',
-                    example: 'Transaction flagged if it exceeds jurisdiction-specific exposure limits — held for review before execution'
+                    controls: 'Deterministic checks over transaction context, accounts, and attestations - enforced at RPC, validator ingress, or pre-execution runtime',
+                    example: 'Transaction flagged if it exceeds jurisdiction-specific exposure limits - held for review before execution'
                   },
                   {
                     lever: 'Execution / Ordering',
                     stage: 'During processing',
-                    controls: 'Parallel execution with ordering constraints derived from account locks and dependencies — enforcement point for asset and counterparty constraints',
+                    controls: 'Parallel execution with ordering constraints derived from account locks and dependencies - enforcement point for asset and counterparty constraints',
                     example: 'Transaction ordering ensures that compliance-dependent transactions settle in correct sequence'
                   },
                   {
                     lever: 'Propagation (Gossip)',
                     stage: 'Network distribution',
                     controls: 'Validator-to-validator dissemination with future-state controls: selective visibility, jurisdiction-aware propagation, policy-informed mempool behavior',
-                    example: 'Transaction involving UAE parties only propagates to UAE-authorized validators — geographic containment'
+                    example: 'Transaction involving UAE parties only propagates to UAE-authorized validators - geographic containment'
                   },
                   {
                     lever: 'Settlement and Finality',
@@ -5743,7 +6287,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                     example: 'Settlement produces cryptographic proof of compliance that can be provided to regulators on demand'
                   }
                 ],
-                keyInsight: 'Controls are layered, contextual, and composable — applied where they are cheapest, safest, and most legible. This is the opposite of "spray compliance everywhere" — it\'s surgical, efficient enforcement.'
+                keyInsight: 'Controls are layered, contextual, and composable - applied where they are cheapest, safest, and most legible. This is the opposite of "spray compliance everywhere" - it\'s surgical, efficient enforcement.'
               },
               {
                 number: 3,
@@ -5764,7 +6308,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                   marketDynamics: [
                     { actor: 'Verifiers', role: 'Incur real cost (data acquisition, validation, liability)' },
                     { actor: 'Consumers', role: 'Pay because verification is cheaper, faster, and more defensible than bespoke diligence' },
-                    { actor: 'Attestations', role: 'Produced once, consumed many times — collapsing discovery and onboarding costs' }
+                    { actor: 'Attestations', role: 'Produced once, consumed many times - collapsing discovery and onboarding costs' }
                   ],
                   result: 'Compliance transforms from a COST CENTER into a THROUGHPUT ACCELERATOR.'
                 },
@@ -5853,11 +6397,11 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
             regulatorAccess: {
               title: 'How Regulators Get Access',
               levels: [
-                { level: 'Default', access: 'Aggregate statistics, network health, policy compliance rates', requirement: 'None — publicly observable' },
+                { level: 'Default', access: 'Aggregate statistics, network health, policy compliance rates', requirement: 'None - publicly observable' },
                 { level: 'Supervisory', access: 'Jurisdiction-specific views, entity-type breakdowns, risk concentrations', requirement: 'Regulatory authorization' },
                 { level: 'Investigation', access: 'Specific transaction details, counterparty identities, full audit trail', requirement: 'Legal process (subpoena, court order, FIU request)' }
               ],
-              keyPoint: 'Regulators get BETTER visibility than on traditional blockchains — but through proper channels, not by default.'
+              keyPoint: 'Regulators get BETTER visibility than on traditional blockchains - but through proper channels, not by default.'
             }
           },
           spherePayVsSphereNet: {
@@ -5907,18 +6451,18 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               {
                 benefit: 'Interoperable with Existing Systems',
                 explanation: 'SphereNet connects to banks, existing blockchains, and legacy payment systems. It\'s additive, not replacement.',
-                contrast: 'Not asking regulators to abandon existing infrastructure — enhancing it.'
+                contrast: 'Not asking regulators to abandon existing infrastructure - enhancing it.'
               }
             ],
             samplePitch: {
               question: 'A central banker asks: "Why should we care about another blockchain?"',
-              answer: 'SphereNet isn\'t another blockchain — it\'s the first blockchain built FOR regulators, not despite them. Traditional blockchains force you to choose between innovation and oversight. SphereNet gives you both. Compliance is embedded at the protocol level — policy enforcement happens before settlement, not after. You get better visibility than you have today, through proper legal channels, without bulk surveillance. And it\'s designed to work WITH your existing infrastructure — banks, payment systems, even other blockchains. We\'re not asking you to replace SWIFT. We\'re offering a modern complement that handles the corridors SWIFT struggles with.'
+              answer: 'SphereNet isn\'t another blockchain - it\'s the first blockchain built FOR regulators, not despite them. Traditional blockchains force you to choose between innovation and oversight. SphereNet gives you both. Compliance is embedded at the protocol level - policy enforcement happens before settlement, not after. You get better visibility than you have today, through proper legal channels, without bulk surveillance. And it\'s designed to work WITH your existing infrastructure - banks, payment systems, even other blockchains. We\'re not asking you to replace SWIFT. We\'re offering a modern complement that handles the corridors SWIFT struggles with.'
             }
           },
-          keyTakeaway: 'SphereNet is Sphere\'s purpose-built blockchain for regulated finance — compliance-native, privacy-preserving, with multi-dimensional transaction coloring and control levers at every stage. SpherePay is the product; SphereNet is the platform. Together, they create the infrastructure layer for global cross-border payments.'
+          keyTakeaway: 'SphereNet is Sphere\'s purpose-built blockchain for regulated finance - compliance-native, privacy-preserving, with multi-dimensional transaction coloring and control levers at every stage. SpherePay is the product; SphereNet is the platform. Together, they create the infrastructure layer for global cross-border payments.'
         },
         exercise: {
-          title: 'Exercise 5.6 — SphereNet Explanation',
+          title: 'Exercise 5.6 - SphereNet Explanation',
           prompt: 'A UAE Central Bank official asks: "We\'ve seen many blockchain projects. What makes SphereNet different?"\n\nWrite your response covering:\n1) Why traditional blockchains don\'t work for regulated finance\n2) The three core principles (coloring, control levers, proofs)\n3) How it benefits regulators specifically\n4) How it relates to SpherePay\n\nKeep it under 3 minutes speaking time.',
           criteria: ['Traditional blockchain limitations clear', 'Three principles explained simply', 'Regulator benefits specific', 'SpherePay relationship clear', 'No jargon overload']
         },
@@ -5945,7 +6489,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           keyConcepts: [
             'Three segments: EM Businesses, US Companies Serving EM, SaaS/Tech Companies',
             'Qualification: Volume, corridors, urgency, compliance readiness',
-            'Pain points vary by segment — discovery before pitch',
+            'Pain points vary by segment - discovery before pitch',
             'UAE focus: Trading companies, family offices, fintechs'
           ]
         },
@@ -5981,7 +6525,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           },
           segment1Detail: {
             title: 'Segment 1: Emerging Market Businesses',
-            subtitle: '"Ahmed\'s World" — Deep Dive',
+            subtitle: '"Ahmed\'s World" - Deep Dive',
             profile: {
               title: 'Typical Profile',
               characteristics: [
@@ -5998,27 +6542,27 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 {
                   pain: 'SWIFT Wire Delays',
                   detail: 'T+3 to T+10 for payments to suppliers. Every day of delay = port fees, storage costs, missed opportunities.',
-                  intensity: 'HIGH — operational impact'
+                  intensity: 'HIGH - operational impact'
                 },
                 {
                   pain: 'FX Exposure',
                   detail: 'Local currency volatility means payment delays create real losses. ARS, NGN, PKR can move 5-10% in a week.',
-                  intensity: 'HIGH — P&L impact'
+                  intensity: 'HIGH - P&L impact'
                 },
                 {
                   pain: 'Banking Access',
                   detail: 'Local banks are slow, expensive, or unwilling to process certain corridors. USD access is limited.',
-                  intensity: 'MEDIUM-HIGH — existential for some'
+                  intensity: 'MEDIUM-HIGH - existential for some'
                 },
                 {
                   pain: 'Capital Controls',
                   detail: 'Government restrictions on USD access. Documentation requirements. Approval delays.',
-                  intensity: 'MEDIUM — depends on country'
+                  intensity: 'MEDIUM - depends on country'
                 },
                 {
                   pain: 'Supplier Relationships',
                   detail: 'Suppliers demand faster payment. Slow payers get worse terms or lose suppliers entirely.',
-                  intensity: 'MEDIUM — competitive impact'
+                  intensity: 'MEDIUM - competitive impact'
                 }
               ]
             },
@@ -6070,7 +6614,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 { attribute: 'Decision maker', value: 'Founder or CFO' },
                 { attribute: 'Initial volume', value: '$200K-500K/month' },
                 { attribute: 'Expansion potential', value: '2-5x within 12 months' },
-                { attribute: 'Price sensitivity', value: 'Medium — value speed over cost' },
+                { attribute: 'Price sensitivity', value: 'Medium - value speed over cost' },
                 { attribute: 'Integration', value: 'Dashboard first, API later' }
               ]
             },
@@ -6103,7 +6647,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           },
           segment2Detail: {
             title: 'Segment 2: Developed Market Companies Serving EM',
-            subtitle: '"Bob\'s World" — Deep Dive',
+            subtitle: '"Bob\'s World" - Deep Dive',
             profile: {
               title: 'Typical Profile',
               characteristics: [
@@ -6120,27 +6664,27 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 {
                   pain: 'Correspondent Banking Complexity',
                   detail: 'Payments to Nigeria require 4 correspondent hops. Each hop = fees, delays, failure risk.',
-                  intensity: 'HIGH — operational nightmare'
+                  intensity: 'HIGH - operational nightmare'
                 },
                 {
                   pain: 'Visibility Gap',
                   detail: 'Payment sent Monday, no confirmation until Thursday. Customer/supplier asking "where\'s my money?"',
-                  intensity: 'HIGH — customer service impact'
+                  intensity: 'HIGH - customer service impact'
                 },
                 {
                   pain: 'Cost Unpredictability',
                   detail: 'Bank quotes 1.5% but actual cost is 4-6% after correspondent fees and FX spread.',
-                  intensity: 'MEDIUM-HIGH — budget impact'
+                  intensity: 'MEDIUM-HIGH - budget impact'
                 },
                 {
                   pain: 'Compliance Burden',
                   detail: 'Each EM country has different documentation requirements. Finance team spends hours on paperwork.',
-                  intensity: 'MEDIUM — time/resource cost'
+                  intensity: 'MEDIUM - time/resource cost'
                 },
                 {
                   pain: 'Banking Relationship Limits',
                   detail: 'Bank won\'t process payments to certain countries. "We don\'t do Pakistan."',
-                  intensity: 'MEDIUM — growth blocker'
+                  intensity: 'MEDIUM - growth blocker'
                 }
               ]
             },
@@ -6192,7 +6736,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 { attribute: 'Decision maker', value: 'Treasury Director, CFO, or VP Finance' },
                 { attribute: 'Initial volume', value: '$500K-2M/month' },
                 { attribute: 'Expansion potential', value: '2-3x as trust builds' },
-                { attribute: 'Price sensitivity', value: 'Low — value reliability over cost' },
+                { attribute: 'Price sensitivity', value: 'Low - value reliability over cost' },
                 { attribute: 'Integration', value: 'API integration expected' }
               ]
             },
@@ -6225,7 +6769,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           },
           segment3Detail: {
             title: 'Segment 3: Tech/SaaS Companies',
-            subtitle: '"Global-First" — Deep Dive',
+            subtitle: '"Global-First" - Deep Dive',
             profile: {
               title: 'Typical Profile',
               characteristics: [
@@ -6242,27 +6786,27 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 {
                   pain: 'Global Contractor Payroll',
                   detail: 'Contractors in 15 countries. Each country = different payment method, different timing, different fees.',
-                  intensity: 'HIGH — retention impact'
+                  intensity: 'HIGH - retention impact'
                 },
                 {
                   pain: 'Payout Complexity',
                   detail: 'Marketplace/gig platform needs to pay sellers/workers globally. Current solution is slow and expensive.',
-                  intensity: 'HIGH — competitive disadvantage'
+                  intensity: 'HIGH - competitive disadvantage'
                 },
                 {
                   pain: 'Treasury Fragmentation',
                   detail: 'Cash trapped in multiple countries/currencies. Can\'t efficiently move money where it\'s needed.',
-                  intensity: 'MEDIUM-HIGH — capital efficiency'
+                  intensity: 'MEDIUM-HIGH - capital efficiency'
                 },
                 {
                   pain: 'Integration Burden',
                   detail: 'Current payment providers require complex integration. Engineering time is precious.',
-                  intensity: 'MEDIUM — resource cost'
+                  intensity: 'MEDIUM - resource cost'
                 },
                 {
                   pain: 'Compliance Uncertainty',
                   detail: 'Unsure if current contractor payments are compliant. Worried about tax/legal risk.',
-                  intensity: 'MEDIUM — risk concern'
+                  intensity: 'MEDIUM - risk concern'
                 }
               ]
             },
@@ -6314,7 +6858,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 { attribute: 'Decision maker', value: 'CTO, VP Eng, or Head of Finance' },
                 { attribute: 'Initial volume', value: '$100K-500K/month' },
                 { attribute: 'Expansion potential', value: '3-10x as company scales' },
-                { attribute: 'Price sensitivity', value: 'Medium — value developer experience' },
+                { attribute: 'Price sensitivity', value: 'Medium - value developer experience' },
                 { attribute: 'Integration', value: 'API-first, fast integration critical' }
               ]
             },
@@ -6352,7 +6896,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               {
                 priority: 1,
                 segment: 'Emerging Market Businesses (Trading Companies)',
-                rationale: 'Highest volume, clearest pain, shortest sales cycle. UAE is a trading hub — thousands of companies fit this profile.',
+                rationale: 'Highest volume, clearest pain, shortest sales cycle. UAE is a trading hub - thousands of companies fit this profile.',
                 targetSubsegments: ['Commodity traders', 'Import/export businesses', 'Re-export companies', 'Manufacturing importers']
               },
               {
@@ -6425,17 +6969,17 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
             scoringGuide: {
               title: 'Scoring Guide',
               scores: [
-                { score: '5 Green', action: 'High priority — fast-track' },
-                { score: '3-4 Green', action: 'Good opportunity — standard process' },
+                { score: '5 Green', action: 'High priority - fast-track' },
+                { score: '3-4 Green', action: 'Good opportunity - standard process' },
                 { score: '2 Green', action: 'Qualify further before investing time' },
-                { score: '< 2 Green', action: 'Likely not a fit — be honest, move on' }
+                { score: '< 2 Green', action: 'Likely not a fit - be honest, move on' }
               ]
             }
           },
-          keyTakeaway: 'Three segments: EM Businesses (trading), Developed Market Companies (exporters), Tech/SaaS (global payroll). Qualify on BANT+C: Budget, Authority, Need, Timeline, Corridors. In UAE, prioritize trading companies and fintechs — highest volume, clearest pain.'
+          keyTakeaway: 'Three segments: EM Businesses (trading), Developed Market Companies (exporters), Tech/SaaS (global payroll). Qualify on BANT+C: Budget, Authority, Need, Timeline, Corridors. In UAE, prioritize trading companies and fintechs - highest volume, clearest pain.'
         },
         exercise: {
-          title: 'Exercise 5.7 — Segment Qualification',
+          title: 'Exercise 5.7 - Segment Qualification',
           prompt: 'You receive three inbound leads. Qualify each using BANT+C:\n\n1) Dubai trading company, $3M/month to India and China, founder reached out, needs solution "ASAP" because bank is too slow\n\n2) UK software company, $50K/month to UAE for one contractor, HR manager inquiring, "exploring options for next year"\n\n3) UAE fintech, $800K/month payroll to 12 countries, CTO on the call, current provider (Wise) taking 3-4 days\n\nFor each: Score BANT+C, identify segment, recommend action.',
           criteria: ['Correct segment identification', 'BANT+C scoring accurate', 'Action recommendation appropriate', 'Justified reasoning']
         },
@@ -6509,20 +7053,20 @@ Arnold identified these 15 questions as the ones Sphere faces repeatedly. Master
             {
               number: 2,
               question: 'How is Sphere classified?',
-              shortAnswer: 'Licensed Money Services Business — B2B payment infrastructure. NOT an exchange, bank, or custodian.',
+              shortAnswer: 'Licensed Money Services Business - B2B payment infrastructure. NOT an exchange, bank, or custodian.',
               doNotSay: 'We\'re a crypto company / We\'re like Coinbase'
             },
             {
               number: 3,
               question: 'Aren\'t you just another crypto company?',
-              shortAnswer: 'No. Licensed payment infrastructure using stablecoins as settlement rails — like banks use SWIFT. Compliance-native, not crypto-native.',
+              shortAnswer: 'No. Licensed payment infrastructure using stablecoins as settlement rails - like banks use SWIFT. Compliance-native, not crypto-native.',
               doNotSay: 'Yes we\'re crypto / Regulation doesn\'t apply'
             }
           ],
           keyTakeaway: 'Lead with licenses. Differentiate from crypto speculation immediately.'
         },
         exercise: {
-          title: 'Exercise 6.1 — Licensing Roleplay',
+          title: 'Exercise 6.1 - Licensing Roleplay',
           prompt: 'Bank says: "We don\'t work with crypto companies." Reframe Sphere.',
           criteria: ['Reframes', 'Cites licenses', 'Opens dialogue']
         },
@@ -6570,7 +7114,7 @@ Arnold identified these 15 questions as the ones Sphere faces repeatedly. Master
           keyTakeaway: 'Emphasize pre-settlement compliance. This differentiates from crypto cowboys.'
         },
         exercise: {
-          title: 'Exercise 6.2 — AML Deep Dive',
+          title: 'Exercise 6.2 - AML Deep Dive',
           prompt: 'Walk through what happens when a transaction triggers a sanctions hit.',
           criteria: ['Process clear', 'Escalation defined', 'Resolution explained']
         },
@@ -6599,7 +7143,7 @@ Arnold identified these 15 questions as the ones Sphere faces repeatedly. Master
             {
               number: 7,
               question: 'What if the stablecoin depegs during a transaction?',
-              shortAnswer: 'Risk exists — USDC hit $0.87 during SVB. We mitigate: hold for minutes not days, multiple issuers, contingency procedures.',
+              shortAnswer: 'Risk exists - USDC hit $0.87 during SVB. We mitigate: hold for minutes not days, multiple issuers, contingency procedures.',
               honesty: 'Never claim risk-free. Acknowledge, then mitigate.'
             },
             {
@@ -6618,7 +7162,7 @@ Arnold identified these 15 questions as the ones Sphere faces repeatedly. Master
           keyTakeaway: 'Acknowledge risks honestly, then explain mitigation. Credibility through honesty.'
         },
         exercise: {
-          title: 'Exercise 6.3 — Stablecoin Risk',
+          title: 'Exercise 6.3 - Stablecoin Risk',
           prompt: 'Risk officer: "USDC depeg scared us. Why trust stablecoins?" Respond.',
           criteria: ['Acknowledge', 'Explain event', 'Describe mitigation']
         },
@@ -6666,7 +7210,7 @@ Arnold identified these 15 questions as the ones Sphere faces repeatedly. Master
           keyTakeaway: 'Lead with real metrics. Show you have processes for when things go wrong.'
         },
         exercise: {
-          title: 'Exercise 6.4 — Operational Scenario',
+          title: 'Exercise 6.4 - Operational Scenario',
           prompt: 'Customer\'s $2M shows pending for 6 hours. Walk through response.',
           criteria: ['Investigation', 'Communication', 'Resolution']
         },
@@ -6714,7 +7258,7 @@ Arnold identified these 15 questions as the ones Sphere faces repeatedly. Master
           keyTakeaway: 'Make it easy to say yes. Clear timelines, requirements, and support.'
         },
         exercise: {
-          title: 'Exercise 6.5 — Partnership Pitch',
+          title: 'Exercise 6.5 - Partnership Pitch',
           prompt: 'Prospect: "We\'ve been burned by fintechs who disappear." Address.',
           criteria: ['Acknowledge', 'Describe support', 'Offer references']
         },
@@ -6751,7 +7295,7 @@ Arnold identified these 15 questions as the ones Sphere faces repeatedly. Master
           keyTakeaway: 'Master the 15 questions, anticipate patterns, always close with next step.'
         },
         exercise: {
-          title: 'Exercise 6.6 — Full Roleplay',
+          title: 'Exercise 6.6 - Full Roleplay',
           prompt: '15 minutes with a UAE bank CRO who\'s skeptical of crypto. Go.',
           criteria: ['Strong opening', 'Handles objections', 'Uses metrics', 'Closes with next steps']
         },
@@ -6795,7 +7339,7 @@ This comprehensive assessment tests your knowledge across all six pillars. Compl
 **Before you begin:**
 - Review any pillars where you scored below 80%
 - Have the 15 Questions reference handy
-- Take your time — quality over speed`,
+- Take your time - quality over speed`,
     sections: [
       {
         id: 'exam-payments',
@@ -6813,7 +7357,7 @@ This comprehensive assessment tests your knowledge across all six pillars. Compl
           ]
         },
         learn: {
-          introduction: 'This section tests your understanding of traditional payments infrastructure — the foundation everything else builds on.',
+          introduction: 'This section tests your understanding of traditional payments infrastructure - the foundation everything else builds on.',
           coreQuestion: 'Can you explain why cross-border payments are structurally hard?',
           sections: [],
           keyTakeaway: 'Review Pillar 1 if you need to refresh on payment fundamentals.'
