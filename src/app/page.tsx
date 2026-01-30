@@ -27,14 +27,15 @@ const FormattedFeedback = ({ text }: { text: string }) => {
   const lines = text.split('\n');
   let inModelAnswer = false;
   let modelAnswerLines: string[] = [];
+  let modelAnswerTitle = 'Model Answer';
   
-  const renderModelAnswerBlock = (content: string[]) => {
+  const renderModelAnswerBlock = (content: string[], title: string) => {
     if (content.length === 0) return null;
     return (
       <div className="mt-4 bg-blue-500/10 border border-blue-500/30 rounded-xl p-5">
         <div className="flex items-center gap-2 mb-3">
           <span className="text-xl">📝</span>
-          <h4 className="font-semibold text-blue-400">Model Answer</h4>
+          <h4 className="font-semibold text-blue-400">{title}</h4>
         </div>
         <div className="text-gray-200 space-y-2">
           {content.map((line, i) => {
@@ -44,8 +45,8 @@ const FormattedFeedback = ({ text }: { text: string }) => {
             if (trimmed.startsWith('- ') || trimmed.startsWith('• ') || trimmed.startsWith('* ')) {
               return <div key={i} className="flex items-start gap-2 ml-2"><span className="text-blue-400">•</span><span>{trimmed.slice(2)}</span></div>;
             }
-            if (/^\d+[\.\)]\s/.test(trimmed)) {
-              const match = trimmed.match(/^(\d+)[\.\)]\s*(.*)/);
+            if (/^\d+[\.\\)]\s/.test(trimmed)) {
+              const match = trimmed.match(/^(\d+)[\.\\)]\s*(.*)/);
               if (match) {
                 return (
                   <div key={i} className="flex items-start gap-3 ml-2">
@@ -67,18 +68,27 @@ const FormattedFeedback = ({ text }: { text: string }) => {
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
     const trimmed = line.trim();
+    const cleanedLine = trimmed.replace(/\*\*/g, '').toLowerCase();
     
-    // Check for Model Answer header (including "Model Answer for Question X:")
-    if (/^\*?\*?Model Answer.*?\*?\*?:?$/i.test(trimmed.replace(/\*/g, '')) || /^Model Answer/i.test(trimmed.replace(/\*\*/g, ''))) {
+    // Check for Model Answer header - more robust detection
+    // Matches: "**Model Answer:**", "Model Answer:", "**Model Answer for Question 1:**", etc.
+    if (cleanedLine.startsWith('model answer')) {
+      // If we were already in a model answer, render it first
+      if (inModelAnswer && modelAnswerLines.length > 0) {
+        const rendered = renderModelAnswerBlock(modelAnswerLines, modelAnswerTitle);
+        if (rendered) elements.push(<div key={`model-${i}`}>{rendered}</div>);
+      }
       inModelAnswer = true;
       modelAnswerLines = [];
+      // Extract the title
+      modelAnswerTitle = trimmed.replace(/\*\*/g, '').replace(/:$/, '') || 'Model Answer';
       continue;
     }
     
     // Check if we've hit another section header while in model answer
-    if (inModelAnswer && /^\*\*[A-Z]/.test(trimmed) && !trimmed.toLowerCase().includes('model answer')) {
+    if (inModelAnswer && /^\*\*[A-Za-z]/.test(trimmed) && !cleanedLine.includes('model answer')) {
       // Render the collected model answer
-      const rendered = renderModelAnswerBlock(modelAnswerLines);
+      const rendered = renderModelAnswerBlock(modelAnswerLines, modelAnswerTitle);
       if (rendered) elements.push(<div key={`model-${i}`}>{rendered}</div>);
       inModelAnswer = false;
       modelAnswerLines = [];
@@ -172,8 +182,8 @@ const FormattedFeedback = ({ text }: { text: string }) => {
     }
     
     // Numbered items
-    if (/^\d+[\.\)]\s/.test(trimmed)) {
-      const match = trimmed.match(/^(\d+)[\.\)]\s*(.*)/);
+    if (/^\d+[\.\\)]\s/.test(trimmed)) {
+      const match = trimmed.match(/^(\d+)[\.\\)]\s*(.*)/);
       if (match) {
         elements.push(
           <div key={i} className="flex items-start gap-3 text-gray-300 ml-2">
@@ -198,7 +208,7 @@ const FormattedFeedback = ({ text }: { text: string }) => {
   
   // Don't forget to render any remaining model answer content
   if (inModelAnswer && modelAnswerLines.length > 0) {
-    const rendered = renderModelAnswerBlock(modelAnswerLines);
+    const rendered = renderModelAnswerBlock(modelAnswerLines, modelAnswerTitle);
     if (rendered) elements.push(<div key="model-final">{rendered}</div>);
   }
   
@@ -744,7 +754,7 @@ export default function TrainingPlatform() {
                       {loading ? (
                         <><Loader2 className="w-5 h-5 inline mr-2 animate-spin" />Getting Feedback...</>
                       ) : (
-                        <><Send className="w-5 h-5 inline mr-2" />Submit for AI Feedback</>
+                        <><Send className="w-5 h-5 inline mr-2" />Submit for Realtime Feedback</>
                       )}
                     </button>
                     
@@ -766,7 +776,7 @@ export default function TrainingPlatform() {
                         )}
                         <h4 className="font-semibold text-white mb-4 flex items-center gap-2">
                           <Award className="w-5 h-5 text-amber-400" />
-                          AI Feedback
+                          Feedback
                         </h4>
                         <FormattedFeedback text={aiFeedback[sectionKey]} />
                         <div className="flex items-center gap-4 mt-4">
@@ -974,7 +984,7 @@ export default function TrainingPlatform() {
                     {masterQuizLoading ? (
                       <><Loader2 className="w-5 h-5 inline mr-2 animate-spin" />Evaluating...</>
                     ) : (
-                      <><Trophy className="w-5 h-5 inline mr-2" />Submit for AI Evaluation</>
+                      <><Trophy className="w-5 h-5 inline mr-2" />Submit for Realtime Evaluation</>
                     )}
                   </button>
                 ) : masterQuizFeedback[pillar.id] && (
@@ -982,7 +992,7 @@ export default function TrainingPlatform() {
                     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
                       <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
                         <Award className="w-5 h-5 text-amber-400" />
-                        AI Evaluation
+                        Evaluation
                       </h3>
                       <FormattedFeedback text={masterQuizFeedback[pillar.id]} />
                     </div>
