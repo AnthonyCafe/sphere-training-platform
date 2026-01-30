@@ -24,9 +24,10 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
   // Render order for known properties
   const renderOrder = [
     'introduction', 'glossary', 'coreQuestion', 'warning',
+    // Section difficulty/prerequisites (for advanced sections)
+    'difficultyNote', 'summaryFramework',
     'arnoldQuote', 'parable', 'keyFact', 'keyPhrase',
     'stats', 'coreMetrics', 'sphereMetrics',
-    'antarcticaStory',
     'riskCategories', 'definitions', 'types',
     'sections',
     // Payment systems content (Pillar 1)
@@ -36,13 +37,14 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
     'systemDetails', 'bitcoinClarification',
     'identifyingCorrespondents',
     'issuanceVsTransmission', 'globalFrameworks',
-    'uaeDeepDive', 'singaporeDeepDive', 'ukDeepDive', 'brazilDeepDive',
+    'uaeDeepDive', 'sphereStatus', 'singaporeDeepDive', 'ukDeepDive', 'brazilDeepDive',
     'potentialFrictionPoints', 'howSphereAddresses',
-    'adoptionCurve', 'enterpriseUseCases',
     'realEnterpriseUseCases', 'whySphereIsRightPartner',
     'speedComparison', 'asymmetryProblem', 'fourLedgers', 'capitalEfficiency',
     'globalFrameworks', 'micaDetails', 'geniusAct', 'uaeFramework', 'convergencePattern',
     'adoptionCurve', 'enterpriseUseCases', 'unbankedOpportunity', 'arnoldOnMarkets',
+    // Pillar 2 story content (Antarctica moved after risk categories)
+    'antarcticaStory',
     'whatSphereIs', 'whatSphereIsNot', 'classificationMatters', 'classificationMattersLegally', 'complianceNative', 'sampleResponse', 'sampleResponses',
     'complianceFlow', 'complianceEnablesGrowth',
     'coreDefinitions', 'kycRequirements', 'amlProgram', 'cddRequirements', 'eddRequirements', 'sarRequirements',
@@ -68,7 +70,9 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
     'table', 'comparison', 'languageGuide',
     'sphereRelevance', 'sphereSolution',
     'arnoldInsight',
-    'keyTakeaway'
+    'keyTakeaway',
+    // Section transitions (always at end, before exercise/quiz)
+    'nextSection'
   ];
 
   // Get all keys from learn object
@@ -232,6 +236,19 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
 
     case 'riskCategories':
       return <RiskCategoriesBlock data={value} />;
+
+    // NEW: Pillar 2 flow improvements
+    case 'nextSection':
+      return <NextSectionBlock data={value} />;
+    
+    case 'difficultyNote':
+      return <DifficultyNoteBlock data={value} />;
+    
+    case 'summaryFramework':
+      return <SummaryFrameworkBlock data={value} />;
+    
+    case 'sphereStatus':
+      return <SphereStatusBlock data={value} />;
 
     case 'definitions':
     case 'types':
@@ -1033,6 +1050,81 @@ function PaymentSystemsDeepDiveBlock({ data }: { data: any }) {
             </div>
           )}
         </div>
+      )}
+    </div>
+  );
+}
+
+// NEW: Next Section Block (section transitions)
+function NextSectionBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/30 rounded-xl p-4 mt-6">
+      <h4 className="text-blue-300 font-semibold mb-2">→ {data.title}</h4>
+      <p className="text-gray-300 text-sm">{data.preview}</p>
+    </div>
+  );
+}
+
+// NEW: Difficulty Note Block (for advanced sections)
+function DifficultyNoteBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-4 mb-4">
+      <div className="flex items-center gap-2 mb-2">
+        <span className="bg-amber-500 text-white text-xs font-bold px-2 py-0.5 rounded">{data.level}</span>
+        <span className="text-amber-300 font-medium">Section Difficulty</span>
+      </div>
+      {data.prerequisites && (
+        <p className="text-gray-400 text-sm mb-1"><span className="text-gray-500">Prerequisites:</span> {data.prerequisites}</p>
+      )}
+      {data.audience && (
+        <p className="text-gray-400 text-sm mb-1"><span className="text-gray-500">Audience:</span> {data.audience}</p>
+      )}
+      {data.recommendation && (
+        <p className="text-amber-200 text-sm mt-2">💡 {data.recommendation}</p>
+      )}
+    </div>
+  );
+}
+
+// NEW: Summary Framework Block (for Section 2.6)
+function SummaryFrameworkBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700 mb-4">
+      <h3 className="text-white font-semibold text-xl mb-1">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 text-sm mb-4">{data.subtitle}</p>}
+      
+      <div className="grid md:grid-cols-3 gap-3 mb-4">
+        {data.categories?.map((cat: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+            <div className="flex items-center gap-2 mb-2">
+              <span className="text-2xl">{cat.icon}</span>
+              <h4 className="text-white font-medium">{cat.name}</h4>
+            </div>
+            <p className="text-gray-300 text-sm mb-2">{cat.oneLiner}</p>
+            <p className="text-gray-500 text-xs mb-1"><span className="text-gray-400">Case Study:</span> {cat.caseStudy}</p>
+            <p className="text-emerald-300 text-xs"><span className="text-emerald-400">Sphere:</span> {cat.sphereResponse}</p>
+          </div>
+        ))}
+      </div>
+      
+      {data.keyMessage && (
+        <div className="bg-blue-500/10 border border-blue-500/30 rounded p-3">
+          <p className="text-blue-200 text-sm">{data.keyMessage}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// NEW: Sphere Status Block (for UAE section)
+function SphereStatusBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4 mt-3">
+      <h4 className="text-amber-300 font-semibold mb-1">{data.title}</h4>
+      <p className="text-amber-400 font-bold text-lg mb-2">{data.status}</p>
+      <p className="text-gray-300 text-sm mb-2">{data.explanation}</p>
+      {data.crossReference && (
+        <p className="text-blue-300 text-sm bg-blue-500/10 rounded p-2">📚 {data.crossReference}</p>
       )}
     </div>
   );
