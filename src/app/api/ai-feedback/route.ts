@@ -56,7 +56,7 @@ Provide feedback in this EXACT format (use the exact icons shown):
 **Great Insight:** [Highlight something specific they said that shows good thinking]
 
 **Model Answer:**
-[Only provide if score is 6/10 or below. For scores 7/10 and above, write: "Your response demonstrates solid understanding! For additional depth, you might explore [one brief suggestion]."]
+[MANDATORY if score is 8/10 or below - Write a comprehensive, perfect example response that would score 10/10. This should demonstrate exactly what an ideal answer looks like, covering all the criteria. Make it detailed and educational so the trainee can learn from it. If score is 9/10 or 10/10, write: "Excellent work! Your response demonstrates strong understanding. No model answer needed for scores at 90% or above."]
 
 REMEMBER: Be supportive and developmental. The goal is to build confidence while guiding improvement.`
   } else if (body.type === 'quiz') {
@@ -111,7 +111,7 @@ ${body.responses?.map((_: any, i: number) => `**Question ${i + 1} Score: X/10**
 - Verdict: ✅ Pass / 💡 Good with room to grow
 
 **Model Answer for Question ${i + 1}:**
-[Only if score is 6/10 or below. For 7/10 and above, write: "Your response shows solid understanding. For additional depth, consider [one brief enhancement]."]
+[MANDATORY if score is 8/10 or below - Write a comprehensive, perfect example response that demonstrates exactly what an ideal answer looks like. Make it detailed and educational. If score is 9/10 or 10/10, write: "Excellent response! No model answer needed for scores at 90% or above."]
 `).join('\n')}
 
 **OVERALL WRITTEN SCORE: X/10**
