@@ -43,22 +43,26 @@ Provide feedback in this EXACT format (use the exact icons shown):
 **Score: X/10**
 
 **Strengths:**
-- ✅ [Specific strength - what they did well - find at least 2 positives]
-- ✅ [Another specific strength - be generous in recognizing understanding]
+- ✅ [Specific strength - what they did well]
+- ✅ [Another specific strength]
 
-**Suggestions for Enhancement:**
-- 💡 [Helpful suggestion framed positively - "Consider also..." or "You could strengthen this by..."]
-- 💡 [Another suggestion if applicable]
+**Needs Improvement:**
+- ⚠️ [Specific area that could be better, with suggestion]
+- ⚠️ [Another improvement area]
 
-**Corrections (only if factually incorrect):**
-- ⚠️ [Only include if there's an actual factual error - many responses won't need this section]
+**Errors (if any):**
+- ❌ [Factual error or significant mistake - only include if actually wrong]
 
-**Great Insight:** [Highlight something specific they said that shows good thinking]
+**Key Tip:** [One actionable suggestion for next time]
 
 **Model Answer:**
-[MANDATORY if score is 8/10 or below - Write a comprehensive, perfect example response that would score 10/10. This should demonstrate exactly what an ideal answer looks like, covering all the criteria. Make it detailed and educational so the trainee can learn from it. If score is 9/10 or 10/10, write: "Excellent work! Your response demonstrates strong understanding. No model answer needed for scores at 90% or above."]
+[MANDATORY if score is 8/10 or below - Write a comprehensive, perfect example response that would score 10/10. This should demonstrate exactly what an ideal answer looks like, covering all the criteria. Make it detailed and educational so the trainee can learn from it. If score is 9/10 or 10/10, write "Great job! No model answer needed for scores above 80%."]
 
-REMEMBER: Be supportive and developmental. The goal is to build confidence while guiding improvement.`
+CRITICAL INSTRUCTIONS:
+1. Use ✅ for strengths, ⚠️ for areas needing improvement, and ❌ only for factual errors
+2. Be encouraging but honest
+3. Score fairly based on criteria met - use the scoring philosophy above to be generous
+4. YOU MUST ALWAYS INCLUDE THE MODEL ANSWER SECTION - if score is 8/10 or below, provide a full example answer; if 9/10 or above, just note that no model is needed`
   } else if (body.type === 'quiz') {
     prompt = `You are a supportive training coach. The trainee completed a quiz with these results:
 
@@ -68,14 +72,14 @@ REMEMBER: Be supportive and developmental. The goal is to build confidence while
 **Questions Missed**:
 ${body.missedQuestions?.map((q: any) => `- ${q.question}\n  Their answer: ${q.theirAnswer}\n  Correct answer: ${q.correctAnswer}`).join('\n') || 'None - perfect score!'}
 
-Provide brief, encouraging feedback in this EXACT format:
+Provide brief feedback in this EXACT format:
 
 **Quiz Score: ${body.correctAnswers}/${body.totalQuestions} (${body.percentage}%)**
 
 **Feedback:**
-[2-3 sentences - be encouraging! If they missed questions, frame it as a learning opportunity, not a failure. Acknowledge what they got right before addressing what to review.]
+[2-3 sentences on performance and what to review if needed]
 
-**Next Steps:** [Positive framing - "To strengthen your knowledge..." or "You're ready to move forward!"]`
+**Recommendation:** [Pass/Review specific topics]`
   } else if (body.type === 'mastery') {
     prompt = `You are a senior training coach for Sphere's UAE engagement program. Your role is to provide developmental feedback that builds confidence while identifying growth areas.
 
@@ -105,24 +109,28 @@ ${body.responses?.map((r: any, i: number) => `
 Provide evaluation in this EXACT format (use the exact icons shown):
 
 ${body.responses?.map((_: any, i: number) => `**Question ${i + 1} Score: X/10**
-- ✅ Strengths: [What they did well - find positives first]
-- 💡 Enhancement: [Framed as opportunity, not criticism]
-- ⚠️ Correction: [Only if factually wrong - omit if no actual errors]
-- Verdict: ✅ Pass / 💡 Good with room to grow
+- ✅ Strengths: [What they did well]
+- ⚠️ Needs improvement: [What could be better]
+- ❌ Errors: [Only if factually wrong - omit this line if no errors]
+- Verdict: ✅ Pass / ⚠️ Needs Work / ❌ Insufficient
 
 **Model Answer for Question ${i + 1}:**
-[MANDATORY if score is 8/10 or below - Write a comprehensive, perfect example response that demonstrates exactly what an ideal answer looks like. Make it detailed and educational. If score is 9/10 or 10/10, write: "Excellent response! No model answer needed for scores at 90% or above."]
+[MANDATORY if score is 8/10 or below - Write a comprehensive, perfect example response that demonstrates exactly what an ideal answer looks like. Make it detailed and educational. If score is 9/10 or 10/10, write "Score above 80% - no model answer needed."]
 `).join('\n')}
 
 **OVERALL WRITTEN SCORE: X/10**
 
 **Summary:**
-- ✅ [Key strength - what they're doing well overall]
-- 💡 [One growth area framed positively]
+- ✅ [Key strength across responses]
+- ⚠️ [Key area to focus on]
 
-**OVERALL ASSESSMENT:** [2-3 sentences - be encouraging! Acknowledge their effort and understanding. Frame any gaps as opportunities for continued learning, not deficiencies.]
+**OVERALL ASSESSMENT:** [2-3 sentence summary of readiness level and key recommendations]
 
-REMEMBER: The goal is to develop confident, capable team members. Lead with what's working before suggesting improvements.`
+CRITICAL INSTRUCTIONS:
+1. Use ✅ for strengths/pass, ⚠️ for needs improvement, and ❌ only for factual errors or insufficient responses
+2. YOU MUST ALWAYS INCLUDE A MODEL ANSWER SECTION FOR EACH QUESTION - if score is 8/10 or below, provide a full example; if 9/10 or above, just note that no model is needed
+3. Be thorough in your model answers - they should teach the trainee exactly what a perfect response looks like
+4. Use the scoring philosophy above to be generous with scores`
   }
 
   try {
