@@ -1389,9 +1389,17 @@ You must be able to discuss stablecoins without crypto language, understand thei
               { label: 'Stablecoin transfer cost', value: '< $0.01' }
             ]
           },
-          arnoldQuote: {
-            quote: 'By 2030, stablecoins are estimated to be the world\'s default way of moving money.',
-            speaker: 'Arnold Lee'
+          types: {
+            title: 'Types of Stablecoins',
+            subtitle: 'Understanding the different types helps you explain why Sphere uses specific stablecoins for specific corridors.',
+            items: [
+              { type: 'Fiat-Collateralized', icon: '💵', examples: 'USDT, USDC, PYUSD, EURC', description: 'Backed 1:1 by fiat reserves. Most common, most institutional. Subject to MiCA/GENIUS Act.' },
+              { type: 'Crypto-Collateralized', icon: '🔗', examples: 'DAI/USDS', description: 'Backed by crypto assets (over-collateralized). More volatile, DeFi-focused. Less regulatory clarity.' },
+              { type: 'Algorithmic', icon: '📈', examples: 'Terra/Luna (failed 2022)', description: 'Maintained by algorithms, no hard backing. HIGH RISK. Most jurisdictions now restrict or prohibit.' },
+              { type: 'Commodity-Backed', icon: '🥇', examples: 'PAXG (gold)', description: 'Backed by physical commodities. Niche use cases. Subject to commodity regulations.' },
+              { type: 'Bank-Consortium', icon: '🏦', examples: 'USDG (launching), JPM Coin', description: 'Issued by or backed by bank consortiums. Emerging category targeting institutional adoption.' }
+            ],
+            sphereFocus: 'Sphere primarily uses FIAT-COLLATERALIZED stablecoins (USDC, USDT) because they have the deepest liquidity, clearest regulatory status, and are most trusted by institutional counterparties.'
           },
           sections: [
             {
@@ -1402,6 +1410,11 @@ You must be able to discuss stablecoins without crypto language, understand thei
               keyPoint: 'The end user never needs to understand crypto. They send money, recipient gets money — faster and cheaper.'
             }
           ],
+          arnoldQuote: {
+            quote: 'By 2030, stablecoins are estimated to be the world\'s default way of moving money.',
+            speaker: 'Arnold Lee',
+            context: 'This isn\'t crypto hype — it\'s infrastructure evolution.'
+          },
           stablecoinSandwichDeepDive: {
             title: 'The Stablecoin Sandwich Explained in Depth',
             concept: 'The "stablecoin sandwich" is the core innovation that makes Sphere work. It\'s called a sandwich because stable coin sits in the middle—wrapped by fiat on both sides. The end user only ever touches fiat currency.',
@@ -1589,16 +1602,6 @@ You must be able to discuss stablecoins without crypto language, understand thei
               implication: 'This is the connection to systemic risk — stablecoin redemptions could force Treasury sales, affecting yields and liquidity.'
             }
           },
-          types: {
-            title: 'Types of Stablecoins',
-            items: [
-              { type: 'Fiat-Collateralized', icon: '💵', examples: 'USDT, USDC, PYUSD, EURC', description: 'Backed 1:1 by fiat reserves. Most common, most institutional. Subject to MiCA/GENIUS Act.' },
-              { type: 'Crypto-Collateralized', icon: '🔗', examples: 'DAI/USDS', description: 'Backed by crypto assets (over-collateralized). More volatile, DeFi-focused. Less regulatory clarity.' },
-              { type: 'Algorithmic', icon: '📈', examples: 'Terra/Luna (failed 2022)', description: 'Maintained by algorithms, no hard backing. HIGH RISK. Most jurisdictions now restrict or prohibit.' },
-              { type: 'Commodity-Backed', icon: '🥇', examples: 'PAXG (gold)', description: 'Backed by physical commodities. Niche use cases. Subject to commodity regulations.' },
-              { type: 'Bank-Consortium', icon: '🏦', examples: 'USDG (launching), JPM Coin', description: 'Issued by or backed by bank consortiums. Emerging category targeting institutional adoption.' }
-            ]
-          },
           sphereRelevance: {
             title: 'Sphere\'s Position',
             points: [
@@ -1613,7 +1616,11 @@ You must be able to discuss stablecoins without crypto language, understand thei
             wrong: ['Sphere is a crypto company'],
             correct: ['Sphere uses stablecoin rails for faster B2B settlement']
           },
-          keyTakeaway: 'Stablecoins are settlement infrastructure, not speculation. Sphere uses them as invisible plumbing.'
+          keyTakeaway: 'Stablecoins are settlement infrastructure, not speculation. Sphere uses them as invisible plumbing.',
+          nextSection: {
+            title: 'What\'s Next',
+            preview: 'Now that you understand what stablecoins are and how Sphere uses them, Section 2.2 covers the risks. Stablecoins are NOT risk-free — and sophisticated counterparties will test your knowledge of what can go wrong.'
+          }
         },
         exercise: {
           title: 'Exercise 2.1 — Stablecoin Explanation',
@@ -1644,85 +1651,9 @@ You must be able to discuss stablecoins without crypto language, understand thei
         learn: {
           introduction: 'Stablecoins are NOT risk-free. If you present them as "risk-free digital dollars," you will lose credibility instantly with sophisticated counterparties.',
           coreQuestion: 'What can go wrong with stablecoins?',
-          antarcticaStory: {
-            title: 'The Antarctica Story: A Cautionary Tale',
-            speaker: 'Arnold Lee',
-            setup: 'Arnold tells a parable about "Antarctica" — a fictional emerging market that serves as a perfect case study for understanding the disruptive potential and risks of stablecoins in economies with weak currencies and capital controls.',
-            theScenario: {
-              title: 'The Setup: Pre-Stablecoin Antarctica',
-              situation: 'Antarctica is an emerging market country with chronic inflation and currency instability. The local currency, let\'s call it the "Antarctic Peso," has been depreciating 20-30% annually for years. The government, desperate to prevent capital flight, institutes strict capital controls.',
-              capitalControls: [
-                'Citizens can only convert $10,000 per year from Antarctic Pesos to USD',
-                'Businesses need government approval for any foreign currency transaction',
-                'Official exchange rate: 100 Pesos = $1 USD (government-set)',
-                'Black market rate: 150 Pesos = $1 USD (market reality)'
-              ],
-              whatThisMeans: 'If you\'re an Antarctic citizen or business, your savings are trapped in a depreciating currency. The government uses this captive capital to finance its operations—printing money to pay salaries, fund public services, service debt. The population has no escape.'
-            },
-            stablecoinsArrive: {
-              title: 'Act II: Stablecoins Arrive in Antarctica',
-              howTheyArrive: 'Savvy Antarcticans discover they can:',
-              steps: [
-                'Buy USDT on a peer-to-peer exchange using local currency',
-                'Hold USDT in a self-custody wallet (government can\'t freeze it)',
-                'Transact in USDT with anyone globally (bypassing capital controls)',
-                'Convert USDT back to local currency when needed'
-              ],
-              adoption: 'Within 6 months, 30% of businesses start accepting USDT for payments. Within 12 months, 60% of savings move from Antarctic Peso bank accounts into USDT wallets. Within 18 months, no one trusts the Antarctic Peso anymore.',
-              quote: 'If you have easy access to dollars through stablecoins, why do you need the old fishbones at all?',
-              fishbonesExplained: 'The "old fishbones" are the Antarctic Peso—the local currency that citizens used because they had no alternative. Stablecoins provided the alternative.'
-            },
-            theCollapse: {
-              title: 'Act III: The System Collapses',
-              whatHappens: 'The Antarctic government suddenly realizes:',
-              consequences: [
-                {
-                  problem: 'Tax Revenue Vanishes',
-                  explanation: 'Businesses transact in USDT off the government\'s radar. Sales taxes, VAT, corporate taxes—all evaded or underreported. Government revenue drops 40%.'
-                },
-                {
-                  problem: 'Central Bank Loses Control',
-                  explanation: 'Monetary policy is useless. The central bank can print Antarctic Pesos, but no one wants them. Interest rate adjustments don\'t matter when citizens save in USDT.'
-                },
-                {
-                  problem: 'Government Can\'t Pay Salaries',
-                  explanation: 'Teachers, police, military, civil servants are all paid in Antarctic Pesos. But no one will accept Pesos anymore. Government tries to pay salaries in Pesos—employees refuse to work.'
-                },
-                {
-                  problem: 'Social Services Collapse',
-                  explanation: 'Healthcare, education, infrastructure—all funded by the government. With no tax revenue and no one accepting the currency, these services shut down.'
-                },
-                {
-                  problem: 'Civil Unrest',
-                  explanation: 'Unpaid police and military. Desperate citizens. No social services. The government tries to ban stablecoins, but it\'s too late—everyone is already using them. Enforcement is impossible.'
-                }
-              ],
-              theCrisis: 'Within 24 months of mass stablecoin adoption, Antarctica\'s government is functionally insolvent. The Antarctic Peso collapses from 150:1 to 10,000:1. Hyperinflation sets in. The economy implodes.'
-            },
-            theLessonTitle: 'What the Antarctica Story Teaches Us',
-            lessons: [
-              {
-                lesson: 'Stablecoins Are Disruptive, Not Risk-Free',
-                explanation: 'Stablecoins aren\'t neutral technology. They fundamentally challenge the sovereignty of any government that relies on currency controls or seigniorage (profit from printing money). Emerging markets with weak currencies are most vulnerable.'
-              },
-              {
-                lesson: 'Violent Transitions Are the Real Risk',
-                explanation: 'The problem isn\'t that stablecoins exist. The problem is the SPEED of transition. Antarctica\'s economy had no time to adapt. Gradual dollarization (like Ecuador or El Salvador) can be managed. Rapid, uncontrolled dollarization via stablecoins creates chaos.'
-              },
-              {
-                lesson: 'Regulators Will React',
-                explanation: 'When governments see their monetary sovereignty threatened, they WILL crack down. We\'ve already seen this: China banned crypto, Nigeria restricted stablecoin access, India proposed bans. Sphere must work WITH regulators, not around them.'
-              },
-              {
-                lesson: 'Don\'t Present Stablecoins as Harmless',
-                explanation: 'If you tell a central banker "stablecoins are just faster payments," they will not take you seriously. They understand the systemic implications. Acknowledge the disruption. Frame Sphere as a compliance-native solution that respects sovereignty.'
-              }
-            ],
-            arnoldInsight: 'Stablecoins themselves are not the problem, but VIOLENT TRANSITIONS are. Countries need time to adapt. Sphere works with regulators to enable gradual, controlled adoption—not chaotic displacement.',
-            spherePosition: 'Sphere is NOT trying to replace national currencies. We\'re providing cross-border payment infrastructure for businesses—not facilitating mass dollarization. Our customers are enterprises paying suppliers, not citizens hoarding stablecoins to avoid local currency.'
-          },
           riskCategories: {
             title: 'Five Categories of Stablecoin Risk',
+            subtitle: 'Understanding these risk categories is foundational. Every sophisticated counterparty will probe your knowledge here.',
             items: [
               {
                 category: 'Reserve Risk',
@@ -1783,7 +1714,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
           },
           caseStudy: {
             title: 'USDC Depeg (March 2023): The Full Story',
-            subtitle: 'How a well-regulated, fully-backed stablecoin lost its peg in 48 hours',
+            subtitle: 'How a well-regulated, fully-backed stablecoin lost its peg in 48 hours — demonstrating counterparty risk in action',
             background: {
               title: 'Background: USDC Pre-Crisis',
               status: 'USDC was the gold standard of stablecoins',
@@ -1950,7 +1881,57 @@ You must be able to discuss stablecoins without crypto language, understand thei
             keyPoint: 'We hold stablecoins for MINUTES, not days. This dramatically reduces exposure to ALL five risk categories. Even in worst-case scenarios (depeg, hack, bank failure), our exposure is limited to minutes of transaction flow.',
             honestAssessment: 'Can Sphere eliminate stablecoin risk? NO. Can we minimize it to acceptable levels for enterprise customers? YES. Transparency about risk is MORE IMPORTANT than promising zero risk.'
           },
-          keyTakeaway: '"Stable" doesn\'t mean "risk-free." Understand the risks and how Sphere mitigates them.'
+          antarcticaStory: {
+            title: 'The Antarctica Story: A Macro Risk Perspective',
+            speaker: 'Arnold Lee',
+            setup: 'Beyond the five categories of technical risk above, there\'s a broader SYSTEMIC risk that sophisticated counterparties — especially central bankers — will probe. Arnold tells a parable about "Antarctica" to illustrate.',
+            theScenario: {
+              title: 'The Setup: Pre-Stablecoin Antarctica',
+              situation: 'Antarctica is an emerging market country with chronic inflation and currency instability. The local currency, the "Antarctic Peso," has been depreciating 20-30% annually for years. The government institutes strict capital controls.',
+              capitalControls: [
+                'Citizens can only convert $10,000 per year from Antarctic Pesos to USD',
+                'Businesses need government approval for any foreign currency transaction',
+                'Official exchange rate: 100 Pesos = $1 USD (government-set)',
+                'Black market rate: 150 Pesos = $1 USD (market reality)'
+              ],
+              whatThisMeans: 'If you\'re an Antarctic citizen or business, your savings are trapped in a depreciating currency. The government uses this captive capital to finance its operations.'
+            },
+            stablecoinsArrive: {
+              title: 'Act II: Stablecoins Arrive',
+              howTheyArrive: 'Savvy Antarcticans discover they can:',
+              steps: [
+                'Buy USDT on a peer-to-peer exchange using local currency',
+                'Hold USDT in a self-custody wallet (government can\'t freeze it)',
+                'Transact in USDT with anyone globally (bypassing capital controls)',
+                'Convert USDT back to local currency when needed'
+              ],
+              adoption: 'Within 18 months, no one trusts the Antarctic Peso anymore.',
+              quote: 'If you have easy access to dollars through stablecoins, why do you need the old fishbones at all?',
+              fishbonesExplained: 'The "old fishbones" are the Antarctic Peso—the local currency that citizens used because they had no alternative.'
+            },
+            theCollapse: {
+              title: 'Act III: The System Collapses',
+              consequences: [
+                { problem: 'Tax Revenue Vanishes', explanation: 'Businesses transact in USDT off the government\'s radar.' },
+                { problem: 'Central Bank Loses Control', explanation: 'Monetary policy is useless. Interest rate adjustments don\'t matter when citizens save in USDT.' },
+                { problem: 'Government Can\'t Pay Salaries', explanation: 'No one will accept Pesos anymore.' },
+                { problem: 'Social Services Collapse', explanation: 'With no tax revenue, services shut down.' }
+              ],
+              theCrisis: 'Within 24 months, Antarctica\'s government is functionally insolvent. This is the SYSTEMIC RISK regulators worry about.'
+            },
+            theLessonTitle: 'Why This Matters for Sphere',
+            lessons: [
+              { lesson: 'Don\'t Present Stablecoins as Harmless', explanation: 'Central bankers understand the systemic implications. Acknowledge the disruption.' },
+              { lesson: 'Violent Transitions Are the Real Risk', explanation: 'The problem is SPEED of transition. Gradual dollarization can be managed. Rapid, uncontrolled dollarization creates chaos.' },
+              { lesson: 'Sphere\'s Position', explanation: 'We\'re providing cross-border payment infrastructure for BUSINESSES—not facilitating mass dollarization. Our customers are enterprises paying suppliers, not citizens evading capital controls.' }
+            ],
+            arnoldInsight: 'Stablecoins themselves are not the problem, but VIOLENT TRANSITIONS are. Countries need time to adapt. Sphere works with regulators to enable gradual, controlled adoption—not chaotic displacement.'
+          },
+          keyTakeaway: '"Stable" doesn\'t mean "risk-free." Understand the five risk categories, be honest about them, and explain how Sphere mitigates each one.',
+          nextSection: {
+            title: 'What\'s Next',
+            preview: 'Section 2.3 covers the speed vs safety tradeoffs — the operational challenges that arise when stablecoins settle in minutes but fiat takes days.'
+          }
         },
         exercise: {
           title: 'Exercise 2.2 — Risk Explanation',
@@ -2311,9 +2292,9 @@ You must be able to discuss stablecoins without crypto language, understand thei
             title: 'UAE: Sphere\'s Home Market',
             whyUAE: 'UAE is Sphere\'s primary market. Dubai is the financial hub for MENA, Asia-Africa trade, and emerging markets. High volume of cross-border payments, progressive regulatory environment.',
             regulators: [
-              { name: 'CBUAE (Central Bank of UAE)', jurisdiction: 'Onshore payment services', relevance: 'Sphere operates under CBUAE licensing for fiat on/off-ramping' },
+              { name: 'CBUAE (Central Bank of UAE)', jurisdiction: 'Onshore payment services', relevance: 'Federal regulator for fiat payment services and stablecoin rules' },
               { name: 'VARA (Virtual Assets Regulatory Authority)', jurisdiction: 'Dubai virtual assets', relevance: 'Governs crypto custody, exchange services in Dubai' },
-              { name: 'DFSA (Dubai Financial Services Authority)', jurisdiction: 'DIFC (Dubai International Financial Centre)', relevance: 'Free zone regulator—separate from onshore' },
+              { name: 'DFSA (Dubai Financial Services Authority)', jurisdiction: 'DIFC (Dubai International Financial Centre)', relevance: 'Free zone regulator—English Common Law jurisdiction' },
               { name: 'FSRA (Financial Services Regulatory Authority)', jurisdiction: 'ADGM (Abu Dhabi Global Market)', relevance: 'Abu Dhabi free zone—separate from Dubai' }
             ],
             keyDevelopments: [
@@ -2322,15 +2303,11 @@ You must be able to discuss stablecoins without crypto language, understand thei
               'UAE-India payment corridor focus (massive remittance volume)',
               'Dubai Multi Commodities Centre (DMCC) crypto hub'
             ],
-            complianceRequirements: {
-              title: 'Sphere\'s UAE Compliance Obligations',
-              requirements: [
-                'Payment Services License from CBUAE (Sphere has applied)',
-                'AML/KYC: UAE FIU reporting, FATF compliance, sanctions screening',
-                'Reserve management: Fiat held at UAE-licensed banks',
-                'Consumer protection: Clear disclosures, dispute resolution',
-                'Operational resilience: Business continuity, cybersecurity standards'
-              ]
+            sphereStatus: {
+              title: '⚠️ Sphere\'s Current UAE Status',
+              status: 'EXPLORING — NOT YET LICENSED',
+              explanation: 'Sphere is actively exploring UAE market entry but has NOT yet obtained UAE licenses. Be honest about this status with counterparties.',
+              crossReference: 'For detailed UAE regulatory framework (VARA vs DIFC vs ADGM, CBUAE stablecoin rules, decision frameworks), see Section 3.5 in Pillar 3.'
             }
           },
           singaporeDeepDive: {
@@ -2732,7 +2709,8 @@ You must be able to discuss stablecoins without crypto language, understand thei
             current: 'We\'re in the PRODUCTION phase. Stablecoins are no longer experimental.'
           },
           enterpriseUseCases: {
-            title: 'Real Enterprise Use Cases',
+            title: 'Enterprise Use Case Categories',
+            subtitle: 'High-level categories where stablecoins add value',
             items: [
               { useCase: 'Treasury Management', benefit: '24/7 liquidity, yield on idle cash' },
               { useCase: 'Cross-Border Payments', benefit: '15-30 min vs 2-5 days' },
@@ -2913,7 +2891,11 @@ You must be able to discuss stablecoins without crypto language, understand thei
               'We\'re invisible to end users — that\'s the point'
             ]
           },
-          keyTakeaway: 'Stablecoins have moved from speculation to production. 1.4B unbanked people need dollar access — that\'s Sphere\'s market.'
+          keyTakeaway: 'Stablecoins have moved from speculation to production. 1.4B unbanked people need dollar access — that\'s Sphere\'s market.',
+          nextSection: {
+            title: 'What\'s Next: Systemic Risk at Scale',
+            preview: 'With adoption comes scale, and with scale comes systemic implications. Section 2.6 covers the macro-level risks that central bankers and sophisticated institutional counterparties will probe — leverage formation, liquidity runs, and enforcement gaps. This is advanced material, but essential for regulatory conversations.'
+          }
         },
         exercise: {
           title: 'Exercise 2.5 — Use Case Development',
@@ -2949,6 +2931,40 @@ You must be able to discuss stablecoins without crypto language, understand thei
         learn: {
           introduction: 'Stablecoins have reached systemic scale. Understanding macro-level risks is essential for conversations with central banks, regulators, and sophisticated institutional counterparties. This section covers the advanced risk framework that goes beyond individual stablecoin risks to address system-wide implications.',
           coreQuestion: 'How do stablecoin risks extend beyond crypto into the broader financial system?',
+          difficultyNote: {
+            level: 'ADVANCED',
+            prerequisites: 'Sections 2.1-2.5 (stablecoin fundamentals, risk categories, regulatory landscape)',
+            audience: 'This material is designed for conversations with central bankers, risk committees, and institutional compliance teams. Not needed for basic sales conversations.',
+            recommendation: 'Review this section thoroughly before regulatory meetings. The three-risk-category framework is essential for demonstrating Sphere\'s sophistication.'
+          },
+          summaryFramework: {
+            title: 'The Three Systemic Risk Categories — At a Glance',
+            subtitle: 'Before diving deep, here\'s the framework you\'ll learn:',
+            categories: [
+              { 
+                name: 'Leverage Formation', 
+                icon: '📈', 
+                oneLiner: 'Hidden leverage builds outside regulatory view through rehypothecation', 
+                caseStudy: 'MakerDAO — how 50% of "decentralized" DAI was backed by USDC',
+                sphereResponse: 'SphereNet enforces collateral transparency at protocol level'
+              },
+              { 
+                name: 'Liquidity Runs', 
+                icon: '🏃', 
+                oneLiner: 'Synchronized exits without circuit breakers create contagion', 
+                caseStudy: 'USDC depeg — $10B+ moved in 48 hours with no pause mechanism',
+                sphereResponse: 'SphereNet supports programmable circuit breakers'
+              },
+              { 
+                name: 'Enforcement Gaps', 
+                icon: '⚖️', 
+                oneLiner: 'On-chain settlement outpaces regulatory response capability', 
+                caseStudy: 'Chainalysis limitations — analytics see history, not prevent violations',
+                sphereResponse: 'SphereNet enforces compliance BEFORE settlement'
+              }
+            ],
+            keyMessage: 'These three risks are why traditional blockchains cannot serve as compliant financial infrastructure. SphereNet addresses each at the protocol level.'
+          },
           systemicScaleContext: {
             title: 'Stablecoins Have Reached Systemic Scale',
             marketSize: {
