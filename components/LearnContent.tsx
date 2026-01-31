@@ -53,18 +53,36 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
     'whatIsIt', 'thresholds', 'travelRuleFlow', 'whyItMatters',
     'mitigationFramework', 'sphereCertifications',
     'counterpartyTypes', 'dueDiligenceFramework',
-    // NEW P4.2 Counterparty Risk fields
+    // P4.2 Counterparty Risk fields
     'whyCounterpartyRiskMatters', 'ongoingMonitoring', 'concentrationManagement',
     'counterpartyFailureScenarios', 'counterpartyRiskMetrics',
-    'liquidityTypes', 'managementStrategies',
+    // P4.3 Liquidity Risk fields
+    'whyLiquidityIsCritical', 'liquidityTypes', 'liquidityManagementFramework',
+    'stressTesting', 'managementStrategies',
+    // P4.4 Operational Risk fields
+    'whyOperationalRiskMatters', 'threeRiskCategories', 'keyControls',
     'keyMetrics', 'sphereResilience',
-    'severityLevels', 'postIncidentReview',
+    // P4.5 Business Continuity fields
+    'bcpVsDr', 'resilienceArchitecture', 'warRoomProtocol',
+    'incidentCommunication', 'severityLevels', 'postIncidentReview',
+    // P4.6 Cybersecurity fields
+    'securityFramework', 'threatLandscape', 'cryptoSpecificSecurity',
+    // P4.7 Governance fields
+    'boardOversight', 'threeLines', 'governanceCertifications',
+    // P5 Technical fields
+    'apiOverview', 'architectureOverview', 'technicalArchitecture',
+    'bankingIntegrationArchitecture', 'commonIntegrationPatterns', 'systemSpecificIntegration',
+    'stablecoinSettlementDeepDive', 'paymentSystemsDeepDive',
+    // Case studies
+    'caseStudy', 'caseStudies', 'celsiusCaseStudy',
+    // Common patterns
+    'institutionalQA', 'metrics',
     'foundingContext', 'arnoldQuotes',
     'productComponents', 'paymentFlow',
     'vsTraditional', 'vsCryptoNative',
     'primaryUseCases', 'bobAndAhmed',
     'questions', 'tips', 'closingExample',
-    'caseStudy', 'systemicRisk', 'sphereMitigation', 'sphereApproach', 'spherePosition',
+    'systemicRisk', 'sphereMitigation', 'sphereApproach', 'spherePosition',
     'regulatorQA', 'reserveComposition',
     'table', 'comparison', 'languageGuide',
     'sphereRelevance', 'sphereSolution',
@@ -684,6 +702,80 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
     
     case 'edgeCases':
       return <EdgeCasesBlock data={value} />;
+
+    // =========================================================================
+    // PILLAR 4 OPERATIONAL RISK HANDLERS
+    // =========================================================================
+    case 'whyOperationalRiskMatters':
+      return <WhyOperationalRiskMattersBlock data={value} />;
+
+    case 'whyLiquidityIsCritical':
+      return <WhyLiquidityIsCriticalBlock data={value} />;
+
+    case 'securityFramework':
+      return <SecurityFrameworkBlock data={value} />;
+
+    case 'threatLandscape':
+      return <ThreatLandscapeBlock data={value} />;
+
+    case 'keyControls':
+      return <KeyControlsBlock data={value} />;
+
+    case 'liquidityManagementFramework':
+      return <LiquidityManagementFrameworkBlock data={value} />;
+
+    case 'stressTesting':
+      return <StressTestingBlock data={value} />;
+
+    case 'bcpVsDr':
+      return <BcpVsDrBlock data={value} />;
+
+    case 'resilienceArchitecture':
+      return <ResilienceArchitectureBlock data={value} />;
+
+    case 'warRoomProtocol':
+      return <WarRoomProtocolBlock data={value} />;
+
+    case 'incidentCommunication':
+      return <IncidentCommunicationBlock data={value} />;
+
+    case 'boardOversight':
+      return <BoardOversightBlock data={value} />;
+
+    case 'threeLines':
+      return <ThreeLinesBlock data={value} />;
+
+    case 'governanceCertifications':
+      return <GovernanceCertificationsBlock data={value} />;
+
+    // Generic case study handlers
+    case 'caseStudies':
+      return <CaseStudiesBlock data={value} />;
+
+    case 'celsiusCaseStudy':
+      return <CelsiusCaseStudyBlock data={value} />;
+
+    // Institutional QA (Q&A format)
+    case 'institutionalQA':
+      return <InstitutionalQABlock data={value} />;
+
+    // Other common patterns
+    case 'metrics':
+      return <MetricsBlock data={value} />;
+
+    case 'apiOverview':
+    case 'architectureOverview':
+    case 'bankingIntegrationArchitecture':
+    case 'technicalArchitecture':
+      return <ArchitectureOverviewBlock data={value} />;
+
+    case 'commonIntegrationPatterns':
+    case 'systemSpecificIntegration':
+      return <IntegrationPatternsBlock data={value} />;
+
+    case 'stablecoinSettlementDeepDive':
+    case 'paymentSystemsDeepDive':
+      return <DeepDiveBlock data={value} />;
 
     default:
       // Generic object renderer for any missed properties
@@ -6693,6 +6785,628 @@ function QualificationFrameworkBlock({ data }: { data: any }) {
               <div key={i} className="flex justify-between text-sm"><span className="text-gray-400">{s.score}</span><span className="text-gray-300">{s.action}</span></div>
             ))}
           </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// =============================================================================
+// PILLAR 4 OPERATIONAL RISK COMPONENTS
+// =============================================================================
+
+function WhyOperationalRiskMattersBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      {data.context && <p className="text-gray-300 mb-4">{data.context}</p>}
+      
+      {data.institutionalPerspective && (
+        <div className="space-y-4">
+          {data.institutionalPerspective.map((item: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-blue-500">
+              <h4 className="text-blue-300 font-semibold mb-2">{item.stakeholder}</h4>
+              <p className="text-amber-300 text-sm mb-2">"{item.theirConcern}"</p>
+              {item.whatTheyEvaluate && (
+                <div className="mb-2">
+                  <span className="text-xs text-slate-400 uppercase">They Evaluate:</span>
+                  <ul className="text-gray-300 text-sm mt-1">
+                    {item.whatTheyEvaluate.map((e: string, j: number) => <li key={j}>• {e}</li>)}
+                  </ul>
+                </div>
+              )}
+              {item.whatTheyWantToHear && (
+                <div className="bg-emerald-500/10 border border-emerald-500/30 rounded p-2 mt-2">
+                  <span className="text-xs text-emerald-400">✓ What they want to hear:</span>
+                  <p className="text-emerald-300 text-sm">{item.whatTheyWantToHear}</p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+      
+      {data.keyInsight && (
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 mt-4">
+          <p className="text-purple-300">💡 {data.keyInsight}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function WhyLiquidityIsCriticalBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      
+      {data.comparison && (
+        <div className="mb-6">
+          <h4 className="text-white font-medium mb-3">{data.comparison.title}</h4>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-slate-600">
+                  <th className="text-left py-2 px-3 text-slate-400">Aspect</th>
+                  <th className="text-left py-2 px-3 text-slate-400">Bank</th>
+                  <th className="text-left py-2 px-3 text-slate-400">Payment Processor</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.comparison.differences?.map((row: any, i: number) => (
+                  <tr key={i} className="border-b border-slate-700/50">
+                    <td className="py-2 px-3 text-white font-medium">{row.aspect}</td>
+                    <td className="py-2 px-3 text-gray-300">{row.bank}</td>
+                    <td className="py-2 px-3 text-amber-300">{row.paymentProcessor}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+      
+      {data.scenario && (
+        <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+          <h4 className="text-amber-300 font-semibold mb-2">📋 {data.scenario.title}</h4>
+          <p className="text-gray-300 text-sm mb-3">{data.scenario.setup}</p>
+          
+          {data.scenario.demands && (
+            <div className="mb-3">
+              <span className="text-xs text-slate-400 uppercase">Demands:</span>
+              <ul className="text-gray-300 text-sm mt-1">
+                {data.scenario.demands.map((d: string, i: number) => <li key={i}>• {d}</li>)}
+              </ul>
+            </div>
+          )}
+          
+          {data.scenario.whatCouldGoWrong && (
+            <div className="mb-3">
+              <span className="text-xs text-red-400 uppercase">What Could Go Wrong:</span>
+              <ul className="text-red-300 text-sm mt-1">
+                {data.scenario.whatCouldGoWrong.map((w: string, i: number) => <li key={i}>⚠️ {w}</li>)}
+              </ul>
+            </div>
+          )}
+          
+          {data.scenario.howWeManage && (
+            <div className="bg-emerald-500/10 border border-emerald-500/30 rounded p-2">
+              <p className="text-emerald-300 text-sm">✓ {data.scenario.howWeManage}</p>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SecurityFrameworkBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 text-sm mb-4">{data.subtitle}</p>}
+      {data.overview && <p className="text-gray-300 mb-4">{data.overview}</p>}
+      
+      {data.functions && (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {data.functions.map((func: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-2xl">{func.icon}</span>
+                <h4 className="text-white font-semibold">{func.function}</h4>
+              </div>
+              <p className="text-gray-400 text-sm mb-2">{func.purpose}</p>
+              {func.activities && (
+                <ul className="text-gray-300 text-sm space-y-1 mb-2">
+                  {func.activities.map((a: string, j: number) => <li key={j}>• {a}</li>)}
+                </ul>
+              )}
+              {func.sphereImplementation && (
+                <p className="text-blue-300 text-xs mt-2 pt-2 border-t border-slate-600">
+                  Sphere: {func.sphereImplementation}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ThreatLandscapeBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      
+      {data.threats && (
+        <div className="space-y-3">
+          {data.threats.map((threat: any, i: number) => (
+            <div key={i} className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+              <div className="flex items-center justify-between mb-2">
+                <h4 className="text-red-300 font-semibold">{threat.threat || threat.type}</h4>
+                {threat.severity && (
+                  <span className={`text-xs px-2 py-1 rounded ${threat.severity === 'HIGH' ? 'bg-red-500 text-white' : 'bg-amber-500 text-white'}`}>
+                    {threat.severity}
+                  </span>
+                )}
+              </div>
+              {threat.description && <p className="text-gray-300 text-sm mb-2">{threat.description}</p>}
+              {threat.mitigation && (
+                <p className="text-emerald-300 text-sm">🛡️ Mitigation: {threat.mitigation}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function KeyControlsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      
+      {data.controls && (
+        <div className="space-y-3">
+          {data.controls.map((control: any, i: number) => (
+            <div key={i} className="flex items-start gap-3 bg-slate-700/50 rounded-lg p-3">
+              <CheckCircle className="w-5 h-5 text-emerald-400 mt-0.5 flex-shrink-0" />
+              <div>
+                <p className="text-white font-medium">{control.control || control.name}</p>
+                {control.description && <p className="text-gray-400 text-sm">{control.description}</p>}
+                {control.implementation && <p className="text-blue-300 text-sm mt-1">Implementation: {control.implementation}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function LiquidityManagementFrameworkBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      {data.overview && <p className="text-gray-300 mb-4">{data.overview}</p>}
+      
+      {data.components && (
+        <div className="grid md:grid-cols-2 gap-4">
+          {data.components.map((comp: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-white font-medium mb-2">{comp.component || comp.name}</h4>
+              <p className="text-gray-300 text-sm">{comp.description}</p>
+              {comp.target && <p className="text-emerald-300 text-sm mt-2">Target: {comp.target}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function StressTestingBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      
+      {data.scenarios && (
+        <div className="space-y-3">
+          {data.scenarios.map((scenario: any, i: number) => (
+            <div key={i} className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+              <h4 className="text-amber-300 font-semibold mb-2">{scenario.scenario || scenario.name}</h4>
+              {scenario.description && <p className="text-gray-300 text-sm mb-2">{scenario.description}</p>}
+              {scenario.assumption && <p className="text-gray-400 text-sm">Assumption: {scenario.assumption}</p>}
+              {scenario.expectedOutcome && <p className="text-emerald-300 text-sm mt-2">Expected: {scenario.expectedOutcome}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+      
+      {data.frequency && <p className="text-blue-300 text-sm mt-4">📅 Frequency: {data.frequency}</p>}
+    </div>
+  );
+}
+
+function BcpVsDrBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      
+      {data.comparison && (
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+            <h4 className="text-blue-300 font-semibold mb-3">Business Continuity (BCP)</h4>
+            {data.comparison.bcp && (
+              <ul className="text-gray-300 text-sm space-y-1">
+                {Object.entries(data.comparison.bcp).map(([key, val]: [string, any]) => (
+                  <li key={key}><span className="text-slate-400">{key}:</span> {val}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+            <h4 className="text-purple-300 font-semibold mb-3">Disaster Recovery (DR)</h4>
+            {data.comparison.dr && (
+              <ul className="text-gray-300 text-sm space-y-1">
+                {Object.entries(data.comparison.dr).map(([key, val]: [string, any]) => (
+                  <li key={key}><span className="text-slate-400">{key}:</span> {val}</li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ResilienceArchitectureBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      
+      {data.layers && (
+        <div className="space-y-3">
+          {data.layers.map((layer: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-blue-500">
+              <h4 className="text-white font-medium mb-2">{layer.layer || layer.name}</h4>
+              <p className="text-gray-300 text-sm">{layer.description}</p>
+              {layer.implementation && (
+                <ul className="text-blue-300 text-sm mt-2 space-y-1">
+                  {(Array.isArray(layer.implementation) ? layer.implementation : [layer.implementation]).map((impl: string, j: number) => (
+                    <li key={j}>• {impl}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function WarRoomProtocolBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-6">
+      <h3 className="font-semibold text-red-300 mb-4">🚨 {data.title}</h3>
+      
+      {data.steps && (
+        <div className="space-y-3">
+          {data.steps.map((step: any, i: number) => (
+            <div key={i} className="flex items-start gap-3">
+              <span className="bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0">
+                {i + 1}
+              </span>
+              <div>
+                <p className="text-white font-medium">{step.step || step.action}</p>
+                {step.detail && <p className="text-gray-300 text-sm">{step.detail}</p>}
+                {step.owner && <p className="text-amber-300 text-sm">Owner: {step.owner}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function IncidentCommunicationBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      
+      {data.templates && (
+        <div className="space-y-4">
+          {data.templates.map((template: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-white font-medium mb-2">{template.audience || template.type}</h4>
+              {template.timing && <p className="text-amber-300 text-sm mb-2">Timing: {template.timing}</p>}
+              {template.content && <p className="text-gray-300 text-sm">{template.content}</p>}
+              {template.channels && (
+                <p className="text-blue-300 text-sm mt-2">Channels: {template.channels.join(', ')}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function BoardOversightBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      
+      {data.responsibilities && (
+        <div className="space-y-3">
+          {data.responsibilities.map((resp: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-3">
+              <p className="text-white font-medium">{resp.area || resp.responsibility}</p>
+              {resp.frequency && <p className="text-blue-300 text-sm">Frequency: {resp.frequency}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ThreeLinesBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      
+      {data.lines && (
+        <div className="space-y-4">
+          {data.lines.map((line: any, i: number) => (
+            <div key={i} className={`rounded-lg p-4 border-l-4 ${
+              i === 0 ? 'bg-blue-500/10 border-blue-500' :
+              i === 1 ? 'bg-purple-500/10 border-purple-500' :
+              'bg-emerald-500/10 border-emerald-500'
+            }`}>
+              <h4 className={`font-semibold mb-2 ${
+                i === 0 ? 'text-blue-300' : i === 1 ? 'text-purple-300' : 'text-emerald-300'
+              }`}>{line.line}</h4>
+              <p className="text-white mb-2">{line.role || line.function}</p>
+              {line.responsibilities && (
+                <ul className="text-gray-300 text-sm space-y-1">
+                  {line.responsibilities.map((r: string, j: number) => <li key={j}>• {r}</li>)}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function GovernanceCertificationsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      
+      {data.certifications && (
+        <div className="grid md:grid-cols-2 gap-4">
+          {data.certifications.map((cert: any, i: number) => (
+            <div key={i} className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <CheckCircle className="w-5 h-5 text-emerald-400" />
+                <h4 className="text-emerald-300 font-semibold">{cert.certification || cert.name}</h4>
+              </div>
+              {cert.description && <p className="text-gray-300 text-sm">{cert.description}</p>}
+              {cert.scope && <p className="text-gray-400 text-sm mt-1">Scope: {cert.scope}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CaseStudiesBlock({ data }: { data: any }) {
+  const [expanded, setExpanded] = React.useState<number | null>(0);
+  
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      
+      {data.cases && (
+        <div className="space-y-3">
+          {data.cases.map((cs: any, i: number) => (
+            <div key={i} className="border border-slate-600 rounded-lg overflow-hidden">
+              <button
+                onClick={() => setExpanded(expanded === i ? null : i)}
+                className="w-full flex items-center justify-between p-4 bg-slate-700/30 hover:bg-slate-700/50"
+              >
+                <span className="text-white font-medium">{cs.name || cs.title}</span>
+                {expanded === i ? <ChevronUp className="w-5 h-5 text-slate-400" /> : <ChevronDown className="w-5 h-5 text-slate-400" />}
+              </button>
+              
+              {expanded === i && (
+                <div className="p-4">
+                  {cs.description && <p className="text-gray-300 mb-3">{cs.description}</p>}
+                  {cs.lessons && (
+                    <div className="bg-amber-500/10 border border-amber-500/30 rounded p-3">
+                      <span className="text-xs text-amber-400 uppercase">Lessons:</span>
+                      <ul className="text-amber-300 text-sm mt-1">
+                        {cs.lessons.map((l: string, j: number) => <li key={j}>• {l}</li>)}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CelsiusCaseStudyBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-6">
+      <h3 className="font-semibold text-amber-300 mb-4">📚 {data.title}</h3>
+      
+      {data.background && <p className="text-gray-300 mb-4">{data.background}</p>}
+      
+      {data.failures && (
+        <div className="mb-4">
+          <h4 className="text-red-300 font-semibold mb-2">What Went Wrong</h4>
+          <ul className="text-gray-300 text-sm space-y-1">
+            {data.failures.map((f: string, i: number) => <li key={i}>❌ {f}</li>)}
+          </ul>
+        </div>
+      )}
+      
+      {data.lessons && (
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 className="text-emerald-300 font-semibold mb-2">Lessons for Sphere</h4>
+          <ul className="text-gray-300 text-sm space-y-1">
+            {data.lessons.map((l: string, i: number) => <li key={i}>✓ {l}</li>)}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function InstitutionalQABlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      
+      {data.questions && (
+        <div className="space-y-4">
+          {data.questions.map((qa: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <p className="text-blue-300 font-medium mb-2">Q: {qa.question}</p>
+              <p className="text-gray-300">A: {qa.answer}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function MetricsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      
+      {data.items && (
+        <div className="grid md:grid-cols-2 gap-4">
+          {data.items.map((m: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <p className="text-slate-400 text-sm">{m.metric || m.name}</p>
+              {m.value && <p className="text-2xl font-bold text-blue-400">{m.value}</p>}
+              {m.target && <p className="text-emerald-300 text-sm">Target: {m.target}</p>}
+              {m.description && <p className="text-gray-300 text-sm mt-1">{m.description}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ArchitectureOverviewBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      {data.overview && <p className="text-gray-300 mb-4">{data.overview}</p>}
+      {data.description && <p className="text-gray-300 mb-4">{data.description}</p>}
+      
+      {data.components && (
+        <div className="grid md:grid-cols-2 gap-4">
+          {data.components.map((comp: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-white font-medium mb-2">{comp.component || comp.name}</h4>
+              <p className="text-gray-300 text-sm">{comp.description || comp.purpose}</p>
+            </div>
+          ))}
+        </div>
+      )}
+      
+      {data.layers && (
+        <div className="space-y-3">
+          {data.layers.map((layer: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-blue-500">
+              <h4 className="text-white font-medium">{layer.layer || layer.name}</h4>
+              <p className="text-gray-300 text-sm">{layer.description}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function IntegrationPatternsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      
+      {data.patterns && (
+        <div className="space-y-4">
+          {data.patterns.map((pattern: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-blue-300 font-semibold mb-2">{pattern.pattern || pattern.name}</h4>
+              {pattern.description && <p className="text-gray-300 text-sm mb-2">{pattern.description}</p>}
+              {pattern.useCase && <p className="text-amber-300 text-sm">Use case: {pattern.useCase}</p>}
+              {pattern.implementation && (
+                <div className="mt-2 bg-slate-800 rounded p-2">
+                  <code className="text-emerald-300 text-xs">{pattern.implementation}</code>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function DeepDiveBlock({ data }: { data: any }) {
+  const [expanded, setExpanded] = React.useState(false);
+  
+  return (
+    <div className="bg-slate-800 rounded-xl border border-slate-700 overflow-hidden">
+      <button
+        onClick={() => setExpanded(!expanded)}
+        className="w-full flex items-center justify-between p-6 hover:bg-slate-700/30"
+      >
+        <h3 className="font-semibold text-white">{data.title}</h3>
+        {expanded ? <ChevronUp className="w-5 h-5 text-slate-400" /> : <ChevronDown className="w-5 h-5 text-slate-400" />}
+      </button>
+      
+      {expanded && (
+        <div className="px-6 pb-6">
+          {data.overview && <p className="text-gray-300 mb-4">{data.overview}</p>}
+          {data.content && <p className="text-gray-300 mb-4">{data.content}</p>}
+          
+          {data.sections && (
+            <div className="space-y-4">
+              {data.sections.map((section: any, i: number) => (
+                <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+                  <h4 className="text-white font-medium mb-2">{section.title}</h4>
+                  {section.content && <p className="text-gray-300 text-sm">{section.content}</p>}
+                  {section.points && (
+                    <ul className="text-gray-300 text-sm space-y-1 mt-2">
+                      {section.points.map((p: string, j: number) => <li key={j}>• {p}</li>)}
+                    </ul>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
