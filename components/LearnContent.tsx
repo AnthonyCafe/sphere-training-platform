@@ -12,11 +12,29 @@ interface LearnContentProps {
 }
 
 export default function LearnContentRenderer({ learn }: LearnContentProps) {
+  // Handle null/undefined learn prop
+  if (!learn) {
+    return (
+      <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+        <p className="text-gray-400">No content available</p>
+      </div>
+    );
+  }
+
   // Handle string format (old markdown)
   if (typeof learn === 'string') {
     return (
       <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
         <div className="text-gray-300 whitespace-pre-wrap">{learn}</div>
+      </div>
+    );
+  }
+
+  // Handle non-object learn prop
+  if (typeof learn !== 'object') {
+    return (
+      <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+        <p className="text-gray-300">{String(learn)}</p>
       </div>
     );
   }
@@ -117,13 +135,20 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
 // =============================================================================
 
 function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
-  switch (propKey) {
-    case 'introduction':
-      return (
-        <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-          <p className="text-gray-300 text-lg leading-relaxed">{value}</p>
-        </div>
-      );
+  // Safety check - if value is null/undefined, don't render
+  if (value === null || value === undefined) {
+    return null;
+  }
+
+  // Wrap in try-catch to prevent crashes from bad data
+  try {
+    switch (propKey) {
+      case 'introduction':
+        return (
+          <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+            <p className="text-gray-300 text-lg leading-relaxed">{value}</p>
+          </div>
+        );
 
     case 'coreQuestion':
       return (
@@ -783,6 +808,15 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
         return <GenericBlock propKey={propKey} data={value} />;
       }
       return null;
+    }
+  } catch (error) {
+    // If rendering fails, show a graceful fallback
+    console.error(`Error rendering ${propKey}:`, error);
+    return (
+      <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+        <p className="text-red-300 text-sm">Error rendering content for: {propKey}</p>
+      </div>
+    );
   }
 }
 
@@ -6796,9 +6830,11 @@ function QualificationFrameworkBlock({ data }: { data: any }) {
 // =============================================================================
 
 function WhyOperationalRiskMattersBlock({ data }: { data: any }) {
+  if (!data) return null;
+  
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      <h3 className="font-semibold text-white mb-4">{data.title || 'Operational Risk'}</h3>
       {data.context && <p className="text-gray-300 mb-4">{data.context}</p>}
       
       {data.institutionalPerspective && (
@@ -6836,9 +6872,11 @@ function WhyOperationalRiskMattersBlock({ data }: { data: any }) {
 }
 
 function WhyLiquidityIsCriticalBlock({ data }: { data: any }) {
+  if (!data) return null;
+  
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      <h3 className="font-semibold text-white mb-4">{data.title || 'Liquidity Risk'}</h3>
       
       {data.comparison && (
         <div className="mb-6">
@@ -6901,6 +6939,7 @@ function WhyLiquidityIsCriticalBlock({ data }: { data: any }) {
 }
 
 function SecurityFrameworkBlock({ data }: { data: any }) {
+  if (!data) return null;
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-2">{data.title}</h3>
@@ -6935,6 +6974,7 @@ function SecurityFrameworkBlock({ data }: { data: any }) {
 }
 
 function ThreatLandscapeBlock({ data }: { data: any }) {
+  if (!data) return null;
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
@@ -6964,6 +7004,7 @@ function ThreatLandscapeBlock({ data }: { data: any }) {
 }
 
 function KeyControlsBlock({ data }: { data: any }) {
+  if (!data) return null;
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
@@ -6987,6 +7028,7 @@ function KeyControlsBlock({ data }: { data: any }) {
 }
 
 function LiquidityManagementFrameworkBlock({ data }: { data: any }) {
+  if (!data) return null;
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
@@ -7008,6 +7050,7 @@ function LiquidityManagementFrameworkBlock({ data }: { data: any }) {
 }
 
 function StressTestingBlock({ data }: { data: any }) {
+  if (!data) return null;
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
@@ -7031,6 +7074,7 @@ function StressTestingBlock({ data }: { data: any }) {
 }
 
 function BcpVsDrBlock({ data }: { data: any }) {
+  if (!data) return null;
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
@@ -7064,6 +7108,7 @@ function BcpVsDrBlock({ data }: { data: any }) {
 }
 
 function ResilienceArchitectureBlock({ data }: { data: any }) {
+  if (!data) return null;
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
@@ -7090,6 +7135,7 @@ function ResilienceArchitectureBlock({ data }: { data: any }) {
 }
 
 function WarRoomProtocolBlock({ data }: { data: any }) {
+  if (!data) return null;
   return (
     <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-6">
       <h3 className="font-semibold text-red-300 mb-4">🚨 {data.title}</h3>
@@ -7115,6 +7161,7 @@ function WarRoomProtocolBlock({ data }: { data: any }) {
 }
 
 function IncidentCommunicationBlock({ data }: { data: any }) {
+  if (!data) return null;
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
@@ -7138,6 +7185,7 @@ function IncidentCommunicationBlock({ data }: { data: any }) {
 }
 
 function BoardOversightBlock({ data }: { data: any }) {
+  if (!data) return null;
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
@@ -7157,6 +7205,7 @@ function BoardOversightBlock({ data }: { data: any }) {
 }
 
 function ThreeLinesBlock({ data }: { data: any }) {
+  if (!data) return null;
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
@@ -7187,6 +7236,7 @@ function ThreeLinesBlock({ data }: { data: any }) {
 }
 
 function GovernanceCertificationsBlock({ data }: { data: any }) {
+  if (!data) return null;
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
@@ -7210,6 +7260,7 @@ function GovernanceCertificationsBlock({ data }: { data: any }) {
 }
 
 function CaseStudiesBlock({ data }: { data: any }) {
+  if (!data) return null;
   const [expanded, setExpanded] = React.useState<number | null>(0);
   
   return (
@@ -7250,6 +7301,7 @@ function CaseStudiesBlock({ data }: { data: any }) {
 }
 
 function CelsiusCaseStudyBlock({ data }: { data: any }) {
+  if (!data) return null;
   return (
     <div className="bg-amber-500/10 border border-amber-500/30 rounded-xl p-6">
       <h3 className="font-semibold text-amber-300 mb-4">📚 {data.title}</h3>
@@ -7278,6 +7330,7 @@ function CelsiusCaseStudyBlock({ data }: { data: any }) {
 }
 
 function InstitutionalQABlock({ data }: { data: any }) {
+  if (!data) return null;
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
@@ -7297,6 +7350,7 @@ function InstitutionalQABlock({ data }: { data: any }) {
 }
 
 function MetricsBlock({ data }: { data: any }) {
+  if (!data) return null;
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
@@ -7318,6 +7372,7 @@ function MetricsBlock({ data }: { data: any }) {
 }
 
 function ArchitectureOverviewBlock({ data }: { data: any }) {
+  if (!data) return null;
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
@@ -7350,6 +7405,7 @@ function ArchitectureOverviewBlock({ data }: { data: any }) {
 }
 
 function IntegrationPatternsBlock({ data }: { data: any }) {
+  if (!data) return null;
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
@@ -7375,6 +7431,7 @@ function IntegrationPatternsBlock({ data }: { data: any }) {
 }
 
 function DeepDiveBlock({ data }: { data: any }) {
+  if (!data) return null;
   const [expanded, setExpanded] = React.useState(false);
   
   return (
