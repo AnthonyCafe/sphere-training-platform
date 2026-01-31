@@ -14,9 +14,9 @@ export const pillarsData = [
     color: 'blue',
     overview: `**Why This Pillar Matters**
 
-If this pillar is missing, Sphere won't make sense.
+If this pillar is missing, Sphere won\'t make sense.
 
-Sphere does not "move messages faster." It restructures liquidity, settlement coordination, and compliance. If someone doesn't understand traditional payments infrastructure, they will misclassify Sphere immediately.
+Sphere does not "move messages faster." It restructures liquidity, settlement coordination, and compliance. If someone doesn\'t understand traditional payments infrastructure, they will misclassify Sphere immediately.
 
 This pillar ensures you can explain:
 - Why cross-border payments are structurally hard (not just "old technology")
@@ -1368,12 +1368,12 @@ This pillar ensures you can explain:
 
 Sphere uses stablecoins as plumbing, not ideology - and regulators judge it accordingly.
 
-You must be able to discuss stablecoins without crypto language, understand their systemic implications, and explain why Sphere's approach differs from typical crypto projects.
+You must be able to discuss stablecoins without crypto language, understand their systemic implications, and explain why Sphere\'s approach differs from typical crypto projects.
 
 **If someone thinks stablecoins are...**
-- "Just another cryptocurrency" → They'll see Sphere as speculation platform
-- "Risk-free digital dollars" → They'll ignore real liquidity/compliance risks
-- "Only for DeFi/retail" → They'll miss institutional relevance`,
+- "Just another cryptocurrency" → They\'ll see Sphere as speculation platform
+- "Risk-free digital dollars" → They\'ll ignore real liquidity/compliance risks
+- "Only for DeFi/retail" → They\'ll miss institutional relevance`,
     sections: [
       {
         id: 'what-stablecoins-are',
@@ -3862,16 +3862,16 @@ You must be able to discuss stablecoins without crypto language, understand thei
       scenario: 'A UAE bank risk officer asks about stablecoin risks and regulatory status.',
       questions: [
         { type: 'multiple_choice', question: 'What backs major stablecoins like USDT/USDC?', options: ['Bitcoin', 'Algorithms', 'T-bills, cash, deposits', 'Gold'], correct: 2 },
-        { type: 'multiple_choice', question: 'USDC depeg cause?', options: ['Insufficient reserves', 'SVB failure', 'Hack', 'Regulation'], correct: 1 },
+        { type: 'multiple_choice', question: 'What percentage of USDC reserves were at SVB during the March 2023 crisis?', options: ['2%', '8%', '15%', '25%'], correct: 1 },
         { type: 'multiple_choice', question: 'MiCA impact on Tether?', options: ['Approval', 'Delisting from some exchanges', 'No impact', 'Increased usage'], correct: 1 },
         { type: 'multiple_choice', question: 'Which is NOT a systemic risk category?', options: ['Leverage formation', 'Liquidity runs', 'Smart contract bugs', 'Enforcement gaps'], correct: 2 },
         { type: 'multiple_choice', question: 'SphereNet enforces compliance:', options: ['After settlement', 'Before settlement', 'Weekly batch', 'Not at all'], correct: 1 },
         { type: 'multiple_choice', question: 'Sphere is classified as:', options: ['Stablecoin issuer', 'Stablecoin transmitter', 'Crypto exchange', 'Bank'], correct: 1 },
-        { type: 'multiple_choice', question: 'What is the "stablecoin sandwich"?', options: ['Trading strategy', 'Fiat→Stablecoin→Fiat flow', 'DeFi protocol', 'Regulatory framework'], correct: 1 },
+        { type: 'multiple_choice', question: 'Why does Sphere hold stablecoins for minutes rather than days?', options: ['Regulatory requirement', 'Minimizes depeg exposure window', 'Technical limitation', 'Customer preference'], correct: 1 },
         { type: 'multiple_choice', question: 'Chainalysis 2023 illicit volume was revised from $24.2B to:', options: ['$26.1B', '$36.1B', '$46.1B', '$56.1B'], correct: 2 },
         { type: 'multiple_choice', question: 'Why does SphereNet exist (vs SpherePay on Solana)?', options: ['Solana is too slow', 'Protocol-level compliance needed', 'Lower fees', 'Marketing reasons'], correct: 1 },
         { type: 'multiple_choice', question: 'SphereNet\'s privacy-preserving approach uses:', options: ['Full transparency', 'Zero-knowledge proofs', 'Complete opacity', 'No privacy controls'], correct: 1 },
-        { type: 'analysis', question: 'Explain "stablecoin sandwich" to a traditional banker with no crypto knowledge.', rubric: ['No jargon', 'Clear fiat→stablecoin→fiat flow', 'Business benefit (speed, cost)', 'Risk acknowledgment (depeg, compliance)'] },
+        { type: 'analysis', question: 'A treasury manager asks: "How do stablecoin reserves actually work? What happens to my money when it is in transit?" Explain the reserve model and Sphere exposure.', rubric: ['Reserve composition (T-bills, cash)', 'Attestation vs audit distinction', 'Sphere minimal hold time', 'Multi-issuer risk distribution'] },
         { type: 'analysis', question: 'A central banker asks about stablecoin systemic risks. Explain the three risk categories with one case study each.', rubric: ['Leverage formation + MakerDAO rehypothecation', 'Liquidity runs + USDC depeg (no circuit breakers)', 'Enforcement gaps + Chainalysis revision', 'SphereNet as protocol-level solution'] },
         { type: 'analysis', question: 'Compare analytics-based compliance (Chainalysis model) vs SphereNet\'s approach. When would you use each?', rubric: ['Analytics = after settlement, probabilistic', 'SphereNet = before settlement, preventative', 'Analytics for public blockchains', 'SphereNet for regulated finance'] },
         { type: 'application', question: 'Risk officer asks: "What if the stablecoin depegs during a transaction?" How do you respond?', rubric: ['Acknowledge risk honestly', 'USDC March 2023 case ($0.87)', 'Sphere mitigation (minutes not days)', 'Multi-issuer support'] },
@@ -3891,9 +3891,9 @@ You must be able to discuss stablecoins without crypto language, understand thei
     color: 'amber',
     overview: `**Why This Pillar Matters**
 
-Sphere's classification determines everything. Get this wrong and nothing else matters.
+Sphere\'s classification determines everything. Get this wrong and nothing else matters.
 
-Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company. Knowing how to classify it correctly - and defend that classification - is essential for every counterparty conversation.
+Sphere is NOT a crypto exchange. It\'s a licensed payment infrastructure company. Knowing how to classify it correctly - and defend that classification - is essential for every counterparty conversation.
 
 **Key Principle:** Regulatory classification matters more than technology. A sophisticated counterparty asks about licensing and classification BEFORE features.`,
     sections: [
@@ -5120,8 +5120,7 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
           { q: 'Why is UAE strategically important for cross-border payments?', options: ['Low tax rates only', 'Gateway to MENA, South Asia, Africa trade corridors', 'Only English-speaking country in region', 'No regulations at all'], correct: 1 },
           { q: 'Which statement about Sphere and stablecoin issuance is correct?', options: ['Sphere issues its own USDC', 'Sphere is seeking an issuance license', 'Sphere is NOT an issuer - we use third-party stablecoins', 'Sphere will issue an AED stablecoin'], correct: 2 }
         ]
-      }
-    ],
+      },
       {
         id: 'enforcement-case-studies',
         title: '3.6 Enforcement Case Studies',
@@ -5484,7 +5483,8 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
           { q: 'Tornado Cash showed that OFAC can sanction:', options: ['Only companies', 'Only individuals', 'Protocols/code', 'Only US entities'], correct: 2 },
           { q: 'Most common enforcement pattern:', options: ['Technical failure', 'Growth over compliance', 'Bad luck', 'Competitor sabotage'], correct: 1 }
         ]
-      },
+      }
+    ],
     masterQuiz: {
       title: 'Pillar 3 Mastery Assessment',
       passingScore: 70,
@@ -5514,9 +5514,9 @@ Sphere is NOT a crypto exchange. It's a licensed payment infrastructure company.
     color: 'red',
     overview: `**Why This Pillar Matters**
 
-Banks and large enterprises won't partner with companies that can't articulate their risk management framework. When a bank risk committee evaluates Sphere, they're not just asking "can you move money?" - they're asking "what happens when things go wrong?"
+Banks and large enterprises won\'t partner with companies that can\'t articulate their risk management framework. When a bank risk committee evaluates Sphere, they\'re not just asking "can you move money?" - they\'re asking "what happens when things go wrong?"
 
-This pillar transforms you from someone who can describe Sphere's features into someone who can defend Sphere's operational integrity under institutional scrutiny.
+This pillar transforms you from someone who can describe Sphere\'s features into someone who can defend Sphere\'s operational integrity under institutional scrutiny.
 
 This pillar ensures you can explain:
 - How operational risks are identified, measured, and mitigated
@@ -5533,7 +5533,7 @@ This pillar ensures you can explain:
             'Define operational risk and explain why it matters for payment infrastructure',
             'Identify the four categories of operational risk with specific examples',
             'Explain the risk mitigation framework: prevention, detection, response, recovery',
-            'Articulate Sphere\\'s risk management approach with confidence',
+            'Articulate Sphere\'s risk management approach with confidence',
             'Handle institutional risk questions without defensiveness'
           ],
           keyConcepts: [
@@ -5545,12 +5545,12 @@ This pillar ensures you can explain:
           ]
         },
         learn: {
-          introduction: 'Every sophisticated counterparty - banks, large enterprises, institutional investors - will probe your understanding of operational risk. They\\'ve seen companies fail from risks they didn\\'t anticipate or couldn\\'t manage. Your job is to demonstrate that Sphere has thought deeply about what can go wrong and has controls to prevent, detect, and respond.',
+          introduction: 'Every sophisticated counterparty - banks, large enterprises, institutional investors - will probe your understanding of operational risk. They\'ve seen companies fail from risks they didn\'t anticipate or couldn\'t manage. Your job is to demonstrate that Sphere has thought deeply about what can go wrong and has controls to prevent, detect, and respond.',
           coreQuestion: 'What can go wrong, how do we prevent it, and what happens when prevention fails?',
           
           whyOperationalRiskMatters: {
             title: 'Why Operational Risk Defines Institutional Partnerships',
-            context: 'Banks lose billions annually to operational failures. They\\'ve developed sophisticated frameworks to assess operational risk in partners.',
+            context: 'Banks lose billions annually to operational failures. They\'ve developed sophisticated frameworks to assess operational risk in partners.',
             institutionalPerspective: [
               {
                 stakeholder: 'Bank Risk Committee',
@@ -5571,7 +5571,7 @@ This pillar ensures you can explain:
                 whatTheyWantToHear: 'We have SOC 2 Type II and ISO 27001 certifications with clean audit opinions.'
               }
             ],
-            keyInsight: 'Operational risk management isn\\'t about having zero incidents - that\\'s impossible. It\\'s about demonstrating you\\'ve anticipated risks, implemented controls, and can recover quickly when incidents occur.'
+            keyInsight: 'Operational risk management isn\'t about having zero incidents - that\'s impossible. It\'s about demonstrating you\'ve anticipated risks, implemented controls, and can recover quickly when incidents occur.'
           },
 
           riskCategories: {
@@ -5709,7 +5709,7 @@ This pillar ensures you can explain:
               {
                 category: 'External Risk',
                 icon: '🌍',
-                definition: 'Risk arising from external events outside the organization\\'s control.',
+                definition: 'Risk arising from external events outside the organization\'s control.',
                 examples: ['Vendor failures', 'Regulatory changes', 'Market disruptions', 'Geopolitical events'],
                 sphereSpecificRisks: [
                   {
@@ -5736,7 +5736,7 @@ This pillar ensures you can explain:
                   scenarios: [
                     {
                       scenario: 'Banking Partner Failure (SVB-Style Event)',
-                      description: 'One of Sphere\\'s banking partners fails suddenly on a Friday.',
+                      description: 'One of Sphere\'s banking partners fails suddenly on a Friday.',
                       immediateImpact: 'Funds at failed bank temporarily inaccessible.',
                       sphereResponse: 'Immediate activation of backup banking. Customer communication within 1 hour.',
                       customerImpact: 'Payments in transit may be delayed. No customer funds at risk.',
@@ -5759,7 +5759,7 @@ This pillar ensures you can explain:
           mitigationFramework: {
             title: 'Risk Mitigation Framework: Defense in Depth',
             subtitle: 'Effective risk management operates in layers. No single control is sufficient.',
-            philosophy: 'We assume every control can fail. That\\'s why we layer them.',
+            philosophy: 'We assume every control can fail. That\'s why we layer them.',
             layers: [
               {
                 layer: 'Prevention',
@@ -5842,7 +5842,7 @@ This pillar ensures you can explain:
                 },
                 whatHappened: [
                   'Promised high yields but deployed funds in illiquid DeFi strategies',
-                  'When market crashed, customers wanted withdrawals but Celsius couldn\\'t liquidate',
+                  'When market crashed, customers wanted withdrawals but Celsius couldn\'t liquidate',
                   'Paused withdrawals June 12, 2022',
                   'Filed bankruptcy July 13, 2022 with $4.7B deficit'
                 ],
@@ -5870,7 +5870,7 @@ This pillar ensures you can explain:
                 whatHappened: [
                   'Deployed new trading software with old code accidentally left in',
                   'System executed 4 million trades in 45 minutes',
-                  'Lost $440 million - more than company\\'s entire market cap'
+                  'Lost $440 million - more than company\'s entire market cap'
                 ],
                 rootCauses: [
                   {
@@ -5889,7 +5889,7 @@ This pillar ensures you can explain:
           },
 
           governanceCertifications: {
-            title: 'Sphere\\'s Governance Framework',
+            title: 'Sphere\'s Governance Framework',
             certifications: [
               {
                 cert: 'SOC 2 Type II',
@@ -5918,11 +5918,11 @@ This pillar ensures you can explain:
         },
         exercise: {
           title: 'Exercise 4.1 - Risk Assessment Presentation',
-          prompt: 'A bank risk committee has 15 minutes for your risk presentation.\\n\\nPrepare covering:\\n1) Your understanding of operational risk (2 min)\\n2) Sphere\\'s four risk categories with examples (5 min)\\n3) The layered mitigation framework (3 min)\\n4) How Sphere is different from FTX/Celsius (3 min)\\n5) Certifications and verification (2 min)',
+          prompt: 'A bank risk committee has 15 minutes for your risk presentation.\\n\\nPrepare covering:\\n1) Your understanding of operational risk (2 min)\\n2) Sphere\'s four risk categories with examples (5 min)\\n3) The layered mitigation framework (3 min)\\n4) How Sphere is different from FTX/Celsius (3 min)\\n5) Certifications and verification (2 min)',
           criteria: ['Risk categories comprehensive', 'Mitigation layers explained', 'Case studies referenced', 'Certifications cited', 'Institutional tone']
         },
         quiz: [
-          { q: 'SOC 2 Type II vs Type I - what\\'s the difference?', options: ['Type II is newer', 'Type II tests effectiveness over time', 'Type II is US only', 'No difference'], correct: 1 },
+          { q: 'SOC 2 Type II vs Type I - what\'s the difference?', options: ['Type II is newer', 'Type II tests effectiveness over time', 'Type II is US only', 'No difference'], correct: 1 },
           { q: 'What caused FTX collapse?', options: ['Market crash', 'Governance and control failures', 'Regulatory action', 'Technology failure'], correct: 1 },
           { q: 'First layer of risk mitigation?', options: ['Response', 'Recovery', 'Prevention', 'Detection'], correct: 2 },
           { q: 'Knight Capital lost $440M due to:', options: ['Fraud', 'Software deployment failure', 'Cyber attack', 'Market manipulation'], correct: 1 },
@@ -5934,8 +5934,8 @@ This pillar ensures you can explain:
         title: '4.2 Counterparty Risk Management',
         curriculum: {
           objectives: [
-            'Define counterparty risk and explain why it\\'s existential for payment processors',
-            'Identify Sphere\\'s key counterparty types and their specific risks',
+            'Define counterparty risk and explain why it\'s existential for payment processors',
+            'Identify Sphere\'s key counterparty types and their specific risks',
             'Explain the due diligence framework across four dimensions',
             'Articulate ongoing monitoring requirements',
             'Handle counterparty risk questions with institutional sophistication'
@@ -5949,7 +5949,7 @@ This pillar ensures you can explain:
           ]
         },
         learn: {
-          introduction: 'Counterparty risk is the risk that someone you depend on fails to perform. For Sphere, this is existential: if our banking partner fails, customers can\\'t send or receive fiat. Understanding and managing counterparty risk is survival.',
+          introduction: 'Counterparty risk is the risk that someone you depend on fails to perform. For Sphere, this is existential: if our banking partner fails, customers can\'t send or receive fiat. Understanding and managing counterparty risk is survival.',
           coreQuestion: 'What happens if someone we depend on fails, and how do we prevent that from affecting our customers?',
 
           whyCounterpartyRiskMatters: {
@@ -5964,7 +5964,7 @@ This pillar ensures you can explain:
           },
 
           counterpartyTypes: {
-            title: 'Sphere\\'s Key Counterparty Types',
+            title: 'Sphere\'s Key Counterparty Types',
             types: [
               {
                 type: 'Banking Partners',
@@ -6026,7 +6026,7 @@ This pillar ensures you can explain:
 
           dueDiligenceFramework: {
             title: 'Due Diligence Framework: Four Dimensions',
-            philosophy: 'Due diligence is not a checkbox. It\\'s ongoing understanding of our counterparties.',
+            philosophy: 'Due diligence is not a checkbox. It\'s ongoing understanding of our counterparties.',
             dimensions: [
               {
                 dimension: 'Financial Assessment',
@@ -6079,16 +6079,126 @@ This pillar ensures you can explain:
           concentrationManagement: {
             title: 'Concentration Limits: No Single Point of Failure',
             limits: [
-              { category: 'Banking Partners', limit: 'No single bank > 30%', rationale: 'Bank failure shouldn\\'t stop > 30% of payments' },
+              { category: 'Banking Partners', limit: 'No single bank > 30%', rationale: 'Bank failure should not stop > 30% of payments' },
               { category: 'Stablecoin Issuers', limit: 'Multi-stablecoin capability', rationale: 'Depeg should have immediate alternative' },
-              { category: 'Liquidity Providers', limit: 'Minimum 2 LPs per corridor', rationale: 'LP failure shouldn\\'t stop corridor' },
-              { category: 'Technology Vendors', limit: 'No single cloud dependency', rationale: 'Outage shouldn\\'t stop operations' },
-              { category: 'Customers', limit: 'No customer > 10%', rationale: 'Customer loss shouldn\\'t threaten business' }
+              { category: 'Liquidity Providers', limit: 'Minimum 2 LPs per corridor', rationale: 'LP failure should not stop corridor' },
+              { category: 'Technology Vendors', limit: 'No single cloud dependency', rationale: 'Outage should not stop operations' },
+              { category: 'Customers', limit: 'No customer > 10%', rationale: 'Customer loss should not threaten business' }
             ],
             monitoring: 'Concentration calculated daily. Alerts if approaching limits. Board reporting quarterly.'
           },
 
-          keyTakeaway: 'Counterparty risk management is existential. We depend on banks, issuers, LPs, and vendors. Any can fail. Our job: ensure no single failure stops service or loses customer funds.'
+          counterpartyFailureScenarios: {
+            title: 'Counterparty Failure Scenarios and Response Playbooks',
+            subtitle: 'Pre-planned responses for when counterparties fail',
+            scenarios: [
+              {
+                scenario: 'Banking Partner Failure (SVB-style)',
+                trigger: 'Bank closure, FDIC receivership, or de-banking',
+                immediateActions: [
+                  'Freeze new transactions through affected bank',
+                  'Activate backup banking partner(s)',
+                  'Assess in-flight transaction status',
+                  'Customer communication within 1 hour'
+                ],
+                recoverySteps: [
+                  'Reroute pending transactions to backup partners',
+                  'Expedite onboarding of additional bank if needed',
+                  'Work with FDIC/regulators on fund recovery',
+                  'Daily customer updates until resolved'
+                ],
+                targetRecovery: 'Partial service within 4 hours, full service within 24 hours',
+                lessonsFromSVB: 'SVB failed on Friday. Weekend meant no redemptions. Timing matters. Our playbook includes weekend escalation procedures.'
+              },
+              {
+                scenario: 'Stablecoin Depeg Event',
+                trigger: 'Stablecoin trading >2% below peg',
+                immediateActions: [
+                  'Automatic circuit breaker pauses affected stablecoin',
+                  'Switch to alternative stablecoin automatically',
+                  'Assess in-flight transaction exposure',
+                  'Customer communication within 30 minutes'
+                ],
+                recoverySteps: [
+                  'Monitor for peg recovery',
+                  'If >5% depeg: absorb loss on in-flight, do not pass to customers',
+                  'Reassess stablecoin selection if systemic issue'
+                ],
+                targetRecovery: 'Service continues on alternative stablecoin within 30 minutes',
+                crossReference: 'See Pillar 2.2 for detailed USDC depeg case study'
+              },
+              {
+                scenario: 'Liquidity Provider Failure',
+                trigger: 'LP unable to settle, inventory exhausted, or operational failure',
+                immediateActions: [
+                  'Route to backup LP for affected corridor',
+                  'Adjust pricing if backup LP has wider spreads',
+                  'Notify affected customers of potential delays'
+                ],
+                recoverySteps: [
+                  'Assess root cause with failed LP',
+                  'Expedite onboarding of replacement if needed',
+                  'Review LP concentration across all corridors'
+                ],
+                targetRecovery: 'Corridor operational on backup within 1 hour',
+                prevention: 'Minimum 2 LPs per major corridor. Real-time inventory monitoring.'
+              },
+              {
+                scenario: 'Technology Vendor Outage',
+                trigger: 'Cloud provider, blockchain node, or critical SaaS down',
+                immediateActions: [
+                  'Automatic failover to backup systems (if available)',
+                  'Assess impact scope',
+                  'Activate manual procedures if automation fails'
+                ],
+                recoverySteps: [
+                  'Monitor vendor status page',
+                  'Escalate with vendor support',
+                  'Post-incident review of redundancy gaps'
+                ],
+                targetRecovery: 'Depends on redundancy - seconds for hot standby, hours for cold backup',
+                prevention: 'Multi-cloud architecture. No single vendor for critical path.'
+              }
+            ]
+          },
+
+          counterpartyRiskMetrics: {
+            title: 'Counterparty Risk Metrics and Reporting',
+            metrics: [
+              {
+                metric: 'Counterparty Concentration Index',
+                calculation: 'Herfindahl-style index of volume concentration',
+                target: '<0.25 (no single counterparty dominates)',
+                frequency: 'Daily calculation, weekly reporting'
+              },
+              {
+                metric: 'Days Since DD Refresh',
+                calculation: 'Days since last full due diligence review per counterparty',
+                target: '<365 days for all active counterparties',
+                frequency: 'Monthly review'
+              },
+              {
+                metric: 'Settlement Success Rate by Counterparty',
+                calculation: 'Percentage of transactions settling successfully',
+                target: '>99.5% per counterparty',
+                frequency: 'Daily monitoring'
+              },
+              {
+                metric: 'Average Settlement Time by Counterparty',
+                calculation: 'Mean time from initiation to confirmation',
+                target: 'Within SLA per counterparty type',
+                frequency: 'Daily monitoring'
+              }
+            ],
+            reporting: {
+              daily: 'Concentration dashboard, settlement exceptions',
+              weekly: 'Counterparty performance summary',
+              monthly: 'Full counterparty risk report to risk committee',
+              quarterly: 'Board-level counterparty risk summary'
+            }
+          },
+
+          keyTakeaway: 'Counterparty risk management is existential. We depend on banks, issuers, LPs, and vendors. Any can fail. Our job: ensure no single failure stops service or loses customer funds. Pre-planned playbooks, concentration limits, and continuous monitoring are how we deliver on this.'
         },
         exercise: {
           title: 'Exercise 4.2 - Counterparty Assessment',
@@ -6098,7 +6208,7 @@ This pillar ensures you can explain:
         quiz: [
           { q: 'Why is counterparty risk "existential" for payment processors?', options: ['Regulatory term', 'Counterparty failure directly impacts customers', 'Sounds important', 'All risks are existential'], correct: 1 },
           { q: 'What caused USDC to depeg in March 2023?', options: ['Circle fraud', 'Counterparty exposure to SVB', 'Technical bug', 'Market manipulation'], correct: 1 },
-          { q: 'Sphere\\'s maximum exposure to any single bank:', options: ['10%', '20%', '30%', '50%'], correct: 2 },
+          { q: 'Sphere\'s maximum exposure to any single bank:', options: ['10%', '20%', '30%', '50%'], correct: 2 },
           { q: 'Due diligence should be performed:', options: ['At onboarding only', 'Annually only', 'Continuously with annual refresh', 'When problems arise'], correct: 2 },
           { q: 'Which is NOT a due diligence dimension?', options: ['Financial', 'Operational', 'Marketing', 'Compliance'], correct: 2 }
         ]
@@ -6110,62 +6220,328 @@ This pillar ensures you can explain:
           objectives: [
             'Define liquidity risk and explain its three types',
             'Understand why liquidity risk is critical for payment processors',
-            'Explain Sphere\\'s liquidity management framework',
-            'Describe stress testing methodology'
+            'Explain Sphere\'s three-layer liquidity management framework',
+            'Describe stress testing methodology and scenarios',
+            'Articulate daily liquidity management procedures'
           ],
           keyConcepts: [
             'Three types: Funding, Settlement, Market liquidity',
-            'Payment processors face instant liquidity demand',
-            'Buffers must cover peak plus stress scenarios',
-            'Stress testing validates adequacy'
+            'Payment processors face instant liquidity demand - no delay tolerance',
+            'Three-layer framework: Operating, Buffer, Contingency',
+            'Stress testing validates adequacy quarterly',
+            'Daily management prevents liquidity crises'
           ]
         },
         learn: {
-          introduction: 'Liquidity risk is the risk of being unable to meet payment obligations when due. For a payment processor, this is catastrophic.',
+          introduction: 'Liquidity risk is the risk of being unable to meet payment obligations when due. For a payment processor, this is catastrophic - if we can\'t fund a payment, the transaction fails and customers are impacted immediately. Unlike banks that can delay or manage customer expectations, payment processors have zero tolerance for liquidity failures.',
           coreQuestion: 'Can we always meet our payment obligations, even under stress?',
+
           liquidityTypes: {
             title: 'Three Types of Liquidity Risk',
+            subtitle: 'Each type requires different management approach',
             types: [
-              { type: 'Funding Liquidity', icon: '💵', definition: 'Ability to raise cash to meet obligations', management: 'Buffers exceeding peak. Diversified funding.' },
-              { type: 'Settlement Liquidity', icon: '🔄', definition: 'Ability to meet settlement system obligations', management: 'Balances above minimums. Gas monitoring.' },
-              { type: 'Market Liquidity', icon: '📈', definition: 'Ability to convert assets without price impact', management: 'Transaction limits. Multiple LPs.' }
+              {
+                type: 'Funding Liquidity',
+                icon: '💵',
+                definition: 'The ability to raise cash to meet obligations as they come due.',
+                paymentProcessorContext: 'Customer sends $1M payment - do we have the funds to execute? Ten customers send $5M simultaneously - can we fund all of them?',
+                examples: [
+                  'Customer initiates large payment exceeding available balance',
+                  'Multiple customers hit at same time (month-end payroll)',
+                  'Banking partner delays credit of incoming funds'
+                ],
+                management: {
+                  strategy: 'Maintain buffers exceeding peak demand',
+                  tactics: [
+                    'Operating balances at 150% of average daily volume',
+                    'Pre-arranged credit facilities for surge capacity',
+                    'Diversified funding sources across multiple banks'
+                  ]
+                },
+                metrics: {
+                  target: 'Fund 100% of requests within 30 minutes',
+                  monitoring: 'Real-time balance tracking, automated alerts at 80% utilization'
+                }
+              },
+              {
+                type: 'Settlement Liquidity',
+                icon: '🔄',
+                definition: 'The ability to meet obligations in payment and settlement systems.',
+                paymentProcessorContext: 'Do we have enough ETH for gas fees? Can we meet end-of-day settlement requirements?',
+                examples: [
+                  'Gas prices spike 10x during network congestion',
+                  'End-of-day bank settlement requires immediate funding',
+                  'Blockchain transaction stuck due to insufficient gas'
+                ],
+                management: {
+                  strategy: 'Maintain balances above system minimums with buffer',
+                  tactics: [
+                    'Gas reserves at 5x average daily consumption',
+                    'Pre-funded positions at all banking partners',
+                    'Real-time monitoring of blockchain gas prices'
+                  ]
+                },
+                metrics: {
+                  target: 'Never miss a settlement window',
+                  monitoring: 'Gas price alerts, balance monitoring, settlement countdown tracking'
+                }
+              },
+              {
+                type: 'Market Liquidity',
+                icon: '📈',
+                definition: 'The ability to convert assets to cash without significant price impact.',
+                paymentProcessorContext: 'Can we convert $10M USDC to fiat quickly without moving the market? Is there enough LP inventory for this corridor?',
+                examples: [
+                  'Large conversion needed but LP inventory low',
+                  'Market stress reduces available liquidity',
+                  'Exotic corridor has limited depth'
+                ],
+                management: {
+                  strategy: 'Transaction limits relative to market depth',
+                  tactics: [
+                    'Maximum transaction size limits by corridor',
+                    'Multiple LPs per corridor for redundancy',
+                    'Real-time inventory monitoring'
+                  ]
+                },
+                metrics: {
+                  target: 'Execute within 1% of quoted price',
+                  monitoring: 'LP inventory dashboards, spread monitoring, execution quality tracking'
+                }
+              }
             ]
           },
+
+          whyLiquidityIsCritical: {
+            title: 'Why Liquidity Risk Is Critical for Payment Processors',
+            comparison: {
+              title: 'Payment Processor vs Bank',
+              differences: [
+                { aspect: 'Obligation Timing', bank: 'Can often delay withdrawals, manage expectations', paymentProcessor: 'Immediate - customer expects instant execution' },
+                { aspect: 'Customer Tolerance', bank: 'Some delay acceptable ("processing time")', paymentProcessor: 'Zero tolerance - failed payment = immediate escalation' },
+                { aspect: 'Peak Predictability', bank: 'Relatively predictable patterns', paymentProcessor: 'Can spike suddenly (payroll day, month-end)' },
+                { aspect: 'Recovery Options', bank: 'Can call loans, sell assets over days', paymentProcessor: 'Must fund NOW or transaction fails' }
+              ]
+            },
+            scenario: {
+              title: 'Real Scenario: Friday Afternoon Rush',
+              setup: 'It\'s Friday 3pm GST. Multiple customers are trying to complete payments before the weekend.',
+              demands: [
+                '$5M payment to Brazil requested',
+                '$2M payroll run for US subsidiary',
+                'Three $500K supplier payments to India'
+              ],
+              whatCouldGoWrong: [
+                'Bank doesn\'t have $8M+ available in our account',
+                'Brazil LP inventory depleted from earlier volume',
+                'Gas prices have spiked due to NFT mint',
+                'Indian bank approaching daily inbound limit'
+              ],
+              howWeManage: 'Liquidity buffers ensure funds available. Multiple LPs provide backup. Gas reserves prevent blockchain delays. Limit tracking prevents surprises.'
+            }
+          },
+
           liquidityManagementFramework: {
-            title: 'Sphere\\'s Liquidity Management Framework',
+            title: 'Sphere\'s Three-Layer Liquidity Framework',
+            philosophy: 'We assume every day could be a stress day. Liquidity is sized for worst case, not average case.',
             layers: [
-              { layer: 'Operating Liquidity', purpose: 'Daily operations', target: 'Average daily + 50%' },
-              { layer: 'Buffer Liquidity', purpose: 'Peak demand', target: '3x average daily' },
-              { layer: 'Contingency Liquidity', purpose: 'Stress scenarios', target: 'Cover stress requirements' }
+              {
+                layer: 'Operating Liquidity',
+                icon: '🟢',
+                purpose: 'Fund normal daily operations',
+                components: [
+                  'Primary bank account balances',
+                  'Stablecoin float (minimal, converted quickly)',
+                  'Gas reserves (ETH, SOL, MATIC)'
+                ],
+                target: 'Average daily volume + 50% buffer',
+                sizing: 'If average daily is $10M, operating liquidity = $15M',
+                monitoring: {
+                  frequency: 'Real-time',
+                  alerts: '80% utilization = warning, 90% = escalation'
+                }
+              },
+              {
+                layer: 'Buffer Liquidity',
+                icon: '🟡',
+                purpose: 'Handle peak demand and unexpected volume',
+                components: [
+                  'Excess balances at banking partners',
+                  'Standby credit facilities (pre-arranged)',
+                  'LP credit lines'
+                ],
+                target: '3x average daily volume',
+                sizing: 'If average daily is $10M, buffer = $30M accessible',
+                monitoring: {
+                  frequency: 'Daily',
+                  alerts: 'Weekly adequacy calculation, monthly review'
+                },
+                activationTrigger: 'Operating liquidity falls below 60%'
+              },
+              {
+                layer: 'Contingency Liquidity',
+                icon: '🔴',
+                purpose: 'Survive stress scenarios',
+                components: [
+                  'Emergency credit facilities',
+                  'Asset liquidation plan',
+                  'Cross-currency conversion capability'
+                ],
+                target: 'Cover worst-case stress scenario',
+                sizing: 'Sized by quarterly stress test results',
+                monitoring: {
+                  frequency: 'Quarterly stress test',
+                  alerts: 'Board-level if ever activated'
+                },
+                activationTrigger: 'Buffer liquidity insufficient OR banking partner failure'
+              }
             ]
           },
+
           stressTesting: {
             title: 'Liquidity Stress Testing',
+            philosophy: 'We don\'t just hope we have enough - we test under extreme scenarios.',
+            methodology: {
+              frequency: 'Quarterly with board reporting',
+              approach: 'Model extreme but plausible scenarios',
+              governance: 'Results reviewed by risk committee, reported to board'
+            },
             scenarios: [
-              { scenario: 'Volume Spike', description: '200% of average', lastResult: 'Pass' },
-              { scenario: 'Bank Failure', description: 'Largest partner fails', lastResult: 'Pass' },
-              { scenario: 'Stablecoin Depeg', description: 'USDC to $0.90', lastResult: 'Pass' },
-              { scenario: 'Combined Stress', description: 'All above simultaneously', lastResult: 'Pass with warnings' }
+              {
+                scenario: 'Volume Spike',
+                icon: '📈',
+                description: '200% of average daily volume hits in single day',
+                assumptions: ['All customers pay at once', 'No advance notice', 'Normal market conditions'],
+                testQuestion: 'Can we fund all requests without delays?',
+                metrics: ['Time to fund', 'Maximum queue depth', 'Utilization peak'],
+                lastResult: 'Pass - funded 100% with 20% buffer remaining',
+                actionIfFail: 'Increase operating liquidity target'
+              },
+              {
+                scenario: 'Banking Partner Failure',
+                icon: '🏦',
+                description: 'Largest banking partner fails suddenly (SVB scenario)',
+                assumptions: ['No warning', 'Funds at failed bank inaccessible', 'Other partners operational'],
+                testQuestion: 'Can we continue operations with remaining partners?',
+                metrics: ['Coverage with remaining banks', 'Time to full recovery', 'Customer impact'],
+                lastResult: 'Pass - 100% coverage restored in 4 hours',
+                actionIfFail: 'Reduce concentration, add backup partner'
+              },
+              {
+                scenario: 'Stablecoin Depeg',
+                icon: '🪙',
+                description: 'USDC drops to $0.90 (similar to March 2023)',
+                assumptions: ['Sudden depeg', 'In-flight transactions affected', 'Alternative stablecoins available'],
+                testQuestion: 'Can we switch stablecoins and absorb losses?',
+                metrics: ['Loss on in-flight', 'Switch time', 'Customer impact'],
+                lastResult: 'Pass - losses within tolerance, switch in <30 minutes',
+                actionIfFail: 'Increase multi-stablecoin capability, reduce hold time',
+                crossReference: 'See Pillar 2.2 for detailed USDC depeg analysis'
+              },
+              {
+                scenario: 'Combined Stress',
+                icon: '🔥',
+                description: 'Volume spike + banking issue + market volatility simultaneously',
+                assumptions: ['200% volume', 'One bank unavailable', 'LP spreads widened'],
+                testQuestion: 'Can we survive multiple simultaneous stresses?',
+                metrics: ['Survival time', 'Degraded service level', 'Recovery path'],
+                lastResult: 'Pass with warnings - some delays possible, no failures',
+                actionIfFail: 'Increase contingency layer, review concentration'
+              }
             ],
-            frequency: 'Quarterly with board reporting'
+            reporting: {
+              to: 'Board Risk Committee',
+              frequency: 'Quarterly',
+              content: ['All scenario results', 'Trend analysis', 'Action items from failures', 'Proposed limit changes']
+            }
           },
+
+          dailyManagement: {
+            title: 'Daily Liquidity Management',
+            subtitle: 'Operational procedures that prevent liquidity crises',
+            startOfDay: [
+              { task: 'Position Review', description: 'Check all account balances across banks', owner: 'Treasury' },
+              { task: 'Forecast Review', description: 'Review expected flows for the day', owner: 'Operations' },
+              { task: 'LP Inventory Check', description: 'Confirm LP inventory for expected corridors', owner: 'Trading' },
+              { task: 'Gas Levels', description: 'Verify blockchain gas reserves sufficient', owner: 'Operations' }
+            ],
+            throughoutDay: [
+              { task: 'Real-Time Monitoring', description: 'Dashboard shows positions vs. limits', frequency: 'Continuous' },
+              { task: 'Threshold Alerts', description: 'Automated alerts at 80%, 90% utilization', frequency: 'As triggered' },
+              { task: 'Large Transaction Approval', description: 'Manual review for transactions >$1M', frequency: 'As needed' },
+              { task: 'Rebalancing', description: 'Move funds between accounts if imbalanced', frequency: 'As needed' }
+            ],
+            bankingCutoffs: {
+              title: 'Banking Cutoff Management',
+              description: 'Know when you can and can\'t move fiat',
+              examples: [
+                { system: 'Fedwire', cutoff: '6:00 PM ET', implication: 'US fiat after cutoff queues to next day' },
+                { system: 'UAEFTS', cutoff: '4:00 PM GST', implication: 'UAE fiat after cutoff queues to next day' },
+                { system: 'SEPA', cutoff: 'Varies by bank', implication: 'Know your specific bank\'s cutoff' }
+              ],
+              management: 'Large transactions routed to make cutoffs. Customers advised of timing implications.'
+            },
+            endOfDay: [
+              { task: 'Reconciliation', description: 'Match all transactions to bank records', owner: 'Operations' },
+              { task: 'Position Report', description: 'Final balances and next-day forecast', owner: 'Treasury' },
+              { task: 'Exception Review', description: 'Review any alerts or issues from day', owner: 'Risk' }
+            ]
+          },
+
           celsiusCaseStudy: {
-            title: 'Case Study: Celsius Network Failure',
-            whatWentWrong: ['Asset-liability mismatch', 'No stress testing', 'Concentrated positions'],
-            outcome: 'Bankruptcy with $4.7B deficit. Customers got ~40 cents.',
-            sphereDifference: 'We hold stablecoins for minutes, not months. Payment processor, not lender.'
+            title: 'Case Study: Celsius Network - Liquidity Failure',
+            background: {
+              company: 'Celsius Network - Crypto lending platform',
+              assets: '$12 billion in customer deposits at peak',
+              promise: 'High yields (up to 18% APY) on crypto deposits',
+              businessModel: 'Take customer deposits, deploy in DeFi and illiquid strategies for yield'
+            },
+            whatWentWrong: [
+              {
+                failure: 'Asset-Liability Mismatch',
+                detail: 'Customer deposits were withdrawable anytime. Celsius investments were illiquid (locked staking, DeFi positions).',
+                sphereContrast: 'Sphere holds stablecoins for minutes during transit, not months in illiquid positions.'
+              },
+              {
+                failure: 'No Stress Testing',
+                detail: 'Never tested what happens if 20% of customers withdraw at once.',
+                sphereContrast: 'Sphere stress tests quarterly including 200% volume scenarios.'
+              },
+              {
+                failure: 'Concentrated Positions',
+                detail: 'Large positions in single protocols that couldn\'t be unwound quickly.',
+                sphereContrast: 'Sphere maintains multiple LPs and banking partners. No single point of concentration.'
+              }
+            ],
+            timeline: [
+              { date: 'May 2022', event: 'TerraUSD collapse triggers market sell-off' },
+              { date: 'Early June', event: 'Celsius customers begin heavy withdrawals' },
+              { date: 'June 12, 2022', event: 'Celsius pauses all withdrawals' },
+              { date: 'July 13, 2022', event: 'Celsius files bankruptcy with $4.7B deficit' }
+            ],
+            outcome: 'Bankruptcy. Customers received approximately 40 cents on the dollar.',
+            lessonsForSphere: [
+              'Never create asset-liability mismatch - we hold stablecoins for minutes, not months',
+              'Stress test under extreme scenarios regularly',
+              'Maintain diversified, liquid positions across multiple counterparties'
+            ],
+            howToDiscuss: 'When Celsius comes up: "Celsius failed because they were a LENDER with asset-liability mismatch. Sphere is a PAYMENT PROCESSOR - we hold stablecoins for minutes during transit, not months in illiquid investments. Very different business model, very different risk profile."'
           },
-          keyTakeaway: 'Liquidity risk can destroy a company in hours. Our framework ensures we always meet obligations.'
+
+          keyTakeaway: 'Liquidity risk can destroy a financial services company in hours. Sphere\'s three-layer framework (Operating, Buffer, Contingency), quarterly stress testing, and daily management procedures ensure we can always meet payment obligations, even under extreme stress.'
         },
         exercise: {
-          title: 'Exercise 4.3 - Liquidity Scenario',
-          prompt: 'Friday 4pm: $15M demand (3x peak), bank issues, gas spike, LP out of inventory. Analyze and respond.',
-          criteria: ['Risks identified', 'Actions practical', 'Communication professional']
+          title: 'Exercise 4.3 - Liquidity Crisis Response',
+          prompt: 'It\'s Friday 4pm GST. You\'re the on-call treasury manager.\\n\\nSituation:\\n- Three large customers have initiated $15M in payments (3x normal daily average)\\n- Your primary bank is experiencing system issues and can\'t confirm balances\\n- Ethereum gas has spiked 10x due to a popular NFT mint\\n- One of your LPs reports they\'re out of USDC inventory\\n\\nWalk through:\\n1) Which liquidity types are affected?\\n2) What immediate actions do you take?\\n3) How do you communicate to customers?\\n4) Which contingency measures do you activate?\\n5) What do you do differently next week to prevent this?',
+          criteria: ['All three liquidity types identified', 'Actions are practical and prioritized', 'Customer communication is professional', 'Contingency activation appropriate', 'Prevention measures realistic']
         },
         quiz: [
-          { q: 'Funding liquidity is:', options: ['Market prices', 'Ability to raise cash', 'Blockchain fees', 'Credit rating'], correct: 1 },
-          { q: 'Celsius failed due to:', options: ['Fraud', 'Asset-liability mismatch', 'Regulatory action', 'Technical failure'], correct: 1 },
-          { q: 'Sphere holds stablecoins for:', options: ['Months', 'Weeks', 'Days', 'Minutes'], correct: 3 }
+          { q: 'Funding liquidity is:', options: ['Market prices', 'Ability to raise cash to meet obligations', 'Blockchain gas fees', 'Credit rating'], correct: 1 },
+          { q: 'Why is liquidity MORE critical for payment processors than banks?', options: ['Larger volumes', 'Immediate obligations - zero delay tolerance', 'More regulations', 'Crypto volatility'], correct: 1 },
+          { q: 'Celsius failed primarily due to:', options: ['Fraud', 'Asset-liability mismatch', 'Regulatory action', 'Technical failure'], correct: 1 },
+          { q: 'How often should liquidity stress tests occur?', options: ['Daily', 'Weekly', 'Monthly', 'Quarterly'], correct: 3 },
+          { q: 'Sphere holds stablecoins for:', options: ['Months (yield generation)', 'Weeks (float)', 'Days (buffer)', 'Minutes (transit only)'], correct: 3 },
+          { q: 'Operating liquidity target is:', options: ['Average daily volume', 'Average + 50%', '2x average', '5x average'], correct: 1 }
         ]
       },
       {
@@ -6173,74 +6549,365 @@ This pillar ensures you can explain:
         title: '4.4 Business Continuity & Disaster Recovery',
         curriculum: {
           objectives: [
-            'Distinguish BCP from DR',
-            'Explain RTO and RPO metrics',
-            'Articulate Sphere\\'s resilience architecture',
-            'Describe testing requirements'
+            'Distinguish between BCP (during disruption) and DR (after failure)',
+            'Explain RTO and RPO metrics with Sphere-specific targets',
+            'Articulate Sphere\'s multi-region resilience architecture',
+            'Describe the testing program and governance',
+            'Handle institutional questions about resilience'
           ],
           keyConcepts: [
-            'BCP = Operations during disruption; DR = Recovery after failure',
-            'RTO = Max downtime; RPO = Max data loss',
-            'Resilience is architectural',
-            'Testing validates readiness'
+            'BCP = Maintain operations DURING disruption',
+            'DR = Recover AFTER major failure',
+            'RTO = Maximum acceptable downtime',
+            'RPO = Maximum acceptable data loss',
+            'Resilience is architectural, not reactive'
           ]
         },
         learn: {
-          introduction: 'Business continuity ensures operations continue during disruptions. Disaster recovery restores after major failures.',
+          introduction: 'Business continuity ensures operations continue during disruptions. Disaster recovery restores normal operations after major failures. For a payment processor, both are critical - customers depend on us for time-sensitive payments, and any extended outage directly impacts their business operations.',
           coreQuestion: 'What happens when systems fail, and how quickly can we recover?',
+
+          bcpVsDr: {
+            title: 'BCP vs DR: Understanding the Difference',
+            comparison: [
+              {
+                aspect: 'Focus',
+                bcp: 'Maintaining operations DURING disruption',
+                dr: 'Recovering AFTER major failure',
+                example: 'BCP: Database fails, automatically switch to replica. DR: Data center destroyed, rebuild from backups.'
+              },
+              {
+                aspect: 'Timeframe',
+                bcp: 'Immediate - measured in seconds to minutes',
+                dr: 'Extended - measured in hours to days',
+                example: 'BCP: 30-second failover. DR: 4-hour regional recovery.'
+              },
+              {
+                aspect: 'Trigger',
+                bcp: 'Component failure, partial outage',
+                dr: 'Catastrophic event, complete site loss',
+                example: 'BCP: Single server failure. DR: Natural disaster, major cyber attack.'
+              },
+              {
+                aspect: 'Goal',
+                bcp: 'Continuous service (maybe degraded)',
+                dr: 'Restore full capability',
+                example: 'BCP: Keep processing with reduced throughput. DR: Return to 100% capacity.'
+              }
+            ],
+            integration: 'Good BCP reduces the need for DR. If automatic failover handles 99% of issues, DR is rarely needed. But when it IS needed, having a tested plan is critical.'
+          },
+
           keyMetrics: {
-            title: 'RTO and RPO',
+            title: 'Key Metrics: RTO and RPO',
+            subtitle: 'These numbers define recovery expectations',
             metrics: [
               {
                 metric: 'RTO',
                 fullName: 'Recovery Time Objective',
+                definition: 'Maximum acceptable time from failure to service restoration.',
+                whyItMatters: 'Longer RTO = longer customer impact. For payment processing, even minutes matter.',
                 sphereTargets: [
-                  { system: 'Core Processing', rto: '< 30 seconds (auto failover)' },
-                  { system: 'Customer APIs', rto: '< 5 minutes' },
-                  { system: 'Full Regional Failure', rto: '< 4 hours' }
-                ]
+                  {
+                    system: 'Core Payment Processing',
+                    rto: '< 30 seconds',
+                    method: 'Automatic failover to replica',
+                    notes: 'Hot standby, synchronous replication, automatic health detection'
+                  },
+                  {
+                    system: 'Customer APIs',
+                    rto: '< 5 minutes',
+                    method: 'DNS failover to backup region',
+                    notes: 'Health checks trigger automatic DNS update'
+                  },
+                  {
+                    system: 'Dashboard/Reporting',
+                    rto: '< 30 minutes',
+                    method: 'Backup deployment activation',
+                    notes: 'Lower priority than core processing'
+                  },
+                  {
+                    system: 'Full Regional Failure',
+                    rto: '< 4 hours',
+                    method: 'Activate DR region',
+                    notes: 'Complete region loss - rare but planned for'
+                  }
+                ],
+                institutionalContext: 'When a bank asks "What\'s your RTO?", answer with specific numbers. "30 seconds for core processing, 4 hours for complete regional failure." Vague answers ("we recover quickly") don\'t satisfy institutional due diligence.'
               },
               {
                 metric: 'RPO',
                 fullName: 'Recovery Point Objective',
+                definition: 'Maximum acceptable amount of data loss (measured in time).',
+                whyItMatters: 'RPO = how much history you might lose. For financial transactions, this is critical.',
                 sphereTargets: [
-                  { system: 'Transaction Data', rpo: '0 (zero data loss)' },
-                  { system: 'Audit Logs', rpo: '< 1 minute' }
-                ]
+                  {
+                    system: 'Transaction Data',
+                    rpo: '0 (zero data loss)',
+                    method: 'Synchronous replication',
+                    notes: 'Every transaction replicated before acknowledgment'
+                  },
+                  {
+                    system: 'Audit Logs',
+                    rpo: '< 1 minute',
+                    method: 'Near-synchronous replication',
+                    notes: 'Slightly async for performance, but minimal gap'
+                  },
+                  {
+                    system: 'Analytics/Reporting Data',
+                    rpo: '< 1 hour',
+                    method: 'Periodic batch replication',
+                    notes: 'Non-critical data, can be regenerated'
+                  }
+                ],
+                zeroRPOexplained: {
+                  title: 'What "Zero Data Loss" Actually Means',
+                  explanation: 'Synchronous replication: transaction is written to primary AND replica before we confirm to the customer. If primary fails, replica has everything. Trade-off: slightly higher latency. Worth it for financial data.',
+                  contrast: 'Asynchronous replication is faster but creates a gap. If primary fails, you lose whatever hadn\'t replicated yet. Unacceptable for transaction data.'
+                }
               }
             ]
           },
-          sphereResilience: {
-            title: 'Sphere\\'s Resilience Architecture',
+
+          resilienceArchitecture: {
+            title: 'Sphere\'s Resilience Architecture',
+            subtitle: 'Resilience is built in, not bolted on',
             principles: [
-              { principle: 'Multi-Region Deployment', benefit: 'Regional failure doesn\\'t stop service' },
-              { principle: 'No Single Points of Failure', benefit: 'Component failure handled automatically' },
-              { principle: 'Data Replication', benefit: 'Zero data loss' },
-              { principle: 'Automatic Failover', benefit: 'Fastest possible recovery' },
-              { principle: 'Graceful Degradation', benefit: 'Partial service better than none' }
+              {
+                principle: 'Multi-Region Deployment',
+                icon: '🌍',
+                implementation: [
+                  'Primary region: Full production workload',
+                  'Hot standby region: Ready to take over in minutes',
+                  'Cold backup region: Can be activated in hours'
+                ],
+                benefit: 'Complete region failure doesn\'t stop service',
+                detail: 'Data replicated continuously. Application deployments mirrored. DNS failover pre-configured.'
+              },
+              {
+                principle: 'No Single Points of Failure',
+                icon: '🔗',
+                implementation: [
+                  'Every server has redundant pair',
+                  'Every database has replica',
+                  'Every network path has alternative',
+                  'Every external service has backup'
+                ],
+                benefit: 'Component failure handled automatically',
+                detail: 'Health checks detect failures in seconds. Traffic automatically routes to healthy instances.'
+              },
+              {
+                principle: 'Data Replication',
+                icon: '📊',
+                implementation: [
+                  'Synchronous replication for critical data',
+                  'Cross-region replication for DR',
+                  'Point-in-time recovery capability'
+                ],
+                benefit: 'Zero data loss for transactions',
+                detail: 'Transaction not confirmed until written to multiple locations.'
+              },
+              {
+                principle: 'Automatic Failover',
+                icon: '⚡',
+                implementation: [
+                  'Health checks every 5 seconds',
+                  'Automatic failover on detection',
+                  'No human intervention required',
+                  'Alerts sent post-failover'
+                ],
+                benefit: 'Fastest possible recovery',
+                detail: '30-second detection and failover. Humans notified AFTER automatic recovery.'
+              },
+              {
+                principle: 'Graceful Degradation',
+                icon: '📉',
+                implementation: [
+                  'Non-critical features can be disabled',
+                  'Rate limiting protects core functions',
+                  'Queue management prevents overload',
+                  'Priority routing for critical transactions'
+                ],
+                benefit: 'Partial service better than no service',
+                detail: 'If under stress, reporting might slow down but payments keep processing.'
+              }
             ]
           },
+
           testingProgram: {
-            title: 'Testing Program',
+            title: 'BCP/DR Testing Program',
+            subtitle: 'Untested plans are just documentation. Testing validates capability.',
+            philosophy: 'We test in production (safely). A plan that works in test but not production is worthless.',
             tests: [
-              { type: 'Component Failover', frequency: 'Monthly' },
-              { type: 'Regional Failover', frequency: 'Quarterly' },
-              { type: 'Full DR Exercise', frequency: 'Annually' },
-              { type: 'Tabletop Exercises', frequency: 'Semi-annually' }
+              {
+                type: 'Component Failover',
+                frequency: 'Monthly',
+                description: 'Kill individual components in production and verify automatic recovery',
+                examples: ['Database failover', 'Server termination', 'Network path failure'],
+                success: 'Service continues with zero customer impact',
+                lastResult: 'Pass - all monthly tests successful',
+                governance: 'Results logged, any failures trigger immediate remediation'
+              },
+              {
+                type: 'Regional Failover',
+                frequency: 'Quarterly',
+                description: 'Simulate complete regional failure, verify backup region takes over',
+                examples: ['DNS failover to backup region', 'Database promotion in DR site'],
+                success: 'Full service restored in backup region within RTO',
+                lastResult: 'Pass - failover completed in 3.5 hours (target: 4 hours)',
+                governance: 'Board-level reporting, documented lessons learned'
+              },
+              {
+                type: 'Full DR Exercise',
+                frequency: 'Annually',
+                description: 'Complete restore from backups to verify recoverability',
+                examples: ['Restore all systems from backup', 'Verify data integrity', 'Test full transaction flow'],
+                success: 'Complete system operational from backups',
+                lastResult: 'Pass - full restore completed in 6 hours',
+                governance: 'Executive sign-off required, external auditor may observe'
+              },
+              {
+                type: 'Tabletop Exercises',
+                frequency: 'Semi-annually',
+                description: 'Walk through scenarios with team to test decision-making',
+                examples: ['Ransomware scenario', 'Key person unavailability', 'Coordinated attack'],
+                success: 'Team demonstrates knowledge of procedures and escalation',
+                lastResult: 'Completed with 3 action items identified',
+                governance: 'Documented minutes, action item tracking'
+              }
             ],
-            governance: 'Results to board quarterly. Failures trigger immediate remediation.'
+            governance: {
+              reporting: 'All test results reported to Risk Committee',
+              failures: 'Any RTO/RPO miss triggers immediate remediation',
+              documentation: 'Full test documentation maintained for audit',
+              improvement: 'Lessons learned incorporated into procedures'
+            }
           },
-          keyTakeaway: 'Business continuity is about tested, validated capabilities. Multi-region, automatic failover, and regular testing give partners confidence.'
+
+          incidentCommunication: {
+            title: 'Incident Communication Framework',
+            subtitle: 'How we communicate during disruptions',
+            principles: [
+              {
+                principle: 'Proactive Over Reactive',
+                description: 'Tell customers about issues before they discover them',
+                implementation: 'Status page update within 15 minutes of any P1/P2 incident'
+              },
+              {
+                principle: 'Frequent Updates',
+                description: 'Even "no update" is an update',
+                implementation: 'Minimum every 30 minutes during active incidents'
+              },
+              {
+                principle: 'Honesty',
+                description: 'Don\'t minimize or hide issues',
+                implementation: 'State what we know, what we don\'t know, and when we\'ll update'
+              },
+              {
+                principle: 'Clear Ownership',
+                description: 'Customers know who to contact',
+                implementation: 'Named contact in all communications, dedicated incident line'
+              }
+            ],
+            templates: {
+              title: 'Communication Templates',
+              examples: [
+                {
+                  type: 'Initial Notification',
+                  template: 'We are currently investigating an issue affecting [service]. Some customers may experience [specific impact]. Our team is actively working on resolution. We will provide updates every [timeframe]. For urgent payment matters, please contact [contact].'
+                },
+                {
+                  type: 'Status Update',
+                  template: 'Update on [service] incident: [What we\'ve learned since last update]. [What we\'re doing now]. Current ETA: [estimate or "investigating"]. Next update in [timeframe].'
+                },
+                {
+                  type: 'Resolution Notice',
+                  template: 'The issue affecting [service] has been resolved as of [time]. Normal service has been restored. [X] transactions were delayed but have now been processed. If you experience any ongoing issues, please contact support. A detailed incident report will be available within 24 hours.'
+                }
+              ]
+            }
+          },
+
+          caseStudy: {
+            title: 'Case Study: AWS US-East-1 Outage (December 2021)',
+            subtitle: 'When a major cloud region fails',
+            background: {
+              event: 'AWS US-East-1 region experienced major outage',
+              duration: '7+ hours for some services',
+              impact: 'Affected Netflix, Disney+, Slack, and many financial services'
+            },
+            whatHappened: [
+              'Network configuration change triggered cascading failures',
+              'US-East-1 is most popular AWS region - massive blast radius',
+              'Many companies had DR plans but hadn\'t tested cross-region failover',
+              'Some companies recovered quickly; others were down for hours'
+            ],
+            lessonsLearned: [
+              {
+                lesson: 'Multi-region isn\'t enough - you need TESTED multi-region',
+                detail: 'Companies with tested failover recovered in minutes. Those with "planned" but untested failover took hours.'
+              },
+              {
+                lesson: 'Don\'t over-depend on one region',
+                detail: 'Many put everything in US-East-1 because it had the most services. Single point of failure.'
+              },
+              {
+                lesson: 'Your dependencies matter',
+                detail: 'Even if your app is multi-region, if your auth provider is single-region, you\'re still vulnerable.'
+              }
+            ],
+            sphereApproach: {
+              title: 'How Sphere Would Handle This',
+              response: [
+                'Automatic detection within 30 seconds',
+                'DNS failover to backup region triggered automatically',
+                'Customer impact: <5 minutes for API users',
+                'Status page updated within 10 minutes',
+                'Post-incident review within 48 hours'
+              ]
+            }
+          },
+
+          institutionalQA: {
+            title: 'Handling Institutional BCP/DR Questions',
+            questions: [
+              {
+                question: 'What\'s your RTO for payment processing?',
+                guidance: 'Be specific. Give numbers.',
+                response: '30 seconds for automatic failover of core processing. 4 hours for complete regional failure. We test monthly.'
+              },
+              {
+                question: 'What\'s your RPO?',
+                guidance: 'Emphasize zero data loss for transactions.',
+                response: 'Zero data loss for transaction data - synchronous replication means every transaction is in two places before confirmation. <1 minute for audit logs.'
+              },
+              {
+                question: 'How often do you test DR?',
+                guidance: 'Describe the full testing program.',
+                response: 'Component failover monthly, regional failover quarterly, full DR exercise annually. Results reported to board. Last regional test: 3.5 hours to full recovery.'
+              },
+              {
+                question: 'What happens if your primary data center is destroyed?',
+                guidance: 'Walk through the DR process.',
+                response: 'Backup region is continuously replicated and can be promoted within 4 hours. We\'ve tested this. Data loss: zero. Customer impact: temporary during failover, then full service from backup.'
+              }
+            ]
+          },
+
+          keyTakeaway: 'Business continuity isn\'t about having a plan - it\'s about having a TESTED, PROVEN capability. Multi-region architecture, automatic failover, regular testing, and clear communication ensure Sphere can maintain service even when things go wrong. When institutional partners ask about resilience, specific numbers (30-second RTO, zero RPO, quarterly testing) build confidence.'
         },
         exercise: {
-          title: 'Exercise 4.4 - BCP Scenario',
-          prompt: 'Primary cloud region goes down at 2pm Tuesday. What happens automatically? Customer impact? Notifications? Team actions?',
-          criteria: ['Automatic failover understood', 'Impact minimized', 'Communication clear']
+          title: 'Exercise 4.4 - DR Scenario Response',
+          prompt: 'Scenario: It\'s Tuesday 2pm. You receive alerts that your primary cloud region is experiencing major outage. Multiple systems are failing.\\n\\nWalk through:\\n1) What happens automatically (no human action needed)?\\n2) What\'s the first thing you do manually?\\n3) How do you communicate to customers (draft the message)?\\n4) What\'s your checklist for validating the backup region is working?\\n5) What do you do in the post-incident review?',
+          criteria: ['Automatic failover understood', 'Manual actions prioritized', 'Customer communication professional', 'Validation checklist comprehensive', 'Post-incident review thorough']
         },
         quiz: [
-          { q: 'RTO stands for:', options: ['Real-Time Ops', 'Recovery Time Objective', 'Risk Tolerance', 'Test'], correct: 1 },
-          { q: 'RPO = 0 means:', options: ['No recovery', 'Zero data loss', 'Immediate recovery', 'No backups'], correct: 1 },
-          { q: 'Regional failover testing frequency:', options: ['Daily', 'Monthly', 'Quarterly', 'Annually'], correct: 2 }
+          { q: 'RTO stands for:', options: ['Real-Time Operations', 'Recovery Time Objective', 'Risk Tolerance Order', 'Restore Target Output'], correct: 1 },
+          { q: 'RPO = 0 means:', options: ['No recovery needed', 'Zero data loss acceptable', 'Instant recovery', 'No backups'], correct: 1 },
+          { q: 'BCP focuses on:', options: ['Recovery after failure', 'Operations during disruption', 'Preventing all failures', 'Annual planning'], correct: 1 },
+          { q: 'Regional failover testing frequency:', options: ['Daily', 'Monthly', 'Quarterly', 'Annually'], correct: 2 },
+          { q: 'Sphere\'s core processing RTO:', options: ['< 30 seconds', '< 5 minutes', '< 1 hour', '< 4 hours'], correct: 0 },
+          { q: 'Untested DR plans are:', options: ['Fine as backup', 'Just documentation', 'Better than nothing', 'Required by law'], correct: 1 }
         ]
       },
       {
@@ -7116,7 +7783,7 @@ This pillar ensures you can explain:
     color: 'purple',
     overview: `**Why This Pillar Matters**
 
-This pillar is where your payments knowledge becomes Sphere-specific. You need to articulate what we do, how we're different, and why we win.`,
+This pillar is where your payments knowledge becomes Sphere-specific. You need to articulate what we do, how we\'re different, and why we win.`,
     sections: [
       {
         id: 'sphere-origin',
@@ -7163,7 +7830,6 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           { q: '"Being small is advantage" because:', options: ['Lower costs', 'Willingness to serve hard markets', 'Faster tech', 'Less regulation'], correct: 1 }
         ]
       },
-      {
       {
         id: 'product-architecture',
         title: '5.2 Product Architecture',
@@ -7572,6 +8238,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           { q: 'Gas costs to customers are:', options: ['Billed separately', 'Included in transaction fee', 'Customer responsibility', 'Free'], correct: 1 }
         ]
       },
+      {
         id: 'performance-metrics',
         title: '5.3 Performance Metrics',
         curriculum: {
@@ -9044,8 +9711,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           { q: 'Red flag in qualification:', options: ['$5M monthly volume', 'CFO on call', '"Our bank is fine"', 'LATAM corridors'], correct: 2 },
           { q: 'Segment 3 (Tech/SaaS) primary pain:', options: ['SWIFT delays', 'Global contractor payroll', 'FX exposure', 'Banking access'], correct: 1 }
         ]
-      }
-    ],
+      },
       {
         id: 'technical-faq',
         title: '5.8 Technical FAQ: Dangerous Statements About Sphere',
@@ -9428,7 +10094,8 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           { q: 'Reconciliation should happen:', options: ['Monthly', 'Quarterly', 'Daily', 'Annually'], correct: 2 },
           { q: '"We\'ll figure out integration later" is:', options: ['Good - flexible', 'Red flag - timeline risk', 'Normal', 'Preferred'], correct: 1 }
         ]
-      },
+      }
+    ],
     masterQuiz: {
       title: 'Pillar 5 Mastery Assessment',
       passingScore: 70,
