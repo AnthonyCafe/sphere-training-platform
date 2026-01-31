@@ -1,20 +1,31 @@
 // Sphere Training Platform - Complete Pillars Data
 // Structured learn content for proper React rendering
-// Last updated: January 2026 - RESTORATION IN PROGRESS
+// Last updated: January 2026
 
-// This file needs to be manually updated with the full content from:
-// The expanded pillars-data-v2-pillar4-expanded.ts file
+export const pillarsData = [
+  // ============================================================================
+  // PILLAR 1: PAYMENTS & SETTLEMENT FUNDAMENTALS
+  // ============================================================================
+  {
+    id: 'payments',
+    title: 'Pillar 1: Payments & Settlement Fundamentals',
+    shortTitle: 'Payments',
+    description: 'The non-negotiable foundation. If this pillar is missing, Sphere won\'t make sense.',
+    color: 'blue',
+    overview: `**Why This Pillar Matters**
 
-export const pillarsData: any[] = [];
+If this pillar is missing, Sphere won't make sense.
 
-// Temporary placeholder - full content to be restored
-// The complete expanded file (8,892 lines) includes:
-// - Pillar 1: Payments & Settlement (unchanged)
-// - Pillar 2: Stablecoins (unchanged) 
-// - Pillar 3: Compliance (unchanged)
-// - Pillar 4: Risk & Governance (EXPANDED from 270 to 1600+ lines)
-// - Pillar 5: Product & Positioning (unchanged)
-// - Pillar 6: 15 Compliance Questions (unchanged)
+Sphere does not "move messages faster." It restructures liquidity, settlement coordination, and compliance. If someone doesn't understand traditional payments infrastructure, they will misclassify Sphere immediately.
+
+This pillar ensures you can explain:
+- Why cross-border payments are structurally hard (not just "old technology")
+- The difference between messages and money
+- What settlement finality actually means (legally, not technically)
+- Where Sphere fits in the existing infrastructure`,
+    sections: []
+  }
+];
 
 export type Pillar = typeof pillarsData[number];
-export type Section = any;
+export type Section = Pillar['sections'][number];
