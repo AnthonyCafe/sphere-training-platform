@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import { CheckCircle, ChevronDown, ChevronUp } from 'lucide-react';
+import { CheckCircle, ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
 
 // =============================================================================
 // MAIN COMPONENT - Renders any learn content structure
@@ -15,7 +15,7 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
   // Handle null/undefined
   if (!learn) {
     return (
-      <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-6">
+      <div className="bg-red-500/20 border border-red-500/30 rounded-xl p-6">
         <p className="text-red-300">No learn content available for this section.</p>
       </div>
     );
@@ -946,7 +946,7 @@ function BeyondSwiftFedwireBlock({ data }: { data: any }) {
           <p className="text-amber-200 text-sm">💡 {data.keyDistinction}</p>
         </div>
       )}
-      <div className="space-y-3">
+      <div className="space-y-4">
         {data.otherSystems?.map((sys: any, i: number) => (
           <div key={i} className="bg-slate-700/50 rounded-lg p-4">
             <div className="flex items-center justify-between mb-2">
@@ -1174,7 +1174,7 @@ function PaymentSystemsDeepDiveBlock({ data }: { data: any }) {
               
               <div className="grid md:grid-cols-2 gap-3">
                 {data.internationalSystems.crossBorderChallenge.traditionalSolution && (
-                  <div className="bg-red-500/10 border border-red-500/30 rounded p-3">
+                  <div className="bg-red-500/20 border border-red-500/30 rounded p-3">
                     <h6 className="text-red-300 font-medium text-sm mb-1">{data.internationalSystems.crossBorderChallenge.traditionalSolution.title}</h6>
                     <p className="text-gray-300 text-xs mb-2">{data.internationalSystems.crossBorderChallenge.traditionalSolution.description}</p>
                     <p className="text-gray-400 text-xs italic mb-2">{data.internationalSystems.crossBorderChallenge.traditionalSolution.example}</p>
@@ -1453,7 +1453,7 @@ function SectionCard({ section }: { section: any }) {
           )}
           
           {section.whatCanGoWrong && (
-            <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+            <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-4">
               <p className="text-red-300 font-semibold mb-2 text-sm">What Can Go Wrong:</p>
               <p className="text-gray-300 text-sm">{section.whatCanGoWrong}</p>
             </div>
@@ -1538,7 +1538,7 @@ function QuestionCard({ question }: { question: any }) {
           )}
           
           {(question.doNotSay || question.answer?.doNotSay) && (
-            <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3">
+            <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-3">
               <p className="text-red-300 text-sm">❌ <span className="font-medium">Don't say:</span> {question.doNotSay || question.answer?.doNotSay}</p>
             </div>
           )}
@@ -1656,7 +1656,7 @@ function RiskCategoriesBlock({ data }: { data: any }) {
                       <h5 className="text-red-300 font-semibold mb-3">⚠️ {item.whatCanGoWrong.title || 'Risk Scenarios'}</h5>
                       <div className="space-y-3">
                         {item.whatCanGoWrong.scenarios?.map((scenario: any, j: number) => (
-                          <div key={j} className="bg-red-500/5 border border-red-500/20 rounded-lg p-3">
+                          <div key={j} className="bg-red-500/20 border border-red-500/20 rounded-lg p-3">
                             <h6 className="text-white font-medium mb-2">{scenario.scenario}</h6>
                             <p className="text-gray-400 text-xs mb-3">{scenario.description}</p>
                             <div className="grid grid-cols-2 gap-2 text-xs">
@@ -1715,32 +1715,54 @@ function DefinitionsBlock({ data }: { data: any }) {
 function TableBlock({ data }: { data: any }) {
   const headers = data.headers || [];
   const rows = data.rows || [];
-  
+
+  // Check if this is a frictions-style table (3 columns with long examples)
+  const isFrictionsTable = data.title?.includes('Frictions') ||
+    (headers.length === 3 && headers[2]?.toLowerCase().includes('example'));
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      {data.title && <h3 className="font-semibold text-white mb-4">{data.title}</h3>}
+      {data.title && <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>}
+      {data.subtitle && <p className="text-gray-400 text-sm mb-4">{data.subtitle}</p>}
       <div className="overflow-x-auto">
         <table className="w-full">
           <thead>
             <tr className="border-b border-slate-600">
               {headers.map((h: string, i: number) => (
-                <th key={i} className="px-4 py-3 text-left font-semibold text-gray-300 bg-slate-700/50">{h}</th>
+                <th key={i} className={`px-4 py-3 text-left font-semibold bg-slate-700/50 ${
+                  i === 0 ? 'text-amber-300 w-1/5' :
+                  i === 1 ? 'text-red-300 w-1/5' :
+                  'text-blue-300 w-3/5'
+                }`}>{h}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {rows.map((row: any[], i: number) => (
-              <tr key={i} className="border-b border-slate-700/50">
+              <tr key={i} className="border-b border-slate-700/50 align-top">
                 {row.map((cell, j) => (
-                  <td key={j} className="px-4 py-3 text-gray-300">{cell}</td>
+                  <td key={j} className={`px-4 py-4 ${
+                    isFrictionsTable ? (
+                      j === 0 ? 'text-amber-300 font-semibold' :
+                      j === 1 ? 'text-red-300 text-sm' :
+                      ''
+                    ) : 'text-gray-300'
+                  }`}>
+                    {isFrictionsTable && j === 2 ? (
+                      <div className="bg-slate-700/30 rounded-lg p-3 text-gray-300 text-sm leading-relaxed italic">
+                        {cell}
+                      </div>
+                    ) : cell}
+                  </td>
                 ))}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      {data.source && <p className="text-gray-500 text-xs mt-4 italic">{data.source}</p>}
       {data.conclusion && <p className="text-gray-400 text-sm mt-4">{data.conclusion}</p>}
-      {data.keyPoint && <p className="text-purple-300 text-sm mt-4 font-medium">💡 {data.keyPoint}</p>}
+      {data.keyPoint && <p className="text-purple-300 text-sm mt-4 font-medium">{data.keyPoint}</p>}
     </div>
   );
 }
@@ -1903,7 +1925,7 @@ function CaseStudyBlock({ data }: { data: any }) {
 
 function SystemicRiskBlock({ data }: { data: any }) {
   return (
-    <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-6">
+    <div className="bg-red-500/20 border border-red-500/30 rounded-xl p-6">
       <h3 className="font-semibold text-white mb-3">{data.title}</h3>
       {data.scenario && <p className="text-gray-300 mb-3">{data.scenario}</p>}
       {data.impact && (
@@ -1956,7 +1978,7 @@ function AsymmetryBlock({ data }: { data: any }) {
       )}
       
       {data.whatCanGoWrong && (
-        <div className="bg-red-500/10 rounded-lg p-4">
+        <div className="bg-red-500/20 rounded-lg p-4">
           <p className="font-medium text-red-300 mb-2">What can go wrong:</p>
           <ul className="text-gray-300 text-sm space-y-1">
             {data.whatCanGoWrong.map((w: string, i: number) => <li key={i}>• {w}</li>)}
@@ -2009,7 +2031,7 @@ function FourLedgersBlock({ data }: { data: any }) {
               </div>
             ))}
           </div>
-          <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3 mt-3">
+          <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-3 mt-3">
             <p className="text-red-200 text-sm font-medium">{data.timingDifferences.gap}</p>
           </div>
         </div>
@@ -2030,7 +2052,7 @@ function CapitalEfficiencyBlock({ data }: { data: any }) {
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
       <div className="grid md:grid-cols-2 gap-4">
         {data.comparison?.map((c: any, i: number) => (
-          <div key={i} className={`rounded-lg p-4 ${i === 0 ? 'bg-red-500/10 border border-red-500/30' : 'bg-emerald-500/10 border border-emerald-500/30'}`}>
+          <div key={i} className={`rounded-lg p-4 ${i === 0 ? 'bg-red-500/20 border border-red-500/30' : 'bg-emerald-500/10 border border-emerald-500/30'}`}>
             <p className={`font-semibold ${i === 0 ? 'text-red-300' : 'text-emerald-300'}`}>{c.approach}</p>
             <p className="text-gray-300 text-sm mt-1">{c.description}</p>
             <p className={`text-lg font-bold mt-2 ${i === 0 ? 'text-red-400' : 'text-emerald-400'}`}>{c.impact}</p>
@@ -2100,7 +2122,7 @@ function SphereApproachBlock({ data }: { data: any }) {
               <div key={i} className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
                 <p className="text-emerald-300 font-semibold mb-2">{example.situation}</p>
                 <div className="grid md:grid-cols-2 gap-3">
-                  <div className="bg-red-500/10 rounded p-2">
+                  <div className="bg-red-500/20 rounded p-2">
                     <p className="text-red-300 text-xs font-semibold mb-1">Naive Approach:</p>
                     <p className="text-gray-300 text-xs">{example.naiveApproach}</p>
                   </div>
@@ -2122,7 +2144,7 @@ function SphereApproachBlock({ data }: { data: any }) {
           {data.solutions.map((solution: any, i: number) => (
             <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-purple-500">
               <div className="grid md:grid-cols-2 gap-3 mb-3">
-                <div className="bg-red-500/10 rounded p-2">
+                <div className="bg-red-500/20 rounded p-2">
                   <p className="text-red-300 font-semibold text-sm mb-1">❌ Problem:</p>
                   <p className="text-gray-300 text-sm">{solution.problem}</p>
                 </div>
@@ -2200,7 +2222,7 @@ function SphereApproachBlock({ data }: { data: any }) {
       {/* Handle languageGuide within sphereApproach */}
       {data.languageGuide && (
         <div className="grid md:grid-cols-2 gap-3 mb-4">
-          <div className="bg-red-500/10 border border-red-500/30 rounded p-3">
+          <div className="bg-red-500/20 border border-red-500/30 rounded p-3">
             <p className="text-red-300 text-sm font-semibold mb-2">❌ Don't Say:</p>
             <ul className="text-gray-300 text-xs space-y-1">
               {data.languageGuide.wrong?.map((item: string, i: number) => (
@@ -2239,7 +2261,7 @@ function SphereApproachBlock({ data }: { data: any }) {
         <div className="bg-slate-700/50 rounded-lg p-4">
           <h4 className="text-white font-semibold mb-3">{data.realWorldExample.title}</h4>
           <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-red-500/10 border border-red-500/30 rounded p-3">
+            <div className="bg-red-500/20 border border-red-500/30 rounded p-3">
               <p className="text-red-300 font-semibold mb-2">Traditional Approach</p>
               <p className="text-gray-300 text-sm mb-2">{data.realWorldExample.traditional.timeline}</p>
               <p className="text-gray-400 text-xs mb-1">Cost: {data.realWorldExample.traditional.cost}</p>
@@ -2395,7 +2417,7 @@ function WhatSphereBlock({ data, isNot }: { data: any; isNot: boolean }) {
   // Handle new expanded format with categories array
   if (data.categories) {
     return (
-      <div className={`rounded-xl p-6 ${isNot ? 'bg-red-500/10 border border-red-500/30' : 'bg-emerald-500/10 border border-emerald-500/30'}`}>
+      <div className={`rounded-xl p-6 ${isNot ? 'bg-red-500/20 border border-red-500/30' : 'bg-emerald-500/10 border border-emerald-500/30'}`}>
         <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
         {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
         
@@ -2490,7 +2512,7 @@ function WhatSphereBlock({ data, isNot }: { data: any; isNot: boolean }) {
   
   // Original simple format with items array
   return (
-    <div className={`rounded-xl p-6 ${isNot ? 'bg-red-500/10 border border-red-500/30' : 'bg-emerald-500/10 border border-emerald-500/30'}`}>
+    <div className={`rounded-xl p-6 ${isNot ? 'bg-red-500/20 border border-red-500/30' : 'bg-emerald-500/10 border border-emerald-500/30'}`}>
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
       {data.items && (
         <div className="space-y-2">
@@ -2604,7 +2626,7 @@ function SampleResponseBlock({ data }: { data: any }) {
       <p className="text-gray-200 mb-4">{data.answer}</p>
       
       {data.doNotSay && (
-        <div className="bg-red-500/10 rounded-lg p-3 mb-3">
+        <div className="bg-red-500/20 rounded-lg p-3 mb-3">
           <p className="text-red-400 text-sm font-medium mb-1">❌ Don't say:</p>
           <ul className="text-red-300 text-sm space-y-1">
             {data.doNotSay.map((d: string, i: number) => <li key={i}>• {d}</li>)}
@@ -2669,7 +2691,7 @@ function ListBlock({ data }: { data: any }) {
 
 function HighRiskBlock({ data }: { data: any }) {
   return (
-    <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-6">
+    <div className="bg-red-500/20 border border-red-500/30 rounded-xl p-6">
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
       {data.comprehensive && <p className="text-red-300 mb-2"><strong>Comprehensive:</strong> {data.comprehensive.join(', ')}</p>}
       {data.targeted && <p className="text-amber-300 mb-2"><strong>Targeted:</strong> {data.targeted.join(', ')}</p>}
@@ -2749,7 +2771,7 @@ function MitigationBlock({ data }: { data: any }) {
           <div key={i} className={`rounded-lg p-4 border-l-4 ${
             i === 0 ? 'bg-blue-500/10 border-blue-500' :
             i === 1 ? 'bg-amber-500/10 border-amber-500' :
-            i === 2 ? 'bg-red-500/10 border-red-500' :
+            i === 2 ? 'bg-red-500/20 border-red-500' :
             'bg-emerald-500/10 border-emerald-500'
           }`}>
             <div className="flex items-center gap-2 mb-2">
@@ -2822,7 +2844,7 @@ function CounterpartyBlock({ data }: { data: any }) {
                     <p className="text-red-300 font-medium text-sm mb-2">Specific Risks:</p>
                     <div className="space-y-2">
                       {item.specificRisks.map((risk: any, j: number) => (
-                        <div key={j} className="bg-red-500/10 border border-red-500/20 rounded p-3">
+                        <div key={j} className="bg-red-500/20 border border-red-500/20 rounded p-3">
                           <p className="text-white text-sm font-medium">{risk.risk}</p>
                           {risk.example && <p className="text-gray-400 text-xs">Example: {risk.example}</p>}
                           <p className="text-emerald-300 text-xs mt-1">Mitigation: {risk.mitigation}</p>
@@ -3343,7 +3365,7 @@ function TipsBlock({ data }: { data: any }) {
 function LanguageGuideBlock({ data }: { data: any }) {
   return (
     <div className="grid md:grid-cols-2 gap-4">
-      <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-4">
+      <div className="bg-red-500/20 border border-red-500/50 rounded-xl p-4">
         <p className="font-semibold text-red-400 mb-3">❌ Never Say</p>
         <ul className="space-y-2">
           {data.wrong?.map((item: string, i: number) => <li key={i} className="text-gray-300 text-sm">• {item}</li>)}
@@ -3360,17 +3382,52 @@ function LanguageGuideBlock({ data }: { data: any }) {
 }
 
 function SphereRelevanceBlock({ data }: { data: any }) {
+  const [showBlockchainBasics, setShowBlockchainBasics] = useState(false);
+
   return (
     <div className="bg-purple-500/10 border border-purple-500/50 rounded-xl p-6">
       <h3 className="font-semibold text-white mb-4">🎯 {data.title}</h3>
-      
-      {/* Handle simple points array format */}
+
+      {/* Key insight first */}
+      {data.keyInsight && (
+        <div className="bg-purple-500/20 rounded-lg p-4 mb-4">
+          <p className="text-purple-200 font-medium">💡 {data.keyInsight}</p>
+        </div>
+      )}
+
+      {/* SWIFT vs Sphere comparison table */}
+      {data.swiftVsSphere && (
+        <div className="overflow-x-auto mb-4">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-slate-600">
+                <th className="text-left py-3 px-4 text-gray-400 font-medium"></th>
+                <th className="text-left py-3 px-4 text-red-400 font-medium">SWIFT</th>
+                <th className="text-left py-3 px-4 text-emerald-400 font-medium">Sphere</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.swiftVsSphere.map((row: any, i: number) => (
+                <tr key={i} className="border-b border-slate-700">
+                  <td className="py-3 px-4 text-white font-medium">{row.aspect}</td>
+                  <td className="py-3 px-4 text-gray-400">{row.swift}</td>
+                  <td className="py-3 px-4 text-gray-300">{row.sphere}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* Handle points array - both string and object formats */}
       {data.points && (
-        <ul className="space-y-2 mb-4">
-          {data.points.map((point: string, i: number) => (
+        <ul className="space-y-3">
+          {data.points.map((point: any, i: number) => (
             <li key={i} className="flex items-start gap-2 text-gray-300">
               <CheckCircle className="w-4 h-4 text-purple-400 mt-1 flex-shrink-0" />
-              {point}
+              {typeof point === 'string' ? point : (
+                <span><strong className="text-purple-300">{point.point}:</strong> {point.detail}</span>
+              )}
             </li>
           ))}
         </ul>
@@ -3394,7 +3451,45 @@ function SphereRelevanceBlock({ data }: { data: any }) {
           <p className="text-purple-200 font-medium">{data.sphereValue}</p>
         </div>
       )}
-      
+
+      {/* Blockchain Basics Expandable Section */}
+      {data.blockchainBasics && (
+        <div className="mb-4">
+          <button
+            onClick={() => setShowBlockchainBasics(!showBlockchainBasics)}
+            className="flex items-center gap-2 text-blue-400 hover:text-blue-300 text-sm font-medium transition-colors"
+          >
+            <HelpCircle className="w-4 h-4" />
+            {data.blockchainBasics.trigger}
+            <ChevronDown className={`w-4 h-4 transition-transform ${showBlockchainBasics ? 'rotate-180' : ''}`} />
+          </button>
+
+          {showBlockchainBasics && (
+            <div className="mt-3 bg-slate-700/50 border border-slate-600 rounded-lg p-5 animate-in fade-in duration-200">
+              <h4 className="text-white font-semibold mb-2">{data.blockchainBasics.title}</h4>
+              <p className="text-gray-400 text-sm mb-4">{data.blockchainBasics.subtitle}</p>
+
+              <div className="space-y-4">
+                {data.blockchainBasics.concepts?.map((concept: any, i: number) => (
+                  <div key={i} className="bg-slate-800/50 rounded-lg p-4">
+                    <h5 className="text-blue-300 font-semibold mb-2">{concept.term}</h5>
+                    <p className="text-white text-sm mb-2">{concept.simple}</p>
+                    <p className="text-emerald-300 text-sm mb-2"><span className="font-medium">Why it matters:</span> {concept.whyItMatters}</p>
+                    <p className="text-gray-400 text-sm italic">💡 {concept.analogy}</p>
+                  </div>
+                ))}
+              </div>
+
+              {data.blockchainBasics.keyPoint && (
+                <div className="mt-4 bg-purple-500/20 rounded-lg p-3">
+                  <p className="text-purple-200 text-sm font-medium">{data.blockchainBasics.keyPoint}</p>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
+
       {/* Handle problemExplained */}
       {data.problemExplained && (
         <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4 mb-4">
@@ -3412,7 +3507,7 @@ function SphereRelevanceBlock({ data }: { data: any }) {
                 <p className="text-purple-300 font-semibold mb-2">{step.step}</p>
                 <p className="text-gray-300 text-sm mb-2">{step.process}</p>
                 <div className="grid md:grid-cols-2 gap-2 mt-2 text-sm">
-                  <div className="bg-red-500/10 rounded p-2">
+                  <div className="bg-red-500/20 rounded p-2">
                     <p className="text-red-300 font-semibold mb-1">Traditional:</p>
                     <p className="text-gray-400">{step.traditional}</p>
                   </div>
@@ -3484,12 +3579,6 @@ function SphereRelevanceBlock({ data }: { data: any }) {
         </div>
       )}
       
-      {/* keyInsight at the end */}
-      {data.keyInsight && (
-        <div className="bg-purple-500/20 rounded-lg p-4">
-          <p className="text-purple-200 font-medium">💡 {data.keyInsight}</p>
-        </div>
-      )}
     </div>
   );
 }
@@ -3638,7 +3727,7 @@ function SampleResponsesBlockNew({ data }: { data: any }) {
               </div>
             )}
             {s.doNotSay && (
-              <div className="bg-red-500/10 rounded p-2 mt-2">
+              <div className="bg-red-500/20 rounded p-2 mt-2">
                 <p className="text-red-400 text-xs font-medium mb-1">❌ Don't say:</p>
                 <ul className="text-red-300 text-xs space-y-0.5">
                   {s.doNotSay.map((d: string, j: number) => <li key={j}>• {d}</li>)}
@@ -4143,7 +4232,7 @@ function RiskAssessmentFrameworkBlock({ data }: { data: any }) {
                 <div className="flex items-center justify-between mb-4">
                   <span className={`${textColor} font-semibold text-lg`}>{r.rating}</span>
                   {r.approval && (
-                    <span className="text-red-400 text-sm bg-red-500/10 px-3 py-1 rounded">{r.approval}</span>
+                    <span className="text-red-400 text-sm bg-red-500/20 px-3 py-1 rounded">{r.approval}</span>
                   )}
                 </div>
                 <div className="grid md:grid-cols-3 gap-4 mb-4">
@@ -4362,7 +4451,7 @@ function SanctionsRegimesBlock({ data }: { data: any }) {
                     <p className="text-gray-400 text-sm uppercase mb-2">Real-World Examples</p>
                     <div className="space-y-2">
                       {r.realWorldExamples.map((ex: any, j: number) => (
-                        <div key={j} className="bg-red-500/10 rounded-lg p-3">
+                        <div key={j} className="bg-red-500/20 rounded-lg p-3">
                           <p className="text-white font-medium text-sm">{ex.example}</p>
                           <p className="text-gray-400 text-sm">{ex.violation}</p>
                           <p className="text-red-400 text-sm font-medium">{ex.consequence}</p>
@@ -4478,7 +4567,7 @@ function HighRiskJurisdictionsBlock({ data }: { data: any }) {
               >
                 <div className="flex items-center gap-3">
                   <span className="text-white font-semibold">{cat.category}</span>
-                  <span className={`text-sm px-2 py-1 rounded ${isProhibited ? 'text-red-400 bg-red-500/10' : isHigh ? 'text-amber-400 bg-amber-500/10' : 'text-yellow-400 bg-yellow-500/10'}`}>
+                  <span className={`text-sm px-2 py-1 rounded ${isProhibited ? 'text-red-400 bg-red-500/20' : isHigh ? 'text-amber-400 bg-amber-500/10' : 'text-yellow-400 bg-yellow-500/10'}`}>
                     {cat.riskLevel}
                   </span>
                 </div>
@@ -4539,7 +4628,7 @@ function HighRiskJurisdictionsBlock({ data }: { data: any }) {
           <p className="text-gray-400 text-sm mb-4">{data.nuancedApproach.explanation}</p>
           <div className="grid md:grid-cols-2 gap-3">
             {data.nuancedApproach.tiers?.map((t: any, i: number) => {
-              const colorClasses = t.tier === 'Prohibited' ? 'border-l-red-500 bg-red-500/5' :
+              const colorClasses = t.tier === 'Prohibited' ? 'border-l-red-500 bg-red-500/20' :
                            t.tier === 'Highly Restricted' ? 'border-l-amber-500 bg-amber-500/5' :
                            t.tier === 'Enhanced Scrutiny' ? 'border-l-yellow-500 bg-yellow-500/5' : 'border-l-emerald-500 bg-emerald-500/5';
               const textColor = t.tier === 'Prohibited' ? 'text-red-400' :
@@ -4584,7 +4673,7 @@ function ScreeningFlowDiagramBlock({ data }: { data: any }) {
                             node.color === 'red' ? 'border-l-red-500' :
                             node.color === 'yellow' ? 'border-l-amber-500' : 'border-l-blue-500';
           const bgClass = node.color === 'green' ? 'bg-emerald-500/5' :
-                         node.color === 'red' ? 'bg-red-500/5' :
+                         node.color === 'red' ? 'bg-red-500/20' :
                          node.color === 'yellow' ? 'bg-amber-500/5' : 'bg-slate-700/50';
 
           return (
@@ -4826,7 +4915,7 @@ function FlaggedPaymentProcessBlock({ data }: { data: any }) {
                     </div>
                   )}
                   {s.rejectedCommunication && (
-                    <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3">
+                    <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-3">
                       <p className="text-red-400 font-medium text-sm mb-2">✗ {s.rejectedCommunication.subject}</p>
                       <pre className="text-gray-400 text-xs whitespace-pre-wrap font-sans bg-slate-800/50 rounded p-3">{s.rejectedCommunication.template}</pre>
                     </div>
@@ -5119,7 +5208,7 @@ function WhyTravelRuleMattersBlock({ data }: { data: any }) {
           <div key={i} className="bg-slate-700/50 rounded-lg p-5">
             <h4 className="text-blue-300 font-semibold mb-3">{b.implication}</h4>
             <p className="text-gray-300 mb-4">{b.detail}</p>
-            <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+            <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-4">
               <p className="text-gray-500 text-sm mb-1">Impact</p>
               <p className="text-red-300">{b.impact}</p>
             </div>
@@ -5177,7 +5266,7 @@ function TravelRuleProtocolsBlock({ data }: { data: any }) {
                     </div>
                   )}
                   {p.cons && (
-                    <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+                    <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-4">
                       <p className="text-red-300 font-medium mb-2">Cons</p>
                       <div className="space-y-2">
                         {p.cons.map((con: string, j: number) => (
@@ -5242,7 +5331,7 @@ function TransmissionMethodsBlock({ data }: { data: any }) {
                   ))}
                 </div>
               </div>
-              <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+              <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-4">
                 <p className="text-red-300 font-medium mb-2">Disadvantages</p>
                 <div className="space-y-2">
                   {m.disadvantages?.map((d: string, j: number) => (
@@ -5346,7 +5435,7 @@ function EdgeCasesBlock({ data }: { data: any }) {
                         <div className="bg-emerald-500/10 rounded-lg p-3">
                           <p className="text-emerald-300">✓ {sol.pros}</p>
                         </div>
-                        <div className="bg-red-500/10 rounded-lg p-3">
+                        <div className="bg-red-500/20 rounded-lg p-3">
                           <p className="text-red-300">✗ {sol.cons}</p>
                         </div>
                       </div>
@@ -5470,7 +5559,7 @@ function WhyItMattersBlock({ data }: { data: any }) {
       {data.impacts && (
         <div className="space-y-3 mb-4">
           {data.impacts.map((impact: any, i: number) => (
-            <div key={i} className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+            <div key={i} className="bg-red-500/20 border border-red-500/30 rounded-lg p-4">
               <h4 className="text-white font-medium mb-1">{impact.scenario}</h4>
               <p className="text-red-300 text-sm">{impact.consequence}</p>
             </div>
@@ -5645,7 +5734,7 @@ function ProcessBlock({ data }: { data: any }) {
           )}
 
           {data.bankingCutoffs && (
-            <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+            <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-4">
               <h4 className="text-red-300 font-semibold mb-2">{data.bankingCutoffs.title}</h4>
               <p className="text-gray-400 text-sm mb-3">{data.bankingCutoffs.description}</p>
               <div className="space-y-2">
@@ -5754,9 +5843,9 @@ function ScenarioBlock({ data }: { data: any }) {
       {data.scenarios && (
         <div className="space-y-3">
           {data.scenarios.map((s: any, i: number) => (
-            <div key={i} className="bg-red-500/5 border border-red-500/20 rounded-lg overflow-hidden">
+            <div key={i} className="bg-red-500/20 border border-red-500/20 rounded-lg overflow-hidden">
               <div
-                className="p-4 cursor-pointer hover:bg-red-500/10"
+                className="p-4 cursor-pointer hover:bg-red-500/20"
                 onClick={() => setExpanded(expanded === i ? null : i)}
               >
                 <div className="flex items-center justify-between">
@@ -5806,7 +5895,7 @@ function ScenarioBlock({ data }: { data: any }) {
               <h4 className="text-red-300 font-semibold mb-3">What Went Wrong</h4>
               <div className="space-y-3">
                 {data.whatWentWrong.map((item: any, i: number) => (
-                  <div key={i} className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
+                  <div key={i} className="bg-red-500/20 border border-red-500/20 rounded-lg p-4">
                     <h5 className="text-white font-medium mb-2">{item.failure}</h5>
                     <p className="text-gray-400 text-sm mb-2">{item.detail}</p>
                     {item.sphereContrast && (
@@ -5975,10 +6064,10 @@ function FrameworkBlock({ data }: { data: any }) {
             <div key={i} className={`rounded-lg overflow-hidden border-l-4 ${
               layer.icon === '🟢' ? 'bg-emerald-500/10 border-emerald-500' :
               layer.icon === '🟡' ? 'bg-amber-500/10 border-amber-500' :
-              layer.icon === '🔴' ? 'bg-red-500/10 border-red-500' :
+              layer.icon === '🔴' ? 'bg-red-500/20 border-red-500' :
               i === 0 ? 'bg-blue-500/10 border-blue-500' :
               i === 1 ? 'bg-amber-500/10 border-amber-500' :
-              'bg-red-500/10 border-red-500'
+              'bg-red-500/20 border-red-500'
             }`}>
               <button
                 onClick={() => setExpanded(expanded === i ? null : i)}
@@ -6088,7 +6177,7 @@ function FrameworkBlock({ data }: { data: any }) {
 
                   {/* Last Result */}
                   {s.lastResult && (
-                    <div className={`rounded p-2 ${s.lastResult.includes('Pass') ? 'bg-emerald-500/10 border border-emerald-500/30' : 'bg-red-500/10 border border-red-500/30'}`}>
+                    <div className={`rounded p-2 ${s.lastResult.includes('Pass') ? 'bg-emerald-500/10 border border-emerald-500/30' : 'bg-red-500/20 border border-red-500/30'}`}>
                       <p className={`text-sm ${s.lastResult.includes('Pass') ? 'text-emerald-300' : 'text-red-300'}`}>
                         <span className="font-medium">Result:</span> {s.lastResult}
                       </p>
@@ -6263,7 +6352,7 @@ function ArchitectureBlock({ data }: { data: any }) {
       {data.threats && (
         <div className="space-y-3">
           {data.threats.map((threat: any, i: number) => (
-            <div key={i} className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
+            <div key={i} className="bg-red-500/20 border border-red-500/20 rounded-lg p-4">
               <h4 className="text-red-300 font-semibold mb-2">{threat.threat || threat.name}</h4>
               <p className="text-gray-400 text-sm mb-2">{threat.description}</p>
               {threat.mitigation && <p className="text-emerald-300 text-sm">Mitigation: {threat.mitigation}</p>}
@@ -6489,7 +6578,7 @@ function WarRoomBlock({ data }: { data: any }) {
       <h3 className="font-semibold text-white mb-2 text-xl">🚨 {data.title}</h3>
       {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
       {data.triggerCriteria && (
-        <div className="bg-red-500/10 border border-red-500/30 rounded p-3 mb-4">
+        <div className="bg-red-500/20 border border-red-500/30 rounded p-3 mb-4">
           <p className="text-red-300 text-xs font-semibold mb-1">Trigger Criteria:</p>
           <p className="text-gray-300 text-sm">{data.triggerCriteria}</p>
         </div>
@@ -6719,7 +6808,7 @@ function FailureModesBlock({ data }: { data: any }) {
 
       <div className="space-y-4">
         {data.scenarios?.map((scenario: any, i: number) => (
-          <div key={i} className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
+          <div key={i} className="bg-red-500/20 border border-red-500/20 rounded-lg p-4">
             <h4 className="text-red-300 font-medium mb-3">{scenario.failure}</h4>
             <div className="grid md:grid-cols-2 gap-3 text-sm">
               <div>
@@ -7092,7 +7181,7 @@ function SwiftAckBlock({ data }: { data: any }) {
           </ul>
         </div>
         
-        <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+        <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-4">
           <p className="text-red-300 font-semibold mb-2">❌ What It Does NOT Mean</p>
           <ul className="text-gray-300 space-y-1 text-sm">
             {data.whatItDoesNOTMean?.map((item: string, i: number) => (
@@ -7113,7 +7202,7 @@ function SwiftAckBlock({ data }: { data: any }) {
 
 function DangerZoneBlock({ data }: { data: any }) {
   return (
-    <div className="bg-red-500/10 border-2 border-red-500/50 rounded-xl p-6">
+    <div className="bg-red-500/20 border-2 border-red-500/50 rounded-xl p-6">
       <h3 className="font-semibold text-red-300 mb-4 text-xl">⚠️ {data.title}</h3>
       <div className="bg-red-500/20 rounded-lg p-4 mb-4">
         <p className="text-white font-semibold text-lg">"{data.statement}"</p>
@@ -7121,9 +7210,9 @@ function DangerZoneBlock({ data }: { data: any }) {
       </div>
       
       {data.mythVsReality && (
-        <div className="space-y-3 mb-4">
+        <div className="space-y-4 mb-4">
           {data.mythVsReality.map((item: any, i: number) => (
-            <div key={i} className="bg-slate-700/50 rounded-lg p-3">
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
               <p className="text-red-300 text-sm">❌ Myth: {item.myth}</p>
               <p className="text-emerald-300 text-sm">✅ Reality: {item.truth}</p>
             </div>
@@ -7132,9 +7221,9 @@ function DangerZoneBlock({ data }: { data: any }) {
       )}
       
       {data.whatCanStillGoWrong?.scenarios && (
-        <div>
+        <div className="mt-6">
           <h4 className="text-white font-semibold mb-3">{data.whatCanStillGoWrong.title}</h4>
-          <div className="space-y-3">
+          <div className="space-y-4">
             {data.whatCanStillGoWrong.scenarios.map((scenario: any, i: number) => (
               <div key={i} className="bg-slate-700/50 rounded-lg p-4">
                 <p className="text-amber-300 font-semibold mb-1">{scenario.issue}</p>
@@ -7270,14 +7359,14 @@ function IdentifyingCorrespondentsBlock({ data }: { data: any }) {
       
       {/* Factors */}
       {data.factors && (
-        <div className="mb-6">
-          <h4 className="text-white font-semibold mb-3">Key Factors</h4>
-          <div className="space-y-3">
+        <div className="mb-8">
+          <h4 className="text-white font-semibold mb-4">Key Factors</h4>
+          <div className="space-y-4">
             {data.factors.map((factor: any, i: number) => (
               <div key={i} className="bg-slate-700/50 rounded-lg p-4">
                 <h5 className="text-blue-300 font-semibold mb-2">{factor.factor}</h5>
-                <p className="text-gray-300 text-sm mb-2">{factor.explanation}</p>
-                <div className="grid md:grid-cols-2 gap-2 text-sm">
+                <p className="text-gray-300 text-sm mb-3">{factor.explanation}</p>
+                <div className="grid md:grid-cols-2 gap-3 text-sm">
                   {factor.highLiquidity && <p className="text-gray-400">High: {factor.highLiquidity}</p>}
                   {factor.lowLiquidity && <p className="text-gray-400">Low: {factor.lowLiquidity}</p>}
                   {factor.developed && <p className="text-gray-400">Developed: {factor.developed}</p>}
@@ -7292,19 +7381,19 @@ function IdentifyingCorrespondentsBlock({ data }: { data: any }) {
           </div>
         </div>
       )}
-      
+
       {/* Typical Corridors */}
       {data.typicalCorridors?.examples && (
-        <div className="mb-6">
-          <h4 className="text-white font-semibold mb-3">{data.typicalCorridors.title}</h4>
-          <div className="space-y-3">
+        <div className="mb-8">
+          <h4 className="text-white font-semibold mb-4">{data.typicalCorridors.title}</h4>
+          <div className="space-y-4">
             {data.typicalCorridors.examples.map((corridor: any, i: number) => (
               <div key={i} className="bg-slate-700/50 rounded-lg p-4">
                 <div className="flex items-start justify-between mb-2">
                   <h5 className="text-emerald-300 font-semibold">{corridor.corridor}</h5>
                   <span className="text-xs bg-slate-600 px-2 py-1 rounded">{corridor.hops} hops</span>
                 </div>
-                <p className="text-gray-300 text-sm mb-1">{corridor.chain}</p>
+                <p className="text-gray-300 text-sm mb-2">{corridor.chain}</p>
                 <p className="text-gray-400 text-xs">Speed: {corridor.speed} • Reason: {corridor.reason}</p>
               </div>
             ))}
@@ -7538,7 +7627,7 @@ function AntarcticaStoryBlock({ data }: { data: any }) {
               <p className="text-gray-300 text-sm mb-3">{data.theCollapse.whatHappens}</p>
               <div className="space-y-2">
                 {data.theCollapse.consequences?.map((consequence: any, i: number) => (
-                  <div key={i} className="bg-red-500/10 border border-red-500/30 rounded p-3">
+                  <div key={i} className="bg-red-500/20 border border-red-500/30 rounded p-3">
                     <p className="text-red-300 font-semibold text-sm mb-1">{consequence.problem}</p>
                     <p className="text-gray-300 text-xs">{consequence.explanation}</p>
                   </div>
@@ -7677,7 +7766,7 @@ function SpeedComparisonDetailedBlock({ data }: { data: any }) {
       
       {/* Fiat Leg Detail */}
       {data.fiatLegDetail && (
-        <div className="mb-4 bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+        <div className="mb-4 bg-red-500/20 border border-red-500/30 rounded-lg p-4">
           <h4 className="font-semibold text-red-300 mb-3">{data.fiatLegDetail.title}</h4>
           <div className="space-y-3">
             {data.fiatLegDetail.steps?.map((step: any, i: number) => (
@@ -7717,7 +7806,7 @@ function IssuanceVsTransmissionBlock({ data }: { data: any }) {
       
       <div className="grid md:grid-cols-2 gap-4 mb-4">
         {/* Issuance */}
-        <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+        <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-4">
           <h4 className="text-red-300 font-semibold mb-3">{data.issuance.title}</h4>
           <p className="text-gray-300 text-sm mb-2">{data.issuance.what}</p>
           <p className="text-amber-300 text-sm mb-3"><span className="font-semibold">Regulatory:</span> {data.issuance.regulatoryFramework}</p>
@@ -7876,7 +7965,7 @@ function FrictionPointsBlock({ data }: { data: any }) {
             <h4 className="text-amber-300 font-semibold mb-2">{friction.friction}</h4>
             
             <div className="space-y-3">
-              <div className="bg-red-500/10 rounded p-3">
+              <div className="bg-red-500/20 rounded p-3">
                 <p className="text-red-300 text-sm font-semibold mb-1">Challenge:</p>
                 <p className="text-gray-300 text-sm">{friction.challenge}</p>
               </div>
@@ -7951,7 +8040,7 @@ function RealUseCasesBlock({ data }: { data: any }) {
             {expandedCase === i && (
               <div className="px-4 pb-4 space-y-3">
                 {/* Problem */}
-                <div className="bg-red-500/10 border border-red-500/30 rounded p-3">
+                <div className="bg-red-500/20 border border-red-500/30 rounded p-3">
                   <p className="text-red-300 text-xs font-semibold mb-1">Problem</p>
                   <p className="text-gray-300 text-sm">{useCase.problem}</p>
                 </div>
@@ -8219,7 +8308,7 @@ function ThreeRiskCategoriesBlock({ data }: { data: any }) {
                   </div>
                 )}
                 {cat.onChainRisks && (
-                  <div className="bg-red-500/10 border border-red-500/30 rounded p-3">
+                  <div className="bg-red-500/20 border border-red-500/30 rounded p-3">
                     <p className="text-red-300 text-sm font-semibold mb-2">On-Chain Risks:</p>
                     <ul className="text-gray-300 text-sm space-y-1">
                       {cat.onChainRisks.map((r: string, j: number) => (<li key={j}>• {r}</li>))}
@@ -8355,7 +8444,7 @@ function SphereNetSolutionBlock({ data }: { data: any }) {
           {expandedSection === 'why' && (
             <div className="space-y-3 mt-3">
               {data.whySphereNetExists.limitations?.map((l: any, i: number) => (
-                <div key={i} className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+                <div key={i} className="bg-red-500/20 border border-red-500/30 rounded-lg p-4">
                   <p className="text-red-300 font-semibold mb-2">❌ {l.limitation}</p>
                   <p className="text-gray-300 text-sm mb-2"><span className="text-gray-500">Problem:</span> {l.problem}</p>
                   <p className="text-amber-300 text-sm mb-2"><span className="text-gray-500">Consequence:</span> {l.consequence}</p>
@@ -8383,7 +8472,7 @@ function SphereNetSolutionBlock({ data }: { data: any }) {
           </button>
           {expandedSection === 'arch' && (
             <div className="grid md:grid-cols-2 gap-4 mt-3">
-              <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+              <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-4">
                 <p className="text-red-300 font-semibold mb-2">{data.architectureShift.traditional?.label}</p>
                 <div className="flex flex-wrap gap-1 mb-2">
                   {data.architectureShift.traditional?.flow?.map((step: string, i: number) => (
@@ -8449,7 +8538,7 @@ function SphereNetSolutionBlock({ data }: { data: any }) {
                     )}
                     
                     {p.withoutThis && (
-                      <div className="bg-red-500/10 border border-red-500/30 rounded p-3">
+                      <div className="bg-red-500/20 border border-red-500/30 rounded p-3">
                         <p className="text-red-300 font-semibold text-sm mb-2">❌ {p.withoutThis.scenario}:</p>
                         <ul className="text-gray-400 text-xs space-y-1">
                           {p.withoutThis.consequences?.map((c: string, j: number) => (
@@ -8591,7 +8680,7 @@ function SphereNetSolutionBlock({ data }: { data: any }) {
                   <p className="text-white font-semibold mb-2">🎯 {s.scenario}</p>
                   <p className="text-gray-400 text-sm mb-3">{s.setup}</p>
                   <div className="grid md:grid-cols-2 gap-3">
-                    <div className="bg-red-500/10 border border-red-500/30 rounded p-3">
+                    <div className="bg-red-500/20 border border-red-500/30 rounded p-3">
                       <p className="text-red-300 font-semibold text-sm mb-2">On Traditional Blockchain:</p>
                       <ul className="text-gray-400 text-xs space-y-1">
                         {s.onTraditionalBlockchain?.map((step: string, j: number) => (
@@ -8795,7 +8884,7 @@ function RegulatorPerspectiveBlock({ data }: { data: any }) {
           </div>
         )}
         {data.doNotSay && (
-          <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+          <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-4">
             <p className="text-red-300 font-semibold mb-2">❌ Don't Say:</p>
             <ul className="text-gray-300 text-sm space-y-2">
               {data.doNotSay.map((s: string, i: number) => (<li key={i} className="italic">"{s}"</li>))}
@@ -9379,7 +9468,7 @@ function CBUAERegulationsBlock({ data }: { data: any }) {
             </div>
           )}
           {data.practicalImplications.restricted && (
-            <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+            <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-4">
               <h4 className="text-red-300 font-medium mb-2">{data.practicalImplications.restricted.title}</h4>
               <ul className="space-y-1">
                 {data.practicalImplications.restricted.items?.map((item: string, i: number) => (
@@ -9694,7 +9783,7 @@ function CompetitorLandscapeBlock({ data }: { data: any }) {
                   <p className="text-gray-400 text-sm mb-2 italic">{c.theirPitch}</p>
                   <div className="grid md:grid-cols-2 gap-2 text-xs">
                     <div className="bg-emerald-500/10 rounded p-2"><span className="text-emerald-400 font-semibold">Sphere advantage:</span><p className="text-gray-300">{c.sphereAdvantage}</p></div>
-                    <div className="bg-red-500/10 rounded p-2"><span className="text-red-400 font-semibold">Sphere disadvantage:</span><p className="text-gray-300">{c.sphereDisadvantage}</p></div>
+                    <div className="bg-red-500/20 rounded p-2"><span className="text-red-400 font-semibold">Sphere disadvantage:</span><p className="text-gray-300">{c.sphereDisadvantage}</p></div>
                   </div>
                 </div>
               ))}
@@ -9756,7 +9845,7 @@ function PositioningFrameworkBlock({ data }: { data: any }) {
               <h4 className="text-purple-300 font-semibold mb-2">{aud.audience}</h4>
               <div className="grid md:grid-cols-2 gap-3 text-sm">
                 <div className="bg-emerald-500/10 rounded p-2"><span className="text-emerald-400 font-semibold">Lead with:</span><p className="text-gray-300">{aud.leadWith}</p></div>
-                <div className="bg-red-500/10 rounded p-2"><span className="text-red-400 font-semibold">Avoid:</span><p className="text-gray-300">{aud.avoid}</p></div>
+                <div className="bg-red-500/20 rounded p-2"><span className="text-red-400 font-semibold">Avoid:</span><p className="text-gray-300">{aud.avoid}</p></div>
               </div>
               <div className="bg-blue-500/10 rounded p-2 mt-2"><span className="text-blue-400 font-semibold">Key message:</span><p className="text-gray-300 italic">"{aud.keyMessage}"</p></div>
             </div>
@@ -9825,7 +9914,7 @@ function BobAndAhmedBlock({ data }: { data: any }) {
           )}
           
           {data.theProblem && (
-            <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+            <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-4">
               <h4 className="text-red-300 font-semibold mb-2">{data.theProblem.title}</h4>
               <p className="text-gray-300 text-sm mb-2">{data.theProblem.description}</p>
               {data.theProblem.arnoldQuote && (
@@ -10063,7 +10152,7 @@ function PrivacyPreservingBlock({ data }: { data: any }) {
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4 text-xl">🔒 {data.title}</h3>
       {data.theProblem && (
-        <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mb-4">
+        <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-4 mb-4">
           <h4 className="text-red-300 font-semibold mb-2">{data.theProblem.title}</h4>
           <p className="text-gray-300 text-sm">{data.theProblem.description}</p>
         </div>
@@ -10212,7 +10301,7 @@ function SegmentDetailBlock({ data }: { data: any }) {
               <h4 className="text-red-300 font-semibold mb-3">{data.painPoints.title}</h4>
               <div className="space-y-2">
                 {data.painPoints.pains?.map((p: any, i: number) => (
-                  <div key={i} className="bg-red-500/10 border border-red-500/30 rounded-lg p-3">
+                  <div key={i} className="bg-red-500/20 border border-red-500/30 rounded-lg p-3">
                     <div className="flex justify-between items-center mb-1">
                       <span className="text-white font-medium">{p.pain}</span>
                       <span className={`text-xs px-2 py-1 rounded ${p.intensity === 'HIGH' ? 'bg-red-500 text-white' : 'bg-amber-500 text-white'}`}>{p.intensity}</span>
@@ -10249,7 +10338,7 @@ function SegmentDetailBlock({ data }: { data: any }) {
                     {data.qualificationCriteria.niceToHave?.map((n: string, i: number) => (<li key={i}>• {n}</li>))}
                   </ul>
                 </div>
-                <div className="bg-red-500/10 rounded-lg p-3">
+                <div className="bg-red-500/20 rounded-lg p-3">
                   <p className="text-red-300 font-semibold text-sm mb-2">Red Flags</p>
                   <ul className="text-gray-300 text-xs space-y-1">
                     {data.qualificationCriteria.redFlags?.map((r: string, i: number) => (<li key={i}>• {r}</li>))}
@@ -10468,7 +10557,7 @@ function CaseStudiesBlock({ data }: { data: any }) {
                     <h5 className="text-amber-300 font-semibold mb-2">Specific Violations</h5>
                     <div className="space-y-2">
                       {caseStudy.specificViolations.map((v: any, j: number) => (
-                        <div key={j} className="bg-red-500/10 border border-red-500/20 rounded p-3">
+                        <div key={j} className="bg-red-500/20 border border-red-500/20 rounded p-3">
                           <div className="flex justify-between items-start mb-1">
                             <span className="text-white font-medium">{v.violation}</span>
                             {v.penalty && <span className="text-red-400 font-bold">{v.penalty}</span>}
@@ -10500,7 +10589,7 @@ function CaseStudiesBlock({ data }: { data: any }) {
                     <div className="space-y-2">
                       {caseStudy.rootCauses.map((rc: any, j: number) => (
                         <div key={j} className="bg-slate-800/50 rounded p-3 grid grid-cols-2 gap-3">
-                          <div className="bg-red-500/10 rounded p-2">
+                          <div className="bg-red-500/20 rounded p-2">
                             <p className="text-red-300 text-xs font-semibold mb-1">❌ Failure:</p>
                             <p className="text-gray-300 text-sm">{rc.failure}</p>
                           </div>
@@ -10516,7 +10605,7 @@ function CaseStudiesBlock({ data }: { data: any }) {
 
                 {/* Outcome */}
                 {caseStudy.outcome && (
-                  <div className="bg-red-500/10 border border-red-500/30 rounded p-3">
+                  <div className="bg-red-500/20 border border-red-500/30 rounded p-3">
                     <p className="text-red-300 text-sm"><span className="font-semibold">Outcome:</span> {caseStudy.outcome}</p>
                   </div>
                 )}
@@ -10755,9 +10844,9 @@ function DangerousStatementsBlock({ data }: { data: any }) {
 
       <div className="space-y-3">
         {data.statements?.map((stmt: any, i: number) => (
-          <div key={i} className="bg-red-500/5 border border-red-500/20 rounded-lg overflow-hidden">
+          <div key={i} className="bg-red-500/20 border border-red-500/20 rounded-lg overflow-hidden">
             <div
-              className="p-4 cursor-pointer hover:bg-red-500/10"
+              className="p-4 cursor-pointer hover:bg-red-500/20"
               onClick={() => setExpandedStatement(expandedStatement === i ? null : i)}
             >
               <div className="flex items-center justify-between">

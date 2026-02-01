@@ -190,6 +190,26 @@ This pillar ensures you can explain:
             title: 'Why This Matters for Sphere',
             context: 'Traditional cross-border payments take 2-5 days from initiation to settlement. During that window: sender\'s money is gone, receiver hasn\'t received it, banks carry risk, FX rates can move against you, and compliance holds can freeze everything.',
             sphereValue: 'SpherePay compresses this from days to MINUTES using stablecoins.',
+            blockchainBasics: {
+              trigger: 'New to blockchain or stablecoins? Click here for a 60-second explainer.',
+              title: 'Blockchain & Stablecoins: The 60-Second Version',
+              subtitle: 'You don\'t need to be a crypto expert. Just understand two things:',
+              concepts: [
+                {
+                  term: 'Blockchain',
+                  simple: 'A shared digital ledger that runs 24/7 across thousands of computers worldwide.',
+                  whyItMatters: 'No banking hours. No single point of failure. Transactions confirm in minutes, not days.',
+                  analogy: 'Think of it like a Google Doc everyone can see but no one can secretly edit - every change is recorded and verified by the network.'
+                },
+                {
+                  term: 'Stablecoin',
+                  simple: 'A digital dollar that moves on blockchain rails. 1 USDC = $1 USD, backed by real reserves.',
+                  whyItMatters: 'Combines the speed of blockchain with the stability of dollars. No price volatility like Bitcoin.',
+                  analogy: 'If blockchain is the highway, stablecoins are the trucks carrying dollar-equivalent cargo.'
+                }
+              ],
+              keyPoint: 'Sphere uses stablecoins as infrastructure - customers never see or touch crypto. They send fiat, receive fiat. The blockchain part is invisible plumbing.'
+            },
             keyInsight: 'SpherePay\'s value is in the settlement layer - not faster messaging.',
             problemExplained: 'Traditional cross-border payments are slow because settlement requires moving money through correspondent banking chains, across time zones, and through central bank systems that operate on business hours. The MESSAGING is already fast (SWIFT messages arrive in seconds)-the delay is in SETTLEMENT.',
             howSphereWorks: {
@@ -433,10 +453,13 @@ This pillar ensures you can explain:
           },
           sphereRelevance: {
             title: 'Why This Matters for Sphere',
-            points: [
-              'Traditional: SWIFT message → Days of uncertainty → Eventually Fedwire settles',
-              'Sphere: Stablecoin transfer → Minutes → Settlement complete',
-              'We\'re not making SWIFT faster - we\'re using a different settlement layer entirely'
+            keyInsight: 'Arnold\'s framing: "We\'re essentially building a modern SWIFT." Same trusted role - moving value between institutions - but with settlement built in.',
+            swiftVsSphere: [
+              { aspect: 'Core Function', swift: 'Messaging only - sends instructions', sphere: 'Messaging + Settlement in one action' },
+              { aspect: 'Cross-Border', swift: 'Days through correspondent chain', sphere: 'Minutes via stablecoin transfer' },
+              { aspect: 'Final Settlement', swift: 'RTGS at destination (after days)', sphere: 'RTGS at destination (after minutes)' },
+              { aspect: 'Intermediaries', swift: '3-5 correspondent bank hops', sphere: 'Direct between endpoints' },
+              { aspect: 'Availability', swift: 'Business hours only', sphere: '24/7/365' }
             ]
           },
           keyTakeaway: 'SWIFT sends messages. Fedwire moves money. Never confuse the two.'
