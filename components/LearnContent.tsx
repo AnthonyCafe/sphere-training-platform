@@ -12,6 +12,15 @@ interface LearnContentProps {
 }
 
 export default function LearnContentRenderer({ learn }: LearnContentProps) {
+  // Handle null/undefined
+  if (!learn) {
+    return (
+      <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-6">
+        <p className="text-red-300">No learn content available for this section.</p>
+      </div>
+    );
+  }
+
   // Handle string format (old markdown)
   if (typeof learn === 'string') {
     return (
@@ -46,7 +55,7 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
     // Pillar 2 story content (Antarctica moved after risk categories)
     'antarcticaStory',
     // Section 2.6 flow: scale context → three risk categories → case studies → contagion → why blockchains fail → SphereNet solution → regulator perspective
-    'systemicScaleContext', 'threeRiskCategories', 'caseStudyMakerDAO', 'caseStudyUSDCDepeg', 'caseStudyChainalysis', 
+    'systemicScaleContext', 'threeRiskCategories', 'caseStudyMakerDAO', 'caseStudyUSDCDepeg', 'caseStudyChainalysis',
     'contagionRiskToTraditionalFinance', 'whyExistingBlockchainsFail', 'sphereNetSolution', 'regulatorPerspective',
     'whatSphereIs', 'whatSphereIsNot', 'classificationMatters', 'classificationMattersLegally', 'complianceNative', 'sampleResponse', 'sampleResponses',
     'complianceFlow', 'complianceEnablesGrowth',
@@ -58,17 +67,61 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
     'whyTravelRuleMatters', 'travelRuleProtocols', 'transmissionMethods', 'transactionsApplied', 'edgeCases',
     'sanctionsRegimes', 'screeningProcess',
     'whatIsIt', 'thresholds', 'travelRuleFlow', 'whyItMatters',
-    'mitigationFramework', 'sphereCertifications',
-    'counterpartyTypes', 'dueDiligenceFramework',
-    'liquidityTypes', 'managementStrategies',
-    'keyMetrics', 'sphereResilience',
-    'severityLevels', 'postIncidentReview',
-    'foundingContext', 'arnoldQuotes',
-    'productComponents', 'paymentFlow',
-    'vsTraditional', 'vsCryptoNative',
-    'primaryUseCases', 'bobAndAhmed',
+
+    // =========================================================================
+    // PILLAR 4: Risk & Governance - All sections
+    // =========================================================================
+    // 4.1 Operational Risk Framework
+    'whyOperationalRiskMatters', 'mitigationFramework', 'caseStudies', 'governanceCertifications',
+    // 4.2 Counterparty Risk Management
+    'whyCounterpartyRiskMatters', 'counterpartyTypes', 'dueDiligenceFramework',
+    'ongoingMonitoring', 'concentrationManagement', 'counterpartyFailureScenarios', 'counterpartyRiskMetrics',
+    // 4.3 Liquidity Risk
+    'liquidityTypes', 'whyLiquidityIsCritical', 'liquidityManagementFramework',
+    'stressTesting', 'dailyManagement', 'celsiusCaseStudy', 'managementStrategies',
+    // 4.4 Business Continuity & Disaster Recovery
+    'bcpVsDr', 'keyMetrics', 'resilienceArchitecture', 'testingProgram',
+    'incidentCommunication', 'caseStudy', 'institutionalQA',
+    // 4.5 Incident Management
+    'severityLevels', 'responseProcess', 'warRoomProtocol',
+    'customerCommunication', 'postIncidentReview', 'metrics',
+    // 4.6 Enterprise Risk Management
+    'threeLines', 'riskAppetite', 'boardOversight', 'regulatoryReadiness',
+    // 4.7 Technology & Cybersecurity Risk
+    'threatLandscape', 'securityFramework', 'keyControls',
+    'cryptoSpecificSecurity', 'securityIncidentResponse',
+    'sphereCertifications', 'sphereResilience',
+
+    // =========================================================================
+    // PILLAR 5: Sphere Product & Positioning - All sections
+    // =========================================================================
+    // 5.1-5.2 Sphere Origin & Product Architecture
+    'foundingContext', 'arnoldQuotes', 'productComponents', 'paymentFlow',
+    'architectureOverview', 'stablecoinSettlementDeepDive', 'complianceArchitecture',
+    'bankingIntegrationArchitecture', 'failureModes', 'apiOverview',
+    // 5.3 Competitive Positioning
+    'positioningFramework', 'competitorCategories', 'spherePayCompetitors', 'sphereNetCompetitors',
+    'vsTraditional', 'vsCryptoNative', 'vsTraditionalBanks', 'whenToWalkAway',
+    // 5.4 Customer Segments & Use Cases
+    'primaryUseCases', 'sphereCustomerProfiles', 'geographicFocus', 'bobAndAhmed',
+    // 5.5 SphereNet Deep Dive
+    'whatIsSphereNet', 'threeCorePrinciples', 'technicalArchitecture',
+    'spherePayVsSphereNet', 'privacyPreservingCompliance', 'forRegulators', 'hyperliquidPlaybook',
+    // 5.6 Customer Qualification & Segmentation
+    'threeSegments', 'segmentPrioritization', 'segment1Detail', 'segment2Detail', 'segment3Detail',
+    'qualificationFramework',
+    // 5.7-5.8 Objection Handling & Technical FAQ
+    'dangerousStatements', 'technicalObjections', 'correctionTechnique',
+    // 5.9 Enterprise Integration
+    'discoveryQuestions', 'commonIntegrationPatterns', 'systemSpecificIntegration',
+    'dataFlowsAndReconciliation', 'securityRequirements',
+
+    // =========================================================================
+    // Shared/Generic content blocks
+    // =========================================================================
     'questions', 'tips', 'closingExample',
-    'caseStudy', 'systemicRisk', 'sphereMitigation', 'sphereApproach', 'sphereRegulatoryApproach', 'sphereEnterpriseApproach', 'spherePosition',
+    'systemicRisk', 'sphereMitigation', 'sphereApproach', 'sphereRegulatoryApproach',
+    'sphereEnterpriseApproach', 'spherePosition',
     'regulatorQA', 'reserveComposition', 'marketGrowth',
     'table', 'comparison', 'languageGuide',
     'sphereRelevance', 'sphereSolution',
@@ -700,10 +753,139 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
     case 'edgeCases':
       return <EdgeCasesBlock data={value} />;
 
+    // ===========================================
+    // NEW PILLAR 4 - ENHANCED GOVERNANCE CONTENT
+    // ===========================================
+    case 'whyOperationalRiskMatters':
+      return <WhyOperationalRiskMattersBlock data={value} />;
+
+    case 'caseStudies':
+      return <CaseStudiesBlock data={value} />;
+
+    case 'threeLines':
+      return <ThreeLinesDefenseBlock data={value} />;
+
+    case 'riskAppetite':
+      return <RiskAppetiteBlock data={value} />;
+
+    case 'boardOversight':
+      return <BoardOversightBlock data={value} />;
+
+    case 'governanceCertifications':
+      return <GovernanceCertificationsBlock data={value} />;
+
+    // ===========================================
+    // NEW PILLAR 5.8 - TECHNICAL FAQ
+    // ===========================================
+    case 'dangerousStatements':
+      return <DangerousStatementsBlock data={value} />;
+
+    case 'technicalObjections':
+      return <TechnicalObjectionsBlock data={value} />;
+
+    case 'correctionTechnique':
+      return <CorrectionTechniqueBlock data={value} />;
+
+    // ===========================================
+    // NEW PILLAR 5.9 - ENTERPRISE INTEGRATION
+    // ===========================================
+    case 'commonIntegrationPatterns':
+      return <IntegrationPatternsBlock data={value} />;
+
+    case 'securityRequirements':
+      return <SecurityRequirementsBlock data={value} />;
+
+    // ===========================================
+    // PILLAR 4 - ADDITIONAL GOVERNANCE COMPONENTS
+    // ===========================================
+
+    // Section 4.2 - Counterparty Risk
+    case 'whyCounterpartyRiskMatters':
+    case 'whyLiquidityIsCritical':
+      return <WhyItMattersBlock data={value} />;
+
+    case 'ongoingMonitoring':
+    case 'concentrationManagement':
+    case 'dailyManagement':
+    case 'testingProgram':
+    case 'regulatoryReadiness':
+      return <ProcessBlock data={value} />;
+
+    case 'counterpartyFailureScenarios':
+    case 'celsiusCaseStudy':
+      return <ScenarioBlock data={value} />;
+
+    case 'counterpartyRiskMetrics':
+    case 'metrics':
+      return <MetricsBlock data={value} />;
+
+    // Section 4.3 - Liquidity Risk
+    case 'liquidityManagementFramework':
+    case 'stressTesting':
+    case 'securityFramework':
+      return <FrameworkBlock data={value} />;
+
+    // Section 4.4 - Business Continuity
+    case 'bcpVsDr':
+      return <ComparisonBlock data={value} />;
+
+    case 'resilienceArchitecture':
+    case 'threatLandscape':
+      return <ArchitectureBlock data={value} />;
+
+    case 'incidentCommunication':
+    case 'customerCommunication':
+      return <CommunicationBlock data={value} />;
+
+    case 'institutionalQA':
+      return <InstitutionalQABlock data={value} />;
+
+    // Section 4.5 - Incident Management
+    case 'responseProcess':
+    case 'securityIncidentResponse':
+      return <ResponseProcessBlock data={value} />;
+
+    case 'warRoomProtocol':
+      return <WarRoomBlock data={value} />;
+
+    // Section 4.7 - Cybersecurity
+    case 'keyControls':
+    case 'cryptoSpecificSecurity':
+      return <SecurityControlsBlock data={value} />;
+
+    // ===========================================
+    // PILLAR 5 - PRODUCT & ARCHITECTURE
+    // ===========================================
+
+    // Section 5.2 - Product Architecture
+    case 'architectureOverview':
+      return <ArchitectureOverviewBlock data={value} />;
+
+    case 'stablecoinSettlementDeepDive':
+    case 'bankingIntegrationArchitecture':
+    case 'complianceArchitecture':
+      return <DeepDiveBlock data={value} />;
+
+    case 'failureModes':
+      return <FailureModesBlock data={value} />;
+
+    case 'apiOverview':
+      return <ApiOverviewBlock data={value} />;
+
+    // Section 5.9 - Enterprise Integration
+    case 'systemSpecificIntegration':
+      return <SystemIntegrationBlock data={value} />;
+
+    case 'dataFlowsAndReconciliation':
+      return <DataFlowsBlock data={value} />;
+
+    case 'discoveryQuestions':
+      return <DiscoveryQuestionsBlock data={value} />;
+
     default:
-      // Generic object renderer for any missed properties
+      // Smart generic renderer for any missed properties
       if (typeof value === 'object' && value !== null) {
-        return <GenericBlock propKey={propKey} data={value} />;
+        return <SmartGenericBlock propKey={propKey} data={value} />;
       }
       return null;
   }
@@ -1384,32 +1566,127 @@ function StatsBlock({ title, items }: { title: string; items: any[] }) {
 }
 
 function RiskCategoriesBlock({ data }: { data: any }) {
+  const [expandedCategory, setExpandedCategory] = useState<number | null>(null);
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
-      <div className="grid gap-4 md:grid-cols-2">
-        {data.items.map((item: any, i: number) => (
-          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
-            <div className="flex items-center gap-2 mb-2">
-              {item.icon && <span className="text-2xl">{item.icon}</span>}
-              <h4 className="font-semibold text-white">{item.category}</h4>
+      <h3 className="font-semibold text-white mb-2">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 text-sm mb-4">{data.subtitle}</p>}
+
+      <div className="space-y-4">
+        {data.items.map((item: any, i: number) => {
+          const hasExpandedContent = item.sphereSpecificRisks || item.whatCanGoWrong;
+          const isExpanded = expandedCategory === i;
+
+          return (
+            <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+              {/* Header - clickable if has expanded content */}
+              <div
+                className={`p-4 ${hasExpandedContent ? 'cursor-pointer hover:bg-slate-700/70' : ''}`}
+                onClick={() => hasExpandedContent && setExpandedCategory(isExpanded ? null : i)}
+              >
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-2">
+                    {item.icon && <span className="text-2xl">{item.icon}</span>}
+                    <h4 className="font-semibold text-white">{item.category}</h4>
+                  </div>
+                  {hasExpandedContent && (
+                    <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                  )}
+                </div>
+
+                {/* Definition (new field) */}
+                {item.definition && (
+                  <p className="text-gray-300 text-sm mb-2">{item.definition}</p>
+                )}
+
+                {/* Legacy description field */}
+                {item.description && !item.definition && (
+                  <p className="text-gray-300 text-sm mb-2">{item.description}</p>
+                )}
+
+                {/* Examples */}
+                {item.examples && (
+                  <div className="mb-2">
+                    <p className="text-amber-300 text-xs font-semibold mb-1">Examples:</p>
+                    <ul className="text-sm text-gray-400 space-y-1">
+                      {item.examples.map((ex: string, j: number) => <li key={j}>• {ex}</li>)}
+                    </ul>
+                  </div>
+                )}
+
+                {item.context && (
+                  <div className="bg-blue-500/10 border border-blue-500/30 rounded p-2 mt-2">
+                    <p className="text-blue-200 text-xs">{item.context}</p>
+                  </div>
+                )}
+              </div>
+
+              {/* Expanded content */}
+              {isExpanded && hasExpandedContent && (
+                <div className="px-4 pb-4 space-y-4 border-t border-slate-600 pt-4">
+                  {/* Sphere-Specific Risks */}
+                  {item.sphereSpecificRisks && (
+                    <div>
+                      <h5 className="text-purple-300 font-semibold mb-3">🎯 Sphere-Specific Risks & Mitigations</h5>
+                      <div className="space-y-3">
+                        {item.sphereSpecificRisks.map((risk: any, j: number) => (
+                          <div key={j} className="bg-slate-800/50 rounded-lg p-3">
+                            <h6 className="text-white font-medium mb-1">{risk.risk}</h6>
+                            <p className="text-gray-400 text-xs mb-2">{risk.description}</p>
+                            <div className="grid grid-cols-2 gap-2 text-xs">
+                              <div className="bg-emerald-500/10 rounded p-2">
+                                <span className="text-emerald-400 font-semibold">Sphere Mitigation:</span>
+                                <p className="text-gray-300 mt-1">{risk.sphereMitigation}</p>
+                              </div>
+                              <div className="bg-amber-500/10 rounded p-2">
+                                <span className="text-amber-400 font-semibold">Residual Risk:</span>
+                                <p className="text-gray-300 mt-1">{risk.residualRisk}</p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* What Can Go Wrong Scenarios */}
+                  {item.whatCanGoWrong && (
+                    <div>
+                      <h5 className="text-red-300 font-semibold mb-3">⚠️ {item.whatCanGoWrong.title || 'Risk Scenarios'}</h5>
+                      <div className="space-y-3">
+                        {item.whatCanGoWrong.scenarios?.map((scenario: any, j: number) => (
+                          <div key={j} className="bg-red-500/5 border border-red-500/20 rounded-lg p-3">
+                            <h6 className="text-white font-medium mb-2">{scenario.scenario}</h6>
+                            <p className="text-gray-400 text-xs mb-3">{scenario.description}</p>
+                            <div className="grid grid-cols-2 gap-2 text-xs">
+                              <div>
+                                <span className="text-red-400 font-semibold">Immediate Impact:</span>
+                                <p className="text-gray-300">{scenario.immediateImpact}</p>
+                              </div>
+                              <div>
+                                <span className="text-emerald-400 font-semibold">Sphere Response:</span>
+                                <p className="text-gray-300">{scenario.sphereResponse}</p>
+                              </div>
+                              <div>
+                                <span className="text-blue-400 font-semibold">Customer Impact:</span>
+                                <p className="text-gray-300">{scenario.customerImpact}</p>
+                              </div>
+                              <div>
+                                <span className="text-purple-400 font-semibold">Prevention:</span>
+                                <p className="text-gray-300">{scenario.prevention}</p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
-            <p className="text-gray-300 text-sm mb-2">{item.description}</p>
-            {item.examples && (
-              <div className="mb-2">
-                <p className="text-amber-300 text-xs font-semibold mb-1">Examples:</p>
-                <ul className="text-sm text-gray-400 space-y-1">
-                  {item.examples.map((ex: string, j: number) => <li key={j}>• {ex}</li>)}
-                </ul>
-              </div>
-            )}
-            {item.context && (
-              <div className="bg-blue-500/10 border border-blue-500/30 rounded p-2 mt-2">
-                <p className="text-blue-200 text-xs">{item.context}</p>
-              </div>
-            )}
-          </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );
@@ -1473,9 +1750,75 @@ function CaseStudyBlock({ data }: { data: any }) {
     <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-6 space-y-4">
       <h3 className="font-semibold text-white text-xl">📋 {data.title}</h3>
       {data.subtitle && <p className="text-orange-200 text-sm italic">{data.subtitle}</p>}
-      
-      {/* Background section */}
-      {data.background && (
+
+      {/* Background section - AWS Outage style (event/duration/impact) */}
+      {data.background && data.background.event && (
+        <div className="bg-slate-700/50 rounded-lg p-4">
+          <h4 className="font-semibold text-white mb-2">Background</h4>
+          <div className="grid md:grid-cols-3 gap-3 text-sm">
+            <div>
+              <span className="text-gray-500">Event:</span>
+              <p className="text-gray-300">{data.background.event}</p>
+            </div>
+            <div>
+              <span className="text-gray-500">Duration:</span>
+              <p className="text-red-300">{data.background.duration}</p>
+            </div>
+            <div>
+              <span className="text-gray-500">Impact:</span>
+              <p className="text-amber-300">{data.background.impact}</p>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* What Happened - for AWS style case studies */}
+      {data.whatHappened && (
+        <div>
+          <h4 className="font-semibold text-white mb-2">What Happened</h4>
+          <ul className="space-y-2">
+            {data.whatHappened.map((item: string, i: number) => (
+              <li key={i} className="text-gray-300 text-sm flex items-start gap-2">
+                <span className="text-orange-400">•</span> {item}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Lessons Learned - for AWS style case studies */}
+      {data.lessonsLearned && (
+        <div>
+          <h4 className="font-semibold text-white mb-3">Lessons Learned</h4>
+          <div className="space-y-3">
+            {data.lessonsLearned.map((item: any, i: number) => (
+              <div key={i} className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
+                <p className="text-blue-300 font-medium mb-1">{item.lesson}</p>
+                <p className="text-gray-400 text-sm">{item.detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Sphere Approach - for AWS style case studies */}
+      {data.sphereApproach && (
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 className="text-emerald-300 font-semibold mb-2">{data.sphereApproach.title}</h4>
+          {data.sphereApproach.response && (
+            <ul className="space-y-1">
+              {data.sphereApproach.response.map((item: string, i: number) => (
+                <li key={i} className="text-gray-300 text-sm flex items-center gap-2">
+                  <span className="text-emerald-400">✓</span> {item}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
+
+      {/* Background section - original style with title/status/characteristics */}
+      {data.background && data.background.title && (
         <div className="bg-slate-700/50 rounded-lg p-4">
           <h4 className="font-semibold text-white mb-2">{data.background.title}</h4>
           <p className="text-emerald-300 text-sm mb-2">{data.background.status}</p>
@@ -2174,41 +2517,80 @@ function WhatSphereBlock({ data, isNot }: { data: any; isNot: boolean }) {
 function ComplianceNativeBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+
       {data.approaches && (
-        <div className="space-y-3 mb-4">
-          {data.approaches.map((a: any, i: number) => (
-            <div key={i} className={`flex items-center gap-3 p-3 rounded-lg ${a.icon === '✅' ? 'bg-emerald-500/10' : a.icon === '⚠️' ? 'bg-amber-500/10' : 'bg-red-500/10'}`}>
-              <span className="text-xl">{a.icon}</span>
-              <div>
-                <p className="text-white font-medium">{a.approach}</p>
-                <p className="text-gray-400 text-sm">{a.result}</p>
+        <div className="grid md:grid-cols-3 gap-4 mb-6">
+          {data.approaches.map((a: any, i: number) => {
+            const isAfterThought = a.icon === '❌';
+            const isBoltOn = a.icon === '⚠️';
+
+            return (
+              <div
+                key={i}
+                className={`rounded-lg p-4 border-l-4 ${
+                  isAfterThought ? 'bg-slate-700/50 border-red-500' :
+                  isBoltOn ? 'bg-slate-700/50 border-amber-500' :
+                  'bg-slate-700/50 border-emerald-500'
+                }`}
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <span>{a.icon}</span>
+                  <h4 className="text-white font-medium">{a.approach}</h4>
+                </div>
+                <p className="text-gray-400 text-sm mb-2">{a.description}</p>
+                <p className={`text-sm ${
+                  isAfterThought ? 'text-red-400' :
+                  isBoltOn ? 'text-amber-400' :
+                  'text-emerald-400'
+                }`}>{a.result}</p>
+                {a.problems && (
+                  <ul className="mt-2 space-y-1">
+                    {a.problems.map((p: string, j: number) => (
+                      <li key={j} className="text-gray-400 text-xs">• {p}</li>
+                    ))}
+                  </ul>
+                )}
+                {a.advantages && (
+                  <ul className="mt-2 space-y-1">
+                    {a.advantages.map((adv: string, j: number) => (
+                      <li key={j} className="text-gray-300 text-xs">✓ {adv}</li>
+                    ))}
+                  </ul>
+                )}
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
+
       {data.whatItMeans && Array.isArray(data.whatItMeans) && (
-        <div className="space-y-3">
-          {data.whatItMeans.map((w: any, i: number) => (
-            <div key={i} className="bg-slate-700/50 rounded p-3">
-              {typeof w === 'string' ? (
-                <p className="text-gray-300">• {w}</p>
-              ) : (
-                <>
-                  <p className="text-white font-medium">{w.principle}</p>
-                  <p className="text-gray-400 text-sm">{w.explanation}</p>
-                  {w.implementation && <p className="text-emerald-300 text-xs mt-1">→ {w.implementation}</p>}
-                </>
-              )}
-            </div>
-          ))}
+        <div>
+          <h4 className="text-white font-medium mb-3">What Compliance-Native Means in Practice</h4>
+          <div className="space-y-2">
+            {data.whatItMeans.map((w: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded-lg p-3">
+                {typeof w === 'string' ? (
+                  <p className="text-gray-300 text-sm">• {w}</p>
+                ) : (
+                  <>
+                    <p className="text-white text-sm mb-1">{w.principle}</p>
+                    <p className="text-gray-400 text-sm">{w.explanation}</p>
+                    {w.implementation && (
+                      <p className="text-emerald-400 text-sm mt-1">→ {w.implementation}</p>
+                    )}
+                  </>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       )}
+
       {data.arnoldQuote && (
-        <div className="mt-4 bg-slate-700/50 border-l-4 border-blue-500 rounded-r p-4">
-          <p className="text-gray-300 italic">"{data.arnoldQuote.quote}"</p>
-          {data.arnoldQuote.context && <p className="text-gray-500 text-xs mt-1">— {data.arnoldQuote.context}</p>}
+        <div className="mt-4 bg-slate-700/50 rounded-lg p-4">
+          <p className="text-gray-200 italic">"{data.arnoldQuote.quote}"</p>
+          {data.arnoldQuote.context && <p className="text-gray-500 text-sm mt-2">— {data.arnoldQuote.context}</p>}
         </div>
       )}
     </div>
@@ -2262,15 +2644,6 @@ function FlowBlock({ data }: { data: any }) {
   );
 }
 
-function ComparisonBlock({ data }: { data: any }) {
-  return (
-    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
-      {data.comparison && <TableBlock data={data.comparison} />}
-    </div>
-  );
-}
-
 function ListBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
@@ -2287,25 +2660,6 @@ function ListBlock({ data }: { data: any }) {
                 {item.details && <p className="text-gray-400 text-sm">{item.details}</p>}
               </>
             )}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function ProcessBlock({ data }: { data: any }) {
-  return (
-    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
-      <div className="space-y-2">
-        {data.steps?.map((step: any, i: number) => (
-          <div key={i} className="flex items-center gap-3 bg-slate-700/50 rounded-lg p-3">
-            <span className="bg-blue-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm">{i + 1}</span>
-            <div>
-              <p className="text-white font-medium">{step.step}</p>
-              <p className="text-gray-400 text-sm">{step.action}</p>
-            </div>
           </div>
         ))}
       </div>
@@ -2383,13 +2737,34 @@ function WhyMattersBlock({ data }: { data: any }) {
 function MitigationBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      <h3 className="font-semibold text-white mb-2">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 text-sm mb-2">{data.subtitle}</p>}
+      {data.philosophy && (
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded p-3 mb-4">
+          <p className="text-purple-300 text-sm italic">💡 {data.philosophy}</p>
+        </div>
+      )}
       <div className="space-y-3">
         {data.layers?.map((layer: any, i: number) => (
-          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
-            <p className="text-white font-medium">{layer.layer}</p>
-            <p className="text-gray-400 text-sm">{layer.description}</p>
-            {layer.examples && <p className="text-gray-300 text-xs mt-1">Examples: {layer.examples.join(', ')}</p>}
+          <div key={i} className={`rounded-lg p-4 border-l-4 ${
+            i === 0 ? 'bg-blue-500/10 border-blue-500' :
+            i === 1 ? 'bg-amber-500/10 border-amber-500' :
+            i === 2 ? 'bg-red-500/10 border-red-500' :
+            'bg-emerald-500/10 border-emerald-500'
+          }`}>
+            <div className="flex items-center gap-2 mb-2">
+              {layer.icon && <span className="text-xl">{layer.icon}</span>}
+              <p className="text-white font-semibold">{layer.layer}</p>
+            </div>
+            <p className="text-gray-300 text-sm mb-2">{layer.description}</p>
+            {layer.examples && (
+              <p className="text-gray-400 text-xs mb-2">Examples: {layer.examples.join(', ')}</p>
+            )}
+            {layer.sphereExample && (
+              <div className="bg-slate-800/50 rounded p-2 mt-2">
+                <p className="text-emerald-300 text-xs"><span className="font-semibold">Sphere:</span> {layer.sphereExample}</p>
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -2417,10 +2792,67 @@ function CertificationsBlock({ data }: { data: any }) {
 }
 
 function CounterpartyBlock({ data }: { data: any }) {
+  const [expanded, setExpanded] = useState<number | null>(null);
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4">{data.title}</h3>
-      <div className="space-y-2">
+      <div className="space-y-4">
+        {data.types?.map((item: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+            <button
+              onClick={() => setExpanded(expanded === i ? null : i)}
+              className="w-full p-4 flex items-center justify-between hover:bg-slate-700/70 transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                {item.icon && <span className="text-2xl">{item.icon}</span>}
+                <div className="text-left">
+                  <p className="text-white font-medium">{item.type}</p>
+                  <p className="text-gray-400 text-sm">{item.role}</p>
+                </div>
+              </div>
+              <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${expanded === i ? 'rotate-180' : ''}`} />
+            </button>
+
+            {expanded === i && (
+              <div className="p-4 pt-0 border-t border-slate-600">
+                {/* Specific Risks */}
+                {item.specificRisks && (
+                  <div className="mb-4">
+                    <p className="text-red-300 font-medium text-sm mb-2">Specific Risks:</p>
+                    <div className="space-y-2">
+                      {item.specificRisks.map((risk: any, j: number) => (
+                        <div key={j} className="bg-red-500/10 border border-red-500/20 rounded p-3">
+                          <p className="text-white text-sm font-medium">{risk.risk}</p>
+                          {risk.example && <p className="text-gray-400 text-xs">Example: {risk.example}</p>}
+                          <p className="text-emerald-300 text-xs mt-1">Mitigation: {risk.mitigation}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Sphere Approach */}
+                {item.sphereApproach && (
+                  <div className="bg-purple-500/10 border border-purple-500/30 rounded p-3">
+                    <p className="text-purple-300 font-medium text-sm mb-2">Sphere's Approach:</p>
+                    <div className="space-y-1 text-sm">
+                      {item.sphereApproach.strategy && <p className="text-gray-300"><span className="text-gray-500">Strategy:</span> {item.sphereApproach.strategy}</p>}
+                      {item.sphereApproach.limits && <p className="text-gray-300"><span className="text-gray-500">Limits:</span> {item.sphereApproach.limits}</p>}
+                      {item.sphereApproach.monitoring && <p className="text-gray-300"><span className="text-gray-500">Monitoring:</span> {item.sphereApproach.monitoring}</p>}
+                      {item.sphereApproach.selection && <p className="text-gray-300"><span className="text-gray-500">Selection:</span> {item.sphereApproach.selection}</p>}
+                      {item.sphereApproach.exposure && <p className="text-gray-300"><span className="text-gray-500">Exposure:</span> {item.sphereApproach.exposure}</p>}
+                      {item.sphereApproach.requirements && <p className="text-gray-300"><span className="text-gray-500">Requirements:</span> {item.sphereApproach.requirements}</p>}
+                      {item.sphereApproach.onboarding && <p className="text-gray-300"><span className="text-gray-500">Onboarding:</span> {item.sphereApproach.onboarding}</p>}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+
+        {/* Fallback for old structure */}
         {data.items?.map((item: any, i: number) => (
           <div key={i} className="bg-slate-700/50 rounded-lg p-3">
             <p className="text-white font-medium">{item.type}</p>
@@ -2433,16 +2865,64 @@ function CounterpartyBlock({ data }: { data: any }) {
 }
 
 function DueDiligenceBlock({ data }: { data: any }) {
+  const [expanded, setExpanded] = useState<number | null>(null);
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
+      <h3 className="font-semibold text-white mb-2">{data.title}</h3>
+      {data.philosophy && (
+        <p className="text-purple-300 italic text-sm mb-4">"{data.philosophy}"</p>
+      )}
       <div className="grid md:grid-cols-2 gap-4">
         {data.dimensions?.map((dim: any, i: number) => (
-          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
-            <p className="text-white font-medium mb-2">{dim.dimension}</p>
-            <ul className="text-gray-300 text-sm space-y-1">
-              {dim.checks?.map((c: string, j: number) => <li key={j}>• {c}</li>)}
-            </ul>
+          <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+            <button
+              onClick={() => setExpanded(expanded === i ? null : i)}
+              className="w-full p-4 text-left hover:bg-slate-700/70 transition-colors"
+            >
+              <div className="flex items-center gap-2 mb-1">
+                {dim.icon && <span className="text-xl">{dim.icon}</span>}
+                <p className="text-white font-medium">{dim.dimension}</p>
+              </div>
+              {dim.purpose && <p className="text-gray-400 text-sm">{dim.purpose}</p>}
+            </button>
+
+            {expanded === i && (
+              <div className="p-4 pt-0 border-t border-slate-600 space-y-3">
+                {/* Checks */}
+                {dim.checks && (
+                  <div>
+                    <p className="text-emerald-300 font-medium text-xs mb-1">What to Check:</p>
+                    <ul className="text-gray-300 text-sm space-y-1">
+                      {dim.checks.map((c: string, j: number) => (
+                        <li key={j} className="flex items-center gap-2">
+                          <span className="text-emerald-400">✓</span> {c}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Red Flags */}
+                {dim.redFlags && (
+                  <div>
+                    <p className="text-red-300 font-medium text-xs mb-1">Red Flags:</p>
+                    <ul className="text-gray-300 text-sm space-y-1">
+                      {dim.redFlags.map((rf: string, j: number) => (
+                        <li key={j} className="flex items-center gap-2">
+                          <span className="text-red-400">⚠</span> {rf}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Frequency */}
+                {dim.frequency && (
+                  <p className="text-blue-300 text-xs">📅 {dim.frequency}</p>
+                )}
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -2451,10 +2931,81 @@ function DueDiligenceBlock({ data }: { data: any }) {
 }
 
 function LiquidityTypesBlock({ data }: { data: any }) {
+  const [expanded, setExpanded] = useState<number | null>(null);
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
-      <div className="space-y-3">
+      <h3 className="font-semibold text-white mb-2">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 text-sm mb-4">{data.subtitle}</p>}
+      <div className="space-y-4">
+        {data.types?.map((item: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+            <button
+              onClick={() => setExpanded(expanded === i ? null : i)}
+              className="w-full p-4 text-left hover:bg-slate-700/70 transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                {item.icon && <span className="text-2xl">{item.icon}</span>}
+                <div>
+                  <p className="text-white font-medium">{item.type}</p>
+                  <p className="text-gray-400 text-sm">{item.definition}</p>
+                </div>
+              </div>
+            </button>
+
+            {expanded === i && (
+              <div className="p-4 pt-0 border-t border-slate-600 space-y-4">
+                {/* Payment Processor Context */}
+                {item.paymentProcessorContext && (
+                  <div className="bg-blue-500/10 border border-blue-500/30 rounded p-3">
+                    <p className="text-blue-300 text-sm font-medium mb-1">For Payment Processors:</p>
+                    <p className="text-gray-300 text-sm">{item.paymentProcessorContext}</p>
+                  </div>
+                )}
+
+                {/* Examples */}
+                {item.examples && (
+                  <div>
+                    <p className="text-amber-300 font-medium text-xs mb-2">Examples:</p>
+                    <ul className="space-y-1">
+                      {item.examples.map((ex: string, j: number) => (
+                        <li key={j} className="text-gray-300 text-sm flex items-start gap-2">
+                          <span className="text-amber-400">•</span> {ex}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Management */}
+                {item.management && (
+                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded p-3">
+                    <p className="text-emerald-300 font-medium text-sm mb-1">Strategy: {item.management.strategy}</p>
+                    {item.management.tactics && (
+                      <ul className="space-y-1 mt-2">
+                        {item.management.tactics.map((tactic: string, j: number) => (
+                          <li key={j} className="text-gray-300 text-sm flex items-center gap-2">
+                            <span className="text-emerald-400">✓</span> {tactic}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                )}
+
+                {/* Metrics */}
+                {item.metrics && (
+                  <div className="bg-purple-500/10 border border-purple-500/30 rounded p-3">
+                    <p className="text-purple-300 text-sm"><span className="font-medium">Target:</span> {item.metrics.target}</p>
+                    <p className="text-gray-400 text-xs mt-1">Monitoring: {item.metrics.monitoring}</p>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+
+        {/* Fallback for old structure */}
         {data.items?.map((item: any, i: number) => (
           <div key={i} className="bg-slate-700/50 rounded-lg p-4">
             <p className="text-white font-medium">{item.type}</p>
@@ -2486,19 +3037,94 @@ function StrategiesBlock({ data }: { data: any }) {
 }
 
 function KeyMetricsBlock({ data }: { data: any }) {
+  const [expanded, setExpanded] = useState<number | null>(null);
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4">{data.title}</h3>
-      <div className="space-y-3">
-        {data.items?.map((item: any, i: number) => (
-          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
-            <div className="flex justify-between items-center">
-              <span className="text-gray-400">{item.metric || item.fullName}</span>
-              <span className="text-white font-medium">{item.description || item.example}</span>
+      <h3 className="font-semibold text-white mb-2">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+
+      {/* RTO/RPO style metrics */}
+      {data.metrics && (
+        <div className="space-y-4">
+          {data.metrics.map((metric: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+              <button
+                onClick={() => setExpanded(expanded === i ? null : i)}
+                className="w-full p-4 text-left hover:bg-slate-700/70 transition-colors"
+              >
+                <div className="flex items-center justify-between">
+                  <div>
+                    <span className="text-blue-300 font-bold text-lg">{metric.metric}</span>
+                    {metric.fullName && <span className="text-gray-400 ml-2">({metric.fullName})</span>}
+                  </div>
+                  <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${expanded === i ? 'rotate-180' : ''}`} />
+                </div>
+                {metric.definition && <p className="text-gray-300 text-sm mt-1">{metric.definition}</p>}
+              </button>
+
+              {expanded === i && (
+                <div className="p-4 pt-0 border-t border-slate-600 space-y-4">
+                  {metric.whyItMatters && (
+                    <div className="bg-amber-500/10 border border-amber-500/30 rounded p-3">
+                      <p className="text-amber-300 text-sm"><span className="font-medium">Why it matters:</span> {metric.whyItMatters}</p>
+                    </div>
+                  )}
+
+                  {/* Sphere Targets Table */}
+                  {metric.sphereTargets && (
+                    <div>
+                      <h5 className="text-white font-medium mb-2">Sphere Targets</h5>
+                      <div className="space-y-2">
+                        {metric.sphereTargets.map((target: any, j: number) => (
+                          <div key={j} className="bg-slate-800 rounded p-3">
+                            <div className="flex justify-between items-center mb-1">
+                              <span className="text-gray-300">{target.system}</span>
+                              <span className="text-emerald-300 font-mono font-bold">{target.rto || target.rpo}</span>
+                            </div>
+                            <p className="text-gray-500 text-xs">{target.method}</p>
+                            {target.notes && <p className="text-gray-400 text-xs mt-1">{target.notes}</p>}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {metric.institutionalContext && (
+                    <div className="bg-purple-500/10 border border-purple-500/30 rounded p-3">
+                      <p className="text-purple-300 text-sm">💼 {metric.institutionalContext}</p>
+                    </div>
+                  )}
+
+                  {metric.zeroRPOexplained && (
+                    <div className="bg-blue-500/10 border border-blue-500/30 rounded p-3">
+                      <h5 className="text-blue-300 font-medium mb-1">{metric.zeroRPOexplained.title}</h5>
+                      <p className="text-gray-300 text-sm mb-2">{metric.zeroRPOexplained.explanation}</p>
+                      {metric.zeroRPOexplained.contrast && (
+                        <p className="text-gray-400 text-xs">{metric.zeroRPOexplained.contrast}</p>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
+
+      {/* Fallback for simple items structure */}
+      {data.items && (
+        <div className="space-y-3">
+          {data.items.map((item: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <div className="flex justify-between items-center">
+                <span className="text-gray-400">{item.metric || item.fullName}</span>
+                <span className="text-white font-medium">{item.description || item.example}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
@@ -2540,9 +3166,86 @@ function SeverityBlock({ data }: { data: any }) {
 }
 
 function PostIncidentBlock({ data }: { data: any }) {
+  const [expanded, setExpanded] = useState<number | null>(null);
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-3">{data.title}</h3>
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-2">{data.subtitle}</p>}
+      {data.philosophy && (
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded p-3 mb-4">
+          <p className="text-purple-300 text-sm italic">{data.philosophy}</p>
+        </div>
+      )}
+
+      {/* Format Section */}
+      {data.format && (
+        <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 mb-4">
+          <h4 className="text-blue-300 font-semibold mb-2">Review Format</h4>
+          <div className="grid md:grid-cols-2 gap-2 text-sm">
+            {data.format.timing && <div><span className="text-gray-500">Timing:</span> <span className="text-gray-300">{data.format.timing}</span></div>}
+            {data.format.attendees && <div><span className="text-gray-500">Attendees:</span> <span className="text-gray-300">{data.format.attendees}</span></div>}
+            {data.format.duration && <div><span className="text-gray-500">Duration:</span> <span className="text-gray-300">{data.format.duration}</span></div>}
+            {data.format.facilitation && <div><span className="text-gray-500">Facilitator:</span> <span className="text-gray-300">{data.format.facilitation}</span></div>}
+          </div>
+        </div>
+      )}
+
+      {/* Agenda Section */}
+      {data.agenda && (
+        <div className="mb-4">
+          <h4 className="text-white font-semibold mb-3">Review Agenda</h4>
+          <div className="space-y-2">
+            {data.agenda.map((item: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+                <button
+                  onClick={() => setExpanded(expanded === i ? null : i)}
+                  className="w-full p-3 text-left hover:bg-slate-700/70 transition-colors"
+                >
+                  <div className="flex justify-between items-center">
+                    <span className="text-white font-medium">{item.section}</span>
+                    <span className="text-gray-500 text-xs">{item.duration}</span>
+                  </div>
+                </button>
+                {expanded === i && (
+                  <div className="px-3 pb-3 border-t border-slate-600 pt-2">
+                    <p className="text-gray-400 text-sm mb-1"><span className="font-medium">Focus:</span> {item.focus}</p>
+                    <p className="text-emerald-300 text-xs"><span className="font-medium">Output:</span> {item.output}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Documentation Section */}
+      {data.documentation && (
+        <div className="bg-slate-700/50 rounded-lg p-4 mb-4">
+          <h4 className="text-white font-semibold mb-2">{data.documentation.title || 'Documentation'}</h4>
+          {data.documentation.sections && (
+            <div className="mb-2">
+              <p className="text-gray-400 text-xs mb-1">Sections:</p>
+              <div className="flex flex-wrap gap-1">
+                {data.documentation.sections.map((s: string, i: number) => (
+                  <span key={i} className="bg-slate-600 text-gray-300 px-2 py-0.5 rounded text-xs">{s}</span>
+                ))}
+              </div>
+            </div>
+          )}
+          {data.documentation.distribution && <p className="text-gray-400 text-xs">Distribution: {data.documentation.distribution}</p>}
+          {data.documentation.retention && <p className="text-gray-400 text-xs">Retention: {data.documentation.retention}</p>}
+        </div>
+      )}
+
+      {/* Action Item Tracking */}
+      {data.actionItemTracking && (
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded p-3">
+          <p className="text-emerald-300 text-sm">✓ {data.actionItemTracking}</p>
+        </div>
+      )}
+
+      {/* Fallback for simple structure */}
       {data.principle && <p className="text-purple-300 mb-3">{data.principle}</p>}
       {data.elements && (
         <ul className="text-gray-300 space-y-1 mb-3">
@@ -2836,44 +3539,66 @@ function ReserveBlock({ data }: { data: any }) {
 // Classification Matters Block (Section 3.1)
 function ClassificationMattersBlock({ data }: { data: any }) {
   const [expandedCase, setExpandedCase] = useState<string | null>(null);
-  
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
       {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
-      
+
       {data.consequences && (
-        <div className="space-y-3 mb-4">
+        <div className="grid md:grid-cols-2 gap-4 mb-6">
           {data.consequences.map((c: any, i: number) => (
             <div key={i} className="bg-slate-700/50 rounded-lg p-4">
-              <h4 className="text-white font-medium mb-2">{c.determination}</h4>
+              <div className="flex items-start gap-3 mb-2">
+                <span className="text-blue-400 font-bold">{i + 1}.</span>
+                <h4 className="text-white font-medium">{c.determination}</h4>
+              </div>
               <p className="text-gray-400 text-sm mb-2">{c.detail}</p>
               {c.sphereImplication && (
-                <p className="text-emerald-300 text-sm"><span className="font-semibold">Sphere:</span> {c.sphereImplication}</p>
+                <p className="text-emerald-400 text-sm">
+                  <span className="font-medium">Sphere:</span> {c.sphereImplication}
+                </p>
               )}
             </div>
           ))}
         </div>
       )}
-      
+
       {data.caseStudies && (
-        <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
-          <h4 className="text-red-300 font-semibold mb-3">{data.caseStudies.title}</h4>
-          <div className="space-y-3">
+        <div className="bg-slate-700/50 rounded-lg p-4">
+          <h4 className="text-red-300 font-medium mb-3 flex items-center gap-2">
+            ⚠️ {data.caseStudies.title}
+          </h4>
+          <div className="space-y-2">
             {data.caseStudies.cases?.map((cs: any, i: number) => (
-              <div key={i} className="bg-slate-800/50 rounded p-3">
+              <div key={i} className="bg-slate-800/70 rounded-lg overflow-hidden">
                 <button
                   onClick={() => setExpandedCase(expandedCase === cs.company ? null : cs.company)}
-                  className="w-full text-left"
+                  className="w-full text-left p-3 flex items-center justify-between hover:bg-slate-600/50 transition-colors"
                 >
-                  <h5 className="text-white font-medium">{cs.company}</h5>
+                  <span className="text-white">{cs.company}</span>
+                  <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${expandedCase === cs.company ? 'rotate-180' : ''}`} />
                 </button>
                 {expandedCase === cs.company && (
-                  <div className="mt-2 text-sm">
-                    <p className="text-gray-400"><span className="text-gray-500">Issue:</span> {cs.issue}</p>
-                    <p className="text-red-300"><span className="text-gray-500">Consequence:</span> {cs.consequence}</p>
-                    <p className="text-amber-300"><span className="text-gray-500">Lesson:</span> {cs.lesson}</p>
-                    {cs.sphereRelevance && <p className="text-emerald-300"><span className="text-gray-500">Sphere:</span> {cs.sphereRelevance}</p>}
+                  <div className="px-3 pb-3 border-t border-slate-700 pt-3 space-y-2">
+                    <div>
+                      <p className="text-gray-500 text-xs">Issue</p>
+                      <p className="text-gray-300 text-sm">{cs.issue}</p>
+                    </div>
+                    <div>
+                      <p className="text-red-400 text-xs">Consequence</p>
+                      <p className="text-gray-300 text-sm">{cs.consequence}</p>
+                    </div>
+                    <div>
+                      <p className="text-amber-400 text-xs">Lesson</p>
+                      <p className="text-gray-300 text-sm">{cs.lesson}</p>
+                    </div>
+                    {cs.sphereRelevance && (
+                      <div>
+                        <p className="text-emerald-400 text-xs">Sphere Approach</p>
+                        <p className="text-gray-300 text-sm">{cs.sphereRelevance}</p>
+                      </div>
+                    )}
                   </div>
                 )}
               </div>
@@ -2939,16 +3664,18 @@ function CoreDefinitionsBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      <div className="grid md:grid-cols-2 gap-3">
+      <div className="grid md:grid-cols-2 gap-4">
         {data.definitions?.map((d: any, i: number) => (
           <div key={i} className="bg-slate-700/50 rounded-lg p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <span className="text-blue-400 font-bold">{d.term}</span>
-              {d.fullName && <span className="text-gray-500 text-sm">({d.fullName})</span>}
+            <div className="mb-2">
+              <span className="text-blue-300 font-semibold">{d.term}</span>
+              {d.fullName && <span className="text-gray-500 text-sm ml-2">({d.fullName})</span>}
             </div>
             <p className="text-gray-300 text-sm mb-2">{d.definition}</p>
             {d.sphereContext && (
-              <p className="text-emerald-300 text-xs"><span className="font-semibold">Sphere:</span> {d.sphereContext}</p>
+              <p className="text-emerald-400 text-sm border-t border-slate-600 pt-2 mt-2">
+                <span className="font-medium">Sphere:</span> {d.sphereContext}
+              </p>
             )}
           </div>
         ))}
@@ -2960,12 +3687,12 @@ function CoreDefinitionsBlock({ data }: { data: any }) {
 // Compliance Enables Growth Block (Section 3.2)
 function ComplianceEnablesGrowthBlock({ data }: { data: any }) {
   const [expandedExample, setExpandedExample] = useState<number | null>(null);
-  
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
       {data.overview && <p className="text-gray-400 mb-4">{data.overview}</p>}
-      
+
       {data.comparisonTable && (
         <div className="overflow-x-auto mb-4">
           <table className="w-full text-sm">
@@ -2987,38 +3714,47 @@ function ComplianceEnablesGrowthBlock({ data }: { data: any }) {
           </table>
         </div>
       )}
-      
+
       {data.specificExamples && (
         <div className="space-y-2">
-          <h4 className="text-white font-medium">Real Examples:</h4>
+          <h4 className="text-white font-medium mb-2">Real Examples:</h4>
           {data.specificExamples.map((ex: any, i: number) => (
             <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
               <button
                 onClick={() => setExpandedExample(expandedExample === i ? null : i)}
-                className="w-full p-3 text-left flex justify-between items-center hover:bg-slate-700/70"
+                className="w-full p-3 text-left flex justify-between items-center hover:bg-slate-600/50 transition-colors"
               >
                 <span className="text-white font-medium">{ex.example}</span>
                 <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${expandedExample === i ? 'rotate-180' : ''}`} />
               </button>
               {expandedExample === i && (
-                <div className="px-3 pb-3 text-sm">
-                  <p className="text-gray-300 mb-2">{ex.story}</p>
-                  <p className="text-emerald-300"><span className="text-gray-500">Outcome:</span> {ex.outcome}</p>
-                  <p className="text-amber-300"><span className="text-gray-500">Lesson:</span> {ex.lesson}</p>
+                <div className="px-4 pb-4 border-t border-slate-600 pt-3 space-y-3">
+                  <div>
+                    <p className="text-gray-400 text-xs uppercase mb-1">Story</p>
+                    <p className="text-gray-300 text-sm">{ex.story}</p>
+                  </div>
+                  <div>
+                    <p className="text-emerald-400 text-xs uppercase mb-1">Outcome</p>
+                    <p className="text-gray-300 text-sm">{ex.outcome}</p>
+                  </div>
+                  <div>
+                    <p className="text-amber-400 text-xs uppercase mb-1">Lesson</p>
+                    <p className="text-gray-300 text-sm">{ex.lesson}</p>
+                  </div>
                 </div>
               )}
             </div>
           ))}
         </div>
       )}
-      
+
       {data.bankingPartnerRequirements && (
-        <div className="mt-4 bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
-          <h4 className="text-blue-300 font-medium mb-2">Banking Partner Requirements:</h4>
+        <div className="mt-4 bg-slate-700/50 rounded-lg p-4">
+          <h4 className="text-blue-300 font-medium mb-3">Banking Partner Requirements</h4>
           <div className="grid md:grid-cols-2 gap-2">
             {data.bankingPartnerRequirements.map((r: any, i: number) => (
               <div key={i} className="text-sm">
-                <span className="text-white font-medium">{r.requirement}:</span>{' '}
+                <span className="text-white">{r.requirement}:</span>{' '}
                 <span className="text-gray-400">{r.detail}</span>
               </div>
             ))}
@@ -3033,51 +3769,63 @@ function ComplianceEnablesGrowthBlock({ data }: { data: any }) {
 function KYCRequirementsBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      
+      <h3 className="font-semibold text-white mb-6 text-xl">{data.title}</h3>
+
       {data.individualVerification && (
-        <div className="mb-4">
-          <h4 className="text-blue-300 font-medium mb-2">{data.individualVerification.title}</h4>
-          <div className="space-y-2">
+        <div className="mb-8">
+          <h4 className="text-blue-300 font-medium mb-4 flex items-center gap-2 text-lg">
+            👤 {data.individualVerification.title}
+          </h4>
+          <div className="space-y-4">
             {data.individualVerification.requirements?.map((r: any, i: number) => (
-              <div key={i} className="bg-slate-700/50 rounded p-3">
-                <div className="flex justify-between items-start">
-                  <span className="text-white font-medium">{r.category}</span>
-                  <span className="text-emerald-300 text-xs">{r.required}</span>
+              <div key={i} className="bg-slate-700/50 rounded-lg p-5">
+                <div className="flex justify-between items-start mb-2">
+                  <span className="text-white font-semibold text-base">{r.category}</span>
+                  <span className="text-emerald-400 text-sm bg-emerald-500/10 px-2 py-1 rounded">{r.required}</span>
                 </div>
+                {r.context && <p className="text-gray-400 mb-4">{r.context}</p>}
                 {r.acceptable && (
-                  <div className="mt-1 flex flex-wrap gap-1">
-                    {r.acceptable.map((a: string, j: number) => (
-                      <span key={j} className="text-xs bg-slate-600 text-gray-300 px-2 py-0.5 rounded">{a}</span>
-                    ))}
+                  <div className="mb-3">
+                    <p className="text-gray-500 text-sm mb-2">Acceptable documents:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {r.acceptable.map((item: string, j: number) => (
+                        <span key={j} className="text-gray-300 text-sm bg-slate-600/50 px-3 py-1 rounded">{item}</span>
+                      ))}
+                    </div>
                   </div>
                 )}
-                {r.notes && <p className="text-gray-500 text-xs mt-1">{r.notes}</p>}
+                {r.notes && <p className="text-gray-500 text-sm italic">{r.notes}</p>}
               </div>
             ))}
           </div>
         </div>
       )}
-      
+
       {data.businessVerification && (
         <div>
-          <h4 className="text-purple-300 font-medium mb-2">{data.businessVerification.title}</h4>
-          <div className="space-y-2">
+          <h4 className="text-purple-300 font-medium mb-4 flex items-center gap-2 text-lg">
+            🏢 {data.businessVerification.title}
+          </h4>
+          <div className="space-y-4">
             {data.businessVerification.requirements?.map((r: any, i: number) => (
-              <div key={i} className="bg-slate-700/50 rounded p-3">
-                <div className="flex justify-between items-start">
-                  <span className="text-white font-medium">{r.category}</span>
-                  <span className="text-emerald-300 text-xs">{r.required}</span>
+              <div key={i} className="bg-slate-700/50 rounded-lg p-5">
+                <div className="flex justify-between items-start mb-2">
+                  <span className="text-white font-semibold text-base">{r.category}</span>
+                  <span className="text-emerald-400 text-sm bg-emerald-500/10 px-2 py-1 rounded">{r.required}</span>
                 </div>
+                {r.context && <p className="text-gray-400 mb-4">{r.context}</p>}
                 {r.acceptable && (
-                  <div className="mt-1 flex flex-wrap gap-1">
-                    {r.acceptable.map((a: string, j: number) => (
-                      <span key={j} className="text-xs bg-slate-600 text-gray-300 px-2 py-0.5 rounded">{a}</span>
-                    ))}
+                  <div className="mb-3">
+                    <p className="text-gray-500 text-sm mb-2">Acceptable documents:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {r.acceptable.map((item: string, j: number) => (
+                        <span key={j} className="text-gray-300 text-sm bg-slate-600/50 px-3 py-1 rounded">{item}</span>
+                      ))}
+                    </div>
                   </div>
                 )}
-                {r.detail && <p className="text-gray-400 text-xs mt-1">{r.detail}</p>}
-                {r.notes && <p className="text-gray-500 text-xs mt-1">{r.notes}</p>}
+                {r.detail && <p className="text-gray-300 text-sm mb-2">{r.detail}</p>}
+                {r.notes && <p className="text-gray-500 text-sm italic">{r.notes}</p>}
               </div>
             ))}
           </div>
@@ -3090,67 +3838,93 @@ function KYCRequirementsBlock({ data }: { data: any }) {
 // AML Program Block (Section 3.2)
 function AMLProgramBlock({ data }: { data: any }) {
   const [expandedPillar, setExpandedPillar] = useState<number | null>(null);
-  
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
       {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
-      
+
       <div className="space-y-2">
         {data.pillars?.map((p: any, i: number) => (
           <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
             <button
               onClick={() => setExpandedPillar(expandedPillar === i ? null : i)}
-              className="w-full p-4 text-left flex justify-between items-center hover:bg-slate-700/70"
+              className="w-full p-4 text-left flex justify-between items-center hover:bg-slate-600/50 transition-colors"
             >
               <span className="text-white font-medium">{p.pillar}</span>
               <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${expandedPillar === i ? 'rotate-180' : ''}`} />
             </button>
             {expandedPillar === i && (
-              <div className="px-4 pb-4 space-y-2">
-                <p className="text-gray-300 text-sm">{p.requirement}</p>
+              <div className="px-4 pb-4 border-t border-slate-600 pt-3 space-y-3">
+                <div>
+                  <p className="text-gray-400 text-xs uppercase mb-1">Requirement</p>
+                  <p className="text-gray-300 text-sm">{p.requirement}</p>
+                </div>
                 {p.includes && (
                   <div>
-                    <p className="text-gray-500 text-xs mb-1">Includes:</p>
-                    <ul className="text-gray-400 text-xs space-y-0.5">
-                      {p.includes.map((item: string, j: number) => (
-                        <li key={j}>• {item}</li>
+                    <p className="text-gray-400 text-xs uppercase mb-2">Includes</p>
+                    <div className="space-y-3">
+                      {p.includes.map((item: any, j: number) => (
+                        <div key={j} className="bg-slate-800/50 rounded-lg p-3">
+                          <p className="text-white font-medium text-sm">{typeof item === 'string' ? item : item.item}</p>
+                          {typeof item === 'object' && item.context && (
+                            <p className="text-gray-400 text-sm mt-1">{item.context}</p>
+                          )}
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 )}
                 {p.responsibilities && (
                   <div>
-                    <p className="text-gray-500 text-xs mb-1">Responsibilities:</p>
-                    <ul className="text-gray-400 text-xs space-y-0.5">
-                      {p.responsibilities.map((r: string, j: number) => (
-                        <li key={j}>• {r}</li>
+                    <p className="text-gray-400 text-xs uppercase mb-2">Responsibilities</p>
+                    <div className="space-y-3">
+                      {p.responsibilities.map((r: any, j: number) => (
+                        <div key={j} className="bg-slate-800/50 rounded-lg p-3">
+                          <p className="text-white font-medium text-sm">{typeof r === 'string' ? r : r.item}</p>
+                          {typeof r === 'object' && r.context && (
+                            <p className="text-gray-400 text-sm mt-1">{r.context}</p>
+                          )}
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 )}
                 {p.elements && (
                   <div>
-                    <p className="text-gray-500 text-xs mb-1">Elements:</p>
-                    <ul className="text-gray-400 text-xs space-y-0.5">
-                      {p.elements.map((e: string, j: number) => (
-                        <li key={j}>• {e}</li>
+                    <p className="text-gray-400 text-xs uppercase mb-2">Elements</p>
+                    <div className="space-y-3">
+                      {p.elements.map((e: any, j: number) => (
+                        <div key={j} className="bg-slate-800/50 rounded-lg p-3">
+                          <p className="text-white font-medium text-sm">{typeof e === 'string' ? e : e.item}</p>
+                          {typeof e === 'object' && e.context && (
+                            <p className="text-gray-400 text-sm mt-1">{e.context}</p>
+                          )}
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 )}
                 {p.scope && (
                   <div>
-                    <p className="text-gray-500 text-xs mb-1">Scope:</p>
-                    <ul className="text-gray-400 text-xs space-y-0.5">
-                      {p.scope.map((s: string, j: number) => (
-                        <li key={j}>• {s}</li>
+                    <p className="text-gray-400 text-xs uppercase mb-2">Scope</p>
+                    <div className="space-y-3">
+                      {p.scope.map((s: any, j: number) => (
+                        <div key={j} className="bg-slate-800/50 rounded-lg p-3">
+                          <p className="text-white font-medium text-sm">{typeof s === 'string' ? s : s.item}</p>
+                          {typeof s === 'object' && s.context && (
+                            <p className="text-gray-400 text-sm mt-1">{s.context}</p>
+                          )}
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 )}
                 {p.sphereImplementation && (
-                  <p className="text-emerald-300 text-xs mt-2"><span className="font-semibold">Sphere:</span> {p.sphereImplementation}</p>
+                  <div className="border-t border-slate-600 pt-2 mt-2">
+                    <p className="text-emerald-400 text-xs uppercase mb-1">Sphere Implementation</p>
+                    <p className="text-gray-300 text-sm">{p.sphereImplementation}</p>
+                  </div>
                 )}
               </div>
             )}
@@ -3166,43 +3940,41 @@ function CDDRequirementsBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      <div className="space-y-3">
+      <div className="space-y-4">
         {data.requirements?.map((r: any, i: number) => (
           <div key={i} className="bg-slate-700/50 rounded-lg p-4">
             <h4 className="text-blue-300 font-medium mb-2">{r.requirement}</h4>
-            <p className="text-gray-300 text-sm mb-2">{r.detail}</p>
+            <p className="text-gray-300 text-sm mb-3">{r.detail}</p>
             {r.forIndividuals && (
               <div className="mb-2">
-                <span className="text-gray-500 text-xs">Individuals:</span>
-                <div className="flex flex-wrap gap-1 mt-1">
-                  {r.forIndividuals.map((item: string, j: number) => (
-                    <span key={j} className="text-xs bg-slate-600 text-gray-300 px-2 py-0.5 rounded">{item}</span>
-                  ))}
-                </div>
+                <p className="text-gray-500 text-xs mb-1">For Individuals:</p>
+                <p className="text-gray-300 text-sm">{r.forIndividuals.join(', ')}</p>
               </div>
             )}
             {r.forEntities && (
               <div className="mb-2">
-                <span className="text-gray-500 text-xs">Entities:</span>
-                <div className="flex flex-wrap gap-1 mt-1">
-                  {r.forEntities.map((item: string, j: number) => (
-                    <span key={j} className="text-xs bg-slate-600 text-gray-300 px-2 py-0.5 rounded">{item}</span>
-                  ))}
-                </div>
+                <p className="text-gray-500 text-xs mb-1">For Entities:</p>
+                <p className="text-gray-300 text-sm">{r.forEntities.join(', ')}</p>
               </div>
             )}
             {r.toCollect && (
               <div className="mb-2">
-                <span className="text-gray-500 text-xs">To Collect:</span>
-                <div className="flex flex-wrap gap-1 mt-1">
-                  {r.toCollect.map((item: string, j: number) => (
-                    <span key={j} className="text-xs bg-slate-600 text-gray-300 px-2 py-0.5 rounded">{item}</span>
-                  ))}
-                </div>
+                <p className="text-gray-500 text-xs mb-1">To Collect:</p>
+                <p className="text-gray-300 text-sm">{r.toCollect.join(', ')}</p>
               </div>
             )}
-            {r.timing && <p className="text-amber-300 text-xs">Timing: {r.timing}</p>}
-            {r.purpose && <p className="text-gray-400 text-xs">Purpose: {r.purpose}</p>}
+            {r.timing && (
+              <div className="mb-2">
+                <p className="text-gray-500 text-xs mb-1">Timing:</p>
+                <p className="text-gray-300 text-sm">{r.timing}</p>
+              </div>
+            )}
+            {r.purpose && (
+              <div>
+                <p className="text-gray-500 text-xs mb-1">Purpose:</p>
+                <p className="text-gray-400 text-sm">{r.purpose}</p>
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -3214,20 +3986,20 @@ function CDDRequirementsBlock({ data }: { data: any }) {
 function EDDRequirementsBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      
+      <h3 className="font-semibold text-white mb-6 text-xl">{data.title}</h3>
+
       {data.triggers && (
-        <div className="mb-4">
-          <h4 className="text-red-300 font-medium mb-2">EDD Triggers:</h4>
-          <div className="space-y-2">
+        <div className="mb-8">
+          <h4 className="text-red-300 font-medium mb-4 text-lg">EDD Triggers</h4>
+          <div className="space-y-4">
             {data.triggers.map((t: any, i: number) => (
-              <div key={i} className="bg-red-500/10 border border-red-500/30 rounded p-3">
-                <h5 className="text-white font-medium">{t.trigger}</h5>
-                <p className="text-gray-400 text-xs mb-1">Why: {t.why}</p>
+              <div key={i} className="bg-slate-700/50 rounded-lg p-5">
+                <p className="text-white font-semibold mb-2">{t.trigger}</p>
+                <p className="text-gray-400 mb-3">{t.why}</p>
                 {t.eddRequired && (
-                  <div className="flex flex-wrap gap-1 mt-1">
-                    {t.eddRequired.map((item: string, j: number) => (
-                      <span key={j} className="text-xs bg-red-500/20 text-red-300 px-2 py-0.5 rounded">{item}</span>
+                  <div className="flex flex-wrap gap-2">
+                    {t.eddRequired.map((req: string, j: number) => (
+                      <span key={j} className="text-gray-300 text-sm bg-slate-600/50 px-3 py-1 rounded">{req}</span>
                     ))}
                   </div>
                 )}
@@ -3236,15 +4008,15 @@ function EDDRequirementsBlock({ data }: { data: any }) {
           </div>
         </div>
       )}
-      
+
       {data.components && (
         <div>
-          <h4 className="text-blue-300 font-medium mb-2">EDD Components:</h4>
-          <div className="grid md:grid-cols-2 gap-2">
+          <h4 className="text-blue-300 font-medium mb-4 text-lg">EDD Components</h4>
+          <div className="space-y-4">
             {data.components.map((c: any, i: number) => (
-              <div key={i} className="bg-slate-700/50 rounded p-3">
-                <span className="text-white font-medium text-sm">{c.component}:</span>
-                <span className="text-gray-400 text-xs ml-1">{c.detail}</span>
+              <div key={i} className="bg-slate-700/50 rounded-lg p-5">
+                <p className="text-white font-semibold mb-2">{c.component}</p>
+                <p className="text-gray-400">{c.detail}</p>
               </div>
             ))}
           </div>
@@ -3259,57 +4031,55 @@ function SARRequirementsBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      
+
       {data.thresholds && (
         <div className="mb-4">
-          <h4 className="text-amber-300 font-medium mb-2">Filing Thresholds:</h4>
+          <h4 className="text-amber-300 font-medium mb-3">Filing Thresholds</h4>
           <div className="space-y-2">
             {data.thresholds.map((t: any, i: number) => (
-              <div key={i} className="bg-slate-700/50 rounded p-3 flex justify-between items-center">
+              <div key={i} className="bg-slate-700/50 rounded-lg p-3 flex justify-between items-center">
                 <div>
-                  <span className="text-white font-medium">{t.category}</span>
-                  <p className="text-gray-400 text-xs">{t.detail}</p>
+                  <span className="text-white">{t.category}</span>
+                  <p className="text-gray-500 text-sm">{t.detail}</p>
                 </div>
-                <span className="text-amber-300 font-bold">{t.threshold}</span>
+                <span className="text-amber-300 font-semibold">{t.threshold}</span>
               </div>
             ))}
           </div>
         </div>
       )}
-      
+
       {data.process && (
         <div className="mb-4">
-          <h4 className="text-blue-300 font-medium mb-2">SAR Process:</h4>
-          <div className="flex flex-wrap gap-2">
+          <h4 className="text-blue-300 font-medium mb-3">SAR Process</h4>
+          <div className="space-y-2">
             {data.process.map((p: any, i: number) => (
-              <div key={i} className="bg-slate-700/50 rounded px-3 py-2">
-                <span className="text-blue-400 font-bold">{p.step}.</span>
-                <span className="text-white ml-1">{p.action}</span>
+              <div key={i} className="flex items-start gap-3">
+                <span className="bg-blue-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0">{p.step}</span>
+                <span className="text-gray-300 text-sm">{p.action}</span>
               </div>
             ))}
           </div>
         </div>
       )}
-      
+
       {data.timeline && (
         <p className="text-amber-300 text-sm mb-4">⏱️ {data.timeline}</p>
       )}
-      
+
       {data.confidentiality && (
-        <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
-          <h4 className="text-red-300 font-semibold mb-3">{data.confidentiality.title || 'Confidentiality Rules'}</h4>
-          <div className="space-y-3">
+        <div className="bg-slate-700/50 rounded-lg p-4">
+          <h4 className="text-red-300 font-medium mb-3">{data.confidentiality.title || 'Confidentiality Rules'}</h4>
+          <div className="space-y-2">
             {data.confidentiality.rules?.map((r: any, i: number) => (
-              <div key={i} className="bg-slate-800/50 rounded p-3">
-                <p className="text-white font-medium text-sm mb-1">🔒 {r.rule}</p>
-                <p className="text-gray-300 text-sm">{r.detail}</p>
+              <div key={i}>
+                <p className="text-white text-sm">🔒 {r.rule}</p>
+                <p className="text-gray-400 text-sm ml-5">{r.detail}</p>
               </div>
             ))}
           </div>
           {data.confidentiality.warning && (
-            <div className="mt-3 bg-red-500/20 rounded p-3">
-              <p className="text-red-200 text-sm">⚠️ {data.confidentiality.warning}</p>
-            </div>
+            <p className="text-red-300 text-sm mt-3">⚠️ {data.confidentiality.warning}</p>
           )}
         </div>
       )}
@@ -3322,77 +4092,82 @@ function RiskAssessmentFrameworkBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      
+
       {data.categories && (
-        <div className="space-y-4 mb-4">
+        <div className="space-y-4 mb-6">
           {data.categories.map((cat: any, i: number) => (
             <div key={i} className="bg-slate-700/50 rounded-lg p-4">
               <h4 className="text-white font-medium mb-3 flex items-center gap-2">
-                <span>{cat.icon}</span> {cat.category}
+                {cat.icon && <span>{cat.icon}</span>} {cat.category}
               </h4>
-              {/* Header row */}
-              <div className="grid grid-cols-4 gap-2 text-xs mb-2">
-                <span className="text-gray-500 font-medium">Factor</span>
-                <span className="text-red-400 font-medium text-center">High Risk</span>
-                <span className="text-amber-400 font-medium text-center">Medium Risk</span>
-                <span className="text-emerald-400 font-medium text-center">Low Risk</span>
-              </div>
-              <div className="space-y-2">
-                {cat.factors?.map((f: any, j: number) => (
-                  <div key={j} className="grid grid-cols-4 gap-2 text-xs">
-                    <span className="text-gray-300 font-medium">{f.factor}</span>
-                    <span className="text-red-300 bg-red-500/10 border border-red-500/30 px-2 py-1 rounded text-center">{f.high}</span>
-                    <span className="text-amber-300 bg-amber-500/10 border border-amber-500/30 px-2 py-1 rounded text-center">{f.medium}</span>
-                    <span className="text-emerald-300 bg-emerald-500/10 border border-emerald-500/30 px-2 py-1 rounded text-center">{f.low}</span>
-                  </div>
-                ))}
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-slate-600">
+                      <th className="text-left text-gray-400 py-2 pr-2">Factor</th>
+                      <th className="text-center text-red-400 py-2 px-2">High</th>
+                      <th className="text-center text-amber-400 py-2 px-2">Medium</th>
+                      <th className="text-center text-emerald-400 py-2 px-2">Low</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {cat.factors?.map((f: any, j: number) => (
+                      <tr key={j} className="border-b border-slate-600/50">
+                        <td className="text-white py-2 pr-2">{f.factor}</td>
+                        <td className="text-red-300 py-2 px-2 text-center text-xs">{f.high}</td>
+                        <td className="text-amber-300 py-2 px-2 text-center text-xs">{f.medium}</td>
+                        <td className="text-emerald-300 py-2 px-2 text-center text-xs">{f.low}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           ))}
         </div>
       )}
-      
+
       {data.riskRatings && (
-        <div className="space-y-3">
-          <h4 className="text-white font-medium">Risk Rating Outcomes:</h4>
+        <div className="space-y-4">
+          <h4 className="text-white font-medium text-lg mb-4">Risk Rating Outcomes</h4>
           {data.riskRatings.map((r: any, i: number) => {
-            const isProhibited = r.rating === 'Prohibited';
-            const isHigh = r.rating === 'High';
-            const isMedium = r.rating === 'Medium';
-            const isLow = r.rating === 'Low';
-            
-            const borderColor = isProhibited ? 'border-red-500' : isHigh ? 'border-amber-500' : isMedium ? 'border-yellow-500' : 'border-emerald-500';
-            const bgColor = isProhibited ? 'bg-red-500/10' : isHigh ? 'bg-amber-500/10' : isMedium ? 'bg-yellow-500/10' : 'bg-emerald-500/10';
-            const textColor = isProhibited ? 'text-red-400' : isHigh ? 'text-amber-400' : isMedium ? 'text-yellow-400' : 'text-emerald-400';
-            
+            const bgColor = r.rating === 'Prohibited' ? 'border-l-red-500' :
+                           r.rating === 'High' ? 'border-l-amber-500' :
+                           r.rating === 'Medium' ? 'border-l-yellow-500' : 'border-l-emerald-500';
+            const textColor = r.rating === 'Prohibited' ? 'text-red-400' :
+                              r.rating === 'High' ? 'text-amber-400' :
+                              r.rating === 'Medium' ? 'text-yellow-400' : 'text-emerald-400';
+
             return (
-              <div key={i} className={`${bgColor} border ${borderColor} rounded-lg p-4`}>
-                <div className="flex items-center justify-between mb-2">
-                  <span className={`${textColor} font-bold text-lg`}>{r.rating}</span>
-                  {r.approval && <span className="text-xs bg-slate-700 text-gray-300 px-2 py-1 rounded">{r.approval}</span>}
+              <div key={i} className={`bg-slate-700/50 rounded-lg p-5 border-l-4 ${bgColor}`}>
+                <div className="flex items-center justify-between mb-4">
+                  <span className={`${textColor} font-semibold text-lg`}>{r.rating}</span>
+                  {r.approval && (
+                    <span className="text-red-400 text-sm bg-red-500/10 px-3 py-1 rounded">{r.approval}</span>
+                  )}
                 </div>
-                <div className="grid md:grid-cols-3 gap-4 text-sm">
-                  <div>
-                    <p className="text-gray-500 text-xs mb-1">Criteria</p>
-                    <p className="text-gray-300">{r.criteria}</p>
+                <div className="grid md:grid-cols-3 gap-4 mb-4">
+                  <div className="bg-slate-800/50 rounded-lg p-3">
+                    <p className="text-gray-400 text-sm mb-2">Criteria</p>
+                    <p className="text-gray-200">{r.criteria}</p>
                   </div>
-                  <div>
-                    <p className="text-gray-500 text-xs mb-1">Monitoring</p>
-                    <p className="text-gray-300">{r.monitoring}</p>
+                  <div className="bg-slate-800/50 rounded-lg p-3">
+                    <p className="text-gray-400 text-sm mb-2">Monitoring</p>
+                    <p className="text-gray-200">{r.monitoring}</p>
                   </div>
-                  <div>
-                    <p className="text-gray-500 text-xs mb-1">Refresh Cycle</p>
-                    <p className="text-gray-300">{r.refresh || 'N/A'}</p>
+                  <div className="bg-slate-800/50 rounded-lg p-3">
+                    <p className="text-gray-400 text-sm mb-2">Refresh Cycle</p>
+                    <p className="text-gray-200">{r.refresh || 'N/A'}</p>
                   </div>
                 </div>
                 {r.examples && (
-                  <div className="mt-3 pt-3 border-t border-slate-600">
-                    <p className="text-gray-500 text-xs mb-1">Examples:</p>
-                    <ul className="text-gray-400 text-xs space-y-0.5">
+                  <div>
+                    <p className="text-gray-400 text-sm mb-2">Examples</p>
+                    <div className="flex flex-wrap gap-2">
                       {r.examples.map((ex: string, j: number) => (
-                        <li key={j}>• {ex}</li>
+                        <span key={j} className="text-gray-300 text-sm bg-slate-600/50 px-3 py-1 rounded">{ex}</span>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 )}
               </div>
@@ -3408,45 +4183,49 @@ function RiskAssessmentFrameworkBlock({ data }: { data: any }) {
 function SphereComplianceApproachBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      
+      <h3 className="font-semibold text-white mb-6 text-xl">{data.title}</h3>
+
       {data.philosophy && (
-        <div className="mb-4">
-          <h4 className="text-emerald-300 font-medium mb-2">Philosophy:</h4>
-          <div className="space-y-2">
+        <div className="mb-8">
+          <h4 className="text-emerald-300 font-medium mb-4 text-lg">Philosophy</h4>
+          <div className="space-y-4">
             {data.philosophy.map((p: any, i: number) => (
-              <div key={i} className="bg-emerald-500/10 border border-emerald-500/30 rounded p-3">
-                <h5 className="text-white font-medium">{p.principle}</h5>
-                <p className="text-gray-400 text-xs">{p.explanation}</p>
-                <p className="text-emerald-300 text-xs mt-1">→ {p.implementation}</p>
+              <div key={i} className="bg-slate-700/50 rounded-lg p-5 border-l-4 border-emerald-500">
+                <h5 className="text-white font-semibold text-base mb-3">{p.principle}</h5>
+                <p className="text-gray-300 mb-4">{p.explanation}</p>
+                <div className="bg-emerald-500/10 rounded-lg p-3">
+                  <p className="text-emerald-400 text-sm">
+                    <span className="font-semibold">Implementation:</span> {p.implementation}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
         </div>
       )}
-      
+
       {data.technologyStack && (
-        <div className="mb-4">
-          <h4 className="text-blue-300 font-medium mb-2">Technology Stack:</h4>
-          <div className="grid md:grid-cols-2 gap-2">
+        <div className="mb-8">
+          <h4 className="text-blue-300 font-medium mb-4 text-lg">Technology Stack</h4>
+          <div className="space-y-4">
             {data.technologyStack.map((t: any, i: number) => (
-              <div key={i} className="bg-slate-700/50 rounded p-3">
-                <span className="text-white font-medium text-sm">{t.component}</span>
-                <p className="text-gray-400 text-xs">{t.function}</p>
+              <div key={i} className="bg-slate-700/50 rounded-lg p-5">
+                <p className="text-white font-semibold mb-2">{t.component}</p>
+                <p className="text-gray-400">{t.function}</p>
               </div>
             ))}
           </div>
         </div>
       )}
-      
+
       {data.teamStructure && (
         <div>
-          <h4 className="text-purple-300 font-medium mb-2">Team Structure:</h4>
-          <div className="space-y-2">
+          <h4 className="text-purple-300 font-medium mb-4 text-lg">Team Structure</h4>
+          <div className="space-y-4">
             {data.teamStructure.map((t: any, i: number) => (
-              <div key={i} className="bg-slate-700/50 rounded p-2 flex justify-between">
-                <span className="text-white text-sm">{t.role}</span>
-                <span className="text-gray-400 text-xs">{t.responsibility}</span>
+              <div key={i} className="bg-slate-700/50 rounded-lg p-5">
+                <p className="text-white font-semibold mb-2">{t.role}</p>
+                <p className="text-gray-400">{t.responsibility}</p>
               </div>
             ))}
           </div>
@@ -3461,22 +4240,24 @@ function RedFlagsBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      
+
       {data.categories && (
-        <div className="space-y-4 mb-4">
+        <div className="space-y-4 mb-6">
           {data.categories.map((cat: any, i: number) => (
             <div key={i} className="bg-slate-700/50 rounded-lg p-4">
-              <h4 className="text-white font-medium mb-2 flex items-center gap-2">
-                <span>{cat.icon}</span> {cat.category}
+              <h4 className="text-white font-medium mb-3 flex items-center gap-2">
+                {cat.icon && <span>{cat.icon}</span>} {cat.category}
               </h4>
-              <div className="space-y-1">
+              <div className="space-y-2">
                 {cat.flags?.map((f: any, j: number) => (
-                  <div key={j} className="flex justify-between items-center text-sm">
-                    <div>
-                      <span className="text-white">{f.flag}:</span>
-                      <span className="text-gray-400 ml-1">{f.detail}</span>
+                  <div key={j} className="flex justify-between items-start py-2 border-b border-slate-600 last:border-0">
+                    <div className="flex-1">
+                      <span className="text-white text-sm">{f.flag}</span>
+                      <p className="text-gray-400 text-sm">{f.detail}</p>
                     </div>
-                    <span className={`text-xs px-2 py-0.5 rounded ${f.severity === 'High' ? 'bg-red-500/20 text-red-300' : 'bg-amber-500/20 text-amber-300'}`}>{f.severity}</span>
+                    <span className={`text-xs ml-3 ${f.severity === 'High' ? 'text-red-400' : 'text-amber-400'}`}>
+                      {f.severity}
+                    </span>
                   </div>
                 ))}
               </div>
@@ -3484,15 +4265,20 @@ function RedFlagsBlock({ data }: { data: any }) {
           ))}
         </div>
       )}
-      
+
       {data.responseToRedFlags && (
-        <div className="bg-blue-500/10 border border-blue-500/30 rounded p-4">
-          <h4 className="text-blue-300 font-medium mb-2">Response Process:</h4>
-          <div className="flex flex-wrap gap-2">
+        <div className="bg-slate-700/50 rounded-lg p-4">
+          <h4 className="text-blue-300 font-medium mb-4">Response Process</h4>
+          <div className="space-y-3">
             {data.responseToRedFlags.map((r: any, i: number) => (
-              <div key={i} className="bg-slate-800/50 rounded px-3 py-2">
-                <span className="text-blue-400 font-bold">{r.step}.</span>
-                <span className="text-white ml-1">{r.detail}</span>
+              <div key={i} className="flex items-start gap-3">
+                <span className="bg-blue-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">
+                  {i + 1}
+                </span>
+                <div>
+                  <p className="text-white font-medium">{r.step}</p>
+                  <p className="text-gray-400 text-sm">{r.detail}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -3505,69 +4291,91 @@ function RedFlagsBlock({ data }: { data: any }) {
 // Sanctions Regimes Block (Section 3.3)
 function SanctionsRegimesBlock({ data }: { data: any }) {
   const [expandedRegime, setExpandedRegime] = useState<string | null>(null);
-  
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      
-      <div className="space-y-2">
+      <h3 className="font-semibold text-white mb-6 text-xl">{data.title}</h3>
+
+      <div className="space-y-4">
         {data.regimes?.map((r: any, i: number) => (
           <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
             <button
               onClick={() => setExpandedRegime(expandedRegime === r.regime ? null : r.regime)}
-              className="w-full p-4 text-left flex items-center justify-between hover:bg-slate-700/70"
+              className="w-full p-5 text-left flex items-center justify-between hover:bg-slate-600/50 transition-colors"
             >
               <div className="flex items-center gap-3">
-                <span className="text-2xl">{r.icon}</span>
+                {r.icon && <span className="text-2xl">{r.icon}</span>}
                 <div>
-                  <span className="text-white font-medium">{r.regime}</span>
-                  {r.fullName && <p className="text-gray-400 text-xs">{r.fullName}</p>}
+                  <span className="text-white font-semibold">{r.regime}</span>
+                  {r.fullName && <p className="text-gray-400 text-sm">{r.fullName}</p>}
                 </div>
               </div>
-              <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${expandedRegime === r.regime ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${expandedRegime === r.regime ? 'rotate-180' : ''}`} />
             </button>
             {expandedRegime === r.regime && (
-              <div className="px-4 pb-4 space-y-3">
-                <p className="text-gray-300 text-sm"><span className="text-gray-500">Agency:</span> {r.agency}</p>
-                <p className="text-gray-300 text-sm"><span className="text-gray-500">Scope:</span> {r.scope}</p>
-                
+              <div className="px-5 pb-5 border-t border-slate-600 pt-4 space-y-4">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="text-gray-500 text-sm mb-1">Agency</p>
+                    <p className="text-white">{r.agency}</p>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="text-gray-500 text-sm mb-1">Scope</p>
+                    <p className="text-gray-300">{r.scope}</p>
+                  </div>
+                </div>
                 {r.lists && (
                   <div>
-                    <p className="text-gray-500 text-xs mb-1">Lists:</p>
-                    {r.lists.map((l: any, j: number) => (
-                      <div key={j} className="bg-slate-800/50 rounded p-2 mb-1">
-                        <span className="text-blue-300 text-sm">{l.list}</span>
-                        <p className="text-gray-400 text-xs">{l.description}</p>
-                      </div>
-                    ))}
+                    <p className="text-gray-400 text-sm uppercase mb-3">Sanctions Lists</p>
+                    <div className="space-y-2">
+                      {r.lists.map((l: any, j: number) => (
+                        <div key={j} className="bg-slate-800/50 rounded-lg p-3">
+                          <span className="text-blue-300 font-medium">{l.list}</span>
+                          <span className="text-gray-400 ml-2">- {l.description}</span>
+                          {l.count && <span className="text-gray-500 ml-2">({l.count})</span>}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
-                
                 {r.keyPrinciples && (
                   <div>
-                    <p className="text-gray-500 text-xs mb-1">Key Principles:</p>
-                    <ul className="text-gray-300 text-xs space-y-0.5">
-                      {r.keyPrinciples.map((p: string, j: number) => (
-                        <li key={j}>• {p}</li>
+                    <p className="text-gray-400 text-sm uppercase mb-2">Key Principles</p>
+                    <div className="space-y-2">
+                      {r.keyPrinciples.map((p: any, j: number) => (
+                        <div key={j} className="bg-slate-800/50 rounded-lg p-3">
+                          {typeof p === 'string' ? (
+                            <p className="text-gray-300 text-sm">{p}</p>
+                          ) : (
+                            <p className="text-sm">
+                              <span className="text-white font-semibold">{p.principle}:</span>
+                              <span className="text-gray-400 ml-1">{p.context}</span>
+                            </p>
+                          )}
+                        </div>
                       ))}
-                    </ul>
+                    </div>
                   </div>
                 )}
-                
                 {r.realWorldExamples && (
-                  <div className="bg-red-500/10 rounded p-2">
-                    {r.realWorldExamples.map((ex: any, j: number) => (
-                      <div key={j} className="mb-2">
-                        <span className="text-red-300 font-medium text-sm">{ex.example}</span>
-                        <p className="text-gray-400 text-xs">{ex.violation}</p>
-                        <p className="text-red-300 text-xs">{ex.consequence}</p>
-                      </div>
-                    ))}
+                  <div>
+                    <p className="text-gray-400 text-sm uppercase mb-2">Real-World Examples</p>
+                    <div className="space-y-2">
+                      {r.realWorldExamples.map((ex: any, j: number) => (
+                        <div key={j} className="bg-red-500/10 rounded-lg p-3">
+                          <p className="text-white font-medium text-sm">{ex.example}</p>
+                          <p className="text-gray-400 text-sm">{ex.violation}</p>
+                          <p className="text-red-400 text-sm font-medium">{ex.consequence}</p>
+                          {ex.lesson && <p className="text-gray-500 text-xs mt-1">{ex.lesson}</p>}
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
-                
                 {r.sphereImplication && (
-                  <p className="text-emerald-300 text-sm"><span className="font-semibold">Sphere:</span> {r.sphereImplication}</p>
+                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+                    <p className="text-emerald-400"><span className="font-semibold">Sphere:</span> {r.sphereImplication}</p>
+                  </div>
                 )}
               </div>
             )}
@@ -3580,27 +4388,67 @@ function SanctionsRegimesBlock({ data }: { data: any }) {
 
 // What Gets Screened Block (Section 3.3)
 function WhatGetsScreenedBlock({ data }: { data: any }) {
+  const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      
-      <div className="space-y-4">
+      {data.introduction && (
+        <p className="text-gray-400 mb-6">{data.introduction}</p>
+      )}
+
+      <div className="space-y-3">
         {data.categories?.map((cat: any, i: number) => (
-          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
-            <h4 className="text-white font-medium mb-2 flex items-center gap-2">
-              <span>{cat.icon}</span> {cat.category}
-            </h4>
-            <div className="space-y-2 mb-3">
-              {cat.items?.map((item: any, j: number) => (
-                <div key={j} className="text-sm">
-                  <span className="text-blue-300">{item.item}:</span>
-                  <span className="text-gray-400 ml-1">{item.detail}</span>
-                  {item.challenge && <span className="text-amber-300 text-xs ml-2">(Challenge: {item.challenge})</span>}
+          <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+            <button
+              onClick={() => setExpandedCategory(expandedCategory === cat.category ? null : cat.category)}
+              className="w-full p-4 text-left flex items-center justify-between hover:bg-slate-600/50 transition-colors"
+            >
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">{cat.icon}</span>
+                <div>
+                  <p className="text-white font-semibold">{cat.category}</p>
+                  {cat.whyItMatters && (
+                    <p className="text-gray-400 text-sm line-clamp-1">{cat.whyItMatters}</p>
+                  )}
                 </div>
-              ))}
-            </div>
-            {cat.howItWorks && <p className="text-gray-300 text-xs mb-2"><span className="text-gray-500">How:</span> {cat.howItWorks}</p>}
-            {cat.example && <p className="text-emerald-300 text-xs"><span className="text-gray-500">Example:</span> {cat.example}</p>}
+              </div>
+              <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform flex-shrink-0 ${expandedCategory === cat.category ? 'rotate-180' : ''}`} />
+            </button>
+            {expandedCategory === cat.category && (
+              <div className="px-4 pb-4 border-t border-slate-600 pt-4 space-y-3">
+                {cat.whyItMatters && (
+                  <p className="text-gray-400 text-sm">{cat.whyItMatters}</p>
+                )}
+                <div className="space-y-2">
+                  {cat.items?.map((item: any, j: number) => (
+                    <div key={j} className="bg-slate-800/50 rounded-lg p-3">
+                      <p className="text-blue-300 font-medium">{item.item}</p>
+                      <p className="text-gray-400 text-sm">{item.detail}</p>
+                      {item.challenge && (
+                        <p className="text-amber-300 text-sm mt-1">⚠️ {item.challenge}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+                {(cat.howItWorks || cat.example) && (
+                  <div className="grid md:grid-cols-2 gap-3 pt-2">
+                    {cat.howItWorks && (
+                      <div className="bg-slate-800/50 rounded-lg p-3">
+                        <p className="text-gray-500 text-xs uppercase mb-1">How it works</p>
+                        <p className="text-gray-300 text-sm">{cat.howItWorks}</p>
+                      </div>
+                    )}
+                    {cat.example && (
+                      <div className="bg-emerald-500/10 rounded-lg p-3">
+                        <p className="text-gray-500 text-xs uppercase mb-1">Example</p>
+                        <p className="text-emerald-300 text-sm">{cat.example}</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -3611,62 +4459,103 @@ function WhatGetsScreenedBlock({ data }: { data: any }) {
 // High Risk Jurisdictions Block (Section 3.3)
 function HighRiskJurisdictionsBlock({ data }: { data: any }) {
   const [expandedCategory, setExpandedCategory] = useState<string | null>(null);
-  
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      
-      <div className="space-y-2 mb-4">
-        {data.jurisdictionCategories?.map((cat: any, i: number) => (
-          <div key={i} className={`rounded-lg border ${cat.riskLevel.includes('PROHIBITED') ? 'border-red-500 bg-red-500/10' : cat.riskLevel.includes('HIGH') ? 'border-amber-500 bg-amber-500/10' : 'border-yellow-500 bg-yellow-500/10'}`}>
-            <button
-              onClick={() => setExpandedCategory(expandedCategory === cat.category ? null : cat.category)}
-              className="w-full p-4 text-left flex justify-between items-center"
-            >
-              <div>
-                <span className="text-white font-medium">{cat.category}</span>
-                <span className={`ml-2 text-xs px-2 py-0.5 rounded ${cat.riskLevel.includes('PROHIBITED') ? 'bg-red-500 text-white' : cat.riskLevel.includes('HIGH') ? 'bg-amber-500 text-black' : 'bg-yellow-500 text-black'}`}>{cat.riskLevel}</span>
-              </div>
-              <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${expandedCategory === cat.category ? 'rotate-180' : ''}`} />
-            </button>
-            {expandedCategory === cat.category && (
-              <div className="px-4 pb-4 space-y-2">
-                {cat.jurisdictions && (
-                  <div className="grid md:grid-cols-2 gap-2">
-                    {cat.jurisdictions.map((j: any, k: number) => (
-                      <div key={k} className="bg-slate-800/50 rounded p-2">
-                        <span>{j.icon} {j.country}</span>
-                        <p className="text-gray-400 text-xs">{j.detail}</p>
-                        {j.exception && <p className="text-emerald-300 text-xs">Exception: {j.exception}</p>}
+      <h3 className="font-semibold text-white mb-6 text-xl">{data.title}</h3>
+
+      <div className="space-y-4 mb-6">
+        {data.jurisdictionCategories?.map((cat: any, i: number) => {
+          const isProhibited = cat.riskLevel?.includes('PROHIBITED');
+          const isHigh = cat.riskLevel?.includes('HIGH');
+          const borderColor = isProhibited ? 'border-l-red-500' : isHigh ? 'border-l-amber-500' : 'border-l-yellow-500';
+
+          return (
+            <div key={i} className={`bg-slate-700/50 rounded-lg overflow-hidden border-l-4 ${borderColor}`}>
+              <button
+                onClick={() => setExpandedCategory(expandedCategory === cat.category ? null : cat.category)}
+                className="w-full p-5 text-left flex justify-between items-center hover:bg-slate-600/50 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <span className="text-white font-semibold">{cat.category}</span>
+                  <span className={`text-sm px-2 py-1 rounded ${isProhibited ? 'text-red-400 bg-red-500/10' : isHigh ? 'text-amber-400 bg-amber-500/10' : 'text-yellow-400 bg-yellow-500/10'}`}>
+                    {cat.riskLevel}
+                  </span>
+                </div>
+                <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${expandedCategory === cat.category ? 'rotate-180' : ''}`} />
+              </button>
+              {expandedCategory === cat.category && (
+                <div className="px-5 pb-5 border-t border-slate-600 pt-4 space-y-4">
+                  {cat.explanation && (
+                    <p className="text-gray-400">{cat.explanation}</p>
+                  )}
+                  {cat.jurisdictions && (
+                    <div className="space-y-3">
+                      {cat.jurisdictions.map((j: any, k: number) => (
+                        <div key={k} className="bg-slate-800/50 rounded-lg p-4">
+                          <p className="text-white font-medium mb-1">{j.icon} {j.country}</p>
+                          <p className="text-gray-400">{j.detail}</p>
+                          {j.status && (
+                            <p className="text-blue-400 text-sm mt-2">Status: {j.status}</p>
+                          )}
+                          {j.exception && (
+                            <p className="text-emerald-400 text-sm mt-2">Exception: {j.exception}</p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  {cat.spherePolicy && (
+                    <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+                      <p className="text-blue-400"><span className="font-semibold">Sphere Policy:</span> {cat.spherePolicy}</p>
+                    </div>
+                  )}
+                  {cat.customerCommunication && (
+                    <div className="bg-slate-800/50 rounded-lg p-4">
+                      <p className="text-gray-500 text-sm mb-1">Customer Communication</p>
+                      <p className="text-gray-300">{cat.customerCommunication}</p>
+                    </div>
+                  )}
+                  {cat.eddRequirements && (
+                    <div>
+                      <p className="text-gray-500 text-sm mb-2">EDD Requirements</p>
+                      <div className="flex flex-wrap gap-2">
+                        {cat.eddRequirements.map((req: string, k: number) => (
+                          <span key={k} className="text-gray-300 bg-slate-600/50 px-3 py-1 rounded">{req}</span>
+                        ))}
                       </div>
-                    ))}
-                  </div>
-                )}
-                {cat.spherePolicy && <p className="text-blue-300 text-sm mt-2"><span className="font-semibold">Sphere Policy:</span> {cat.spherePolicy}</p>}
-                {cat.eddRequirements && (
-                  <div className="flex flex-wrap gap-1">
-                    {cat.eddRequirements.map((req: string, k: number) => (
-                      <span key={k} className="text-xs bg-slate-700 text-gray-300 px-2 py-1 rounded">{req}</span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-        ))}
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
-      
+
       {data.nuancedApproach && (
-        <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
-          <h4 className="text-blue-300 font-medium mb-2">{data.nuancedApproach.title}</h4>
-          <p className="text-gray-300 text-sm mb-2">{data.nuancedApproach.explanation}</p>
-          <div className="space-y-1">
-            {data.nuancedApproach.tiers?.map((t: any, i: number) => (
-              <div key={i} className="flex items-center gap-2 text-sm">
-                <span className={`px-2 py-0.5 rounded text-xs ${t.tier === 'Prohibited' ? 'bg-red-500 text-white' : t.tier === 'Highly Restricted' ? 'bg-amber-500 text-black' : t.tier === 'Enhanced Scrutiny' ? 'bg-yellow-500 text-black' : 'bg-emerald-500 text-white'}`}>{t.tier}</span>
-                <span className="text-gray-400">{t.treatment}</span>
-              </div>
-            ))}
+        <div className="bg-slate-700/50 rounded-lg p-5">
+          <h4 className="text-white font-semibold mb-2">{data.nuancedApproach.title}</h4>
+          <p className="text-gray-400 text-sm mb-4">{data.nuancedApproach.explanation}</p>
+          <div className="grid md:grid-cols-2 gap-3">
+            {data.nuancedApproach.tiers?.map((t: any, i: number) => {
+              const colorClasses = t.tier === 'Prohibited' ? 'border-l-red-500 bg-red-500/5' :
+                           t.tier === 'Highly Restricted' ? 'border-l-amber-500 bg-amber-500/5' :
+                           t.tier === 'Enhanced Scrutiny' ? 'border-l-yellow-500 bg-yellow-500/5' : 'border-l-emerald-500 bg-emerald-500/5';
+              const textColor = t.tier === 'Prohibited' ? 'text-red-400' :
+                           t.tier === 'Highly Restricted' ? 'text-amber-400' :
+                           t.tier === 'Enhanced Scrutiny' ? 'text-yellow-400' : 'text-emerald-400';
+              return (
+                <div key={i} className={`rounded-lg p-3 border-l-4 ${colorClasses}`}>
+                  <div className="flex justify-between items-center mb-1">
+                    <p className={`font-semibold text-sm ${textColor}`}>{t.tier}</p>
+                    {t.examples && <span className="text-gray-500 text-xs">{t.examples}</span>}
+                  </div>
+                  <p className="text-white text-sm">{t.treatment}</p>
+                  {t.context && <p className="text-gray-500 text-xs mt-1">{t.context}</p>}
+                </div>
+              );
+            })}
           </div>
         </div>
       )}
@@ -3676,63 +4565,94 @@ function HighRiskJurisdictionsBlock({ data }: { data: any }) {
 
 // Screening Flow Diagram Block (Section 3.3)
 function ScreeningFlowDiagramBlock({ data }: { data: any }) {
-  const [activeNode, setActiveNode] = useState<string>('initiation');
-  
-  const getNodeColor = (node: any) => {
-    if (node.color === 'green') return 'bg-emerald-500/20 border-emerald-500';
-    if (node.color === 'yellow') return 'bg-amber-500/20 border-amber-500';
-    if (node.color === 'red') return 'bg-red-500/20 border-red-500';
-    if (node.type === 'start') return 'bg-blue-500/20 border-blue-500';
-    if (node.type === 'decision') return 'bg-purple-500/20 border-purple-500';
-    return 'bg-slate-700/50 border-slate-500';
-  };
-  
-  const activeNodeData = data.nodes?.find((n: any) => n.id === activeNode);
-  
+  const [expandedNode, setExpandedNode] = useState<string | null>(null);
+
+  // Filter to show main flow nodes (not decision branches)
+  const mainNodes = data.nodes?.filter((n: any) =>
+    ['initiation', 'pre-screen', 'clear-process', 'potential-match', 'confirmed-hit'].includes(n.id)
+  ) || [];
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      
-      {/* Flow visualization */}
-      <div className="bg-slate-900 rounded-lg p-4 mb-4">
-        <div className="flex flex-wrap justify-center gap-2">
-          {data.nodes?.map((node: any) => (
-            <button
-              key={node.id}
-              onClick={() => setActiveNode(node.id)}
-              className={`px-3 py-2 rounded-lg border-2 transition-all ${getNodeColor(node)} ${activeNode === node.id ? 'ring-2 ring-white' : ''}`}
-            >
-              <span className="text-white text-xs">{node.label}</span>
-            </button>
-          ))}
-        </div>
+      <h3 className="font-semibold text-white mb-6 text-xl">{data.title}</h3>
+
+      {/* Visual Flow */}
+      <div className="space-y-3 mb-6">
+        {mainNodes.map((node: any, index: number) => {
+          const isExpanded = expandedNode === node.id;
+          const colorClass = node.color === 'green' ? 'border-l-emerald-500' :
+                            node.color === 'red' ? 'border-l-red-500' :
+                            node.color === 'yellow' ? 'border-l-amber-500' : 'border-l-blue-500';
+          const bgClass = node.color === 'green' ? 'bg-emerald-500/5' :
+                         node.color === 'red' ? 'bg-red-500/5' :
+                         node.color === 'yellow' ? 'bg-amber-500/5' : 'bg-slate-700/50';
+
+          return (
+            <div key={node.id}>
+              <div className={`rounded-lg border-l-4 ${colorClass} ${bgClass} overflow-hidden`}>
+                <button
+                  onClick={() => setExpandedNode(isExpanded ? null : node.id)}
+                  className="w-full p-4 text-left flex items-center justify-between hover:bg-slate-600/30 transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="w-7 h-7 rounded-full bg-slate-600 text-white flex items-center justify-center text-sm font-medium">
+                      {index + 1}
+                    </span>
+                    <div>
+                      <p className="text-white font-semibold">{node.label}</p>
+                      <p className="text-gray-400 text-sm">{node.description}</p>
+                    </div>
+                  </div>
+                  {(node.details || node.outcome) && (
+                    <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+                  )}
+                </button>
+                {isExpanded && (node.details || node.outcome) && (
+                  <div className="px-4 pb-4 pt-2 border-t border-slate-600/50">
+                    {node.details && (
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        {node.details.map((d: string, i: number) => (
+                          <span key={i} className="text-gray-300 text-sm bg-slate-800/50 px-3 py-1 rounded">• {d}</span>
+                        ))}
+                      </div>
+                    )}
+                    {node.outcome && (
+                      <p className={`text-sm font-medium ${node.color === 'green' ? 'text-emerald-400' : node.color === 'red' ? 'text-red-400' : 'text-blue-400'}`}>
+                        → {node.outcome}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
+              {index < mainNodes.length - 1 && index < 1 && (
+                <div className="flex justify-center py-1">
+                  <div className="w-0.5 h-4 bg-slate-600"></div>
+                </div>
+              )}
+              {index === 1 && (
+                <div className="flex items-center justify-center py-2 gap-2">
+                  <div className="flex-1 h-px bg-slate-600"></div>
+                  <span className="text-gray-500 text-xs px-2">SCREENING RESULT</span>
+                  <div className="flex-1 h-px bg-slate-600"></div>
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
-      
-      {/* Active node details */}
-      {activeNodeData && (
-        <div className={`rounded-lg p-4 border-2 mb-4 ${getNodeColor(activeNodeData)}`}>
-          <h4 className="text-white font-semibold mb-2">{activeNodeData.label}</h4>
-          <p className="text-gray-300 text-sm mb-2">{activeNodeData.description}</p>
-          {activeNodeData.details && (
-            <ul className="text-gray-400 text-xs space-y-0.5">
-              {activeNodeData.details.map((d: string, i: number) => (
-                <li key={i}>• {d}</li>
-              ))}
-            </ul>
-          )}
-          {activeNodeData.outcome && <p className="text-emerald-300 text-sm mt-2">Outcome: {activeNodeData.outcome}</p>}
-        </div>
-      )}
-      
-      {/* Key principles */}
+
+      {/* Key principles - compact grid */}
       {data.keyPrinciples && (
-        <div className="bg-blue-500/10 border border-blue-500/30 rounded p-4">
-          <h4 className="text-blue-300 font-medium mb-2">Key Principles:</h4>
-          <ul className="text-gray-300 text-sm space-y-1">
+        <div className="bg-slate-700/50 rounded-lg p-4">
+          <h4 className="text-white font-semibold mb-3 text-sm">Key Principles</h4>
+          <div className="grid md:grid-cols-2 gap-2">
             {data.keyPrinciples.map((p: string, i: number) => (
-              <li key={i}>✓ {p}</li>
+              <div key={i} className="flex items-start gap-2 text-sm">
+                <span className="text-emerald-400 flex-shrink-0">✓</span>
+                <span className="text-gray-300">{p}</span>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       )}
     </div>
@@ -3741,25 +4661,51 @@ function ScreeningFlowDiagramBlock({ data }: { data: any }) {
 
 // Documentation Requirements Block (Section 3.3)
 function DocumentationRequirementsBlock({ data }: { data: any }) {
+  const [expandedFlag, setExpandedFlag] = useState<string | null>(null);
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      
+      {data.introduction && (
+        <p className="text-gray-400 mb-6">{data.introduction}</p>
+      )}
+
       <div className="space-y-3">
         {data.byFlagType?.map((f: any, i: number) => (
-          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
-            <h4 className="text-amber-300 font-medium mb-2">{f.flagType}</h4>
-            <p className="text-gray-400 text-xs mb-2">Scenario: {f.scenario}</p>
-            <div className="mb-2">
-              <span className="text-gray-500 text-xs">Required:</span>
-              <div className="flex flex-wrap gap-1 mt-1">
-                {f.requiredDocumentation?.map((d: string, j: number) => (
-                  <span key={j} className="text-xs bg-slate-600 text-gray-300 px-2 py-0.5 rounded">{d}</span>
-                ))}
+          <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+            <button
+              onClick={() => setExpandedFlag(expandedFlag === f.flagType ? null : f.flagType)}
+              className="w-full p-4 text-left flex items-center justify-between hover:bg-slate-600/50 transition-colors"
+            >
+              <div>
+                <p className="text-amber-300 font-semibold">{f.flagType}</p>
+                <p className="text-gray-400 text-sm">{f.scenario}</p>
               </div>
-            </div>
-            <p className="text-gray-300 text-xs"><span className="text-gray-500">Purpose:</span> {f.purpose}</p>
-            <p className="text-blue-300 text-xs">⏱️ {f.timeline}</p>
+              <div className="flex items-center gap-3">
+                <span className="text-blue-300 text-sm">{f.timeline}</span>
+                <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${expandedFlag === f.flagType ? 'rotate-180' : ''}`} />
+              </div>
+            </button>
+            {expandedFlag === f.flagType && (
+              <div className="px-4 pb-4 border-t border-slate-600 pt-3 space-y-3">
+                {f.whyFlagged && (
+                  <div className="bg-amber-500/10 rounded-lg p-3">
+                    <p className="text-amber-300 text-sm"><span className="font-medium">Why flagged:</span> {f.whyFlagged}</p>
+                  </div>
+                )}
+                <div>
+                  <p className="text-gray-500 text-xs uppercase mb-2">Required Documentation</p>
+                  <div className="space-y-1">
+                    {f.requiredDocumentation?.map((d: string, j: number) => (
+                      <p key={j} className="text-gray-300 text-sm bg-slate-800/50 rounded p-2">• {d}</p>
+                    ))}
+                  </div>
+                </div>
+                <div className="bg-emerald-500/10 rounded-lg p-3">
+                  <p className="text-emerald-300 text-sm"><span className="font-medium">Purpose:</span> {f.purpose}</p>
+                </div>
+              </div>
+            )}
           </div>
         ))}
       </div>
@@ -3769,82 +4715,175 @@ function DocumentationRequirementsBlock({ data }: { data: any }) {
 
 // Flagged Payment Process Block (Section 3.3)
 function FlaggedPaymentProcessBlock({ data }: { data: any }) {
-  const [activeStep, setActiveStep] = useState(1);
+  const [expandedStep, setExpandedStep] = useState<number | null>(null);
   const steps = data.process?.steps || [];
-  const activeStepData = steps.find((s: any) => s.step === activeStep);
-  
+
+  // Color coding based on step type
+  const getStepColors = (step: number) => {
+    switch (step) {
+      case 1: return { border: 'border-blue-500', bg: 'bg-blue-500', text: 'text-blue-400', label: 'Notification' };
+      case 2: return { border: 'border-amber-500', bg: 'bg-amber-500', text: 'text-amber-400', label: 'Review' };
+      case 3: return { border: 'border-purple-500', bg: 'bg-purple-500', text: 'text-purple-400', label: 'Documentation' };
+      case 4: return { border: 'border-amber-500', bg: 'bg-amber-500', text: 'text-amber-400', label: 'Review' };
+      case 5: return { border: 'border-green-500', bg: 'bg-green-500', text: 'text-green-400', label: 'Resolution' };
+      default: return { border: 'border-slate-500', bg: 'bg-slate-500', text: 'text-slate-400', label: '' };
+    }
+  };
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      
-      {/* Step navigation */}
-      <div className="flex overflow-x-auto gap-2 mb-4">
-        {steps.map((s: any) => (
-          <button
-            key={s.step}
-            onClick={() => setActiveStep(s.step)}
-            className={`flex-shrink-0 px-4 py-2 rounded-lg ${activeStep === s.step ? 'bg-blue-500 text-white' : 'bg-slate-700 text-gray-300'}`}
-          >
-            {s.step}. {s.title}
-          </button>
-        ))}
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      <p className="text-gray-400 text-sm mb-6">Click any step to see customer communication templates and outcomes.</p>
+
+      {/* Vertical flow of steps */}
+      <div className="space-y-3 mb-6">
+        {steps.map((s: any, i: number) => {
+          const colors = getStepColors(s.step);
+          const isExpanded = expandedStep === s.step;
+
+          return (
+            <div key={s.step} className={`bg-slate-700/50 rounded-lg overflow-hidden border-l-4 ${colors.border}`}>
+              <button
+                onClick={() => setExpandedStep(isExpanded ? null : s.step)}
+                className="w-full p-4 text-left flex items-center justify-between hover:bg-slate-600/50 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  <span className={`w-8 h-8 rounded-full ${colors.bg} text-white flex items-center justify-center text-sm font-semibold flex-shrink-0`}>
+                    {s.step}
+                  </span>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <p className="text-white font-semibold">{s.title}</p>
+                      <span className={`text-xs px-2 py-0.5 rounded ${colors.text} bg-slate-800/50`}>{s.timing}</span>
+                    </div>
+                    <p className="text-gray-400 text-sm">{s.whatHappens}</p>
+                  </div>
+                </div>
+                <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform flex-shrink-0 ${isExpanded ? 'rotate-180' : ''}`} />
+              </button>
+
+              {isExpanded && (
+                <div className="px-4 pb-4 pt-1 border-t border-slate-600/50 space-y-3">
+                  {/* Outcomes */}
+                  {s.outcomes && (
+                    <div>
+                      <p className="text-gray-500 text-xs mb-2 uppercase tracking-wide">Possible Outcomes</p>
+                      <div className="flex flex-wrap gap-2">
+                        {s.outcomes.map((outcome: string, j: number) => {
+                          const isPositive = outcome.toLowerCase().includes('clear') || outcome.toLowerCase().includes('approved') || outcome.toLowerCase().includes('resolved');
+                          const isNegative = outcome.toLowerCase().includes('reject') || outcome.toLowerCase().includes('block');
+                          return (
+                            <span
+                              key={j}
+                              className={`px-3 py-1 rounded text-sm ${
+                                isPositive ? 'bg-green-500/20 text-green-400 border border-green-500/30' :
+                                isNegative ? 'bg-red-500/20 text-red-400 border border-red-500/30' :
+                                'bg-amber-500/20 text-amber-400 border border-amber-500/30'
+                              }`}
+                            >
+                              {outcome}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Documentation timeline (for step 3) */}
+                  {s.documentationTimeline && (
+                    <div className="bg-slate-800/50 rounded-lg p-3">
+                      <p className="text-gray-500 text-xs mb-2 uppercase tracking-wide">Documentation Timeline</p>
+                      <div className="grid grid-cols-3 gap-2 text-sm">
+                        <div>
+                          <p className="text-gray-500">Standard</p>
+                          <p className="text-white">{s.documentationTimeline.standard}</p>
+                        </div>
+                        <div>
+                          <p className="text-gray-500">Extension</p>
+                          <p className="text-white">{s.documentationTimeline.extension}</p>
+                        </div>
+                        <div>
+                          <p className="text-gray-500">If Expired</p>
+                          <p className="text-amber-400">{s.documentationTimeline.expired}</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Customer communication template */}
+                  {s.customerCommunication && (
+                    <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3">
+                      <p className="text-blue-400 font-medium text-sm mb-2">📧 {s.customerCommunication.subject}</p>
+                      <pre className="text-gray-400 text-xs whitespace-pre-wrap font-sans bg-slate-800/50 rounded p-3">{s.customerCommunication.template}</pre>
+                    </div>
+                  )}
+
+                  {/* Approved/Rejected communications (for step 5) */}
+                  {s.approvedCommunication && (
+                    <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-3">
+                      <p className="text-green-400 font-medium text-sm mb-2">✓ {s.approvedCommunication.subject}</p>
+                      <pre className="text-gray-400 text-xs whitespace-pre-wrap font-sans bg-slate-800/50 rounded p-3">{s.approvedCommunication.template}</pre>
+                    </div>
+                  )}
+                  {s.rejectedCommunication && (
+                    <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3">
+                      <p className="text-red-400 font-medium text-sm mb-2">✗ {s.rejectedCommunication.subject}</p>
+                      <pre className="text-gray-400 text-xs whitespace-pre-wrap font-sans bg-slate-800/50 rounded p-3">{s.rejectedCommunication.template}</pre>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Connector line to next step */}
+              {i < steps.length - 1 && (
+                <div className="flex justify-center -mb-3 relative z-10">
+                  <div className="w-0.5 h-3 bg-slate-600" />
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
-      
-      {/* Active step content */}
-      {activeStepData && (
-        <div className="bg-slate-700/50 rounded-lg p-4 mb-4">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="bg-blue-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">{activeStepData.step}</span>
-            <div>
-              <h4 className="text-white font-semibold">{activeStepData.title}</h4>
-              <p className="text-gray-400 text-sm">{activeStepData.timing}</p>
-            </div>
-          </div>
-          <p className="text-gray-300 mb-3">{activeStepData.whatHappens}</p>
-          
-          {activeStepData.outcomes && (
-            <div className="flex flex-wrap gap-2 mb-3">
-              {activeStepData.outcomes.map((o: string, i: number) => (
-                <span key={i} className="text-xs bg-slate-600 text-gray-200 px-2 py-1 rounded">{o}</span>
-              ))}
-            </div>
-          )}
-          
-          {activeStepData.customerCommunication && (
-            <div className="bg-slate-800 rounded p-3">
-              <p className="text-blue-300 text-sm font-medium mb-1">📧 {activeStepData.customerCommunication.subject}</p>
-              <pre className="text-gray-300 text-xs whitespace-pre-wrap font-sans">{activeStepData.customerCommunication.template}</pre>
-            </div>
-          )}
-        </div>
-      )}
-      
-      {/* Timeline expectations */}
+
+      {/* Timeline expectations - compact grid */}
       {data.timelineExpectations && (
-        <div className="bg-slate-700/50 rounded-lg p-4 mb-4">
-          <h4 className="text-white font-medium mb-2">{data.timelineExpectations.title}</h4>
-          <div className="space-y-2">
+        <div className="bg-slate-700/50 rounded-lg p-4 mb-6">
+          <h4 className="text-white font-semibold text-sm mb-3">{data.timelineExpectations.title}</h4>
+          <div className="grid md:grid-cols-3 gap-3">
             {data.timelineExpectations.scenarios?.map((s: any, i: number) => (
-              <div key={i} className="flex justify-between text-sm">
-                <span className="text-gray-300">{s.scenario}</span>
-                <span className="text-blue-300">{s.typical}</span>
+              <div key={i} className="bg-slate-800/50 rounded-lg p-3">
+                <p className="text-gray-400 text-xs mb-1">{s.scenario}</p>
+                <p className="text-blue-300 font-medium text-sm">{s.typical}</p>
+                {s.withDocs && <p className="text-gray-500 text-xs">+docs: {s.withDocs}</p>}
               </div>
             ))}
           </div>
         </div>
       )}
-      
+
       {/* Escalation path */}
       {data.escalationPath && (
-        <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
-          <h4 className="text-purple-300 font-medium mb-2">{data.escalationPath.title}</h4>
+        <div className="bg-slate-700/50 rounded-lg p-4">
+          <h4 className="text-white font-semibold text-sm mb-2">{data.escalationPath.title}</h4>
+          {data.escalationPath.introduction && (
+            <p className="text-gray-400 text-xs mb-4">{data.escalationPath.introduction}</p>
+          )}
           <div className="space-y-2">
-            {data.escalationPath.levels?.map((l: any, i: number) => (
-              <div key={i} className="flex items-start gap-2">
-                <span className="bg-purple-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs">{i + 1}</span>
-                <div>
-                  <span className="text-white text-sm">{l.level}:</span>
-                  <span className="text-gray-400 text-xs ml-1">{l.handles}</span>
+            {data.escalationPath.levels?.map((l: any, i: number, arr: any[]) => (
+              <div key={i} className="flex items-start gap-3">
+                <div className="flex flex-col items-center">
+                  <div className="w-7 h-7 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-semibold flex-shrink-0">
+                    {i + 1}
+                  </div>
+                  {i < arr.length - 1 && <div className="w-0.5 h-full min-h-[32px] bg-slate-600 mt-1" />}
+                </div>
+                <div className="flex-1 pb-2">
+                  <p className="text-blue-300 font-semibold text-sm">{l.level}</p>
+                  <p className="text-white text-xs">{l.handles}</p>
+                  {l.context && <p className="text-gray-500 text-xs mt-1">{l.context}</p>}
+                  {l.whenToEscalate && (
+                    <p className="text-amber-400 text-xs mt-1">↑ {l.whenToEscalate}</p>
+                  )}
                 </div>
               </div>
             ))}
@@ -3858,23 +4897,30 @@ function FlaggedPaymentProcessBlock({ data }: { data: any }) {
 // Travel Rule Summary Block (Section 3.4)
 function TravelRuleSummaryBlock({ data }: { data: any }) {
   return (
-    <div className="bg-blue-500/10 border border-blue-500/30 rounded-xl p-6">
-      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
-      <p className="text-gray-300 mb-4">{data.definition}</p>
-      
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      <div className="bg-slate-700/50 rounded-lg p-5 mb-6">
+        <p className="text-gray-300 text-lg">{data.definition}</p>
+      </div>
       {data.keyTakeaways && (
-        <div className="space-y-2 mb-4">
-          {data.keyTakeaways.map((t: string, i: number) => (
-            <div key={i} className="bg-slate-800/50 rounded px-3 py-2 text-sm text-gray-300">{t}</div>
-          ))}
+        <div className="mb-6">
+          <h4 className="text-gray-400 text-sm uppercase mb-4">Key Takeaways</h4>
+          <div className="space-y-3">
+            {data.keyTakeaways.map((t: string, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded-lg p-4 text-gray-300">• {t}</div>
+            ))}
+          </div>
         </div>
       )}
-      
       {data.spherePosition && (
-        <p className="text-emerald-300"><span className="font-semibold">Sphere:</span> {data.spherePosition}</p>
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-5 mb-4">
+          <p className="text-emerald-400"><span className="font-semibold">Sphere Position:</span> {data.spherePosition}</p>
+        </div>
       )}
       {data.whyItMatters && (
-        <p className="text-amber-300 text-sm mt-2">{data.whyItMatters}</p>
+        <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-5">
+          <p className="text-amber-400">{data.whyItMatters}</p>
+        </div>
       )}
     </div>
   );
@@ -3884,32 +4930,46 @@ function TravelRuleSummaryBlock({ data }: { data: any }) {
 function FATFDefinitionBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      
+      <h3 className="font-semibold text-white mb-6 text-xl">{data.title}</h3>
       {data.whatIsFATF && (
-        <div className="bg-slate-700/50 rounded p-4 mb-4">
-          <h4 className="text-blue-300 font-medium">{data.whatIsFATF.fullName}</h4>
-          <p className="text-gray-300 text-sm">{data.whatIsFATF.description}</p>
-          <p className="text-amber-300 text-xs mt-2">Relevant: {data.whatIsFATF.relevantRecommendation}</p>
+        <div className="bg-slate-700/50 rounded-lg p-5 mb-6">
+          <h4 className="text-white font-semibold mb-2">{data.whatIsFATF.fullName}</h4>
+          <p className="text-gray-400 mb-4">{data.whatIsFATF.description}</p>
+          <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+            <p className="text-amber-400"><span className="font-medium">Relevant:</span> {data.whatIsFATF.relevantRecommendation}</p>
+          </div>
         </div>
       )}
-      
       {data.recommendation16 && (
-        <div className="bg-purple-500/10 border border-purple-500/30 rounded p-4 mb-4">
-          <h4 className="text-purple-300 font-medium mb-2">{data.recommendation16.title}</h4>
-          <p className="text-gray-400 text-sm"><span className="text-gray-500">Original:</span> {data.recommendation16.originalScope}</p>
-          <p className="text-gray-400 text-sm"><span className="text-gray-500">Extended:</span> {data.recommendation16.extension}</p>
+        <div className="bg-slate-700/50 rounded-lg p-5 mb-6">
+          <h4 className="text-white font-semibold mb-4">{data.recommendation16.title}</h4>
+          <div className="grid md:grid-cols-2 gap-4 mb-4">
+            <div className="bg-slate-800/50 rounded-lg p-4">
+              <p className="text-gray-500 text-sm mb-1">Original Scope</p>
+              <p className="text-gray-300">{data.recommendation16.originalScope}</p>
+            </div>
+            <div className="bg-slate-800/50 rounded-lg p-4">
+              <p className="text-gray-500 text-sm mb-1">Extended To</p>
+              <p className="text-gray-300">{data.recommendation16.extension}</p>
+            </div>
+          </div>
           {data.recommendation16.keyLanguage && (
-            <p className="text-gray-300 text-sm italic mt-2 bg-slate-800/50 p-2 rounded">"{data.recommendation16.keyLanguage}"</p>
+            <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+              <p className="text-blue-300 italic">"{data.recommendation16.keyLanguage}"</p>
+            </div>
           )}
         </div>
       )}
-      
       {data.sunriseIssue && (
-        <div className="bg-amber-500/10 border border-amber-500/30 rounded p-4">
-          <h4 className="text-amber-300 font-medium mb-2">{data.sunriseIssue.title}</h4>
-          <p className="text-gray-300 text-sm"><span className="text-gray-500">Problem:</span> {data.sunriseIssue.problem}</p>
-          <p className="text-emerald-300 text-sm mt-1"><span className="font-semibold">Sphere:</span> {data.sunriseIssue.sphereApproach}</p>
+        <div className="bg-slate-700/50 rounded-lg p-5">
+          <h4 className="text-amber-400 font-semibold mb-4">{data.sunriseIssue.title}</h4>
+          <div className="bg-slate-800/50 rounded-lg p-4 mb-4">
+            <p className="text-gray-500 text-sm mb-1">Problem</p>
+            <p className="text-gray-300">{data.sunriseIssue.problem}</p>
+          </div>
+          <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+            <p className="text-emerald-400"><span className="font-semibold">Sphere Approach:</span> {data.sunriseIssue.sphereApproach}</p>
+          </div>
         </div>
       )}
     </div>
@@ -3920,23 +4980,22 @@ function FATFDefinitionBlock({ data }: { data: any }) {
 function RequiredDataElementsBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      
+      <h3 className="font-semibold text-white mb-6 text-xl">{data.title}</h3>
       {data.originatorRequirements && (
-        <div className="mb-4">
-          <h4 className="text-blue-300 font-medium mb-2">{data.originatorRequirements.title}</h4>
-          <div className="space-y-2">
+        <div className="mb-8">
+          <h4 className="text-blue-300 font-medium mb-4 text-lg">{data.originatorRequirements.title}</h4>
+          <div className="space-y-4">
             {data.originatorRequirements.required?.map((r: any, i: number) => (
-              <div key={i} className="bg-slate-700/50 rounded p-3">
-                <div className="flex justify-between">
-                  <span className="text-white font-medium">{r.element}</span>
-                  <span className="text-emerald-300 text-xs">{r.required}</span>
+              <div key={i} className="bg-slate-700/50 rounded-lg p-5">
+                <div className="flex justify-between items-start mb-2">
+                  <span className="text-white font-semibold">{r.element}</span>
+                  <span className="text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded text-sm">{r.required}</span>
                 </div>
-                {r.description && <p className="text-gray-400 text-xs">{r.description}</p>}
+                {r.description && <p className="text-gray-400 mb-2">{r.description}</p>}
                 {r.options && (
-                  <div className="flex flex-wrap gap-1 mt-1">
-                    {r.options.map((o: string, j: number) => (
-                      <span key={j} className="text-xs bg-slate-600 text-gray-300 px-2 py-0.5 rounded">{o}</span>
+                  <div className="flex flex-wrap gap-2">
+                    {r.options.map((opt: string, j: number) => (
+                      <span key={j} className="text-gray-300 bg-slate-600/50 px-3 py-1 rounded text-sm">{opt}</span>
                     ))}
                   </div>
                 )}
@@ -3945,27 +5004,28 @@ function RequiredDataElementsBlock({ data }: { data: any }) {
           </div>
         </div>
       )}
-      
       {data.beneficiaryRequirements && (
-        <div className="mb-4">
-          <h4 className="text-purple-300 font-medium mb-2">{data.beneficiaryRequirements.title}</h4>
-          <div className="space-y-2">
+        <div className="mb-8">
+          <h4 className="text-purple-300 font-medium mb-4 text-lg">{data.beneficiaryRequirements.title}</h4>
+          <div className="space-y-4">
             {data.beneficiaryRequirements.required?.map((r: any, i: number) => (
-              <div key={i} className="bg-slate-700/50 rounded p-3">
-                <span className="text-white font-medium">{r.element}</span>
-                <span className="text-emerald-300 text-xs ml-2">{r.required}</span>
+              <div key={i} className="bg-slate-700/50 rounded-lg p-5 flex justify-between items-center">
+                <span className="text-white font-semibold">{r.element}</span>
+                <span className="text-emerald-400 bg-emerald-500/10 px-3 py-1 rounded text-sm">{r.required}</span>
               </div>
             ))}
           </div>
         </div>
       )}
-      
       {data.whyEachMatters && (
-        <div className="bg-blue-500/10 rounded p-4">
-          <h4 className="text-blue-300 font-medium mb-2">Why Each Matters:</h4>
-          <div className="space-y-1">
+        <div className="bg-slate-700/50 rounded-lg p-5">
+          <h4 className="text-white font-semibold mb-4">Why Each Matters</h4>
+          <div className="space-y-3">
             {data.whyEachMatters.map((w: any, i: number) => (
-              <p key={i} className="text-sm"><span className="text-white">{w.element}:</span> <span className="text-gray-400">{w.purpose}</span></p>
+              <div key={i} className="bg-slate-800/50 rounded-lg p-4">
+                <p className="text-gray-300 font-medium mb-1">{w.element}</p>
+                <p className="text-gray-500">{w.purpose}</p>
+              </div>
             ))}
           </div>
         </div>
@@ -3977,70 +5037,66 @@ function RequiredDataElementsBlock({ data }: { data: any }) {
 // Thresholds by Jurisdiction Block (Section 3.4)
 function ThresholdsByJurisdictionBlock({ data }: { data: any }) {
   const [expandedJurisdiction, setExpandedJurisdiction] = useState<string | null>(null);
-  
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      
       {data.majorJurisdictions && (
         <div className="space-y-2 mb-4">
           {data.majorJurisdictions.map((j: any, i: number) => (
             <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
               <button
                 onClick={() => setExpandedJurisdiction(expandedJurisdiction === j.jurisdiction ? null : j.jurisdiction)}
-                className="w-full p-3 text-left flex items-center justify-between hover:bg-slate-700/70"
+                className="w-full p-3 text-left flex items-center justify-between hover:bg-slate-600/50 transition-colors"
               >
                 <div className="flex items-center gap-2">
-                  <span className="text-xl">{j.flag}</span>
+                  {j.flag && <span>{j.flag}</span>}
                   <span className="text-white">{j.jurisdiction}</span>
-                  <span className={`text-sm ${j.threshold.includes('0') && !j.threshold.includes('$3') ? 'text-red-300' : 'text-emerald-300'}`}>{j.threshold}</span>
+                  <span className="text-gray-400 text-sm">{j.threshold}</span>
                 </div>
-                <span className={`text-xs px-2 py-0.5 rounded ${j.status === 'Enforced' ? 'bg-emerald-500/20 text-emerald-300' : 'bg-amber-500/20 text-amber-300'}`}>{j.status}</span>
+                <span className={`text-xs ${j.status === 'Enforced' ? 'text-emerald-400' : 'text-amber-400'}`}>{j.status}</span>
               </button>
               {expandedJurisdiction === j.jurisdiction && (
-                <div className="px-3 pb-3 text-sm">
-                  <p className="text-gray-400"><span className="text-gray-500">Regulator:</span> {j.regulator}</p>
-                  {j.notes && <p className="text-gray-400"><span className="text-gray-500">Notes:</span> {j.notes}</p>}
-                  {j.sphereImplication && <p className="text-emerald-300 mt-1"><span className="font-semibold">Sphere:</span> {j.sphereImplication}</p>}
+                <div className="px-3 pb-3 border-t border-slate-600 pt-3 text-sm space-y-1">
+                  <p className="text-gray-400">Regulator: {j.regulator}</p>
+                  {j.notes && <p className="text-gray-500">{j.notes}</p>}
+                  {j.sphereImplication && <p className="text-emerald-400">Sphere: {j.sphereImplication}</p>}
                 </div>
               )}
             </div>
           ))}
         </div>
       )}
-      
       {data.latinAmerica && (
-        <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4 mb-4">
-          <h4 className="text-amber-300 font-medium mb-2">{data.latinAmerica.title}</h4>
-          {data.latinAmerica.jurisdictions?.map((j: any, i: number) => (
-            <div key={i} className="bg-slate-800/50 rounded p-3 mb-2">
-              <div className="flex items-center gap-2 mb-1">
-                <span>{j.flag}</span>
-                <span className="text-white">{j.jurisdiction}</span>
-                <span className="text-emerald-300 text-sm">{j.threshold}</span>
+        <div className="bg-slate-700/50 rounded-lg p-4 mb-4">
+          <h4 className="text-amber-400 font-medium mb-3">{data.latinAmerica.title}</h4>
+          <div className="space-y-2">
+            {data.latinAmerica.jurisdictions?.map((j: any, i: number) => (
+              <div key={i} className="text-sm">
+                <span className="text-white">{j.flag} {j.jurisdiction}</span>
+                <span className="text-gray-400 ml-2">- {j.threshold}</span>
+                <span className="text-gray-500 ml-2">({j.regulator})</span>
+                {j.sphereImplication && <p className="text-blue-400 text-xs ml-4">{j.sphereImplication}</p>}
               </div>
-              <p className="text-gray-400 text-xs">Regulator: {j.regulator}</p>
-              {j.sphereImplication && <p className="text-blue-300 text-xs mt-1">{j.sphereImplication}</p>}
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       )}
-      
       {data.thresholdComparisonTable && (
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-slate-700">
+              <tr className="border-b border-slate-600">
                 {data.thresholdComparisonTable.headers?.map((h: string, i: number) => (
-                  <th key={i} className="p-2 text-left text-gray-300">{h}</th>
+                  <th key={i} className="p-2 text-left text-gray-400">{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {data.thresholdComparisonTable.rows?.map((row: string[], i: number) => (
-                <tr key={i} className="border-t border-slate-700">
+                <tr key={i} className="border-b border-slate-700/50">
                   {row.map((cell: string, j: number) => (
-                    <td key={j} className={`p-2 ${j === 0 ? 'text-white' : j === 1 ? 'text-emerald-300' : 'text-gray-400'}`}>{cell}</td>
+                    <td key={j} className={`p-2 ${j === 0 ? 'text-white' : 'text-gray-400'}`}>{cell}</td>
                   ))}
                 </tr>
               ))}
@@ -4056,14 +5112,17 @@ function ThresholdsByJurisdictionBlock({ data }: { data: any }) {
 function WhyTravelRuleMattersBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      
-      <div className="space-y-3">
+      <h3 className="font-semibold text-white mb-6 text-xl">{data.title}</h3>
+
+      <div className="space-y-4">
         {data.businessImplications?.map((b: any, i: number) => (
-          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
-            <h4 className="text-blue-300 font-medium mb-1">{b.implication}</h4>
-            <p className="text-gray-300 text-sm mb-2">{b.detail}</p>
-            <p className="text-red-300 text-sm"><span className="text-gray-500">Impact:</span> {b.impact}</p>
+          <div key={i} className="bg-slate-700/50 rounded-lg p-5">
+            <h4 className="text-blue-300 font-semibold mb-3">{b.implication}</h4>
+            <p className="text-gray-300 mb-4">{b.detail}</p>
+            <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+              <p className="text-gray-500 text-sm mb-1">Impact</p>
+              <p className="text-red-300">{b.impact}</p>
+            </div>
           </div>
         ))}
       </div>
@@ -4074,64 +5133,81 @@ function WhyTravelRuleMattersBlock({ data }: { data: any }) {
 // Travel Rule Protocols Block (Section 3.4)
 function TravelRuleProtocolsBlock({ data }: { data: any }) {
   const [expandedProtocol, setExpandedProtocol] = useState<string | null>(null);
-  
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
-      {data.overview && <p className="text-gray-400 mb-4">{data.overview}</p>}
-      
-      <div className="space-y-2 mb-4">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+      {data.overview && <p className="text-gray-400 mb-6">{data.overview}</p>}
+
+      <div className="space-y-4 mb-6">
         {data.protocols?.map((p: any, i: number) => (
           <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
             <button
               onClick={() => setExpandedProtocol(expandedProtocol === p.protocol ? null : p.protocol)}
-              className="w-full p-3 text-left flex justify-between items-center hover:bg-slate-700/70"
+              className="w-full p-5 text-left flex justify-between items-center hover:bg-slate-600/50 transition-colors"
             >
               <div>
-                <span className="text-white font-medium">{p.protocol}</span>
-                <span className="text-gray-400 text-sm ml-2">({p.type})</span>
+                <span className="text-white font-semibold">{p.protocol}</span>
+                <span className="text-gray-400 ml-2">({p.type})</span>
               </div>
-              <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${expandedProtocol === p.protocol ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${expandedProtocol === p.protocol ? 'rotate-180' : ''}`} />
             </button>
             {expandedProtocol === p.protocol && (
-              <div className="px-3 pb-3 space-y-2">
-                <p className="text-gray-300 text-sm">{p.description}</p>
-                <p className="text-gray-400 text-xs"><span className="text-gray-500">Governance:</span> {p.governance}</p>
-                <p className="text-gray-400 text-xs"><span className="text-gray-500">Coverage:</span> {p.coverage}</p>
-                <div className="grid grid-cols-2 gap-2">
+              <div className="px-5 pb-5 border-t border-slate-600 pt-4 space-y-4">
+                <p className="text-gray-300">{p.description}</p>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="text-gray-500 text-sm mb-1">Governance</p>
+                    <p className="text-gray-300">{p.governance}</p>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-4">
+                    <p className="text-gray-500 text-sm mb-1">Coverage</p>
+                    <p className="text-gray-300">{p.coverage}</p>
+                  </div>
+                </div>
+                <div className="grid md:grid-cols-2 gap-4">
                   {p.pros && (
-                    <div className="bg-emerald-500/10 rounded p-2">
-                      <p className="text-emerald-300 text-xs font-medium">Pros:</p>
-                      {p.pros.map((pro: string, j: number) => (
-                        <p key={j} className="text-gray-300 text-xs">✓ {pro}</p>
-                      ))}
+                    <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+                      <p className="text-emerald-300 font-medium mb-2">Pros</p>
+                      <div className="space-y-2">
+                        {p.pros.map((pro: string, j: number) => (
+                          <p key={j} className="text-gray-300">✓ {pro}</p>
+                        ))}
+                      </div>
                     </div>
                   )}
                   {p.cons && (
-                    <div className="bg-red-500/10 rounded p-2">
-                      <p className="text-red-300 text-xs font-medium">Cons:</p>
-                      {p.cons.map((con: string, j: number) => (
-                        <p key={j} className="text-gray-300 text-xs">✗ {con}</p>
-                      ))}
+                    <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+                      <p className="text-red-300 font-medium mb-2">Cons</p>
+                      <div className="space-y-2">
+                        {p.cons.map((con: string, j: number) => (
+                          <p key={j} className="text-gray-300">✗ {con}</p>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
-                {p.sphereSupport && <p className="text-emerald-300 text-xs"><span className="font-semibold">Sphere:</span> {p.sphereSupport}</p>}
+                {p.sphereSupport && (
+                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+                    <p className="text-emerald-400"><span className="font-semibold">Sphere:</span> {p.sphereSupport}</p>
+                  </div>
+                )}
               </div>
             )}
           </div>
         ))}
       </div>
-      
+
       {data.sphereApproach && (
-        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded p-4">
-          <h4 className="text-emerald-300 font-medium mb-2">{data.sphereApproach.title}</h4>
-          <p className="text-gray-300 text-sm mb-2">{data.sphereApproach.strategy}</p>
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-5">
+          <h4 className="text-emerald-300 font-semibold mb-3">{data.sphereApproach.title}</h4>
+          <p className="text-gray-300 mb-4">{data.sphereApproach.strategy}</p>
           {data.sphereApproach.workflow && (
-            <div className="flex flex-wrap gap-2">
+            <div className="space-y-2">
               {data.sphereApproach.workflow.map((w: any, i: number) => (
-                <div key={i} className="bg-slate-800/50 rounded px-2 py-1 text-xs">
-                  <span className="text-emerald-400">{w.step}.</span> <span className="text-gray-300">{w.action}</span>
+                <div key={i} className="bg-slate-800/50 rounded-lg p-3 flex items-center gap-3">
+                  <span className="bg-emerald-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-sm font-medium">{w.step}</span>
+                  <span className="text-gray-300">{w.action}</span>
                 </div>
               ))}
             </div>
@@ -4146,38 +5222,49 @@ function TravelRuleProtocolsBlock({ data }: { data: any }) {
 function TransmissionMethodsBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      
-      <div className="space-y-3 mb-4">
+      <h3 className="font-semibold text-white mb-6 text-xl">{data.title}</h3>
+
+      <div className="space-y-4 mb-6">
         {data.methods?.map((m: any, i: number) => (
-          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
-            <h4 className="text-blue-300 font-medium mb-1">{m.method}</h4>
-            <p className="text-gray-300 text-sm mb-2">{m.description}</p>
-            <p className="text-gray-400 text-xs mb-2"><span className="text-gray-500">How:</span> {m.howItWorks}</p>
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              <div>
-                <span className="text-emerald-300">Advantages:</span>
-                {m.advantages?.map((a: string, j: number) => (
-                  <p key={j} className="text-gray-400">✓ {a}</p>
-                ))}
+          <div key={i} className="bg-slate-700/50 rounded-lg p-5">
+            <h4 className="text-blue-300 font-semibold mb-2">{m.method}</h4>
+            <p className="text-gray-300 mb-4">{m.description}</p>
+            <div className="bg-slate-800/50 rounded-lg p-4 mb-4">
+              <p className="text-gray-500 text-sm mb-1">How it works</p>
+              <p className="text-gray-400">{m.howItWorks}</p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-4 mb-4">
+              <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+                <p className="text-emerald-300 font-medium mb-2">Advantages</p>
+                <div className="space-y-2">
+                  {m.advantages?.map((a: string, j: number) => (
+                    <p key={j} className="text-gray-300">✓ {a}</p>
+                  ))}
+                </div>
               </div>
-              <div>
-                <span className="text-red-300">Disadvantages:</span>
-                {m.disadvantages?.map((d: string, j: number) => (
-                  <p key={j} className="text-gray-400">✗ {d}</p>
-                ))}
+              <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+                <p className="text-red-300 font-medium mb-2">Disadvantages</p>
+                <div className="space-y-2">
+                  {m.disadvantages?.map((d: string, j: number) => (
+                    <p key={j} className="text-gray-300">✗ {d}</p>
+                  ))}
+                </div>
               </div>
             </div>
-            <p className="text-amber-300 text-xs mt-2">When: {m.whenToUse}</p>
+            <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+              <p className="text-amber-300"><span className="font-medium">When to use:</span> {m.whenToUse}</p>
+            </div>
           </div>
         ))}
       </div>
-      
+
       {data.timingRequirements && (
-        <div className="bg-blue-500/10 border border-blue-500/30 rounded p-4">
-          <h4 className="text-blue-300 font-medium mb-1">{data.timingRequirements.title}</h4>
-          <p className="text-gray-300 text-sm">{data.timingRequirements.guidance}</p>
-          <p className="text-emerald-300 text-sm mt-1"><span className="font-semibold">Sphere:</span> {data.timingRequirements.sphereApproach}</p>
+        <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-5">
+          <h4 className="text-blue-300 font-semibold mb-3">{data.timingRequirements.title}</h4>
+          <p className="text-gray-300 mb-4">{data.timingRequirements.guidance}</p>
+          <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+            <p className="text-emerald-400"><span className="font-semibold">Sphere Approach:</span> {data.timingRequirements.sphereApproach}</p>
+          </div>
         </div>
       )}
     </div>
@@ -4188,33 +5275,36 @@ function TransmissionMethodsBlock({ data }: { data: any }) {
 function TransactionsAppliedBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      
+      <h3 className="font-semibold text-white mb-6 text-xl">{data.title}</h3>
+
       {data.appliesTo && (
-        <div className="mb-4">
-          <h4 className="text-emerald-300 font-medium mb-2">Travel Rule APPLIES To:</h4>
-          <div className="space-y-2">
+        <div className="mb-8">
+          <h4 className="text-emerald-300 font-medium mb-4 text-lg">Travel Rule APPLIES To:</h4>
+          <div className="space-y-4">
             {data.appliesTo.map((t: any, i: number) => (
-              <div key={i} className="bg-emerald-500/10 border border-emerald-500/30 rounded p-3">
-                <h5 className="text-white font-medium">{t.type}</h5>
-                <p className="text-gray-400 text-xs">{t.description}</p>
-                <p className="text-gray-300 text-xs">Example: {t.example}</p>
-                <p className="text-emerald-300 text-xs mt-1">{t.travelRule}</p>
+              <div key={i} className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-5">
+                <h5 className="text-white font-semibold mb-2">{t.type}</h5>
+                <p className="text-gray-400 mb-3">{t.description}</p>
+                <div className="bg-slate-800/50 rounded-lg p-4 mb-3">
+                  <p className="text-gray-500 text-sm mb-1">Example</p>
+                  <p className="text-gray-300">{t.example}</p>
+                </div>
+                <p className="text-emerald-400 font-medium">{t.travelRule}</p>
               </div>
             ))}
           </div>
         </div>
       )}
-      
+
       {data.doesNotApply && (
         <div>
-          <h4 className="text-gray-400 font-medium mb-2">Travel Rule Does NOT Apply To:</h4>
-          <div className="space-y-2">
+          <h4 className="text-gray-400 font-medium mb-4 text-lg">Travel Rule Does NOT Apply To:</h4>
+          <div className="space-y-4">
             {data.doesNotApply.map((t: any, i: number) => (
-              <div key={i} className="bg-slate-700/50 rounded p-3">
-                <h5 className="text-white font-medium">{t.type}</h5>
-                <p className="text-gray-400 text-xs">{t.description}</p>
-                <p className="text-gray-500 text-xs mt-1">{t.travelRule}</p>
+              <div key={i} className="bg-slate-700/50 rounded-lg p-5">
+                <h5 className="text-white font-semibold mb-2">{t.type}</h5>
+                <p className="text-gray-400 mb-3">{t.description}</p>
+                <p className="text-gray-500">{t.travelRule}</p>
               </div>
             ))}
           </div>
@@ -4227,39 +5317,48 @@ function TransactionsAppliedBlock({ data }: { data: any }) {
 // Edge Cases Block (Section 3.4)
 function EdgeCasesBlock({ data }: { data: any }) {
   const [expandedScenario, setExpandedScenario] = useState<string | null>(null);
-  
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
-      
-      <div className="space-y-2">
+      <h3 className="font-semibold text-white mb-6 text-xl">{data.title}</h3>
+
+      <div className="space-y-4">
         {data.scenarios?.map((s: any, i: number) => (
           <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
             <button
               onClick={() => setExpandedScenario(expandedScenario === s.scenario ? null : s.scenario)}
-              className="w-full p-4 text-left hover:bg-slate-700/70"
+              className="w-full p-5 text-left hover:bg-slate-600/50 transition-colors flex justify-between items-start"
             >
-              <h4 className="text-white font-medium">{s.scenario}</h4>
-              <p className="text-gray-400 text-sm">{s.problem}</p>
+              <div>
+                <h4 className="text-white font-semibold mb-2">{s.scenario}</h4>
+                <p className="text-gray-400">{s.problem}</p>
+              </div>
+              <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform flex-shrink-0 ml-4 ${expandedScenario === s.scenario ? 'rotate-180' : ''}`} />
             </button>
             {expandedScenario === s.scenario && (
-              <div className="px-4 pb-4 space-y-3">
-                <div className="space-y-2">
+              <div className="px-5 pb-5 border-t border-slate-600 pt-4 space-y-4">
+                <div className="space-y-4">
                   {s.solutions?.map((sol: any, j: number) => (
-                    <div key={j} className="bg-slate-800/50 rounded p-3 border-l-4 border-blue-500">
-                      <h5 className="text-blue-300 font-medium text-sm">{sol.solution}</h5>
-                      <p className="text-gray-300 text-xs">{sol.implementation}</p>
-                      <div className="flex gap-4 text-xs mt-1">
-                        <span className="text-emerald-300">✓ {sol.pros}</span>
-                        <span className="text-red-300">✗ {sol.cons}</span>
+                    <div key={j} className="bg-slate-800/50 rounded-lg p-5 border-l-4 border-blue-500">
+                      <h5 className="text-blue-300 font-semibold mb-2">{sol.solution}</h5>
+                      <p className="text-gray-300 mb-4">{sol.implementation}</p>
+                      <div className="grid md:grid-cols-2 gap-4 mb-4">
+                        <div className="bg-emerald-500/10 rounded-lg p-3">
+                          <p className="text-emerald-300">✓ {sol.pros}</p>
+                        </div>
+                        <div className="bg-red-500/10 rounded-lg p-3">
+                          <p className="text-red-300">✗ {sol.cons}</p>
+                        </div>
                       </div>
-                      <p className="text-amber-300 text-xs">When: {sol.when}</p>
+                      <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
+                        <p className="text-amber-300"><span className="font-medium">When to use:</span> {sol.when}</p>
+                      </div>
                     </div>
                   ))}
                 </div>
                 {s.sphereApproach && (
-                  <div className="bg-emerald-500/10 rounded p-3">
-                    <p className="text-emerald-300 text-sm"><span className="font-semibold">Sphere:</span> {s.sphereApproach}</p>
+                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+                    <p className="text-emerald-400"><span className="font-semibold">Sphere Approach:</span> {s.sphereApproach}</p>
                   </div>
                 )}
               </div>
@@ -4271,16 +5370,1681 @@ function EdgeCasesBlock({ data }: { data: any }) {
   );
 }
 
-function GenericBlock({ propKey, data }: { propKey: string; data: any }) {
+// =============================================================================
+// PILLAR 4 ADDITIONAL COMPONENTS
+// =============================================================================
+
+function WhyItMattersBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.context && <p className="text-gray-400 mb-4">{data.context}</p>}
+      {data.description && <p className="text-gray-300 mb-4">{data.description}</p>}
+
+      {/* Payment Processor Exposure Table (for counterparty risk) */}
+      {data.paymentProcessorExposure && (
+        <div className="overflow-x-auto mb-4">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-slate-600">
+                <th className="text-left py-2 px-3 text-gray-400">Counterparty</th>
+                <th className="text-left py-2 px-3 text-gray-400">If They Fail</th>
+                <th className="text-left py-2 px-3 text-gray-400">Time to Impact</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.paymentProcessorExposure.map((item: any, i: number) => (
+                <tr key={i} className="border-b border-slate-700">
+                  <td className="py-2 px-3 text-white font-medium">{item.counterparty}</td>
+                  <td className="py-2 px-3 text-red-300">{item.ifTheyFail}</td>
+                  <td className="py-2 px-3 text-amber-300">{item.timeToImpact}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+
+      {/* Comparison Table (for liquidity risk - payment processor vs bank) */}
+      {data.comparison && (
+        <div className="mb-4">
+          <h4 className="text-blue-300 font-medium mb-3">{data.comparison.title}</h4>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b border-slate-600">
+                  <th className="text-left py-2 px-3 text-gray-400">Aspect</th>
+                  <th className="text-left py-2 px-3 text-gray-400">Bank</th>
+                  <th className="text-left py-2 px-3 text-gray-400">Payment Processor</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.comparison.differences?.map((diff: any, i: number) => (
+                  <tr key={i} className="border-b border-slate-700">
+                    <td className="py-2 px-3 text-white font-medium">{diff.aspect}</td>
+                    <td className="py-2 px-3 text-gray-400">{diff.bank}</td>
+                    <td className="py-2 px-3 text-amber-300">{diff.paymentProcessor}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {/* Scenario Block (for liquidity risk - real scenario) */}
+      {data.scenario && (
+        <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4 mb-4">
+          <h4 className="text-amber-300 font-medium mb-2">{data.scenario.title}</h4>
+          {data.scenario.setup && <p className="text-gray-300 text-sm mb-3">{data.scenario.setup}</p>}
+
+          {data.scenario.demands && (
+            <div className="mb-3">
+              <p className="text-white text-sm font-medium mb-1">Demands:</p>
+              <ul className="space-y-1">
+                {data.scenario.demands.map((demand: string, i: number) => (
+                  <li key={i} className="text-gray-300 text-sm flex items-center gap-2">
+                    <span className="text-blue-400">→</span> {demand}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {data.scenario.whatCouldGoWrong && (
+            <div>
+              <p className="text-red-300 text-sm font-medium mb-1">What Could Go Wrong:</p>
+              <ul className="space-y-1">
+                {data.scenario.whatCouldGoWrong.map((issue: string, i: number) => (
+                  <li key={i} className="text-gray-300 text-sm flex items-center gap-2">
+                    <span className="text-red-400">⚠</span> {issue}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Liquidity Crisis Impacts (for liquidity risk) */}
+      {data.impacts && (
+        <div className="space-y-3 mb-4">
+          {data.impacts.map((impact: any, i: number) => (
+            <div key={i} className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+              <h4 className="text-white font-medium mb-1">{impact.scenario}</h4>
+              <p className="text-red-300 text-sm">{impact.consequence}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.points && (
+        <ul className="space-y-2 mb-4">
+          {data.points.map((p: any, i: number) => (
+            <li key={i} className="text-gray-300 flex items-start gap-2">
+              <span className="text-blue-400">•</span>
+              {typeof p === 'string' ? p : p.point || p.description}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {data.scenarios && (
+        <div className="space-y-3">
+          {data.scenarios.map((s: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-white font-medium mb-2">{s.scenario || s.title}</h4>
+              <p className="text-gray-400 text-sm">{s.description || s.impact}</p>
+              {s.sphereRelevance && <p className="text-emerald-300 text-sm mt-2">Sphere: {s.sphereRelevance}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.keyInsight && (
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded p-3 mt-4">
+          <p className="text-purple-300 text-sm">💡 {data.keyInsight}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ProcessBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+      {data.description && <p className="text-gray-300 mb-4">{data.description}</p>}
+      {data.philosophy && <p className="text-purple-300 italic mb-4">"{data.philosophy}"</p>}
+
+      {/* Ongoing Monitoring Activities */}
+      {data.activities && (
+        <div className="space-y-4 mb-4">
+          {data.activities.map((activity: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-blue-300 font-semibold mb-2">{activity.frequency}</h4>
+              <ul className="space-y-1">
+                {activity.items?.map((item: string, j: number) => (
+                  <li key={j} className="text-gray-300 text-sm flex items-center gap-2">
+                    <span className="text-emerald-400">•</span> {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Trigger Events */}
+      {data.triggerEvents && (
+        <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4 mb-4">
+          <h4 className="text-amber-300 font-semibold mb-2">⚠️ Trigger Events (Require Immediate Review)</h4>
+          <div className="flex flex-wrap gap-2">
+            {data.triggerEvents.map((event: string, i: number) => (
+              <span key={i} className="bg-amber-500/20 text-amber-200 px-2 py-1 rounded text-sm">{event}</span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Concentration Limits */}
+      {data.limits && (
+        <div className="space-y-3 mb-4">
+          {data.limits.map((item: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <div className="flex justify-between items-start mb-2">
+                <h4 className="text-white font-medium">{item.category}</h4>
+                <span className="bg-blue-500/20 text-blue-300 px-2 py-1 rounded text-sm">{item.limit}</span>
+              </div>
+              <p className="text-gray-400 text-sm">{item.rationale}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Testing Program Items (testTypes) */}
+      {data.testTypes && (
+        <div className="space-y-3 mb-4">
+          {data.testTypes.map((test: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-white font-medium mb-1">{test.type}</h4>
+              <p className="text-gray-400 text-sm mb-2">{test.description}</p>
+              <p className="text-blue-300 text-xs">Frequency: {test.frequency}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* BCP/DR Testing Program (tests) */}
+      {data.tests && (
+        <div className="space-y-4 mb-4">
+          {data.tests.map((test: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <div className="flex justify-between items-start mb-2">
+                <h4 className="text-white font-medium">{test.type}</h4>
+                <span className="bg-blue-500/20 text-blue-300 px-2 py-1 rounded text-xs">{test.frequency}</span>
+              </div>
+              <p className="text-gray-400 text-sm mb-2">{test.description}</p>
+              {test.examples && (
+                <div className="flex flex-wrap gap-2 mb-2">
+                  {test.examples.map((ex: string, j: number) => (
+                    <span key={j} className="bg-slate-600 text-gray-300 px-2 py-0.5 rounded text-xs">{ex}</span>
+                  ))}
+                </div>
+              )}
+              {test.success && (
+                <p className="text-emerald-300 text-sm"><span className="font-medium">Success criteria:</span> {test.success}</p>
+              )}
+              {test.lastResult && (
+                <p className={`text-sm mt-1 ${test.lastResult.includes('Pass') ? 'text-emerald-300' : 'text-amber-300'}`}>
+                  <span className="font-medium">Last result:</span> {test.lastResult}
+                </p>
+              )}
+              {test.governance && (
+                <p className="text-gray-500 text-xs mt-1">{test.governance}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Daily Management Tasks (for dailyManagement) */}
+      {data.startOfDay && (
+        <div className="space-y-4">
+          <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4">
+            <h4 className="text-blue-300 font-semibold mb-3">🌅 Start of Day</h4>
+            <div className="space-y-2">
+              {data.startOfDay.map((task: any, i: number) => (
+                <div key={i} className="flex justify-between items-start bg-slate-800/50 rounded p-2">
+                  <div>
+                    <p className="text-white text-sm font-medium">{task.task}</p>
+                    <p className="text-gray-400 text-xs">{task.description}</p>
+                  </div>
+                  <span className="text-blue-300 text-xs">{task.owner}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {data.throughoutDay && (
+            <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
+              <h4 className="text-amber-300 font-semibold mb-3">☀️ Throughout Day</h4>
+              <div className="space-y-2">
+                {data.throughoutDay.map((task: any, i: number) => (
+                  <div key={i} className="flex justify-between items-start bg-slate-800/50 rounded p-2">
+                    <div>
+                      <p className="text-white text-sm font-medium">{task.task}</p>
+                      <p className="text-gray-400 text-xs">{task.description}</p>
+                    </div>
+                    <span className="text-amber-300 text-xs">{task.frequency}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {data.bankingCutoffs && (
+            <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
+              <h4 className="text-red-300 font-semibold mb-2">{data.bankingCutoffs.title}</h4>
+              <p className="text-gray-400 text-sm mb-3">{data.bankingCutoffs.description}</p>
+              <div className="space-y-2">
+                {data.bankingCutoffs.examples?.map((ex: any, i: number) => (
+                  <div key={i} className="flex justify-between items-center bg-slate-800/50 rounded p-2">
+                    <span className="text-white text-sm">{ex.system}</span>
+                    <span className="text-red-300 text-sm font-mono">{ex.cutoff}</span>
+                  </div>
+                ))}
+              </div>
+              {data.bankingCutoffs.management && (
+                <p className="text-emerald-300 text-xs mt-3">✓ {data.bankingCutoffs.management}</p>
+              )}
+            </div>
+          )}
+
+          {data.endOfDay && (
+            <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+              <h4 className="text-purple-300 font-semibold mb-3">🌙 End of Day</h4>
+              <div className="space-y-2">
+                {data.endOfDay.map((task: any, i: number) => (
+                  <div key={i} className="flex justify-between items-start bg-slate-800/50 rounded p-2">
+                    <div>
+                      <p className="text-white text-sm font-medium">{task.task}</p>
+                      <p className="text-gray-400 text-xs">{task.description}</p>
+                    </div>
+                    <span className="text-purple-300 text-xs">{task.owner}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Regulatory Readiness Elements */}
+      {data.elements && (
+        <div className="space-y-3 mb-4">
+          {data.elements.map((el: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-white font-medium mb-1">{el.element}</h4>
+              <p className="text-gray-400 text-sm mb-2">{el.description}</p>
+              {el.keyComponents && (
+                <ul className="space-y-1">
+                  {el.keyComponents.map((comp: string, j: number) => (
+                    <li key={j} className="text-emerald-300 text-xs flex items-center gap-2">
+                      <span>✓</span> {comp}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.steps && (
+        <div className="space-y-3">
+          {data.steps.map((step: any, i: number) => (
+            <div key={i} className="flex items-start gap-3">
+              <span className="bg-blue-500 text-white text-sm font-bold w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">{i + 1}</span>
+              <div>
+                <p className="text-white font-medium">{step.step || step.title || step}</p>
+                {step.description && <p className="text-gray-400 text-sm">{step.description}</p>}
+                {step.actions && <p className="text-gray-500 text-xs mt-1">{step.actions.join(', ')}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.items && (
+        <div className="space-y-3">
+          {data.items.map((item: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-white font-medium mb-1">{item.item || item.title || item.name}</h4>
+              <p className="text-gray-400 text-sm">{item.description || item.detail}</p>
+              {item.frequency && <p className="text-blue-300 text-xs mt-1">Frequency: {item.frequency}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.principles && (
+        <div className="space-y-3">
+          {data.principles.map((p: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-blue-300 font-medium mb-1">{p.principle || p.title}</h4>
+              <p className="text-gray-400 text-sm">{p.description || p.detail}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ScenarioBlock({ data }: { data: any }) {
+  const [expanded, setExpanded] = useState<number | null>(null);
+
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+
+      {data.scenarios && (
+        <div className="space-y-3">
+          {data.scenarios.map((s: any, i: number) => (
+            <div key={i} className="bg-red-500/5 border border-red-500/20 rounded-lg overflow-hidden">
+              <div
+                className="p-4 cursor-pointer hover:bg-red-500/10"
+                onClick={() => setExpanded(expanded === i ? null : i)}
+              >
+                <div className="flex items-center justify-between">
+                  <h4 className="text-white font-medium">{s.scenario || s.title}</h4>
+                  <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${expanded === i ? 'rotate-180' : ''}`} />
+                </div>
+              </div>
+              {expanded === i && (
+                <div className="px-4 pb-4 space-y-3 border-t border-red-500/20 pt-3">
+                  {s.description && <p className="text-gray-300 text-sm">{s.description}</p>}
+                  {s.trigger && <p className="text-amber-300 text-sm"><span className="font-semibold">Trigger:</span> {s.trigger}</p>}
+                  {s.impact && <p className="text-red-300 text-sm"><span className="font-semibold">Impact:</span> {s.impact}</p>}
+                  {s.immediateActions && (
+                    <div>
+                      <p className="text-blue-300 text-xs font-semibold mb-1">Immediate Actions:</p>
+                      <ul className="text-gray-300 text-sm space-y-1">
+                        {s.immediateActions.map((a: string, j: number) => <li key={j}>• {a}</li>)}
+                      </ul>
+                    </div>
+                  )}
+                  {s.sphereResponse && <p className="text-emerald-300 text-sm"><span className="font-semibold">Sphere Response:</span> {s.sphereResponse}</p>}
+                  {s.lesson && <p className="text-purple-300 text-sm"><span className="font-semibold">Lesson:</span> {s.lesson}</p>}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Handle Celsius-style case study format */}
+      {data.background && typeof data.background === 'object' && data.background.company && (
+        <div className="space-y-4">
+          {/* Background */}
+          <div className="bg-slate-700/50 rounded-lg p-4">
+            <h4 className="text-gray-300 font-semibold mb-3">Background</h4>
+            <div className="grid md:grid-cols-2 gap-2 text-sm">
+              <div><span className="text-gray-500">Company:</span> <span className="text-white">{data.background.company}</span></div>
+              <div><span className="text-gray-500">Assets:</span> <span className="text-emerald-300">{data.background.assets}</span></div>
+              <div><span className="text-gray-500">Promise:</span> <span className="text-amber-300">{data.background.promise}</span></div>
+              <div><span className="text-gray-500">Model:</span> <span className="text-gray-300">{data.background.businessModel}</span></div>
+            </div>
+          </div>
+
+          {/* What Went Wrong */}
+          {data.whatWentWrong && (
+            <div>
+              <h4 className="text-red-300 font-semibold mb-3">What Went Wrong</h4>
+              <div className="space-y-3">
+                {data.whatWentWrong.map((item: any, i: number) => (
+                  <div key={i} className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
+                    <h5 className="text-white font-medium mb-2">{item.failure}</h5>
+                    <p className="text-gray-400 text-sm mb-2">{item.detail}</p>
+                    {item.sphereContrast && (
+                      <p className="text-emerald-300 text-sm"><span className="font-semibold">Sphere:</span> {item.sphereContrast}</p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Timeline */}
+          {data.timeline && (
+            <div>
+              <h4 className="text-amber-300 font-semibold mb-3">Timeline</h4>
+              <div className="border-l-2 border-amber-500/50 pl-4 space-y-3">
+                {data.timeline.map((t: any, i: number) => (
+                  <div key={i}>
+                    <span className="text-amber-300 text-sm font-mono">{t.date}</span>
+                    <p className="text-gray-300 text-sm">{t.event}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Outcome */}
+          {data.outcome && (
+            <div className="bg-red-500/20 border border-red-500/30 rounded-lg p-4">
+              <h4 className="text-red-300 font-semibold mb-2">Outcome</h4>
+              <p className="text-white">{data.outcome}</p>
+            </div>
+          )}
+
+          {/* Lessons for Sphere */}
+          {data.lessonsForSphere && (
+            <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+              <h4 className="text-emerald-300 font-semibold mb-2">Lessons for Sphere</h4>
+              <ul className="space-y-1">
+                {data.lessonsForSphere.map((lesson: string, i: number) => (
+                  <li key={i} className="text-gray-300 text-sm flex items-center gap-2">
+                    <span className="text-emerald-400">✓</span> {lesson}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {/* How to Discuss */}
+          {data.howToDiscuss && (
+            <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
+              <h4 className="text-purple-300 font-semibold mb-2">💬 How to Discuss</h4>
+              <p className="text-gray-300 text-sm italic">"{data.howToDiscuss}"</p>
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Handle simple background format */}
+      {data.background && (typeof data.background === 'string' || !data.background.company) && (
+        <div className="space-y-4">
+          <div className="bg-slate-700/50 rounded p-3">
+            <h4 className="text-gray-300 font-semibold mb-2">Background</h4>
+            <p className="text-gray-400 text-sm">{typeof data.background === 'string' ? data.background : JSON.stringify(data.background)}</p>
+          </div>
+          {data.whatHappened && Array.isArray(data.whatHappened) && typeof data.whatHappened[0] === 'string' && (
+            <div>
+              <h4 className="text-red-300 font-semibold mb-2">What Happened</h4>
+              <ul className="text-gray-300 text-sm space-y-1">
+                {data.whatHappened.map((item: string, i: number) => <li key={i}>• {item}</li>)}
+              </ul>
+            </div>
+          )}
+          {data.lessons && (
+            <div>
+              <h4 className="text-blue-300 font-semibold mb-2">Lessons</h4>
+              <ul className="text-gray-300 text-sm space-y-1">
+                {data.lessons.map((l: any, i: number) => <li key={i}>• {typeof l === 'string' ? l : l.lesson}</li>)}
+              </ul>
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function MetricsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+
+      {data.metrics && (
+        <div className="grid gap-4 md:grid-cols-2">
+          {data.metrics.map((m: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                {m.icon && <span className="text-xl">{m.icon}</span>}
+                <h4 className="text-blue-300 font-semibold">{m.metric || m.name}</h4>
+              </div>
+              {m.definition && <p className="text-gray-400 text-sm mb-2">{m.definition}</p>}
+              {m.target && <p className="text-emerald-300 text-sm">Target: {m.target}</p>}
+              {m.why && <p className="text-purple-300 text-xs mt-1">Why: {m.why}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.items && (
+        <div className="grid gap-4 md:grid-cols-2">
+          {data.items.map((item: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-white font-medium">{item.metric || item.name || item.title}</h4>
+              <p className="text-gray-400 text-sm">{item.description || item.definition}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function FrameworkBlock({ data }: { data: any }) {
+  const [expanded, setExpanded] = useState<number | null>(null);
+
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+      {data.overview && <p className="text-gray-300 mb-4">{data.overview}</p>}
+      {data.philosophy && <p className="text-purple-300 italic text-sm mb-4">"{data.philosophy}"</p>}
+
+      {/* Methodology (for stress testing) */}
+      {data.methodology && (
+        <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 mb-4">
+          <h4 className="text-blue-300 font-medium mb-2">Methodology</h4>
+          <div className="grid md:grid-cols-3 gap-3 text-sm">
+            <div><span className="text-gray-500">Frequency:</span> <span className="text-gray-300">{data.methodology.frequency}</span></div>
+            <div><span className="text-gray-500">Approach:</span> <span className="text-gray-300">{data.methodology.approach}</span></div>
+            <div><span className="text-gray-500">Governance:</span> <span className="text-gray-300">{data.methodology.governance}</span></div>
+          </div>
+        </div>
+      )}
+
+      {data.components && (
+        <div className="space-y-4">
+          {data.components.map((c: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-blue-500">
+              <h4 className="text-white font-semibold mb-2">{c.component || c.name || c.title}</h4>
+              <p className="text-gray-400 text-sm mb-2">{c.description}</p>
+              {c.elements && (
+                <ul className="text-gray-300 text-xs space-y-1">
+                  {c.elements.map((e: string, j: number) => <li key={j}>• {e}</li>)}
+                </ul>
+              )}
+              {c.sphereApproach && <p className="text-emerald-300 text-sm mt-2">Sphere: {c.sphereApproach}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Liquidity Layers (for liquidityManagementFramework) */}
+      {data.layers && (
+        <div className="space-y-4">
+          {data.layers.map((layer: any, i: number) => (
+            <div key={i} className={`rounded-lg overflow-hidden border-l-4 ${
+              layer.icon === '🟢' ? 'bg-emerald-500/10 border-emerald-500' :
+              layer.icon === '🟡' ? 'bg-amber-500/10 border-amber-500' :
+              layer.icon === '🔴' ? 'bg-red-500/10 border-red-500' :
+              i === 0 ? 'bg-blue-500/10 border-blue-500' :
+              i === 1 ? 'bg-amber-500/10 border-amber-500' :
+              'bg-red-500/10 border-red-500'
+            }`}>
+              <button
+                onClick={() => setExpanded(expanded === i ? null : i)}
+                className="w-full p-4 text-left hover:bg-white/5 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  {layer.icon && <span className="text-xl">{layer.icon}</span>}
+                  <div>
+                    <h4 className="text-white font-semibold">{layer.layer || layer.name}</h4>
+                    {layer.purpose && <p className="text-gray-400 text-sm">{layer.purpose}</p>}
+                  </div>
+                </div>
+              </button>
+
+              {expanded === i && (
+                <div className="p-4 pt-0 border-t border-white/10 space-y-3">
+                  {/* Components */}
+                  {layer.components && (
+                    <div>
+                      <p className="text-gray-400 text-xs font-medium mb-1">Components:</p>
+                      <ul className="space-y-1">
+                        {layer.components.map((comp: string, j: number) => (
+                          <li key={j} className="text-gray-300 text-sm flex items-center gap-2">
+                            <span className="text-emerald-400">•</span> {comp}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Target & Sizing */}
+                  {(layer.target || layer.sizing) && (
+                    <div className="grid md:grid-cols-2 gap-2 text-sm">
+                      {layer.target && <div><span className="text-blue-300 font-medium">Target:</span> <span className="text-gray-300">{layer.target}</span></div>}
+                      {layer.sizing && <div><span className="text-purple-300 font-medium">Sizing:</span> <span className="text-gray-300">{layer.sizing}</span></div>}
+                    </div>
+                  )}
+
+                  {/* Monitoring */}
+                  {layer.monitoring && (
+                    <div className="bg-slate-800/50 rounded p-2">
+                      <p className="text-gray-400 text-xs">📊 Monitoring: {layer.monitoring.frequency}</p>
+                      <p className="text-amber-300 text-xs">⚠ Alerts: {layer.monitoring.alerts}</p>
+                    </div>
+                  )}
+
+                  {/* Activation Trigger */}
+                  {layer.activationTrigger && (
+                    <p className="text-red-300 text-sm">🚨 Activation: {layer.activationTrigger}</p>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Stress Testing Scenarios */}
+      {data.scenarios && (
+        <div className="space-y-4 mt-4">
+          {data.scenarios.map((s: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+              <button
+                onClick={() => setExpanded(expanded === (i + 100) ? null : (i + 100))}
+                className="w-full p-4 text-left hover:bg-slate-700/70 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  {s.icon && <span className="text-xl">{s.icon}</span>}
+                  <div>
+                    <h4 className="text-amber-300 font-medium">{s.scenario || s.name}</h4>
+                    <p className="text-gray-400 text-sm">{s.description}</p>
+                  </div>
+                </div>
+              </button>
+
+              {expanded === (i + 100) && (
+                <div className="p-4 pt-0 border-t border-slate-600 space-y-3">
+                  {/* Assumptions */}
+                  {s.assumptions && (
+                    <div>
+                      <p className="text-gray-400 text-xs font-medium mb-1">Assumptions:</p>
+                      <ul className="space-y-1">
+                        {s.assumptions.map((a: string, j: number) => (
+                          <li key={j} className="text-gray-300 text-sm flex items-center gap-2">
+                            <span className="text-blue-400">•</span> {a}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Test Question */}
+                  {s.testQuestion && (
+                    <div className="bg-blue-500/10 border border-blue-500/30 rounded p-2">
+                      <p className="text-blue-300 text-sm"><span className="font-medium">Test:</span> {s.testQuestion}</p>
+                    </div>
+                  )}
+
+                  {/* Metrics */}
+                  {s.metrics && (
+                    <div className="flex flex-wrap gap-2">
+                      {s.metrics.map((m: string, j: number) => (
+                        <span key={j} className="bg-slate-600 text-gray-300 px-2 py-1 rounded text-xs">{m}</span>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Last Result */}
+                  {s.lastResult && (
+                    <div className={`rounded p-2 ${s.lastResult.includes('Pass') ? 'bg-emerald-500/10 border border-emerald-500/30' : 'bg-red-500/10 border border-red-500/30'}`}>
+                      <p className={`text-sm ${s.lastResult.includes('Pass') ? 'text-emerald-300' : 'text-red-300'}`}>
+                        <span className="font-medium">Result:</span> {s.lastResult}
+                      </p>
+                    </div>
+                  )}
+
+                  {/* Action If Fail */}
+                  {s.actionIfFail && (
+                    <p className="text-amber-300 text-sm">⚠ If fail: {s.actionIfFail}</p>
+                  )}
+
+                  {/* Cross Reference */}
+                  {s.crossReference && (
+                    <p className="text-purple-300 text-xs">📎 {s.crossReference}</p>
+                  )}
+
+                  {s.sphereApproach && <p className="text-emerald-300 text-sm mt-2">Approach: {s.sphereApproach}</p>}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ComparisonBlock({ data }: { data: any }) {
+  // Check if this is a BCP vs DR style comparison (has aspect/bcp/dr)
+  const isBcpDrStyle = data.comparison && data.comparison[0]?.aspect;
+
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+
+      {/* BCP vs DR style comparison table */}
+      {isBcpDrStyle && (
+        <div className="overflow-x-auto mb-4">
+          <table className="w-full text-sm">
+            <thead>
+              <tr className="border-b border-slate-600">
+                <th className="text-left py-2 px-3 text-gray-400">Aspect</th>
+                <th className="text-left py-2 px-3 text-blue-300">BCP</th>
+                <th className="text-left py-2 px-3 text-purple-300">DR</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.comparison.map((item: any, i: number) => (
+                <tr key={i} className="border-b border-slate-700">
+                  <td className="py-3 px-3 text-white font-medium">{item.aspect}</td>
+                  <td className="py-3 px-3 text-gray-300">{item.bcp}</td>
+                  <td className="py-3 px-3 text-gray-300">{item.dr}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          {/* Examples row */}
+          <div className="mt-3 space-y-2">
+            {data.comparison.map((item: any, i: number) => item.example && (
+              <p key={i} className="text-gray-500 text-xs"><span className="text-gray-400">{item.aspect}:</span> {item.example}</p>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Integration note for BCP/DR */}
+      {data.integration && (
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded p-3">
+          <p className="text-emerald-300 text-sm">💡 {data.integration}</p>
+        </div>
+      )}
+
+      {/* Original style comparison (term/definition) */}
+      {data.comparison && !isBcpDrStyle && (
+        <div className="grid md:grid-cols-2 gap-4">
+          {data.comparison.map((item: any, i: number) => (
+            <div key={i} className={`rounded-lg p-4 ${i === 0 ? 'bg-blue-500/10 border border-blue-500/30' : 'bg-purple-500/10 border border-purple-500/30'}`}>
+              <h4 className={`font-semibold mb-2 ${i === 0 ? 'text-blue-300' : 'text-purple-300'}`}>{item.term || item.name}</h4>
+              <p className="text-gray-300 text-sm mb-2">{item.definition || item.description}</p>
+              {item.focus && <p className="text-gray-400 text-xs">Focus: {item.focus}</p>}
+              {item.example && <p className="text-gray-400 text-xs mt-1">Example: {item.example}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.items && (
+        <div className="grid md:grid-cols-2 gap-4">
+          {data.items.map((item: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-white font-medium mb-2">{item.name || item.title}</h4>
+              <p className="text-gray-400 text-sm">{item.description}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ArchitectureBlock({ data }: { data: any }) {
+  const [expanded, setExpanded] = useState<number | null>(null);
+
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+
+      {/* Resilience Principles (for resilienceArchitecture) */}
+      {data.principles && (
+        <div className="space-y-4">
+          {data.principles.map((p: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+              <button
+                onClick={() => setExpanded(expanded === i ? null : i)}
+                className="w-full p-4 text-left hover:bg-slate-700/70 transition-colors"
+              >
+                <div className="flex items-center gap-3">
+                  {p.icon && <span className="text-2xl">{p.icon}</span>}
+                  <div>
+                    <h4 className="text-white font-semibold">{p.principle}</h4>
+                    {p.benefit && <p className="text-emerald-300 text-sm">{p.benefit}</p>}
+                  </div>
+                </div>
+              </button>
+
+              {expanded === i && (
+                <div className="p-4 pt-0 border-t border-slate-600 space-y-3">
+                  {p.implementation && (
+                    <div>
+                      <p className="text-gray-400 text-xs font-medium mb-1">Implementation:</p>
+                      <ul className="space-y-1">
+                        {p.implementation.map((item: string, j: number) => (
+                          <li key={j} className="text-gray-300 text-sm flex items-center gap-2">
+                            <span className="text-blue-400">•</span> {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {p.detail && (
+                    <p className="text-gray-400 text-sm">{p.detail}</p>
+                  )}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.layers && (
+        <div className="space-y-3">
+          {data.layers.map((layer: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                {layer.icon && <span className="text-xl">{layer.icon}</span>}
+                <h4 className="text-white font-semibold">{layer.layer || layer.name}</h4>
+              </div>
+              <p className="text-gray-400 text-sm mb-2">{layer.description}</p>
+              {layer.components && (
+                <div className="flex flex-wrap gap-2">
+                  {layer.components.map((c: string, j: number) => (
+                    <span key={j} className="bg-slate-600 text-gray-300 text-xs px-2 py-1 rounded">{c}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.threats && (
+        <div className="space-y-3">
+          {data.threats.map((threat: any, i: number) => (
+            <div key={i} className="bg-red-500/10 border border-red-500/20 rounded-lg p-4">
+              <h4 className="text-red-300 font-semibold mb-2">{threat.threat || threat.name}</h4>
+              <p className="text-gray-400 text-sm mb-2">{threat.description}</p>
+              {threat.mitigation && <p className="text-emerald-300 text-sm">Mitigation: {threat.mitigation}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.categories && (
+        <div className="space-y-3">
+          {data.categories.map((cat: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-amber-300 font-semibold mb-2">{cat.category || cat.name}</h4>
+              <p className="text-gray-400 text-sm mb-2">{cat.description}</p>
+              {cat.examples && (
+                <p className="text-gray-500 text-xs">Examples: {cat.examples.join(', ')}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CommunicationBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+      {data.philosophy && (
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded p-3 mb-4">
+          <p className="text-purple-300 text-sm">💡 {data.philosophy}</p>
+        </div>
+      )}
+
+      {/* Principles with implementation */}
+      {data.principles && (
+        <div className="space-y-3 mb-4">
+          {data.principles.map((p: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-white font-medium mb-1">{p.principle || p.name}</h4>
+              <p className="text-gray-400 text-sm">{p.description || p.explanation || p.detail}</p>
+              {p.implementation && (
+                <p className="text-emerald-300 text-xs mt-2">✓ {p.implementation}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Templates - handle as object with nested templates */}
+      {data.templates && typeof data.templates === 'object' && !Array.isArray(data.templates) && (
+        <div className="space-y-4">
+          {data.templates.title && (
+            <h4 className="text-blue-300 font-semibold">{data.templates.title}</h4>
+          )}
+
+          {/* Handle templates.examples array (incidentCommunication structure) */}
+          {data.templates.examples && Array.isArray(data.templates.examples) && (
+            <div className="space-y-3">
+              {data.templates.examples.map((t: any, i: number) => (
+                <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+                  <h5 className="text-amber-300 font-medium mb-2">{t.type}</h5>
+                  <div className="bg-slate-800 rounded p-3">
+                    <p className="text-gray-300 text-sm whitespace-pre-wrap font-mono">{t.template}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+
+          {/* Handle templates as object with initial/update/resolution (customerCommunication structure) */}
+          {data.templates.initial && (
+            <div className="space-y-3">
+              {['initial', 'update', 'resolution'].map((key) => {
+                const t = data.templates[key];
+                if (!t) return null;
+                return (
+                  <div key={key} className="bg-slate-700/50 rounded-lg p-4">
+                    <h5 className="text-amber-300 font-medium mb-2">{t.title}</h5>
+                    <div className="bg-slate-800 rounded p-3">
+                      <p className="text-gray-300 text-sm whitespace-pre-wrap font-mono">{t.template}</p>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Templates - handle as array (fallback) */}
+      {data.templates && Array.isArray(data.templates) && (
+        <div className="space-y-4">
+          {data.templates.map((t: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-blue-300 font-semibold mb-2">{t.scenario || t.name}</h4>
+              {t.timing && <p className="text-gray-500 text-xs mb-2">Timing: {t.timing}</p>}
+              {t.template && (
+                <div className="bg-slate-800 rounded p-3 mt-2">
+                  <p className="text-gray-300 text-sm whitespace-pre-wrap">{t.template}</p>
+                </div>
+              )}
+              {t.channels && <p className="text-gray-400 text-xs mt-2">Channels: {t.channels.join(', ')}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function InstitutionalQABlock({ data }: { data: any }) {
+  const [expandedQ, setExpandedQ] = useState<number | null>(null);
+
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">💬 {data.title}</h3>
+
+      {data.questions && (
+        <div className="space-y-3">
+          {data.questions.map((q: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+              <div
+                className="p-4 cursor-pointer hover:bg-slate-700/70"
+                onClick={() => setExpandedQ(expandedQ === i ? null : i)}
+              >
+                <div className="flex items-center justify-between">
+                  <p className="text-amber-300 font-medium">{q.question}</p>
+                  <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${expandedQ === i ? 'rotate-180' : ''}`} />
+                </div>
+              </div>
+              {expandedQ === i && (
+                <div className="px-4 pb-4 border-t border-slate-600 pt-3">
+                  <div className="bg-emerald-500/10 rounded p-3">
+                    <p className="text-emerald-300 text-sm">{q.answer}</p>
+                  </div>
+                  {q.evidence && <p className="text-gray-400 text-xs mt-2">Evidence: {q.evidence}</p>}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ResponseProcessBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+
+      {/* Stages format (Incident Response Process) */}
+      {data.stages && (
+        <div className="space-y-4">
+          {data.stages.map((stage: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                {stage.icon && <span>{stage.icon}</span>}
+                <h4 className="text-white font-medium">{stage.stage}</h4>
+              </div>
+              {stage.goal && <p className="text-gray-300 text-sm mb-2">{stage.goal}</p>}
+              {(stage.methods || stage.activities) && (
+                <ul className="text-gray-400 text-sm space-y-1 mb-2">
+                  {(stage.methods || stage.activities).map((item: string, j: number) => (
+                    <li key={j}>• {item}</li>
+                  ))}
+                </ul>
+              )}
+              {stage.metric && (
+                <p className="text-blue-400 text-xs mb-1">📊 {stage.metric}</p>
+              )}
+              {stage.sphereImplementation && (
+                <p className="text-emerald-400 text-xs">Sphere: {stage.sphereImplementation}</p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Phases format */}
+      {data.phases && (
+        <div className="space-y-3">
+          {data.phases.map((phase: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-white font-medium mb-2">{phase.phase || phase.name}</h4>
+              <p className="text-gray-400 text-sm mb-2">{phase.description || phase.objective}</p>
+              {phase.actions && (
+                <ul className="text-gray-300 text-sm space-y-1">
+                  {phase.actions.map((a: string, j: number) => <li key={j}>• {a}</li>)}
+                </ul>
+              )}
+              {phase.timeframe && <p className="text-gray-500 text-xs mt-2">Timeframe: {phase.timeframe}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Steps format */}
+      {data.steps && (
+        <div className="space-y-2">
+          {data.steps.map((step: any, i: number) => (
+            <div key={i} className="flex items-start gap-3">
+              <span className="bg-blue-500 text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0">{i + 1}</span>
+              <div>
+                <p className="text-white text-sm">{step.step || step.name}</p>
+                <p className="text-gray-400 text-sm">{step.description || step.detail}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function WarRoomBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">🚨 {data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+      {data.triggerCriteria && (
+        <div className="bg-red-500/10 border border-red-500/30 rounded p-3 mb-4">
+          <p className="text-red-300 text-xs font-semibold mb-1">Trigger Criteria:</p>
+          <p className="text-gray-300 text-sm">{data.triggerCriteria}</p>
+        </div>
+      )}
+
+      {data.roles && (
+        <div className="space-y-3 mb-4">
+          <h4 className="text-white font-semibold">Roles</h4>
+          {data.roles.map((role: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h5 className="text-blue-300 font-medium mb-1">{role.role || role.name}</h5>
+              <p className="text-gray-400 text-sm">{role.responsibility || role.description}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.protocol && (
+        <div className="space-y-3">
+          <h4 className="text-white font-semibold">Protocol</h4>
+          {data.protocol.map((step: any, i: number) => (
+            <div key={i} className="flex items-start gap-3">
+              <span className="bg-red-500 text-white text-sm font-bold w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">{i + 1}</span>
+              <div>
+                <p className="text-white font-medium">{step.step || step.action}</p>
+                {step.timing && <p className="text-gray-500 text-xs">{step.timing}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SecurityControlsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">🔒 {data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+
+      {data.controls && (
+        <div className="space-y-4">
+          {data.controls.map((ctrl: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                {ctrl.icon && <span className="text-xl">{ctrl.icon}</span>}
+                <h4 className="text-emerald-300 font-semibold">{ctrl.control || ctrl.name}</h4>
+              </div>
+              <p className="text-gray-400 text-sm mb-2">{ctrl.description}</p>
+              {ctrl.implementation && <p className="text-blue-300 text-xs">Implementation: {ctrl.implementation}</p>}
+              {ctrl.sphereApproach && <p className="text-emerald-300 text-xs mt-1">Sphere: {ctrl.sphereApproach}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.categories && (
+        <div className="space-y-4">
+          {data.categories.map((cat: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-white font-semibold mb-2">{cat.category || cat.name}</h4>
+              {cat.controls && (
+                <ul className="text-gray-300 text-sm space-y-1">
+                  {cat.controls.map((c: any, j: number) => (
+                    <li key={j}>• {typeof c === 'string' ? c : c.control || c.name}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// =============================================================================
+// PILLAR 5 - PRODUCT & ARCHITECTURE COMPONENTS
+// =============================================================================
+
+function ArchitectureOverviewBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+
+      {data.layers && (
+        <div className="space-y-4">
+          {data.layers.map((layer: any, i: number) => (
+            <div key={i} className={`rounded-lg p-4 border-l-4 ${
+              i === 0 ? 'bg-blue-500/10 border-blue-500' :
+              i === 1 ? 'bg-purple-500/10 border-purple-500' :
+              i === 2 ? 'bg-emerald-500/10 border-emerald-500' :
+              'bg-amber-500/10 border-amber-500'
+            }`}>
+              <h4 className="text-white font-semibold mb-2">{layer.layer}</h4>
+              <p className="text-gray-400 text-sm mb-3">{layer.description}</p>
+              {layer.components && (
+                <div className="flex flex-wrap gap-2">
+                  {layer.components.map((comp: string, j: number) => (
+                    <span key={j} className="bg-slate-700 text-gray-300 px-2 py-1 rounded text-xs">{comp}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.keyPrinciple && (
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded p-3 mt-4">
+          <p className="text-purple-300 text-sm">💡 {data.keyPrinciple}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function DeepDiveBlock({ data }: { data: any }) {
+  const [expanded, setExpanded] = useState<number | null>(null);
+
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+
+      {/* Supported Chains (for stablecoinSettlementDeepDive) */}
+      {data.supportedChains && (
+        <div className="space-y-4 mb-4">
+          <h4 className="text-blue-300 font-medium">{data.supportedChains.title}</h4>
+          {data.supportedChains.chains?.map((chain: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+              <button
+                onClick={() => setExpanded(expanded === i ? null : i)}
+                className="w-full p-4 text-left hover:bg-slate-700/70 transition-colors"
+              >
+                <div className="flex items-center justify-between">
+                  <h5 className="text-white font-medium">{chain.chain}</h5>
+                  <span className="text-gray-400 text-sm">{chain.stablecoins?.join(', ')}</span>
+                </div>
+              </button>
+              {expanded === i && chain.characteristics && (
+                <div className="p-4 pt-0 border-t border-slate-600">
+                  <div className="grid grid-cols-2 gap-2 text-sm mb-3">
+                    <div><span className="text-gray-500">Finality:</span> <span className="text-gray-300">{chain.characteristics.finality}</span></div>
+                    <div><span className="text-gray-500">Cost:</span> <span className="text-gray-300">{chain.characteristics.costRange}</span></div>
+                    <div><span className="text-gray-500">Throughput:</span> <span className="text-gray-300">{chain.characteristics.throughput}</span></div>
+                    <div><span className="text-gray-500">Best For:</span> <span className="text-gray-300">{chain.characteristics.bestFor}</span></div>
+                  </div>
+                  {chain.sphereUsage && <p className="text-emerald-300 text-sm">Sphere: {chain.sphereUsage}</p>}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Partners/Components (for bankingIntegrationArchitecture) */}
+      {data.partners && (
+        <div className="space-y-3">
+          {data.partners.map((partner: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-white font-medium mb-2">{partner.type || partner.name}</h4>
+              <p className="text-gray-400 text-sm">{partner.description || partner.role}</p>
+              {partner.requirements && (
+                <ul className="mt-2 space-y-1">
+                  {partner.requirements.map((req: string, j: number) => (
+                    <li key={j} className="text-gray-300 text-xs flex items-center gap-2">
+                      <span className="text-blue-400">•</span> {req}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Layers (generic) */}
+      {data.layers && (
+        <div className="space-y-3">
+          {data.layers.map((layer: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-white font-medium mb-2">{layer.layer || layer.name}</h4>
+              <p className="text-gray-400 text-sm">{layer.description}</p>
+              {layer.components && (
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {layer.components.map((c: string, j: number) => (
+                    <span key={j} className="bg-slate-600 text-gray-300 px-2 py-1 rounded text-xs">{c}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Components (for complianceArchitecture) */}
+      {data.components && !data.layers && (
+        <div className="space-y-3">
+          {data.components.map((comp: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-white font-medium mb-2">{comp.component || comp.name}</h4>
+              <p className="text-gray-400 text-sm">{comp.description}</p>
+              {comp.capabilities && (
+                <ul className="mt-2 space-y-1">
+                  {comp.capabilities.map((cap: string, j: number) => (
+                    <li key={j} className="text-emerald-300 text-xs flex items-center gap-2">
+                      <span>✓</span> {cap}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function FailureModesBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+
+      <div className="space-y-4">
+        {data.scenarios?.map((scenario: any, i: number) => (
+          <div key={i} className="bg-red-500/5 border border-red-500/20 rounded-lg p-4">
+            <h4 className="text-red-300 font-medium mb-3">{scenario.failure}</h4>
+            <div className="grid md:grid-cols-2 gap-3 text-sm">
+              <div>
+                <p className="text-gray-500 text-xs mb-1">Detection:</p>
+                <p className="text-gray-300">{scenario.detection}</p>
+              </div>
+              <div>
+                <p className="text-gray-500 text-xs mb-1">Response:</p>
+                <p className="text-emerald-300">{scenario.response}</p>
+              </div>
+              <div>
+                <p className="text-gray-500 text-xs mb-1">Customer Impact:</p>
+                <p className="text-amber-300">{scenario.customerImpact}</p>
+              </div>
+              <div>
+                <p className="text-gray-500 text-xs mb-1">Prevention:</p>
+                <p className="text-blue-300">{scenario.prevention}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ApiOverviewBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+
+      {/* Design section */}
+      {data.design && (
+        <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 mb-4">
+          <h4 className="text-blue-300 font-medium mb-2">API Design</h4>
+          <div className="grid md:grid-cols-2 gap-2 text-sm">
+            {Object.entries(data.design).map(([key, value]: [string, any]) => (
+              <div key={key}>
+                <span className="text-gray-500 capitalize">{key.replace(/([A-Z])/g, ' $1')}:</span>{' '}
+                <span className="text-gray-300">{value}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Endpoints */}
+      {data.coreEndpoints && (
+        <div className="space-y-3">
+          <h4 className="text-white font-medium">Core Endpoints</h4>
+          {data.coreEndpoints.map((endpoint: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded text-xs font-mono">{endpoint.method}</span>
+                <code className="text-blue-300 text-sm">{endpoint.endpoint}</code>
+              </div>
+              <p className="text-gray-400 text-sm">{endpoint.purpose}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Webhooks */}
+      {data.webhooks && (
+        <div className="mt-4 space-y-3">
+          <h4 className="text-white font-medium">Webhooks</h4>
+          {data.webhooks.map((webhook: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-3">
+              <code className="text-amber-300 text-sm">{webhook.event}</code>
+              <p className="text-gray-400 text-xs mt-1">{webhook.trigger}</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function SystemIntegrationBlock({ data }: { data: any }) {
+  const [expanded, setExpanded] = useState<number | null>(null);
+
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
+
+      <div className="space-y-4">
+        {data.systems?.map((system: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+            <button
+              onClick={() => setExpanded(expanded === i ? null : i)}
+              className="w-full p-4 text-left hover:bg-slate-700/70 transition-colors"
+            >
+              <h4 className="text-white font-medium">{system.system}</h4>
+            </button>
+
+            {expanded === i && (
+              <div className="p-4 pt-0 border-t border-slate-600 space-y-3">
+                {/* Common Requirements */}
+                {system.commonRequirements && (
+                  <div>
+                    <p className="text-gray-400 text-xs font-medium mb-1">Common Requirements:</p>
+                    <ul className="space-y-1">
+                      {system.commonRequirements.map((req: string, j: number) => (
+                        <li key={j} className="text-gray-300 text-sm flex items-center gap-2">
+                          <span className="text-blue-400">•</span> {req}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Integration Approach */}
+                {system.integrationApproach && (
+                  <div className="bg-blue-500/10 rounded p-2">
+                    <p className="text-blue-300 text-sm"><span className="font-medium">Approach:</span> {system.integrationApproach}</p>
+                  </div>
+                )}
+
+                {/* Sphere Capabilities */}
+                {system.sphereCapabilities && (
+                  <div>
+                    <p className="text-emerald-300 text-xs font-medium mb-1">Sphere Capabilities:</p>
+                    <div className="flex flex-wrap gap-2">
+                      {system.sphereCapabilities.map((cap: string, j: number) => (
+                        <span key={j} className="bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded text-xs">{cap}</span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Considerations */}
+                {system.considerations && (
+                  <p className="text-amber-300 text-xs">⚠️ {system.considerations}</p>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function DataFlowsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+
+      {/* Data Requirements */}
+      {data.dataRequirements && (
+        <div className="space-y-4 mb-4">
+          {data.dataRequirements.map((req: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <div className="flex items-center justify-between mb-2">
+                <h4 className="text-white font-medium">{req.data}</h4>
+                <span className={`px-2 py-1 rounded text-xs ${
+                  req.direction.includes('→ Sphere') ? 'bg-blue-500/20 text-blue-300' : 'bg-emerald-500/20 text-emerald-300'
+                }`}>{req.direction}</span>
+              </div>
+              <p className="text-gray-400 text-sm mb-2">Format: {req.format}</p>
+              {req.requiredFields && (
+                <div className="flex flex-wrap gap-1">
+                  {req.requiredFields.map((field: string, j: number) => (
+                    <span key={j} className="bg-slate-600 text-gray-300 px-2 py-0.5 rounded text-xs">{field}</span>
+                  ))}
+                </div>
+              )}
+              {req.keyStatuses && (
+                <div className="flex flex-wrap gap-1 mt-2">
+                  {req.keyStatuses.map((status: string, j: number) => (
+                    <span key={j} className="bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded text-xs">{status}</span>
+                  ))}
+                </div>
+              )}
+              {req.timing && <p className="text-gray-500 text-xs mt-2">Timing: {req.timing}</p>}
+              {req.frequency && <p className="text-gray-500 text-xs mt-2">Frequency: {req.frequency}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Best Practices */}
+      {data.reconciliationBestPractices && (
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+          <h4 className="text-emerald-300 font-medium mb-2">Reconciliation Best Practices</h4>
+          <ul className="space-y-1">
+            {data.reconciliationBestPractices.map((practice: string, i: number) => (
+              <li key={i} className="text-gray-300 text-sm flex items-center gap-2">
+                <span className="text-emerald-400">✓</span> {practice}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function DiscoveryQuestionsBlock({ data }: { data: any }) {
+  const [expanded, setExpanded] = useState<number | null>(null);
+
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+
+      <div className="space-y-3">
+        {data.questions?.map((q: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+            <button
+              onClick={() => setExpanded(expanded === i ? null : i)}
+              className="w-full p-4 text-left hover:bg-slate-700/70 transition-colors"
+            >
+              <p className="text-white font-medium">{q.question}</p>
+            </button>
+
+            {expanded === i && (
+              <div className="p-4 pt-0 border-t border-slate-600 space-y-2">
+                {q.whyAsk && (
+                  <p className="text-blue-300 text-sm"><span className="font-medium">Why ask:</span> {q.whyAsk}</p>
+                )}
+                {q.goodAnswer && (
+                  <p className="text-emerald-300 text-sm"><span className="font-medium">Good answer:</span> {q.goodAnswer}</p>
+                )}
+                {q.redFlag && (
+                  <p className="text-red-300 text-sm"><span className="font-medium">Red flag:</span> {q.redFlag}</p>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SmartGenericBlock({ propKey, data }: { propKey: string; data: any }) {
   // Format the key as a title
   const title = propKey.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
-  
+
+  // Try to intelligently render based on data structure
+  const hasItems = data.items && Array.isArray(data.items);
+  const hasPoints = data.points && Array.isArray(data.points);
+  const hasSteps = data.steps && Array.isArray(data.steps);
+  const hasScenarios = data.scenarios && Array.isArray(data.scenarios);
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-4">{data.title || title}</h3>
-      {typeof data === 'string' && <p className="text-gray-300">{data}</p>}
-      {typeof data === 'object' && (
-        <pre className="text-gray-400 text-sm overflow-auto">{JSON.stringify(data, null, 2)}</pre>
+
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+      {data.description && <p className="text-gray-300 mb-4">{data.description}</p>}
+      {data.overview && <p className="text-gray-300 mb-4">{data.overview}</p>}
+
+      {hasItems && (
+        <div className="space-y-3">
+          {data.items.map((item: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              {typeof item === 'string' ? (
+                <p className="text-gray-300">• {item}</p>
+              ) : (
+                <>
+                  <h4 className="text-white font-medium mb-1">{item.name || item.title || item.item || item.term}</h4>
+                  <p className="text-gray-400 text-sm">{item.description || item.definition || item.detail}</p>
+                </>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {hasPoints && (
+        <ul className="space-y-2">
+          {data.points.map((p: any, i: number) => (
+            <li key={i} className="text-gray-300 flex items-start gap-2">
+              <span className="text-blue-400">•</span>
+              {typeof p === 'string' ? p : p.point || p.description}
+            </li>
+          ))}
+        </ul>
+      )}
+
+      {hasSteps && (
+        <div className="space-y-3">
+          {data.steps.map((step: any, i: number) => (
+            <div key={i} className="flex items-start gap-3">
+              <span className="bg-blue-500 text-white text-sm font-bold w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">{i + 1}</span>
+              <div>
+                <p className="text-white font-medium">{typeof step === 'string' ? step : step.step || step.name}</p>
+                {step.description && <p className="text-gray-400 text-sm">{step.description}</p>}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {hasScenarios && (
+        <div className="space-y-3">
+          {data.scenarios.map((s: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-amber-300 font-medium mb-2">{s.scenario || s.name || s.title}</h4>
+              <p className="text-gray-400 text-sm">{s.description || s.detail}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.keyInsight && (
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded p-3 mt-4">
+          <p className="text-purple-300 text-sm">💡 {data.keyInsight}</p>
+        </div>
+      )}
+
+      {/* Fallback for completely unknown structures */}
+      {!hasItems && !hasPoints && !hasSteps && !hasScenarios && !data.subtitle && !data.description && !data.overview && (
+        <div className="text-gray-400 text-sm">
+          {Object.entries(data).filter(([k]) => k !== 'title').map(([key, val]) => (
+            <div key={key} className="mb-2">
+              <span className="text-gray-500">{key}: </span>
+              <span>{typeof val === 'string' ? val : JSON.stringify(val)}</span>
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
@@ -5483,40 +8247,35 @@ function DetailedCaseStudyBlock({ data }: { data: any }) {
         {data.icon && <span>{data.icon}</span>}
         {data.title}
       </h3>
-      
       {data.background && (
         <div className="bg-slate-700/50 rounded-lg p-4 mb-4">
-          <h4 className="text-gray-300 font-semibold mb-2">Background</h4>
+          <h4 className="text-white font-medium mb-2">Background</h4>
           {typeof data.background === 'object' ? (
             <div className="space-y-1 text-sm">
               {Object.entries(data.background).map(([key, value], i) => (
-                <p key={i} className="text-gray-300"><span className="text-gray-500">{key}:</span> {value as string}</p>
+                <p key={i} className="text-gray-400"><span className="text-gray-500">{key}:</span> {value as string}</p>
               ))}
             </div>
-          ) : (<p className="text-gray-300 text-sm">{data.background}</p>)}
+          ) : (<p className="text-gray-400 text-sm">{data.background}</p>)}
         </div>
       )}
-      
       {data.howItWorks && (
-        <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 mb-4">
-          <h4 className="text-blue-300 font-semibold mb-3">{data.howItWorks.title}</h4>
+        <div className="bg-slate-700/50 rounded-lg p-4 mb-4">
+          <h4 className="text-white font-medium mb-3">{data.howItWorks.title}</h4>
           <div className="space-y-2">
             {data.howItWorks.steps?.map((s: any, i: number) => (
               <div key={i} className="flex items-start gap-3">
-                <span className="bg-blue-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center flex-shrink-0">{s.step}</span>
-                <p className="text-gray-300 text-sm">{s.action}</p>
+                <span className="bg-blue-500 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0">{s.step}</span>
+                <p className="text-gray-400 text-sm">{s.action}</p>
               </div>
             ))}
           </div>
         </div>
       )}
-      
       {(data.regulatoryImplication || data.lessonForSphere || data.keyTakeaway) && (
-        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
-          <p className="text-emerald-200 text-sm">
-            <span className="font-semibold">Key Insight:</span> {data.regulatoryImplication || data.lessonForSphere || data.keyTakeaway}
-          </p>
-        </div>
+        <p className="text-emerald-400 text-sm">
+          Key Insight: {data.regulatoryImplication || data.lessonForSphere || data.keyTakeaway}
+        </p>
       )}
     </div>
   );
@@ -5525,13 +8284,13 @@ function DetailedCaseStudyBlock({ data }: { data: any }) {
 function ContagionRiskBlock({ data }: { data: any }) {
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
       {data.channels && (
-        <div className="grid md:grid-cols-2 gap-4">
+        <div className="grid md:grid-cols-2 gap-3">
           {data.channels.map((ch: any, i: number) => (
             <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-red-500">
-              <h4 className="text-red-300 font-semibold mb-2">{ch.channel}</h4>
-              <p className="text-gray-300 text-sm">{ch.mechanism}</p>
+              <h4 className="text-white font-medium mb-1">{ch.channel}</h4>
+              <p className="text-gray-400 text-sm">{ch.mechanism}</p>
             </div>
           ))}
         </div>
@@ -5546,21 +8305,21 @@ function BlockchainFailBlock({ data }: { data: any }) {
       <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
       <div className="grid md:grid-cols-2 gap-4">
         {data.traditionalBlockchains && (
-          <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4">
-            <h4 className="text-red-300 font-semibold mb-3">{data.traditionalBlockchains.title}</h4>
-            <div className="space-y-2">
+          <div className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-red-500">
+            <h4 className="text-red-400 font-medium mb-2">{data.traditionalBlockchains.title}</h4>
+            <div className="space-y-1">
               {data.traditionalBlockchains.characteristics?.map((c: any, i: number) => (
-                <div key={i} className="text-sm"><span className="text-gray-400">{c.attribute}:</span><span className="text-gray-300 ml-2">{c.value}</span></div>
+                <p key={i} className="text-sm text-gray-400">{c.attribute}: {c.value}</p>
               ))}
             </div>
           </div>
         )}
         {data.regulatedFinanceRequirements && (
-          <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
-            <h4 className="text-emerald-300 font-semibold mb-3">{data.regulatedFinanceRequirements.title}</h4>
-            <div className="space-y-2">
+          <div className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-emerald-500">
+            <h4 className="text-emerald-400 font-medium mb-2">{data.regulatedFinanceRequirements.title}</h4>
+            <div className="space-y-1">
               {data.regulatedFinanceRequirements.characteristics?.map((c: any, i: number) => (
-                <div key={i} className="text-sm"><span className="text-gray-400">{c.attribute}:</span><span className="text-gray-300 ml-2">{c.value}</span></div>
+                <p key={i} className="text-sm text-gray-400">{c.attribute}: {c.value}</p>
               ))}
             </div>
           </div>
@@ -6061,129 +8820,97 @@ function RegulatorPerspectiveBlock({ data }: { data: any }) {
 
 function WhyUAEMattersBlock({ data }: { data: any }) {
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
-  
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-2 text-xl">🇦🇪 {data.title}</h3>
       {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
-      
-      {/* Simple points list */}
+
       {data.points && !data.marketContext && (
-        <div className="space-y-2 mb-4">
-          <ul className="text-gray-300 space-y-2">
-            {data.points.map((p: string, i: number) => (
-              <li key={i} className="flex items-start gap-2">
-                <span className="text-emerald-400">•</span>
-                <span>{p}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul className="text-gray-300 text-sm space-y-1 mb-4">
+          {data.points.map((p: string, i: number) => <li key={i}>• {p}</li>)}
+        </ul>
       )}
-      
-      {/* Market Context with Stats */}
+
       {data.marketContext && (
         <div className="mb-4">
           <h4 className="text-white font-medium mb-3">{data.marketContext.title}</h4>
           <div className="grid md:grid-cols-2 gap-3">
             {data.marketContext.stats?.map((s: any, i: number) => (
-              <div key={i} className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
-                <p className="text-emerald-400 font-bold text-xl">{s.metric}</p>
-                <p className="text-white font-medium">{s.description}</p>
-                <p className="text-gray-400 text-sm mt-1">{s.context}</p>
+              <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+                <p className="text-emerald-400 font-bold text-lg">{s.metric}</p>
+                <p className="text-white">{s.description}</p>
+                <p className="text-gray-500 text-sm">{s.context}</p>
               </div>
             ))}
           </div>
         </div>
       )}
-      
-      {/* Trade Corridors */}
+
       {data.tradeCorridors && (
         <div className="mb-4">
-          <h4 className="text-white font-medium mb-3">{data.tradeCorridors.title}</h4>
+          <h4 className="text-white font-medium mb-2">{data.tradeCorridors.title}</h4>
           <div className="space-y-2">
             {data.tradeCorridors.corridors?.map((c: any, i: number) => (
               <div key={i} className="bg-slate-700/50 rounded-lg p-3">
-                <div className="flex items-center gap-2 mb-1">
-                  <span className="text-blue-400 font-mono text-sm">{c.route}</span>
-                  <span className="text-gray-500 text-xs">({c.volume})</span>
-                </div>
-                <p className="text-gray-300 text-sm">{c.description}</p>
-                <p className="text-amber-300 text-xs mt-1">Pain point: {c.painPoint}</p>
+                <span className="text-blue-400 text-sm">{c.route}</span>
+                <span className="text-gray-500 text-sm ml-2">({c.volume})</span>
+                <p className="text-gray-400 text-sm">{c.description}</p>
+                <p className="text-amber-400 text-xs">Pain point: {c.painPoint}</p>
               </div>
             ))}
           </div>
         </div>
       )}
-      
-      {/* Why UAE Wants Crypto */}
+
       {data.whyUAEWantsCrypto && (
         <div className="mb-4">
-          <button 
+          <button
             onClick={() => setExpandedSection(expandedSection === 'whyCrypto' ? null : 'whyCrypto')}
-            className="w-full text-left"
+            className="w-full text-left bg-slate-700/50 rounded-lg p-3 flex items-center justify-between hover:bg-slate-600/50 transition-colors"
           >
-            <h4 className="text-white font-medium mb-2 flex items-center justify-between">
-              {data.whyUAEWantsCrypto.title}
-              <ChevronDown className={`w-4 h-4 transition-transform ${expandedSection === 'whyCrypto' ? 'rotate-180' : ''}`} />
-            </h4>
+            <span className="text-white font-medium">{data.whyUAEWantsCrypto.title}</span>
+            <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${expandedSection === 'whyCrypto' ? 'rotate-180' : ''}`} />
           </button>
           {expandedSection === 'whyCrypto' && (
-            <div className="space-y-2 mt-2">
+            <div className="mt-2 space-y-2">
               {data.whyUAEWantsCrypto.points?.map((p: any, i: number) => (
-                <div key={i} className="bg-slate-700/50 rounded p-3">
-                  <p className="text-blue-300 font-medium">{p.point}</p>
-                  <p className="text-gray-400 text-sm">{p.explanation}</p>
+                <div key={i} className="bg-slate-700/30 rounded-lg p-3">
+                  <p className="text-white text-sm">{p.point}</p>
+                  <p className="text-gray-500 text-sm">{p.explanation}</p>
                 </div>
               ))}
             </div>
           )}
         </div>
       )}
-      
-      {/* Sphere Opportunity */}
+
       {data.sphereOpportunity && (
-        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 mb-4">
-          <h4 className="text-emerald-300 font-medium mb-2">{data.sphereOpportunity.title}</h4>
-          <ul className="space-y-1">
-            {data.sphereOpportunity.points?.map((p: string, i: number) => (
-              <li key={i} className="text-gray-300 text-sm flex items-start gap-2">
-                <span className="text-emerald-400">✓</span>
-                <span>{p}</span>
-              </li>
-            ))}
+        <div className="bg-slate-700/50 rounded-lg p-4 mb-4">
+          <h4 className="text-emerald-400 font-medium mb-2">{data.sphereOpportunity.title}</h4>
+          <ul className="text-gray-300 text-sm space-y-1">
+            {data.sphereOpportunity.points?.map((p: string, i: number) => <li key={i}>✓ {p}</li>)}
           </ul>
         </div>
       )}
-      
-      {/* Sphere Status Warning */}
+
       {data.sphereStatus && (
-        <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-4">
-          <h4 className="text-amber-300 font-semibold mb-2">{data.sphereStatus.title}</h4>
-          <p className="text-white font-medium mb-2">{data.sphereStatus.status}</p>
-          <ul className="space-y-1">
-            {data.sphereStatus.whatThisMeans?.map((w: string, i: number) => (
-              <li key={i} className="text-gray-300 text-sm flex items-start gap-2">
-                <span className="text-amber-400">•</span>
-                <span>{w}</span>
-              </li>
-            ))}
+        <div className="bg-slate-700/50 rounded-lg p-4">
+          <h4 className="text-amber-400 font-medium mb-2">{data.sphereStatus.title}</h4>
+          <p className="text-white text-sm mb-2">{data.sphereStatus.status}</p>
+          <ul className="text-gray-400 text-sm space-y-1">
+            {data.sphereStatus.whatThisMeans?.map((w: string, i: number) => <li key={i}>• {w}</li>)}
           </ul>
         </div>
       )}
-      
-      {/* Arnold Quote */}
+
       {data.arnoldQuote && (
-        <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 mt-4">
-          {typeof data.arnoldQuote === 'string' ? (
-            <p className="text-purple-200 italic">"{data.arnoldQuote}"</p>
-          ) : (
-            <>
-              <p className="text-purple-200 italic">"{data.arnoldQuote.quote}"</p>
-              {data.arnoldQuote.context && (
-                <p className="text-gray-400 text-sm mt-2">{data.arnoldQuote.context}</p>
-              )}
-            </>
+        <div className="bg-slate-700/50 rounded-lg p-4 mt-4">
+          <p className="text-gray-300 italic">
+            "{typeof data.arnoldQuote === 'string' ? data.arnoldQuote : data.arnoldQuote.quote}"
+          </p>
+          {typeof data.arnoldQuote !== 'string' && data.arnoldQuote.context && (
+            <p className="text-gray-500 text-sm mt-2">{data.arnoldQuote.context}</p>
           )}
         </div>
       )}
@@ -6193,119 +8920,85 @@ function WhyUAEMattersBlock({ data }: { data: any }) {
 
 function RegulatoryLandscapeBlock({ data }: { data: any }) {
   const [expandedTerritory, setExpandedTerritory] = useState<number | null>(null);
-  
+
   return (
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
       {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
-      
-      {/* Why Multiple Territories Explanation */}
+
       {data.whyMultipleTerritories && (
-        <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-4 mb-4">
-          <h4 className="text-blue-300 font-medium mb-2">{data.whyMultipleTerritories.title}</h4>
-          <p className="text-gray-300 text-sm mb-2">{data.whyMultipleTerritories.explanation}</p>
+        <div className="bg-slate-700/50 rounded-lg p-4 mb-4">
+          <h4 className="text-white font-medium mb-2">{data.whyMultipleTerritories.title}</h4>
+          <p className="text-gray-400 text-sm">{data.whyMultipleTerritories.explanation}</p>
           {data.whyMultipleTerritories.keyInsight && (
-            <p className="text-blue-200 text-sm italic">💡 {data.whyMultipleTerritories.keyInsight}</p>
+            <p className="text-blue-400 text-sm mt-2">💡 {data.whyMultipleTerritories.keyInsight}</p>
           )}
         </div>
       )}
-      
-      {/* Territories - Expandable Cards */}
+
       {data.territories && (
         <div className="space-y-2 mb-4">
           {data.territories.map((t: any, i: number) => (
             <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
               <button
                 onClick={() => setExpandedTerritory(expandedTerritory === i ? null : i)}
-                className="w-full p-4 text-left flex items-center justify-between hover:bg-slate-700/70"
+                className="w-full p-3 text-left flex items-center justify-between hover:bg-slate-600/50 transition-colors"
               >
-                <div className="flex items-center gap-3">
-                  {t.icon && <span className="text-2xl">{t.icon}</span>}
-                  <div>
-                    <h4 className="text-white font-semibold">{t.name}</h4>
-                    {t.fullName && <p className="text-gray-500 text-xs">{t.fullName}</p>}
-                  </div>
+                <div className="flex items-center gap-2">
+                  {t.icon && <span>{t.icon}</span>}
+                  <span className="text-white">{t.name}</span>
+                  {t.fullName && <span className="text-gray-500 text-sm">({t.fullName})</span>}
                 </div>
                 <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${expandedTerritory === i ? 'rotate-180' : ''}`} />
               </button>
-              
               {expandedTerritory === i && (
-                <div className="px-4 pb-4 space-y-3">
-                  {t.location && <p className="text-gray-400 text-sm"><span className="text-gray-500">Location:</span> {t.location}</p>}
-                  {t.legalSystem && <p className="text-gray-400 text-sm"><span className="text-gray-500">Legal System:</span> {t.legalSystem}</p>}
-                  {t.established && <p className="text-gray-400 text-sm"><span className="text-gray-500">Established:</span> {t.established}</p>}
-                  
-                  {t.whatItIs && <p className="text-gray-300 text-sm mt-2">{t.whatItIs}</p>}
-                  
-                  {t.targetClients && <p className="text-gray-300 text-sm"><span className="text-gray-500">Target:</span> {t.targetClients}</p>}
-                  {t.cryptoScope && <p className="text-gray-300 text-sm"><span className="text-gray-500">Crypto Scope:</span> {t.cryptoScope}</p>}
-                  
-                  {t.licenseTypes && (
-                    <div className="flex flex-wrap gap-1 mt-2">
-                      {t.licenseTypes.map((l: string, j: number) => (
-                        <span key={j} className="text-xs bg-slate-600 text-gray-300 px-2 py-0.5 rounded">{l}</span>
-                      ))}
-                    </div>
-                  )}
-                  
+                <div className="px-3 pb-3 border-t border-slate-600 pt-3 space-y-2 text-sm">
+                  {t.location && <p className="text-gray-400">Location: {t.location}</p>}
+                  {t.legalSystem && <p className="text-gray-400">Legal System: {t.legalSystem}</p>}
+                  {t.established && <p className="text-gray-400">Established: {t.established}</p>}
+                  {t.whatItIs && <p className="text-gray-300">{t.whatItIs}</p>}
+                  {t.targetClients && <p className="text-gray-400">Target: {t.targetClients}</p>}
+                  {t.cryptoScope && <p className="text-gray-400">Crypto Scope: {t.cryptoScope}</p>}
+                  {t.licenseTypes && <p className="text-gray-400">Licenses: {t.licenseTypes.join(', ')}</p>}
                   {t.strengths && (
-                    <div className="mt-2">
-                      <p className="text-emerald-400 text-xs font-medium mb-1">Strengths:</p>
-                      <ul className="text-gray-300 text-xs space-y-0.5">
-                        {t.strengths.map((s: string, j: number) => <li key={j}>✓ {s}</li>)}
-                      </ul>
+                    <div>
+                      <p className="text-emerald-400 text-xs">Strengths:</p>
+                      <ul className="text-gray-400 text-xs">{t.strengths.map((s: string, j: number) => <li key={j}>✓ {s}</li>)}</ul>
                     </div>
                   )}
-                  
                   {t.limitations && (
-                    <div className="mt-2">
-                      <p className="text-amber-400 text-xs font-medium mb-1">Limitations:</p>
-                      <ul className="text-gray-300 text-xs space-y-0.5">
-                        {t.limitations.map((l: string, j: number) => <li key={j}>• {l}</li>)}
-                      </ul>
+                    <div>
+                      <p className="text-amber-400 text-xs">Limitations:</p>
+                      <ul className="text-gray-400 text-xs">{t.limitations.map((l: string, j: number) => <li key={j}>• {l}</li>)}</ul>
                     </div>
                   )}
-                  
-                  {t.sphereRelevance && (
-                    <p className="text-emerald-300 text-sm font-medium mt-2 bg-emerald-500/10 rounded p-2">
-                      Sphere: {t.sphereRelevance}
-                    </p>
-                  )}
-                  
-                  {t.vibeCheck && (
-                    <p className="text-purple-300 text-xs italic mt-2">"{t.vibeCheck}"</p>
-                  )}
+                  {t.sphereRelevance && <p className="text-emerald-400">Sphere: {t.sphereRelevance}</p>}
+                  {t.vibeCheck && <p className="text-gray-500 italic text-xs">"{t.vibeCheck}"</p>}
                 </div>
               )}
             </div>
           ))}
         </div>
       )}
-      
-      {/* Simple Rule */}
-      {data.simpleRule && (
-        <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-3 mb-4">
-          <p className="text-blue-200 text-sm">📌 {data.simpleRule}</p>
-        </div>
-      )}
-      
-      {/* Comparison Table */}
+
+      {data.simpleRule && <p className="text-blue-400 text-sm mb-4">📌 {data.simpleRule}</p>}
+
       {data.comparisonTable && (
         <div className="mb-4 overflow-x-auto">
           <h4 className="text-white font-medium mb-2">{data.comparisonTable.title}</h4>
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-slate-700">
+              <tr className="border-b border-slate-600">
                 {data.comparisonTable.headers?.map((h: string, i: number) => (
-                  <th key={i} className="p-2 text-left text-gray-300 font-medium">{h}</th>
+                  <th key={i} className="p-2 text-left text-gray-400">{h}</th>
                 ))}
               </tr>
             </thead>
             <tbody>
               {data.comparisonTable.rows?.map((row: string[], i: number) => (
-                <tr key={i} className="border-t border-slate-700">
+                <tr key={i} className="border-b border-slate-700/50">
                   {row.map((cell: string, j: number) => (
-                    <td key={j} className={`p-2 ${j === 0 ? 'text-white font-medium' : 'text-gray-400'}`}>{cell}</td>
+                    <td key={j} className={`p-2 ${j === 0 ? 'text-white' : 'text-gray-400'}`}>{cell}</td>
                   ))}
                 </tr>
               ))}
@@ -6313,30 +9006,23 @@ function RegulatoryLandscapeBlock({ data }: { data: any }) {
           </table>
         </div>
       )}
-      
-      {/* Decision Framework */}
+
       {data.decisionFramework && (
         <div className="mb-4">
           <h4 className="text-white font-medium mb-2">{data.decisionFramework.title}</h4>
           <div className="space-y-2">
             {data.decisionFramework.scenarios?.map((s: any, i: number) => (
-              <div key={i} className="bg-slate-700/50 rounded p-3 flex items-start gap-3">
-                <span className="text-blue-400 font-bold text-sm">{s.recommendation}</span>
-                <div>
-                  <p className="text-gray-300 text-sm">{s.scenario}</p>
-                  <p className="text-gray-500 text-xs">→ {s.reason}</p>
-                </div>
+              <div key={i} className="text-sm">
+                <span className="text-blue-400 font-medium">{s.recommendation}:</span>
+                <span className="text-gray-300 ml-1">{s.scenario}</span>
+                <span className="text-gray-500 ml-1">({s.reason})</span>
               </div>
             ))}
           </div>
         </div>
       )}
-      
-      {data.keyInsight && (
-        <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4">
-          <p className="text-purple-200 text-sm">💡 {data.keyInsight}</p>
-        </div>
-      )}
+
+      {data.keyInsight && <p className="text-blue-400 text-sm">💡 {data.keyInsight}</p>}
     </div>
   );
 }
@@ -7657,6 +10343,602 @@ function QualificationFrameworkBlock({ data }: { data: any }) {
           <div className="space-y-1">
             {data.scoringGuide.scores?.map((s: any, i: number) => (
               <div key={i} className="flex justify-between text-sm"><span className="text-gray-400">{s.score}</span><span className="text-gray-300">{s.action}</span></div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// =============================================================================
+// NEW PILLAR 4 - ENHANCED GOVERNANCE COMPONENTS
+// =============================================================================
+
+function WhyOperationalRiskMattersBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.context && <p className="text-gray-400 mb-4">{data.context}</p>}
+
+      {data.institutionalPerspective && (
+        <div className="space-y-4">
+          {data.institutionalPerspective.map((perspective: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-blue-300 font-semibold mb-2">{perspective.stakeholder}</h4>
+              <p className="text-amber-300 text-sm mb-3 italic">"{perspective.theirConcern}"</p>
+
+              {perspective.whatTheyEvaluate && (
+                <div className="mb-3">
+                  <p className="text-gray-400 text-xs font-semibold mb-1">What They Evaluate:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {perspective.whatTheyEvaluate.map((item: string, j: number) => (
+                      <span key={j} className="bg-slate-600 text-gray-300 text-xs px-2 py-1 rounded">{item}</span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {perspective.whatTheyWantToHear && (
+                <div className="bg-emerald-500/10 border border-emerald-500/30 rounded p-3">
+                  <p className="text-emerald-300 text-xs font-semibold mb-1">✅ What They Want to Hear:</p>
+                  <p className="text-gray-300 text-sm">{perspective.whatTheyWantToHear}</p>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.keyInsight && (
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 mt-4">
+          <p className="text-purple-300 font-medium">💡 {data.keyInsight}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function CaseStudiesBlock({ data }: { data: any }) {
+  const [expandedCase, setExpandedCase] = useState<number | null>(null);
+
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+
+      <div className="space-y-4">
+        {data.cases?.map((caseStudy: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+            {/* Case Header */}
+            <div
+              className="p-4 cursor-pointer hover:bg-slate-700/70"
+              onClick={() => setExpandedCase(expandedCase === i ? null : i)}
+            >
+              <div className="flex items-center justify-between">
+                <div>
+                  <h4 className="text-white font-semibold">{caseStudy.title}</h4>
+                  {caseStudy.subtitle && <p className="text-gray-400 text-sm">{caseStudy.subtitle}</p>}
+                </div>
+                <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${expandedCase === i ? 'rotate-180' : ''}`} />
+              </div>
+              {caseStudy.regulators && (
+                <div className="flex gap-2 mt-2">
+                  {caseStudy.regulators.map((r: string, j: number) => (
+                    <span key={j} className="bg-red-500/20 text-red-300 text-xs px-2 py-0.5 rounded">{r}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Expanded Content */}
+            {expandedCase === i && (
+              <div className="px-4 pb-4 space-y-4 border-t border-slate-600 pt-4">
+                {/* Background */}
+                {caseStudy.background && (
+                  <div className="bg-slate-800/50 rounded p-3">
+                    <h5 className="text-gray-300 font-semibold mb-2">Background</h5>
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs">
+                      {caseStudy.background.company && <div><span className="text-gray-500">Company:</span> <span className="text-gray-300">{caseStudy.background.company}</span></div>}
+                      {caseStudy.background.volume && <div><span className="text-gray-500">Volume:</span> <span className="text-gray-300">{caseStudy.background.volume}</span></div>}
+                      {caseStudy.background.timeframe && <div><span className="text-gray-500">Period:</span> <span className="text-gray-300">{caseStudy.background.timeframe}</span></div>}
+                      {caseStudy.background.valuation && <div><span className="text-gray-500">Valuation:</span> <span className="text-gray-300">{caseStudy.background.valuation}</span></div>}
+                      {caseStudy.background.customers && <div><span className="text-gray-500">Customers:</span> <span className="text-gray-300">{caseStudy.background.customers}</span></div>}
+                      {caseStudy.background.assets && <div><span className="text-gray-500">Assets:</span> <span className="text-gray-300">{caseStudy.background.assets}</span></div>}
+                      {caseStudy.background.promise && <div className="col-span-2 md:col-span-3"><span className="text-gray-500">Promise:</span> <span className="text-gray-300">{caseStudy.background.promise}</span></div>}
+                    </div>
+                  </div>
+                )}
+
+                {/* What Happened */}
+                {caseStudy.whatHappened && (
+                  <div>
+                    <h5 className="text-red-300 font-semibold mb-2">What Happened</h5>
+                    <ul className="text-gray-300 text-sm space-y-1">
+                      {caseStudy.whatHappened.map((item: string, j: number) => (
+                        <li key={j}>• {item}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Specific Violations */}
+                {caseStudy.specificViolations && (
+                  <div>
+                    <h5 className="text-amber-300 font-semibold mb-2">Specific Violations</h5>
+                    <div className="space-y-2">
+                      {caseStudy.specificViolations.map((v: any, j: number) => (
+                        <div key={j} className="bg-red-500/10 border border-red-500/20 rounded p-3">
+                          <div className="flex justify-between items-start mb-1">
+                            <span className="text-white font-medium">{v.violation}</span>
+                            {v.penalty && <span className="text-red-400 font-bold">{v.penalty}</span>}
+                          </div>
+                          <p className="text-gray-400 text-xs">{v.details}</p>
+                          {v.regulator && <span className="text-gray-500 text-xs">Regulator: {v.regulator}</span>}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Consequences */}
+                {caseStudy.consequences && (
+                  <div>
+                    <h5 className="text-red-300 font-semibold mb-2">Consequences</h5>
+                    <ul className="text-gray-300 text-sm space-y-1">
+                      {caseStudy.consequences.map((c: string, j: number) => (
+                        <li key={j}>• {c}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Root Causes with Sphere Contrast (FTX/Celsius style) */}
+                {caseStudy.rootCauses && (
+                  <div>
+                    <h5 className="text-amber-300 font-semibold mb-2">Root Causes & Sphere Contrast</h5>
+                    <div className="space-y-2">
+                      {caseStudy.rootCauses.map((rc: any, j: number) => (
+                        <div key={j} className="bg-slate-800/50 rounded p-3 grid grid-cols-2 gap-3">
+                          <div className="bg-red-500/10 rounded p-2">
+                            <p className="text-red-300 text-xs font-semibold mb-1">❌ Failure:</p>
+                            <p className="text-gray-300 text-sm">{rc.failure}</p>
+                          </div>
+                          <div className="bg-emerald-500/10 rounded p-2">
+                            <p className="text-emerald-300 text-xs font-semibold mb-1">✅ Sphere:</p>
+                            <p className="text-gray-300 text-sm">{rc.sphereContrast}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Outcome */}
+                {caseStudy.outcome && (
+                  <div className="bg-red-500/10 border border-red-500/30 rounded p-3">
+                    <p className="text-red-300 text-sm"><span className="font-semibold">Outcome:</span> {caseStudy.outcome}</p>
+                  </div>
+                )}
+
+                {/* Lesson for Sphere */}
+                {caseStudy.lessonForSphere && (
+                  <div className="bg-blue-500/10 border border-blue-500/30 rounded p-3">
+                    <p className="text-blue-300 text-sm"><span className="font-semibold">Lesson:</span> {caseStudy.lessonForSphere}</p>
+                  </div>
+                )}
+
+                {/* How to Discuss */}
+                {caseStudy.howToDiscuss && (
+                  <div className="bg-purple-500/10 border border-purple-500/30 rounded p-3">
+                    <p className="text-purple-300 text-sm"><span className="font-semibold">💬 How to Discuss:</span> {caseStudy.howToDiscuss}</p>
+                  </div>
+                )}
+
+                {/* Sphere Contrast (Binance/BitMEX style) */}
+                {caseStudy.sphereContrast && (
+                  <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+                    <h5 className="text-emerald-300 font-semibold mb-2">✅ {caseStudy.sphereContrast.title}</h5>
+                    <ul className="text-gray-300 text-sm space-y-1">
+                      {caseStudy.sphereContrast.points?.map((p: string, j: number) => (
+                        <li key={j}>• {p}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                {/* Key Lessons */}
+                {caseStudy.keyLessons && (
+                  <div>
+                    <h5 className="text-blue-300 font-semibold mb-2">Key Lessons</h5>
+                    <div className="space-y-2">
+                      {caseStudy.keyLessons.map((lesson: any, j: number) => (
+                        <div key={j} className="bg-blue-500/10 rounded p-2">
+                          <p className="text-blue-300 font-medium text-sm">{lesson.lesson}</p>
+                          <p className="text-gray-400 text-xs">{lesson.detail}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ThreeLinesDefenseBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-2">{data.subtitle}</p>}
+      {data.overview && <p className="text-gray-300 text-sm mb-4">{data.overview}</p>}
+
+      <div className="space-y-4">
+        {data.lines?.map((line: any, i: number) => (
+          <div key={i} className={`rounded-lg p-4 border-l-4 ${i === 0 ? 'bg-blue-500/10 border-blue-500' : i === 1 ? 'bg-purple-500/10 border-purple-500' : 'bg-amber-500/10 border-amber-500'}`}>
+            <div className="flex items-center gap-3 mb-2">
+              {line.icon && <span className="text-2xl">{line.icon}</span>}
+              <h4 className={`font-semibold ${i === 0 ? 'text-blue-300' : i === 1 ? 'text-purple-300' : 'text-amber-300'}`}>{line.line}</h4>
+            </div>
+            <p className="text-gray-300 text-sm mb-2">{line.role}</p>
+            {line.who && <p className="text-gray-500 text-xs mb-2">Who: {line.who}</p>}
+
+            {line.responsibilities && (
+              <div className="mb-2">
+                <p className="text-gray-400 text-xs font-semibold mb-1">Responsibilities:</p>
+                <ul className="text-gray-300 text-xs space-y-1">
+                  {line.responsibilities.map((r: string, j: number) => (
+                    <li key={j}>• {r}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {line.accountability && <p className="text-gray-400 text-xs italic">{line.accountability}</p>}
+
+            {line.example && (
+              <div className="bg-slate-800/50 rounded p-2 mt-2">
+                <p className="text-gray-400 text-xs"><span className="font-semibold">Example:</span> {line.example}</p>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {data.whyItMatters && (
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 mt-4">
+          <p className="text-emerald-300 text-sm">💡 {data.whyItMatters}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function RiskAppetiteBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-2">{data.subtitle}</p>}
+      {data.definition && <p className="text-gray-300 text-sm mb-4">{data.definition}</p>}
+
+      {data.components && (
+        <div className="space-y-4">
+          {data.components.map((comp: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-blue-300 font-semibold mb-2">{comp.component}</h4>
+              <p className="text-gray-300 text-sm mb-2">{comp.description}</p>
+
+              {comp.example && (
+                <div className="bg-blue-500/10 rounded p-2">
+                  <p className="text-blue-200 text-xs">{comp.example}</p>
+                </div>
+              )}
+
+              {comp.examples && (
+                <ul className="text-gray-400 text-xs space-y-1">
+                  {comp.examples.map((ex: string, j: number) => (
+                    <li key={j}>• {ex}</li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.governance && (
+        <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 mt-4">
+          <p className="text-purple-300 text-sm">{data.governance}</p>
+        </div>
+      )}
+
+      {data.howToDiscuss && (
+        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 mt-4">
+          <p className="text-emerald-300 text-xs font-semibold mb-1">💬 How to Discuss:</p>
+          <p className="text-gray-300 text-sm">{data.howToDiscuss}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function BoardOversightBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+
+      {data.structure && (
+        <div className="space-y-4">
+          {data.structure.map((body: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <div className="flex justify-between items-start mb-2">
+                <h4 className="text-white font-semibold">{body.body}</h4>
+                {body.frequency && <span className="text-gray-500 text-xs">{body.frequency}</span>}
+              </div>
+              {body.composition && <p className="text-gray-400 text-xs mb-2">Composition: {body.composition}</p>}
+
+              {body.riskRole && (
+                <div>
+                  <p className="text-blue-300 text-xs font-semibold mb-1">Risk Responsibilities:</p>
+                  <ul className="text-gray-300 text-xs space-y-1">
+                    {body.riskRole.map((role: string, j: number) => (
+                      <li key={j}>• {role}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+function GovernanceCertificationsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">🏛️ {data.title}</h3>
+
+      {/* Certifications */}
+      {data.certifications && (
+        <div className="space-y-4 mb-6">
+          {data.certifications.map((cert: any, i: number) => (
+            <div key={i} className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+              <div className="flex items-center gap-3 mb-2">
+                {cert.icon && <span className="text-2xl">{cert.icon}</span>}
+                <h4 className="text-emerald-300 font-semibold">{cert.cert}</h4>
+              </div>
+              <div className="space-y-2 text-sm">
+                <p className="text-gray-300"><span className="text-gray-500">What it is:</span> {cert.whatItIs}</p>
+                <p className="text-gray-300"><span className="text-gray-500">Why it matters:</span> {cert.whyItMatters}</p>
+                <p className="text-emerald-300"><span className="text-gray-500">Sphere status:</span> {cert.sphereStatus}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Additional Controls */}
+      {data.additionalControls && (
+        <div>
+          <h4 className="text-white font-semibold mb-3">Additional Controls</h4>
+          <div className="grid gap-3 md:grid-cols-2">
+            {data.additionalControls.map((ctrl: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded-lg p-3">
+                <p className="text-blue-300 font-medium text-sm">{ctrl.control}</p>
+                <p className="text-gray-400 text-xs">{ctrl.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// =============================================================================
+// NEW PILLAR 5.8 - TECHNICAL FAQ COMPONENTS
+// =============================================================================
+
+function DangerousStatementsBlock({ data }: { data: any }) {
+  const [expandedStatement, setExpandedStatement] = useState<number | null>(null);
+
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">⚠️ {data.title}</h3>
+
+      <div className="space-y-3">
+        {data.statements?.map((stmt: any, i: number) => (
+          <div key={i} className="bg-red-500/5 border border-red-500/20 rounded-lg overflow-hidden">
+            <div
+              className="p-4 cursor-pointer hover:bg-red-500/10"
+              onClick={() => setExpandedStatement(expandedStatement === i ? null : i)}
+            >
+              <div className="flex items-center justify-between">
+                <p className="text-red-300 font-medium">❌ {stmt.dangerous}</p>
+                <ChevronDown className={`w-5 h-5 text-gray-400 transition-transform ${expandedStatement === i ? 'rotate-180' : ''}`} />
+              </div>
+            </div>
+
+            {expandedStatement === i && (
+              <div className="px-4 pb-4 space-y-3 border-t border-red-500/20 pt-3">
+                <div className="bg-amber-500/10 rounded p-3">
+                  <p className="text-amber-300 text-xs font-semibold mb-1">Why It's Dangerous:</p>
+                  <p className="text-gray-300 text-sm">{stmt.whyDangerous}</p>
+                </div>
+
+                <div className="bg-blue-500/10 rounded p-3">
+                  <p className="text-blue-300 text-xs font-semibold mb-1">Reality:</p>
+                  <p className="text-gray-300 text-sm">{stmt.reality}</p>
+                </div>
+
+                <div className="bg-emerald-500/10 rounded p-3">
+                  <p className="text-emerald-300 text-xs font-semibold mb-1">✅ Say Instead:</p>
+                  <p className="text-gray-300 text-sm">{stmt.correction}</p>
+                </div>
+
+                {stmt.followUp && (
+                  <div className="bg-purple-500/10 rounded p-3">
+                    <p className="text-purple-300 text-xs font-semibold mb-1">If They Push:</p>
+                    <p className="text-gray-300 text-sm">{stmt.followUp}</p>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function TechnicalObjectionsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">🛡️ {data.title}</h3>
+
+      <div className="space-y-4">
+        {data.objections?.map((obj: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+            <div className="flex items-start justify-between mb-2">
+              <p className="text-amber-300 font-medium">"{obj.objection}"</p>
+              {obj.context && <span className="text-gray-500 text-xs">{obj.context}</span>}
+            </div>
+
+            <div className="bg-emerald-500/10 rounded p-3 mb-2">
+              <p className="text-emerald-300 text-xs font-semibold mb-1">Response:</p>
+              <p className="text-gray-300 text-sm">{obj.response}</p>
+            </div>
+
+            {obj.evidence && (
+              <div className="bg-blue-500/10 rounded p-2">
+                <p className="text-blue-300 text-xs"><span className="font-semibold">Evidence:</span> {obj.evidence}</p>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function CorrectionTechniqueBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">💡 {data.title}</h3>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        {data.principles?.map((principle: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+            <h4 className="text-blue-300 font-semibold mb-2">{principle.principle}</h4>
+            <p className="text-gray-400 text-sm mb-2">{principle.technique}</p>
+            {principle.example && (
+              <div className="bg-blue-500/10 rounded p-2">
+                <p className="text-gray-300 text-xs italic">"{principle.example}"</p>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// =============================================================================
+// NEW PILLAR 5.9 - ENTERPRISE INTEGRATION COMPONENTS
+// =============================================================================
+
+function IntegrationPatternsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">🔗 {data.title}</h3>
+
+      <div className="space-y-4">
+        {data.patterns?.map((pattern: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+            <div className="flex justify-between items-start mb-2">
+              <h4 className="text-white font-semibold">{pattern.pattern}</h4>
+              {pattern.typicalTimeline && (
+                <span className="text-gray-500 text-xs bg-slate-600 px-2 py-0.5 rounded">{pattern.typicalTimeline}</span>
+              )}
+            </div>
+            <p className="text-gray-300 text-sm mb-3">{pattern.description}</p>
+
+            {pattern.useCases && (
+              <div className="mb-2">
+                <p className="text-blue-300 text-xs font-semibold mb-1">Use Cases:</p>
+                <div className="flex flex-wrap gap-1">
+                  {pattern.useCases.map((uc: string, j: number) => (
+                    <span key={j} className="text-gray-300 text-xs bg-blue-500/20 px-2 py-0.5 rounded">{uc}</span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <div className="grid grid-cols-2 gap-2 mt-3">
+              {pattern.advantages && (
+                <div className="bg-emerald-500/10 rounded p-2">
+                  <p className="text-emerald-300 text-xs font-semibold mb-1">Advantages:</p>
+                  <ul className="text-gray-300 text-xs space-y-1">
+                    {pattern.advantages.map((a: string, j: number) => (
+                      <li key={j}>• {a}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+              {pattern.requirements && (
+                <div className="bg-amber-500/10 rounded p-2">
+                  <p className="text-amber-300 text-xs font-semibold mb-1">Requirements:</p>
+                  <ul className="text-gray-300 text-xs space-y-1">
+                    {pattern.requirements.map((r: string, j: number) => (
+                      <li key={j}>• {r}</li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SecurityRequirementsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+      <h3 className="font-semibold text-white mb-4 text-xl">🔒 {data.title}</h3>
+
+      {data.requirements && (
+        <div className="space-y-4">
+          {data.requirements.map((req: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4">
+              <h4 className="text-red-300 font-semibold mb-2">{req.category}</h4>
+              {req.items && (
+                <ul className="text-gray-300 text-sm space-y-1">
+                  {req.items.map((item: string, j: number) => (
+                    <li key={j}>• {item}</li>
+                  ))}
+                </ul>
+              )}
+              {req.description && <p className="text-gray-400 text-sm">{req.description}</p>}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.certifications && (
+        <div className="mt-4">
+          <h4 className="text-white font-semibold mb-2">Required Certifications</h4>
+          <div className="flex flex-wrap gap-2">
+            {data.certifications.map((cert: string, i: number) => (
+              <span key={i} className="bg-emerald-500/20 text-emerald-300 px-3 py-1 rounded-full text-sm">{cert}</span>
             ))}
           </div>
         </div>
