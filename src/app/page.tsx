@@ -9,6 +9,7 @@ import {
 } from 'lucide-react'
 import { pillarsData } from '@/lib/pillars-data'
 import LearnContentRenderer from '../../components/LearnContent'
+import HelpChat from '../../components/HelpChat'
 import { 
   useProgress, 
   useExercises, 
@@ -1013,6 +1014,9 @@ export default function TrainingPlatform() {
           </div>
         </main>
       </div>
+
+      {/* Help Chat Button - hidden on exercises, quizzes, and assessments */}
+      <HelpChat hidden={currentTab === 'exercise' || currentTab === 'quiz' || showMasterQuiz || pillar.id === 'final-exam'} />
     </div>
   )
 }

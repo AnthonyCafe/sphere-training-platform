@@ -12,13 +12,9 @@ export const pillarsData = [
     shortTitle: 'Payments',
     description: 'The non-negotiable foundation. If this pillar is missing, Sphere won\'t make sense.',
     color: 'blue',
-    overview: `**Why This Pillar Matters**
+    overview: `Sphere does not "move messages faster." It restructures liquidity, settlement coordination, and compliance. Without understanding traditional payments infrastructure, people misclassify Sphere immediately.
 
-If this pillar is missing, Sphere won\'t make sense.
-
-Sphere does not "move messages faster." It restructures liquidity, settlement coordination, and compliance. If someone doesn\'t understand traditional payments infrastructure, they will misclassify Sphere immediately.
-
-This pillar ensures you can explain:
+**After this pillar, you'll explain:**
 - Why cross-border payments are structurally hard (not just "old technology")
 - The difference between messages and money
 - What settlement finality actually means (legally, not technically)
@@ -40,7 +36,7 @@ This pillar ensures you can explain:
           ]
         },
         learn: {
-          introduction: 'Every payment - whether it\'s $50 on Venmo or $500M between banks - moves through the same three stages. Understanding this lifecycle is non-negotiable for Sphere conversations because we restructure where and how settlement happens.',
+          introduction: 'Every payment - whether $50 on Venmo or $500M between banks - moves through three stages. Sphere restructures where and how settlement happens, so you need to understand this lifecycle cold.',
           coreQuestion: 'Has money actually moved?',
           sections: [
             {
@@ -268,6 +264,15 @@ This pillar ensures you can explain:
           { q: 'Why is SpherePay\'s value "in the settlement layer"?', options: ['Faster messages than SWIFT', 'Stablecoins compress settlement to minutes', 'Eliminates clearing', 'Bypasses all banks'], correct: 1 },
           { q: 'What is the correct order of the payment lifecycle?', options: ['Settlement → Clearing → Initiation', 'Clearing → Initiation → Settlement', 'Initiation → Clearing → Settlement', 'Initiation → Settlement → Clearing'], correct: 2 },
           { q: 'Settlement finality means:', options: ['Payment message was sent', 'Banks have agreed to transfer', 'Value transfer is complete and irrevocable', 'Customer received confirmation'], correct: 2 }
+        ],
+        glossary: [
+          { term: 'Initiation', definition: 'First stage of a payment. The instruction is created and sent, but no money has moved. Easily reversible.' },
+          { term: 'Clearing', definition: 'Second stage. Payment instruction is validated, matched, and prepared for settlement. Banks have agreed, but money hasn\'t moved yet.' },
+          { term: 'Settlement', definition: 'Final stage. Actual value moves on the ledger that matters (usually central bank). Irrevocable.' },
+          { term: 'Settlement Finality', definition: 'The legal and operational point at which a payment becomes irrevocable. Once settled, it cannot be reversed.' },
+          { term: 'Correspondent Bank', definition: 'An intermediary bank that facilitates transactions between two banks that don\'t have a direct relationship. Common in cross-border payments.' },
+          { term: 'Nostro Account', definition: 'An account that a bank holds in a foreign currency at another bank. Used to facilitate cross-border settlements. "Nostro" = "ours" in Latin.' },
+          { term: 'Central Bank Ledger', definition: 'The master ledger maintained by a country\'s central bank (e.g., Federal Reserve). Settlement on this ledger is considered final because central banks cannot default.' }
         ]
       },
       {
@@ -473,8 +478,15 @@ This pillar ensures you can explain:
           { q: 'What does SWIFT primarily provide?', options: ['Settlement services', 'Messaging services', 'Currency exchange', 'Liquidity provision'], correct: 1 },
           { q: 'A SWIFT ACK confirms:', options: ['Money has moved', 'Message delivered to next bank', 'Settlement complete', 'Beneficiary received funds'], correct: 1 },
           { q: 'Complete: "Messages create obligations..."', options: ['...messaging confirms them', '...settlement discharges them', '...banks process them', '...compliance approves them'], correct: 1 },
-          { q: 'How many financial institutions are connected to SWIFT?', options: ['1,100+', '5,500+', '11,000+', '50,000+'], correct: 2 },
-          { q: 'Which system actually MOVES money in the US?', options: ['SWIFT', 'Fedwire', 'CHIPS', 'Both Fedwire and CHIPS'], correct: 3 }
+          { q: 'Why is releasing goods after receiving a SWIFT ACK dangerous?', options: ['SWIFT ACK means payment is complete', 'SWIFT ACK only confirms message delivery, not settlement', 'SWIFT ACK is unreliable', 'Goods should never be released'], correct: 1 },
+          { q: 'Which system provides final settlement for USD in the US?', options: ['SWIFT', 'Fedwire (CHIPS settles through Fedwire)', 'CHIPS alone', 'ACH'], correct: 1 }
+        ],
+        glossary: [
+          { term: 'SWIFT', definition: 'Society for Worldwide Interbank Financial Telecommunication. A secure messaging network connecting 11,000+ financial institutions globally. Sends payment instructions but does NOT move money.' },
+          { term: 'Fedwire', definition: 'Real-time gross settlement system operated by the Federal Reserve. Actually moves money between banks by debiting/crediting reserve accounts. Provides immediate, irrevocable finality.' },
+          { term: 'SWIFT ACK', definition: 'Acknowledgment message confirming a SWIFT message was received and accepted. Does NOT mean money moved or settlement occurred - only that the instruction was delivered.' },
+          { term: 'RTGS', definition: 'Real-Time Gross Settlement. Systems that settle payments individually and immediately (not batched). Fedwire, CHAPS, and TARGET2 are RTGS systems.' },
+          { term: 'CHIPS', definition: 'Clearing House Interbank Payments System. Clears large USD payments throughout the day, then nets positions and settles the net through Fedwire at end of day.' }
         ]
       },
       {
@@ -952,7 +964,21 @@ This pillar ensures you can explain:
           { q: 'Why doesn\'t Bitcoin have legal finality?', options: ['Too slow', 'No legal framework defining when final', 'Always reversible', 'Government banned it'], correct: 1 },
           { q: 'Strongest finality?', options: ['ACH', 'CHIPS', 'Fedwire (RTGS)', 'Card networks'], correct: 2 },
           { q: 'Technical finality on blockchain means:', options: ['Legally irrevocable', 'Computationally impractical to reverse', 'Government approved', 'Bank confirmed'], correct: 1 },
-          { q: 'Why does Sphere use regulated stablecoins?', options: ['Faster than Bitcoin', 'Issuer provides legal framework for finality', 'No fees', 'Decentralized'], correct: 1 }
+          { q: 'Why does Sphere use regulated stablecoins?', options: ['Faster than Bitcoin', 'Reserve-backed with issuer accountability under financial regulation', 'No fees', 'Decentralized'], correct: 1 }
+        ],
+        glossary: [
+          { term: 'Settlement Finality', definition: 'The legal property that makes a payment unconditional, irrevocable, and enforceable. Defined by law, not technology.' },
+          { term: 'Legal Finality', definition: 'Finality backed by statute and court precedent. If reversed, you have legal recourse. Fedwire provides this; crypto does not.' },
+          { term: 'Probabilistic Finality', definition: 'The increasing difficulty of reversing a transaction as more confirmations accrue. Blockchain transactions become "computationally impractical" to reverse but have no legal protection.' },
+          { term: 'RTGS (Real-Time Gross Settlement)', definition: 'Settlement system that processes payments individually and immediately, one at a time. Fedwire, TARGET2, and CHAPS are RTGS systems. Provides immediate finality.' },
+          { term: 'Netting', definition: 'Offsetting payments between parties to reduce the total amount that must settle. CHIPS uses netting to process $1.8 trillion daily with only ~$3 billion in liquidity.' },
+          { term: 'Batch Processing', definition: 'Collecting payments into groups and processing them at scheduled times rather than individually. ACH uses batch processing, which is efficient but slower than RTGS.' },
+          { term: 'FedNow', definition: 'The Federal Reserve\'s instant payment service launched in 2023. Provides 24/7/365 real-time settlement with immediate finality for domestic US payments up to $500K.' },
+          { term: 'TARGET2', definition: 'Trans-European Automated Real-time Gross Settlement Express Transfer. The Eurozone\'s RTGS system for EUR, operated by the European Central Bank.' },
+          { term: 'CHAPS', definition: 'Clearing House Automated Payment System. The UK\'s RTGS system for GBP, operated by the Bank of England.' },
+          { term: 'SEPA', definition: 'Single Euro Payments Area. A payment scheme (not settlement system) that standardizes EUR transfers across 36 European countries. Includes SEPA Instant for 10-second transfers.' },
+          { term: 'MT103', definition: 'SWIFT message type for single customer credit transfers. The standard wire transfer instruction message. When someone asks for "the MT103," they want payment details.' },
+          { term: 'MT202', definition: 'SWIFT message type for bank-to-bank transfers. Used for correspondent banking settlements and cover payments that accompany MT103s.' }
         ]
       },
       {
@@ -1079,7 +1105,16 @@ This pillar ensures you can explain:
         quiz: [
           { q: 'What makes central bank money unique?', options: ['It\'s digital', 'Zero credit risk (sovereign-backed)', 'It\'s faster', 'Globally accepted'], correct: 1 },
           { q: 'CHIPS settles through:', options: ['Bitcoin', 'SWIFT', 'Fedwire', 'Credit cards'], correct: 2 },
-          { q: 'Sphere\'s position on central banks:', options: ['Replace them', 'Complement them', 'Ignore them', 'Wait for CBDCs'], correct: 1 }
+          { q: 'Sphere\'s position on central banks:', options: ['Replace them', 'Complement them', 'Ignore them', 'Wait for CBDCs'], correct: 1 },
+          { q: 'Why can\'t technology "disintermediate" central banks for settlement?', options: ['Technology is too slow', 'Only sovereigns can provide zero credit risk and legal finality', 'Regulations prevent it', 'Banks would block it'], correct: 1 },
+          { q: 'How does Sphere complement central banks?', options: ['By replacing correspondent banking entirely', 'By optimizing the cross-border leg while endpoints still settle through central bank systems', 'By creating a new currency', 'By operating outside the banking system'], correct: 1 }
+        ],
+        glossary: [
+          { term: 'Central Bank', definition: 'A nation\'s primary monetary authority that issues currency, manages monetary policy, and provides final settlement through RTGS systems. Examples: Federal Reserve (US), ECB (Eurozone), Bank of England (UK), Central Bank of UAE.' },
+          { term: 'CBDC (Central Bank Digital Currency)', definition: 'A digital form of central bank money, issued directly by a central bank. Unlike stablecoins (issued by private companies), CBDCs would have direct sovereign backing. Many central banks are exploring or piloting CBDCs.' },
+          { term: 'Zero Credit Risk', definition: 'The unique property of central bank money: it cannot default because the sovereign can always create more of its own currency. No private institution can offer this - only central banks provide zero credit risk settlement.' },
+          { term: 'Lender of Last Resort', definition: 'A central bank function: the ability to create money to support the financial system during crises. Only central banks have this power. No technology or private company can replicate it.' },
+          { term: 'Sovereign Backing', definition: 'The guarantee provided by a nation-state that gives its currency value and makes its central bank money the ultimate settlement asset. This is why central bank settlement is "final" in a way private settlement cannot be.' }
         ]
       },
       {
@@ -1813,6 +1848,19 @@ You must be able to discuss stablecoins without crypto language, understand thei
           { q: 'What is the "stablecoin sandwich"?', options: ['A trading strategy', 'Fiat→Stablecoin→Fiat transfer flow', 'A type of stablecoin', 'DeFi protocol'], correct: 1 },
           { q: 'Sphere uses stablecoins as:', options: ['Investment product', 'Speculative asset', 'Settlement infrastructure/plumbing', 'Customer-facing product'], correct: 2 },
           { q: 'Average stablecoin hold time at Sphere:', options: ['Days', 'Hours', 'Minutes (15-45)', 'Weeks'], correct: 2 }
+        ],
+        glossary: [
+          { term: 'Stablecoin', definition: 'A cryptocurrency designed to maintain stable value by pegging to a reference asset (usually USD). Unlike Bitcoin, stablecoins hold ~$1.00 consistently through reserve backing.' },
+          { term: 'Fiat-Collateralized Stablecoin', definition: 'A stablecoin backed 1:1 by fiat currency reserves (cash, T-bills, bank deposits). USDC and USDT are fiat-collateralized. Most institutional and regulatory-friendly type.' },
+          { term: 'Algorithmic Stablecoin', definition: 'A stablecoin that maintains its peg through algorithms rather than reserves. HIGH RISK. TerraUSD (UST) collapsed in 2022, losing $40B+. Most jurisdictions now restrict or prohibit these.' },
+          { term: 'On-Ramp', definition: 'A licensed service that converts fiat currency (USD, EUR, AED) into cryptocurrency or stablecoins. The entry point from traditional finance into crypto rails.' },
+          { term: 'Off-Ramp', definition: 'A licensed service that converts cryptocurrency or stablecoins back into fiat currency. The exit point from crypto rails back to traditional banking.' },
+          { term: 'Stablecoin Sandwich', definition: 'Sphere\'s core payment flow: Fiat In → Stablecoin Transfer → Fiat Out. The stablecoin is the invisible middle layer. End users only touch fiat.' },
+          { term: 'USDC', definition: 'USD Coin, issued by Circle. US-regulated, MiCA-compliant stablecoin with transparent reserves (~$52B market cap). Monthly attestations. Sphere\'s primary stablecoin for US corridors.' },
+          { term: 'USDT', definition: 'Tether, the largest stablecoin (~$137B market cap). Highest liquidity globally, dominant in Asia. Not MiCA-compliant, delisted from EU exchanges. Sphere uses for Asia corridors.' },
+          { term: 'MiCA', definition: 'Markets in Crypto-Assets Regulation. EU regulatory framework for crypto-assets including stablecoins. Requires reserves, transparency, and licensing. USDC compliant, USDT not compliant.' },
+          { term: 'Attestation', definition: 'A report from an independent auditor confirming a stablecoin issuer\'s reserves. Not a full audit, but verification that reserves exist at a point in time. Circle publishes monthly.' },
+          { term: 'Transitory Holdings', definition: 'Sphere\'s operational approach: hold stablecoins for MINUTES (15-45 avg), not hours or days. Minimizes exposure to depeg, hack, or regulatory risk.' }
         ]
       },
       {
@@ -2126,6 +2174,18 @@ You must be able to discuss stablecoins without crypto language, understand thei
           { q: 'How does Sphere mitigate stablecoin risk?', options: ['Avoid stablecoins', 'Hold for minutes not days', 'Use only one issuer', 'Guarantee the peg'], correct: 1 },
           { q: 'Which is NOT one of the five stablecoin risk categories?', options: ['Reserve risk', 'Redemption risk', 'Interest rate risk', 'Counterparty risk'], correct: 2 },
           { q: 'Sphere\'s maximum stablecoin hold time per transaction:', options: ['24 hours', '2 hours', '1 week', 'No limit'], correct: 1 }
+        ],
+        glossary: [
+          { term: 'Depeg', definition: 'When a stablecoin trades below (or above) its $1.00 target price. USDC briefly traded at $0.87 during the March 2023 SVB crisis - a 13% depeg.' },
+          { term: 'Reserve Risk', definition: 'The risk that a stablecoin\'s reserves don\'t exist, aren\'t liquid, or aren\'t high quality. Algorithmic stablecoins (TerraUSD) had zero reserves and collapsed.' },
+          { term: 'Redemption Risk', definition: 'The risk that you can\'t convert stablecoins back to fiat when needed. During bank runs or confidence shocks, redemptions may be delayed or restricted.' },
+          { term: 'Operational Risk', definition: 'Risk from smart contract bugs, hacks, bridge exploits, or key management failures. Ronin Bridge ($625M) and Wormhole ($325M) were major operational failures.' },
+          { term: 'Regulatory Risk', definition: 'Risk that a stablecoin issuer is shut down, banned, or forced to freeze assets by regulators. BUSD was ordered to stop minting by NYDFS in 2023.' },
+          { term: 'Counterparty Risk', definition: 'Risk that banks or institutions holding stablecoin reserves fail. USDC had $3.3B at Silicon Valley Bank when it collapsed - classic counterparty risk.' },
+          { term: 'Bank Run', definition: 'Mass withdrawals driven by fear. SVB saw $42B withdrawn in 24 hours. Stablecoins face similar risk if holders lose confidence and rush to redeem.' },
+          { term: 'Confidence Shock', definition: 'A sudden loss of market confidence that causes price drops or redemption surges. USDC depegged due to confidence shock, not actual insolvency.' },
+          { term: 'Multi-sig Wallet', definition: 'A cryptocurrency wallet requiring multiple private keys to authorize transactions (e.g., 3-of-5). Prevents single points of failure in key management.' },
+          { term: 'Systemic Risk', definition: 'Risk that problems in one part of the financial system cascade to others. Mass stablecoin redemptions could force Treasury sales, affecting broader markets.' }
         ]
       },
       {
@@ -2398,6 +2458,15 @@ You must be able to discuss stablecoins without crypto language, understand thei
           { q: 'Sphere\'s approach to speed vs safety:', options: ['Maximum speed always', 'Safety first - confirm fiat before releasing', 'Ignore reconciliation', 'Only use one ledger'], correct: 1 },
           { q: 'Sphere\'s median settlement time:', options: ['60 seconds', '15-30 minutes', '2-5 days', '24 hours'], correct: 1 },
           { q: 'What does Sphere do if fiat confirmation exceeds 2 hours?', options: ['Auto-complete anyway', 'Cancel transaction', 'Escalate to manual review', 'Ignore'], correct: 2 }
+        ],
+        glossary: [
+          { term: 'Speed Asymmetry', definition: 'The timing mismatch where stablecoins settle in minutes while fiat takes days. Creates reconciliation risk - someone must bear exposure during the gap.' },
+          { term: 'Four Ledgers', definition: 'Every Sphere payment touches four separate record systems: Client\'s bank, Sphere\'s bank, blockchain, and destination bank. All must eventually reconcile.' },
+          { term: 'Reconciliation', definition: 'The process of ensuring all four ledgers agree on transaction amounts and status. Timing differences create temporary gaps that must be monitored.' },
+          { term: 'Pre-Flight Verification', definition: 'Checking customer balance and wire validity BEFORE initiating any stablecoin conversion. Prevents releasing stablecoin for unfunded transfers.' },
+          { term: 'Fiat Confirmation Gateway', definition: 'Sphere\'s control that holds stablecoin release until fiat receipt is confirmed. Maximum wait: 2 hours before escalation.' },
+          { term: 'Cut-Off Time', definition: 'The deadline by which a bank must receive payment for same-day processing. Missing cut-off adds 1+ days. Fedwire cut-off: 6:30 PM ET.' },
+          { term: 'Safety-First Approach', definition: 'Sphere\'s operational philosophy: confirm fiat before releasing stablecoin. Trades raw speed (60 seconds) for safety (15-30 minutes).' }
         ]
       },
       {
@@ -2911,6 +2980,16 @@ You must be able to discuss stablecoins without crypto language, understand thei
           { q: 'Which stablecoin is MiCA compliant?', options: ['USDT', 'USDC', 'DAI', 'Terra'], correct: 1 },
           { q: 'Sphere is classified as:', options: ['Stablecoin issuer', 'Stablecoin transmitter', 'Crypto exchange', 'Bank'], correct: 1 },
           { q: 'MiCA requires stablecoin reserves to be:', options: ['In Bitcoin', '1:1 in liquid assets', 'Algorithmic', 'Optional'], correct: 1 }
+        ],
+        glossary: [
+          { term: 'Stablecoin Issuance', definition: 'Creating new stablecoin tokens backed by reserves. Requires heavy regulation (bank/e-money license, 1:1 backing, audits). Circle and Tether are issuers. Sphere is NOT.' },
+          { term: 'Stablecoin Transmission', definition: 'Moving existing stablecoins between parties. Lighter regulation than issuance (payment services license). Sphere IS a transmitter.' },
+          { term: 'MiCA', definition: 'Markets in Crypto-Assets Regulation. EU framework for crypto including stablecoins. Requires reserves, transparency, licensing. USDC compliant; USDT delisted from EU exchanges.' },
+          { term: 'GENIUS Act', definition: 'US stablecoin legislation enacted 2025. Focuses on issuance requirements: reserves, capital, reporting. Sphere complies as transmitter.' },
+          { term: 'VARA', definition: 'Virtual Assets Regulatory Authority. Dubai regulator for crypto activities including exchanges and custody. Separate from CBUAE (fiat payments).' },
+          { term: 'CBUAE', definition: 'Central Bank of UAE. Federal regulator for payment services and stablecoin rules (onshore). Key regulator for Sphere\'s UAE operations.' },
+          { term: 'MAS', definition: 'Monetary Authority of Singapore. Regulates payment services under PSA 2019. Major Payment Institution (MPI) license required for large volumes.' },
+          { term: 'Regulatory Convergence', definition: 'Global trend toward similar stablecoin regulations across jurisdictions. Bank-like oversight becoming standard. Good for Sphere - validates compliance-first approach.' }
         ]
       },
       {
@@ -3232,6 +3311,14 @@ You must be able to discuss stablecoins without crypto language, understand thei
           { q: 'Current stage of institutional adoption?', options: ['Speculation', 'Pilots', 'Production', 'Not started'], correct: 2 },
           { q: 'Sphere serves enterprise customers via:', options: ['Retail app', 'API-first integration', 'Bank branches', 'ATMs'], correct: 1 },
           { q: 'Which is NOT a Sphere enterprise service?', options: ['White-label capability', 'Compliance as a Service', 'Retail trading', 'Enterprise SLAs'], correct: 2 }
+        ],
+        glossary: [
+          { term: 'Institutional Adoption Curve', definition: 'The progression of enterprise stablecoin usage: speculation → pilots → production → infrastructure. We\'re currently in the production phase.' },
+          { term: 'Unbanked Population', definition: 'The 1.4 billion people globally without access to formal banking services. Stablecoins + mobile phones enable financial inclusion.' },
+          { term: 'API-First', definition: 'Design philosophy where all functionality is available via programmatic interfaces. Enables enterprise integration into ERP, treasury, and accounting systems.' },
+          { term: 'White-Label', definition: 'Service that can be rebranded by partners as their own. Sphere offers white-label capability for financial institutions.' },
+          { term: 'Treasury Management', definition: 'Corporate function managing cash, liquidity, and working capital. Stablecoins enable 24/7 treasury operations and faster capital recycling.' },
+          { term: 'Enterprise SLA', definition: 'Service Level Agreement specifying uptime, response times, and support levels for business customers. Sphere offers 99.9% uptime guarantee.' }
         ]
       },
       {
@@ -4371,6 +4458,17 @@ You must be able to discuss stablecoins without crypto language, understand thei
           { q: 'Chainalysis 2023 illicit volume was revised from $24.2B to:', options: ['$26.1B', '$36.1B', '$46.1B', '$56.1B'], correct: 2 },
           { q: 'SphereNet enforces compliance:', options: ['After settlement', 'Before settlement', 'Weekly', 'Never'], correct: 1 },
           { q: 'Which is NOT a SphereNet core principle?', options: ['Compliance-native', 'Privacy-preserving', 'Fully decentralized', 'Verified ecosystem'], correct: 2 }
+        ],
+        glossary: [
+          { term: 'Systemic Risk', definition: 'Risk that problems in one part of the financial system cascade to others. Stablecoins have reached scale ($300B+) where their risks affect Treasury markets and global liquidity.' },
+          { term: 'Leverage Formation', definition: 'Using stablecoins as collateral to borrow more stablecoins, creating hidden leverage. MakerDAO\'s DAI was 50%+ backed by USDC - rehypothecation risk.' },
+          { term: 'Liquidity Run', definition: 'Mass redemptions driven by fear. Unlike banks, stablecoins have no circuit breakers. USDC saw $5.6B redeemed in 48 hours during March 2023 crisis.' },
+          { term: 'Enforcement Gap', definition: 'The problem that blockchain transactions settle before compliance can act. Chainalysis revised 2023 illicit volume from $24.2B to $46.1B - showing detection lags reality.' },
+          { term: 'Compliance-Native', definition: 'Architecture where compliance is enforced at the protocol level, before settlement. SphereNet\'s approach - non-compliant transactions never settle.' },
+          { term: 'Privacy-Preserving', definition: 'Using zero-knowledge proofs to verify compliance without revealing sensitive data. SphereNet shares attestations (verified/not verified), not raw customer data.' },
+          { term: 'Verified Ecosystem', definition: 'Network where all participants must be identified and verified before transacting. No anonymous wallets on SphereNet.' },
+          { term: 'Pre-Settlement Enforcement', definition: 'Checking sanctions, jurisdiction rules, and policies BEFORE a transaction executes. Rejected transactions never appear on-chain.' },
+          { term: 'SphereNet', definition: 'Purpose-built blockchain for regulated finance. Enforces compliance at protocol level, uses privacy-preserving proofs, requires verified participants.' }
         ]
       }
     ],

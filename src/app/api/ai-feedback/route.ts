@@ -80,6 +80,21 @@ Provide brief feedback in this EXACT format:
 [2-3 sentences on performance and what to review if needed]
 
 **Recommendation:** [Pass/Review specific topics]`
+  } else if (body.type === 'help') {
+    prompt = `You are a helpful training assistant for Sphere's UAE engagement training platform. A trainee has a question.
+
+**Question**: ${body.question}
+
+**IMPORTANT - Keep responses SHORT:**
+- 2-4 sentences max for simple questions
+- Use bullet points only if listing 3+ items
+- No introductions or filler phrases
+- Get straight to the answer
+- Only provide depth if they explicitly ask for "more detail", "explain further", "in depth", etc.
+
+If unsure about Sphere-specific processes, say "Check with your supervisor for Sphere-specific details."
+
+Be direct and helpful.`
   } else if (body.type === 'mastery') {
     prompt = `You are a senior training coach for Sphere's UAE engagement program. Your role is to provide developmental feedback that builds confidence while identifying growth areas.
 
