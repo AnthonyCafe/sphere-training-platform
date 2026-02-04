@@ -2694,6 +2694,32 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 'Directly impacts any company serving EU customers or using EUR stablecoins'
               ]
             },
+            euRegulators: {
+              title: 'EU Regulators Under MiCA',
+              regulators: [
+                {
+                  name: 'ESMA (European Securities and Markets Authority)',
+                  role: 'Primary EU-level regulator for crypto-assets',
+                  responsibilities: 'Oversees Crypto-Asset Service Providers (CASPs), maintains EU-wide registers, issues technical standards and guidance'
+                },
+                {
+                  name: 'EBA (European Banking Authority)',
+                  role: 'Supervises significant stablecoins',
+                  responsibilities: 'Direct oversight of "significant" EMTs and ARTs (over €5B outstanding or 10M users), sets prudential standards'
+                },
+                {
+                  name: 'National Competent Authorities (NCAs)',
+                  role: 'Authorize and supervise entities in each member state',
+                  responsibilities: 'Grant licenses, conduct ongoing supervision, enforce MiCA locally. Examples: BaFin (Germany), AMF (France), CBI (Ireland)'
+                },
+                {
+                  name: 'ECB (European Central Bank)',
+                  role: 'Monetary policy oversight',
+                  responsibilities: 'Consulted on significant stablecoins that could impact monetary policy or payment systems. Not direct MiCA enforcer but influential voice.'
+                }
+              ],
+              keyPoint: 'Unlike US (state-by-state licensing), MiCA creates passporting - one EU license works across all 27 member states. Get authorized in France, operate in Germany without separate license.'
+            },
             stablecoinClassification: {
               title: 'MiCA Stablecoin Classifications',
               types: [
@@ -2800,6 +2826,37 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 'Defines "payment stablecoin" as distinct regulatory category',
                 'Establishes US as having clear stablecoin rules (competitive with EU MiCA)'
               ]
+            },
+            usRegulators: {
+              title: 'US Regulators for Stablecoins',
+              regulators: [
+                {
+                  name: 'OCC (Office of the Comptroller of the Currency)',
+                  role: 'Federal stablecoin issuer licensing under GENIUS Act',
+                  responsibilities: 'Charters and supervises national banks and federal stablecoin issuers'
+                },
+                {
+                  name: 'FinCEN (Financial Crimes Enforcement Network)',
+                  role: 'AML/BSA compliance for all money services businesses',
+                  responsibilities: 'MSB registration, SAR filing requirements, AML program standards. Sphere is registered with FinCEN.'
+                },
+                {
+                  name: 'State Banking Regulators',
+                  role: 'Money transmitter licensing (state-by-state)',
+                  responsibilities: 'Issue MTLs, conduct examinations, enforce state money transmission laws. Sphere holds multiple state MTLs.'
+                },
+                {
+                  name: 'Federal Reserve',
+                  role: 'Oversight of payment systems and bank holding companies',
+                  responsibilities: 'Monitors stablecoin impact on monetary policy and financial stability'
+                },
+                {
+                  name: 'SEC (Securities and Exchange Commission)',
+                  role: 'Securities classification (contested)',
+                  responsibilities: 'May claim jurisdiction if stablecoin deemed a security. Most payment stablecoins NOT securities under GENIUS Act.'
+                }
+              ],
+              keyPoint: 'Unlike EU passporting, US requires state-by-state MTL licensing for transmission. GENIUS Act creates federal path for ISSUERS only - transmitters like Sphere still need state MTLs.'
             },
             keyProvisions: {
               title: 'GENIUS Act Key Provisions',
