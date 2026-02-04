@@ -1,7 +1,32 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, createContext, useContext } from 'react';
 import { CheckCircle, ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
+import { GlossaryTooltip, linkifyGlossaryTerms } from './GlossaryTooltip';
+
+// =============================================================================
+// GLOSSARY CONTEXT - Makes glossary available throughout the component tree
+// =============================================================================
+
+interface GlossaryTerm {
+  term: string;
+  definition: string;
+}
+
+const GlossaryContext = createContext<GlossaryTerm[]>([]);
+
+export function useGlossary() {
+  return useContext(GlossaryContext);
+}
+
+// Helper component to render text with glossary tooltips
+function GlossaryText({ children }: { children: string }) {
+  const glossary = useGlossary();
+  if (!glossary || glossary.length === 0) {
+    return <>{children}</>;
+  }
+  return <>{linkifyGlossaryTerms(children, glossary)}</>;
+}
 
 // =============================================================================
 // MAIN COMPONENT - Renders any learn content structure
@@ -9,9 +34,10 @@ import { CheckCircle, ChevronDown, ChevronUp, HelpCircle } from 'lucide-react';
 
 interface LearnContentProps {
   learn: any;
+  glossary?: GlossaryTerm[];
 }
 
-export default function LearnContentRenderer({ learn }: LearnContentProps) {
+export default function LearnContentRenderer({ learn, glossary = [] }: LearnContentProps) {
   // Handle null/undefined
   if (!learn) {
     return (
@@ -48,7 +74,7 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
     'issuanceVsTransmission', 'globalFrameworks',
     'uaeDeepDive', 'sphereStatus', 'singaporeDeepDive', 'ukDeepDive', 'brazilDeepDive',
     'potentialFrictionPoints', 'howSphereAddresses',
-    'speedComparison', 'asymmetryProblem', 'fourLedgers', 'capitalEfficiency',
+    'speedComparison', 'asymmetryProblem', 'fourLedgers', 'capitalEfficiency', 'sphereApproach',
     'globalFrameworks', 'micaDetails', 'geniusAct', 'uaeFramework', 'convergencePattern',
     // Section 2.5 flow: adoption curve → categories → detailed examples → why Sphere → metrics (proof) → market opportunity
     'adoptionCurve', 'enterpriseUseCases', 'realEnterpriseUseCases', 'whySphereIsRightPartner', 'sphereMetrics', 'unbankedOpportunity', 'arnoldOnMarkets',
@@ -155,8 +181,10 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
     'table', 'comparison', 'languageGuide',
     'arnoldInsight',
     // Sphere positioning - right before key takeaway
-    'sphereApproach', 'sphereRegulatoryApproach', 'sphereEnterpriseApproach',
+    'sphereRegulatoryApproach', 'sphereEnterpriseApproach',
     'spherePosition', 'sphereRelevance', 'sphereSolution',
+    // Visual summaries with color-coded sections
+    'visualSummary',
     'keyTakeaway',
     // Section transitions (always at end, before exercise/quiz)
     'nextSection'
@@ -166,21 +194,23 @@ export default function LearnContentRenderer({ learn }: LearnContentProps) {
   const learnKeys = Object.keys(learn);
 
   return (
-    <div className="space-y-6">
-      {/* Render in order */}
-      {renderOrder.map(key => {
-        if (!learn[key]) return null;
-        return <RenderProperty key={key} propKey={key} value={learn[key]} />;
-      })}
-
-      {/* Render any remaining properties not in renderOrder */}
-      {learnKeys
-        .filter(key => !renderOrder.includes(key))
-        .map(key => {
+    <GlossaryContext.Provider value={glossary}>
+      <div className="space-y-6">
+        {/* Render in order */}
+        {renderOrder.map(key => {
           if (!learn[key]) return null;
           return <RenderProperty key={key} propKey={key} value={learn[key]} />;
         })}
-    </div>
+
+        {/* Render any remaining properties not in renderOrder */}
+        {learnKeys
+          .filter(key => !renderOrder.includes(key))
+          .map(key => {
+            if (!learn[key]) return null;
+            return <RenderProperty key={key} propKey={key} value={learn[key]} />;
+          })}
+      </div>
+    </GlossaryContext.Provider>
   );
 }
 
@@ -193,7 +223,7 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
     case 'introduction':
       return (
         <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
-          <p className="text-gray-300 text-lg leading-relaxed">{value}</p>
+          <p className="text-gray-300 text-lg leading-relaxed"><GlossaryText>{value}</GlossaryText></p>
         </div>
       );
 
@@ -250,6 +280,37 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
         <div className="bg-purple-500/10 rounded-xl p-6 text-center">
           <p className="text-xl font-semibold text-white mb-2">"{value.phrase}"</p>
           <p className="text-purple-300 text-sm">{value.explanation}</p>
+        </div>
+      );
+
+    case 'visualSummary':
+      return (
+        <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+          <h3 className="font-semibold text-white text-lg mb-4">{value.title}</h3>
+          <div className="grid gap-4 md:grid-cols-2">
+            {value.sections?.map((section: any, i: number) => {
+              const bgColor = section.type === 'danger' ? 'bg-red-500/10 border-red-500/30' :
+                              section.type === 'success' ? 'bg-emerald-500/10 border-emerald-500/30' :
+                              section.type === 'info' ? 'bg-blue-500/10 border-blue-500/30' :
+                              section.type === 'sphere' ? 'bg-purple-500/10 border-purple-500/30' :
+                              'bg-slate-700/50 border-slate-600';
+              const textColor = section.type === 'danger' ? 'text-red-300' :
+                                section.type === 'success' ? 'text-emerald-300' :
+                                section.type === 'info' ? 'text-blue-300' :
+                                section.type === 'sphere' ? 'text-purple-300' :
+                                'text-gray-300';
+              return (
+                <div key={i} className={`${bgColor} border rounded-lg p-4`}>
+                  <h4 className={`font-semibold ${textColor} mb-2`}>{section.title}</h4>
+                  <ul className="space-y-1">
+                    {section.items?.map((item: string, j: number) => (
+                      <li key={j} className="text-gray-300 text-sm">• {item}</li>
+                    ))}
+                  </ul>
+                </div>
+              );
+            })}
+          </div>
         </div>
       );
 
@@ -1747,7 +1808,7 @@ function SectionCard({ section }: { section: any }) {
       
       {expanded && (
         <div className="p-6 space-y-4">
-          <p className="text-gray-300">{section.content}</p>
+          <p className="text-gray-300"><GlossaryText>{section.content}</GlossaryText></p>
           
           {section.details && (
             <div className="bg-slate-700/50 rounded-lg p-4 space-y-2">
@@ -2410,7 +2471,7 @@ function DefinitionsBlock({ data }: { data: any }) {
               {item.icon && <span className="text-xl">{item.icon}</span>}
               <span className="font-semibold text-white">{item.term || item.type}</span>
             </div>
-            <p className="text-gray-300 text-sm">{item.meaning || item.description}</p>
+            <p className="text-gray-300 text-sm"><GlossaryText>{item.meaning || item.description}</GlossaryText></p>
             {item.examples && <p className="text-gray-400 text-xs mt-1">Examples: {item.examples}</p>}
           </div>
         ))}

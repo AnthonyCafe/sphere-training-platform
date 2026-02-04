@@ -109,3 +109,4 @@ The platform supports:
 - Make targeted fixes over complete file rewrites
 - Test locally before pushing
 - Commit messages should describe the specific change
+- Do not deviate from user instructions. This is non negotiable.

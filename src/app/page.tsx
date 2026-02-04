@@ -10,6 +10,7 @@ import {
 import { pillarsData } from '@/lib/pillars-data'
 import LearnContentRenderer from '../../components/LearnContent'
 import HelpChat from '../../components/HelpChat'
+import FeedbackButton from '../../components/FeedbackButton'
 import { 
   useProgress, 
   useExercises, 
@@ -217,7 +218,7 @@ const FormattedFeedback = ({ text }: { text: string }) => {
 };
 
 // Admin emails list
-const ADMIN_EMAILS = ['arnold@sphere.com', 'anthony@vc.cafe']
+const ADMIN_EMAILS = ['arnold@spherepay.co', 'anthony@vc.cafe', 'anthonyk@spherepay.co']
 
 // Sphere Logo Component
 const SphereLogo = ({ className = "h-8 w-auto" }: { className?: string }) => (
@@ -506,7 +507,7 @@ export default function TrainingPlatform() {
             <span className="text-sm font-medium">{totalProgress}%</span>
           </div>
 
-          <a href="https://docs.google.com/document/d/1BHSNW_pYGk0OWELyuxP4Flw1OcHG4asx/edit" target="_blank" className="flex items-center gap-2 bg-slate-700/50 px-3 py-1.5 rounded-lg hover:bg-slate-700 transition">
+          <a href="https://docs.google.com/document/d/1d5l5Kg8WkQdKDSVEHQLvqD6hcn9AitJH/edit?usp=drive_link&ouid=114645856373087270413&rtpof=true&sd=true" target="_blank" className="flex items-center gap-2 bg-slate-700/50 px-3 py-1.5 rounded-lg hover:bg-slate-700 transition">
             <FileText className="w-4 h-4 text-blue-400" />
             <span className="text-sm hidden sm:inline">Glossary</span>
           </a>
@@ -544,17 +545,22 @@ export default function TrainingPlatform() {
             </div>
 
             {/* Pillar Tabs */}
-            <div className="flex border-b border-slate-700">
+            <div className="grid grid-cols-4 gap-1 p-2 bg-slate-900/50">
               {pillarsData.map((p: any, i: number) => {
                 const colors = getPillarColors(p.color)
+                const isActive = currentPillar === i
                 return (
                   <button
                     key={p.id}
                     onClick={() => { setCurrentPillar(i); setCurrentSection(0); setCurrentTab('curriculum'); setShowMasterQuiz(false); }}
-                    className={`flex-1 py-3 text-xs font-medium transition relative ${currentPillar === i ? colors.text : 'text-slate-500 hover:text-slate-300'}`}
+                    className={`py-1.5 px-1 text-[10px] font-semibold transition-all rounded-md flex flex-col items-center ${
+                      isActive
+                        ? `${colors.bg} ${colors.text} border ${colors.border}`
+                        : 'text-slate-500 hover:text-slate-300 hover:bg-slate-700/50'
+                    }`}
                   >
-                    {p.id === 'final-exam' ? '📝' : `P${i + 1}`}
-                    <div className={`absolute bottom-0 left-0 right-0 h-0.5 ${currentPillar === i ? colors.solid : 'bg-transparent'}`} />
+                    <span className="text-xs">{p.id === 'final-exam' ? '📝' : `P${i + 1}`}</span>
+                    <span className={`text-[8px] font-normal truncate w-full text-center leading-tight ${isActive ? '' : 'text-slate-600'}`}>{p.shortTitle}</span>
                   </button>
                 )
               })}
@@ -625,35 +631,39 @@ export default function TrainingPlatform() {
 
             {/* Tabs */}
             {!showMasterQuiz && (
-              <div className="flex gap-1 mt-4">
-                {(pillar.id === 'final-exam' ? [
-                  { id: 'curriculum', label: 'Curriculum', icon: ClipboardList },
-                  { id: 'exercise', label: 'Checklist', icon: PenTool },
-                  { id: 'notes', label: 'Notes', icon: StickyNote },
-                ] : [
-                  { id: 'curriculum', label: 'Curriculum', icon: ClipboardList },
-                  { id: 'learn', label: 'Learn', icon: BookOpen },
-                  { id: 'exercise', label: 'Exercise', icon: PenTool },
-                  { id: 'quiz', label: 'Quiz', icon: Brain },
-                  { id: 'notes', label: 'Notes', icon: StickyNote },
-                ]).map((tab: any) => (
-                  <button
-                    key={tab.id}
-                    onClick={() => setCurrentTab(tab.id)}
-                    className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition ${currentTab === tab.id ? 'bg-slate-700 text-white' : 'text-gray-400 hover:text-white'}`}
-                  >
-                    <tab.icon className="w-4 h-4" />
-                    {tab.label}
-                    {tab.id === 'exercise' && exerciseScores[sectionKey] && (
-                      <span className="ml-1 text-xs bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded">{exerciseScores[sectionKey]}%</span>
-                    )}
-                    {tab.id === 'quiz' && quizSubmitted[sectionKey] && progress[sectionKey]?.quizScore !== undefined && (
-                      <span className="ml-1 text-xs bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded">
-                        {Math.round((progress[sectionKey].quizScore / section.quiz.length) * 100)}%
-                      </span>
-                    )}
-                  </button>
-                ))}
+              <div className="flex items-center gap-1 mt-4">
+                <div className="flex gap-1 flex-1">
+                  {(pillar.id === 'final-exam' ? [
+                    { id: 'curriculum', label: 'Curriculum', icon: ClipboardList },
+                    { id: 'exercise', label: 'Checklist', icon: PenTool },
+                    { id: 'notes', label: 'Notes', icon: StickyNote },
+                  ] : [
+                    { id: 'curriculum', label: 'Curriculum', icon: ClipboardList },
+                    { id: 'learn', label: 'Learn', icon: BookOpen },
+                    { id: 'exercise', label: 'Exercise', icon: PenTool },
+                    { id: 'quiz', label: 'Quiz', icon: Brain },
+                    { id: 'glossary', label: 'Glossary', icon: Bookmark },
+                    { id: 'notes', label: 'Notes', icon: StickyNote },
+                  ]).map((tab: any) => (
+                    <button
+                      key={tab.id}
+                      onClick={() => setCurrentTab(tab.id)}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition ${currentTab === tab.id ? 'bg-slate-700 text-white' : 'text-gray-400 hover:text-white'}`}
+                    >
+                      <tab.icon className="w-4 h-4" />
+                      {tab.label}
+                      {tab.id === 'exercise' && exerciseScores[sectionKey] && (
+                        <span className="ml-1 text-xs bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded">{exerciseScores[sectionKey]}%</span>
+                      )}
+                      {tab.id === 'quiz' && quizSubmitted[sectionKey] && progress[sectionKey]?.quizScore !== undefined && (
+                        <span className="ml-1 text-xs bg-emerald-500/20 text-emerald-400 px-1.5 py-0.5 rounded">
+                          {Math.round((progress[sectionKey].quizScore / section.quiz.length) * 100)}%
+                        </span>
+                      )}
+                    </button>
+                  ))}
+                </div>
+                <FeedbackButton pillar={pillar.shortTitle} section={section.title} />
               </div>
             )}
           </div>
@@ -702,7 +712,7 @@ export default function TrainingPlatform() {
             {/* Learn Tab */}
             {currentTab === 'learn' && !showMasterQuiz && pillar.id !== 'final-exam' && (
               <div>
-                <LearnContentRenderer learn={section.learn} />
+                <LearnContentRenderer learn={section.learn} glossary={section.glossary} />
                 {!progress[sectionKey]?.learn && (
                   <button onClick={markLearnComplete} className={`mt-8 px-6 py-3 bg-gradient-to-r ${pillarColors.gradient} text-white rounded-lg font-medium`}>
                     <CheckCircle className="w-5 h-5 inline mr-2" />
@@ -877,6 +887,26 @@ export default function TrainingPlatform() {
                     Redo Quiz
                   </button>
                 )}
+              </div>
+            )}
+
+            {/* Glossary Tab */}
+            {currentTab === 'glossary' && !showMasterQuiz && section.glossary && (
+              <div className="space-y-4">
+                <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
+                  <h3 className="font-semibold text-white mb-4 flex items-center gap-2">
+                    <Bookmark className="w-5 h-5 text-blue-400" />
+                    Key Terms ({section.glossary.length})
+                  </h3>
+                  <div className="space-y-3">
+                    {section.glossary.map((item: { term: string; definition: string }, idx: number) => (
+                      <div key={idx} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-blue-500">
+                        <h4 className="text-blue-300 font-semibold mb-2">{item.term}</h4>
+                        <p className="text-gray-300 text-sm">{item.definition}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
             )}
 

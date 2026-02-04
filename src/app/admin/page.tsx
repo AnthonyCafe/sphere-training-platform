@@ -11,7 +11,7 @@ import {
 import Link from 'next/link'
 
 // Admin emails list - keep in sync with page.tsx
-const ADMIN_EMAILS = ['admin@sphere.com', 'anthony@vc.cafe']
+const ADMIN_EMAILS = ['admin@spherepay.co', 'anthony@vc.cafe', 'anthonyk@spherepay.co']
 
 interface UserStats {
   user_id: string
