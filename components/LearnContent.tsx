@@ -163,8 +163,8 @@ export default function LearnContentRenderer({ learn, glossary = [] }: LearnCont
     'pitchStructure', 'whatChangesVsConstant', 'commonMistakes', 'listeningFirst', 'pitchLengths',
     // 7.1-7.6 Audience-specific pitches
     'audienceProfile', 'whatToPitch', 'investorHooks', 'enterpriseHooks', 'bankHooks',
-    'fintechHooks', 'cryptoHooks', 'sovereignHooks', 'proofPoints', 'commonObjections',
-    'pitchScripts', 'practiceScenarios', 'championBuilding', 'relationshipBuilding',
+    'fintechHooks', 'cryptoHooks', 'sovereignHooks', 'proofPoints', 'investorMetricsReference',
+    'commonObjections', 'pitchScripts', 'practiceScenarios', 'championBuilding', 'relationshipBuilding',
     'partnershipModels', 'keyMessages',
 
     // =========================================================================
@@ -1174,6 +1174,9 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
 
     case 'proofPoints':
       return <ProofPointsBlock data={value} />;
+
+    case 'investorMetricsReference':
+      return <InvestorMetricsBlock data={value} />;
 
     case 'commonObjections':
       return <ObjectionsBlock data={value} />;
@@ -2867,6 +2870,51 @@ function FourLedgersBlock({ data }: { data: any }) {
       {data.requirement && (
         <div className="bg-purple-500/10 rounded-lg p-4">
           <p className="text-purple-200">{data.requirement}</p>
+        </div>
+      )}
+
+      {/* Risk-to-Control Mapping */}
+      {data.riskControlMapping && (
+        <div className="mt-6 bg-gradient-to-r from-red-500/10 to-emerald-500/10 rounded-xl p-5 border border-slate-600">
+          <h4 className="text-white font-semibold text-lg mb-2">{data.riskControlMapping.title}</h4>
+          <p className="text-gray-400 text-sm mb-4">{data.riskControlMapping.introduction}</p>
+
+          <div className="space-y-4">
+            {data.riskControlMapping.mappings?.map((mapping: any, i: number) => (
+              <div key={i} className="bg-slate-800/70 rounded-lg p-4 border-l-4 border-red-500/50">
+                <div className="flex items-start justify-between mb-3">
+                  <div>
+                    <p className="text-red-300 font-medium">⚠️ Risk: {mapping.risk}</p>
+                    <p className="text-gray-500 text-xs mt-1">Ledgers affected: {mapping.ledgersAffected?.join(', ')}</p>
+                  </div>
+                  <span className={`px-2 py-1 rounded text-xs font-medium ${
+                    mapping.severity?.includes('Critical') ? 'bg-red-500/30 text-red-300' :
+                    mapping.severity?.includes('Medium') ? 'bg-amber-500/30 text-amber-300' :
+                    'bg-blue-500/30 text-blue-300'
+                  }`}>
+                    {mapping.severity}
+                  </span>
+                </div>
+
+                <div className="bg-emerald-500/10 rounded-lg p-3 mb-2">
+                  <p className="text-emerald-400 text-sm font-medium mb-1">✅ Control: {mapping.control}</p>
+                  <p className="text-gray-300 text-sm">{mapping.howItWorks}</p>
+                </div>
+
+                {mapping.fallback && (
+                  <div className="bg-blue-500/10 rounded p-2">
+                    <p className="text-blue-300 text-xs">🔄 Fallback: {mapping.fallback}</p>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+
+          {data.riskControlMapping.exerciseGuidance && (
+            <div className="mt-4 bg-purple-500/10 rounded-lg p-3 border border-purple-500/30">
+              <p className="text-purple-200 text-sm">📝 {data.riskControlMapping.exerciseGuidance}</p>
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -11907,6 +11955,84 @@ function ProofPointsBlock({ data }: { data: any }) {
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+// Investor Metrics Block
+function InvestorMetricsBlock({ data }: { data: any }) {
+  const [expandedMetric, setExpandedMetric] = useState<number | null>(null);
+
+  return (
+    <div className="bg-gradient-to-br from-blue-900/20 to-slate-900 rounded-xl p-6 border border-blue-500/30">
+      <div className="flex items-center gap-3 mb-2">
+        <span className="text-2xl">📊</span>
+        <h3 className="font-semibold text-white text-xl">{data.title}</h3>
+      </div>
+      <p className="text-gray-400 text-sm mb-4">{data.introduction}</p>
+
+      {/* Core Metrics */}
+      <div className="space-y-3 mb-6">
+        {data.coreMetrics?.map((metric: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg overflow-hidden">
+            <button
+              onClick={() => setExpandedMetric(expandedMetric === i ? null : i)}
+              className="w-full p-4 text-left hover:bg-slate-700/70 transition-colors"
+            >
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <span className="text-blue-300 font-medium">{metric.metric}</span>
+                  <span className="bg-emerald-500/20 text-emerald-300 px-2 py-1 rounded text-sm font-mono">{metric.sphereNumber}</span>
+                </div>
+                <span className={`transform transition-transform ${expandedMetric === i ? 'rotate-90' : ''}`}>▶</span>
+              </div>
+            </button>
+            {expandedMetric === i && (
+              <div className="p-4 pt-0 border-t border-slate-600 space-y-3">
+                <div className="bg-slate-800/50 rounded p-3">
+                  <p className="text-gray-400 text-xs font-medium mb-1">What it means:</p>
+                  <p className="text-gray-300 text-sm">{metric.whatItMeans}</p>
+                </div>
+                <div className="bg-emerald-500/10 rounded p-3">
+                  <p className="text-emerald-400 text-xs font-medium mb-1">How to present:</p>
+                  <p className="text-emerald-200 text-sm">{metric.howToPresent}</p>
+                </div>
+                {metric.caveat && (
+                  <div className="bg-amber-500/10 rounded p-2">
+                    <p className="text-amber-300 text-xs">⚠️ {metric.caveat}</p>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* Metrics NOT to Lead With */}
+      {data.metricsNotToLead && (
+        <div className="bg-red-500/10 rounded-lg p-4 mb-4 border border-red-500/30">
+          <p className="text-red-300 font-medium mb-2">❌ Metrics NOT to Lead With:</p>
+          <div className="space-y-2">
+            {data.metricsNotToLead.map((item: any, i: number) => (
+              <div key={i} className="flex items-start gap-2">
+                <span className="text-red-400 text-sm">•</span>
+                <div>
+                  <span className="text-red-200 text-sm font-medium">{item.metric}:</span>
+                  <span className="text-gray-400 text-sm ml-1">{item.why}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Presentation Order */}
+      {data.presentationOrder && (
+        <div className="bg-blue-500/10 rounded-lg p-4 border border-blue-500/30">
+          <p className="text-blue-300 font-medium mb-2">📋 Recommended Presentation Order:</p>
+          <p className="text-blue-200 text-sm">{data.presentationOrder}</p>
+        </div>
+      )}
     </div>
   );
 }

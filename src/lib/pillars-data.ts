@@ -1389,6 +1389,28 @@ export const pillarsData = [
                   chain: 'US bank → Tokyo correspondent (MUFG, Mizuho) or direct → Japanese bank',
                   speed: 'Same day to T+2',
                   reason: 'Major currency pair, strong banking relationships'
+                },
+                {
+                  corridor: 'Brazil → Japan (BRL → JPY)',
+                  hops: '3-4',
+                  chain: 'Brazilian bank (Itaú, Bradesco) → São Paulo correspondent → New York correspondent (JPM, Citi) → Tokyo correspondent (MUFG, SMBC) → Japanese bank',
+                  speed: 'T+3 to T+7',
+                  reason: 'Exotic currency pair with low direct liquidity. Must route through USD as intermediary currency. Brazil\'s capital controls add complexity. Limited direct BRL-JPY market means conversion happens twice: BRL→USD→JPY.',
+                  complianceChecks: [
+                    'Brazilian Central Bank (BCB) reporting for outbound transfers >$10K',
+                    'Brazil capital controls verification (legal source of funds)',
+                    'US OFAC screening at NY correspondent',
+                    'Japan FSA compliance at Tokyo correspondent',
+                    'Beneficiary verification at Japanese bank'
+                  ],
+                  failurePoints: [
+                    'BCB documentation requirements not met → payment returned',
+                    'NY correspondent compliance flag → 2-3 day hold',
+                    'FX conversion slippage (two conversions = more exposure)',
+                    'Cut-off time misalignment across 3 time zones (São Paulo, New York, Tokyo)',
+                    'Japanese bank beneficiary name mismatch (character encoding issues common)'
+                  ],
+                  sphereApproach: 'Sphere compresses this to: Brazilian on-ramp (BRL→USDC, 15 min) → Stablecoin transfer (5 min) → Japanese off-ramp (USDC→JPY, 30 min). Total: ~1 hour vs 3-7 days. Single FX conversion point. Compliance handled upfront at on-ramp. No correspondent chain.'
                 }
               ]
             },
@@ -2341,7 +2363,70 @@ You must be able to discuss stablecoins without crypto language, understand thei
               ],
               gap: 'For 2 DAYS, there\'s a gap: Beneficiary has fiat. Customer was debited. But Sphere hasn\'t received fiat yet. Who bears risk during this gap?'
             },
-            requirement: 'All four ledgers must eventually reconcile. But timing differences create temporary gaps that must be monitored, controlled, and someone must bear the risk.'
+            requirement: 'All four ledgers must eventually reconcile. But timing differences create temporary gaps that must be monitored, controlled, and someone must bear the risk.',
+            riskControlMapping: {
+              title: 'Risk-to-Control Mapping for Reconciliation',
+              introduction: 'For each risk in the four-ledger system, here are the specific controls that mitigate it:',
+              mappings: [
+                {
+                  risk: 'Fiat not received but stablecoin already released',
+                  ledgersAffected: ['Client Bank Ledger', 'Sphere Bank Ledger'],
+                  severity: 'Critical - Direct financial loss',
+                  control: 'Fiat Confirmation Gateway',
+                  howItWorks: 'NEVER release stablecoin until fiat confirmed in Sphere\'s bank account. Wait for bank API confirmation or partner confirmation. Max 2-hour wait before escalation.',
+                  fallback: 'If confirmation exceeds 2 hours, escalate to operations team for manual verification before proceeding.'
+                },
+                {
+                  risk: 'Amount mismatch due to hidden correspondent fees',
+                  ledgersAffected: ['Client Bank Ledger', 'Sphere Bank Ledger'],
+                  severity: 'Medium - Margin erosion',
+                  control: 'Amount Matching',
+                  howItWorks: 'Compare expected amount vs received amount. Flag if difference >$100 OR >0.5%. Contact customer to confirm fee before releasing adjusted stablecoin amount.',
+                  fallback: 'For recurring customers, build fee profiles to predict deductions. For new corridors, add buffer to quotes.'
+                },
+                {
+                  risk: 'FX rate movement during settlement gap',
+                  ledgersAffected: ['Client Bank Ledger', 'Blockchain Ledger'],
+                  severity: 'Medium - FX exposure',
+                  control: 'Real-time FX locking + Settlement windows',
+                  howItWorks: 'Lock FX rate at quote time. Execute conversion immediately upon fiat confirmation. Minimize gap between quote and execution.',
+                  fallback: 'For large amounts (>$100K), offer hedging or require customer to bear FX risk if they want delayed execution.'
+                },
+                {
+                  risk: 'Compliance flag after stablecoin released',
+                  ledgersAffected: ['Blockchain Ledger', 'Destination Bank Ledger'],
+                  severity: 'Critical - Regulatory and financial risk',
+                  control: 'Pre-Flight Compliance Screening',
+                  howItWorks: 'Run ALL compliance checks (KYC, AML, sanctions) BEFORE initiating any conversion. Payment never enters system if compliance fails.',
+                  fallback: 'For post-release compliance issues, maintain clawback capability and customer agreements that permit recovery.'
+                },
+                {
+                  risk: 'Beneficiary bank rejects incoming fiat',
+                  ledgersAffected: ['Blockchain Ledger', 'Destination Bank Ledger'],
+                  severity: 'Medium - Operational complexity',
+                  control: 'Beneficiary Pre-Verification',
+                  howItWorks: 'Verify beneficiary account details before initiating off-ramp. Use bank validation APIs where available. Confirm account is active and can receive funds.',
+                  fallback: 'If rejection occurs, reverse stablecoin transaction and refund to sender (minus incurred fees).'
+                },
+                {
+                  risk: 'Blockchain transaction fails or reverts',
+                  ledgersAffected: ['Blockchain Ledger'],
+                  severity: 'Low - Rare but impactful',
+                  control: 'Transaction Monitoring + Retry Logic',
+                  howItWorks: 'Monitor blockchain for confirmation. If transaction fails, automatically retry with higher gas. Alert operations if 3 retries fail.',
+                  fallback: 'Maintain stablecoin in Sphere wallet until confirmed delivery. Never release from Sphere control until blockchain confirms.'
+                },
+                {
+                  risk: 'Timing gaps over weekends/holidays',
+                  ledgersAffected: ['All four ledgers'],
+                  severity: 'Low - Extended exposure window',
+                  control: 'Cut-Off Time Management',
+                  howItWorks: 'Warn customers if payment initiated near cut-off: "Fiat won\'t settle until Monday. Proceed?" Hold stablecoin release until fiat leg can settle.',
+                  fallback: 'For urgent payments, offer premium same-day service where Sphere pre-funds and bears weekend risk (higher fee).'
+                }
+              ],
+              exerciseGuidance: 'When designing a reconciliation process for any corridor, identify: (1) Which of these 7 risks apply, (2) What controls you\'ll implement, (3) What fallbacks exist if controls fail.'
+            }
           },
           capitalEfficiency: {
             title: 'Capital Efficiency Gains',
@@ -16558,6 +16643,84 @@ This pillar teaches you to tailor Sphere's story to six distinct audiences, with
                 howToPresent: 'Use investor quality as signal. "Our cap table is our customer list - exchanges need our rails."'
               }
             ]
+          },
+
+          investorMetricsReference: {
+            title: 'Investor Metrics Reference Guide',
+            introduction: 'Investors evaluate companies using specific metrics. Here\'s what they mean and how to present Sphere\'s numbers:',
+            coreMetrics: [
+              {
+                metric: 'Total Volume Processed',
+                sphereNumber: '$3B+',
+                whatItMeans: 'Total dollar value of payments processed through Sphere. Shows scale and trust.',
+                howToPresent: 'Use as proof of execution, not as the lead. "$3B proves we can execute. What\'s exciting is the growth rate."',
+                caveat: 'Volume alone doesn\'t indicate profitability. Always pair with take rate or revenue.'
+              },
+              {
+                metric: 'Customer Count',
+                sphereNumber: '150+',
+                whatItMeans: 'Number of active enterprise customers. Shows market validation.',
+                howToPresent: 'Mention key logos if possible. "150+ customers including [notable names]."',
+                caveat: 'Customer count without revenue concentration data is incomplete. Be ready to discuss top 10 concentration.'
+              },
+              {
+                metric: 'Growth Rate (YoY)',
+                sphereNumber: '3-4x annually',
+                whatItMeans: 'Year-over-year growth in volume or revenue. The #1 metric VCs care about.',
+                howToPresent: 'Lead with this. "We\'re tripling year-over-year" is more compelling than "$3B processed."',
+                caveat: 'Growth rate matters more at early stage. Later stage, efficiency metrics (CAC payback, margins) become important.'
+              },
+              {
+                metric: 'Net Revenue Retention (NRR)',
+                sphereNumber: '>120%',
+                whatItMeans: 'Revenue from existing customers compared to prior period, including expansion and churn. >100% means customers spend more over time.',
+                howToPresent: '"Our NRR is above 120% - customers expand with us because we solve more corridors for them."',
+                caveat: 'NRR above 120% is excellent for B2B. Shows sticky product with expansion potential.'
+              },
+              {
+                metric: 'Take Rate',
+                sphereNumber: 'Varies by corridor (0.5-2%)',
+                whatItMeans: 'Percentage of transaction volume Sphere earns as revenue. Gross margin on payments.',
+                howToPresent: '"Our take rate varies by corridor - higher in emerging markets where we provide more value."',
+                caveat: 'Take rate × volume = revenue. Hard markets have higher take rates; easy markets are competitive.'
+              },
+              {
+                metric: 'CAC (Customer Acquisition Cost)',
+                sphereNumber: 'Context-dependent',
+                whatItMeans: 'Total sales & marketing cost to acquire one customer. Lower is better.',
+                howToPresent: '"Enterprise sales has inherent CAC, but our payback period is under 6 months."',
+                caveat: 'CAC alone is meaningless. CAC Payback Period (months to recover CAC) is the real metric. <12 months is good for enterprise.'
+              },
+              {
+                metric: 'LTV (Lifetime Value)',
+                sphereNumber: 'Context-dependent',
+                whatItMeans: 'Total revenue expected from a customer over their lifetime. Higher is better.',
+                howToPresent: '"With >120% NRR and multi-year relationships, our LTV/CAC ratio is well above 3x."',
+                caveat: 'LTV/CAC ratio >3x is the benchmark. Below 3x means you\'re spending too much to acquire customers.'
+              },
+              {
+                metric: 'Regulatory Footprint',
+                sphereNumber: '27 entities / 18 jurisdictions',
+                whatItMeans: 'Number of licensed entities across jurisdictions. Shows compliance investment and moat.',
+                howToPresent: '"27 regulated entities isn\'t a vanity metric - it\'s $5M+ and 3 years of work competitors haven\'t done."',
+                caveat: 'This is a MOAT metric, not a growth metric. Use to explain defensibility.'
+              }
+            ],
+            metricsNotToLead: [
+              {
+                metric: 'Team size',
+                why: 'Headcount doesn\'t correlate with value. Can signal inefficiency.'
+              },
+              {
+                metric: 'Funding raised',
+                why: 'Money raised is an input, not an output. Focus on what you built with it.'
+              },
+              {
+                metric: 'Absolute revenue (if small)',
+                why: 'If revenue is small, lead with growth rate instead. "$2M growing 4x" is better than "We did $2M."'
+              }
+            ],
+            presentationOrder: 'For investor pitches, present metrics in this order: (1) Growth rate - shows momentum, (2) Traction proof (volume, customers) - shows execution, (3) Unit economics (NRR, take rate) - shows business model works, (4) Moat metrics (licenses, hard markets) - shows defensibility.'
           },
 
           commonObjections: {
