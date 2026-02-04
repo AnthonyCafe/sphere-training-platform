@@ -512,7 +512,7 @@ export default function TrainingPlatform() {
             <span className="text-sm hidden sm:inline">Glossary</span>
           </a>
 
-          <a href="https://drive.google.com/drive/folders/10JXZPCZRVSO_92nTm7RP8Ax-c1Ax6XKa" target="_blank" className="flex items-center gap-2 bg-slate-700/50 px-3 py-1.5 rounded-lg hover:bg-slate-700 transition">
+          <a href="https://drive.google.com/drive/folders/1u1CoU_Xgcg9xBGrPY7vRcuuFJJggcHUi?usp=sharing" target="_blank" className="flex items-center gap-2 bg-slate-700/50 px-3 py-1.5 rounded-lg hover:bg-slate-700 transition">
             <FileText className="w-4 h-4 text-emerald-400" />
             <span className="text-sm hidden sm:inline">Files</span>
           </a>

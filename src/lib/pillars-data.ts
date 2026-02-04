@@ -14482,19 +14482,19 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
   },
 
   // ============================================================================
-  // PILLAR 6: THE 16 COMPLIANCE QUESTIONS
+  // PILLAR 6: REGULATORY & RISK MASTERY
   // ============================================================================
   {
     id: 'questions',
-    title: 'Pillar 6: The 16 Compliance Questions',
-    shortTitle: '16 Questions',
+    title: 'Pillar 6: Regulatory & Risk Mastery',
+    shortTitle: 'Reg & Risk',
     description: 'Master the questions every sophisticated counterparty will ask.',
     color: 'slate',
     overview: `**Why This Pillar Matters**
 
 These are the questions that determine whether a deal moves forward. Every bank, regulator, and enterprise partner will ask some version of these.
 
-Arnold identified these 16 questions as the ones Sphere faces repeatedly. Master them.`,
+Arnold identified these critical questions as the ones Sphere faces repeatedly. Master them.`,
     sections: [
       {
         id: 'licensing-questions',
@@ -16030,7 +16030,7 @@ A great conversation that ends with "we\'ll be in touch" is a failure. No next s
 
           closingExample: 'We\'ve covered licensing, compliance, and settlement. Sphere offers institutional-grade infrastructure with 15-30 minute settlement - that\'s 99th percentile among cross-border providers. I\'d suggest a technical deep-dive next week. Does Tuesday work, or would you prefer I send some documentation first?',
 
-          keyTakeaway: 'Master the 16 questions so you can handle them in any order. Recognize question clusters and anticipate. Bridge every answer to Sphere\'s strengths. And always - always - close with a clear next step.'
+          keyTakeaway: 'Master these compliance questions so you can handle them in any order. Recognize question clusters and anticipate. Bridge every answer to Sphere\'s strengths. And always - always - close with a clear next step.'
         },
         glossary: [
           { term: 'Bridge', definition: 'Conversation technique of connecting an answer back to your key differentiators. Turns defensive answers into offensive positioning.' },
@@ -16041,7 +16041,7 @@ A great conversation that ends with "we\'ll be in touch" is a failure. No next s
           { term: 'Pilot Close', definition: 'Closing technique suggesting a small-scale production test on a specific corridor before full rollout.' },
           { term: 'Reference Close', definition: 'Closing technique offering to connect prospect with existing customers who had similar concerns.' },
           { term: 'Meeting Close', definition: 'Closing technique that proposes a specific follow-up meeting with date options rather than vague "stay in touch."' },
-          { term: 'The Five Clusters', definition: 'Groupings of the 16 questions: Legitimacy, Compliance, Risk, Operations, Partnership. Recognizing clusters helps anticipate questions.' },
+          { term: 'The Five Clusters', definition: 'Groupings of compliance questions: Legitimacy, Compliance, Risk, Operations, Partnership. Recognizing clusters helps anticipate questions.' },
           { term: 'Acknowledgment', definition: 'Conversation technique of validating a concern before addressing it. "You\'re right to raise that..." builds credibility before pivoting to mitigation.' }
         ],
         exercise: {
@@ -17525,7 +17525,7 @@ This comprehensive assessment tests your knowledge across all six pillars. Compl
 
 **Before you begin:**
 - Review any pillars where you scored below 80%
-- Have the 16 Questions reference handy
+- Have the Compliance Questions reference handy
 - Take your time - quality over speed`,
     sections: [
       {
@@ -17698,7 +17698,7 @@ This comprehensive assessment tests your knowledge across all six pillars. Compl
             'Demonstrate professional readiness'
           ],
           keyConcepts: [
-            'All 16 questions',
+            'All compliance questions',
             'Objection handling',
             'Closing with next steps'
           ]
