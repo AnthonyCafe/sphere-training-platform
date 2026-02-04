@@ -2209,6 +2209,39 @@ function QuestionCard({ question }: { question: any }) {
             </div>
           )}
 
+          {/* Sanctions Hit Workflow - Step-by-step process */}
+          {question.sanctionsHitWorkflow && (
+            <div className="bg-gradient-to-r from-red-500/10 to-amber-500/10 rounded-xl p-5 border border-red-500/30">
+              <h4 className="text-red-300 font-semibold text-lg mb-2">⚠️ {question.sanctionsHitWorkflow.title}</h4>
+              <p className="text-gray-400 mb-4">{question.sanctionsHitWorkflow.introduction}</p>
+
+              <div className="space-y-3">
+                {question.sanctionsHitWorkflow.steps?.map((step: any, i: number) => (
+                  <div key={i} className="bg-slate-800/70 rounded-lg p-4 border-l-4 border-red-500/50">
+                    <div className="flex items-center gap-3 mb-2">
+                      <span className="bg-red-500 text-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm">
+                        {step.step}
+                      </span>
+                      <span className="text-white font-medium">{step.name}</span>
+                    </div>
+                    <p className="text-gray-300 text-sm mb-2 ml-11">{step.description}</p>
+                    <p className="text-amber-300 text-xs ml-11 bg-amber-500/10 rounded p-2">
+                      💡 {step.keyPoint}
+                    </p>
+                  </div>
+                ))}
+              </div>
+
+              {question.sanctionsHitWorkflow.criticalDifferentiator && (
+                <div className="mt-4 bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4">
+                  <p className="text-emerald-300 font-medium text-sm">
+                    ✅ {question.sanctionsHitWorkflow.criticalDifferentiator}
+                  </p>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Bridging Technique */}
           {question.bridgingTechnique && (
             <div className="bg-cyan-500/10 border-l-4 border-cyan-500 p-3 rounded-r-lg">
@@ -11881,6 +11914,7 @@ function ProofPointsBlock({ data }: { data: any }) {
 // Objections Block
 function ObjectionsBlock({ data }: { data: any }) {
   const [expandedObjection, setExpandedObjection] = useState<number | null>(null);
+  const [cbdcExpanded, setCbdcExpanded] = useState(false);
 
   return (
     <div className="bg-gradient-to-br from-amber-900/20 to-slate-900 rounded-xl p-6 border border-amber-500/30">
@@ -11927,6 +11961,136 @@ function ObjectionsBlock({ data }: { data: any }) {
           </div>
         ))}
       </div>
+
+      {/* CBDC Complementarity Deep Dive - for Sovereign pitch section */}
+      {data.cbdcComplementarity && (
+        <div className="mt-6 bg-gradient-to-r from-blue-500/20 to-cyan-500/20 rounded-xl overflow-hidden border-2 border-blue-500/40">
+          <button
+            onClick={() => setCbdcExpanded(!cbdcExpanded)}
+            className="w-full px-5 py-4 flex items-center justify-between hover:bg-blue-500/10 transition-colors"
+          >
+            <div className="flex items-center gap-3">
+              <span className="bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded">DEEP DIVE</span>
+              <span className="text-white font-medium">🏛️ {data.cbdcComplementarity.title}</span>
+            </div>
+            <span className={`text-white transform transition-transform ${cbdcExpanded ? 'rotate-180' : ''}`}>▼</span>
+          </button>
+
+          {cbdcExpanded && (
+            <div className="p-5 border-t border-blue-500/30 space-y-5">
+              <p className="text-gray-300">{data.cbdcComplementarity.introduction}</p>
+
+              {/* Core Framework */}
+              {data.cbdcComplementarity.coreFramework && (
+                <div className="bg-slate-800/70 rounded-lg p-4 space-y-3">
+                  <h5 className="text-blue-300 font-semibold">The Core Framework</h5>
+                  <div className="grid md:grid-cols-2 gap-3">
+                    <div className="bg-blue-500/10 rounded-lg p-3">
+                      <p className="text-blue-400 text-xs font-medium mb-1">Central Bank Role:</p>
+                      <p className="text-gray-300 text-sm">{data.cbdcComplementarity.coreFramework.centralBankRole}</p>
+                    </div>
+                    <div className="bg-purple-500/10 rounded-lg p-3">
+                      <p className="text-purple-400 text-xs font-medium mb-1">SphereNet Role:</p>
+                      <p className="text-gray-300 text-sm">{data.cbdcComplementarity.coreFramework.sphereNetRole}</p>
+                    </div>
+                  </div>
+                  <div className="bg-emerald-500/10 rounded-lg p-3">
+                    <p className="text-emerald-400 text-xs font-medium mb-1">💡 Analogy:</p>
+                    <p className="text-emerald-200 text-sm">{data.cbdcComplementarity.coreFramework.analogy}</p>
+                  </div>
+                </div>
+              )}
+
+              {/* Complementary Layers */}
+              {data.cbdcComplementarity.complementaryLayers && (
+                <div className="space-y-3">
+                  <h5 className="text-blue-300 font-semibold">Complementary Layers</h5>
+                  {data.cbdcComplementarity.complementaryLayers.map((layer: any, i: number) => (
+                    <div key={i} className="bg-slate-800/50 rounded-lg p-4 border-l-4 border-blue-500/50">
+                      <p className="text-white font-medium mb-2">{layer.layer}</p>
+                      <div className="grid md:grid-cols-2 gap-2 mb-2">
+                        <div className="bg-slate-700/50 rounded p-2">
+                          <p className="text-blue-300 text-xs font-medium">CBDC Handles:</p>
+                          <p className="text-gray-400 text-sm">{layer.cbdcHandles}</p>
+                        </div>
+                        <div className="bg-purple-500/10 rounded p-2">
+                          <p className="text-purple-300 text-xs font-medium">SphereNet Handles:</p>
+                          <p className="text-gray-300 text-sm">{layer.sphereNetHandles}</p>
+                        </div>
+                      </div>
+                      <p className="text-cyan-300 text-xs bg-cyan-500/10 rounded p-2">📌 Example: {layer.example}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              {/* What To Say */}
+              {data.cbdcComplementarity.whatToSay && (
+                <div className="bg-emerald-500/10 rounded-lg p-4 border border-emerald-500/30">
+                  <h5 className="text-emerald-300 font-semibold mb-3">📝 What to Say in the Meeting</h5>
+                  <div className="space-y-3">
+                    <div className="bg-slate-800/50 rounded p-3">
+                      <p className="text-emerald-400 text-xs font-medium mb-1">Opening:</p>
+                      <p className="text-gray-300 text-sm italic">"{data.cbdcComplementarity.whatToSay.opening}"</p>
+                    </div>
+                    <div className="bg-slate-800/50 rounded p-3">
+                      <p className="text-emerald-400 text-xs font-medium mb-1">Positioning:</p>
+                      <p className="text-gray-300 text-sm italic">"{data.cbdcComplementarity.whatToSay.positioning}"</p>
+                    </div>
+                    <div className="bg-slate-800/50 rounded p-3">
+                      <p className="text-emerald-400 text-xs font-medium mb-1">Concrete Example:</p>
+                      <p className="text-gray-300 text-sm italic">"{data.cbdcComplementarity.whatToSay.concrete}"</p>
+                    </div>
+                    <div className="bg-slate-800/50 rounded p-3">
+                      <p className="text-emerald-400 text-xs font-medium mb-1">Close with Offer:</p>
+                      <p className="text-gray-300 text-sm italic">"{data.cbdcComplementarity.whatToSay.offer}"</p>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Key Insight */}
+              {data.cbdcComplementarity.keyInsight && (
+                <div className="bg-amber-500/10 rounded-lg p-3 border border-amber-500/30">
+                  <p className="text-amber-200 text-sm">💡 <strong>Key Insight:</strong> {data.cbdcComplementarity.keyInsight}</p>
+                </div>
+              )}
+
+              {/* Protocol-Level Access */}
+              {data.cbdcComplementarity.protocolLevelAccess && (
+                <div className="bg-gradient-to-r from-purple-500/10 to-blue-500/10 rounded-lg p-4 border border-purple-500/30">
+                  <h5 className="text-purple-300 font-semibold mb-2">{data.cbdcComplementarity.protocolLevelAccess.title}</h5>
+                  <p className="text-gray-400 text-sm mb-4">{data.cbdcComplementarity.protocolLevelAccess.explanation}</p>
+
+                  <div className="space-y-3">
+                    {data.cbdcComplementarity.protocolLevelAccess.capabilities?.map((cap: any, i: number) => (
+                      <div key={i} className="bg-slate-800/50 rounded-lg p-3">
+                        <p className="text-white font-medium text-sm mb-2">{cap.capability}</p>
+                        <div className="grid md:grid-cols-2 gap-2 text-xs">
+                          <div className="bg-red-500/10 rounded p-2">
+                            <p className="text-red-300 font-medium mb-1">Traditional:</p>
+                            <p className="text-gray-400">{cap.traditional}</p>
+                          </div>
+                          <div className="bg-emerald-500/10 rounded p-2">
+                            <p className="text-emerald-300 font-medium mb-1">SphereNet:</p>
+                            <p className="text-gray-300">{cap.sphereNet}</p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {data.cbdcComplementarity.protocolLevelAccess.sovereignBenefit && (
+                    <p className="text-purple-200 text-sm mt-3 bg-purple-500/20 rounded p-2">
+                      🏛️ {data.cbdcComplementarity.protocolLevelAccess.sovereignBenefit}
+                    </p>
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }

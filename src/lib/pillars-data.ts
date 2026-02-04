@@ -14924,7 +14924,62 @@ Sanctions violations can result in:
               sphereApproach: 'Sphere screens in real-time on every transaction - not batched overnight. The transaction architecture requires compliance clearance before settlement. Additionally, Sphere screens wallet addresses using blockchain analytics tools, not just names and fiat bank accounts.',
               shortAnswer: 'Real-time on every transaction: OFAC, UN, EU, local lists. Screen individuals, entities, jurisdictions, wallet addresses. Never settle without clearance.',
               emphasis: 'Real-time, comprehensive',
-              realWorldContext: 'In 2022, OFAC sanctioned Tornado Cash (a crypto mixer) - the first time a piece of software was sanctioned. Companies that hadn\'t been screening wallet addresses suddenly had to scramble. Sphere already had wallet screening in place because it was built compliance-first.'
+              realWorldContext: 'In 2022, OFAC sanctioned Tornado Cash (a crypto mixer) - the first time a piece of software was sanctioned. Companies that hadn\'t been screening wallet addresses suddenly had to scramble. Sphere already had wallet screening in place because it was built compliance-first.',
+              sanctionsHitWorkflow: {
+                title: 'What Happens When a Transaction Triggers a Sanctions Hit',
+                introduction: 'Understanding the exact workflow when a sanctions match occurs is critical. Here\'s the step-by-step process:',
+                steps: [
+                  {
+                    step: 1,
+                    name: 'Immediate Transaction Hold',
+                    description: 'The transaction is immediately held - it does NOT settle. This is the fundamental difference of pre-settlement compliance. The money hasn\'t moved yet.',
+                    keyPoint: 'Pre-settlement means we catch it BEFORE funds transfer, not after.'
+                  },
+                  {
+                    step: 2,
+                    name: 'Alert Generation',
+                    description: 'The compliance system automatically generates an alert with all relevant details: transaction amount, parties involved, which list triggered the match, match confidence score.',
+                    keyPoint: 'Automated alerts ensure nothing slips through human error.'
+                  },
+                  {
+                    step: 3,
+                    name: 'Compliance Analyst Review',
+                    description: 'A compliance analyst reviews the alert to determine: Is this a TRUE MATCH or a FALSE POSITIVE? False positives are common - "Mohammed Ali" might match a sanctioned person but be a completely different individual.',
+                    keyPoint: 'Human judgment is essential - algorithms flag, humans decide.'
+                  },
+                  {
+                    step: 4,
+                    name: 'False Positive Resolution',
+                    description: 'If determined to be a false positive, the analyst documents their reasoning (why this is not the sanctioned party), the documentation is stored for audit purposes, and the transaction is released to continue processing.',
+                    keyPoint: 'All decisions must be documented - regulators will ask.'
+                  },
+                  {
+                    step: 5,
+                    name: 'True Match / Unclear Escalation',
+                    description: 'If the match appears genuine OR the analyst is uncertain, they escalate to the BSA Officer (Bank Secrecy Act Officer) - the designated senior compliance person with authority to make final decisions.',
+                    keyPoint: 'When in doubt, escalate. Never guess on sanctions.'
+                  },
+                  {
+                    step: 6,
+                    name: 'True Match: Permanent Block',
+                    description: 'Confirmed true matches result in: transaction permanently blocked, customer relationship reviewed, potential account termination, and incident fully documented.',
+                    keyPoint: 'True matches are non-negotiable - the transaction never settles.'
+                  },
+                  {
+                    step: 7,
+                    name: 'Customer Notification (Limited)',
+                    description: 'The customer is notified their transaction could not be processed. CRITICAL: You cannot reveal the specific reason (sanctions match) due to "tipping-off" rules. You might say "transaction could not be completed due to compliance requirements."',
+                    keyPoint: 'Tipping-off is illegal - never reveal sanctions was the reason.'
+                  },
+                  {
+                    step: 8,
+                    name: 'SAR Filing (If Warranted)',
+                    description: 'If the true match or surrounding circumstances indicate potential money laundering or other suspicious activity, a Suspicious Activity Report (SAR) is filed with FinCEN within required timeframes.',
+                    keyPoint: 'SARs are confidential - the customer never knows one was filed.'
+                  }
+                ],
+                criticalDifferentiator: 'The key point throughout: THE MONEY NEVER MOVED. Pre-settlement compliance means we catch sanctioned transactions before they settle. Traditional banking often catches these problems after money has already transferred, making recovery difficult or impossible.'
+              }
             },
             {
               number: 6,
@@ -17464,7 +17519,70 @@ This pillar teaches you to tailor Sphere's story to six distinct audiences, with
                 response: 'Excellent - we\'d love to learn more about your approach. SphereNet isn\'t competitive with CBDCs; it\'s potentially complementary infrastructure. Many central banks exploring CBDCs are also exploring how private stablecoins interact with them. We could be helpful as you think through interoperability.',
                 key: 'Position as complementary to CBDC efforts'
               }
-            ]
+            ],
+            cbdcComplementarity: {
+              title: 'How SphereNet Complements CBDCs (Detailed)',
+              introduction: 'When a central bank says "we\'re developing our own CBDC," this is an opportunity, not an objection. Here\'s how to position SphereNet as complementary infrastructure:',
+              coreFramework: {
+                centralBankRole: 'Central banks focus on ISSUING digital currency (the money itself)',
+                sphereNetRole: 'SphereNet focuses on MOVING digital currency across borders compliantly',
+                analogy: 'Central banks are mints that create money. SphereNet is the highway system that moves it. You need both - a mint without highways can\'t serve an economy.'
+              },
+              complementaryLayers: [
+                {
+                  layer: 'Domestic CBDC Settlement',
+                  cbdcHandles: 'Internal currency issuance, domestic transfers between banks',
+                  sphereNetHandles: 'Cross-border interoperability when CBDC needs to interact with other countries',
+                  example: 'UAE digital dirham settles domestically through central bank. When UAE company needs to pay Singapore supplier, SphereNet bridges digital dirham → USDC → digital SGD.'
+                },
+                {
+                  layer: 'Regulatory Infrastructure',
+                  cbdcHandles: 'Domestic regulatory requirements and monetary policy',
+                  sphereNetHandles: 'Cross-jurisdictional compliance, Travel Rule between countries, multi-jurisdiction AML',
+                  example: 'CBDC knows UAE regulations. SphereNet knows how UAE regulations interact with Singapore, UK, EU regulations for compliant cross-border flow.'
+                },
+                {
+                  layer: 'Protocol-Level Integration',
+                  cbdcHandles: 'Central bank\'s proprietary ledger and issuance mechanism',
+                  sphereNetHandles: 'Translation layer between different CBDC systems and stablecoins',
+                  example: 'Project mBridge connects Asian CBDCs. SphereNet could be the commercial layer that fintechs and banks use to access that infrastructure.'
+                }
+              ],
+              whatToSay: {
+                opening: '"We\'re excited about your CBDC work. SphereNet is designed to complement that investment, not compete with it."',
+                positioning: '"Central banks are best positioned to issue digital currency. SphereNet is designed to be the cross-border layer - connecting your CBDC to other CBDCs and to compliant stablecoins. We focus on the movement, you focus on the issuance."',
+                concrete: '"When your digital dirham goes live, how will it interact with Singapore\'s Project Orchid or the EU\'s digital euro? That cross-border interoperability layer is where SphereNet fits."',
+                offer: '"We\'d welcome the opportunity to share our technical architecture and explore how it might integrate with your CBDC roadmap. No commitments - just education."'
+              },
+              keyInsight: 'CBDCs solve DOMESTIC digital currency. SphereNet solves CROSS-BORDER digital currency movement. These are complementary problems, not competing solutions. A central bank with a CBDC still needs infrastructure for international payments - that\'s SphereNet\'s role.',
+              protocolLevelAccess: {
+                title: 'Protocol-Level Regulatory Access (What It Actually Means)',
+                explanation: 'When we say regulators can "verify at the protocol level," here\'s what that means concretely:',
+                capabilities: [
+                  {
+                    capability: 'Transaction Verification',
+                    traditional: 'Regulator asks company for reports. Company sends spreadsheets. Regulator trusts the data.',
+                    sphereNet: 'Regulator can directly query the protocol to verify transaction data. No middleman, no trust required - cryptographic proof.'
+                  },
+                  {
+                    capability: 'Compliance Attestation',
+                    traditional: 'Company says "we screened this transaction." Regulator believes them or audits later.',
+                    sphereNet: 'Compliance checks are recorded on-chain. Regulator can verify that screening occurred without trusting the company\'s word.'
+                  },
+                  {
+                    capability: 'Privacy-Preserved Oversight',
+                    traditional: 'Regulator either sees everything (privacy concern) or nothing (oversight gap).',
+                    sphereNet: 'Zero-knowledge proofs allow regulators to verify compliance without seeing underlying transaction details. "This transaction was screened" without "here\'s who sent what to whom."'
+                  },
+                  {
+                    capability: 'Real-Time Monitoring',
+                    traditional: 'Reports are monthly or quarterly. Problems discovered after the fact.',
+                    sphereNet: 'Regulators can monitor in real-time if they choose. Suspicious patterns visible as they emerge.'
+                  }
+                ],
+                sovereignBenefit: 'This transforms regulation from "trust and verify later" to "verify in real-time." Central banks can have confidence in the system because they can see it working, not just believe company reports.'
+              }
+            }
           },
 
           pitchScripts: {
