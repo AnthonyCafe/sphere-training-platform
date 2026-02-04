@@ -13842,6 +13842,25 @@ function MiCADetailsBlock({ data }: { data: any }) {
 
       {expanded && (
         <div className="space-y-4">
+          {/* EU Regulators */}
+          {data.euRegulators && (
+            <div className="bg-blue-500/10 rounded-lg p-4">
+              <h4 className="text-blue-300 font-semibold mb-3">{data.euRegulators.title}</h4>
+              <div className="space-y-3">
+                {data.euRegulators.regulators?.map((reg: any, i: number) => (
+                  <div key={i} className="bg-slate-700/50 rounded-lg p-3">
+                    <p className="text-white font-medium">{reg.name}</p>
+                    <p className="text-blue-300 text-sm">{reg.role}</p>
+                    <p className="text-gray-400 text-xs mt-1">{reg.responsibilities}</p>
+                  </div>
+                ))}
+              </div>
+              {data.euRegulators.keyPoint && (
+                <p className="text-blue-200 text-sm mt-3 bg-blue-500/10 rounded p-2">💡 {data.euRegulators.keyPoint}</p>
+              )}
+            </div>
+          )}
+
           {/* Stablecoin Classification */}
           {data.stablecoinClassification && (
             <div>
@@ -13967,6 +13986,25 @@ function GeniusActBlock({ data }: { data: any }) {
 
       {expanded && (
         <div className="space-y-4">
+          {/* US Regulators */}
+          {data.usRegulators && (
+            <div className="bg-blue-500/10 rounded-lg p-4">
+              <h4 className="text-blue-300 font-semibold mb-3">{data.usRegulators.title}</h4>
+              <div className="space-y-3">
+                {data.usRegulators.regulators?.map((reg: any, i: number) => (
+                  <div key={i} className="bg-slate-700/50 rounded-lg p-3">
+                    <p className="text-white font-medium">{reg.name}</p>
+                    <p className="text-blue-300 text-sm">{reg.role}</p>
+                    <p className="text-gray-400 text-xs mt-1">{reg.responsibilities}</p>
+                  </div>
+                ))}
+              </div>
+              {data.usRegulators.keyPoint && (
+                <p className="text-blue-200 text-sm mt-3 bg-blue-500/10 rounded p-2">💡 {data.usRegulators.keyPoint}</p>
+              )}
+            </div>
+          )}
+
           {/* Key Provisions */}
           {data.keyProvisions && (
             <div>
