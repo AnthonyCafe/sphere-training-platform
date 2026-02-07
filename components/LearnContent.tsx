@@ -72,7 +72,7 @@ export default function LearnContentRenderer({ learn, glossary = [] }: LearnCont
     'systemDetails', 'bitcoinClarification',
     'identifyingCorrespondents',
     'issuanceVsTransmission', 'globalFrameworks',
-    'uaeDeepDive', 'sphereStatus', 'singaporeDeepDive', 'ukDeepDive', 'brazilDeepDive',
+    'uaeDeepDive', 'sphereStatus', 'latamDeepDive', 'ukDeepDive', 'brazilDeepDive',
     'potentialFrictionPoints', 'howSphereAddresses',
     'speedComparison', 'asymmetryProblem', 'fourLedgers', 'capitalEfficiency', 'sphereApproach',
     'globalFrameworks', 'micaDetails', 'geniusAct', 'uaeFramework', 'convergencePattern',
@@ -682,7 +682,7 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
       return <IssuanceVsTransmissionBlock data={value} />;
 
     case 'uaeDeepDive':
-    case 'singaporeDeepDive':
+    case 'latamDeepDive':
     case 'ukDeepDive':
     case 'brazilDeepDive':
       return <MarketDeepDiveBlock data={value} />;
@@ -3264,7 +3264,12 @@ function GlobalFrameworksBlock({ data }: { data: any }) {
             </div>
             <div className="flex items-center gap-2">
               {item.sphereFocus && (
-                <span className={`text-xs px-2 py-1 rounded ${item.sphereFocus.includes('PRIMARY') ? 'bg-purple-500/30 text-purple-300 font-semibold' : 'bg-blue-500/20 text-blue-300'}`}>
+                <span className={`text-xs px-2 py-1 rounded font-semibold ${
+                  item.sphereFocus.includes('ANCHOR') ? 'bg-emerald-500/30 text-emerald-300' :
+                  item.sphereFocus.includes('PRIMARY') ? 'bg-purple-500/30 text-purple-300' :
+                  item.sphereFocus.includes('STRATEGIC') ? 'bg-amber-500/30 text-amber-300' :
+                  'bg-blue-500/20 text-blue-300'
+                }`}>
                   {item.sphereFocus}
                 </span>
               )}
@@ -13796,7 +13801,7 @@ function MarketDeepDiveBlock({ data }: { data: any }) {
     <div className="bg-slate-800 rounded-xl p-6 border border-slate-700">
       <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
       {data.whyUAE && <p className="text-blue-300 mb-4">{data.whyUAE}</p>}
-      {data.whySingapore && <p className="text-blue-300 mb-4">{data.whySingapore}</p>}
+      {data.whyLatam && <p className="text-blue-300 mb-4">{data.whyLatam}</p>}
       {data.whyUK && <p className="text-blue-300 mb-4">{data.whyUK}</p>}
       {data.whyBrazil && <p className="text-blue-300 mb-4">{data.whyBrazil}</p>}
       
@@ -13815,14 +13820,35 @@ function MarketDeepDiveBlock({ data }: { data: any }) {
           </div>
         </div>
       )}
-      
+
+      {/* Key Markets (for LATAM deep dive) */}
+      {data.keyMarkets && (
+        <div className="mb-4">
+          <h4 className="text-white font-semibold mb-3">Key Markets</h4>
+          <div className="grid gap-2">
+            {data.keyMarkets.map((market: any, i: number) => (
+              <div key={i} className="bg-slate-700/50 rounded p-3 flex items-center justify-between">
+                <div>
+                  <p className="text-blue-300 font-semibold text-sm">{market.country}</p>
+                  <p className="text-gray-400 text-xs">{market.framework}</p>
+                </div>
+                <div className="text-right">
+                  <p className="text-emerald-300 text-xs">{market.volume}</p>
+                  <p className="text-gray-400 text-xs">{market.status}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Framework */}
       {data.framework && (
         <div className="bg-blue-500/10 rounded p-3 mb-4">
           <p className="text-blue-200 text-sm"><span className="font-semibold">Framework:</span> {data.framework}</p>
         </div>
       )}
-      
+
       {/* Key Developments */}
       {data.keyDevelopments && (
         <div className="mb-4">

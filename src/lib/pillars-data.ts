@@ -1184,7 +1184,7 @@ export const pillarsData = [
                 definition: 'A federal regulatory category in the US for businesses that transmit money, cash checks, exchange currency, or sell money orders/prepaid access. MSBs must register with FinCEN, implement AML programs, and comply with the Bank Secrecy Act.',
                 example: 'Western Union, MoneyGram, PayPal, Wise, and Sphere are all registered MSBs. So is the check-cashing store on the corner. The category covers a wide range of businesses - what they share is handling other people\'s money.',
                 whyItMatters: 'MSB registration is the baseline federal requirement for payment companies in the US. But MSB alone isn\'t enough - you also need state Money Transmitter Licenses (MTLs) in each state where you operate. The combination of federal MSB + state MTLs is what authorizes a company to transmit money legally in the US.',
-                sphereContext: 'Sphere is a FinCEN-registered MSB and holds Money Transmitter Licenses in 43+ US states (including California, New York, Texas, Florida, and others). When someone asks "Are you licensed?", the answer is: "Yes - federal MSB registration plus state money transmitter licenses across the majority of US states." This is our core US regulatory framework.'
+                sphereContext: 'Sphere has 2 federally registered MSBs with FinCEN, plus state-level Money Transmission Licenses (MTLs). When someone asks "Are you licensed?", the answer is: "Yes - 2 federal MSB registrations plus state MTLs." This is our core US regulatory framework.'
               },
               {
                 term: 'Correspondent Bank',
@@ -2620,17 +2620,18 @@ You must be able to discuss stablecoins without crypto language, understand thei
             title: 'Sphere\'s Target Markets: Regulatory Landscape',
             subtitle: 'Focus on markets where Sphere is aggressively building',
             items: [
-              { jurisdiction: '🇦🇪 UAE', framework: 'CBUAE + VARA + DFSA', status: 'Active', sphereFocus: 'PRIMARY MARKET' },
-              { jurisdiction: '🇸🇬 Singapore', framework: 'MAS Payment Services Act', status: 'Enforced', sphereFocus: 'PRIMARY MARKET' },
-              { jurisdiction: '🇬🇧 UK', framework: 'FCA authorization', status: 'Evolving', sphereFocus: 'PRIMARY MARKET' },
-              { jurisdiction: '🇧🇷 Brazil', framework: 'BCB Payment Institutions', status: 'Active', sphereFocus: 'LATAM HUB' },
-              { jurisdiction: '🇺🇸 US', framework: 'GENIUS Act (2025) + State MTLs', status: 'Enacted', sphereFocus: 'Key corridor partner' },
-              { jurisdiction: '🇪🇺 EU', framework: 'MiCA (Markets in Crypto-Assets)', status: 'Enforced', sphereFocus: 'Key corridor partner' }
+              { jurisdiction: '🇺🇸 US', framework: 'FinCEN MSB + State MTLs', status: 'Active', sphereFocus: 'ANCHOR MARKET (36.8% sending volume)' },
+              { jurisdiction: '🇧🇷 Brazil', framework: 'BCB Payment Institutions', status: 'Active', sphereFocus: 'PRIMARY - LATAM' },
+              { jurisdiction: '🇲🇽 Mexico', framework: 'CNBV Fintech Law', status: 'Active', sphereFocus: 'PRIMARY - LATAM' },
+              { jurisdiction: '🇦🇷 Argentina', framework: 'CNV + BCRA', status: 'Active', sphereFocus: 'PRIMARY - LATAM' },
+              { jurisdiction: '🇨🇴 Colombia', framework: 'SFC regulations', status: 'Active', sphereFocus: 'PRIMARY - LATAM' },
+              { jurisdiction: '🇦🇪 UAE', framework: 'CBUAE + VARA + DFSA', status: 'Exploring', sphereFocus: 'STRATEGIC REGULATORY HUB' },
+              { jurisdiction: '🇪🇺 EU', framework: 'MiCA (Markets in Crypto-Assets)', status: 'Enforced', sphereFocus: 'Corridor partner' }
             ]
           },
           uaeDeepDive: {
-            title: 'UAE: Sphere\'s Home Market',
-            whyUAE: 'UAE is Sphere\'s primary market. Dubai is the financial hub for MENA, Asia-Africa trade, and emerging markets. High volume of cross-border payments, progressive regulatory environment.',
+            title: 'UAE: Strategic Regulatory Hub',
+            whyUAE: 'UAE is a strategic regulatory hub for Sphere. Dubai is the financial hub for MENA, Asia-Africa trade, and emerging markets. Progressive regulatory environment with clear stablecoin frameworks makes it attractive for future expansion.',
             regulators: [
               { name: 'CBUAE (Central Bank of UAE)', jurisdiction: 'Onshore payment services', relevance: 'Federal regulator for fiat payment services and stablecoin rules' },
               { name: 'VARA (Virtual Assets Regulatory Authority)', jurisdiction: 'Dubai virtual assets', relevance: 'Governs crypto custody, exchange services in Dubai' },
@@ -2650,21 +2651,18 @@ You must be able to discuss stablecoins without crypto language, understand thei
               crossReference: 'For detailed UAE regulatory framework (VARA vs DIFC vs ADGM, CBUAE stablecoin rules, decision frameworks), see Section 3.5 in Pillar 3.'
             }
           },
-          singaporeDeepDive: {
-            title: 'Singapore: Asia-Pacific Hub',
-            whySingapore: 'Singapore is Asia\'s financial center. Gateway to Southeast Asia, India, China corridors. MAS (Monetary Authority of Singapore) is progressive but strict-high compliance bar.',
-            framework: 'Payment Services Act (PSA) 2019',
-            complianceRequirements: {
-              title: 'MAS Payment Services License',
-              requirements: [
-                'Major Payment Institution (MPI) license for large volumes',
-                'Minimum S$250K capital (higher for cross-border)',
-                'Technology risk management (TRMG) standards',
-                'AML/CFT: Transaction monitoring, STR filing, STRO reporting',
-                'Consumer protection: Safeguarding of customer funds'
-              ]
-            },
-            sphereAdvantage: 'MAS is CRYPTO-FRIENDLY but demands high operational standards. Sphere\'s compliance-first approach aligns perfectly. Singapore is ideal for Southeast Asia, India, Australia corridors.'
+          latamDeepDive: {
+            title: 'LATAM: Sphere\'s Primary Growth Market',
+            whyLatam: 'LATAM is Sphere\'s primary growth market. High cross-border payment volume, currency volatility driving stablecoin adoption, and underserved payment infrastructure. Brazil alone represents 10.8% of sending volume.',
+            keyMarkets: [
+              { country: '🇧🇷 Brazil', framework: 'BCB Payment Institutions', volume: '10.8% of sending', status: 'Active - licensed IP partners' },
+              { country: '🇲🇽 Mexico', framework: 'CNBV Fintech Law', volume: '6.7% of sending', status: 'Active - licensed partners' },
+              { country: '🇦🇷 Argentina', framework: 'CNV + BCRA', volume: 'Growing', status: 'Active expansion' },
+              { country: '🇨🇴 Colombia', framework: 'SFC regulations', volume: '12.2% of sending', status: 'Active' },
+              { country: '🇨🇱 Chile', framework: 'CMF regulations', volume: '14.4% of sending', status: 'Active' }
+            ],
+            corridors: 'Brazil → US (imports), Brazil → China (trade), US → LATAM (remittances), LATAM → LATAM (intra-regional trade)',
+            sphereAdvantage: 'Sphere\'s stablecoin rails bypass correspondent banking friction in corridors where traditional banks are slow and expensive. Currency volatility in Argentina and other markets drives demand for USD-denominated settlement.'
           },
           ukDeepDive: {
             title: 'UK: European Gateway Post-Brexit',
@@ -2710,8 +2708,8 @@ You must be able to discuss stablecoins without crypto language, understand thei
             frictions: [
               {
                 friction: 'Multi-Jurisdiction Licensing',
-                challenge: 'Each country requires separate license. UAE license doesn\'t work in Singapore. Singapore license doesn\'t work in Brazil.',
-                sphereApproach: 'Sphere obtains licenses in key hubs (UAE, Singapore, UK) and partners with licensed entities in other markets (Brazil, Mexico, Philippines). Hybrid approach: own licenses where strategic, partnerships elsewhere.',
+                challenge: 'Each country requires separate license. US license doesn\'t work in Brazil. Brazil license doesn\'t work in Mexico.',
+                sphereApproach: 'Sphere holds federal MSB registrations in US (anchor market) and partners with licensed entities in LATAM markets (Brazil, Mexico, Argentina, Colombia). Hybrid approach: own licenses in US, partnerships in growth markets.',
                 example: 'Brazil: Partner with licensed IP. Philippines: Partner with licensed remittance provider. Don\'t try to license everywhere-too slow, too expensive.'
               },
               {
@@ -2761,7 +2759,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
               {
                 advantage: 'Partnership Leverage',
                 explanation: 'Licensed entities attract other licensed entities as partners. Banks want to partner with licensed fintechs. Issuers want licensed transmission partners.',
-                example: 'Circle looks for licensed partners to distribute USDC. Sphere is licensed in UAE, Singapore, UK. Circle chooses Sphere over unlicensed competitors.'
+                example: 'Circle looks for licensed partners to distribute USDC. Sphere holds US MSB registrations and partners with licensed entities across LATAM. Circle chooses Sphere over unlicensed competitors.'
               }
             ]
           },
@@ -3204,12 +3202,12 @@ You must be able to discuss stablecoins without crypto language, understand thei
             subtitle: 'Real production numbers from live enterprise customers',
             items: [
               { metric: 'Annualized Volume', value: '$2.5B+', context: 'B2B payments only-not consumer speculation' },
-              { metric: 'B2B Customers', value: '150+', context: 'SMEs to large enterprises across UAE, Singapore, UK' },
+              { metric: 'B2B Customers', value: '150+', context: 'SMEs to large enterprises across US, LATAM (Brazil, Mexico, Colombia, Chile, Argentina)' },
               { metric: 'Active Accounts', value: '1,847', context: 'Businesses actively using Sphere for vendor/supplier payments' },
               { metric: 'Median Settlement', value: '15-30 minutes', context: 'End-to-end: fiat received → beneficiary fiat delivered' },
               { metric: '99th percentile (before 3pm GST)', value: 'Same day', context: 'GST = Gulf Standard Time (UTC+4). Dubai/Abu Dhabi timezone. Payments initiated before 3pm GST complete same business day.' }
             ],
-            clarification: 'The "before 3pm" metric is GST (Gulf Standard Time, UTC+4) because Sphere is UAE-based. If payment initiated after 3pm GST or on weekends, beneficiary banking hours may delay final fiat delivery to next business day-but stablecoin leg still completes in minutes.'
+            clarification: 'The "before 3pm" metric refers to cut-off times in major corridors. If payment initiated after banking cut-off or on weekends, beneficiary banking hours may delay final fiat delivery to next business day-but stablecoin leg still completes in minutes.'
           },
           realEnterpriseUseCases: {
             title: 'Real Enterprise Use Cases: Detailed Examples',
@@ -3310,8 +3308,8 @@ You must be able to discuss stablecoins without crypto language, understand thei
             reasons: [
               {
                 reason: 'Licensed and Compliant',
-                why: 'Enterprises can\'t use unlicensed providers. Audit risk, legal risk, reputational risk. Sphere has licenses in key markets (UAE, Singapore, UK applying).',
-                example: 'E-commerce platform\'s CFO asks: "Are you licensed?" Sphere shows CBUAE license. Deal closes.',
+                why: 'Enterprises can\'t use unlicensed providers. Audit risk, legal risk, reputational risk. Sphere has 2 federal MSB registrations, state MTLs, and licensed partners across LATAM.',
+                example: 'E-commerce platform\'s CFO asks: "Are you licensed?" Sphere shows FinCEN MSB registration and state licenses. Deal closes.',
                 competitive: 'Most crypto payment companies are unlicensed. Sphere is regulated financial infrastructure.'
               },
               {
@@ -4685,7 +4683,7 @@ Sphere is NOT a crypto exchange. It\'s a licensed payment infrastructure company
                 regulator: 'FinCEN',
                 icon: '🇺🇸',
                 whatItMeans: 'Federal classification under BSA for money transmission, currency exchange, check cashing.',
-                sphereStatus: 'Registered with FinCEN as MSB',
+                sphereStatus: '2 MSB registrations with FinCEN',
                 keyObligations: ['BSA/AML compliance program', 'Designated Compliance Officer', 'Independent testing', 'SAR/CTR filing', '5-year recordkeeping', 'Registration renewal every 2 years'],
                 whyItMatters: 'MSB registration is federal baseline for operating as money transmitter in US.',
                 penalties: 'Unregistered MSB: Up to 5 years imprisonment, $250,000 fine per violation'
@@ -4911,8 +4909,8 @@ Sphere is NOT a crypto exchange. It\'s a licensed payment infrastructure company
           { q: 'Celsius faced issues because it:', options: ['Lacked SOC 2', 'Operated like a bank without charter', 'Used wrong stablecoin', 'Had no website'], correct: 1 }
         ],
         glossary: [
-          { term: 'MSB (Money Services Business)', definition: 'Federal US classification under BSA for money transmission, currency exchange, check cashing. Sphere is FinCEN-registered as MSB.' },
-          { term: 'Money Transmitter License (MTL)', definition: 'State-level license required to legally transmit money within/from that state. Sphere holds MTLs in multiple states.' },
+          { term: 'MSB (Money Services Business)', definition: 'Federal US classification under BSA for money transmission, currency exchange, check cashing. Sphere has 2 federally registered MSBs with FinCEN.' },
+          { term: 'Money Transmitter License (MTL)', definition: 'State-level license required to legally transmit money within/from that state. Sphere holds state-level MTLs.' },
           { term: 'VASP', definition: 'Virtual Asset Service Provider. FATF classification for businesses conducting virtual asset activities. VASP is a classification, not a license.' },
           { term: 'FinCEN', definition: 'Financial Crimes Enforcement Network. US Treasury bureau that administers BSA and collects/analyzes financial intelligence.' },
           { term: 'Compliance-Native', definition: 'Designing compliance into architecture from day one, not as an afterthought. Compliance cannot be bypassed in a compliance-native system.' },
@@ -14704,16 +14702,16 @@ State MTLs typically require:
 **Sphere's Specific License Stack:**
 
 **Federal Level:**
-- FinCEN-registered MSB (Money Services Business)
+- 2 FinCEN-registered MSBs (Money Services Businesses)
 - This means Sphere has a compliance program, files SARs, and is subject to federal examination
 
 **State Level:**
-- Money Transmitter Licenses in states where required
+- State-level Money Transmission Licenses (MTLs)
 - Each license required separate application, capital posting, and ongoing examination
 
 **International:**
 - 27 regulated entities across 18 jurisdictions
-- This includes entities in UAE, Singapore, UK, EU, LATAM, and more
+- Primary focus: US (anchor) and LATAM (Brazil, Mexico, Argentina, Colombia, Chile)
 - Each jurisdiction has its own licensing regime
 
 **Certifications (different from licenses):**
@@ -14727,7 +14725,7 @@ Sphere doesn't just have one company with many licenses. It operates through a n
 Many crypto companies operate WITHOUT these licenses, claiming exemptions or simply ignoring requirements. When something goes wrong (FTX, Celsius, etc.), customers have no protection. Sphere operates WITH full licensing - meaning regular government examination, capital requirements met, consumer protections in place, and legitimacy as a counterparty for banks and enterprises.`
               },
               sphereApproach: 'Sphere built the license stack BEFORE scaling, not after. Many companies try to grow first and figure out licensing later (or never). Sphere invested years in building proper licensing infrastructure.',
-              shortAnswer: 'FinCEN registered MSB, Money Transmitter licenses, 27 entities across 18 jurisdictions, SOC 2 and ISO 27001 certified.',
+              shortAnswer: '2 federally registered MSBs (FinCEN), state-level MTLs, 27 entities across 18 jurisdictions, SOC 2 Type II and ISO 27001 certified.',
               doNotSay: 'We\'re working on licenses / Crypto doesn\'t need licenses',
               realWorldContext: 'When Circle (USDC issuer) wanted to expand into certain markets, they had to go through the same licensing process. When FTX collapsed, one of the revelations was that they operated without proper licenses in many jurisdictions - customers had no regulatory protection.'
             },
@@ -14820,7 +14818,7 @@ Sphere is compliance-native: the regulatory architecture came first, then they c
           { term: 'ISO 27001', definition: 'International standard for information security management systems. Certification means a company has systematic approach to managing sensitive information.' },
           { term: 'Compliance-Native', definition: 'Company built with regulatory compliance as a foundation, not an afterthought. Licensing and compliance architecture comes before product scaling.' },
           { term: 'FBO Account', definition: 'For Benefit Of account - Bank account structure where customer funds are held at a regulated bank for benefit of customers, segregated from Sphere\'s own operating capital.' },
-          { term: '27 Entities / 18 Jurisdictions', definition: 'Sphere\'s global regulatory footprint. Network of properly licensed entities across jurisdictions including UAE, Singapore, UK, EU, and LATAM - not one company with many licenses.' },
+          { term: '27 Entities / 18 Jurisdictions', definition: 'Sphere\'s global regulatory footprint. Network of properly licensed entities with primary focus on US (anchor market) and LATAM (Brazil, Mexico, Argentina, Colombia, Chile) - not one company with many licenses.' },
           { term: 'VASP', definition: 'Virtual Asset Service Provider - FATF term for crypto businesses. Sphere is technically a VASP but positions as compliance-native payment infrastructure, not typical crypto company.' },
           { term: 'Crypto-Native vs Compliance-Native', definition: 'Crypto-native: built around blockchain ideology, views regulation as obstacle. Compliance-native: built with regulation first, uses blockchain as tool. Sphere is compliance-native.' }
         ],
@@ -16733,8 +16731,8 @@ This pillar teaches you to tailor Sphere's story to six distinct audiences, with
               },
               {
                 objection: 'What about regulatory risk?',
-                response: 'Regulatory clarity is emerging, not receding. UAE, Singapore, UK, Brazil all have stablecoin frameworks now. We\'re licensed in 18 jurisdictions precisely because we take regulation seriously. Regulatory risk is higher for companies that ignored compliance.',
-                followUp: 'Reference specific frameworks (VARA, MAS, FCA). Show our 27 regulated entities.'
+                response: 'Regulatory clarity is emerging, not receding. US, Brazil, Mexico, EU all have clear frameworks now. We hold 2 federal MSB registrations, state MTLs, and licensed partners across LATAM. Regulatory risk is higher for companies that ignored compliance.',
+                followUp: 'Reference US licensing (FinCEN MSB, state MTLs). Show our 27 regulated entities across 18 jurisdictions.'
               },
               {
                 objection: 'Why won\'t Stripe/Bridge just win this market?',
@@ -17508,7 +17506,7 @@ This pillar teaches you to tailor Sphere's story to six distinct audiences, with
               },
               {
                 objection: 'Are you going to get shut down by regulators?',
-                response: 'We\'re one of the most regulated players in the space - 27 entities across 18 jurisdictions. We\'re MSB registered, FinCEN compliant, SOC 2 Type II. Our regulatory track record is actually a selling point to banks and partners. We\'re the compliance-native option.',
+                response: 'We\'re one of the most regulated players in the space - 27 entities across 18 jurisdictions. We have 2 federally registered MSBs, state-level MTLs, SOC 2 Type II and ISO 27001 certified. Our regulatory track record is actually a selling point to banks and partners. We\'re the compliance-native option.',
                 key: 'Lean into regulatory positioning'
               },
               {
