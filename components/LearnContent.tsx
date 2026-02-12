@@ -84,7 +84,7 @@ export default function LearnContentRenderer({ learn, glossary = [] }: LearnCont
     'systemicScaleContext', 'threeRiskCategories', 'caseStudyMakerDAO', 'caseStudyUSDCDepeg', 'caseStudyChainalysis',
     'contagionRiskToTraditionalFinance', 'whyExistingBlockchainsFail', 'sphereNetSolution',
     'sixFoundationalPillars', 'threeComponentModel', // SphereNet architecture additions
-    'sphereUSDTechnicalArchitecture', 'regulatorPerspective',
+    'regulatorPerspective',
     'whatSphereIs', 'whatSphereIsNot', 'classificationMatters', 'classificationMattersLegally', 'complianceNative', 'sampleResponse', 'sampleResponses',
     'complianceFlow', 'complianceEnablesGrowth',
     'coreDefinitions', 'kycRequirements', 'amlProgram', 'cddRequirements', 'eddRequirements', 'kybOnboardingWorkflow', 'sarRequirements',
@@ -138,7 +138,7 @@ export default function LearnContentRenderer({ learn, glossary = [] }: LearnCont
     'whyMetricsMatter', 'metricsInContext', 'usingMetricsBySituation',
     'handlingMetricsPushback', 'metricsToAvoid',
     // 5.4 Competitive Positioning
-    'positioningFramework', 'competitorCategories', 'spherePayCompetitors', 'quantifiedBenchmarks', 'sphereNetCompetitors', 'technicalDifferentiation',
+    'positioningFramework', 'sevenMoats', 'competitorCategories', 'spherePayCompetitors', 'quantifiedBenchmarks', 'sphereNetCompetitors', 'technicalDifferentiation',
     'vsTraditional', 'vsCryptoNative', 'vsTraditionalBanks', 'customerFundArchitecture', 'whenToWalkAway',
     'corridorOrchestrationEngine', 'bankFacingInfrastructure', 'bisImplications',
     // 5.4 Customer Segments & Use Cases
@@ -146,7 +146,7 @@ export default function LearnContentRenderer({ learn, glossary = [] }: LearnCont
     'liquidityRecyclingDeepDive', 'stablecoinSandwich', 'dualGoToMarket', 'bobAndAhmed',
     // 5.5 SphereNet Deep Dive
     'whatIsSphereNet', 'threeCorePrinciples', 'technicalArchitecture',
-    'spherePayVsSphereNet', 'privacyPreservingCompliance', 'forRegulators', 'hyperliquidPlaybook',
+    'anzaRelationship', 'spherePayVsSphereNet', 'ariTokenizedCredit', 'privacyPreservingCompliance', 'forRegulators', 'hyperliquidPlaybook',
     // 5.6 Customer Qualification & Segmentation
     'threeSegments', 'segmentPrioritization', 'segment1Detail', 'segment2Detail', 'segment3Detail',
     'qualificationFramework',
@@ -163,7 +163,7 @@ export default function LearnContentRenderer({ learn, glossary = [] }: LearnCont
     'pitchStructure', 'whatChangesVsConstant', 'commonMistakes', 'listeningFirst', 'pitchLengths',
     // 7.1-7.6 Audience-specific pitches
     'audienceProfile', 'whatToPitch', 'investorHooks', 'enterpriseHooks', 'bankHooks',
-    'fintechHooks', 'cryptoHooks', 'sovereignHooks', 'proofPoints', 'investorMetricsReference',
+    'fintechHooks', 'cryptoHooks', 'sovereignHooks', 'proofPoints', 'revenueModel', 'valuationContext', 'investorMetricsReference',
     'commonObjections', 'pitchScripts', 'practiceScenarios', 'championBuilding', 'relationshipBuilding',
     'partnershipModels', 'keyMessages',
 
@@ -832,6 +832,9 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
     // ===========================================
     // NEW COMPETITIVE POSITIONING BLOCKS
     // ===========================================
+    case 'sevenMoats':
+      return <SevenMoatsBlock data={value} />;
+
     case 'quantifiedBenchmarks':
       return <QuantifiedBenchmarksBlock data={value} />;
 
@@ -858,7 +861,13 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
     // ===========================================
     case 'whatIsSphereNet':
       return <WhatIsSphereNetBlock data={value} />;
-    
+
+    case 'anzaRelationship':
+      return <AnzaRelationshipBlock data={value} />;
+
+    case 'ariTokenizedCredit':
+      return <ARITokenizedCreditBlock data={value} />;
+
     case 'hyperliquidPlaybook':
       return <HyperliquidPlaybookBlock data={value} />;
     
@@ -1174,6 +1183,12 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
 
     case 'proofPoints':
       return <ProofPointsBlock data={value} />;
+
+    case 'revenueModel':
+      return <RevenueModelBlock data={value} />;
+
+    case 'valuationContext':
+      return <ValuationContextBlock data={value} />;
 
     case 'investorMetricsReference':
       return <InvestorMetricsBlock data={value} />;
@@ -11843,6 +11858,24 @@ function WhatToPitchBlock({ data }: { data: any }) {
                     <span key={i} className="bg-purple-500/20 text-purple-300 px-2 py-1 rounded text-xs">{m}</span>
                   ))}
                 </div>
+
+                {/* Bullish Thesis */}
+                {data.framework.tomorrow.bullishThesis && (
+                  <div className="mt-3 bg-purple-500/5 rounded-lg p-3 border border-purple-500/20">
+                    <p className="text-purple-400 text-xs font-semibold uppercase mb-2">{data.framework.tomorrow.bullishThesis.title}</p>
+                    <div className="space-y-2">
+                      {data.framework.tomorrow.bullishThesis.points?.map((p: any, i: number) => (
+                        <div key={i} className="flex items-start gap-2">
+                          <span className="text-purple-400 text-xs mt-0.5">▸</span>
+                          <div>
+                            <span className="text-purple-300 text-xs font-semibold">{p.point}: </span>
+                            <span className="text-gray-300 text-xs">{p.detail}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Combined */}
@@ -12931,6 +12964,291 @@ function DiscoveryQuestionsBlock({ data }: { data: any }) {
   );
 }
 
+// =============================================================================
+// SEVEN MOATS BLOCK
+// =============================================================================
+function SevenMoatsBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-gradient-to-br from-purple-900/20 to-slate-900 rounded-xl p-6 border border-purple-500/30">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-6">{data.subtitle}</p>}
+
+      <div className="space-y-3">
+        {data.moats?.map((moat: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-purple-500">
+            <div className="flex items-start gap-3">
+              <span className="bg-purple-500 text-white text-sm font-bold w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0">{moat.number}</span>
+              <div className="flex-1">
+                <div className="flex items-center justify-between flex-wrap gap-2 mb-1">
+                  <h4 className="text-white font-semibold">{moat.name}</h4>
+                  <span className="text-purple-400 text-xs bg-purple-500/20 px-2 py-1 rounded">{moat.taughtIn}</span>
+                </div>
+                <p className="text-gray-300 text-sm">{moat.oneLiner}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {data.keyInsight && (
+        <div className="bg-purple-500/10 rounded p-3 mt-4">
+          <p className="text-purple-300 text-sm">💡 {data.keyInsight}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// =============================================================================
+// REVENUE MODEL BLOCK
+// =============================================================================
+function RevenueModelBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-gradient-to-br from-emerald-900/20 to-slate-900 rounded-xl p-6 border border-emerald-500/30">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-emerald-300 mb-4">{data.subtitle}</p>}
+
+      <div className="space-y-3">
+        {data.streams?.map((s: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-emerald-500">
+            <h4 className="text-emerald-300 font-semibold mb-1">{s.stream}</h4>
+            <p className="text-gray-300 text-sm mb-2">{s.description}</p>
+            <p className="text-gray-500 text-xs italic">{s.example}</p>
+          </div>
+        ))}
+      </div>
+
+      {data.keyInsight && (
+        <div className="bg-emerald-500/10 rounded p-3 mt-4">
+          <p className="text-emerald-300 text-sm">💡 {data.keyInsight}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// =============================================================================
+// ANZA RELATIONSHIP BLOCK
+// =============================================================================
+function AnzaRelationshipBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-gradient-to-br from-blue-900/20 to-slate-900 rounded-xl p-6 border border-blue-500/30">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-blue-300 mb-4">{data.subtitle}</p>}
+
+      <div className="space-y-3">
+        {data.points?.map((p: any, i: number) => (
+          <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-blue-500">
+            <h4 className="text-blue-300 font-semibold mb-1">{p.point}</h4>
+            <p className="text-gray-300 text-sm">{p.detail}</p>
+          </div>
+        ))}
+      </div>
+
+      {data.whyItMatters && (
+        <div className="bg-blue-500/10 rounded p-4 mt-4">
+          <p className="text-xs font-medium text-blue-400 uppercase tracking-wide mb-1">Why It Matters</p>
+          <p className="text-blue-200 text-sm">{data.whyItMatters}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// =============================================================================
+// ARI TOKENIZED CREDIT BLOCK
+// =============================================================================
+function ARITokenizedCreditBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-gradient-to-br from-amber-900/20 to-slate-900 rounded-xl p-6 border border-amber-500/30">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-amber-300 mb-4">{data.subtitle}</p>}
+
+      {/* What is ARI */}
+      {data.whatIsARI && (
+        <div className="bg-slate-700/50 rounded-lg p-4 mb-4">
+          <p className="text-gray-300 text-sm mb-2">{data.whatIsARI.definition}</p>
+          <p className="text-amber-200 text-sm">{data.whatIsARI.whyItMatters}</p>
+        </div>
+      )}
+
+      {/* Traditional vs ARI Comparison */}
+      {data.traditionalVsARI && (
+        <div className="mb-4">
+          <h4 className="text-white font-medium mb-3">{data.traditionalVsARI.title}</h4>
+          <div className="grid md:grid-cols-2 gap-3">
+            <div className="bg-red-500/10 rounded-lg p-4 border border-red-500/30">
+              <p className="text-red-400 font-semibold text-sm mb-2">Traditional Credit</p>
+              <ul className="space-y-2">
+                {data.traditionalVsARI.traditional?.map((t: string, i: number) => (
+                  <li key={i} className="text-gray-300 text-xs flex items-start gap-2">
+                    <span className="text-red-400 mt-0.5">✗</span>{t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="bg-emerald-500/10 rounded-lg p-4 border border-emerald-500/30">
+              <p className="text-emerald-400 font-semibold text-sm mb-2">ARI on SphereNet</p>
+              <ul className="space-y-2">
+                {data.traditionalVsARI.ari?.map((a: string, i: number) => (
+                  <li key={i} className="text-gray-300 text-xs flex items-start gap-2">
+                    <span className="text-emerald-400 mt-0.5">✓</span>{a}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Core Mechanics */}
+      {data.coreMechanics && (
+        <div className="space-y-3 mb-4">
+          <h4 className="text-white font-medium">Core Mechanics:</h4>
+          {data.coreMechanics.map((m: any, i: number) => (
+            <div key={i} className="bg-slate-700/50 rounded-lg p-4 border-l-4 border-amber-500">
+              <h5 className="text-amber-300 font-semibold mb-1">{m.mechanic}</h5>
+              <p className="text-gray-300 text-sm">{m.description}</p>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Worked Example */}
+      {data.workedExample && (
+        <div className="mb-4 bg-blue-500/10 rounded-lg p-4 border border-blue-500/30">
+          <h4 className="text-blue-300 font-medium mb-3">{data.workedExample.title}</h4>
+          <div className="space-y-3">
+            {data.workedExample.steps?.map((s: any, i: number) => (
+              <div key={i} className="flex items-start gap-3">
+                <span className="bg-blue-500 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center flex-shrink-0">{i + 1}</span>
+                <div>
+                  <p className="text-white font-medium text-sm">{s.step}</p>
+                  <p className="text-gray-300 text-xs">{s.detail}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Risks */}
+      {data.risks && (
+        <div className="mb-4">
+          <h4 className="text-white font-medium mb-3">{data.risks.title}</h4>
+          <div className="space-y-2">
+            {data.risks.items?.map((r: any, i: number) => (
+              <div key={i} className="bg-red-500/10 rounded-lg p-3 border-l-4 border-red-500/50">
+                <h5 className="text-red-300 font-semibold text-sm mb-1">{r.risk}</h5>
+                <p className="text-gray-300 text-xs">{r.detail}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Why SphereNet */}
+      {data.whySphereNet && (
+        <div className="bg-purple-500/10 rounded-lg p-4 mb-4">
+          <p className="text-xs font-medium text-purple-400 uppercase tracking-wide mb-1">Why This Only Works on SphereNet</p>
+          <p className="text-purple-200 text-sm">{data.whySphereNet}</p>
+        </div>
+      )}
+
+      {/* Status */}
+      {data.status && (
+        <div className="bg-blue-500/10 rounded-lg p-3 mb-4">
+          <span className="text-blue-400 text-xs font-medium">STATUS:</span>
+          <p className="text-blue-200 text-sm mt-1">{data.status}</p>
+        </div>
+      )}
+
+      {data.keyInsight && (
+        <div className="bg-amber-500/10 rounded p-3">
+          <p className="text-amber-300 text-sm">💡 {data.keyInsight}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// =============================================================================
+// VALUATION CONTEXT BLOCK
+// =============================================================================
+function ValuationContextBlock({ data }: { data: any }) {
+  return (
+    <div className="bg-gradient-to-br from-emerald-900/20 to-slate-900 rounded-xl p-6 border border-emerald-500/30">
+      <h3 className="font-semibold text-white mb-2 text-xl">{data.title}</h3>
+      {data.subtitle && <p className="text-gray-400 mb-4">{data.subtitle}</p>}
+
+      {/* Current Round */}
+      {data.currentRound && (
+        <div className="grid md:grid-cols-2 gap-3 mb-4">
+          <div className="bg-slate-700/50 rounded-lg p-3">
+            <span className="text-gray-400 text-xs">CURRENT VALUATION</span>
+            <p className="text-emerald-300 font-bold text-lg">{data.currentRound.valuation}</p>
+          </div>
+          <div className="bg-slate-700/50 rounded-lg p-3">
+            <span className="text-gray-400 text-xs">STRATEGIC UPROUND</span>
+            <p className="text-purple-300 font-bold text-lg">{data.currentRound.strategicUpround}</p>
+          </div>
+          <div className="bg-slate-700/50 rounded-lg p-3">
+            <span className="text-gray-400 text-xs">SPHR TOKEN FDV</span>
+            <p className="text-blue-300 font-bold text-lg">{data.currentRound.sphereNetToken}</p>
+          </div>
+          <div className="bg-slate-700/50 rounded-lg p-3">
+            <span className="text-gray-400 text-xs">INVESTOR ANGLE</span>
+            <p className="text-amber-300 font-semibold text-sm">{data.currentRound.investorAngle}</p>
+          </div>
+        </div>
+      )}
+
+      {/* Comp Table */}
+      {data.compTable && (
+        <div className="mb-4">
+          <h4 className="text-white font-medium mb-2">{data.compTable.title}</h4>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="bg-slate-700">
+                  {data.compTable.headers?.map((h: string, i: number) => (
+                    <th key={i} className="text-left p-3 text-gray-300 font-medium">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {data.compTable.rows?.map((row: string[], i: number) => (
+                  <tr key={i} className={`border-t border-slate-700 ${row[0] === 'Sphere' ? 'bg-emerald-500/10' : ''}`}>
+                    {row.map((cell: string, j: number) => (
+                      <td key={j} className={`p-3 ${j === 0 ? 'text-white font-semibold' : j === 1 ? 'text-emerald-300 font-bold' : 'text-gray-300'}`}>{cell}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {/* How to Present */}
+      {data.howToPresent && (
+        <div className="bg-purple-500/10 rounded-lg p-4 mb-4">
+          <p className="text-xs font-medium text-purple-400 uppercase tracking-wide mb-1">How to Present</p>
+          <p className="text-purple-200 text-sm">{data.howToPresent}</p>
+        </div>
+      )}
+
+      {/* What Not to Say */}
+      {data.whatNotToSay && (
+        <div className="bg-red-500/10 rounded-lg p-4 border border-red-500/30">
+          <p className="text-xs font-medium text-red-400 uppercase tracking-wide mb-1">What NOT to Say</p>
+          <p className="text-red-200 text-sm">{data.whatNotToSay}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function SmartGenericBlock({ propKey, data }: { propKey: string; data: any }) {
   // Format the key as a title
   const title = propKey.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
@@ -13345,8 +13663,8 @@ function StablecoinSandwichBlock({ data }: { data: any }) {
       <h3 className="font-semibold text-white mb-4 text-xl">{data.title}</h3>
       <p className="text-gray-300 mb-4">{data.concept}</p>
       
-      {/* Three Layers */}
-      <h4 className="text-white font-semibold mb-3">{data.threeLayersTitle}</h4>
+      {/* Layers */}
+      <h4 className="text-white font-semibold mb-3">{data.twoLevelsTitle || data.threeLayersTitle}</h4>
       <div className="space-y-4 mb-6">
         {data.layers?.map((layer: any, i: number) => (
           <div key={i} className="bg-slate-700/50 rounded-lg p-5 border-l-4 border-emerald-500">
@@ -15431,11 +15749,15 @@ function SphereUSDTechnicalArchitectureBlock({ data }: { data: any }) {
                           <span className="text-white font-semibold text-sm">{p.era}</span>
                           <span className="text-gray-400 text-xs">{p.duration}</span>
                         </div>
-                        <div className="flex items-center gap-4 mt-1">
+                        <div className="flex items-center gap-4 mt-1 flex-wrap">
                           <span className="text-emerald-400 text-xs">Circulating: {p.circulating}</span>
                           <span className="text-blue-400 text-xs">Inflation: {p.inflation}</span>
+                          {p.burn && <span className="text-red-400 text-xs">Burn: {p.burn}</span>}
                         </div>
                         <p className="text-gray-500 text-xs mt-1">{p.purpose}</p>
+                        {p.netEffect && (
+                          <p className="text-amber-300 text-xs mt-1 bg-amber-500/10 rounded p-1.5">{p.netEffect}</p>
+                        )}
                       </div>
                     ))}
                   </div>
@@ -16906,6 +17228,7 @@ function CorridorOrchestrationEngineBlock({ data }: { data: any }) {
                     <div key={i} className="bg-slate-600/50 rounded p-2">
                       <p className="text-white text-sm font-semibold">{c.name}</p>
                       <p className="text-gray-400 text-xs">{c.quadrant}: {c.position}</p>
+                      {c.note && <p className="text-blue-300 text-xs mt-1">💡 {c.note}</p>}
                     </div>
                   ))}
                 </div>

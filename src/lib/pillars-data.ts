@@ -212,43 +212,47 @@ export const pillarsData = [
               title: 'How Sphere Achieves Settlement Layer Value Using Stablecoins',
               steps: [
                 {
-                  step: 'Sender Side: Fiat to Stablecoin',
-                  process: 'Customer deposits local currency (USD, AED, EUR) with a licensed on-ramp partner. That partner converts the fiat to stablecoins (USDC, USDT) and sends them to Sphere\'s system. This happens in minutes, not days, because stablecoins settle on blockchain rails 24/7.',
-                  traditional: 'Initiate wire → Wait for correspondent banks → Wait for central bank settlement → 2-5 days',
-                  sphere: 'Deposit fiat → On-ramp converts to stablecoin → Stablecoin received in minutes'
+                  step: 'Step 1: Sphere Holds Local Currency Inventory',
+                  process: 'Sphere maintains local currency on its balance sheet in each active corridor. This is dynamic working capital — actively managed inventory, not static nostro balances sitting idle at correspondent banks. Where a traditional bank might trap $500M+ across nostro accounts in 50 currencies, Sphere maintains lean corridor inventory that might require 80-90% less capital for equivalent volume. Sphere\'s treasury operations ensure each corridor has sufficient liquidity for customer payouts.',
+                  traditional: 'Pre-fund nostro accounts at correspondent banks in every currency → $100M+ trapped capital sitting idle',
+                  sphere: 'Sphere maintains lean corridor inventory → actively rebalanced via stablecoins → 80-90% less capital trapped vs traditional nostro'
                 },
                 {
-                  step: 'Cross-Border Movement: Stablecoin Transfer',
-                  process: 'Sphere moves stablecoins across borders instantly via blockchain. No correspondent banks. No SWIFT messages. No waiting for business hours. The stablecoin transfer settles in minutes on-chain.',
-                  traditional: 'SWIFT message → Correspondent in Country A → Correspondent in Country B → Beneficiary bank → Days of clearing',
-                  sphere: 'Stablecoin transfer on blockchain → Settlement in 15-30 minutes, 24/7'
+                  step: 'Step 2: Customer Sends Fiat → Sphere Pays from Local Inventory',
+                  process: 'When a customer initiates a cross-border payment, Sphere receives their fiat and pays the beneficiary from its existing local currency inventory in the destination corridor. The beneficiary receives local fiat via the local payment rail. Speed is determined by the local rail — not by any conversion step. Example: UAE company sends AED to Sphere, Sphere pays $50K USD from US corridor inventory via Fedwire in minutes. The supplier receives USD same-day.',
+                  traditional: 'SWIFT message → Correspondent in Country A → Correspondent in Country B → Beneficiary bank → 2-5 days',
+                  sphere: 'Customer sends fiat → Sphere pays beneficiary from local inventory → PIX: seconds, wire: minutes, ACH: hours'
                 },
                 {
-                  step: 'Receiver Side: Stablecoin to Fiat',
-                  process: 'Licensed off-ramp partner receives the stablecoins and converts them to local currency for the beneficiary. The beneficiary receives local fiat in their bank account, settled and final.',
-                  traditional: 'Wait for final settlement → Beneficiary bank credits account after settlement confirmation → Days',
-                  sphere: 'Off-ramp receives stablecoin → Converts to local fiat → Credits beneficiary → Minutes to hours'
+                  step: 'Step 3: Sphere Rebalances via Stablecoins (Treasury Operation)',
+                  process: 'After customer payments are made, Sphere\'s treasury rebalances corridor positions between its own entities using stablecoins as the inter-entity settlement layer. This is a wholesale operation — it happens at the treasury level, not per transaction. High-volume corridors (US-Brazil, US-Mexico) may rebalance multiple times daily; lower-volume corridors may rebalance weekly. Stablecoin rebalancing costs $0.50-$5 per transfer regardless of amount, vs $50-$100+ in correspondent fees.',
+                  traditional: 'Correspondent banks slowly reconcile positions across business hours → Days of settlement, $50-$100+ in fees',
+                  sphere: 'Sphere treasury rebalances via stablecoin rails → 24/7, $0.50-$5 per transfer, no correspondent chain'
                 }
               ],
               whyStablecoinsWork: [
                 {
-                  reason: '24/7 Settlement',
-                  explanation: 'Blockchains don\'t have banking hours. Traditional settlement systems (Fedwire, TARGET2) only operate during business hours. Stablecoins settle continuously.'
+                  reason: 'Instant Payouts from Inventory',
+                  explanation: 'Speed comes from paying out of local currency inventory, not from real-time conversion. The customer\'s beneficiary receives funds at the speed of the local payment rail — PIX in Brazil: 2-10 seconds, US domestic wire: 15-60 minutes, SEPA Instant: 10-25 seconds, UK Faster Payments: seconds, ACH: 2-4 hours.'
                 },
                 {
-                  reason: 'Programmable Compliance',
-                  explanation: 'Smart contracts can embed KYC/AML checks directly into the transfer. Traditional systems do compliance checks manually at each correspondent bank.'
+                  reason: 'Efficient Treasury Rebalancing',
+                  explanation: 'Stablecoins let Sphere rebalance corridor positions between its own entities 24/7 without correspondent banks. This keeps inventory levels healthy across corridors at a fraction of the cost of traditional nostro account management. Rebalancing transactions are recorded on-chain, providing transparent, timestamped, immutable audit trails.'
                 },
                 {
                   reason: 'No Correspondent Chain',
-                  explanation: 'With stablecoins, there\'s no need for 4+ correspondent banks. You move value peer-to-peer (or through Sphere\'s network) without intermediaries taking days to process.'
+                  explanation: 'Traditional cross-border payments route through 3-5 correspondent banks. Sphere\'s inventory model eliminates this chain entirely for the customer. The cross-border leg is handled by Sphere\'s own treasury operations using stablecoin rails.'
                 },
                 {
-                  reason: 'Atomic Settlement',
-                  explanation: 'When a stablecoin transaction confirms on-chain, it\'s settled. There\'s no "clearing vs settlement" delay. Traditional payments can clear (message confirmed) but not settle (money not moved) for days.'
+                  reason: 'Compliance Done Once, Not Five Times',
+                  explanation: 'Traditional correspondent chains run compliance at each hop (3-5 times per payment). Sphere does compliance at customer onboarding and per-payment screening — once, upfront. No mid-flight holds at correspondent banks. When Sphere pays from inventory, the beneficiary\'s receipt is final — no clearing-vs-settlement gap.'
+                },
+                {
+                  reason: 'Capital Efficiency',
+                  explanation: 'Instead of pre-funding static nostro accounts in every currency, Sphere maintains lean, actively managed corridor inventory rebalanced via stablecoins. Where traditional banks might trap $500M+ across nostro accounts, Sphere can service equivalent volume with 80-90% less trapped capital.'
                 }
               ],
-              criticalClarification: 'Sphere does NOT eliminate fiat settlement-fiat settlement still happens at the endpoints through licensed partners. What Sphere does is compress the CROSS-BORDER leg from days to minutes by using stablecoins as the settlement asset across borders. This is why we say "Sphere\'s value is in the settlement layer"-we\'re not making messages faster, we\'re making settlement faster.'
+              criticalClarification: 'Speed comes from paying out of inventory, not from real-time conversion. The stablecoin leg is Sphere\'s internal treasury operation — it happens between Sphere\'s own entities, not per customer transaction. Think of Sphere as a market maker: it holds inventory in each corridor and uses stablecoins to rebalance behind the scenes. The customer experience is simple: send fiat, beneficiary receives fiat at local rail speed.'
             }
           },
           keyTakeaway: 'A payment can be initiated and cleared WITHOUT being settled. Risk accumulates until settlement occurs.'
@@ -440,7 +444,7 @@ export const pillarsData = [
               }
             ],
             bestPractice: 'For large or critical payments, require the beneficiary to confirm receipt in their account before releasing goods, services, or obligations. SWIFT ACK is not proof of payment.',
-            sphereAdvantage: 'With Sphere, stablecoin transfers settle on-chain in 15-30 minutes. You can verify settlement by checking the blockchain transaction-it\'s transparent, timestamped, and final. No waiting for correspondent confirmations.'
+            sphereAdvantage: 'With Sphere, beneficiaries receive local fiat from Sphere\'s corridor inventory via local payment rails — settlement speed depends on the local rail (PIX in seconds, wire in minutes). Sphere\'s treasury rebalancing is recorded on-chain, providing transparent, timestamped, immutable audit trails — you can verify settlement status without waiting for correspondent confirmations. No SWIFT ACK ambiguity.'
           },
           keyPhrase: {
             phrase: 'Messages create obligations; settlement discharges them.',
@@ -1058,14 +1062,14 @@ export const pillarsData = [
                 {
                   name: 'Cross-Border Speed Without Replacing Settlement Infrastructure',
                   centralBankRole: 'Central banks provide domestic settlement systems (Fedwire, TARGET2, UAEFTS) that settle in their local currency with legal finality.',
-                  sphereRole: 'Sphere uses stablecoins to move value BETWEEN jurisdictions rapidly (15-30 minutes), then settles into local fiat through the local central bank system at each endpoint.',
+                  sphereRole: 'Sphere holds local currency inventory in each active corridor and pays beneficiaries via local rails. Sphere\'s treasury rebalances corridor positions between its own entities using stablecoin rails, then settles into local fiat through the local central bank system at each endpoint.',
                   complement: 'Central banks remain the final settlement layer for fiat. Sphere simply optimizes the cross-border leg. We\'re like a fast highway between two cities-the cities (central banks) are still the origin and destination.',
-                  example: 'UAE company pays US supplier. Traditional: AED → Central Bank of UAE → Correspondent → Correspondent → Fedwire → USD (2-5 days). Sphere: AED → CBUAE settlement → Stablecoin transfer (30 min) → Fedwire settlement → USD. Central banks still settle both endpoints-we just made the middle faster.'
+                  example: 'UAE company pays US supplier. Traditional: AED → Central Bank of UAE → Correspondent → Correspondent → Fedwire → USD (2-5 days). Sphere: Company sends AED → Sphere pays USD from US corridor inventory via Fedwire → Supplier receives USD at wire speed. Sphere\'s treasury rebalances corridor positions using stablecoins. Central banks still provide settlement at endpoints.'
                 },
                 {
                   name: 'Reducing Pressure on Correspondent Banking',
                   centralBankRole: 'Central banks don\'t directly connect all banks globally. Correspondent banking fills the gap, but it\'s slow, expensive, and shrinking (de-risking).',
-                  sphereRole: 'Sphere provides an alternative pathway that doesn\'t require 4+ correspondent banks. Licensed partners convert fiat to stablecoin (using local central bank settlement), move stablecoins cross-border, and convert back to fiat (using destination central bank settlement).',
+                  sphereRole: 'Sphere provides an alternative pathway that doesn\'t require 4+ correspondent banks. Sphere pays beneficiaries from local corridor inventory via local rails. Sphere\'s treasury rebalances corridor positions using stablecoin rails (with fiat settlement at each endpoint through local central bank systems).',
                   complement: 'This reduces load on correspondent banking networks while still using central bank infrastructure at endpoints. Central banks benefit because cross-border payments become more efficient without requiring them to build new infrastructure.',
                   example: 'Nigerian bank wants to send money to Japan. Traditional path requires correspondents in London, New York, Tokyo-each with their own nostro accounts, compliance, and delays. Sphere path: Nigerian naira settles through Central Bank of Nigeria → stablecoin transfer → Japanese yen settles through Bank of Japan. No correspondent chain needed. Central banks still provide final settlement.'
                 },
@@ -1197,7 +1201,7 @@ export const pillarsData = [
                 definition: 'Latin for "our account with you." A nostro account is an account a bank holds at a foreign bank in foreign currency.',
                 example: 'Bank of America has a EUR nostro account at Deutsche Bank in Germany. When BoA needs to send EUR to Europe, it debits this nostro account.',
                 whyItMatters: 'Nostro accounts tie up capital. Banks must pre-fund them with millions or billions of dollars sitting idle, waiting to be used for payments.',
-                sphereContext: 'Sphere doesn\'t require pre-funded nostro accounts in every currency. Instead of trapping $500M in a EUR nostro "just in case," Sphere converts to stablecoins on-demand, transfers cross-border, and converts to local fiat at the destination. Capital deployed only when needed, freed immediately after.'
+                sphereContext: 'Sphere deploys dynamic working capital across corridors — actively managed inventory rather than static nostro balances. Instead of $500M locked in idle nostro accounts across 50 currencies, Sphere maintains lean corridor inventory rebalanced via stablecoins. More capital-efficient, actively managed, and not sitting idle.'
               },
               {
                 term: 'Vostro Account',
@@ -1410,7 +1414,7 @@ export const pillarsData = [
                     'Cut-off time misalignment across 3 time zones (São Paulo, New York, Tokyo)',
                     'Japanese bank beneficiary name mismatch (character encoding issues common)'
                   ],
-                  sphereApproach: 'Sphere compresses this to: Brazilian on-ramp (BRL→USDC, 15 min) → Stablecoin transfer (5 min) → Japanese off-ramp (USDC→JPY, 30 min). Total: ~1 hour vs 3-7 days. Single FX conversion point. Compliance handled upfront at on-ramp. No correspondent chain.'
+                  sphereApproach: 'Sphere pays from JPY inventory via local Japanese rail. The customer sends BRL, the Japanese supplier receives JPY — settlement speed depends on the local payout rail, not conversion steps. Sphere\'s treasury rebalances the BRL-JPY corridor position using stablecoins at the wholesale level. No correspondent chain. Compliance handled upfront at onboarding.'
                 }
               ]
             },
@@ -1445,28 +1449,28 @@ export const pillarsData = [
             solutions: [
               {
                 problem: '4+ correspondent hops',
-                sphereSolution: 'Direct stablecoin settlement',
-                howItWorks: 'Traditional payment hops through 4 banks, each with own compliance, fees, cut-off times. Sphere converts to stablecoin at origin, transfers peer-to-peer on blockchain, converts to local fiat at destination. No correspondent chain. Licensed partners at each endpoint handle fiat conversion. Result: 4 hops become 2 conversions + 1 transfer.'
+                sphereSolution: 'Direct payout from local corridor inventory',
+                howItWorks: 'Traditional payment hops through 4 banks, each with own compliance, fees, cut-off times. Sphere pays the beneficiary directly from local currency inventory in the destination corridor via local payment rails. No correspondent chain. Sphere\'s treasury rebalances corridor positions using stablecoin rails behind the scenes. Result: 4 hops become 1 direct payout.'
               },
               {
                 problem: 'Banking hours only (cut-off times)',
-                sphereSolution: '24/7 blockchain operations',
-                howItWorks: 'Miss 5 PM cut-off in New York? Traditional: Your payment waits until tomorrow. Weekend? Add 2 days. Sphere: Stablecoin transfers operate 24/7/365. Initiate payment Friday 11 PM, settles by Saturday morning. Fiat off-ramp processes when local banking hours resume, but cross-border movement is done. No waiting for Monday.'
+                sphereSolution: 'Local rail speed + 24/7 treasury rebalancing',
+                howItWorks: 'Miss 5 PM cut-off in New York? Traditional: Your payment waits until tomorrow. Weekend? Add 2 days. Sphere: Payouts happen at local rail speed whenever the local rail is operational. Example: Customer initiates payment Friday 11 PM — if the destination has 24/7 rails (PIX in Brazil, UK Faster Payments), beneficiary receives funds within minutes. If not, payout processes when local rail opens Monday morning — still faster than waiting for correspondent banks. Sphere\'s treasury rebalances corridor positions 24/7/365 using stablecoin rails, so inventory is always ready.'
               },
               {
                 problem: 'Capital trapped in nostros',
-                sphereSolution: 'No pre-funding needed',
-                howItWorks: 'Traditional banks maintain €500M nostro accounts at foreign banks just to have liquidity for payments. Capital sits idle. Sphere: On-ramps and off-ramps convert fiat to stablecoin on-demand. No need to pre-fund accounts in 50 currencies. Capital deployed only when needed, returned immediately after use. Frees billions in trapped liquidity.'
+                sphereSolution: 'Dynamic corridor inventory vs static nostro balances',
+                howItWorks: 'Traditional banks maintain €500M nostro accounts at foreign banks — static capital sitting idle. Sphere maintains lean, actively managed corridor inventory rebalanced via stablecoins. Instead of pre-funding accounts in 50 currencies, Sphere deploys dynamic working capital across active corridors and rebalances positions using stablecoin rails. More capital-efficient than traditional nostro management, not "zero pre-funding" — but dramatically leaner.'
               },
               {
                 problem: 'Compliance at each hop (5+ regimes)',
                 sphereSolution: 'Embedded compliance upfront',
-                howItWorks: 'Traditional: Each correspondent bank runs own compliance checks. Payment gets flagged at hop 3, frozen for 5 days pending review. Sphere: KYC/AML/sanctions screening happens upfront at on-ramp before payment initiates. Smart contracts enforce compliance rules. If payment doesn\'t pass compliance, it never enters the network. No mid-flight freezes.'
+                howItWorks: 'Traditional: Each correspondent bank runs own compliance checks. Payment gets flagged at hop 3, frozen for 5 days pending review. Sphere: KYC/AML/sanctions screening happens upfront at customer onboarding and per-payment screening before payout. If payment doesn\'t pass compliance, it never proceeds. No mid-flight freezes at correspondent banks.'
               },
               {
                 problem: '2-5 day settlement (T+2 to T+10)',
-                sphereSolution: '15-30 minute median settlement',
-                howItWorks: 'Traditional correspondent chain takes days. Each bank processes during business hours, adds delays. Sphere: Stablecoin transfer confirms on-chain in minutes. Fiat conversion at endpoints adds minimal time (15-30 minutes total from fiat in→fiat out). Median settlement: under 30 minutes vs 2-5 days traditional.'
+                sphereSolution: 'Settlement at local rail speed',
+                howItWorks: 'Traditional correspondent chain takes days because each bank processes during business hours with separate compliance checks. Sphere pays from local corridor inventory — settlement speed equals the local payment rail speed. PIX in Brazil = seconds. Wire in the US = minutes. ACH = hours. The cross-border leg is handled by Sphere\'s treasury rebalancing, which is invisible to the customer.'
               }
             ],
             clarifications: {
@@ -1487,9 +1491,9 @@ export const pillarsData = [
                 risks: ['Compliance hold at any hop', 'FX rate movement', 'Correspondent rejection']
               },
               sphere: {
-                timeline: 'Minute 0: Initiate payment in Dubai. Minute 5: AED converted to USDC at on-ramp. Minute 10: USDC transfer confirms on-chain. Minute 25: USDC converted to NGN at off-ramp. Minute 30: NGN credited to beneficiary account. Total: 30 minutes.',
+                timeline: 'Minute 0: Customer initiates payment in Dubai, sends AED to Sphere. Minute 2: Sphere confirms incoming AED. Minute 5: Sphere initiates NGN payout from Nigeria corridor inventory via local Nigerian rail. Minute 15-60: Beneficiary receives NGN (depending on Nigerian local rail speed and banking hours). Separately: Sphere\'s treasury rebalances AED-NGN corridor position using stablecoins — this is independent of the customer payment. Total customer experience: under 1 hour vs 6 days traditional.',
                 cost: '$8 in network fees',
-                risks: ['Minimal-compliance completed upfront', 'No correspondent rejections', 'Blockchain confirmation is deterministic']
+                risks: ['Minimal-compliance completed upfront at onboarding', 'No correspondent rejections', 'Speed determined by local Nigerian rail']
               }
             }
           },
@@ -1612,63 +1616,54 @@ You must be able to discuss stablecoins without crypto language, understand thei
           },
           stablecoinSandwichDeepDive: {
             title: 'The Stablecoin Sandwich Explained in Depth',
-            concept: 'The "stablecoin sandwich" is the core innovation that makes Sphere work. It\'s called a sandwich because stable coin sits in the middle-wrapped by fiat on both sides. The end user only ever touches fiat currency.',
-            threeLayersTitle: 'The Three Layers of the Sandwich',
+            concept: 'The "stablecoin sandwich" describes Sphere\'s settlement architecture: fiat on both sides, stablecoins as the invisible middle layer. But crucially, the stablecoin layer operates at the TREASURY level between Sphere\'s own entities — not per customer transaction. Think market maker, not DEX.',
+            twoLevelsTitle: 'Two Levels of the Sandwich',
             layers: [
               {
-                layer: 'Layer 1 (Bottom Bread): Fiat On-Ramp',
-                what: 'The sender provides local fiat currency (USD, AED, EUR, etc.) to a licensed partner.',
-                how: 'Licensed on-ramp partner (regulated financial institution) receives the fiat, performs KYC/AML compliance, and converts it to stablecoins (USDC, USDT) at a 1:1 rate.',
-                time: '5-15 minutes',
-                who: 'Licensed on-ramp partner (e.g., regulated money service business, licensed exchange)',
-                compliance: 'Full KYC/AML performed here. Customer identity verified, transaction screened for sanctions.',
-                example: 'UAE company wants to pay US supplier $50,000. They deposit 50,000 AED with Sphere\'s licensed UAE partner. Partner converts AED to USDC at market rate and credits Sphere network with 50,000 USDC.'
+                layer: 'Customer Level: Pure Fiat Experience',
+                what: 'The customer sends fiat, the beneficiary receives fiat. The stablecoin is completely invisible.',
+                how: 'Customer initiates payment in their local currency. Sphere receives the fiat and pays the beneficiary from its local currency inventory in the destination corridor via local payment rails. Neither party ever touches, sees, or needs to understand stablecoins. No wallet setup, no gas fees, no private keys — just faster payments.',
+                time: 'Determined by local payment rail speed: PIX (Brazil) = 2-10 seconds, SEPA Instant (EU) = 10-25 seconds, UK Faster Payments = seconds, US Domestic Wire = 15-60 minutes, ACH = 2-4 hours',
+                who: 'Customer → Sphere → Beneficiary',
+                compliance: 'Full KYC/AML performed at customer onboarding. Sanctions screening and transaction monitoring on every payment — done once upfront by Sphere, not repeated at each correspondent hop.',
+                example: 'UAE company wants to pay US supplier $50,000. They send AED to Sphere. Sphere pays the supplier $50,000 USD from its US corridor inventory via Fedwire in ~30 minutes. Supplier receives USD in their bank account — never touched crypto, never knew blockchain was involved. Total cost: ~$8 vs $75+ traditional correspondent fees.'
               },
               {
-                layer: 'Layer 2 (The Filling): Stablecoin Transfer',
-                what: 'Stablecoins move cross-border on blockchain rails.',
-                how: 'Once converted to stablecoins, the value moves peer-to-peer on blockchain (Ethereum, Solana, etc.) without intermediaries. No correspondent banks. No SWIFT. No business hours. Transaction confirms in minutes.',
-                time: '10-30 minutes (depending on blockchain congestion)',
-                who: 'Blockchain network (public, permissionless). Sphere doesn\'t control it-we just use it.',
-                compliance: 'None required at this layer. Compliance already done at on-ramp. Blockchain is just transport.',
-                example: '50,000 USDC moves from UAE wallet to US wallet on Ethereum blockchain. Transaction fee: ~$2. Confirms in 15 minutes. Transparent, traceable on blockchain explorer.'
-              },
-              {
-                layer: 'Layer 3 (Top Bread): Fiat Off-Ramp',
-                what: 'The recipient receives local fiat currency from a licensed partner.',
-                how: 'Licensed off-ramp partner receives the stablecoins, converts them to local fiat at 1:1 rate, and deposits into beneficiary\'s bank account.',
-                time: '15-60 minutes (depending on local banking)',
-                who: 'Licensed off-ramp partner (regulated financial institution in destination country)',
-                compliance: 'Beneficiary identity verified. Transaction recorded for regulatory reporting.',
-                example: 'US off-ramp partner receives 50,000 USDC, converts to $50,000 USD, and deposits into supplier\'s US bank account via ACH or wire. Supplier sees USD-never touched crypto.'
+                layer: 'Wholesale Level: Sphere\'s Treasury Rebalancing',
+                what: 'Sphere rebalances corridor positions between its own entities using stablecoins.',
+                how: 'After customer payments deplete inventory in one corridor and build up in another, Sphere\'s treasury operations rebalance using stablecoin rails. Stablecoins sit in the middle between Sphere\'s own entities across corridors, wrapped by fiat on both sides. This is the actual "sandwich" — and it\'s a wholesale treasury operation. Rebalancing transactions are recorded on-chain, providing a transparent, immutable audit trail.',
+                time: 'High-volume corridors (US-Brazil, US-Mexico) may rebalance multiple times daily. Lower-volume corridors may rebalance weekly. Stablecoin transfer itself: seconds to minutes on-chain.',
+                who: 'Sphere\'s treasury team, using licensed on-ramp and off-ramp partners for the fiat legs',
+                compliance: 'All rebalancing operations go through licensed partners with full KYC/AML compliance. On-chain transactions are traceable by transaction hash, timestamp, and wallet address.',
+                example: 'After processing $2M in UAE→US payments over a day, Sphere\'s UAE entity has accumulated AED and its US entity\'s USD inventory is $2M lower. Treasury converts AED to USDC ($0.50-$5 transfer cost), transfers to the US entity on Solana (settles in seconds), converts to USD — replenishing the corridor. Total rebalancing cost: under $10 vs thousands in correspondent fees. This happens independent of any single customer payment.'
               }
             ],
             whyItWorks: {
-              title: 'Why the Sandwich Works',
+              title: 'Why the Wholesale Inventory Model Works',
               reasons: [
                 {
-                  reason: 'Regulatory Compliance at Endpoints',
-                  explanation: 'All regulatory requirements (KYC, AML, sanctions screening) happen at the fiat on-ramp and off-ramp. The middle layer (stablecoin transfer) is just transport. Regulators are comfortable because licensed partners handle all compliance.'
+                  reason: 'Instant Payouts from Inventory',
+                  explanation: 'Customers don\'t wait for any conversion. Sphere pays from existing local currency inventory. Speed = local rail speed. PIX in seconds, wire in minutes. No on-ramp or off-ramp delay for the customer.'
                 },
                 {
                   reason: 'User Never Touches Crypto',
-                  explanation: 'Sender deposits fiat. Recipient receives fiat. Neither party needs a crypto wallet, doesn\'t need to understand blockchain, never sees a private key. Sphere\'s partners handle all crypto operations invisibly.'
+                  explanation: 'Sender deposits fiat. Recipient receives fiat. Neither party needs a crypto wallet, doesn\'t need to understand blockchain, never sees a private key. The stablecoin layer is purely Sphere\'s internal treasury infrastructure.'
                 },
                 {
-                  reason: 'Speed Without Sacrificing Compliance',
-                  explanation: 'Traditional cross-border payments are slow because compliance checks happen at each correspondent bank (3-5 hops). The sandwich does compliance once at each endpoint, then moves value instantly via stablecoins. Total time: 30-90 minutes vs 2-5 days.'
+                  reason: 'Efficient Cross-Border Rebalancing',
+                  explanation: 'Instead of maintaining expensive correspondent banking chains, Sphere rebalances corridor positions using stablecoin rails — 24/7, low cost ($0.50-$5 per transfer vs $50-$100+ correspondent fees), no intermediaries. All rebalancing is recorded on-chain with transparent, immutable audit trails. This keeps inventory healthy across corridors far more efficiently than traditional nostro management.'
                 },
                 {
-                  reason: '24/7 Operations',
-                  explanation: 'Fiat banking has business hours. Blockchains don\'t. The stablecoin layer operates 24/7/365. So even if sender initiates Friday night, the stablecoin transfer completes over the weekend, and fiat off-ramp processes Monday morning. Much faster than waiting until Monday for traditional banks to even start processing.'
+                  reason: '24/7 Rebalancing',
+                  explanation: 'Fiat banking has business hours. Blockchains don\'t. Sphere\'s treasury can rebalance corridor positions 24/7/365 using stablecoin rails, ensuring inventory is ready when customers need it. Example: Customer initiates payment Friday 11 PM — Sphere pays from inventory immediately (if local rail is available). Treasury rebalances over the weekend so Monday inventory is ready. No waiting for correspondent banks to open on Monday.'
                 },
                 {
                   reason: 'Cost Efficiency',
-                  explanation: 'No correspondent banks = no correspondent fees. Blockchain transaction costs $0.50-$5 depending on network. Traditional correspondent chain: $50-$100+ in fees. The savings are dramatic.'
+                  explanation: 'No correspondent banks = no correspondent fees. Stablecoin rebalancing costs $0.50-$5 per transfer regardless of amount. Traditional correspondent chain: $50-$100+ in fees per payment. The wholesale model passes these savings to customers.'
                 }
               ]
             },
-            criticalClarification: 'The stablecoin is NOT the product. It\'s the invisible middle layer. Sphere is not selling stablecoins to customers. Customers are buying cross-border payment services that HAPPEN to use stablecoins as transport.'
+            criticalClarification: 'The stablecoin is NOT the product. It\'s the invisible treasury rebalancing layer between Sphere\'s own entities. Think market maker, not DEX. Customers never touch stablecoins — they experience a simple fiat-to-fiat payment. The "sandwich" describes how Sphere\'s treasury keeps the whole system funded, not how an individual payment moves.'
           },
           howSphereUtilizesStablecoins: {
             title: 'How Sphere Utilizes Stablecoins',
@@ -1817,23 +1812,23 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 what: 'End users never see, touch, or understand the stablecoin. They send fiat, recipient gets fiat.',
                 howItWorks: [
                   'Customer initiates payment in their local currency (AED, USD, EUR)',
-                  'Sphere\'s licensed partner converts to stablecoin (invisible to customer)',
-                  'Stablecoin moves cross-border in minutes (invisible to customer)',
-                  'Destination partner converts to recipient\'s local currency',
-                  'Recipient receives fiat in their bank account'
+                  'Sphere receives customer\'s fiat',
+                  'Sphere pays beneficiary from local corridor inventory via local payment rail',
+                  'Recipient receives fiat in their bank account',
+                  'Sphere\'s treasury rebalances corridor positions using stablecoin rails (invisible to all parties)'
                 ],
                 whyItMatters: 'No crypto education required. No wallet setup. No key management. Just faster payments.'
               },
               {
-                strategy: 'Transitory Holdings Only',
-                what: 'Sphere holds stablecoins for MINUTES, not hours or days.',
+                strategy: 'Treasury-Level Stablecoin Management',
+                what: 'Sphere manages stablecoin exposure at the treasury level during rebalancing operations.',
                 howItWorks: [
-                  'Average stablecoin hold time: 15-45 minutes',
-                  'Maximum hold time: 2 hours per transaction',
-                  'No overnight stablecoin positions - everything converted to fiat by end of day',
-                  'Real-time monitoring of all stablecoin balances'
+                  'Stablecoins are used for inter-entity settlement (rebalancing corridor positions), not held as a primary position',
+                  'Treasury rebalancing cycles are designed to minimize stablecoin exposure duration — high-volume corridors rebalance multiple times daily, positions are not carried as standing inventory',
+                  'Multi-stablecoin capability enables routing through alternatives if one issuer has issues (Primary: USDC, Secondary: USDT, Tertiary: EURC)',
+                  'Real-time monitoring of all stablecoin balances across treasury operations, with 2% deviation circuit breaker for depeg events'
                 ],
-                whyItMatters: 'Minimizes exposure to depeg risk, hack risk, or regulatory risk. Even if USDC depegs 10%, our max exposure is minutes of transaction volume.'
+                whyItMatters: 'Because stablecoin exposure is limited to treasury rebalancing positions (not the full customer transaction pipeline), a depeg event affects only the rebalancing amount in flight — not individual customer payments, which are paid from local currency inventory. Even a 13% depeg (worst USDC scenario) would only affect treasury rebalancing costs, not customer payouts.'
               },
               {
                 strategy: 'Licensed Partner Network',
@@ -1869,20 +1864,22 @@ You must be able to discuss stablecoins without crypto language, understand thei
           { q: 'Stablecoin transfer volume in 2024?', options: ['$2.7B', '$27.6B', '$276B', '$27.6T'], correct: 3 },
           { q: 'What is the "stablecoin sandwich"?', options: ['A trading strategy', 'Fiat→Stablecoin→Fiat transfer flow', 'A type of stablecoin', 'DeFi protocol'], correct: 1 },
           { q: 'Sphere uses stablecoins as:', options: ['Investment product', 'Speculative asset', 'Settlement infrastructure/plumbing', 'Customer-facing product'], correct: 2 },
-          { q: 'Average stablecoin hold time at Sphere:', options: ['Days', 'Hours', 'Minutes (15-45)', 'Weeks'], correct: 2 }
+          { q: 'How does Sphere achieve fast cross-border payout speed?', options: ['Real-time stablecoin conversion per payment', 'Paying from local corridor inventory at local rail speed', 'Using faster blockchain networks', 'Bypassing all compliance checks'], correct: 1 }
         ],
         glossary: [
           { term: 'Stablecoin', definition: 'A cryptocurrency designed to maintain stable value by pegging to a reference asset (usually USD). Unlike Bitcoin, stablecoins hold ~$1.00 consistently through reserve backing.' },
           { term: 'Fiat-Collateralized Stablecoin', definition: 'A stablecoin backed 1:1 by fiat currency reserves (cash, T-bills, bank deposits). USDC and USDT are fiat-collateralized. Most institutional and regulatory-friendly type.' },
           { term: 'Algorithmic Stablecoin', definition: 'A stablecoin that maintains its peg through algorithms rather than reserves. HIGH RISK. TerraUSD (UST) collapsed in 2022, losing $40B+. Most jurisdictions now restrict or prohibit these.' },
-          { term: 'On-Ramp', definition: 'A licensed service that converts fiat currency (USD, EUR, AED) into cryptocurrency or stablecoins. The entry point from traditional finance into crypto rails.' },
-          { term: 'Off-Ramp', definition: 'A licensed service that converts cryptocurrency or stablecoins back into fiat currency. The exit point from crypto rails back to traditional banking.' },
-          { term: 'Stablecoin Sandwich', definition: 'Sphere\'s core payment flow: Fiat In → Stablecoin Transfer → Fiat Out. The stablecoin is the invisible middle layer. End users only touch fiat.' },
+          { term: 'On-Ramp', definition: 'A licensed service that converts fiat currency (USD, EUR, AED) into cryptocurrency or stablecoins. In Sphere\'s model, on-ramps are used for treasury rebalancing operations, not per-customer-transaction conversion.' },
+          { term: 'Off-Ramp', definition: 'A licensed service that converts cryptocurrency or stablecoins back into fiat currency. In Sphere\'s model, off-ramps are used for treasury rebalancing operations, not per-customer-transaction conversion.' },
+          { term: 'Stablecoin Sandwich', definition: 'Sphere\'s settlement architecture: fiat on both ends, stablecoins as the invisible treasury rebalancing layer between Sphere\'s own entities. Customers only touch fiat. The "sandwich" describes how Sphere\'s treasury keeps corridor inventory funded, not how individual payments move.' },
+          { term: 'Corridor Inventory', definition: 'Local currency held by Sphere in each active corridor for immediate customer payouts. Sphere maintains dynamic working capital across corridors, actively rebalanced via stablecoin rails.' },
+          { term: 'Wholesale Settlement', definition: 'Sphere\'s model of rebalancing corridor positions between its own entities using stablecoin rails. The stablecoin leg is a treasury operation, not a per-transaction conversion.' },
           { term: 'USDC', definition: 'USD Coin, issued by Circle. US-regulated, MiCA-compliant stablecoin with transparent reserves (~$52B market cap). Monthly attestations. Sphere\'s primary stablecoin for US corridors.' },
           { term: 'USDT', definition: 'Tether, the largest stablecoin (~$137B market cap). Highest liquidity globally, dominant in Asia. Not MiCA-compliant, delisted from EU exchanges. Sphere uses for Asia corridors.' },
           { term: 'MiCA', definition: 'Markets in Crypto-Assets Regulation. EU regulatory framework for crypto-assets including stablecoins. Requires reserves, transparency, and licensing. USDC compliant, USDT not compliant.' },
           { term: 'Attestation', definition: 'A report from an independent auditor confirming a stablecoin issuer\'s reserves. Not a full audit, but verification that reserves exist at a point in time. Circle publishes monthly.' },
-          { term: 'Transitory Holdings', definition: 'Sphere\'s operational approach: hold stablecoins for MINUTES (15-45 avg), not hours or days. Minimizes exposure to depeg, hack, or regulatory risk.' }
+          { term: 'Transitory Holdings', definition: 'Sphere\'s approach to stablecoin exposure: used for treasury-level rebalancing operations between Sphere\'s own entities, not held as a standing position. High-volume corridors rebalance multiple times daily; exposure is minimized outside active rebalancing windows. Reduces exposure to depeg, hack, or regulatory risk.' }
         ]
       },
       {
@@ -2085,14 +2082,14 @@ You must be able to discuss stablecoins without crypto language, understand thei
               },
               {
                 risk: 'Redemption Risk',
-                sphereMitigation: 'Transitory holdings-stablecoins held for MINUTES, not days',
-                howItWorks: 'Sphere doesn\'t accumulate stablecoin balances. Every payment is: (1) Fiat received → convert to stablecoin, (2) Transfer stablecoin cross-border, (3) Convert stablecoin → fiat delivered. Total hold time: 15-45 minutes average.',
+                sphereMitigation: 'Stablecoins used for treasury rebalancing, not per-transaction conversion',
+                howItWorks: 'Sphere uses stablecoins for inter-entity settlement (rebalancing corridor positions between Sphere\'s own entities), not for per-transaction conversion. Customer payments are made from local currency inventory — customers are never directly exposed to stablecoin redemption risk. Stablecoin exposure exists only at the treasury level during rebalancing operations.',
                 specificActions: [
-                  'No overnight stablecoin positions-everything converted to fiat by end of day',
-                  'Maximum hold time: 2 hours for any single transaction',
-                  'If redemption delayed (liquidity issue), we absorb cost and complete payment using backup liquidity'
+                  'Treasury rebalancing cycles minimize stablecoin exposure duration — positions are not carried as standing inventory',
+                  'Multi-stablecoin capability — if one issuer has redemption issues, route through alternatives (USDC → USDT → EURC)',
+                  'If redemption delayed (liquidity issue), Sphere absorbs cost and continues customer operations using backup liquidity'
                 ],
-                whichRisksAddressed: 'Dramatically reduces redemption risk exposure. If a depeg happens (like USDC), our exposure is MINUTES of transaction volume, not days/weeks. Example: During USDC depeg, a firm holding $10M in USDC lost $1.3M (13% depeg). Sphere\'s average position: ~$500K for 30 minutes. Max loss: $65K even in worst-case scenario.'
+                whichRisksAddressed: 'Dramatically reduces redemption risk exposure because customers are paid from local currency inventory, not through per-transaction stablecoin conversion. Example: During the USDC depeg (13%), a firm holding $10M in USDC for customer conversions would lose $1.3M. Under Sphere\'s inventory model, the $10M in customer payments were paid from local currency — zero stablecoin exposure for those payments. Only Sphere\'s treasury rebalancing positions (a fraction of total volume) were exposed. Multi-issuer capability provides additional protection.'
               },
               {
                 risk: 'Operational Risk',
@@ -2195,7 +2192,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
           { q: 'What caused the USDC depeg?', options: ['Insufficient reserves', 'SVB failure ($3.3B exposure)', 'Smart contract hack', 'Regulatory action'], correct: 1 },
           { q: 'How does Sphere mitigate stablecoin risk?', options: ['Avoid stablecoins', 'Hold for minutes not days', 'Use only one issuer', 'Guarantee the peg'], correct: 1 },
           { q: 'Which is NOT one of the five stablecoin risk categories?', options: ['Reserve risk', 'Redemption risk', 'Interest rate risk', 'Counterparty risk'], correct: 2 },
-          { q: 'Sphere\'s maximum stablecoin hold time per transaction:', options: ['24 hours', '2 hours', '1 week', 'No limit'], correct: 1 }
+          { q: 'Sphere uses stablecoins primarily for:', options: ['Per-transaction conversion', 'Treasury rebalancing between its own entities', 'Customer-facing crypto products', 'Long-term investment'], correct: 1 }
         ],
         glossary: [
           { term: 'Depeg', definition: 'When a stablecoin trades below (or above) its $1.00 target price. USDC briefly traded at $0.87 during the March 2023 SVB crisis - a 13% depeg.' },
@@ -2240,14 +2237,14 @@ You must be able to discuss stablecoins without crypto language, understand thei
               ['ACH (USD)', '1-2 days', '~$0.25-1', 'Batch windows', 'T+1 to T+2']
             ],
             stablecoinLegDetail: {
-              title: 'Stablecoin Leg Breakdown',
+              title: 'Sphere\'s Inventory Model: Why Speed = Local Rail Speed',
               steps: [
-                { step: 'Fiat to Stablecoin (On-Ramp)', time: '5-15 minutes', what: 'Customer deposits fiat → Licensed partner converts to stablecoin', dependency: 'Banking system availability' },
-                { step: 'Stablecoin Transfer (Blockchain)', time: '15 seconds to 5 minutes', what: 'Stablecoin moves on-chain', dependency: 'Blockchain congestion, gas prices' },
-                { step: 'Stablecoin to Fiat (Off-Ramp)', time: '15-45 minutes', what: 'Stablecoin converted → Fiat delivered to beneficiary', dependency: 'Local banking hours, KYC verification' }
+                { step: 'Customer Sends Fiat', time: 'Varies by method', what: 'Customer sends local currency to Sphere. Sphere confirms receipt. Wire: same-day. ACH: 1-2 days.', dependency: 'Customer\'s bank and payment method' },
+                { step: 'Sphere Pays from Local Inventory', time: 'Seconds to hours', what: 'Sphere pays beneficiary from corridor inventory via local rail. Speed by corridor: PIX (Brazil) = 2-10 sec, SEPA Instant (EU) = 10-25 sec, UK Faster Payments = seconds, US Wire = 15-60 min, ACH = 2-4 hrs.', dependency: 'Local payment rail availability and operating hours' },
+                { step: 'Treasury Rebalancing (Invisible)', time: 'Seconds on-chain', what: 'Sphere rebalances corridor positions using stablecoin rails between its own entities. Cost: $0.50-$5 per transfer regardless of amount. Independent of customer payment.', dependency: 'Treasury operations — separate from customer payment timing' }
               ],
-              totalTime: '30 minutes to 1 hour (median)',
-              bottleneck: 'NOT the blockchain-the bottleneck is the fiat on/off-ramps, which depend on traditional banking systems.'
+              totalTime: 'Corridor-dependent: Brazil (PIX) = seconds, EU (SEPA Instant) = seconds, US (wire) = 15-60 minutes, US (ACH) = 2-4 hours. All dramatically faster than 2-5 day correspondent banking.',
+              bottleneck: 'The bottleneck is NOT any cross-border step — Sphere\'s inventory model eliminates the cross-border delay entirely. The bottleneck is simply the local payout rail speed, which varies by corridor and payment method.'
             },
             fiatLegDetail: {
               title: 'Fiat Leg Breakdown (Traditional Wire)',
@@ -2275,31 +2272,31 @@ You must be able to discuss stablecoins without crypto language, understand thei
               title: 'What Can Go Wrong: Real Scenarios',
               scenarios: [
                 {
-                  scenario: 'Scenario 1: Release Stablecoin Before Fiat Confirmed',
-                  setup: 'Customer in UAE wants to pay US supplier $100K. Sphere receives AED equivalent, converts to USDC, releases USDC to supplier within 30 minutes (stablecoin speed).',
-                  problem: 'But the AED→USD fiat leg takes 2 days to settle through correspondent banks. What if the original AED payment bounces (insufficient funds, compliance issue, customer reversal)?',
-                  consequence: 'Supplier already has $100K USDC. Sphere is $100K short. Sphere bears the loss.',
-                  risk: 'SPHERE bears settlement risk if we release stablecoin before fiat confirmed'
+                  scenario: 'Scenario 1: Pay from Inventory Before Fiat Confirmed',
+                  setup: 'Customer in UAE wants to pay US supplier $100K. Sphere pays USD from US corridor inventory within minutes (local rail speed).',
+                  problem: 'But the AED fiat leg from the customer takes 2 days to settle through correspondent banks. What if the original AED payment bounces (insufficient funds, compliance issue, customer reversal)?',
+                  consequence: 'Supplier already has $100K USD. Sphere is $100K short on its inventory. Sphere bears the loss.',
+                  risk: 'SPHERE bears settlement risk if we pay from inventory before customer fiat confirmed'
                 },
                 {
-                  scenario: 'Scenario 2: Wait for Fiat Before Releasing Stablecoin',
-                  setup: 'Sphere receives AED from customer, waits 2-5 days for fiat to fully settle through correspondent chain before releasing USDC to supplier.',
-                  problem: 'This eliminates Sphere\'s risk-but now the payment takes 2-5 days. We\'ve lost the speed advantage of stablecoins.',
+                  scenario: 'Scenario 2: Wait for Fiat Before Paying from Inventory',
+                  setup: 'Sphere receives AED from customer, waits 2-5 days for fiat to fully settle before paying supplier from US inventory.',
+                  problem: 'This eliminates Sphere\'s risk-but now the payment takes 2-5 days. We\'ve lost the speed advantage of the inventory model.',
                   consequence: 'Customer asks: "Why am I using Sphere if it takes the same time as a wire?"',
                   risk: 'No risk to Sphere, but value proposition disappears'
                 },
                 {
                   scenario: 'Scenario 3: FX Movement During Gap',
-                  setup: 'Customer sends AED 367,300 (= $100K at 3.673 rate). Sphere converts to USDC immediately. But the fiat settlement takes 3 days.',
+                  setup: 'Customer sends AED 367,300 (= $100K at 3.673 rate). Sphere pays supplier $100K from USD inventory immediately. But the customer\'s AED fiat settlement takes 3 days.',
                   problem: 'Over those 3 days, AED depreciates to 3.80. When fiat settles, Sphere receives AED 367,300, but it\'s now only worth $96,658.',
-                  consequence: 'Sphere promised supplier $100K USDC. Sphere received equivalent of $96,658. Sphere is $3,342 short.',
+                  consequence: 'Sphere paid supplier $100K from inventory. Sphere received equivalent of $96,658 from customer. Sphere is $3,342 short.',
                   risk: 'FX exposure during the timing gap-someone has to absorb FX movement'
                 },
                 {
-                  scenario: 'Scenario 4: Compliance Flag After Stablecoin Released',
-                  setup: 'Sphere releases $100K USDC to supplier after receiving customer\'s fiat. Two days later, customer\'s bank flags the transaction for AML review and freezes the payment.',
-                  problem: 'Supplier has $100K USDC. Customer\'s bank has frozen their $100K. Sphere is stuck in the middle.',
-                  consequence: 'Sphere either: (1) Claws back USDC from supplier (relationship damage), or (2) Absorbs $100K loss.',
+                  scenario: 'Scenario 4: Compliance Flag After Payout',
+                  setup: 'Sphere pays $100K from inventory to supplier after receiving customer\'s fiat notification. Two days later, customer\'s bank flags the transaction for AML review and freezes the payment.',
+                  problem: 'Supplier has $100K. Customer\'s bank has frozen their payment. Sphere is stuck in the middle.',
+                  consequence: 'Sphere either: (1) Attempts recovery from supplier (relationship damage), or (2) Absorbs $100K loss.',
                   risk: 'Compliance timing mismatches-one leg clears compliance, other doesn\'t'
                 },
                 {
@@ -2345,7 +2342,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 name: 'Destination Bank Ledger',
                 icon: '🏦',
                 what: 'Beneficiary\'s bank account where fiat is credited',
-                timing: 'Credits after off-ramp converts stablecoin (Day 0 + 30-60 minutes)',
+                timing: 'Credits after Sphere pays from local corridor inventory via local rail',
                 owner: 'Beneficiary\'s bank',
                 finality: 'Final once credited, but bank can claw back if compliance issue'
               }
@@ -2355,13 +2352,12 @@ You must be able to discuss stablecoins without crypto language, understand thei
               explanation: 'These four ledgers don\'t update simultaneously. Here\'s a realistic timeline:',
               timeline: [
                 { time: 'T+0 (Day 0, 9:00 AM)', event: 'Customer initiates wire at their bank', ledger: 'Client Bank Ledger', status: 'Debited' },
-                { time: 'T+0 (Day 0, 9:15 AM)', event: 'Sphere on-ramp receives wire notification', ledger: 'None yet', status: 'Pending confirmation' },
-                { time: 'T+0 (Day 0, 9:30 AM)', event: 'On-ramp converts to USDC, sends to Sphere', ledger: 'Blockchain Ledger', status: 'USDC credited' },
-                { time: 'T+0 (Day 0, 9:45 AM)', event: 'Sphere releases USDC to beneficiary', ledger: 'Blockchain Ledger', status: 'USDC transferred' },
-                { time: 'T+0 (Day 0, 10:00 AM)', event: 'Off-ramp converts USDC to fiat', ledger: 'Destination Bank Ledger', status: 'Fiat credited to beneficiary' },
-                { time: 'T+2 (Day 2, 2:00 PM)', event: 'Fiat finally settles into Sphere\'s bank account', ledger: 'Sphere Bank Ledger', status: 'Fiat received' }
+                { time: 'T+0 (Day 0, 9:15 AM)', event: 'Sphere receives wire notification and confirms incoming fiat', ledger: 'Sphere Bank Ledger', status: 'Pending confirmation' },
+                { time: 'T+0 (Day 0, 9:30 AM)', event: 'Sphere pays beneficiary from local corridor inventory via local rail', ledger: 'Destination Bank Ledger', status: 'Fiat credited to beneficiary' },
+                { time: 'T+0 to T+2', event: 'Fiat from customer fully settles into Sphere\'s bank account', ledger: 'Sphere Bank Ledger', status: 'Fiat received' },
+                { time: 'Treasury cycle', event: 'Sphere\'s treasury rebalances corridor positions using stablecoin rails', ledger: 'Blockchain Ledger', status: 'Corridor inventory replenished' }
               ],
-              gap: 'For 2 DAYS, there\'s a gap: Beneficiary has fiat. Customer was debited. But Sphere hasn\'t received fiat yet. Who bears risk during this gap?'
+              gap: 'There\'s a timing gap: Beneficiary has fiat (paid from Sphere\'s inventory). Customer was debited. But Sphere may not have fully received the customer\'s fiat yet. Sphere bears this risk during the gap. Treasury rebalancing is a separate operation.'
             },
             requirement: 'All four ledgers must eventually reconcile. But timing differences create temporary gaps that must be monitored, controlled, and someone must bear the risk.',
             riskControlMapping: {
@@ -2431,15 +2427,15 @@ You must be able to discuss stablecoins without crypto language, understand thei
           capitalEfficiency: {
             title: 'Capital Efficiency Gains',
             comparison: [
-              { approach: 'Traditional', description: 'Pre-fund nostro accounts everywhere', impact: '$100M+ trapped capital' },
-              { approach: 'Sphere', description: 'Real-time settlement, no pre-funding', impact: '95% reduction in working capital' }
+              { approach: 'Traditional', description: 'Pre-fund static nostro accounts everywhere', impact: '$100M+ trapped in idle capital across 50+ currencies' },
+              { approach: 'Sphere', description: 'Dynamic corridor inventory rebalanced via stablecoins', impact: '80-90% less trapped capital — lean inventory, actively managed and rebalanced' }
             ]
           },
           sphereApproach: {
             title: 'Sphere\'s Safety-First Approach',
             principle: 'Don\'t release stablecoins until fiat confirmed. SAFETY over raw SPEED.',
-            philosophy: 'We could settle payments in 60 seconds using pure blockchain speed. We choose 15-30 minutes instead because that gives us time to CONFIRM fiat settlement before releasing stablecoins. This is the tradeoff.',
-            explanation: 'We prioritize SAFETY over raw SPEED. 15-30 minutes is fast enough to transform cross-border payments (vs 2-5 days traditional). Adding 15 minutes for safety is worth it.',
+            philosophy: 'Sphere COULD pay from inventory the moment a customer initiates a payment — instant. Instead, we confirm incoming fiat first. This adds minutes to the process but eliminates settlement risk. The customer still gets payout at local rail speed, which is dramatically faster than 2-5 days traditional.',
+            explanation: 'We prioritize SAFETY over raw SPEED. Payout speed depends on the local rail (PIX = 2-10 seconds, wire = 15-60 minutes, ACH = 2-4 hours) — all dramatically faster than 2-5 day correspondent banking. The deliberate tradeoff: we add a confirmation step before deploying inventory, trading some speed for eliminated settlement risk.',
             operationalControls: {
               title: 'Specific Reconciliation Procedures',
               controls: [
@@ -2523,14 +2519,14 @@ You must be able to discuss stablecoins without crypto language, understand thei
               ]
             },
             process: [
-              'Step 1: Fiat received and confirmed → THEN convert to stablecoin',
-              'Step 2: Stablecoin transferred on-chain → confirm N-block finality',
+              'Step 1: Customer fiat received and confirmed → THEN authorize payout from corridor inventory',
+              'Step 2: Pay beneficiary from local corridor inventory via local payment rail',
               'Step 3: Beneficiary confirmed fiat receipt → THEN mark payment complete',
-              'Step 4: Never expose Sphere to both legs simultaneously-one must settle before the other initiates'
+              'Step 4: Treasury rebalances corridor positions using stablecoin rails (separate operation)'
             ],
-            conclusion: 'This is slower than raw blockchain speed (60 seconds) but ELIMINATES settlement risk. 15-30 minutes is fast enough for enterprise use cases.'
+            conclusion: 'Payout speed matches local rail speed (seconds to hours depending on corridor). The key safety control is confirming incoming fiat before deploying inventory. This is dramatically faster than 2-5 day traditional settlement while maintaining safety.'
           },
-          keyTakeaway: 'Speed creates risk. Sphere prioritizes safety with 15-30 minute settlement - fast enough to transform payments, safe enough for institutions.'
+          keyTakeaway: 'Speed creates risk. Sphere prioritizes safety by confirming incoming fiat before paying from corridor inventory. Payout speed matches the local rail — fast enough to transform payments, safe enough for institutions.'
         },
         exercise: {
           title: 'Exercise 2.3 - Reconciliation Design',
@@ -2541,7 +2537,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
           { q: 'How many ledgers must reconcile for a Sphere transaction?', options: ['Two', 'Three', 'Four', 'Five'], correct: 2 },
           { q: 'What is the "speed asymmetry problem"?', options: ['Blockchain is slow', 'Stablecoins settle fast, fiat takes days', 'Banks faster than blockchain', 'All equal speed'], correct: 1 },
           { q: 'Sphere\'s approach to speed vs safety:', options: ['Maximum speed always', 'Safety first - confirm fiat before releasing', 'Ignore reconciliation', 'Only use one ledger'], correct: 1 },
-          { q: 'Sphere\'s median settlement time:', options: ['60 seconds', '15-30 minutes', '2-5 days', '24 hours'], correct: 1 },
+          { q: 'Sphere\'s payout speed is determined by:', options: ['Blockchain confirmation time', 'Local payment rail speed in the destination corridor', 'Stablecoin conversion time', 'SWIFT message delivery'], correct: 1 },
           { q: 'What does Sphere do if fiat confirmation exceeds 2 hours?', options: ['Auto-complete anyway', 'Cancel transaction', 'Escalate to manual review', 'Ignore'], correct: 2 }
         ],
         glossary: [
@@ -2551,7 +2547,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
           { term: 'Pre-Flight Verification', definition: 'Checking customer balance and wire validity BEFORE initiating any stablecoin conversion. Prevents releasing stablecoin for unfunded transfers.' },
           { term: 'Fiat Confirmation Gateway', definition: 'Sphere\'s control that holds stablecoin release until fiat receipt is confirmed. Maximum wait: 2 hours before escalation.' },
           { term: 'Cut-Off Time', definition: 'The deadline by which a bank must receive payment for same-day processing. Missing cut-off adds 1+ days. Fedwire cut-off: 6:30 PM ET.' },
-          { term: 'Safety-First Approach', definition: 'Sphere\'s operational philosophy: confirm fiat before releasing stablecoin. Trades raw speed (60 seconds) for safety (15-30 minutes).' }
+          { term: 'Safety-First Approach', definition: 'Sphere\'s operational philosophy: confirm fiat before paying from inventory. Prioritizes safety over raw speed — payout speed matches local rail speed in each corridor.' }
         ]
       },
       {
@@ -3174,7 +3170,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
               {
                 useCase: 'Cross-Border Payments',
                 painPoint: 'International wires take 2-5 days through correspondent banking chains. Fees stack up at each hop ($25-50 per intermediary). No visibility until funds arrive or fail.',
-                sphereSolution: 'Sphere settles cross-border payments in 15-30 minutes via stablecoin rails, bypassing correspondent banks entirely. Single transparent fee, real-time tracking, 80-90% cost reduction.',
+                sphereSolution: 'Sphere pays beneficiaries from local corridor inventory at local rail speed, bypassing correspondent banks entirely. Single transparent fee, real-time tracking, 80-90% cost reduction. Sphere\'s treasury rebalances corridors using stablecoin rails behind the scenes.',
                 benefit: '15-30 min vs 2-5 days'
               },
               {
@@ -3201,13 +3197,17 @@ You must be able to discuss stablecoins without crypto language, understand thei
             title: 'SpherePay Metrics',
             subtitle: 'Real production numbers from live enterprise customers',
             items: [
-              { metric: 'Annualized Volume', value: '$2.5B+', context: 'B2B payments only-not consumer speculation' },
+              { metric: 'Annualized Volume', value: '$3B+', context: 'B2B payments only-not consumer speculation' },
+              { metric: 'Volume Pipeline', value: '$15-20B', context: 'Committed volume for 2026 from existing customers scaling up and newly signed contracts. "Committed" means signed agreements with volume projections — not speculative pipeline.' },
               { metric: 'B2B Customers', value: '150+', context: 'SMEs to large enterprises across US, LATAM (Brazil, Mexico, Colombia, Chile, Argentina)' },
+              { metric: 'Marquee Clients', value: 'Two top-20 US banks', context: 'Banks with $500B+ AUM each, onboarded onto Sphere rails for cross-border payment infrastructure. These are integration partnerships — the banks use Sphere as payment infrastructure, not just a vendor relationship.' },
+              { metric: 'Market Position', value: 'Top-5 stablecoin payments platform globally', context: 'By volume processed — ahead of MoonPay (~$2B)' },
+              { metric: 'Active Corridors', value: '60+ countries', context: 'US (ACH/Wire/Fedwire), Brazil (PIX/TED — JV with Intex bank planned 2026), Mexico (SPEI), Argentina, Colombia/Chile/Peru/Costa Rica/Bolivia (via DLocal), Europe (SEPA EUR, Faster Payments GBP via DTR), South Korea (market entry planned — $3-7B B2B opportunity)' },
               { metric: 'Active Accounts', value: '1,847', context: 'Businesses actively using Sphere for vendor/supplier payments' },
-              { metric: 'Median Settlement', value: '15-30 minutes', context: 'End-to-end: fiat received → beneficiary fiat delivered' },
+              { metric: 'Median Settlement', value: 'Corridor-dependent (local rail speed)', context: 'End-to-end: fiat received → beneficiary paid from local corridor inventory. PIX = seconds, wire = minutes, ACH = hours.' },
               { metric: '99th percentile (before 3pm GST)', value: 'Same day', context: 'GST = Gulf Standard Time (UTC+4). Dubai/Abu Dhabi timezone. Payments initiated before 3pm GST complete same business day.' }
             ],
-            clarification: 'The "before 3pm" metric refers to cut-off times in major corridors. If payment initiated after banking cut-off or on weekends, beneficiary banking hours may delay final fiat delivery to next business day-but stablecoin leg still completes in minutes.'
+            clarification: 'The "before 3pm" metric refers to cut-off times in major corridors. If payment initiated after banking cut-off or on weekends, local payout rail availability may delay final delivery to next business day. Settlement speed is always determined by the local payment rail in the destination corridor.'
           },
           realEnterpriseUseCases: {
             title: 'Real Enterprise Use Cases: Detailed Examples',
@@ -3849,7 +3849,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
               components: [
                 {
                   component: 'SphereNet SVM (Sphere Foundation)',
-                  description: 'Semi-permissioned Layer 1 blockchain built on the Solana Virtual Machine (SVM)',
+                  description: 'Permissioned fork of Solana — the only blessed fork of the ~$100B blockchain. Built in direct collaboration with Anza, the core developer shop behind Solana.',
                   responsibility: 'Core network infrastructure, consensus, and execution',
                   features: [
                     'Proof of Governed Stake (PoGS) - high-performance PoS with decentralized governance',
@@ -3866,7 +3866,7 @@ You must be able to discuss stablecoins without crypto language, understand thei
                   description: 'Base set of enshrined applications and tooling managed by SphereNet Core Applications Team',
                   responsibility: 'Essential financial primitives that all network participants can use',
                   applications: [
-                    'SphereUSD - yield-bearing stablecoin backed by T-bills',
+                    'Third-party stablecoins (USDC, USDT, USDG) — Sphere does NOT issue its own stablecoin',
                     'Sphere Guard - compliance infrastructure with integrated KYC/AML',
                     'Identity and badge attestation system',
                     'Cross-border payment rails (linked to SpherePay)',
@@ -4028,7 +4028,8 @@ You must be able to discuss stablecoins without crypto language, understand thei
                       { tier: 'Tier 1 - Licensed Financial Institutions', examples: 'Banks, licensed payment providers, regulated exchanges', permissions: 'Full network access, all asset types, all corridors', requirements: 'Banking/payments license, full AML program, regulatory supervision' },
                       { tier: 'Tier 2 - Licensed Non-Bank Entities', examples: 'Money service businesses, remittance providers, fintechs', permissions: 'Standard network access, approved asset types, licensed corridors', requirements: 'MSB/payments license, AML program, jurisdiction-specific compliance' },
                       { tier: 'Tier 3 - Verified Corporates', examples: 'Enterprise customers, treasury operations, B2B payments', permissions: 'Limited access, approved counterparties only, volume limits', requirements: 'Corporate KYC, beneficial ownership verified, ongoing monitoring' },
-                      { tier: 'Tier 4 - Retail (via Licensed Providers)', examples: 'Individual users accessing through Tier 1/2 providers', permissions: 'Indirect access only, provider-mediated transactions', requirements: 'KYC performed by licensed provider' }
+                      { tier: 'Tier 4 - Retail (via Licensed Providers)', examples: 'Individual users accessing through Tier 1/2 providers', permissions: 'Indirect access only, provider-mediated transactions', requirements: 'KYC performed by licensed provider' },
+                      { tier: 'Stablecoin Issuers', examples: 'Circle (USDC), Tether (USDT), future issuers', permissions: 'Mint and burn stablecoins natively on SphereNet rails', requirements: 'Third-party issuers — Sphere does NOT issue its own stablecoin. Issuers must meet reserve and licensing requirements.' }
                     ],
                     enforcement: 'Network enforces tier-appropriate permissions. A Tier 3 corporate cannot transact with an unverified entity. A Tier 2 provider cannot offer services in jurisdictions where they\'re not licensed.'
                   }
@@ -4294,165 +4295,8 @@ You must be able to discuss stablecoins without crypto language, understand thei
               }
             }
           },
-          sphereUSDTechnicalArchitecture: {
-            title: 'SphereUSD Technical Architecture',
-            subtitle: 'How SphereUSD is backed, issued, and yields interest',
-
-            mTokenBacking: {
-              title: 'M Token Backing: The Foundation',
-              subtitle: 'SphereUSD is backed 1:1 by M tokens, which are backed by T-bills',
-              overview: 'SphereUSD (sUSD) is not backed directly by fiat. Instead, it is backed 1:1 by M tokens, which themselves are backed by short-term US Treasury bills. This creates a yield-bearing stablecoin without Sphere directly managing fiat reserves.',
-              mTokenStack: {
-                title: 'The M Token Stack',
-                components: [
-                  {
-                    layer: 'Base Layer: T-Bills',
-                    description: 'Short-term US Treasury bills purchased and held by MXON (the M token issuer)',
-                    backing: '105%+ collateralization requirement',
-                    yield: '~4.15% annual (current T-bill rate minus 0.2% MXON fee)'
-                  },
-                  {
-                    layer: 'Token Layer: M Token',
-                    description: 'ERC-20 token on Ethereum minted by MXON against T-bill reserves',
-                    verification: 'Attester periodically verifies bank reserves match circulating M supply',
-                    rate: 'Index value increases continuously based on T-bill yield'
-                  },
-                  {
-                    layer: 'Bridge Layer: Wormhole',
-                    description: 'Cross-chain infrastructure connecting Ethereum to SphereNet',
-                    mechanism: 'M locked on Ethereum portal, wrapped M minted on SphereNet portal',
-                    latency: '~20 minutes for cross-chain transfers'
-                  },
-                  {
-                    layer: 'Sphere Layer: SphereUSD',
-                    description: 'Native stablecoin on SphereNet backed by M in the backing account',
-                    issuance: 'Issuer module mints sUSD when M is deposited to backing account',
-                    redemption: 'Users can always redeem sUSD for M at 1:1 ratio'
-                  }
-                ],
-                keyPoint: 'Sphere does NOT control fiat reserves, MXON does NOT control the SphereNet. Clear separation of concerns.'
-              },
-              issuanceFlow: {
-                title: 'SphereUSD Issuance Flow',
-                steps: [
-                  { step: 1, action: 'User contacts MXON with mint request', timing: 'Same business day (Central European hours)', note: 'Currently MXON accepts USDC only' },
-                  { step: 2, action: 'User sends USDC to MXON', timing: 'Immediate', note: 'MXON converts to T-bill purchase' },
-                  { step: 3, action: 'MXON mints M token on Ethereum', timing: '~30 seconds', note: 'Minter contract on Ethereum' },
-                  { step: 4, action: 'M locked in Wormhole portal (Ethereum)', timing: '~1 minute', note: 'Cross-chain bridge initiated' },
-                  { step: 5, action: 'Wrapped M minted on SphereNet portal', timing: '~20 minutes', note: 'Wormhole cross-chain latency' },
-                  { step: 6, action: 'M deposited to SphereNet backing account', timing: '~2 seconds', note: 'All backing M stored here' },
-                  { step: 7, action: 'SphereUSD minted to user account', timing: '~2 seconds', note: 'Subject to KYC verification' }
-                ],
-                totalTime: 'Same business day for full flow (MXON operations) + ~25 minutes for on-chain portion',
-                futurePlans: 'MXON is developing a permissioned USDC→M pool for 24/7 instant swaps'
-              },
-              whatSphereControls: {
-                title: 'Separation of Control',
-                sphereControls: [
-                  'Issuer module on SphereNet (M → SphereUSD conversion)',
-                  'Backing account that stores M tokens',
-                  'SphereUSD token contract and mint/burn logic',
-                  'KYC verification for SphereUSD recipients'
-                ],
-                sphereDoesNotControl: [
-                  'T-bill purchases or custody (MXON controls)',
-                  'M token minting on Ethereum (MXON controls)',
-                  'Wormhole cross-chain infrastructure (M^0 controls)',
-                  'User bank accounts or fiat custody'
-                ],
-                licensingImplication: 'This separation is critical for licensing - Sphere is a technology provider and payment processor, not a stablecoin issuer or fiat custodian.'
-              }
-            },
-
-            yieldDistribution: {
-              title: 'Yield Distribution Mechanics',
-              subtitle: 'How interest flows from T-bills to individual SphereUSD holders',
-
-              yieldOrigin: {
-                title: 'Where Yield Comes From',
-                flow: [
-                  { stage: 'T-Bills', description: 'Short-term US Treasury bills earn ~4.35% annually', holder: 'Bank (custodian for MXON)' },
-                  { stage: 'MXON Fee', description: 'MXON takes ~0.2% cut for operations', result: '~4.15% net rate' },
-                  { stage: 'M Rate', description: 'Remaining yield encoded as continuously increasing index', mechanism: 'Rate + Index system on Ethereum' },
-                  { stage: 'Index Propagation', description: 'Index updates propagate to SphereNet via Wormhole', frequency: 'With every cross-chain action or manually triggered' },
-                  { stage: 'SphereUSD Yield', description: 'Issuer module calculates yield based on M index changes', distribution: 'Time-weighted balance system' }
-                ]
-              },
-
-              timeWeightedBalance: {
-                title: 'Time-Weighted Balance (TWB) System',
-                subtitle: 'Fair yield distribution based on holding time and balance',
-                overview: 'SphereUSD uses a Time-Weighted Balance system to fairly distribute yield. Your share of the yield pool is proportional to how much you held and for how long.',
-                definitions: [
-                  { term: 'Period', definition: 'Time between yield accumulation updates (e.g., 10 slots)' },
-                  { term: 'CB (Current Balance)', definition: 'User\'s current SphereUSD token balance' },
-                  { term: 'TWB (Time Weighted Balance)', definition: 'Accumulated time-weighted balance across completed periods' },
-                  { term: 'CTWB (Current TWB)', definition: 'TWB accumulated within the current period (not yet claimable)' },
-                  { term: 'LU (Last Updated)', definition: 'The slot at which the account was last updated' },
-                  { term: 'AY (Accumulated Yield)', definition: 'Total yield in nominal token units available for distribution' }
-                ],
-                formula: {
-                  title: 'Yield Calculation',
-                  calculation: '(User TWB / Total Network TWB) × Accumulated Yield = User\'s Claimable Yield',
-                  example: 'If you have TWB of 1500 and network TTWB is 2000 with AY of 30: (1500/2000) × 30 = 22.5 → 22 tokens'
-                },
-                accountUpdate: {
-                  title: 'Account Update on Transfer',
-                  scenario: 'User had 100 sUSD at slot 5, sends 50 at slot 25',
-                  before: { TWB: 0, CB: 100, CTWB: 0, LU: 5 },
-                  calculation: 'TWB = (20-5) × 100 = 1500, CTWB = (25-20) × 100 = 500',
-                  after: { TWB: 1500, CB: 50, CTWB: 500, LU: 25 },
-                  note: 'Users can only claim TWB, not CTWB (current period is still accumulating)'
-                }
-              },
-
-              claimMechanism: {
-                title: 'Yield Claim Process',
-                subtitle: 'User-controlled claiming for tax optimization',
-                overview: 'Yield is NOT automatically added to your balance. You must explicitly call a claim function to receive accumulated yield. This design allows users to control when taxable events occur.',
-                claimFlow: [
-                  { step: 1, action: 'User calls claim function', effect: 'Account updates to current slot' },
-                  { step: 2, action: 'System calculates claimable amount', effect: '(TWB/TTWB) × AY' },
-                  { step: 3, action: 'Yield tokens minted to user balance', effect: 'CB increases by claim amount' },
-                  { step: 4, action: 'User TWB reset to zero', effect: 'Prevents double-claiming' },
-                  { step: 5, action: 'Network totals updated', effect: 'TTWB reduced, AY reduced, TS increased' }
-                ],
-                taxImplication: {
-                  title: 'Tax Considerations',
-                  concept: 'The claim action is designed to be the taxable event, not the continuous accrual',
-                  benefit: 'Users can choose WHEN to claim, potentially timing for optimal tax treatment',
-                  caveat: 'Tax treatment varies by jurisdiction - users should consult tax advisors',
-                  openQuestion: 'Whether "soft claim" checkpoints without triggering taxable events is viable (under review with legal)'
-                },
-                comparisonToTraditional: {
-                  title: 'vs Traditional Interest-Bearing Accounts',
-                  traditional: 'Bank credits interest monthly - taxable whether you withdraw or not',
-                  sphereUSD: 'Yield accrues on-chain but user controls claim timing',
-                  advantage: 'More control over taxable event timing while maintaining yield exposure'
-                }
-              },
-
-              unclaimedInterestDesign: {
-                title: 'Unclaimed Interest Architecture',
-                subtitle: 'Why yield isn\'t automatically added to balance',
-                concept: 'Unclaimed SphereUSD is a computed value, not a stored balance. It exists as an accounting mechanic between claims.',
-                structure: [
-                  { field: 'sUSD Balance', stored: true, description: 'Actual transferable token balance', userControl: 'Full - can transfer, spend, redeem' },
-                  { field: 'Last Index', stored: true, description: 'Index value at last account update', userControl: 'None - system managed' },
-                  { field: 'Cached Interest', stored: true, description: 'Interest cached when balance changes between claims', userControl: 'None - system managed' },
-                  { field: 'Unclaimed Interest', stored: false, description: 'Dynamically computed from index delta', userControl: 'Claim to convert to balance' }
-                ],
-                whyThisDesign: [
-                  'Allows user control over taxable event timing',
-                  'Reduces on-chain storage (computed vs stored)',
-                  'Handles balance changes correctly (cached interest preserves mid-period changes)',
-                  'Clean audit trail (claims are explicit transactions)'
-                ]
-              }
-            },
-
-            sphrTokenomics: {
-              title: 'SPHR Gas Token Economics',
+          sphrTokenomics: {
+            title: 'SPHR Gas Token Economics',
               subtitle: 'SphereNet\'s native gas token allocation and release schedule',
 
               overview: {
@@ -4489,7 +4333,8 @@ You must be able to discuss stablecoins without crypto language, understand thei
                     circulating: '~20%',
                     purpose: 'Vesting begins, public mainnet launches',
                     inflation: '8%',
-                    burn: '50%'
+                    burn: '50%',
+                    netEffect: 'Net deflationary — 8% annual inflation creates new SPHR (validator rewards), but 50% of all transaction fees are permanently burned. At scale, if the network processes enough transactions, the tokens burned per year exceed the tokens minted via inflation, making the total supply shrink over time. This is the same deflationary mechanic as Ethereum\'s EIP-1559 burn — the more the network is used, the scarcer SPHR becomes.'
                   },
                   {
                     era: 'Years 1-3 (Era 2)',
@@ -4517,11 +4362,10 @@ You must be able to discuss stablecoins without crypto language, understand thei
                 selfStaking: 'Encouraged for validators and institutions',
                 delegatedStake: 'Community reserve supports new validator equality programs'
               }
-            },
-
-            crossChainArchitecture: {
-              title: 'Cross-Chain Architecture',
-              subtitle: 'How SphereNet connects to Ethereum via Wormhole',
+          },
+          crossChainArchitecture: {
+            title: 'Cross-Chain Architecture',
+            subtitle: 'How SphereNet connects to Ethereum via Wormhole',
 
               whyEthereum: {
                 title: 'Why Ethereum as Hub',
@@ -4561,7 +4405,6 @@ You must be able to discuss stablecoins without crypto language, understand thei
                   'Permissionless bridging (all bridges will require verification)'
                 ]
               }
-            }
           },
           regulatorPerspective: {
             title: 'What Regulators Want to Hear',
@@ -4765,7 +4608,7 @@ Sphere is NOT a crypto exchange. It\'s a licensed payment infrastructure company
               title: 'Sphere by the Numbers',
               stats: [
                 { metric: 'Regulatory Entities', value: '27+', context: 'Licensed entities across jurisdictions' },
-                { metric: 'Annualized Volume', value: '$2.5B+', context: 'Transaction volume processed' },
+                { metric: 'Annualized Volume', value: '$3B+', context: 'Transaction volume processed' },
                 { metric: 'B2B Customers', value: '150+', context: 'Business customers onboarded' }
               ]
             }
@@ -4836,6 +4679,15 @@ Sphere is NOT a crypto exchange. It\'s a licensed payment infrastructure company
                 whyDistinctionMatters: 'DeFi faces existential regulatory uncertainty.',
                 wrongFraming: 'Sphere is decentralized',
                 rightFraming: 'Sphere is regulated, centralized payment infrastructure with full accountability.'
+              },
+              {
+                notThis: 'Consumer Remittance Company',
+                icon: '❌',
+                whatThatIs: 'Companies sending money for individuals (person-to-person). Examples: Western Union, Remitly, Wise (consumer).',
+                howSphereDiffers: ['B2B only — no individual senders', 'Enterprise API integration, not consumer apps', 'Different regulatory category', 'Higher average transaction size ($10K-$10M+ vs $200-$500)'],
+                whyDistinctionMatters: 'Consumer remittance has razor-thin margins, different compliance requirements, and massive customer acquisition costs. Sphere is enterprise infrastructure.',
+                wrongFraming: 'Can I use Sphere to send money to my family?',
+                rightFraming: 'Sphere provides payment infrastructure for businesses. When someone asks about sending money to family, the answer is no — that\'s a different business entirely.'
               }
             ],
             summaryTable: {
@@ -4848,7 +4700,8 @@ Sphere is NOT a crypto exchange. It\'s a licensed payment infrastructure company
                 ['Bank', 'OCC/Fed/FDIC', 'Charter, deposits', 'NOT a bank'],
                 ['Wallet', 'State MTL', 'Consumer apps', 'NOT a wallet'],
                 ['Broker-Dealer', 'SEC/FINRA', 'Securities registration', 'NOT a BD'],
-                ['DeFi', 'Uncertain', 'Regulatory uncertainty', 'NOT DeFi']
+                ['DeFi', 'Uncertain', 'Regulatory uncertainty', 'NOT DeFi'],
+                ['Consumer Remittance', 'State/FinCEN', 'Consumer protection, thin margins', 'NOT consumer remittance']
               ]
             }
           },
@@ -6266,22 +6119,22 @@ Sphere is NOT a crypto exchange. It\'s a licensed payment infrastructure company
               title: 'Current Operational Challenges',
               subtitle: 'Transparency about Travel Rule implementation complexities',
               onRampChallenges: {
-                title: 'On-Ramp (Fiat → Crypto) Challenges',
+                title: 'On-Ramp (Fiat → Crypto) Challenges — Sphere Treasury Operations',
                 issues: [
                   {
                     challenge: 'Incomplete Sender Information',
-                    description: 'For self-custody transactions, sender information may be incomplete when funds originate from personal wallets.',
+                    description: 'For self-custody transactions in treasury rebalancing, sender information may be incomplete when funds originate from personal wallets. Note: these challenges apply to Sphere\'s treasury rebalancing operations, not to individual customer payments.',
                     currentMitigation: 'Enhanced verification for self-custody sources, proof-of-ownership requirements'
                   },
                   {
                     challenge: 'No Originator Wallet Lookup',
-                    description: 'When funds come from external wallets, determining the originator VASP requires blockchain analytics.',
+                    description: 'When funds come from external wallets during rebalancing, determining the originator VASP requires blockchain analytics.',
                     currentMitigation: 'Integration with blockchain analytics for wallet attribution'
                   }
                 ]
               },
               offRampChallenges: {
-                title: 'Off-Ramp (Crypto → Fiat) Challenges',
+                title: 'Off-Ramp (Crypto → Fiat) Challenges — Sphere Treasury Operations',
                 issues: [
                   {
                     challenge: 'Third-Party Initiator Reliance',
@@ -7807,7 +7660,7 @@ This pillar ensures you can explain:
                   { risk: 'Redemption Freeze', example: 'Weekend timing during SVB crisis', mitigation: 'Minimal holdings. Alternative liquidity sources.' },
                   { risk: 'Regulatory Action', example: 'BUSD ordered to stop minting (Feb 2023)', mitigation: 'Monitor regulatory environment. Ready to switch issuers.' }
                 ],
-                sphereApproach: { strategy: 'Multi-stablecoin, corridor-appropriate', selection: 'USDC for regulated corridors, USDT for Asian liquidity', monitoring: 'Real-time price monitoring, 2% deviation circuit breaker', exposure: 'Hold for minutes, not days' }
+                sphereApproach: { strategy: 'Multi-stablecoin, corridor-appropriate', selection: 'USDC for regulated corridors, USDT for Asian liquidity', monitoring: 'Real-time price monitoring, 2% deviation circuit breaker', exposure: 'Stablecoin exposure managed at treasury level during rebalancing' }
               },
               {
                 type: 'Liquidity Providers',
@@ -8182,7 +8035,7 @@ This pillar ensures you can explain:
                 type: 'Market Liquidity',
                 icon: '📈',
                 definition: 'The ability to convert assets to cash without significant price impact.',
-                paymentProcessorContext: 'Can we convert $10M USDC to fiat quickly without moving the market? Is there enough LP inventory for this corridor?',
+                paymentProcessorContext: 'Can we convert $10M USDC to fiat quickly without moving the market? Is there enough LP inventory for Sphere\'s corridor rebalancing operations?',
                 examples: [
                   'Large conversion needed but LP inventory low',
                   'Market stress reduces available liquidity',
@@ -8392,7 +8245,7 @@ This pillar ensures you can explain:
               {
                 failure: 'Asset-Liability Mismatch',
                 detail: 'Customer deposits were withdrawable anytime. Celsius investments were illiquid (locked staking, DeFi positions).',
-                sphereContrast: 'Sphere holds stablecoins for minutes during transit, not months in illiquid positions.'
+                sphereContrast: 'Sphere uses stablecoins for treasury rebalancing operations, not for lending or yield generation. Customer payments are made from local currency inventory.'
               },
               {
                 failure: 'No Stress Testing',
@@ -8417,7 +8270,7 @@ This pillar ensures you can explain:
               'Stress test under extreme scenarios regularly',
               'Maintain diversified, liquid positions across multiple counterparties'
             ],
-            howToDiscuss: 'When Celsius comes up: "Celsius failed because they were a LENDER with asset-liability mismatch. Sphere is a PAYMENT PROCESSOR - we hold stablecoins for minutes during transit, not months in illiquid investments. Very different business model, very different risk profile."'
+            howToDiscuss: 'When Celsius comes up: "Celsius failed because they were a LENDER with asset-liability mismatch. Sphere is a PAYMENT PROCESSOR — we use stablecoins for treasury-level corridor rebalancing, not for lending or yield generation. Customer payments are made from local currency inventory. Very different business model, very different risk profile."'
           },
 
           keyTakeaway: 'Liquidity risk can destroy a financial services company in hours. Sphere\'s three-layer framework (Operating, Buffer, Contingency), quarterly stress testing, and daily management procedures ensure we can always meet payment obligations, even under extreme stress.'
@@ -8432,7 +8285,7 @@ This pillar ensures you can explain:
           { q: 'Why is liquidity MORE critical for payment processors than banks?', options: ['Larger volumes', 'Immediate obligations - zero delay tolerance', 'More regulations', 'Crypto volatility'], correct: 1 },
           { q: 'Settlement liquidity refers to:', options: ['Market prices for assets', 'Ability to meet obligations in payment systems (gas fees, bank settlement)', 'Long-term investment returns', 'Customer credit ratings'], correct: 1 },
           { q: 'How often should liquidity stress tests occur?', options: ['Daily', 'Weekly', 'Monthly', 'Quarterly'], correct: 3 },
-          { q: 'Sphere holds stablecoins for:', options: ['Months (yield generation)', 'Weeks (float)', 'Days (buffer)', 'Minutes (transit only)'], correct: 3 },
+          { q: 'Sphere uses stablecoins for:', options: ['Yield generation on customer deposits', 'Customer-facing crypto products', 'Long-term treasury reserves', 'Inter-entity corridor rebalancing at treasury level'], correct: 3 },
           { q: 'Operating liquidity target is:', options: ['Average daily volume', 'Average + 50%', '2x average', '5x average'], correct: 1 },
           { q: 'Buffer liquidity target is:', options: ['Average daily volume', '1.5x average', '3x average daily volume', '10x average'], correct: 2 },
           { q: 'When is contingency liquidity activated?', options: ['Daily operations', 'When operating liquidity falls below 80%', 'When buffer liquidity is insufficient OR banking partner fails', 'Monthly review'], correct: 2 },
@@ -10160,7 +10013,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
         ],
         glossary: [
           { term: 'Great Filter', definition: 'Arnold\'s term for crises (Luna collapse, FTX, SVB) that eliminated weaker competitors. Sphere survived these filters while others pivoted to AI or quit.' },
-          { term: 'Stablecoin Sandwich', definition: 'Fiat → Stablecoin → Fiat. The sender sends fiat, it converts to stablecoin mid-flight, and arrives as local currency. The user never knows crypto was involved.' },
+          { term: 'Stablecoin Sandwich', definition: 'Sphere\'s settlement architecture: fiat on both ends, stablecoins as the invisible treasury rebalancing layer between Sphere\'s own entities. Customers send fiat, beneficiaries receive fiat from Sphere\'s local corridor inventory. The stablecoin leg is Sphere\'s wholesale rebalancing operation.' },
           { term: 'First Principles Thinking', definition: 'Breaking down problems to fundamental truths and building up from there. During Luna collapse, Arnold asked: "What makes sense via unified ledger?" The answer: payments.' },
           { term: 'TAM', definition: 'Total Addressable Market. Sphere initially targeted "Stripe for Crypto" but the TAM was ~30 companies. Pivoting to traditional cross-border payments expanded the market dramatically.' },
           { term: 'Hard Markets', definition: 'Emerging market corridors that large competitors avoid due to regulatory complexity, limited banking, and operational challenges. Sphere\'s willingness to serve these creates competitive moat.' },
@@ -10388,7 +10241,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           ],
           keyConcepts: [
             'API-first infrastructure designed for B2B integration',
-            'Stablecoin sandwich: Fiat → Stablecoin → Fiat (end users never touch crypto)',
+            'Stablecoin sandwich: fiat on both ends, stablecoins as invisible treasury rebalancing layer (end users never touch crypto)',
             'Multi-chain capability with automatic routing optimization',
             'Compliance embedded in code, not bolted on',
             'Banking integration layer abstracts regional complexity'
@@ -11304,7 +11157,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           keyConcepts: [
             'Median settlement: 15-30 minutes',
             '99th percentile (before 3pm): same day',
-            '$2.5B+ annualized volume'
+            '$3B+ annualized volume'
           ]
         },
         learn: {
@@ -11324,7 +11177,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               },
               {
                 point: 'Metrics Reduce Perceived Risk',
-                context: 'A company processing $2.5B+ annually isn\'t an experiment—it\'s proven infrastructure. Volume metrics signal that other serious companies trust Sphere with real money.'
+                context: 'A company processing $3B+ annually isn\'t an experiment—it\'s proven infrastructure. Volume metrics signal that other serious companies trust Sphere with real money.'
               },
               {
                 point: 'Metrics Anchor Negotiations',
@@ -11339,9 +11192,9 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
             items: [
               {
                 metric: 'Annualized Volume',
-                value: '$2.5B+',
+                value: '$3B+',
                 whatItMeans: 'Total payment volume processed through Sphere infrastructure on an annualized basis.',
-                whyItMatters: 'Demonstrates scale and trust. $2.5B means real companies are moving real money. This isn\'t a beta product.',
+                whyItMatters: 'Demonstrates scale and trust. $3B+ means real companies are moving real money. This isn\'t a beta product.',
                 howToUseIt: 'Lead with this for risk-averse prospects. "We process over $2.5 billion annually for 150+ B2B customers" immediately establishes credibility.',
                 context: 'For comparison: Wise processes ~$100B annually but is consumer-focused. Bridge (pre-Stripe) was estimated at $500M-1B. Sphere is solidly mid-market scale.'
               },
@@ -11367,7 +11220,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 whatItMeans: 'Half of all transactions settle in 15-30 minutes. This is the typical experience.',
                 whyItMatters: 'This is the headline number. Traditional wires take 2-5 days. Sphere is 100x+ faster for the median transaction.',
                 howToUseIt: 'Lead with this for speed-sensitive prospects. "Your supplier in Mexico gets paid in 30 minutes, not 3 days."',
-                context: 'Median is more meaningful than average (which can be skewed by outliers). 15-30 minutes covers the stablecoin settlement + local fiat disbursement.'
+                context: 'Median is more meaningful than average (which can be skewed by outliers). Speed depends on the local payout rail in each corridor — Sphere pays from local inventory, so settlement speed = local rail speed.'
               },
               {
                 metric: '99th Percentile (before 3pm)',
@@ -11429,7 +11282,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
             situations: [
               {
                 situation: 'Initial Discovery Call',
-                leadWith: ['Annualized Volume ($2.5B+)', 'B2B Customers (150+)'],
+                leadWith: ['Annualized Volume ($3B+)', 'B2B Customers (150+)'],
                 why: 'Establish credibility before diving into details. Volume and customer count signal you\'re not a risky startup.',
                 avoid: 'Don\'t overwhelm with all metrics. Save performance details for when they\'re relevant.'
               },
@@ -11441,9 +11294,9 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               },
               {
                 situation: 'Risk-Averse Enterprise',
-                leadWith: ['Regulated Entities (27 across 18 jurisdictions)', 'Annualized Volume ($2.5B+)'],
+                leadWith: ['Regulated Entities (27 across 18 jurisdictions)', 'Annualized Volume ($3B+)'],
                 why: 'They need to know you\'re safe and proven. Licenses and volume demonstrate operational maturity.',
-                example: 'We operate through 27 regulated entities across 18 jurisdictions, processing over $2.5B annually. This isn\'t experimental infrastructure.'
+                example: 'We operate through 27 regulated entities across 18 jurisdictions, processing over $3B annually. This isn\'t experimental infrastructure.'
               },
               {
                 situation: 'Cost-Focused CFO',
@@ -11465,13 +11318,13 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
             subtitle: 'Common objections and how to address them',
             objections: [
               {
-                objection: '$2.5B sounds small compared to Wise or traditional banks.',
-                response: 'You\'re right—Wise does $100B+ but they\'re consumer-focused with $500 average transactions. We\'re B2B with $50K+ average. Different market, different scale. For B2B cross-border, $2.5B makes us a meaningful player.',
+                objection: '$3B sounds small compared to Wise or traditional banks.',
+                response: 'You\'re right—Wise does $100B+ but they\'re consumer-focused with $500 average transactions. We\'re B2B with $50K+ average. Different market, different scale. For B2B cross-border, $3B+ makes us a meaningful player.',
                 principle: 'Acknowledge the point, reframe the comparison.'
               },
               {
-                objection: '15-30 minutes sounds too good to be true.',
-                response: 'I understand the skepticism—it does sound fast compared to traditional wires. Here\'s what happens: your USD converts to stablecoin in minutes, transfers on blockchain in seconds, and converts to local currency at the destination. The bottleneck in traditional banking is the correspondent chain—we skip that entirely.',
+                objection: 'Same-day settlement sounds too good to be true.',
+                response: 'I understand the skepticism. Here\'s how it works: Sphere holds local currency inventory in each active corridor. When you send a payment, we pay your beneficiary directly from our local inventory via the local payment rail — PIX in Brazil is seconds, wire in the US is minutes. The bottleneck in traditional banking is the correspondent chain — we eliminate that entirely by using an inventory model with treasury-level rebalancing.',
                 principle: 'Explain the mechanism, don\'t just assert the claim.'
               },
               {
@@ -11544,11 +11397,11 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
         },
         quiz: [
           { q: 'Median settlement time:', options: ['2-5 days', '24 hours', '15-30 minutes', 'Instant'], correct: 2 },
-          { q: 'Annualized volume:', options: ['$25M', '$250M', '$2.5B+', '$25B'], correct: 2 },
+          { q: 'Annualized volume:', options: ['$25M', '$250M', '$3B+', '$25B'], correct: 2 },
           { q: 'What percentage settles same-day (before 3pm)?', options: ['50%', '75%', '90%', '99%'], correct: 3 },
           { q: 'Number of regulated entities:', options: ['5', '12', '27', '50'], correct: 2 },
           { q: 'For a risk-averse enterprise, you should lead with:', options: ['Speed metrics', 'Cost savings', 'Regulatory coverage and volume', 'Technical architecture'], correct: 2 },
-          { q: 'When a prospect says "$2.5B sounds small," you should:', options: ['Argue it\'s actually large', 'Reframe as B2B focus with higher average transaction', 'Change the subject', 'Admit they have a point'], correct: 1 },
+          { q: 'When a prospect says "$3B sounds small," you should:', options: ['Argue it\'s actually large', 'Reframe as B2B focus with higher average transaction', 'Change the subject', 'Admit they have a point'], correct: 1 },
           { q: 'Number of B2B customers:', options: ['50+', '100+', '150+', '500+'], correct: 2 },
           { q: 'Number of active accounts:', options: ['500', '1,000', '1,847', '5,000'], correct: 2 },
           { q: 'Cost savings vs correspondent banking:', options: ['20-30%', '40-50%', '70-85%', '95%+'], correct: 2 },
@@ -11557,7 +11410,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
         glossary: [
           { term: 'Median Settlement', definition: 'The middle value when all settlement times are ordered. Sphere\'s median is 15-30 minutes vs 2-5 days for traditional wires.' },
           { term: '99th Percentile', definition: 'The settlement time that 99% of transactions beat. For payments submitted before 3pm, Sphere\'s 99th percentile is same-day.' },
-          { term: 'Annualized Volume', definition: 'Total transaction volume projected over a year. Sphere processes $2.5B+ annualized.' },
+          { term: 'Annualized Volume', definition: 'Total transaction volume projected over a year. Sphere processes $3B+ annualized.' },
           { term: 'Regulated Entities', definition: 'Legal entities with licenses in specific jurisdictions. Sphere has 27 regulated entities across 18 jurisdictions.' },
           { term: 'B2B Focus', definition: 'Business-to-business transactions rather than consumer. Higher average transaction values but lower transaction counts.' },
           { term: 'Jurisdictional Coverage', definition: 'The countries/regions where Sphere can legally operate. Critical metric for enterprises with multi-country operations.' },
@@ -11589,6 +11442,20 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
         learn: {
           introduction: 'Understanding the competitive landscape helps you position Sphere effectively. You\'ll face different competitors depending on the customer: banks compete for large enterprise, crypto-native for tech-forward fintechs, and fintech challengers for SMBs. Know all three.',
           coreQuestion: 'Why Sphere over alternatives?',
+          sevenMoats: {
+            title: 'Sphere\'s 7 Competitive Moats',
+            subtitle: 'You\'ll master each of these throughout the training. This is the framework to hang every lesson on.',
+            moats: [
+              { number: 1, name: 'Banking Core Integration', oneLiner: 'Sphere optimizes how payments route to banks — file optimization, wire room routing, correspondent funds routing. 99th percentile of USD payments before 3pm settle same day.', taughtIn: 'Pillar 5.3' },
+              { number: 2, name: 'No Customer Pre-Funding', oneLiner: 'Sphere holds corridor inventory so customers don\'t pre-fund. Capital immediately redeployable. Direct revenue multiplier for clients.', taughtIn: 'Pillars 1, 3' },
+              { number: 3, name: 'Corridor Expertise', oneLiner: 'Years of war scars in LATAM, Africa, APAC. Inventory management across the most complex markets on earth. Requires people on the ground.', taughtIn: 'Pillar 5.4' },
+              { number: 4, name: 'UX as Customer Acquisition Driver', oneLiner: 'In head-to-head B2B comparisons, Sphere\'s interface wins. When underlying rails are comparable, UX is the deciding factor.', taughtIn: 'Pillar 5.4, 5.5' },
+              { number: 5, name: 'Bundled API (10+ Functions)', oneLiner: 'On-ramp, off-ramp, FX, compliance, reconciliation, exceptions — one contract, one integration. Competitors silo each function.', taughtIn: 'Pillar 5.5' },
+              { number: 6, name: 'Local Presence', oneLiner: '27 regulated entities across 18 jurisdictions. Local banking relationships, regulatory nuance. Can\'t be downloaded or replicated quickly.', taughtIn: 'Pillars 5.4, 6' },
+              { number: 7, name: 'Compliance-Native Positioning', oneLiner: 'MSB registered, FinCEN covered, SOC 2 Type II & ISO 27001. Not positioned as crypto. Handles the "aren\'t you just crypto?" objection.', taughtIn: 'Pillars 4, 6' }
+            ],
+            keyInsight: 'Any one moat is defensible. All seven together are nearly impossible to replicate. When a competitor matches you on one dimension, you\'re ahead on six others.'
+          },
           competitorCategories: {
             title: 'Three Competitor Categories',
             categories: [
@@ -11639,9 +11506,9 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               metrics: [
                 {
                   metric: 'Active Corridors',
-                  sphere: '50+ active corridors',
+                  sphere: '60+ countries (DLocal for LATAM payouts, DTR for Europe GBP/EUR)',
                   industryAverage: '10-20 corridors',
-                  note: 'Most competitors specialize in US/EU. Sphere covers LATAM, MENA, APAC frontier markets.'
+                  note: 'Most competitors specialize in US/EU. Sphere covers LATAM, MENA, APAC frontier markets. Intex bank JV (Brazil 2026), South Korea entry ($3-7B B2B opportunity) in pipeline.'
                 },
                 {
                   metric: 'Regulatory Footprint',
@@ -11722,7 +11589,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 {
                   differentiator: 'SphereNet Future',
                   explanation: 'SpherePay customers get access to SphereNet infrastructure - a path to even lower costs and native compliance.',
-                  proof: 'SphereNet mainnet planned 2026',
+                  proof: 'SphereNet mainnet planned H1 2027',
                   vsCompetitors: 'No other stablecoin API provider is building their own settlement infrastructure.'
                 },
                 {
@@ -11743,8 +11610,8 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 },
                 {
                   differentiator: 'UX as Customer Acquisition Driver',
-                  explanation: 'When underlying stablecoin rails are comparable, UX is the deciding factor. Sphere\'s interface is significantly cleaner for specific B2B cross-border use cases. Heavy investment in onboarding pays off in retention.',
-                  proof: 'Primary reason customers choose Sphere over MoonPay and similar competitors in B2B use cases',
+                  explanation: 'In head-to-head B2B comparisons, Sphere\'s interface is significantly cleaner than competitors. When underlying stablecoin rails are comparable, UX is the deciding factor. Heavy onboarding investment pays off in retention — first payment success within hours, not days.',
+                  proof: 'In head-to-head B2B evaluations where companies trial both Sphere and competitors side-by-side, Sphere consistently wins on UX. Customers cite the finance-native interface (invoices, reconciliation, dashboards — not wallet addresses and gas fees) as the primary reason for choosing Sphere over MoonPay, Transak, and Bridge in B2B use cases. The onboarding-to-first-payment time is hours, not the days or weeks competitors require.',
                   vsCompetitors: 'MoonPay, Transak, and similar providers are crypto-first UX. Sphere is finance-first UX — designed for treasury teams, not crypto traders.',
                   uxPrinciples: {
                     title: 'Sphere UX Philosophy',
@@ -11775,17 +11642,17 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 {
                   differentiator: 'Liquidity Recycling (Revenue Multiplier)',
                   explanation: 'Sphere unlocks new revenue for clients by speeding up settlement so they can re-use liquidity without waiting. Traditional correspondent banking locks capital across borders.',
-                  proof: 'Wise loses 95% of their revenue to opex managing pre-funded accounts. Sphere eliminates pre-funding entirely.',
-                  vsCompetitors: 'Traditional providers require pre-funded nostro accounts in every currency. Sphere\'s real-time settlement means capital deployed only when needed, freed immediately after.',
+                  proof: 'Wise loses 95% of their revenue to opex managing pre-funded accounts. Sphere\'s inventory model is significantly more capital-efficient through stablecoin-based rebalancing.',
+                  vsCompetitors: 'Traditional providers require static pre-funded nostro accounts in every currency. Sphere deploys dynamic working capital across corridors — actively managed inventory rebalanced via stablecoin rails, dramatically leaner than traditional approaches.',
                   businessImpact: {
                     title: 'The Working Capital Unlock',
                     comparison: [
-                      { approach: 'Traditional Correspondent Banking', capital: '$100M+ trapped in nostro accounts', opex: 'Teams to manage positions in 50+ currencies', opportunity: 'Capital sits idle, earning nothing' },
-                      { approach: 'Sphere Model', capital: 'Near-zero pre-funding required', opex: 'Minimal — on-demand conversion', opportunity: 'Capital available for revenue-generating activities' }
+                      { approach: 'Traditional Correspondent Banking', capital: '$100M+ trapped in static nostro accounts', opex: 'Teams to manage positions in 50+ currencies', opportunity: 'Capital sits idle, earning nothing' },
+                      { approach: 'Sphere Model', capital: '80-90% less trapped capital — lean corridor inventory, actively rebalanced', opex: 'Dynamic treasury ops using stablecoin rails ($0.50-$5 per rebalancing transfer)', opportunity: '80-90% of capital freed for revenue-generating activities' }
                     ],
                     wiseExample: {
                       context: 'Wise (TransferWise) is a $10B+ company that spends the majority of its operating costs managing pre-funded accounts globally.',
-                      sphereAdvantage: 'Sphere\'s stablecoin rails eliminate this entirely. Convert on-demand, transfer instantly, convert back. No pre-funding. This is why Sphere can offer better economics.'
+                      sphereAdvantage: 'Sphere\'s inventory model is more capital-efficient than Wise\'s pre-funded accounts. Instead of static pools in every currency, Sphere maintains lean corridor inventory rebalanced via stablecoin rails — lower capital requirements, lower operational overhead.'
                     },
                     customerValue: 'For customers, faster settlement means they can process more payments with the same capital. A customer who previously needed $10M in float to handle daily volume might need only $1M with Sphere. The other $9M can generate returns elsewhere.'
                   }
@@ -11886,7 +11753,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 },
                 {
                   differentiator: 'SpherePay Distribution',
-                  explanation: 'SphereNet launches with $2.5B+ in existing payment volume from SpherePay customers. No cold-start problem.',
+                  explanation: 'SphereNet launches with $3B+ in existing payment volume from SpherePay customers. No cold-start problem.',
                   vsCompetitors: 'New blockchain infrastructure typically struggles with chicken-and-egg. SphereNet inherits SpherePay\'s customer base.'
                 },
                 {
@@ -12054,7 +11921,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           customerFundArchitecture: {
             title: 'How Sphere Holds Customer Funds',
             subtitle: 'Understanding the FBO structure that protects customer assets',
-            overview: 'Sphere does NOT hold customer funds on its own balance sheet. All customer fiat deposits are held in FBO (For Benefit Of) accounts at regulated, FDIC-insured US banking partners. This structure is fundamental to our risk profile and regulatory compliance.',
+            overview: 'Sphere does NOT hold customer funds on its own balance sheet. All customer fiat deposits are held in FBO (For Benefit Of) accounts at regulated, FDIC-insured US banking partners. This structure is fundamental to our risk profile and regulatory compliance. Note: Sphere\'s corridor inventory (local currency held for payouts) is on Sphere\'s own balance sheet — separate from customer funds in FBO accounts.',
             whyThisMatters: 'Post-FTX, every sophisticated counterparty asks: "Where does my money actually sit?" Understanding and explaining the FBO structure is essential for closing enterprise deals.',
             threeLayerStructure: {
               title: 'The Three-Layer Structure',
@@ -12119,7 +11986,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 'Commingle customer funds with Sphere operating capital',
                 'Invest customer funds in securities, loans, or yield-generating instruments',
                 'Lend customer funds to third parties',
-                'Act as long-term custodian for customer crypto (our stablecoin holdings are transitory - minutes)',
+                'Act as long-term custodian for customer crypto (stablecoins are used for treasury rebalancing operations)',
                 'Use customer funds as collateral for Sphere\'s obligations'
               ]
             },
@@ -12139,23 +12006,23 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               clarification: 'Sphere\'s stablecoin holdings are fundamentally different from fiat custody:',
               points: [
                 {
-                  point: 'Transitory Holdings Only',
-                  detail: 'Average stablecoin hold time: 15-45 minutes. Maximum: 2 hours per transaction. We\'re moving stablecoins, not storing them.'
+                  point: 'Treasury Rebalancing Tool',
+                  detail: 'Stablecoins are used for inter-entity settlement — rebalancing corridor inventory between Sphere\'s own entities. They are not held as a primary position or used for per-transaction conversion. Customer payments are made from local currency inventory.'
                 },
                 {
-                  point: 'No Overnight Positions',
-                  detail: 'All stablecoin positions are converted to fiat by end of day. We don\'t carry stablecoin inventory.'
+                  point: 'Managed Exposure',
+                  detail: 'Stablecoin exposure is limited to treasury rebalancing positions — a fraction of total transaction volume. High-volume corridors rebalance multiple times daily; positions are minimized outside of active rebalancing windows. Hot wallet max: $2M per wallet.'
                 },
                 {
-                  point: 'Hot Wallet Limits',
-                  detail: 'Maximum $2M in any single hot wallet. Reduces exposure if there\'s a security incident.'
+                  point: 'Depeg Protection',
+                  detail: 'Because customers are paid from local currency inventory (not through per-transaction stablecoin conversion), a stablecoin depeg affects only Sphere\'s treasury rebalancing costs — not customer payouts. Even the worst USDC depeg (13% during SVB) would only impact rebalancing positions, not the customer pipeline.'
                 },
                 {
                   point: 'Multi-Issuer Strategy',
-                  detail: 'We\'re not dependent on any single stablecoin. If one has issues, we route through others.'
+                  detail: 'We\'re not dependent on any single stablecoin. Primary: USDC. Secondary: USDT. Tertiary: EURC. If one has issues, treasury routes rebalancing through others. 2% deviation circuit breaker triggers automatic switching.'
                 }
               ],
-              keyPoint: 'Customer fiat is held safely at banks. Stablecoins are just the transport layer - held for minutes during the cross-border transfer, then converted back to fiat.'
+              keyPoint: 'Customer fiat is held safely at banks in FBO accounts. Sphere\'s corridor inventory (local currency for payouts) is on Sphere\'s own balance sheet. Stablecoins are the inter-entity rebalancing layer — used by Sphere\'s treasury to keep corridor inventory funded, not held as a customer-facing product.'
             }
           },
           positioningFramework: {
@@ -12220,24 +12087,24 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           },
           corridorOrchestrationEngine: {
             title: 'Corridor Orchestration Engine: Why Sphere Is Not Just an On/Off-Ramp',
-            subtitle: 'Understanding Sphere\'s "Stablecoin Sandwich" architecture',
-            overview: 'Sphere is NOT a simple "crypto on/off-ramp" like Bridge, Transak, or Ramp. It is a corridor orchestration engine that performs intelligent multi-hop conversion with optimal routing, compliance automation, and FX optimization.',
+            subtitle: 'Understanding Sphere\'s wholesale inventory model and corridor management',
+            overview: 'Sphere is NOT a simple "crypto on/off-ramp" like Bridge, Transak, or Ramp. It is a corridor orchestration engine that manages local currency inventory across corridors, optimizes treasury rebalancing, automates compliance, and delivers payments at local rail speed.',
 
             stablecoinSandwich: {
-              title: 'The "Stablecoin Sandwich" Architecture',
-              flow: 'Local Fiat → Stablecoin → USD → Stablecoin → Local Fiat',
-              description: 'Sphere performs intelligent multi-hop conversion using stablecoins as the middle layer - the "sandwich" that enables faster, cheaper cross-border movement.',
+              title: 'The Wholesale Inventory Model',
+              flow: 'Customer sends fiat → Sphere pays from local inventory → Treasury rebalances via stablecoins',
+              description: 'Sphere manages corridor inventory and uses stablecoins for treasury-level rebalancing between its own entities. Customer payments are simple: receive fiat, pay from inventory. The orchestration complexity — routing, FX optimization, rebalancing — happens at the treasury level.',
               capabilities: [
-                'Optimal provider routing across multiple liquidity sources',
-                'Mid-rate triangulation for best FX execution',
-                'Automated reconciliation across all hops',
-                'Corridor-specific compliance logic built into each step',
-                'Partner-level liquidity routing with redundancy',
-                'FX optimization (bps-level routing control)',
+                'Optimal corridor inventory management across active markets',
+                'Mid-rate triangulation for best FX execution on rebalancing',
+                'Automated reconciliation across corridor positions',
+                'Corridor-specific compliance logic built into customer onboarding and payment screening',
+                'Partner-level liquidity routing with redundancy for treasury rebalancing',
+                'FX optimization (bps-level routing control) at the treasury level',
                 'Circuit-breaking logic for problem detection',
-                'Real-time corridor health scoring'
+                'Real-time corridor health and inventory level scoring'
               ],
-              keyInsight: 'This is fundamentally different from "Take USDC in → give me fiat out." Sphere is more like Airwallex or Stripe Treasury than Transak.'
+              keyInsight: 'This is fundamentally different from "Take USDC in → give me fiat out." The customer payment is simple: send fiat, receive fiat at local rail speed. The sophistication is in how Sphere manages corridor inventory and rebalances using stablecoin rails. More like a market maker than an exchange.'
             },
 
             differentVsCommoditized: {
@@ -12263,7 +12130,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 { name: 'Coinbase', quadrant: 'Mid-Left', position: 'Moderately Differentiated + AUM-Leaning' },
                 { name: 'Bridge/Stripe Crypto/Moonpay/Transak', quadrant: 'Bottom-Right', position: 'Commoditized + Volume (basic on/off-ramps)' },
                 { name: 'Anchorage/Fireblocks', quadrant: 'Upper-Left', position: 'Differentiated + AUM (regulated custody)' },
-                { name: 'dLocal/BVNK/Transfero', quadrant: 'Lower-Right to Mid-Right', position: 'Volume + Mild Differentiation' }
+                { name: 'dLocal/BVNK/Transfero', quadrant: 'Lower-Right to Mid-Right', position: 'Volume + Mild Differentiation', note: 'DLocal is also a Sphere LATAM payout partner — competitor in some corridors, partner in others' }
               ],
               whySphereWins: 'Sphere bundles 10+ complex functions into one API that commoditized players silo. This bundling creates defensibility.'
             },
@@ -12412,7 +12279,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                   'Customer funds at regulated bank, NOT on Sphere balance sheet',
                   'Segregated = not part of bankruptcy estate',
                   'No rehypothecation - funds never lent or invested',
-                  'Stablecoins held 15-45 minutes max (transitory only)'
+                  'Stablecoins used for treasury rebalancing only — not a primary holding'
                 ]
               }
             ]
@@ -12431,7 +12298,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           { q: 'When should you walk away from a deal?', options: ['Never', 'Customer only needs domestic US payments', 'Customer wants fast payments', 'Customer is a fintech'], correct: 1 },
           { q: 'What is Sphere\'s "stablecoin sandwich" architecture?', options: ['A fast food partnership', 'Local fiat → stablecoin → USD → stablecoin → local fiat', 'Holding multiple stablecoins overnight', 'Token swapping on exchanges'], correct: 1 },
           { q: 'FBO (For Benefit Of) accounts protect customers because:', options: ['Higher interest rates', 'Funds are segregated and not part of Sphere\'s bankruptcy estate', 'FDIC covers unlimited amounts', 'Funds are invested for returns'], correct: 1 },
-          { q: 'How long does Sphere typically hold stablecoins during a transaction?', options: ['Overnight positions', '15-45 minutes (transitory only)', 'One week minimum', 'Until customer requests withdrawal'], correct: 1 },
+          { q: 'What role do stablecoins play in Sphere\'s settlement model?', options: ['Per-transaction conversion for each payment', 'Treasury-level rebalancing between Sphere\'s own corridor entities', 'Customer-facing cryptocurrency product', 'Long-term investment vehicle'], correct: 1 },
           { q: 'SphereNet\'s "credible neutrality" advantage means:', options: ['No transaction fees ever', 'Infrastructure not controlled by a single corporation', 'No compliance requirements needed', 'Fully decentralized with no validators'], correct: 1 },
           { q: 'What distinguishes Sphere from commoditized on/off-ramps like Transak?', options: ['Lower fees on all transactions', 'Corridor orchestration with routing, compliance automation, and FX optimization', 'More cryptocurrency support', 'Better mobile app design'], correct: 1 }
         ],
@@ -12443,9 +12310,9 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           { term: 'Token Dependency', definition: 'Requiring a proprietary token (like XRP) for transactions. SphereNet avoids this, using fiat-backed stablecoins instead.' },
           { term: 'Walk Away Criteria', definition: 'Conditions where Sphere isn\'t the right fit. Example: customer only needs domestic US payments - better served by ACH.' },
           { term: 'FBO (For Benefit Of)', definition: 'Account structure where customer funds are held at a regulated bank for benefit of customers, segregated from company operations. Key protection against bankruptcy risk - the FTX lesson.' },
-          { term: 'Stablecoin Sandwich', definition: 'Sphere\'s corridor architecture: Local fiat → stablecoin → USD → stablecoin → local fiat. Enables intelligent multi-hop conversion with optimal routing - not a simple on/off-ramp.' },
+          { term: 'Stablecoin Sandwich', definition: 'Sphere\'s settlement architecture: fiat on both ends, stablecoins as the invisible treasury rebalancing layer. Customer payments are made from local corridor inventory. The "sandwich" happens at the wholesale level between Sphere\'s own entities — not per transaction.' },
           { term: 'Credible Neutrality', definition: 'Infrastructure owned by no single corporation, enabling broader adoption than corporate-controlled platforms like Arc (Circle) or Tempo (Stripe). SphereNet\'s key advantage.' },
-          { term: 'Corridor Orchestration', definition: 'Intelligent multi-provider routing with FX optimization, mid-rate triangulation, compliance automation, and redundancy. Distinguishes Sphere from commoditized on/off-ramps.' }
+          { term: 'Corridor Orchestration', definition: 'Sphere\'s system for managing corridor inventory levels, treasury rebalancing operations, FX optimization, compliance automation, and redundancy. The sophistication is at the treasury level — customer payments are simple fiat-to-fiat.' }
         ]
       },
       {
@@ -12683,12 +12550,12 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                   status: 'Capital Efficiency Play',
                   description: 'Capital recycling - replacing pre-funded correspondent accounts with real-time settlement.',
                   customerProfile: 'Payment companies with high cross-border volume, treasury teams managing international liquidity.',
-                  differentiator: 'Eliminates pre-funding requirement, unlocks trapped working capital, revenue multiplier effect.',
+                  differentiator: 'Dramatically reduces static pre-funding through dynamic corridor inventory, unlocks trapped working capital, revenue multiplier effect.',
                   example: 'Payment processor freeing $50M in nostro accounts, treasury team reducing FX exposure window from days to minutes.',
                   businessCase: {
                     title: 'The Liquidity Recycling Business Case',
                     traditional: 'Wise loses 95% of revenue to opex managing pre-funded accounts in 50+ currencies.',
-                    sphere: 'Convert on-demand, transfer instantly, convert back. Capital deployed only when needed.',
+                    sphere: 'Dynamic corridor inventory rebalanced via stablecoins. Lean working capital, actively managed.',
                     impact: 'Customer with $10M float requirement may need only $1M with Sphere. $9M freed for productive use.'
                   }
                 }
@@ -12727,7 +12594,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               },
               sphereNetRole: {
                 title: 'SphereNet: The Vision',
-                status: 'Development, targeting 2026 mainnet',
+                status: 'Development, targeting H1 2027 mainnet',
                 value: 'Purpose-built infrastructure for regulated finance',
                 contribution: 'Captures infrastructure value, creates protocol-level moat, enables ecosystem'
               },
@@ -12793,7 +12660,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                   calculations: [
                     { item: 'Average settlement time', value: '2-4 hours' },
                     { item: 'Capital in transit at any moment', value: '~$20M (4 hours × $100M ÷ 20)' },
-                    { item: 'Pre-funding requirement', value: 'Near zero (on-demand conversion)' },
+                    { item: 'Pre-funding requirement', value: 'Lean corridor inventory (dynamic, rebalanced)' },
                     { item: 'Total capital needed', value: '~$25M' },
                     { item: 'Capital freed', value: '$335M for productive use' }
                   ]
@@ -12811,23 +12678,23 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                   {
                     step: 'Origination',
                     traditional: 'Customer deposits USD → Company credits from EUR pre-funded account',
-                    sphere: 'Customer deposits USD → Sphere converts to USDC instantly',
+                    sphere: 'Customer deposits USD → Sphere receives funds',
                     timeTraditional: 'Instant (but requires pre-funding)',
-                    timeSphere: 'Instant (no pre-funding needed)'
+                    timeSphere: 'Instant'
                   },
                   {
-                    step: 'Cross-Border',
+                    step: 'Cross-Border Payout',
                     traditional: 'Company initiates SWIFT to replenish EUR account',
-                    sphere: 'USDC transfers on Solana (400ms finality)',
+                    sphere: 'Sphere pays from EUR corridor inventory via local rail',
                     timeTraditional: '2-5 business days',
-                    timeSphere: 'Seconds'
+                    timeSphere: 'Local rail speed (minutes to hours)'
                   },
                   {
-                    step: 'Destination',
+                    step: 'Rebalancing',
                     traditional: 'EUR arrives, account replenished, capital available',
-                    sphere: 'USDC converts to EUR locally, funds available',
+                    sphere: 'Sphere treasury rebalances corridor via stablecoin rails',
                     timeTraditional: '2-5 business days total',
-                    timeSphere: '2-4 hours total (fiat legs)'
+                    timeSphere: 'Treasury operation — independent of customer payment'
                   },
                   {
                     step: 'Recycling',
@@ -12935,7 +12802,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
             subtitle: 'How Sphere abstracts all blockchain complexity from end users',
             overview: {
               title: 'Understanding the Stablecoin Sandwich',
-              definition: 'The "stablecoin sandwich" describes Sphere\'s architecture where users interact only with fiat currencies - the stablecoin is invisible middleware. Someone sends fiat, it converts to stablecoin mid-flight, and arrives as local currency. The user never knows crypto was involved.',
+              definition: 'The "stablecoin sandwich" describes Sphere\'s settlement architecture: fiat on both ends, stablecoins as the invisible treasury rebalancing layer between Sphere\'s own entities. Customers send fiat, beneficiaries receive fiat from Sphere\'s local corridor inventory. The stablecoin leg is a wholesale treasury operation — the user never knows crypto was involved.',
               whyItMatters: 'Blockchain adoption has been limited by UX friction: wallets, gas fees, private keys, transaction hashes. Sphere removes this entirely. The technology enables the benefit without requiring user understanding.'
             },
 
@@ -12945,23 +12812,23 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
                 {
                   layer: 'Top Bread: Origination Fiat',
                   userExperience: 'Customer sees: "Send $10,000 to supplier in Brazil"',
-                  behindScenes: 'Sphere receives USD via ACH/wire, converts to USDC',
+                  behindScenes: 'Sphere receives USD via ACH/wire',
                   userKnowledge: 'None required - feels like normal bank transfer'
                 },
                 {
-                  layer: 'Filling: Stablecoin Transit',
+                  layer: 'Filling: Payment from Inventory',
                   userExperience: 'Customer sees: "Payment in progress..."',
-                  behindScenes: 'USDC transfers on Solana, crosses borders in seconds, converts to local stablecoin or fiat',
+                  behindScenes: 'Sphere pays from local BRL corridor inventory. No per-transaction stablecoin conversion.',
                   userKnowledge: 'None required - just sees progress bar'
                 },
                 {
                   layer: 'Bottom Bread: Destination Fiat',
                   userExperience: 'Customer sees: "Payment complete - R$52,340 delivered"',
-                  behindScenes: 'Stablecoin converts to BRL, deposited to beneficiary via PIX',
+                  behindScenes: 'Beneficiary receives BRL from Sphere\'s corridor inventory via PIX',
                   userKnowledge: 'None required - beneficiary receives local currency'
                 }
               ],
-              keyInsight: 'At no point does either party need to understand, touch, or even know about the blockchain leg. They see fiat in, fiat out. The stablecoin is purely infrastructure.'
+              keyInsight: 'At no point does either party need to understand, touch, or even know about blockchain. They see fiat in, fiat out. The stablecoin "filling" happens at the treasury level — Sphere rebalances positions between its own entities using stablecoin rails, independent of individual customer payments.'
             },
 
             whatUsersNeverSee: {
@@ -13291,7 +13158,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           { term: 'Technology Humility', definition: 'Acknowledging that technology alone doesn\'t solve adoption problems. Arnold: "Stablecoins don\'t entirely solve it" - need local presence, banking relationships, regulatory work.' },
           { term: 'Dual Go-to-Market', definition: 'Pursuing both top-down (governments, central banks) and bottom-up (enterprises, fintechs) simultaneously. Each approach reinforces the other.' },
           { term: 'Liquidity Recycling', definition: 'Re-using capital immediately after settlement instead of waiting days. Sphere enables 12x daily capital recycling vs once every 3 days with traditional banking. The revenue multiplier effect.' },
-          { term: 'Pre-Funding Problem', definition: 'Traditional payment companies must hold capital in pre-funded nostro accounts across every currency. Wise spends 95% of revenue managing these positions. Sphere eliminates pre-funding entirely.' },
+          { term: 'Pre-Funding Problem', definition: 'Traditional payment companies must hold capital in static pre-funded nostro accounts across every currency. Wise spends 95% of revenue managing these positions. Sphere\'s dynamic corridor inventory model is significantly more capital-efficient — lean working capital rebalanced via stablecoin rails vs static pools in every currency.' },
           { term: 'Working Capital Unlock', definition: 'When settlement drops from 3 days to 2-4 hours, trapped capital is freed. A company needing $50M in nostro accounts may need only $8M with Sphere - freeing $42M for productive use.' },
           { term: 'Five Product Verticals', definition: 'Sphere\'s complete offering: SpherePay live (Cross-Border B2B, On/Off-Ramp Infrastructure, Settlement & Liquidity) and SphereNet coming (Regulated Settlement Network, RWA Tokenization).' }
         ]
@@ -13354,10 +13221,21 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               milestones: [
                 { phase: '2024', status: 'Completed', description: 'Find product-market fit with SpherePay, prove distribution (150+ businesses, $1B+ captured)', context: 'This foundation phase validated that businesses want stablecoin payments and built the customer base for migration.' },
                 { phase: '2025 MVP', status: 'Completed', description: 'Ideate/design/implement SphereNet v0: confidential transfers, transferable zkSNARKs, M^0 stablecoin integration, initial account classification, API/RPC design', context: 'Core cryptographic primitives and the first proof-of-concept demonstrating compliance-native architecture.' },
-                { phase: '2026 Mainnet', status: 'In Progress', description: 'Deploy SphereNet v1: multi-party extraction proofs, expanded stablecoins (USDG, USDC/T), subclusters for custom AML policies, RFQ/LO auctions & AMM', context: 'Production launch with full feature set—SpherePay customers start transacting on native SphereNet rails.' },
+                { phase: 'H1 2027 Mainnet', status: 'In Progress', description: 'Deploy SphereNet v1: multi-party extraction proofs, expanded stablecoins (USDG, USDC/T), subclusters for custom AML policies, RFQ/LO auctions & AMM', context: 'Production launch with full feature set—SpherePay customers start transacting on native SphereNet rails.' },
                 { phase: '2027+', status: 'Vision', description: 'SphereNet becomes default settlement layer for regulated cross-border finance', context: 'Other fintechs, banks, and payment providers join the network, creating true infrastructure-level adoption.' }
               ]
             }
+          },
+          anzaRelationship: {
+            title: 'The Anza Partnership',
+            subtitle: 'Why SphereNet has unique credibility in the Solana ecosystem',
+            points: [
+              { point: 'Built with Anza', detail: 'Anza is the core developer shop behind Solana — the team that actually writes and maintains the Solana codebase. SphereNet was designed in direct collaboration with them, not forked independently. This matters because Anza understands every performance trade-off and security consideration in the SVM.' },
+              { point: 'Only Blessed Fork', detail: 'SphereNet is the only permissioned fork of Solana endorsed by its core developers. Anza published the SphereNet architectural overview on their own blog — a public stamp of approval. No other project has this endorsement.' },
+              { point: 'Modified SVM', detail: 'Uses a modified Solana Virtual Machine with compliance modifications built at the consensus level — not bolted on as an application layer after the fact. This means compliance isn\'t a smart contract that can be bypassed; it\'s part of how the network processes transactions.' },
+              { point: 'Strategic Investor', detail: 'Anza participated in Sphere\'s $5M Strategic round (Summer 2024) alongside Coinbase Ventures and Kraken Ventures. They put their money where their endorsement is — aligning incentives between the chain\'s architects and its most significant institutional fork.' }
+            ],
+            whyItMatters: 'Third-party validation from the team that built a ~$100B blockchain. This isn\'t a fork in a garage — it\'s a purpose-built institutional version designed with the original architects. When someone asks "why should we trust this chain?" — the answer is that the people who built Solana helped build it and invested in it.'
           },
           hyperliquidPlaybook: {
             title: 'The "Hyperliquid" Playbook',
@@ -13366,7 +13244,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               problem: 'New blockchains face a cold-start problem: no users means no liquidity, no liquidity means no users.',
               solution: 'Sphere uses SpherePay distribution to bootstrap SphereNet adoption.',
               steps: [
-                { step: 1, action: 'Build SpherePay', result: 'Live product with 150+ businesses, $2.5B+ annualized volume', context: 'Prove the product works in real markets with real money before attempting infrastructure plays.' },
+                { step: 1, action: 'Build SpherePay', result: 'Live product with 150+ businesses, $3B+ annualized volume', context: 'Prove the product works in real markets with real money before attempting infrastructure plays.' },
                 { step: 2, action: 'Accumulate data', result: 'Year of transaction data, customer behavior, corridor patterns', context: 'This data reveals which corridors matter, what compliance patterns emerge, and where liquidity naturally flows.' },
                 { step: 3, action: 'Launch SphereNet', result: 'Migrate SpherePay customers to SphereNet without requiring direct integration', context: 'Existing customers get upgraded automatically—no sales cycle required for initial SphereNet adoption.' },
                 { step: 4, action: 'Expand ecosystem', result: 'Other fintechs join SphereNet to access the liquidity and compliance infrastructure', context: 'Network effects kick in: more participants mean more liquidity, more attestation providers, better economics for everyone.' }
@@ -13566,7 +13444,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               headers: ['Attribute', 'SpherePay', 'SphereNet'],
               rows: [
                 ['What it is', 'Payment API product', 'Blockchain infrastructure'],
-                ['Status', 'LIVE ($3B+ processed)', 'In development (2026 mainnet)'],
+                ['Status', 'LIVE ($3B+ processed)', 'In development (H1 2027 mainnet)'],
                 ['Target user', 'Businesses (API integration)', 'Fintechs, banks, payment providers'],
                 ['Revenue model', 'Transaction fees', 'Network fees + licensing'],
                 ['Settlement', 'Uses existing blockchains (Solana)', 'IS the settlement layer'],
@@ -13584,6 +13462,63 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               ],
               strategicValue: 'SpherePay builds the customer base and transaction volume. SphereNet captures the infrastructure value. Together, they create a vertically integrated payments stack.'
             }
+          },
+          ariTokenizedCredit: {
+            title: 'ARI: Tokenized Credit on SphereNet',
+            subtitle: 'On-chain loan origination, fractionalization, and settlement',
+            whatIsARI: {
+              definition: 'ARI is SphereNet\'s tokenized credit product — bringing traditional loan origination, ownership, and trading on-chain with institutional-grade settlement.',
+              whyItMatters: 'Credit markets are $300T+ globally but still settle on paper, fax, and legacy custodians. ARI brings DvP atomic settlement, transparent ownership chains, and instant fractional trading to credit instruments.'
+            },
+            traditionalVsARI: {
+              title: 'Traditional Credit vs ARI: Why This Matters',
+              traditional: [
+                'Loan originated on paper/PDF, emailed between parties',
+                'Ownership tracked in spreadsheets and custodian ledgers',
+                'Settlement takes T+2 to T+5 with counterparty risk during gap',
+                'Fractional ownership requires SPVs, legal wrappers, and weeks of legal work',
+                'Secondary trading is OTC, opaque, and illiquid',
+                'Audit trail reconstructed after the fact from multiple sources'
+              ],
+              ari: [
+                'Loan originated as a token on SphereNet with immutable terms',
+                'Ownership recorded on-chain — single source of truth, real-time',
+                'Settlement is atomic (DvP) — zero counterparty risk, instant',
+                'Fractional ownership is native — tokens represent proportional claims',
+                'Secondary trading on-chain with full compliance checks per transfer',
+                'Audit trail is built-in — every origination, transfer, and payment on-chain'
+              ]
+            },
+            coreMechanics: [
+              { mechanic: 'On-Chain Loan Origination', description: 'Loans are originated directly on SphereNet as tokenized instruments. Full lifecycle from origination to maturity tracked on-chain. Example: A LATAM lender originates a $5M trade finance facility — the loan terms, repayment schedule, and collateral are encoded in the token at creation.' },
+              { mechanic: 'Fractionalized Ownership', description: 'Multiple investors can own pieces of a single loan. Fractional tokens represent proportional claim on principal + interest. Example: That $5M facility can be split into 100 tokens of $50K each, allowing multiple institutional investors to participate without minimum ticket sizes blocking access.' },
+              { mechanic: 'DvP (Delivery vs Payment)', description: 'Atomic settlement — ownership transfer and payment happen simultaneously in one transaction. Zero counterparty risk during settlement. This eliminates the T+2 settlement gap where traditional credit trades carry the risk that one side delivers and the other doesn\'t pay.' },
+              { mechanic: 'Wrapping & Tranching', description: 'Combine obligations from multiple loans into baskets, then tranche into Senior/Mezzanine/Junior layers. Same securitization structure as traditional finance, but with on-chain transparency. Example: 50 trade finance loans wrapped into a basket, then tranched — senior tranche (lower yield, first claim), mezzanine, and junior (higher yield, first loss).' },
+              { mechanic: 'Loan Seasoning Workflows', description: 'Full on-chain lifecycle: lender originates → seasoner holds and validates performance → buyer purchases seasoned loans. All transfers tracked with audit trail. Seasoning proves the loan performs before institutional buyers take ownership — de-risking the purchase.' }
+            ],
+            workedExample: {
+              title: 'Worked Example: Trade Finance on ARI',
+              steps: [
+                { step: 'Origination', detail: 'LATAM lender creates a $5M trade finance facility on SphereNet. Loan terms, repayment schedule, and borrower KYC are encoded in the token.' },
+                { step: 'Fractionalization', detail: 'The $5M facility is split into 100 tokens of $50K each. Each token represents a proportional claim on principal + interest.' },
+                { step: 'Seasoning', detail: 'The lender holds the tokens for 90 days while the borrower makes initial payments. On-chain payment history proves the loan performs.' },
+                { step: 'Secondary Sale', detail: 'A US institutional investor purchases 20 tokens ($1M) via DvP — the USDC payment and token transfer happen atomically. No settlement risk.' },
+                { step: 'Wrapping', detail: 'An asset manager bundles 50 similar trade finance tokens from different originators into a single basket, then tranches it into Senior (4% yield) and Junior (9% yield, first loss) for different investor risk appetites.' },
+                { step: 'Maturity', detail: 'At loan maturity, the borrower repays. Principal + interest are distributed proportionally to all token holders automatically via smart contract.' }
+              ]
+            },
+            risks: {
+              title: 'Risks & Limitations to Understand',
+              items: [
+                { risk: 'Credit Risk Remains', detail: 'ARI doesn\'t eliminate the underlying credit risk of the borrower. A tokenized bad loan is still a bad loan — the technology improves the settlement and trading infrastructure, not the credit quality.' },
+                { risk: 'Regulatory Uncertainty', detail: 'Tokenized credit instruments may be classified as securities in some jurisdictions. SphereNet\'s compliance layer helps, but regulatory frameworks for tokenized credit are still evolving.' },
+                { risk: 'Liquidity Bootstrap', detail: 'Secondary markets need both buyers and sellers. Early-stage ARI markets may have limited liquidity until the ecosystem matures.' },
+                { risk: 'Smart Contract Risk', detail: 'While SphereNet is built with Anza and audited, any on-chain system carries smart contract risk. This is mitigated by the permissioned nature of SphereNet and institutional-grade security audits.' }
+              ]
+            },
+            whySphereNet: 'ARI only works on SphereNet because every participant is KYC\'d, every transaction is compliance-checked, and settlement is atomic. You can\'t do institutional credit on a permissionless chain — counterparty verification is non-negotiable. Imagine a fractional loan token trading on Uniswap to an anonymous wallet — no regulated institution would touch it.',
+            status: 'Pilot phase — institutional-grade participants involved. ARI pilot integrations are a Q1 2026 milestone.',
+            keyInsight: 'ARI turns SphereNet from a payments network into a full financial infrastructure platform. Payments are the wedge; credit is the expansion.'
           },
           forRegulators: {
             title: 'What This Means for Regulators',
@@ -13632,7 +13567,7 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
           { q: 'Which technology lets SphereNet prove compliance without revealing data?', options: ['Public ledger', 'Zero-knowledge proofs (zkSNARKs)', 'Open API endpoints', 'Manual compliance review'], correct: 1 },
           { q: 'SphereNet\'s technical architecture has how many layers?', options: ['2', '3', '5', '7'], correct: 2 },
           { q: 'How do regulators access specific transaction details on SphereNet?', options: ['Full access by default', 'No access ever possible', 'Through legal process (subpoena, court order)', 'By purchasing bulk data'], correct: 2 },
-          { q: 'SphereNet mainnet is targeted for:', options: ['2024', '2026', '2030', 'Already live'], correct: 1 }
+          { q: 'SphereNet mainnet is targeted for:', options: ['2024', 'H1 2027', '2030', 'Already live'], correct: 1 }
         ],
         glossary: [
           { term: 'L1 Blockchain', definition: 'Layer 1 blockchain - the base settlement layer. SphereNet is a purpose-built L1 designed specifically for regulated finance, not a general-purpose chain.' },
@@ -14212,8 +14147,8 @@ This pillar is where your payments knowledge becomes Sphere-specific. You need t
               {
                 dangerous: 'Sphere payments are instant',
                 whyDangerous: 'Sets unrealistic expectations, ignores fiat rail constraints',
-                reality: 'Stablecoin settlement is fast (minutes). But end-to-end includes fiat on-ramp and off-ramp, which depend on banking hours and local payment systems. Median is 15-30 minutes, not "instant."',
-                correction: 'Settlement is typically 15-30 minutes end-to-end. The blockchain part is fast, but we\'re also moving fiat which depends on banking systems. It\'s dramatically faster than traditional 2-5 days, but not instant.',
+                reality: 'Payout speed depends on the local payment rail in each corridor. Sphere pays from local inventory, so speed = local rail speed (PIX in seconds, wire in minutes, ACH in hours). It\'s not "instant" everywhere — it\'s corridor-dependent.',
+                correction: 'Settlement speed depends on the local payout rail. Brazil via PIX can be seconds. US wire is minutes. ACH is hours. It\'s dramatically faster than traditional 2-5 day correspondent banking, but the speed varies by corridor.',
                 followUp: 'Be specific: "If both ends are in real-time payment countries and within banking hours, it can be under an hour. Cross-border to a country with slower rails might be same-day."'
               },
               {
@@ -15246,10 +15181,10 @@ Depegging can happen for various reasons:
 **The Scenario They're Worried About:**
 
 1. Customer sends $10M USD to Sphere
-2. Sphere converts to stablecoin for cross-border transfer
-3. DURING transfer, stablecoin depegs to $0.90
-4. Recipient gets $9M equivalent instead of $10M
-5. Who eats the loss?
+2. Sphere pays beneficiary from local corridor inventory
+3. During treasury rebalancing, the stablecoin used depegs to $0.90
+4. Sphere's rebalancing costs more than expected
+5. Who eats the loss? (Sphere, at the treasury level)
 
 **Why This Matters More for Some Use Cases:**
 
@@ -15272,11 +15207,11 @@ The recovery: FDIC guaranteed all SVB deposits. Circle's reserves were safe. USD
 
 Lesson: Even the most regulated, transparent stablecoin (USDC) can depeg due to banking counterparty risk. The depeg was temporary, but it was real.`
               },
-              sphereApproach: 'Sphere mitigates depeg risk through three mechanisms: (1) **Speed** - holdings measured in minutes, not days, dramatically reducing exposure window; (2) **Multi-issuer** - can route through alternative stablecoins if one has issues; (3) **Contingency procedures** - documented playbooks for depeg scenarios.',
-              shortAnswer: 'Risk exists - USDC hit $0.87 during SVB. We mitigate: hold for minutes not days, multiple issuers, contingency procedures.',
+              sphereApproach: 'Sphere mitigates depeg risk through three mechanisms: (1) **Inventory model** - customer payments are made from local currency inventory, not through per-transaction stablecoin conversion, so customers aren\'t directly exposed; (2) **Multi-issuer** - can route treasury rebalancing through alternative stablecoins if one has issues; (3) **Contingency procedures** - documented playbooks for depeg scenarios.',
+              shortAnswer: 'Risk exists - USDC hit $0.87 during SVB. We mitigate: inventory model shields customers, multiple issuers for rebalancing, contingency procedures.',
               honesty: 'Never claim risk-free. Acknowledge, then mitigate.',
-              criticalPoint: 'The key mitigation is TIME. A depeg that lasts 48 hours doesn\'t affect a payment that settles in 30 minutes. Sphere\'s median settlement time means stablecoin exposure is measured in minutes, not days.',
-              realWorldContext: 'During the USDC depeg, Sphere\'s payment flow meant most transactions completed before or after the event. Holding stablecoins for days (like some treasury operations) creates much higher exposure than Sphere\'s transitory model.'
+              criticalPoint: 'The key mitigation is the INVENTORY MODEL. Customer payments are made from local currency inventory — the stablecoin leg is Sphere\'s treasury rebalancing operation. A depeg affects Sphere\'s treasury costs, not individual customer payments in flight.',
+              realWorldContext: 'Sphere\'s wholesale model means stablecoin exposure exists at the treasury rebalancing level, not the per-payment level. This is fundamentally different from a model where each customer payment goes through live stablecoin conversion.'
             },
             {
               number: 8,
@@ -15395,7 +15330,7 @@ If holdings are measured in minutes:
           { term: 'Fiat-Backed Stablecoin', definition: 'Stablecoin backed by actual dollars or dollar equivalents held in reserve. Examples: USDC, USDT.' },
           { term: 'Algorithmic Stablecoin', definition: 'Stablecoin that maintains its peg through algorithms and incentives rather than hard collateral. Higher risk - Terra/Luna was algorithmic.' },
           { term: 'Reserve Attestation', definition: 'Third-party verification that a stablecoin issuer actually holds the reserves they claim. USDC has monthly attestations from Grant Thornton.' },
-          { term: 'Transitory Holdings', definition: 'Holding assets for very short periods (minutes) rather than long-term. Reduces exposure to price/depeg risk.' },
+          { term: 'Transitory Holdings', definition: 'Sphere\'s approach to stablecoin exposure: used for treasury-level rebalancing operations between Sphere\'s own entities, not held as a primary position. Reduces exposure to price/depeg risk.' },
           { term: 'Multi-Issuer Architecture', definition: 'Infrastructure that can use multiple stablecoin issuers, avoiding single dependency on any one provider.' },
           { term: 'Death Spiral', definition: 'Self-reinforcing collapse where selling pressure causes depegging, which causes more selling. Terra/Luna experienced this when algorithmic mechanisms failed to maintain peg.' },
           { term: 'Over-Collateralized', definition: 'Backing a stablecoin with more collateral value than coins issued (e.g., $150 ETH backing $100 stablecoin). DAI uses this approach to protect against collateral value drops.' },
@@ -15535,7 +15470,7 @@ Arnold's statement "We\'re in the 99th percentile of settlement" means: among al
 | Wise/Neobanks | 1-2 days |
 | Sphere | 15-30 minutes median |`
               },
-              sphereApproach: 'Sphere provides specific metrics, not marketing claims. The 15-30 minute median is achieved through stablecoin settlement plus optimized banking integration. The "99th percentile before 3pm" benchmark comes from actual payment data.',
+              sphereApproach: 'Sphere provides specific metrics, not marketing claims. Settlement speed is corridor-dependent — determined by the local payout rail (PIX in seconds, wire in minutes). Sphere pays from local corridor inventory, which is why speed equals local rail speed rather than slow correspondent banking timelines. The "99th percentile before 3pm" benchmark comes from actual payment data.',
               shortAnswer: 'Median: 15-30 minutes. 99th percentile (before 3pm): same day. Traditional: 2-5 days.',
               arnoldQuote: 'We\'re in the 99th percentile of settlement.',
               realWorldContext: 'For a company doing daily cross-border payroll, the difference between 30 minutes and 3 days is transformational. Workers can actually access their money the same day they earn it.'
@@ -15748,7 +15683,7 @@ This creates clear audit trail and accountability.`
                   'No rehypothecation: We don\'t lend or invest customer funds',
                   'Regulatory examination: State examiners audit FBO arrangements annually'
                 ],
-                stablecoinClarification: 'Stablecoin holdings are transitory - average 15-45 minutes, max 2 hours. No overnight positions. Fiat custody (at banks) is where customer money actually sits.'
+                stablecoinClarification: 'Stablecoins are used for inter-entity treasury rebalancing, not per-transaction conversion. Customer payments are made from local corridor inventory. Fiat custody (at banks in FBO accounts) is where customer money actually sits.'
               },
               objectionHandling: [
                 {
@@ -16585,9 +16520,19 @@ This pillar teaches you to tailor Sphere's story to six distinct audiences, with
               },
               tomorrow: {
                 product: 'SphereNet',
-                status: 'Development - targeting 2026',
+                status: 'Development - targeting H1 2027',
                 narrative: 'SpherePay builds distribution. SphereNet captures infrastructure value. We\'re building the modern SWIFT.',
-                metrics: ['Central bank pilots', 'Protocol-level compliance', 'Ecosystem potential']
+                metrics: ['Central bank pilots', 'Protocol-level compliance', 'Ecosystem potential'],
+                bullishThesis: {
+                  title: 'Why SphereNet Is a Massive Opportunity',
+                  points: [
+                    { point: 'SWIFT TAM', detail: 'SWIFT is 50 years old, processes $5T+/day, hasn\'t meaningfully innovated its core messaging architecture since 1973. SphereNet offers sub-second finality vs SWIFT\'s T+1 to T+3 settlement, significantly lower transaction costs (no correspondent chain fees), 24/7/365 operations vs banking hours only, with compliance built in at the protocol level.' },
+                    { point: 'Institutional Demand', detail: 'Regulated institutions NEED compliant blockchain rails. SphereNet is purpose-built for them. No other chain offers protocol-level compliance.' },
+                    { point: 'Multiple Revenue Streams → SPHR Demand', detail: 'Every action on SphereNet requires SPHR: payments, compliance attestations, settlements, stablecoin operations. Multiple revenue streams all feed token demand.' },
+                    { point: 'Hyperliquid Playbook', detail: 'Product first (SpherePay $3B+), then own chain (SphereNet). Proven cold-start strategy with 150+ customers as day-1 volume.' },
+                    { point: 'Active Sovereign Conversations', detail: 'Central bank and sovereign-level discussions for SphereNet adoption. Institutional-grade from day one.' }
+                  ]
+                }
               },
               combined: {
                 narrative: 'The Hyperliquid Playbook: Use SpherePay\'s distribution to solve SphereNet\'s cold-start problem. We\'re not choosing between being a payments company or an infrastructure company - we\'re both.',
@@ -16622,7 +16567,7 @@ This pillar teaches you to tailor Sphere's story to six distinct audiences, with
             categories: [
               {
                 category: 'Traction',
-                points: ['$3B+ processed', '150+ customers', 'Growing 3-4x annually', 'Net revenue retention >120%'],
+                points: ['$3B+ processed ($15-20B committed for 2026)', '150+ customers', 'Two top-20 US banks ($500B+ AUM)', 'Top-5 stablecoin payments platform globally', 'Growing 3-4x annually', 'Net revenue retention >120%'],
                 howToPresent: 'Lead with growth rate, not absolute numbers. "We\'re tripling year-over-year."'
               },
               {
@@ -16643,15 +16588,51 @@ This pillar teaches you to tailor Sphere's story to six distinct audiences, with
             ]
           },
 
+          revenueModel: {
+            title: 'How Sphere Makes Money',
+            subtitle: '5 revenue streams from the payment lifecycle',
+            streams: [
+              { stream: 'Transaction Fees', description: '% of volume, tiered by corridor and customer size. This is the primary revenue driver — every payment processed through Sphere generates a fee.', example: '5-50 bps per transaction depending on corridor. High-friction corridors (LATAM, Africa) command higher margins than commoditized corridors (US-EU).' },
+              { stream: 'FX Spread', description: 'Spread on currency conversions. Sphere provides mid-rate triangulation for institutional-grade FX execution, earning the spread between buy and sell rates.', example: 'Typically 0.3-0.8% spread. On a $1M payment with FX conversion, this generates $3K-$8K in revenue — per transaction.' },
+              { stream: 'Rebalancing Spread', description: 'The wholesale model creates a unique revenue layer: Sphere holds local currency inventory, pays recipients from it, then rebalances via stablecoins. The delta between what Sphere paid locally and the cost of replenishing that inventory creates margin.', example: 'This revenue stream doesn\'t exist in per-transaction models — it\'s unique to Sphere\'s inventory approach and grows with corridor volume.' },
+              { stream: 'Partner Revenue Share', description: 'Revenue share arrangements with corridor partners (DLocal for LATAM, DTR for Europe) and distribution channels. Sphere provides the rails, partners provide local access.', example: 'Corridor-based pricing and revenue share model with infrastructure partners across 60+ countries.' },
+              { stream: 'Premium Services', description: 'Enterprise tier with SLA guarantees, dedicated support, priority corridor access, enhanced KYC, and faster settlement windows.', example: 'Enterprise clients paying for guaranteed settlement times and white-glove onboarding generate higher per-customer revenue.' }
+            ],
+            keyInsight: 'The wholesale/inventory model creates multiple monetization layers — not just transaction fees, but FX spread and rebalancing spread that traditional per-transaction models can\'t capture. When presenting to investors, emphasize that Sphere earns on the same payment in 3 different ways (transaction fee + FX spread + rebalancing spread).'
+          },
+
+          valuationContext: {
+            title: 'Valuation & Market Context',
+            subtitle: 'Where Sphere sits relative to the market',
+            currentRound: {
+              valuation: '$300M post-money',
+              strategicUpround: '$500M — kicking off April 2026',
+              sphereNetToken: 'SPHR target FDV: $10B',
+              investorAngle: 'Two shots on goal from one check — equity (SpherePay) + tokens (SphereNet/SPHR)'
+            },
+            compTable: {
+              title: 'Competitor Valuation Comps',
+              headers: ['Company', 'Valuation', 'Context'],
+              rows: [
+                ['Bridge', '$1.1B', 'Acquired by Stripe. Less volume than Sphere.'],
+                ['ZeroHash', '$1.5B', 'Raising $250M (Jan 2026). Partners with Stripe, BlackRock.'],
+                ['MoonPay', '$5B', 'ICE/NYSE investing. ~$2B total volume vs Sphere\'s $3B+.'],
+                ['Sphere', '$300M', 'More volume than all comps. Priced at a fraction.']
+              ]
+            },
+            howToPresent: 'Lead with the comp table, not Sphere\'s number. "Bridge sold for $1.1B with less volume than us. MoonPay is at $5B. We\'re at $300M. The math speaks for itself."',
+            whatNotToSay: 'Never guarantee returns or imply that the valuation gap will close. Don\'t say "we\'re undervalued" — let the comp table speak for itself. Don\'t compare equity valuation to SPHR token FDV as if they\'re additive — they\'re separate instruments with separate risk profiles. Never discuss specific investor allocations or term sheet details.'
+          },
+
           investorMetricsReference: {
             title: 'Investor Metrics Reference Guide',
             introduction: 'Investors evaluate companies using specific metrics. Here\'s what they mean and how to present Sphere\'s numbers:',
             coreMetrics: [
               {
                 metric: 'Total Volume Processed',
-                sphereNumber: '$3B+',
-                whatItMeans: 'Total dollar value of payments processed through Sphere. Shows scale and trust.',
-                howToPresent: 'Use as proof of execution, not as the lead. "$3B proves we can execute. What\'s exciting is the growth rate."',
+                sphereNumber: '$3B+ ($15-20B committed for 2026)',
+                whatItMeans: 'Total dollar value of payments processed through Sphere. Shows scale and trust. $15-20B pipeline shows committed demand.',
+                howToPresent: 'Use as proof of execution, not as the lead. "$3B proves we can execute. $15-20B committed for 2026 shows where we\'re going."',
                 caveat: 'Volume alone doesn\'t indicate profitability. Always pair with take rate or revenue.'
               },
               {
@@ -18021,7 +18002,7 @@ This comprehensive assessment tests your knowledge across all six pillars. Compl
         quiz: [
           { q: 'Sphere median settlement time:', options: ['2-5 days', '24 hours', '15-30 minutes', 'Instant'], correct: 2 },
           { q: 'Sphere was founded during:', options: ['Bull market', 'FTX collapse period', 'Before crypto', '2010'], correct: 1 },
-          { q: 'Sphere annualized volume:', options: ['$25M', '$250M', '$2.5B+', '$25B'], correct: 2 }
+          { q: 'Sphere annualized volume:', options: ['$25M', '$250M', '$3B+', '$25B'], correct: 2 }
         ]
       },
       {
