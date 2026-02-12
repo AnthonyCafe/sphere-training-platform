@@ -84,6 +84,7 @@ export default function LearnContentRenderer({ learn, glossary = [] }: LearnCont
     'systemicScaleContext', 'threeRiskCategories', 'caseStudyMakerDAO', 'caseStudyUSDCDepeg', 'caseStudyChainalysis',
     'contagionRiskToTraditionalFinance', 'whyExistingBlockchainsFail', 'sphereNetSolution',
     'sixFoundationalPillars', 'threeComponentModel', // SphereNet architecture additions
+    'sphrTokenomics', 'crossChainArchitecture',
     'regulatorPerspective',
     'whatSphereIs', 'whatSphereIsNot', 'classificationMatters', 'classificationMattersLegally', 'complianceNative', 'sampleResponse', 'sampleResponses',
     'complianceFlow', 'complianceEnablesGrowth',
@@ -740,6 +741,12 @@ function RenderProperty({ propKey, value }: { propKey: string; value: any }) {
 
     case 'sphereUSDTechnicalArchitecture':
       return <SphereUSDTechnicalArchitectureBlock data={value} />;
+
+    case 'sphrTokenomics':
+      return <SphereUSDTechnicalArchitectureBlock data={{ title: 'SPHR Token Economics', sphrTokenomics: value }} />;
+
+    case 'crossChainArchitecture':
+      return <SphereUSDTechnicalArchitectureBlock data={{ title: 'Cross-Chain Architecture', crossChainArchitecture: value }} />;
 
     case 'sixFoundationalPillars':
       return <SixFoundationalPillarsBlock data={value} />;
